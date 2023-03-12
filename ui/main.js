@@ -40,16 +40,19 @@ const routes = [{
   path: '**',
   component: _components_Auth_login_login_component__WEBPACK_IMPORTED_MODULE_0__.LoginComponent
 }]; // sets up routes constant where you define your routes
-class AppRoutingModule {}
-AppRoutingModule.ɵfac = function AppRoutingModule_Factory(t) {
-  return new (t || AppRoutingModule)();
-};
-AppRoutingModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({
-  type: AppRoutingModule
-});
-AppRoutingModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({
-  imports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule.forRoot(routes), _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule, _angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule]
-});
+let AppRoutingModule = /*#__PURE__*/(() => {
+  class AppRoutingModule {}
+  AppRoutingModule.ɵfac = function AppRoutingModule_Factory(t) {
+    return new (t || AppRoutingModule)();
+  };
+  AppRoutingModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({
+    type: AppRoutingModule
+  });
+  AppRoutingModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({
+    imports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule.forRoot(routes), _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule, _angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule]
+  });
+  return AppRoutingModule;
+})();
 (function () {
   (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsetNgModuleScope"](AppRoutingModule, {
     imports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule, _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule],
@@ -73,26 +76,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ 4793);
 
 
-class AppComponent {
-  constructor() {
-    this.title = 'productUI';
-  }
-}
-AppComponent.ɵfac = function AppComponent_Factory(t) {
-  return new (t || AppComponent)();
-};
-AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
-  type: AppComponent,
-  selectors: [["app-root"]],
-  decls: 1,
-  vars: 0,
-  template: function AppComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "router-outlet");
+let AppComponent = /*#__PURE__*/(() => {
+  class AppComponent {
+    constructor() {
+      this.title = 'productUI';
     }
-  },
-  dependencies: [_angular_router__WEBPACK_IMPORTED_MODULE_1__.RouterOutlet]
-});
+  }
+  AppComponent.ɵfac = function AppComponent_Factory(t) {
+    return new (t || AppComponent)();
+  };
+  AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+    type: AppComponent,
+    selectors: [["app-root"]],
+    decls: 1,
+    vars: 0,
+    template: function AppComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "router-outlet");
+      }
+    },
+    dependencies: [_angular_router__WEBPACK_IMPORTED_MODULE_1__.RouterOutlet]
+  });
+  return AppComponent;
+})();
 
 /***/ }),
 
@@ -162,17 +168,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class AppModule {}
-AppModule.ɵfac = function AppModule_Factory(t) {
-  return new (t || AppModule)();
-};
-AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵdefineNgModule"]({
-  type: AppModule,
-  bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent]
-});
-AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵdefineInjector"]({
-  imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_15__.BrowserModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_16__.HttpClientModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_3__.AppRoutingModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__.BrowserAnimationsModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_18__.MatTabsModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_19__.MatFormFieldModule, _angular_forms__WEBPACK_IMPORTED_MODULE_20__.FormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_20__.ReactiveFormsModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_21__.MatInputModule, _angular_material_select__WEBPACK_IMPORTED_MODULE_22__.MatSelectModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_23__.MatButtonModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_24__.MatIconModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_25__.MatTableModule, _angular_material_paginator__WEBPACK_IMPORTED_MODULE_26__.MatPaginatorModule, _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_27__.MatSidenavModule]
-});
+let AppModule = /*#__PURE__*/(() => {
+  class AppModule {}
+  AppModule.ɵfac = function AppModule_Factory(t) {
+    return new (t || AppModule)();
+  };
+  AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵdefineNgModule"]({
+    type: AppModule,
+    bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent]
+  });
+  AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵdefineInjector"]({
+    imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_15__.BrowserModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_16__.HttpClientModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_3__.AppRoutingModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__.BrowserAnimationsModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_18__.MatTabsModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_19__.MatFormFieldModule, _angular_forms__WEBPACK_IMPORTED_MODULE_20__.FormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_20__.ReactiveFormsModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_21__.MatInputModule, _angular_material_select__WEBPACK_IMPORTED_MODULE_22__.MatSelectModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_23__.MatButtonModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_24__.MatIconModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_25__.MatTableModule, _angular_material_paginator__WEBPACK_IMPORTED_MODULE_26__.MatPaginatorModule, _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_27__.MatSidenavModule]
+  });
+  return AppModule;
+})();
 (function () {
   (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_14__["ɵɵsetNgModuleScope"](AppModule, {
     declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent, _components_Auth_login_login_component__WEBPACK_IMPORTED_MODULE_1__.LoginComponent, _components_home_home_component__WEBPACK_IMPORTED_MODULE_2__.HomeComponent, _components_home_tab_home_tab_component__WEBPACK_IMPORTED_MODULE_4__.HomeTabComponent, _components_tab_body_tab_body_component__WEBPACK_IMPORTED_MODULE_5__.TabBodyComponent, _components_controls_controls_component__WEBPACK_IMPORTED_MODULE_6__.ControlsComponent, _components_table_table_component__WEBPACK_IMPORTED_MODULE_7__.TableComponent, _components_new_edit_object_new_edit_object_component__WEBPACK_IMPORTED_MODULE_8__.NewEditObjectComponent, _components_home_dashboard_home_dashboard_component__WEBPACK_IMPORTED_MODULE_9__.HomeDashboardComponent, _components_admin_config_admin_config_component__WEBPACK_IMPORTED_MODULE_10__.AdminConfigComponent, _components_not_implemented_not_implemented_component__WEBPACK_IMPORTED_MODULE_11__.NotImplementedComponent, _components_admin_dashboard_shortcuts_admin_dashboard_shortcuts_component__WEBPACK_IMPORTED_MODULE_12__.AdminDashboardShortcutsComponent, _components_manage_dropdowns_manage_dropdowns_component__WEBPACK_IMPORTED_MODULE_13__.ManageDropdownsComponent],
@@ -221,77 +230,80 @@ function LoginComponent_mat_error_20_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
 }
-class LoginComponent {
-  constructor(authService) {
-    this.authService = authService;
-    this.formGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroup({});
-    this.formGroup.addControl("UserName", new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl("", _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required));
-    this.formGroup.addControl("Password", new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl("", _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required));
+let LoginComponent = /*#__PURE__*/(() => {
+  class LoginComponent {
+    constructor(authService) {
+      this.authService = authService;
+      this.formGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroup({});
+      this.formGroup.addControl("UserName", new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl("", _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required));
+      this.formGroup.addControl("Password", new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl("", _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required));
+    }
+    hasEror(cControl) {
+      let has = false;
+      let control = this.formGroup.get(cControl);
+      if (typeof control != 'undefined' && control != null) {
+        has = !control.valid;
+      }
+      return has;
+    }
+    logMeIn() {
+      if (this.formGroup.valid) {
+        this.authService.signIn(this.formGroup.value);
+      }
+    }
   }
-  hasEror(cControl) {
-    let has = false;
-    let control = this.formGroup.get(cControl);
-    if (typeof control != 'undefined' && control != null) {
-      has = !control.valid;
-    }
-    return has;
-  }
-  logMeIn() {
-    if (this.formGroup.valid) {
-      this.authService.signIn(this.formGroup.value);
-    }
-  }
-}
-LoginComponent.ɵfac = function LoginComponent_Factory(t) {
-  return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_0__.AuthService));
-};
-LoginComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
-  type: LoginComponent,
-  selectors: [["app-login"]],
-  decls: 24,
-  vars: 4,
-  consts: [[1, "outerLogin"], [1, "logo"], [1, "outer"], [1, "loginHeader"], [1, "loginControl"], [1, "loginBox"], [1, "loginForm", 3, "formGroup", "ngSubmit"], ["appearance", "outline", 1, "curField"], ["matInput", "", "placeholder", "User Name", "type", "text", "formControlName", "UserName", "required", ""], [4, "ngIf"], ["matInput", "", "placeholder", "Password", "type", "password", "formControlName", "Password", "required", ""], ["type", "submit", "mat-raised-button", "", "color", "primary", 1, "button", 3, "disabled"]],
-  template: function LoginComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "div", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 2)(3, "div", 3)(4, "h1");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5, "Sign in to Restaurant Technology Deployment Platform");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 4)(7, "div", 5)(8, "form", 6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngSubmit", function LoginComponent_Template_form_ngSubmit_8_listener() {
-        return ctx.logMeIn();
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "p")(10, "mat-form-field", 7)(11, "mat-label");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "Enter your email");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](13, "input", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](14, LoginComponent_mat_error_14_Template, 2, 0, "mat-error", 9);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](15, "p")(16, "mat-form-field", 7)(17, "mat-label");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](18, "Enter your password");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](19, "input", 10);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](20, LoginComponent_mat_error_20_Template, 2, 0, "mat-error", 9);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "p")(22, "button", 11);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](23, "Login");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()()()();
-    }
-    if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.formGroup);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.hasEror("UserName"));
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.hasEror("Password"));
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", ctx.hasEror("Password") || ctx.hasEror("UserName"));
-    }
-  },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatFormField, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatLabel, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatError, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.RequiredValidator, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_material_input__WEBPACK_IMPORTED_MODULE_5__.MatInput, _angular_material_button__WEBPACK_IMPORTED_MODULE_6__.MatButton],
-  styles: ["*[_ngcontent-%COMP%] {\r\n    box-sizing: border-box;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.outerLogin[_ngcontent-%COMP%] {\r\n    display: flex;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.outerLogin[_ngcontent-%COMP%] > div[_ngcontent-%COMP%] {\r\n    float: left;\r\n    padding: 10px;\r\n}\r\n\r\n.logo[_ngcontent-%COMP%] {\r\n    background-image: url(\"https://inspirebrands.com/wp-content/uploads/2022/12/Inspire-All-Brands.jpg\");\r\n    background-repeat: no-repeat;\r\n    background-size: 100% 100%;\r\n    background-color: #cccccc;\r\n}\r\n\r\n.loginHeader[_ngcontent-%COMP%] {\r\n    float: left;\r\n    height: 30%;\r\n    width: 100%;\r\n    display: flex;\r\n    align-items: baseline;\r\n    text-align: center;\r\n}\r\n\r\n.loginHeader[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\r\n    margin-top: auto;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    font-size: 24px;\r\n}\r\n\r\n\r\n.loginControl[_ngcontent-%COMP%] {\r\n    float: left;\r\n    width: 100%;\r\n    display: flex;\r\n}\r\n\r\n.loginBox[_ngcontent-%COMP%] {\r\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.1);\r\n    min-width: 80%;\r\n    min-height: 80%;\r\n    display: flex;\r\n    align-items: center;\r\n    margin: auto;\r\n}\r\n\r\nform[_ngcontent-%COMP%]{\r\n    width: 100%;\r\n}\r\n\r\n@media only screen and (min-width: 100px) and (max-width: 900px) {\r\n\r\n    .outerLogin[_ngcontent-%COMP%] {\r\n        flex-direction: column;\r\n    }\r\n\r\n    .logo[_ngcontent-%COMP%] {\r\n        width: 100%;\r\n        height: 100%;\r\n        margin: auto;\r\n    }\r\n\r\n    .outer[_ngcontent-%COMP%] {\r\n        width: 100%;\r\n        height: 80%;\r\n    }\r\n\r\n    .loginHeader[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\r\n        margin-top: auto;\r\n    }\r\n\r\n    .loginControl[_ngcontent-%COMP%] {\r\n        height: 100%;\r\n    }\r\n}\r\n\r\n@media only screen and (min-width: 901px) {\r\n    .outerLogin[_ngcontent-%COMP%] > div[_ngcontent-%COMP%] {\r\n        height: 100%;\r\n    }\r\n\r\n    .outerLogin[_ngcontent-%COMP%] {\r\n        flex-direction: row;\r\n    }\r\n\r\n    .logo[_ngcontent-%COMP%] {\r\n        width: 50%;\r\n    }\r\n\r\n    .outer[_ngcontent-%COMP%] {\r\n        width: 50%;\r\n    }\r\n\r\n    .loginControl[_ngcontent-%COMP%] {\r\n        height: 70%;\r\n    }\r\n}\r\n\r\n.curField[_ngcontent-%COMP%] {\r\n    width: 90%;\r\n    padding: 10px;\r\n    height: 100px;\r\n    display: flex;\r\n    margin: auto;\r\n}\r\n\r\n.button[_ngcontent-%COMP%] {\r\n    width: 90%;\r\n    margin: 10px;\r\n    display: flex;\r\n    margin: auto;\r\n}\r\n\r\ninput[_ngcontent-%COMP%]{\r\n    background-color: #fff!important;\r\n}"]
-});
+  LoginComponent.ɵfac = function LoginComponent_Factory(t) {
+    return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_0__.AuthService));
+  };
+  LoginComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
+    type: LoginComponent,
+    selectors: [["app-login"]],
+    decls: 24,
+    vars: 4,
+    consts: [[1, "outerLogin"], [1, "logo"], [1, "outer"], [1, "loginHeader"], [1, "loginControl"], [1, "loginBox"], [1, "loginForm", 3, "formGroup", "ngSubmit"], ["appearance", "outline", 1, "curField"], ["matInput", "", "placeholder", "User Name", "type", "text", "formControlName", "UserName", "required", ""], [4, "ngIf"], ["matInput", "", "placeholder", "Password", "type", "password", "formControlName", "Password", "required", ""], ["type", "submit", "mat-raised-button", "", "color", "primary", 1, "button", 3, "disabled"]],
+    template: function LoginComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 2)(3, "div", 3)(4, "h1");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5, "Sign in to Restaurant Technology Deployment Platform");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 4)(7, "div", 5)(8, "form", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngSubmit", function LoginComponent_Template_form_ngSubmit_8_listener() {
+          return ctx.logMeIn();
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "p")(10, "mat-form-field", 7)(11, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "Enter your email");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](13, "input", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](14, LoginComponent_mat_error_14_Template, 2, 0, "mat-error", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](15, "p")(16, "mat-form-field", 7)(17, "mat-label");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](18, "Enter your password");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](19, "input", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](20, LoginComponent_mat_error_20_Template, 2, 0, "mat-error", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "p")(22, "button", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](23, "Login");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()()()();
+      }
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.formGroup);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.hasEror("UserName"));
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.hasEror("Password"));
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", ctx.hasEror("Password") || ctx.hasEror("UserName"));
+      }
+    },
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatFormField, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatLabel, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatError, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.RequiredValidator, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_material_input__WEBPACK_IMPORTED_MODULE_5__.MatInput, _angular_material_button__WEBPACK_IMPORTED_MODULE_6__.MatButton],
+    styles: ["*[_ngcontent-%COMP%] {\r\n    box-sizing: border-box;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n.outerLogin[_ngcontent-%COMP%] {\r\n    display: flex;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.outerLogin[_ngcontent-%COMP%] > div[_ngcontent-%COMP%] {\r\n    float: left;\r\n    padding: 10px;\r\n}\r\n\r\n.logo[_ngcontent-%COMP%] {\r\n    background-image: url(\"https://inspirebrands.com/wp-content/uploads/2022/12/Inspire-All-Brands.jpg\");\r\n    background-repeat: no-repeat;\r\n    background-size: 100% 100%;\r\n    background-color: #cccccc;\r\n}\r\n\r\n.loginHeader[_ngcontent-%COMP%] {\r\n    float: left;\r\n    height: 30%;\r\n    width: 100%;\r\n    display: flex;\r\n    align-items: baseline;\r\n    text-align: center;\r\n}\r\n\r\n.loginHeader[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\r\n    margin-top: auto;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    font-size: 24px;\r\n}\r\n\r\n\r\n.loginControl[_ngcontent-%COMP%] {\r\n    float: left;\r\n    width: 100%;\r\n    display: flex;\r\n}\r\n\r\n.loginBox[_ngcontent-%COMP%] {\r\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.1);\r\n    min-width: 80%;\r\n    min-height: 80%;\r\n    display: flex;\r\n    align-items: center;\r\n    margin: auto;\r\n}\r\n\r\nform[_ngcontent-%COMP%]{\r\n    width: 100%;\r\n}\r\n\r\n@media only screen and (min-width: 100px) and (max-width: 900px) {\r\n\r\n    .outerLogin[_ngcontent-%COMP%] {\r\n        flex-direction: column;\r\n    }\r\n\r\n    .logo[_ngcontent-%COMP%] {\r\n        width: 100%;\r\n        height: 100%;\r\n        margin: auto;\r\n    }\r\n\r\n    .outer[_ngcontent-%COMP%] {\r\n        width: 100%;\r\n        height: 80%;\r\n    }\r\n\r\n    .loginHeader[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\r\n        margin-top: auto;\r\n    }\r\n\r\n    .loginControl[_ngcontent-%COMP%] {\r\n        height: 100%;\r\n    }\r\n}\r\n\r\n@media only screen and (min-width: 901px) {\r\n    .outerLogin[_ngcontent-%COMP%] > div[_ngcontent-%COMP%] {\r\n        height: 100%;\r\n    }\r\n\r\n    .outerLogin[_ngcontent-%COMP%] {\r\n        flex-direction: row;\r\n    }\r\n\r\n    .logo[_ngcontent-%COMP%] {\r\n        width: 50%;\r\n    }\r\n\r\n    .outer[_ngcontent-%COMP%] {\r\n        width: 50%;\r\n    }\r\n\r\n    .loginControl[_ngcontent-%COMP%] {\r\n        height: 70%;\r\n    }\r\n}\r\n\r\n.curField[_ngcontent-%COMP%] {\r\n    width: 90%;\r\n    padding: 10px;\r\n    height: 100px;\r\n    display: flex;\r\n    margin: auto;\r\n}\r\n\r\n.button[_ngcontent-%COMP%] {\r\n    width: 90%;\r\n    margin: 10px;\r\n    display: flex;\r\n    margin: auto;\r\n}\r\n\r\ninput[_ngcontent-%COMP%]{\r\n    background-color: #fff!important;\r\n}"]
+  });
+  return LoginComponent;
+})();
 
 /***/ }),
 
@@ -376,129 +388,132 @@ function AdminConfigComponent_app_manage_dropdowns_28_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](0, "app-manage-dropdowns");
   }
 }
-class AdminConfigComponent {
-  constructor(homeService) {
-    this.homeService = homeService;
-    this.getAllTabs();
-    this.tabIndex = -1;
-    this.tabItems = ["Dashboard", "Users", "Brands Profile", "Vendors", "Manage Dropdowns", "Technology Areas", "Franchise"];
+let AdminConfigComponent = /*#__PURE__*/(() => {
+  class AdminConfigComponent {
+    constructor(homeService) {
+      this.homeService = homeService;
+      this.getAllTabs();
+      this.tabIndex = -1;
+      this.tabItems = ["Dashboard", "Users", "Brands Profile", "Vendors", "Manage Dropdowns", "Technology Areas", "Franchise"];
+    }
+    getAllTabs() {
+      this.tabs = this.homeService.GetAllTabs();
+    }
+    clickOption(index) {
+      this.tabIndex = index;
+    }
   }
-  getAllTabs() {
-    this.tabs = this.homeService.GetAllTabs();
-  }
-  clickOption(index) {
-    this.tabIndex = index;
-  }
-}
-AdminConfigComponent.ɵfac = function AdminConfigComponent_Factory(t) {
-  return new (t || AdminConfigComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_services_home_service__WEBPACK_IMPORTED_MODULE_0__.HomeService));
-};
-AdminConfigComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({
-  type: AdminConfigComponent,
-  selectors: [["app-admin-config"]],
-  decls: 29,
-  vars: 15,
-  consts: [["autosize", "", 1, "example-container"], ["mode", "side", "opened", "true", 1, "sideNav"], ["drawer", ""], [1, "ConfigList"], [3, "click"], [1, "sideNavContent"], [3, "ngClass", "click"], [3, "curTab", 4, "ngIf"], [4, "ngIf"], [3, "curTab"]],
-  template: function AdminConfigComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "mat-drawer-container", 0)(1, "mat-drawer", 1, 2)(3, "div", 3)(4, "span", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_4_listener() {
-        return ctx.clickOption(-1);
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](6, "span", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_6_listener() {
-        return ctx.clickOption(0);
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](8, "span", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_8_listener() {
-        return ctx.clickOption(1);
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](9);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](10, "span", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_10_listener() {
-        return ctx.clickOption(2);
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](11);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](12, "span", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_12_listener() {
-        return ctx.clickOption(-2);
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](14, "span", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_14_listener() {
-        return ctx.clickOption(3);
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](15);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](16, "span", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_16_listener() {
-        return ctx.clickOption(4);
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](17);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](18, "div", 5)(19, "span", 6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_19_listener() {
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r8);
+  AdminConfigComponent.ɵfac = function AdminConfigComponent_Factory(t) {
+    return new (t || AdminConfigComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_services_home_service__WEBPACK_IMPORTED_MODULE_0__.HomeService));
+  };
+  AdminConfigComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({
+    type: AdminConfigComponent,
+    selectors: [["app-admin-config"]],
+    decls: 29,
+    vars: 15,
+    consts: [["autosize", "", 1, "example-container"], ["mode", "side", "opened", "true", 1, "sideNav"], ["drawer", ""], [1, "ConfigList"], [3, "click"], [1, "sideNavContent"], [3, "ngClass", "click"], [3, "curTab", 4, "ngIf"], [4, "ngIf"], [3, "curTab"]],
+    template: function AdminConfigComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "mat-drawer-container", 0)(1, "mat-drawer", 1, 2)(3, "div", 3)(4, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_4_listener() {
+          return ctx.clickOption(-1);
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](6, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_6_listener() {
+          return ctx.clickOption(0);
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](8, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_8_listener() {
+          return ctx.clickOption(1);
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](10, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_10_listener() {
+          return ctx.clickOption(2);
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](12, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_12_listener() {
+          return ctx.clickOption(-2);
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](14, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_14_listener() {
+          return ctx.clickOption(3);
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](16, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_16_listener() {
+          return ctx.clickOption(4);
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](18, "div", 5)(19, "span", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function AdminConfigComponent_Template_span_click_19_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r8);
+          const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵreference"](2);
+          return _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵresetView"](_r0.toggle());
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](20, "mat-icon");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](21, "play_arrow");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](22, AdminConfigComponent_app_tab_body_22_Template, 1, 1, "app-tab-body", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](23, AdminConfigComponent_app_tab_body_23_Template, 1, 1, "app-tab-body", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](24, AdminConfigComponent_app_tab_body_24_Template, 1, 1, "app-tab-body", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](25, AdminConfigComponent_app_tab_body_25_Template, 1, 1, "app-tab-body", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](26, AdminConfigComponent_app_tab_body_26_Template, 1, 1, "app-tab-body", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](27, AdminConfigComponent_app_admin_dashboard_shortcuts_27_Template, 1, 0, "app-admin-dashboard-shortcuts", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](28, AdminConfigComponent_app_manage_dropdowns_28_Template, 1, 0, "app-manage-dropdowns", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
+      }
+      if (rf & 2) {
         const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵreference"](2);
-        return _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵresetView"](_r0.toggle());
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](20, "mat-icon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](21, "play_arrow");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](22, AdminConfigComponent_app_tab_body_22_Template, 1, 1, "app-tab-body", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](23, AdminConfigComponent_app_tab_body_23_Template, 1, 1, "app-tab-body", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](24, AdminConfigComponent_app_tab_body_24_Template, 1, 1, "app-tab-body", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](25, AdminConfigComponent_app_tab_body_25_Template, 1, 1, "app-tab-body", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](26, AdminConfigComponent_app_tab_body_26_Template, 1, 1, "app-tab-body", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](27, AdminConfigComponent_app_admin_dashboard_shortcuts_27_Template, 1, 0, "app-admin-dashboard-shortcuts", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](28, AdminConfigComponent_app_manage_dropdowns_28_Template, 1, 0, "app-manage-dropdowns", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
-    }
-    if (rf & 2) {
-      const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵreference"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[0]);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[1]);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[2]);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[3]);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[4]);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[5]);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[6]);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngClass", _r0.opened ? "toggleIcon opened" : "toggleIcon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == -1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == -2);
-    }
-  },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_5__.NgClass, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgIf, _angular_material_icon__WEBPACK_IMPORTED_MODULE_6__.MatIcon, _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_7__.MatDrawer, _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_7__.MatDrawerContainer, _tab_body_tab_body_component__WEBPACK_IMPORTED_MODULE_1__.TabBodyComponent, _admin_dashboard_shortcuts_admin_dashboard_shortcuts_component__WEBPACK_IMPORTED_MODULE_2__.AdminDashboardShortcutsComponent, _manage_dropdowns_manage_dropdowns_component__WEBPACK_IMPORTED_MODULE_3__.ManageDropdownsComponent],
-  styles: [".example-container[_ngcontent-%COMP%] {\r\n    width: 100%;\r\n    height: 100%;\r\n    border: 1px solid rgba(0, 0, 0, 0.5);\r\n}\r\n\r\n.sideNavContent[_ngcontent-%COMP%] {\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\n.sideNav[_ngcontent-%COMP%] {\r\n    padding: 20px;\r\n    background-color: #E8E8E8;\r\n}\r\n\r\n.toggleIcon[_ngcontent-%COMP%] {\r\n    display: block;\r\n    position: absolute;\r\n    border-radius: 50%;\r\n    top: 20px;\r\n    left: 0px;\r\n    cursor: pointer;\r\n    background-color: gray;\r\n    color: #ffff;\r\n    z-index: 1;\r\n    line-height: 5px;\r\n    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;\r\n}\r\n\r\n.toggleIcon.opened[_ngcontent-%COMP%] {\r\n    transform: rotate(180deg);\r\n}\r\n\r\n.ConfigList[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\r\n    display: block;\r\n    margin: 10px auto;\r\n    background-color: #fff;\r\n    padding: 8px;\r\n    height: 20px;\r\n    border-radius: 5px;\r\n    font-size: 12px;\r\n    line-height: 18px;\r\n    cursor: pointer;\r\n}"]
-});
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[0]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[1]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[2]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[3]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[4]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[5]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx.tabItems[6]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngClass", _r0.opened ? "toggleIcon opened" : "toggleIcon");
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == -1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.tabIndex == -2);
+      }
+    },
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_5__.NgClass, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgIf, _angular_material_icon__WEBPACK_IMPORTED_MODULE_6__.MatIcon, _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_7__.MatDrawer, _angular_material_sidenav__WEBPACK_IMPORTED_MODULE_7__.MatDrawerContainer, _tab_body_tab_body_component__WEBPACK_IMPORTED_MODULE_1__.TabBodyComponent, _admin_dashboard_shortcuts_admin_dashboard_shortcuts_component__WEBPACK_IMPORTED_MODULE_2__.AdminDashboardShortcutsComponent, _manage_dropdowns_manage_dropdowns_component__WEBPACK_IMPORTED_MODULE_3__.ManageDropdownsComponent],
+    styles: [".example-container[_ngcontent-%COMP%] {\r\n    width: 100%;\r\n    height: 100%;\r\n    border: 1px solid rgba(0, 0, 0, 0.5);\r\n}\r\n\r\n.sideNavContent[_ngcontent-%COMP%] {\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\n.sideNav[_ngcontent-%COMP%] {\r\n    padding: 20px;\r\n    background-color: #E8E8E8;\r\n}\r\n\r\n.toggleIcon[_ngcontent-%COMP%] {\r\n    display: block;\r\n    position: absolute;\r\n    border-radius: 50%;\r\n    top: 20px;\r\n    left: 0px;\r\n    cursor: pointer;\r\n    background-color: gray;\r\n    color: #ffff;\r\n    z-index: 1;\r\n    line-height: 5px;\r\n    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;\r\n}\r\n\r\n.toggleIcon.opened[_ngcontent-%COMP%] {\r\n    transform: rotate(180deg);\r\n}\r\n\r\n.ConfigList[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\r\n    display: block;\r\n    margin: 10px auto;\r\n    background-color: #fff;\r\n    padding: 8px;\r\n    height: 20px;\r\n    border-radius: 5px;\r\n    font-size: 12px;\r\n    line-height: 18px;\r\n    cursor: pointer;\r\n}"]
+  });
+  return AdminConfigComponent;
+})();
 
 /***/ }),
 
@@ -520,79 +535,82 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class AdminDashboardShortcutsComponent {}
-AdminDashboardShortcutsComponent.ɵfac = function AdminDashboardShortcutsComponent_Factory(t) {
-  return new (t || AdminDashboardShortcutsComponent)();
-};
-AdminDashboardShortcutsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
-  type: AdminDashboardShortcutsComponent,
-  selectors: [["app-admin-dashboard-shortcuts"]],
-  decls: 48,
-  vars: 0,
-  consts: [[1, "container"], [1, "header"], [1, "dBody"], [1, "searchBar"], ["appearance", "fill", 1, "searchField"], ["matInput", "", "placeholder", "Search"], ["matSuffix", ""], [1, "bodyBar"], [1, "tIcon"]],
-  template: function AdminDashboardShortcutsComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " Dashoard ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 2)(4, "div", 3)(5, "mat-form-field", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "input", 5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "mat-icon", 6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "search");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "mat-hint");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "Type a name of action");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 7)(12, "span")(13, "mat-icon", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "account_box");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, "Add New User");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "span")(17, "mat-icon", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, "dashboard");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "Add New Brand");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "span")(21, "mat-icon", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](22, "extension");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](23, "Add New Vendor");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "span")(25, "mat-icon", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, "shopping_basket");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](27, "Add Dropdown");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "span")(29, "mat-icon", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, "featured_play_list");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](31, "Add New Report");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](32, "span")(33, "mat-icon", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](34, "settings_input_component");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](35, "Add New Technology Area");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "span")(37, "mat-icon", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](38, "settings");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](39, "Setting");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](40, "span")(41, "mat-icon", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](42, "account_circle");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](43, "Add New Frenchise");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](44, "span")(45, "mat-icon", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](46, "accessibility_new");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](47, "Dummy");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-    }
-  },
-  dependencies: [_angular_material_form_field__WEBPACK_IMPORTED_MODULE_1__.MatFormField, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_1__.MatHint, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_1__.MatSuffix, _angular_material_input__WEBPACK_IMPORTED_MODULE_2__.MatInput, _angular_material_icon__WEBPACK_IMPORTED_MODULE_3__.MatIcon],
-  styles: [".container[_ngcontent-%COMP%]{\r\n    width: 90%;\r\n    height: 100%;\r\n    margin: auto;\r\n}\r\n\r\n.header[_ngcontent-%COMP%]{\r\n    height: 40px;\r\n    width: 100%;\r\n    line-height: 35px;\r\n    float: left;\r\n    font-size: 15px;\r\n    font-variant: small-caps;\r\n    color: #444;\r\n    font-weight: bold;\r\n}\r\n.dBody[_ngcontent-%COMP%], .bodyBar[_ngcontent-%COMP%]{\r\n    float: left;\r\n    width: 100%;\r\n    height: calc(100% - 50px);\r\n    overflow: auto;\r\n}\r\n\r\n.searchBar[_ngcontent-%COMP%]{\r\n    float: left;\r\n    width: 100%;\r\n    height: 50px;\r\n    margin-bottom: 50px;\r\n}\r\n\r\n.bodyBar[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{\r\n    float: left;\r\n    width: 150px;\r\n    height: 100px;\r\n    margin: 0px 20px 20px 0px;\r\n    padding: 10px;\r\n    border-radius: 5px;\r\n    background-color: #E8E8E8;\r\n    cursor: pointer;\r\n    text-align: center;\r\n}\r\n\r\n.tIcon[_ngcontent-%COMP%]{\r\n    font-size: 40px;\r\n    width: auto;\r\n    height: auto;\r\n    display: block;\r\n    margin-top: 18px;   \r\n}\r\n\r\n.searchField[_ngcontent-%COMP%]{\r\n    width: 90%;\r\n    margin: auto;\r\n}"]
-});
+let AdminDashboardShortcutsComponent = /*#__PURE__*/(() => {
+  class AdminDashboardShortcutsComponent {}
+  AdminDashboardShortcutsComponent.ɵfac = function AdminDashboardShortcutsComponent_Factory(t) {
+    return new (t || AdminDashboardShortcutsComponent)();
+  };
+  AdminDashboardShortcutsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+    type: AdminDashboardShortcutsComponent,
+    selectors: [["app-admin-dashboard-shortcuts"]],
+    decls: 48,
+    vars: 0,
+    consts: [[1, "container"], [1, "header"], [1, "dBody"], [1, "searchBar"], ["appearance", "fill", 1, "searchField"], ["matInput", "", "placeholder", "Search"], ["matSuffix", ""], [1, "bodyBar"], [1, "tIcon"]],
+    template: function AdminDashboardShortcutsComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " Dashoard ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 2)(4, "div", 3)(5, "mat-form-field", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "input", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "mat-icon", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "search");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "mat-hint");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "Type a name of action");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 7)(12, "span")(13, "mat-icon", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "account_box");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, "Add New User");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "span")(17, "mat-icon", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, "dashboard");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "Add New Brand");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "span")(21, "mat-icon", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](22, "extension");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](23, "Add New Vendor");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "span")(25, "mat-icon", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, "shopping_basket");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](27, "Add Dropdown");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "span")(29, "mat-icon", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, "featured_play_list");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](31, "Add New Report");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](32, "span")(33, "mat-icon", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](34, "settings_input_component");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](35, "Add New Technology Area");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "span")(37, "mat-icon", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](38, "settings");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](39, "Setting");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](40, "span")(41, "mat-icon", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](42, "account_circle");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](43, "Add New Frenchise");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](44, "span")(45, "mat-icon", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](46, "accessibility_new");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](47, "Dummy");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
+      }
+    },
+    dependencies: [_angular_material_form_field__WEBPACK_IMPORTED_MODULE_1__.MatFormField, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_1__.MatHint, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_1__.MatSuffix, _angular_material_input__WEBPACK_IMPORTED_MODULE_2__.MatInput, _angular_material_icon__WEBPACK_IMPORTED_MODULE_3__.MatIcon],
+    styles: [".container[_ngcontent-%COMP%]{\r\n    width: 90%;\r\n    height: 100%;\r\n    margin: auto;\r\n}\r\n\r\n.header[_ngcontent-%COMP%]{\r\n    height: 40px;\r\n    width: 100%;\r\n    line-height: 35px;\r\n    float: left;\r\n    font-size: 15px;\r\n    font-variant: small-caps;\r\n    color: #444;\r\n    font-weight: bold;\r\n}\r\n.dBody[_ngcontent-%COMP%], .bodyBar[_ngcontent-%COMP%]{\r\n    float: left;\r\n    width: 100%;\r\n    height: calc(100% - 50px);\r\n    overflow: auto;\r\n}\r\n\r\n.searchBar[_ngcontent-%COMP%]{\r\n    float: left;\r\n    width: 100%;\r\n    height: 50px;\r\n    margin-bottom: 50px;\r\n}\r\n\r\n.bodyBar[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{\r\n    float: left;\r\n    width: 150px;\r\n    height: 100px;\r\n    margin: 0px 20px 20px 0px;\r\n    padding: 10px;\r\n    border-radius: 5px;\r\n    background-color: #E8E8E8;\r\n    cursor: pointer;\r\n    text-align: center;\r\n}\r\n\r\n.tIcon[_ngcontent-%COMP%]{\r\n    font-size: 40px;\r\n    width: auto;\r\n    height: auto;\r\n    display: block;\r\n    margin-top: 18px;   \r\n}\r\n\r\n.searchField[_ngcontent-%COMP%]{\r\n    width: 90%;\r\n    margin: auto;\r\n}"]
+  });
+  return AdminDashboardShortcutsComponent;
+})();
 
 /***/ }),
 
@@ -742,96 +760,99 @@ function ControlsComponent_mat_icon_3_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
 }
-class ControlsComponent {
-  set controlValues(value) {
-    this._controlValues = value;
-    this.valueChanged();
-  }
-  get controlValues() {
-    return this._controlValues;
-  }
-  constructor() {
-    this.onSubmit = new _angular_core__WEBPACK_IMPORTED_MODULE_1__.EventEmitter();
-    this.formGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroup({});
-  }
-  ngOnChanges() {
-    this.valueChanged();
-  }
-  valueChanged() {
-    this.formGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroup({});
-    for (const formField of this.fields) {
-      if (typeof this._controlValues[formField.fieldUniqeName] == 'undefined') this._controlValues[formField.fieldUniqeName] = formField.defaultVal;
-      this.formGroup.addControl(formField.fieldUniqeName, new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl("", formField.validator));
+let ControlsComponent = /*#__PURE__*/(() => {
+  class ControlsComponent {
+    set controlValues(value) {
+      this._controlValues = value;
+      this.valueChanged();
+    }
+    get controlValues() {
+      return this._controlValues;
+    }
+    constructor() {
+      this.onSubmit = new _angular_core__WEBPACK_IMPORTED_MODULE_1__.EventEmitter();
+      this.formGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroup({});
+    }
+    ngOnChanges() {
+      this.valueChanged();
+    }
+    valueChanged() {
+      this.formGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroup({});
+      for (const formField of this.fields) {
+        if (typeof this._controlValues[formField.fieldUniqeName] == 'undefined') this._controlValues[formField.fieldUniqeName] = formField.defaultVal;
+        this.formGroup.addControl(formField.fieldUniqeName, new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl("", formField.validator));
+      }
+    }
+    hasEror(cControl) {
+      let has = false;
+      let control = this.formGroup.get(cControl.fieldUniqeName);
+      if (typeof control != 'undefined' && control != null) {
+        has = !control.valid;
+      }
+      return has;
+    }
+    getErrorMessage(cControl) {
+      let eMsg = "Error";
+      let control = this.formGroup.get(cControl.fieldUniqeName);
+      if (typeof control != 'undefined' && control != null && control.errors != null) {
+        if (control.errors['required']) eMsg = src_app_interfaces_commons__WEBPACK_IMPORTED_MODULE_0__.ControlsErrorMessages.Requird;else if (control.errors['email']) eMsg = src_app_interfaces_commons__WEBPACK_IMPORTED_MODULE_0__.ControlsErrorMessages.Email;else if (control.errors['range']) eMsg = src_app_interfaces_commons__WEBPACK_IMPORTED_MODULE_0__.ControlsErrorMessages.Range;
+      }
+      return eMsg;
+    }
+    onSubmitClick() {
+      // if (this.formGroup.valid) {
+      this.onSubmit.emit(this.formGroup);
+      // }
     }
   }
-  hasEror(cControl) {
-    let has = false;
-    let control = this.formGroup.get(cControl.fieldUniqeName);
-    if (typeof control != 'undefined' && control != null) {
-      has = !control.valid;
-    }
-    return has;
-  }
-  getErrorMessage(cControl) {
-    let eMsg = "Error";
-    let control = this.formGroup.get(cControl.fieldUniqeName);
-    if (typeof control != 'undefined' && control != null && control.errors != null) {
-      if (control.errors['required']) eMsg = src_app_interfaces_commons__WEBPACK_IMPORTED_MODULE_0__.ControlsErrorMessages.Requird;else if (control.errors['email']) eMsg = src_app_interfaces_commons__WEBPACK_IMPORTED_MODULE_0__.ControlsErrorMessages.Email;else if (control.errors['range']) eMsg = src_app_interfaces_commons__WEBPACK_IMPORTED_MODULE_0__.ControlsErrorMessages.Range;
-    }
-    return eMsg;
-  }
-  onSubmitClick() {
-    // if (this.formGroup.valid) {
-    this.onSubmit.emit(this.formGroup);
-    // }
-  }
-}
 
-ControlsComponent.ɵfac = function ControlsComponent_Factory(t) {
-  return new (t || ControlsComponent)();
-};
-ControlsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
-  type: ControlsComponent,
-  selectors: [["app-controls"]],
-  inputs: {
-    fields: "fields",
-    controlValues: "controlValues",
-    SubmitLabel: "SubmitLabel"
-  },
-  outputs: {
-    onSubmit: "onSubmit"
-  },
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵNgOnChangesFeature"]],
-  decls: 5,
-  vars: 6,
-  consts: [[1, "form", 3, "formGroup", "ngSubmit"], [4, "ngFor", "ngForOf"], ["type", "submit", "mat-raised-button", "", 3, "disabled", "className"], [4, "ngIf"], ["appearance", "outline", 3, "ngClass", 4, "ngIf"], ["appearance", "outline", 3, "ngClass"], ["matInput", "", 3, "placeholder", "type", "formControlName", "ngModel"], [3, "formControlName", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"]],
-  template: function ControlsComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "form", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngSubmit", function ControlsComponent_Template_form_ngSubmit_0_listener() {
-        return ctx.onSubmitClick();
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, ControlsComponent_ng_container_1_Template, 3, 2, "ng-container", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "button", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](3, ControlsComponent_mat_icon_3_Template, 2, 0, "mat-icon", 3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    }
-    if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.formGroup);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.fields);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", !ctx.formGroup.valid)("className", ctx.SubmitLabel == "Search" ? "btn-submit btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base" : "btn-search btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.SubmitLabel == "Search");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx.SubmitLabel, " ");
-    }
-  },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgClass, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatFormField, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatLabel, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatError, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_material_input__WEBPACK_IMPORTED_MODULE_5__.MatInput, _angular_material_select__WEBPACK_IMPORTED_MODULE_6__.MatSelect, _angular_material_core__WEBPACK_IMPORTED_MODULE_7__.MatOption, _angular_material_button__WEBPACK_IMPORTED_MODULE_8__.MatButton, _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__.MatIcon],
-  styles: [".curField[_ngcontent-%COMP%] {\r\n    width: 45%;\r\n    padding: 0px;\r\n    margin-top: 10px;\r\n}\r\n\r\n.hidden[_ngcontent-%COMP%]{\r\n    display: none;\r\n}\r\n\r\n.btn-submit[_ngcontent-%COMP%]{\r\n    float: right;\r\n    margin-right: 40%;\r\n    margin-top: 18px;\r\n}\r\n.btn-search[_ngcontent-%COMP%]{\r\n    margin-right: 40%;\r\n    margin-top: 18px;\r\n}\r\n\r\n.form[_ngcontent-%COMP%]{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: space-between;\r\n}"]
-});
+  ControlsComponent.ɵfac = function ControlsComponent_Factory(t) {
+    return new (t || ControlsComponent)();
+  };
+  ControlsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
+    type: ControlsComponent,
+    selectors: [["app-controls"]],
+    inputs: {
+      fields: "fields",
+      controlValues: "controlValues",
+      SubmitLabel: "SubmitLabel"
+    },
+    outputs: {
+      onSubmit: "onSubmit"
+    },
+    features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵNgOnChangesFeature"]],
+    decls: 5,
+    vars: 6,
+    consts: [[1, "form", 3, "formGroup", "ngSubmit"], [4, "ngFor", "ngForOf"], ["type", "submit", "mat-raised-button", "", 3, "disabled", "className"], [4, "ngIf"], ["appearance", "outline", 3, "ngClass", 4, "ngIf"], ["appearance", "outline", 3, "ngClass"], ["matInput", "", 3, "placeholder", "type", "formControlName", "ngModel"], [3, "formControlName", "ngModel"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"]],
+    template: function ControlsComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "form", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngSubmit", function ControlsComponent_Template_form_ngSubmit_0_listener() {
+          return ctx.onSubmitClick();
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, ControlsComponent_ng_container_1_Template, 3, 2, "ng-container", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](3, ControlsComponent_mat_icon_3_Template, 2, 0, "mat-icon", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+      }
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.formGroup);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.fields);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", !ctx.formGroup.valid)("className", ctx.SubmitLabel == "Search" ? "btn-submit btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base" : "btn-search btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.SubmitLabel == "Search");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx.SubmitLabel, " ");
+      }
+    },
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgClass, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatFormField, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatLabel, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__.MatError, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_material_input__WEBPACK_IMPORTED_MODULE_5__.MatInput, _angular_material_select__WEBPACK_IMPORTED_MODULE_6__.MatSelect, _angular_material_core__WEBPACK_IMPORTED_MODULE_7__.MatOption, _angular_material_button__WEBPACK_IMPORTED_MODULE_8__.MatButton, _angular_material_icon__WEBPACK_IMPORTED_MODULE_9__.MatIcon],
+    styles: [".curField[_ngcontent-%COMP%] {\r\n    width: 45%;\r\n    padding: 0px;\r\n    margin-top: 10px;\r\n}\r\n\r\n.hidden[_ngcontent-%COMP%]{\r\n    display: none;\r\n}\r\n\r\n.btn-submit[_ngcontent-%COMP%]{\r\n    float: right;\r\n    margin-right: 40%;\r\n    margin-top: 18px;\r\n}\r\n.btn-search[_ngcontent-%COMP%]{\r\n    margin-right: 40%;\r\n    margin-top: 18px;\r\n}\r\n\r\n.form[_ngcontent-%COMP%]{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: space-between;\r\n}"]
+  });
+  return ControlsComponent;
+})();
 
 /***/ }),
 
@@ -865,101 +886,104 @@ function HomeDashboardComponent_span_5_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpropertyInterpolate"]("src", brand_r1.tIconURL, _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵsanitizeUrl"]);
   }
 }
-class HomeDashboardComponent {
-  constructor(homeService, brandService) {
-    this.homeService = homeService;
-    this.brandService = brandService;
-    this.getBrands();
-  }
-  getBrands() {
-    // this.brands = this.brandService.GetAllBrands();
-    //  {
-    //   aBrandId: 0,
-    //   tBrandName: '',
-    //   tBrandDescription: '',
-    //   tBrandWebsite: '',
-    //   tBrandCountry: '',
-    //   tBrandEstablished: null,
-    //   tBrandCategory: '',
-    //   tBrandContact: '',
-    //   nBrandLogoAttachmentID: 0,
-    //   nCreatedBy:0 ,
-    //   nUpdateBy: 0,
-    //   dtCreatedOn: null,
-    //   dtUpdatedOn: null,
-    //   tIconURL: ''
-    // }
-    this.brandService.GetBrands(null).subscribe(resp => {
-      this.brands = resp;
-      this.updateIconsTemp();
-    });
-  }
-  updateIconsTemp() {
-    for (var i in this.brands) {
-      if (this.brands[i].tBrandName?.toLowerCase().indexOf("dunkin")) {
-        this.brands[i].tIconURL = "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png";
-      } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("baskin")) {
-        this.brands[i].tIconURL = "https://1000logos.net/wp-content/uploads/2016/10/Baskin-Robbins-Logo-2020.png";
-      } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("buffe")) {
-        this.brands[i].tIconURL = "https://logos-world.net/wp-content/uploads/2022/01/Buffalo-Wild-Wings-Logo.png";
-      } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("arby")) {
-        this.brands[i].tIconURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Arby%27s_logo.svg/2394px-Arby%27s_logo.svg.png";
-      } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("jimm")) {
-        this.brands[i].tIconURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Jimmy_Johns_logo.svg/1200px-Jimmy_Johns_logo.svg.png";
-      } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("sonic")) {
-        this.brands[i].tIconURL = "https://upload.wikimedia.org/wikipedia/commons/f/ff/SONIC_New_Logo_2020.svg";
-      } else {
-        this.brands[i].tIconURL = "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png";
+let HomeDashboardComponent = /*#__PURE__*/(() => {
+  class HomeDashboardComponent {
+    constructor(homeService, brandService) {
+      this.homeService = homeService;
+      this.brandService = brandService;
+      this.getBrands();
+    }
+    getBrands() {
+      // this.brands = this.brandService.GetAllBrands();
+      //  {
+      //   aBrandId: 0,
+      //   tBrandName: '',
+      //   tBrandDescription: '',
+      //   tBrandWebsite: '',
+      //   tBrandCountry: '',
+      //   tBrandEstablished: null,
+      //   tBrandCategory: '',
+      //   tBrandContact: '',
+      //   nBrandLogoAttachmentID: 0,
+      //   nCreatedBy:0 ,
+      //   nUpdateBy: 0,
+      //   dtCreatedOn: null,
+      //   dtUpdatedOn: null,
+      //   tIconURL: ''
+      // }
+      this.brandService.GetBrands(null).subscribe(resp => {
+        this.brands = resp;
+        this.updateIconsTemp();
+      });
+    }
+    updateIconsTemp() {
+      for (var i in this.brands) {
+        if (this.brands[i].tBrandName?.toLowerCase().indexOf("dunkin")) {
+          this.brands[i].tIconURL = "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png";
+        } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("baskin")) {
+          this.brands[i].tIconURL = "https://1000logos.net/wp-content/uploads/2016/10/Baskin-Robbins-Logo-2020.png";
+        } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("buffe")) {
+          this.brands[i].tIconURL = "https://logos-world.net/wp-content/uploads/2022/01/Buffalo-Wild-Wings-Logo.png";
+        } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("arby")) {
+          this.brands[i].tIconURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Arby%27s_logo.svg/2394px-Arby%27s_logo.svg.png";
+        } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("jimm")) {
+          this.brands[i].tIconURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Jimmy_Johns_logo.svg/1200px-Jimmy_Johns_logo.svg.png";
+        } else if (this.brands[i].tBrandName?.toLowerCase().indexOf("sonic")) {
+          this.brands[i].tIconURL = "https://upload.wikimedia.org/wikipedia/commons/f/ff/SONIC_New_Logo_2020.svg";
+        } else {
+          this.brands[i].tIconURL = "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png";
+        }
       }
     }
   }
-}
-HomeDashboardComponent.ɵfac = function HomeDashboardComponent_Factory(t) {
-  return new (t || HomeDashboardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_home_service__WEBPACK_IMPORTED_MODULE_0__.HomeService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_brand_service_service__WEBPACK_IMPORTED_MODULE_1__.BrandServiceService));
-};
-HomeDashboardComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
-  type: HomeDashboardComponent,
-  selectors: [["app-home-dashboard"]],
-  decls: 23,
-  vars: 1,
-  consts: [[1, "leftPart", "floatLeft"], [1, "chips"], [1, "chipsHeader"], [1, "chipsBody"], ["class", "brands", 4, "ngFor", "ngForOf"], [1, "chipsBody", "whiteBG"], [1, "rightPart", "floatLeft"], [1, "brands"], [3, "src"]],
-  template: function HomeDashboardComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](3, "Brands");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "div", 3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](5, HomeDashboardComponent_span_5_Template, 2, 1, "span", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](6, "div", 1)(7, "div", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](8, "Priorities");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](9, "div", 5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](10, "div", 1)(11, "div", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](12, "Goals");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](13, "div", 5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](14, "div", 6)(15, "div", 1)(16, "div", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](17, "Notifications");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](18, "div", 3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](19, "div", 1)(20, "div", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](21, "Pending Requests");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](22, "div", 3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
-    }
-    if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.brands);
-    }
-  },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf],
-  styles: [".floatLeft[_ngcontent-%COMP%] {\r\n    float: left;\r\n}\r\n\r\n.leftPart[_ngcontent-%COMP%] {\r\n    width: 60%;\r\n    overflow: auto;\r\n}\r\n\r\n.rightPart[_ngcontent-%COMP%] {\r\n    width: 40%;\r\n    overflow: auto;\r\n}\r\n\r\n.chips[_ngcontent-%COMP%] {\r\n    min-height: 50px;\r\n    width: calc(100% - 40px);\r\n    padding: 10px;\r\n    margin: 20px auto;\r\n    border-radius: 10px;\r\n    background-color: #E8E8E8;\r\n}\r\n\r\n.chipsHeader[_ngcontent-%COMP%] {\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n    overflow: hidden;\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n    width: 100%;\r\n    height: 40px;\r\n}\r\n\r\n.whiteBG[_ngcontent-%COMP%]{\r\n    background-color: #fff;\r\n}\r\n.chipsBody[_ngcontent-%COMP%] {\r\n    width: 100%;    \r\n    width: 100%;\r\n    min-height: 10px;\r\n}\r\n\r\n.brands[_ngcontent-%COMP%]{\r\n    border-radius: 5px;\r\n    margin: 20px;\r\n    padding: 10px;\r\n    display: inline-block;\r\n    background-color: #fff;\r\n    cursor: pointer;\r\n}\r\n.brands[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{\r\n    width: 80px;\r\n    height: 80px;\r\n}"]
-});
+  HomeDashboardComponent.ɵfac = function HomeDashboardComponent_Factory(t) {
+    return new (t || HomeDashboardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_home_service__WEBPACK_IMPORTED_MODULE_0__.HomeService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_brand_service_service__WEBPACK_IMPORTED_MODULE_1__.BrandServiceService));
+  };
+  HomeDashboardComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
+    type: HomeDashboardComponent,
+    selectors: [["app-home-dashboard"]],
+    decls: 23,
+    vars: 1,
+    consts: [[1, "leftPart", "floatLeft"], [1, "chips"], [1, "chipsHeader"], [1, "chipsBody"], ["class", "brands", 4, "ngFor", "ngForOf"], [1, "chipsBody", "whiteBG"], [1, "rightPart", "floatLeft"], [1, "brands"], [3, "src"]],
+    template: function HomeDashboardComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](3, "Brands");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](5, HomeDashboardComponent_span_5_Template, 2, 1, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](6, "div", 1)(7, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](8, "Priorities");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](9, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](10, "div", 1)(11, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](12, "Goals");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](13, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](14, "div", 6)(15, "div", 1)(16, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](17, "Notifications");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](18, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](19, "div", 1)(20, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](21, "Pending Requests");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](22, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
+      }
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.brands);
+      }
+    },
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf],
+    styles: [".floatLeft[_ngcontent-%COMP%] {\r\n    float: left;\r\n}\r\n\r\n.leftPart[_ngcontent-%COMP%] {\r\n    width: 60%;\r\n    overflow: auto;\r\n}\r\n\r\n.rightPart[_ngcontent-%COMP%] {\r\n    width: 40%;\r\n    overflow: auto;\r\n}\r\n\r\n.chips[_ngcontent-%COMP%] {\r\n    min-height: 50px;\r\n    width: calc(100% - 40px);\r\n    padding: 10px;\r\n    margin: 20px auto;\r\n    border-radius: 10px;\r\n    background-color: #E8E8E8;\r\n}\r\n\r\n.chipsHeader[_ngcontent-%COMP%] {\r\n    font-size: 18px;\r\n    font-weight: bold;\r\n    overflow: hidden;\r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n    width: 100%;\r\n    height: 40px;\r\n}\r\n\r\n.whiteBG[_ngcontent-%COMP%]{\r\n    background-color: #fff;\r\n}\r\n.chipsBody[_ngcontent-%COMP%] {\r\n    width: 100%;    \r\n    width: 100%;\r\n    min-height: 10px;\r\n}\r\n\r\n.brands[_ngcontent-%COMP%]{\r\n    border-radius: 5px;\r\n    margin: 20px;\r\n    padding: 10px;\r\n    display: inline-block;\r\n    background-color: #fff;\r\n    cursor: pointer;\r\n}\r\n.brands[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{\r\n    width: 80px;\r\n    height: 80px;\r\n}"]
+  });
+  return HomeDashboardComponent;
+})();
 
 /***/ }),
 
@@ -1005,347 +1029,350 @@ function HomeTabComponent_mat_tab_1_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpropertyInterpolate"]("label", item_r1.tab_name);
   }
 }
-class HomeTabComponent {
-  constructor() {
-    this.tabsArray = [{
-      tab_name: "Users",
-      tab_header: "Users search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Users,
-      tab_unique_name: "",
-      search_fields: [{
-        field_name: "User Name",
-        fieldUniqeName: "ABCD",
-        icon: "search",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter USer Name",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "Name",
-        fieldUniqeName: "Name",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Name",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Mobile",
-        fieldUniqeName: "Mobile",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Name",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Email",
-        fieldUniqeName: "Email",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.email,
-        field_placeholder: "Enter mail",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "User DOB",
-        fieldUniqeName: "DOB",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
-        field_placeholder: "Enter DOB",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Created Time",
-        fieldUniqeName: "Time",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.time,
-        field_placeholder: "Enter Created Time",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "User Time",
-        fieldUniqeName: "uTime",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.dropdown,
-        field_placeholder: "Enter User Roles",
-        validator: [],
-        mandatory: false,
-        hidden: false,
-        options: [{
-          optionDisplayName: "Admin",
-          optionIndex: 0,
-          optionOrder: 1
+let HomeTabComponent = /*#__PURE__*/(() => {
+  class HomeTabComponent {
+    constructor() {
+      this.tabsArray = [{
+        tab_name: "Users",
+        tab_header: "Users search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Users,
+        tab_unique_name: "",
+        search_fields: [{
+          field_name: "User Name",
+          fieldUniqeName: "ABCD",
+          icon: "search",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter USer Name",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }],
+        fields: [{
+          field_name: "Name",
+          fieldUniqeName: "Name",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Name",
+          validator: [],
+          mandatory: false,
+          hidden: false
         }, {
-          optionDisplayName: "User",
-          optionIndex: 1,
-          optionOrder: 2
+          field_name: "Mobile",
+          fieldUniqeName: "Mobile",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Name",
+          validator: [],
+          mandatory: false,
+          hidden: false
         }, {
-          optionDisplayName: "Vendor",
-          optionIndex: 2,
-          optionOrder: 3
-        }]
-      }]
-    }, {
-      tab_name: "Brands",
-      tab_header: "Brands search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Brands,
-      tab_unique_name: "",
-      search_fields: [{
-        field_name: "Brands Name",
-        fieldUniqeName: "tBrandName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Name",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "Brand Id",
-        fieldUniqeName: "aBrandId",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
-        field_placeholder: "Enter Brands Id",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Brands Name",
-        fieldUniqeName: "tBrandName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Brands Description",
-        fieldUniqeName: "tBrandDescription",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Description",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Brands Website",
-        fieldUniqeName: "tBrandWebsite",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Website",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Brands Country",
-        fieldUniqeName: "tBrandCountry",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.dropdown,
-        field_placeholder: "Enter Brands Country",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
-        mandatory: false,
-        hidden: false,
-        options: [{
-          optionDisplayName: "India",
-          optionIndex: 0,
-          optionOrder: 1
+          field_name: "Email",
+          fieldUniqeName: "Email",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.email,
+          field_placeholder: "Enter mail",
+          validator: [],
+          mandatory: false,
+          hidden: false
         }, {
-          optionDisplayName: "USA",
-          optionIndex: 1,
-          optionOrder: 2
+          field_name: "User DOB",
+          fieldUniqeName: "DOB",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
+          field_placeholder: "Enter DOB",
+          validator: [],
+          mandatory: false,
+          hidden: false
         }, {
-          optionDisplayName: "UAE",
-          optionIndex: 2,
-          optionOrder: 3
+          field_name: "Created Time",
+          fieldUniqeName: "Time",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.time,
+          field_placeholder: "Enter Created Time",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "User Time",
+          fieldUniqeName: "uTime",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.dropdown,
+          field_placeholder: "Enter User Roles",
+          validator: [],
+          mandatory: false,
+          hidden: false,
+          options: [{
+            optionDisplayName: "Admin",
+            optionIndex: 0,
+            optionOrder: 1
+          }, {
+            optionDisplayName: "User",
+            optionIndex: 1,
+            optionOrder: 2
+          }, {
+            optionDisplayName: "Vendor",
+            optionIndex: 2,
+            optionOrder: 3
+          }]
         }]
       }, {
-        field_name: "Brands Established",
-        fieldUniqeName: "tBrandEstablished",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
-        field_placeholder: "Enter Brands Establishment date",
-        validator: [],
-        mandatory: false,
-        hidden: false
+        tab_name: "Brands",
+        tab_header: "Brands search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Brands,
+        tab_unique_name: "",
+        search_fields: [{
+          field_name: "Brands Name",
+          fieldUniqeName: "tBrandName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Name",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }],
+        fields: [{
+          field_name: "Brand Id",
+          fieldUniqeName: "aBrandId",
+          defaultVal: "",
+          readOnly: true,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
+          field_placeholder: "Enter Brands Id",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Name",
+          fieldUniqeName: "tBrandName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Description",
+          fieldUniqeName: "tBrandDescription",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Description",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Website",
+          fieldUniqeName: "tBrandWebsite",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Website",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Country",
+          fieldUniqeName: "tBrandCountry",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.dropdown,
+          field_placeholder: "Enter Brands Country",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
+          mandatory: false,
+          hidden: false,
+          options: [{
+            optionDisplayName: "India",
+            optionIndex: 0,
+            optionOrder: 1
+          }, {
+            optionDisplayName: "USA",
+            optionIndex: 1,
+            optionOrder: 2
+          }, {
+            optionDisplayName: "UAE",
+            optionIndex: 2,
+            optionOrder: 3
+          }]
+        }, {
+          field_name: "Brands Established",
+          fieldUniqeName: "tBrandEstablished",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
+          field_placeholder: "Enter Brands Establishment date",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Category",
+          fieldUniqeName: "tBrandCategory",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Category",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Contact",
+          fieldUniqeName: "tBrandContact",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Contact",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Attachment Id",
+          fieldUniqeName: "nBrandLogoAttachmentID",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
+          field_placeholder: "Enter Brands Attachment",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }, {
+          field_name: "Brands Created By",
+          fieldUniqeName: "nCreatedBy",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
+          field_placeholder: "Enter Brands Created By",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }, {
+          field_name: "Brands Updated by",
+          fieldUniqeName: "nUpdateBy",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
+          field_placeholder: "Enter Brands Updated by",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }, {
+          field_name: "Brands Created on",
+          fieldUniqeName: "dtCreatedOn",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
+          field_placeholder: "Enter Brands Created on",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }, {
+          field_name: "Brands Updated on",
+          fieldUniqeName: "dtUpdatedOn",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
+          field_placeholder: "Enter Brands Updated on",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }]
       }, {
-        field_name: "Brands Category",
-        fieldUniqeName: "tBrandCategory",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Category",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
-        mandatory: false,
-        hidden: false
+        tab_name: "Franchises",
+        tab_header: "Franchises search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Franchise,
+        tab_unique_name: "",
+        search_fields: [],
+        fields: []
       }, {
-        field_name: "Brands Contact",
-        fieldUniqeName: "tBrandContact",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Contact",
-        validator: [],
-        mandatory: false,
-        hidden: false
+        tab_name: "Stores",
+        tab_header: "Stores search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Store,
+        tab_unique_name: "",
+        search_fields: [],
+        fields: []
       }, {
-        field_name: "Brands Attachment Id",
-        fieldUniqeName: "nBrandLogoAttachmentID",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
-        field_placeholder: "Enter Brands Attachment",
-        validator: [],
-        mandatory: false,
-        hidden: true
+        tab_name: "Tech Components",
+        tab_header: "Tech Components search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.TechComponent,
+        tab_unique_name: "",
+        search_fields: [],
+        fields: []
       }, {
-        field_name: "Brands Created By",
-        fieldUniqeName: "nCreatedBy",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
-        field_placeholder: "Enter Brands Created By",
-        validator: [],
-        mandatory: false,
-        hidden: true
+        tab_name: "Vendors",
+        tab_header: "Vendors search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Vendor,
+        tab_unique_name: "",
+        search_fields: [],
+        fields: []
       }, {
-        field_name: "Brands Updated by",
-        fieldUniqeName: "nUpdateBy",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
-        field_placeholder: "Enter Brands Updated by",
-        validator: [],
-        mandatory: false,
-        hidden: true
+        tab_name: "Tech Component Tools",
+        tab_header: "Tech Component Tools search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.TechComponentTools,
+        tab_unique_name: "",
+        search_fields: [],
+        fields: []
       }, {
-        field_name: "Brands Created on",
-        fieldUniqeName: "dtCreatedOn",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
-        field_placeholder: "Enter Brands Created on",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      }, {
-        field_name: "Brands Updated on",
-        fieldUniqeName: "dtUpdatedOn",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
-        field_placeholder: "Enter Brands Updated on",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      }]
-    }, {
-      tab_name: "Franchises",
-      tab_header: "Franchises search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Franchise,
-      tab_unique_name: "",
-      search_fields: [],
-      fields: []
-    }, {
-      tab_name: "Stores",
-      tab_header: "Stores search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Store,
-      tab_unique_name: "",
-      search_fields: [],
-      fields: []
-    }, {
-      tab_name: "Tech Components",
-      tab_header: "Tech Components search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.TechComponent,
-      tab_unique_name: "",
-      search_fields: [],
-      fields: []
-    }, {
-      tab_name: "Vendors",
-      tab_header: "Vendors search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Vendor,
-      tab_unique_name: "",
-      search_fields: [],
-      fields: []
-    }, {
-      tab_name: "Tech Component Tools",
-      tab_header: "Tech Component Tools search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.TechComponentTools,
-      tab_unique_name: "",
-      search_fields: [],
-      fields: []
-    }, {
-      tab_name: "Analytics",
-      tab_header: "Analytics search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Analytics,
-      tab_unique_name: "",
-      search_fields: [],
-      fields: []
-    }];
+        tab_name: "Analytics",
+        tab_header: "Analytics search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Analytics,
+        tab_unique_name: "",
+        search_fields: [],
+        fields: []
+      }];
+    }
   }
-}
-HomeTabComponent.ɵfac = function HomeTabComponent_Factory(t) {
-  return new (t || HomeTabComponent)();
-};
-HomeTabComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
-  type: HomeTabComponent,
-  selectors: [["app-home-tab"]],
-  decls: 2,
-  vars: 1,
-  consts: [[1, "matTab"], [3, "label", 4, "ngFor", "ngForOf"], [3, "label"], ["matTabContent", ""], [3, "curTab"]],
-  template: function HomeTabComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "mat-tab-group", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](1, HomeTabComponent_mat_tab_1_Template, 2, 1, "mat-tab", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-    }
-    if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.tabsArray);
-    }
-  },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_4__.NgForOf, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__.MatTabContent, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__.MatTab, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__.MatTabGroup, _tab_body_tab_body_component__WEBPACK_IMPORTED_MODULE_1__.TabBodyComponent]
-});
+  HomeTabComponent.ɵfac = function HomeTabComponent_Factory(t) {
+    return new (t || HomeTabComponent)();
+  };
+  HomeTabComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
+    type: HomeTabComponent,
+    selectors: [["app-home-tab"]],
+    decls: 2,
+    vars: 1,
+    consts: [[1, "matTab"], [3, "label", 4, "ngFor", "ngForOf"], [3, "label"], ["matTabContent", ""], [3, "curTab"]],
+    template: function HomeTabComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "mat-tab-group", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](1, HomeTabComponent_mat_tab_1_Template, 2, 1, "mat-tab", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      }
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.tabsArray);
+      }
+    },
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_4__.NgForOf, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__.MatTabContent, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__.MatTab, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_5__.MatTabGroup, _tab_body_tab_body_component__WEBPACK_IMPORTED_MODULE_1__.TabBodyComponent]
+  });
+  return HomeTabComponent;
+})();
 
 /***/ }),
 
@@ -1390,120 +1417,123 @@ function HomeComponent_app_not_implemented_50_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](0, "app-not-implemented");
   }
 }
-class HomeComponent {
-  constructor(homeService, brandService) {
-    this.homeService = homeService;
-    this.brandService = brandService;
-    this.viewName = "Dashboard";
-  }
-  getValue() {
-    this.homeService.loginGet().subscribe(res => {
-      alert(res);
-    });
-  }
-  switchView(vName) {
-    this.viewName = vName;
-  }
-}
-HomeComponent.ɵfac = function HomeComponent_Factory(t) {
-  return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_home_service__WEBPACK_IMPORTED_MODULE_0__.HomeService), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_brand_service_service__WEBPACK_IMPORTED_MODULE_1__.BrandServiceService));
-};
-HomeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({
-  type: HomeComponent,
-  selectors: [["app-home"]],
-  decls: 51,
-  vars: 3,
-  consts: [["lang", "en"], ["charset", "utf-8", "content", ""], ["name", "viewport", "content", "width=device-width, initial-scale=1"], [1, "outerLayout", "floatLeft"], [1, "left", "floatLeft"], [1, "logo", "floatLeft"], ["id", "header_logo", "data-name", "Layer 1", "xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 514.83 129.74"], ["fill", "white", "d", "M295.34,65.6c0,12.72-3.7,16.41-15.68,16.41h-7.1V49.2h7.1C291.65,49.2,295.34,52.9,295.34,65.6Zm139.51,0c0,12.72-3.69,16.41-13.6,16.41h-6.51V49.2h6.51C431.16,49.2,434.85,52.9,434.85,65.6ZM125.25,34.38h16.56V141.13h-16L102.48,74.45h-.3v66.68H85.63V34.38h17L125,95.44h.29ZM531.58,124.9v16H480.42V34.12h49.09v16H498.75v27.5h23.66v16H498.75V124.9Zm-305.25-9.65c0,17.59-11.83,27.35-29,27.35-17,0-26.77-13.6-27.5-29.58l17.45-2.5c.74,10.78,5,16.11,10.94,16.11,6.36,0,10.65-3.4,10.65-9.75,0-21.14-37.26-26.76-37.26-57.37,0-17,10.35-26.61,28.38-26.61,14.93,0,23.8,10.8,25.43,25.87L208,60.7c-.74-9.17-5.62-11.83-9.76-11.83-5.91,0-9.16,3.84-9.16,10.5C189.07,77.55,226.33,86.27,226.33,115.25Zm54.23-81.13H254.24V140.87h18.33V97.1h8c22.62,0,33.12-8.71,33.12-31.49S303.17,34.12,280.56,34.12ZM453.19,65.6c0-22.76-10.49-31.49-31-31.49H396.42V140.86h18.33V97.1a89.8,89.8,0,0,0,9.46-.44l13,44.21h18.63L440.32,92.53C446.54,89.71,453.19,82.76,453.19,65.6ZM366.86,29.18c3.33,12.63,2.92,24.58-10.67,31.72l1.62,42.67,2.05,33.6c.17,2.92-3,5.42-6.85,5.45s-7-2.48-6.89-5.4l1.55-33.46,1.2-43c-13.46-7-13.65-18.87-10.71-31.52,2.06-9,6.7-13.23,10.41-15.33a7.8,7.8,0,0,1,7.78,0C360.09,16.14,364.44,20.15,366.86,29.18ZM52,16.39l.17,26.22a5.32,5.32,0,0,1-1.81,4.08l-6,5.65L46,92.55l1.75,44.94c.16,2.75-2.57,5.12-6,5.15s-6.17-2.29-6-5l1-45L37.54,52l-5.95-5.6a5.72,5.72,0,0,1-1.73-4l0-25.82a3.56,3.56,0,0,1,.51-1.71,1.38,1.38,0,0,1,2.62.64L33.1,36.2h3.27l-.14-21.78a1.45,1.45,0,0,1,2.89,0l.14,21.77,3.27,0-.15-21.76a1.45,1.45,0,1,1,2.89,0l.13,21.75,3.29,0-.13-20.84a1.57,1.57,0,0,1,2.74-.93A3.67,3.67,0,0,1,52,16.39Z", "transform", "translate(-29.82 -12.9)", 1, "cls-1"], ["d", "M537.33,137.21a3.66,3.66,0,1,1,3.66,3.66A3.65,3.65,0,0,1,537.33,137.21Zm.55,0a3.11,3.11,0,1,0,3.1-3.1A3.1,3.1,0,0,0,537.88,137.21Zm3,.45h-.72v1.66h-.59v-4.19h1.71a1.28,1.28,0,0,1,1.36,1.28,1.23,1.23,0,0,1-1.07,1.24l1.12,1.67H542Zm-.73-2v1.48h1.12a.73.73,0,0,0,.76-.72.74.74,0,0,0-.76-.76Z", "transform", "translate(-29.82 -12.9)", 1, "cls-1"], [1, "toolBar", "floatLeft"], ["title", "Dashboard", 1, "action", 3, "click"], ["title", "Configurations", 1, "action", 3, "click"], ["title", "Notifications", 1, "action", 3, "click"], ["title", "Mails", 1, "action", 3, "click"], ["title", "Find", 1, "action", 3, "click"], ["title", "List", 1, "action", 3, "click"], ["title", "Settings", 1, "action", 3, "click"], [1, "right", "floatLeft"], [1, "header", "floatLeft"], [1, "leftHeader"], [1, "topHeaderTitle"], [1, "rightHeader"], [1, "mainBody", "floatLeft"], [4, "ngIf"]],
-  template: function HomeComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "html", 0)(1, "head");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](2, "title")(3, "meta", 1)(4, "meta", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](5, "body")(6, "div", 3)(7, "div", 4)(8, "div", 5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnamespaceSVG"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](9, "svg", 6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](10, "defs");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](11, "title");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](12, "Inspire - Logo");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](13, "path", 7)(14, "path", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnamespaceHTML"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](15, "div", 9)(16, "span", 10);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_16_listener() {
-        return ctx.switchView("Dashboard");
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](17, "mat-icon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](18, "home");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](19, "span", 11);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_19_listener() {
-        return ctx.switchView("Configurations");
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](20, "mat-icon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](21, "insert_chart");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](22, "span", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_22_listener() {
-        return ctx.switchView("Notifications");
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](23, "mat-icon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](24, "notifications_none");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](25, "span", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_25_listener() {
-        return ctx.switchView("Mails");
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](26, "mat-icon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](27, "email");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](28, "span", 14);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_28_listener() {
-        return ctx.switchView("Find");
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](29, "mat-icon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](30, "find_in_page");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](31, "span", 15);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_31_listener() {
-        return ctx.switchView("List");
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](32, "mat-icon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](33, "list");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](34, "span", 16);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_34_listener() {
-        return ctx.switchView("Settings");
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](35, "mat-icon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](36, "settings");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](37, "div", 17)(38, "div", 18)(39, "div", 19)(40, "span", 20);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](41, " Good Morning! Alex ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](42, "br");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](43, " Welcome to the Restaraunt Technology Deployment Platform ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](44, "div", 21)(45, "button");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](46, "Support");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](47, "div", 22);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](48, HomeComponent_app_home_dashboard_48_Template, 1, 0, "app-home-dashboard", 23);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](49, HomeComponent_app_admin_config_49_Template, 1, 0, "app-admin-config", 23);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](50, HomeComponent_app_not_implemented_50_Template, 1, 0, "app-not-implemented", 23);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()()()()();
+let HomeComponent = /*#__PURE__*/(() => {
+  class HomeComponent {
+    constructor(homeService, brandService) {
+      this.homeService = homeService;
+      this.brandService = brandService;
+      this.viewName = "Dashboard";
     }
-    if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](48);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", ctx.viewName == "Dashboard");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", ctx.viewName == "Configurations");
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", ctx.viewName != "Dashboard" && ctx.viewName != "Configurations");
+    getValue() {
+      this.homeService.loginGet().subscribe(res => {
+        alert(res);
+      });
     }
-  },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_6__.NgIf, _angular_material_icon__WEBPACK_IMPORTED_MODULE_7__.MatIcon, _home_dashboard_home_dashboard_component__WEBPACK_IMPORTED_MODULE_2__.HomeDashboardComponent, _admin_config_admin_config_component__WEBPACK_IMPORTED_MODULE_3__.AdminConfigComponent, _not_implemented_not_implemented_component__WEBPACK_IMPORTED_MODULE_4__.NotImplementedComponent],
-  styles: ["*[_ngcontent-%COMP%]:not(.mat-icon) {\r\n    font-family: Verdana, Geneva, Tahoma, sans-serif !important;\r\n}\r\n\r\n.outerLayout[_ngcontent-%COMP%] {\r\n    float: left;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.floatLeft[_ngcontent-%COMP%] {\r\n    float: left;\r\n}\r\n\r\n.left[_ngcontent-%COMP%] {\r\n    width: 80px;\r\n    height: 100%;\r\n    background-color: gray;\r\n}\r\n\r\n.right[_ngcontent-%COMP%] {\r\n    display: block;\r\n    width: calc(100% - 80px);\r\n    height: 100%;\r\n}\r\n\r\n.logo[_ngcontent-%COMP%] {\r\n    height: 60px;\r\n    width: 100%;\r\n}\r\n\r\n.header[_ngcontent-%COMP%] {\r\n    height: 60px;\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n\r\n.mainBody[_ngcontent-%COMP%] {\r\n    height: calc(100% - 60px);\r\n    width: 100%;\r\n    overflow: auto;\r\n}\r\n\r\n.toolBar[_ngcontent-%COMP%] {\r\n    width: 100%;\r\n    height: calc(100% - 60px);\r\n}\r\n\r\n\r\n.leftHeader[_ngcontent-%COMP%] {\r\n    float: left;\r\n    padding: 10px 0px 0px 20px;\r\n}\r\n\r\n.topHeaderTitle[_ngcontent-%COMP%]{\r\n    font-size: 16px;\r\n    font-weight: bold;      \r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.header[_ngcontent-%COMP%] {\r\n    background-color: #E8E8E8;\r\n}\r\n\r\n.rightHeader[_ngcontent-%COMP%] {\r\n    float: right;\r\n}\r\n\r\n#header_logo[_ngcontent-%COMP%]{\r\n    width: 65px;\r\n    margin: 15px auto;\r\n    display: block;\r\n    color: #fff;\r\n}\r\n\r\n.action[_ngcontent-%COMP%] {\r\n    display: block;\r\n    width: 28px;\r\n    border-radius: 5px;   \r\n    background-color: #696969;\r\n    padding: 10px;\r\n    margin: 10px 15px;\r\n    cursor: pointer;\r\n}\r\n\r\n.action[_ngcontent-%COMP%]   .mat-icon[_ngcontent-%COMP%]{\r\n    color: #fff;\r\n    font-size: 28px;\r\n    width: 28px;\r\n    height: 28px;\r\n}"]
-});
+    switchView(vName) {
+      this.viewName = vName;
+    }
+  }
+  HomeComponent.ɵfac = function HomeComponent_Factory(t) {
+    return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_home_service__WEBPACK_IMPORTED_MODULE_0__.HomeService), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_brand_service_service__WEBPACK_IMPORTED_MODULE_1__.BrandServiceService));
+  };
+  HomeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({
+    type: HomeComponent,
+    selectors: [["app-home"]],
+    decls: 51,
+    vars: 3,
+    consts: [["lang", "en"], ["charset", "utf-8", "content", ""], ["name", "viewport", "content", "width=device-width, initial-scale=1"], [1, "outerLayout", "floatLeft"], [1, "left", "floatLeft"], [1, "logo", "floatLeft"], ["id", "header_logo", "data-name", "Layer 1", "xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 514.83 129.74"], ["fill", "white", "d", "M295.34,65.6c0,12.72-3.7,16.41-15.68,16.41h-7.1V49.2h7.1C291.65,49.2,295.34,52.9,295.34,65.6Zm139.51,0c0,12.72-3.69,16.41-13.6,16.41h-6.51V49.2h6.51C431.16,49.2,434.85,52.9,434.85,65.6ZM125.25,34.38h16.56V141.13h-16L102.48,74.45h-.3v66.68H85.63V34.38h17L125,95.44h.29ZM531.58,124.9v16H480.42V34.12h49.09v16H498.75v27.5h23.66v16H498.75V124.9Zm-305.25-9.65c0,17.59-11.83,27.35-29,27.35-17,0-26.77-13.6-27.5-29.58l17.45-2.5c.74,10.78,5,16.11,10.94,16.11,6.36,0,10.65-3.4,10.65-9.75,0-21.14-37.26-26.76-37.26-57.37,0-17,10.35-26.61,28.38-26.61,14.93,0,23.8,10.8,25.43,25.87L208,60.7c-.74-9.17-5.62-11.83-9.76-11.83-5.91,0-9.16,3.84-9.16,10.5C189.07,77.55,226.33,86.27,226.33,115.25Zm54.23-81.13H254.24V140.87h18.33V97.1h8c22.62,0,33.12-8.71,33.12-31.49S303.17,34.12,280.56,34.12ZM453.19,65.6c0-22.76-10.49-31.49-31-31.49H396.42V140.86h18.33V97.1a89.8,89.8,0,0,0,9.46-.44l13,44.21h18.63L440.32,92.53C446.54,89.71,453.19,82.76,453.19,65.6ZM366.86,29.18c3.33,12.63,2.92,24.58-10.67,31.72l1.62,42.67,2.05,33.6c.17,2.92-3,5.42-6.85,5.45s-7-2.48-6.89-5.4l1.55-33.46,1.2-43c-13.46-7-13.65-18.87-10.71-31.52,2.06-9,6.7-13.23,10.41-15.33a7.8,7.8,0,0,1,7.78,0C360.09,16.14,364.44,20.15,366.86,29.18ZM52,16.39l.17,26.22a5.32,5.32,0,0,1-1.81,4.08l-6,5.65L46,92.55l1.75,44.94c.16,2.75-2.57,5.12-6,5.15s-6.17-2.29-6-5l1-45L37.54,52l-5.95-5.6a5.72,5.72,0,0,1-1.73-4l0-25.82a3.56,3.56,0,0,1,.51-1.71,1.38,1.38,0,0,1,2.62.64L33.1,36.2h3.27l-.14-21.78a1.45,1.45,0,0,1,2.89,0l.14,21.77,3.27,0-.15-21.76a1.45,1.45,0,1,1,2.89,0l.13,21.75,3.29,0-.13-20.84a1.57,1.57,0,0,1,2.74-.93A3.67,3.67,0,0,1,52,16.39Z", "transform", "translate(-29.82 -12.9)", 1, "cls-1"], ["d", "M537.33,137.21a3.66,3.66,0,1,1,3.66,3.66A3.65,3.65,0,0,1,537.33,137.21Zm.55,0a3.11,3.11,0,1,0,3.1-3.1A3.1,3.1,0,0,0,537.88,137.21Zm3,.45h-.72v1.66h-.59v-4.19h1.71a1.28,1.28,0,0,1,1.36,1.28,1.23,1.23,0,0,1-1.07,1.24l1.12,1.67H542Zm-.73-2v1.48h1.12a.73.73,0,0,0,.76-.72.74.74,0,0,0-.76-.76Z", "transform", "translate(-29.82 -12.9)", 1, "cls-1"], [1, "toolBar", "floatLeft"], ["title", "Dashboard", 1, "action", 3, "click"], ["title", "Configurations", 1, "action", 3, "click"], ["title", "Notifications", 1, "action", 3, "click"], ["title", "Mails", 1, "action", 3, "click"], ["title", "Find", 1, "action", 3, "click"], ["title", "List", 1, "action", 3, "click"], ["title", "Settings", 1, "action", 3, "click"], [1, "right", "floatLeft"], [1, "header", "floatLeft"], [1, "leftHeader"], [1, "topHeaderTitle"], [1, "rightHeader"], [1, "mainBody", "floatLeft"], [4, "ngIf"]],
+    template: function HomeComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "html", 0)(1, "head");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](2, "title")(3, "meta", 1)(4, "meta", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](5, "body")(6, "div", 3)(7, "div", 4)(8, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnamespaceSVG"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](9, "svg", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](10, "defs");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](11, "title");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](12, "Inspire - Logo");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](13, "path", 7)(14, "path", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnamespaceHTML"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](15, "div", 9)(16, "span", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_16_listener() {
+          return ctx.switchView("Dashboard");
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](17, "mat-icon");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](18, "home");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](19, "span", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_19_listener() {
+          return ctx.switchView("Configurations");
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](20, "mat-icon");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](21, "insert_chart");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](22, "span", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_22_listener() {
+          return ctx.switchView("Notifications");
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](23, "mat-icon");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](24, "notifications_none");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](25, "span", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_25_listener() {
+          return ctx.switchView("Mails");
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](26, "mat-icon");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](27, "email");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](28, "span", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_28_listener() {
+          return ctx.switchView("Find");
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](29, "mat-icon");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](30, "find_in_page");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](31, "span", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_31_listener() {
+          return ctx.switchView("List");
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](32, "mat-icon");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](33, "list");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](34, "span", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function HomeComponent_Template_span_click_34_listener() {
+          return ctx.switchView("Settings");
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](35, "mat-icon");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](36, "settings");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](37, "div", 17)(38, "div", 18)(39, "div", 19)(40, "span", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](41, " Good Morning! Alex ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](42, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](43, " Welcome to the Restaraunt Technology Deployment Platform ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](44, "div", 21)(45, "button");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](46, "Support");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](47, "div", 22);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](48, HomeComponent_app_home_dashboard_48_Template, 1, 0, "app-home-dashboard", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](49, HomeComponent_app_admin_config_49_Template, 1, 0, "app-admin-config", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](50, HomeComponent_app_not_implemented_50_Template, 1, 0, "app-not-implemented", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()()()()();
+      }
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](48);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", ctx.viewName == "Dashboard");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", ctx.viewName == "Configurations");
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", ctx.viewName != "Dashboard" && ctx.viewName != "Configurations");
+      }
+    },
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_6__.NgIf, _angular_material_icon__WEBPACK_IMPORTED_MODULE_7__.MatIcon, _home_dashboard_home_dashboard_component__WEBPACK_IMPORTED_MODULE_2__.HomeDashboardComponent, _admin_config_admin_config_component__WEBPACK_IMPORTED_MODULE_3__.AdminConfigComponent, _not_implemented_not_implemented_component__WEBPACK_IMPORTED_MODULE_4__.NotImplementedComponent],
+    styles: ["*[_ngcontent-%COMP%]:not(.mat-icon) {\r\n    font-family: Verdana, Geneva, Tahoma, sans-serif !important;\r\n}\r\n\r\n.outerLayout[_ngcontent-%COMP%] {\r\n    float: left;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.floatLeft[_ngcontent-%COMP%] {\r\n    float: left;\r\n}\r\n\r\n.left[_ngcontent-%COMP%] {\r\n    width: 80px;\r\n    height: 100%;\r\n    background-color: gray;\r\n}\r\n\r\n.right[_ngcontent-%COMP%] {\r\n    display: block;\r\n    width: calc(100% - 80px);\r\n    height: 100%;\r\n}\r\n\r\n.logo[_ngcontent-%COMP%] {\r\n    height: 60px;\r\n    width: 100%;\r\n}\r\n\r\n.header[_ngcontent-%COMP%] {\r\n    height: 60px;\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n\r\n.mainBody[_ngcontent-%COMP%] {\r\n    height: calc(100% - 60px);\r\n    width: 100%;\r\n    overflow: auto;\r\n}\r\n\r\n.toolBar[_ngcontent-%COMP%] {\r\n    width: 100%;\r\n    height: calc(100% - 60px);\r\n}\r\n\r\n\r\n.leftHeader[_ngcontent-%COMP%] {\r\n    float: left;\r\n    padding: 10px 0px 0px 20px;\r\n}\r\n\r\n.topHeaderTitle[_ngcontent-%COMP%]{\r\n    font-size: 16px;\r\n    font-weight: bold;      \r\n    white-space: nowrap;\r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.header[_ngcontent-%COMP%] {\r\n    background-color: #E8E8E8;\r\n}\r\n\r\n.rightHeader[_ngcontent-%COMP%] {\r\n    float: right;\r\n}\r\n\r\n#header_logo[_ngcontent-%COMP%]{\r\n    width: 65px;\r\n    margin: 15px auto;\r\n    display: block;\r\n    color: #fff;\r\n}\r\n\r\n.action[_ngcontent-%COMP%] {\r\n    display: block;\r\n    width: 28px;\r\n    border-radius: 5px;   \r\n    background-color: #696969;\r\n    padding: 10px;\r\n    margin: 10px 15px;\r\n    cursor: pointer;\r\n}\r\n\r\n.action[_ngcontent-%COMP%]   .mat-icon[_ngcontent-%COMP%]{\r\n    color: #fff;\r\n    font-size: 28px;\r\n    width: 28px;\r\n    height: 28px;\r\n}"]
+  });
+  return HomeComponent;
+})();
 
 /***/ }),
 
@@ -1519,23 +1549,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 4650);
 
-class ManageDropdownsComponent {}
-ManageDropdownsComponent.ɵfac = function ManageDropdownsComponent_Factory(t) {
-  return new (t || ManageDropdownsComponent)();
-};
-ManageDropdownsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
-  type: ManageDropdownsComponent,
-  selectors: [["app-manage-dropdowns"]],
-  decls: 2,
-  vars: 0,
-  template: function ManageDropdownsComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "manage-dropdowns works!");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+let ManageDropdownsComponent = /*#__PURE__*/(() => {
+  class ManageDropdownsComponent {}
+  ManageDropdownsComponent.ɵfac = function ManageDropdownsComponent_Factory(t) {
+    return new (t || ManageDropdownsComponent)();
+  };
+  ManageDropdownsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+    type: ManageDropdownsComponent,
+    selectors: [["app-manage-dropdowns"]],
+    decls: 2,
+    vars: 0,
+    template: function ManageDropdownsComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "manage-dropdowns works!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      }
     }
-  }
-});
+  });
+  return ManageDropdownsComponent;
+})();
 
 /***/ }),
 
@@ -1556,58 +1589,68 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class NewEditObjectComponent {
-  set controlValues(value) {
-    this._controlValues = value;
-    this.valueChanged();
-  }
-  get controlValues() {
-    return this._controlValues;
-  }
-  constructor(brandService) {
-    this.brandService = brandService;
-    this.returnBack = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
-    this.SubmitLabel = "Submit";
-    this.controlValues = {};
-  }
-  valueChanged() {}
-  onSubmit(controlVals) {
-    this.brandService.CreateBrand(controlVals.value).subscribe(resp => {
-      console.log(resp);
-      this.returnBack.emit(resp);
-    });
-  }
-}
-NewEditObjectComponent.ɵfac = function NewEditObjectComponent_Factory(t) {
-  return new (t || NewEditObjectComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_brand_service_service__WEBPACK_IMPORTED_MODULE_0__.BrandServiceService));
-};
-NewEditObjectComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
-  type: NewEditObjectComponent,
-  selectors: [["app-new-edit-object"]],
-  inputs: {
-    curTab: "curTab",
-    controlValues: "controlValues"
-  },
-  outputs: {
-    returnBack: "returnBack"
-  },
-  decls: 1,
-  vars: 3,
-  consts: [[3, "fields", "controlValues", "SubmitLabel", "onSubmit"]],
-  template: function NewEditObjectComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "app-controls", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("onSubmit", function NewEditObjectComponent_Template_app_controls_onSubmit_0_listener($event) {
-        return ctx.onSubmit($event);
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+let NewEditObjectComponent = /*#__PURE__*/(() => {
+  class NewEditObjectComponent {
+    set controlValues(value) {
+      this._controlValues = value;
+      this.valueChanged();
     }
-    if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("fields", ctx.curTab.fields)("controlValues", ctx.controlValues)("SubmitLabel", ctx.SubmitLabel);
+    get controlValues() {
+      return this._controlValues;
     }
-  },
-  dependencies: [_controls_controls_component__WEBPACK_IMPORTED_MODULE_1__.ControlsComponent]
-});
+    constructor(brandService) {
+      this.brandService = brandService;
+      this.returnBack = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
+      this.SubmitLabel = "Submit";
+      this.controlValues = {};
+    }
+    valueChanged() {}
+    onSubmit(controlVals) {
+      if (controlVals.value["aBrandId"] && parseInt(controlVals.value["aBrandId"]) > 0) {
+        this.brandService.UpdateBrand(controlVals.value).subscribe(resp => {
+          console.log(resp);
+          this.returnBack.emit(resp);
+        });
+      } else {
+        this.brandService.CreateBrand(controlVals.value).subscribe(resp => {
+          console.log(resp);
+          this.returnBack.emit(resp);
+        });
+      }
+    }
+  }
+  NewEditObjectComponent.ɵfac = function NewEditObjectComponent_Factory(t) {
+    return new (t || NewEditObjectComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_brand_service_service__WEBPACK_IMPORTED_MODULE_0__.BrandServiceService));
+  };
+  NewEditObjectComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
+    type: NewEditObjectComponent,
+    selectors: [["app-new-edit-object"]],
+    inputs: {
+      curTab: "curTab",
+      controlValues: "controlValues"
+    },
+    outputs: {
+      returnBack: "returnBack"
+    },
+    decls: 1,
+    vars: 3,
+    consts: [[3, "fields", "controlValues", "SubmitLabel", "onSubmit"]],
+    template: function NewEditObjectComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "app-controls", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("onSubmit", function NewEditObjectComponent_Template_app_controls_onSubmit_0_listener($event) {
+          return ctx.onSubmit($event);
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      }
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("fields", ctx.curTab.fields)("controlValues", ctx.controlValues)("SubmitLabel", ctx.SubmitLabel);
+      }
+    },
+    dependencies: [_controls_controls_component__WEBPACK_IMPORTED_MODULE_1__.ControlsComponent]
+  });
+  return NewEditObjectComponent;
+})();
 
 /***/ }),
 
@@ -1623,23 +1666,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 4650);
 
-class NotImplementedComponent {}
-NotImplementedComponent.ɵfac = function NotImplementedComponent_Factory(t) {
-  return new (t || NotImplementedComponent)();
-};
-NotImplementedComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
-  type: NotImplementedComponent,
-  selectors: [["app-not-implemented"]],
-  decls: 2,
-  vars: 0,
-  template: function NotImplementedComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "not-implemented works!");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+let NotImplementedComponent = /*#__PURE__*/(() => {
+  class NotImplementedComponent {}
+  NotImplementedComponent.ɵfac = function NotImplementedComponent_Factory(t) {
+    return new (t || NotImplementedComponent)();
+  };
+  NotImplementedComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+    type: NotImplementedComponent,
+    selectors: [["app-not-implemented"]],
+    decls: 2,
+    vars: 0,
+    template: function NotImplementedComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "not-implemented works!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      }
     }
-  }
-});
+  });
+  return NotImplementedComponent;
+})();
 
 /***/ }),
 
@@ -1699,79 +1745,82 @@ function TabBodyComponent_app_new_edit_object_9_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("controlValues", ctx_r1.curControlVals)("curTab", ctx_r1.curTab);
   }
 }
-class TabBodyComponent {
-  constructor(route, router) {
-    this.route = route;
-    this.router = router;
-    this.searchControlVals = {};
-    this.curControlVals = {};
-    this.secondPart = "table";
-    this.SubmitLabel = "Search";
-  }
-  OpenNew() {
-    this.secondPart = "newEdit";
-  }
-  onSubmit(controlVals) {
-    this.searchFields = controlVals.value;
-  }
-  rowClicked(row) {
-    for (var i in row) {
-      this.curControlVals[i] = row[i];
+let TabBodyComponent = /*#__PURE__*/(() => {
+  class TabBodyComponent {
+    constructor(route, router) {
+      this.route = route;
+      this.router = router;
+      this.searchControlVals = {};
+      this.curControlVals = {};
+      this.secondPart = "table";
+      this.SubmitLabel = "Search";
     }
-    this.secondPart = "newEdit";
-  }
-  returnBack(resp) {
-    alert("Saved");
-    this.secondPart = "table";
-  }
-}
-TabBodyComponent.ɵfac = function TabBodyComponent_Factory(t) {
-  return new (t || TabBodyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__.Router));
-};
-TabBodyComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
-  type: TabBodyComponent,
-  selectors: [["app-tab-body"]],
-  inputs: {
-    curTab: "curTab"
-  },
-  decls: 10,
-  vars: 6,
-  consts: [[1, "tabsBody"], [1, "header"], [1, "SearchPart"], [3, "fields", "controlValues", "SubmitLabel", "onSubmit"], ["mat-raised-button", "", 1, "searchButton", 3, "click"], [1, "tablePart"], [3, "curTab", "searchFields", "rowClicked", 4, "ngIf"], [3, "controlValues", "curTab", "returnBack", 4, "ngIf"], [3, "curTab", "searchFields", "rowClicked"], [3, "controlValues", "curTab", "returnBack"]],
-  template: function TabBodyComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](3, "div", 2)(4, "app-controls", 3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("onSubmit", function TabBodyComponent_Template_app_controls_onSubmit_4_listener($event) {
-        return ctx.onSubmit($event);
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](5, "button", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function TabBodyComponent_Template_button_click_5_listener() {
-        return ctx.OpenNew();
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](6, " New ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](7, "div", 5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](8, TabBodyComponent_app_table_8_Template, 1, 2, "app-table", 6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](9, TabBodyComponent_app_new_edit_object_9_Template, 1, 2, "app-new-edit-object", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+    OpenNew() {
+      this.secondPart = "newEdit";
     }
-    if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](ctx.curTab.tab_header);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("fields", ctx.curTab.search_fields)("controlValues", ctx.searchControlVals)("SubmitLabel", ctx.SubmitLabel);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", ctx.secondPart == "table");
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", ctx.secondPart == "newEdit");
+    onSubmit(controlVals) {
+      this.searchFields = controlVals.value;
     }
-  },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_5__.NgIf, _angular_material_button__WEBPACK_IMPORTED_MODULE_6__.MatButton, _controls_controls_component__WEBPACK_IMPORTED_MODULE_0__.ControlsComponent, _table_table_component__WEBPACK_IMPORTED_MODULE_1__.TableComponent, _new_edit_object_new_edit_object_component__WEBPACK_IMPORTED_MODULE_2__.NewEditObjectComponent],
-  styles: [".tabsBody[_ngcontent-%COMP%]{\r\n    width: 90%;\r\n    height: 100%;\r\n    margin: 0px auto;\r\n    background-color: #fff;\r\n}\r\n.header[_ngcontent-%COMP%]{\r\n    height: 40px;\r\n    width: 100%;\r\n    line-height: 35px;\r\n    float: left;\r\n    font-size: 15px;\r\n    font-variant: small-caps;\r\n    color: #444;\r\n    font-weight: bold;\r\n}\r\n.SearchPart[_ngcontent-%COMP%]{\r\n    height: calc(30% - 90px);\r\n    width: 100%;\r\n    float: left;\r\n}\r\n.tablePart[_ngcontent-%COMP%]{\r\n    height: calc(70% - 90px);\r\n    width: 100%;\r\n    float: left;\r\n    overflow: auto;\r\n}\r\n.searchButton[_ngcontent-%COMP%]{\r\n    float: right;\r\n}"]
-});
+    rowClicked(row) {
+      for (var i in row) {
+        this.curControlVals[i] = row[i];
+      }
+      this.secondPart = "newEdit";
+    }
+    returnBack(resp) {
+      alert("Saved");
+      this.secondPart = "table";
+    }
+  }
+  TabBodyComponent.ɵfac = function TabBodyComponent_Factory(t) {
+    return new (t || TabBodyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__.Router));
+  };
+  TabBodyComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
+    type: TabBodyComponent,
+    selectors: [["app-tab-body"]],
+    inputs: {
+      curTab: "curTab"
+    },
+    decls: 10,
+    vars: 6,
+    consts: [[1, "tabsBody"], [1, "header"], [1, "SearchPart"], [3, "fields", "controlValues", "SubmitLabel", "onSubmit"], ["mat-raised-button", "", 1, "searchButton", 3, "click"], [1, "tablePart"], [3, "curTab", "searchFields", "rowClicked", 4, "ngIf"], [3, "controlValues", "curTab", "returnBack", 4, "ngIf"], [3, "curTab", "searchFields", "rowClicked"], [3, "controlValues", "curTab", "returnBack"]],
+    template: function TabBodyComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](3, "div", 2)(4, "app-controls", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("onSubmit", function TabBodyComponent_Template_app_controls_onSubmit_4_listener($event) {
+          return ctx.onSubmit($event);
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](5, "button", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function TabBodyComponent_Template_button_click_5_listener() {
+          return ctx.OpenNew();
+        });
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](6, " New ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](7, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](8, TabBodyComponent_app_table_8_Template, 1, 2, "app-table", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](9, TabBodyComponent_app_new_edit_object_9_Template, 1, 2, "app-new-edit-object", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      }
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](ctx.curTab.tab_header);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("fields", ctx.curTab.search_fields)("controlValues", ctx.searchControlVals)("SubmitLabel", ctx.SubmitLabel);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", ctx.secondPart == "table");
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", ctx.secondPart == "newEdit");
+      }
+    },
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_5__.NgIf, _angular_material_button__WEBPACK_IMPORTED_MODULE_6__.MatButton, _controls_controls_component__WEBPACK_IMPORTED_MODULE_0__.ControlsComponent, _table_table_component__WEBPACK_IMPORTED_MODULE_1__.TableComponent, _new_edit_object_new_edit_object_component__WEBPACK_IMPORTED_MODULE_2__.NewEditObjectComponent],
+    styles: [".tabsBody[_ngcontent-%COMP%]{\r\n    width: 90%;\r\n    height: 100%;\r\n    margin: 0px auto;\r\n    background-color: #fff;\r\n}\r\n.header[_ngcontent-%COMP%]{\r\n    height: 40px;\r\n    width: 100%;\r\n    line-height: 35px;\r\n    float: left;\r\n    font-size: 15px;\r\n    font-variant: small-caps;\r\n    color: #444;\r\n    font-weight: bold;\r\n}\r\n.SearchPart[_ngcontent-%COMP%]{\r\n    height: calc(30% - 90px);\r\n    width: 100%;\r\n    float: left;\r\n}\r\n.tablePart[_ngcontent-%COMP%]{\r\n    height: calc(70% - 90px);\r\n    width: 100%;\r\n    float: left;\r\n    overflow: auto;\r\n}\r\n.searchButton[_ngcontent-%COMP%]{\r\n    float: right;\r\n}"]
+  });
+  return TabBodyComponent;
+})();
 
 /***/ }),
 
@@ -1887,103 +1936,106 @@ const _c0 = function () {
 /** Constants used to fill up our data base. */
 const FRUITS = ['blueberry', 'lychee', 'kiwi', 'mango', 'peach', 'lime', 'pomegranate', 'pineapple'];
 const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
-class TableComponent {
-  constructor(brandService) {
-    this.brandService = brandService;
-    this.rowClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
-    this.displayedColumns = [];
-    this.columns = [];
-    this.clickedRows = new Set();
-  }
-  rowClick(row) {
-    this.rowClicked.emit(row);
-  }
-  getTable() {
-    if (typeof this.curTab != 'undefined') {
+let TableComponent = /*#__PURE__*/(() => {
+  class TableComponent {
+    constructor(brandService) {
+      this.brandService = brandService;
+      this.rowClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
       this.displayedColumns = [];
       this.columns = [];
-      if (this.curTab.tab_type == src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Brands) {
-        this.getBrands(this.searchFields);
-      } else if (this.curTab.tab_type == src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Vendor) {}
+      this.clickedRows = new Set();
     }
-  }
-  getBrands(searchFields) {
-    this.brandService.GetBrands(searchFields).subscribe(resp => {
-      this.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatTableDataSource(resp);
-      for (var indx in this.curTab.fields) {
-        this.displayedColumns.push(this.curTab.fields[indx].fieldUniqeName);
-        this.columns.push({
-          columnDef: this.curTab.fields[indx].fieldUniqeName,
-          header: this.curTab.fields[indx].field_name
-        });
+    rowClick(row) {
+      this.rowClicked.emit(row);
+    }
+    getTable() {
+      if (typeof this.curTab != 'undefined') {
+        this.displayedColumns = [];
+        this.columns = [];
+        if (this.curTab.tab_type == src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Brands) {
+          this.getBrands(this.searchFields);
+        } else if (this.curTab.tab_type == src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Vendor) {}
       }
-      // Assign the data to the data source for the table to render
-      //
-    });
-  }
+    }
+    getBrands(searchFields) {
+      this.brandService.GetBrands(searchFields).subscribe(resp => {
+        this.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatTableDataSource(resp);
+        for (var indx in this.curTab.fields) {
+          this.displayedColumns.push(this.curTab.fields[indx].fieldUniqeName);
+          this.columns.push({
+            columnDef: this.curTab.fields[indx].fieldUniqeName,
+            header: this.curTab.fields[indx].field_name
+          });
+        }
+        // Assign the data to the data source for the table to render
+        //
+      });
+    }
 
-  ngOnChanges() {
-    this.getTable();
-  }
-  ngAfterViewInit2() {
-    this.getTable();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-  applyFilter(event) {
-    const filterValue = event.target.value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    ngOnChanges() {
+      this.getTable();
+    }
+    ngAfterViewInit2() {
+      this.getTable();
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+    applyFilter(event) {
+      const filterValue = event.target.value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
     }
   }
-}
+  TableComponent.ɵfac = function TableComponent_Factory(t) {
+    return new (t || TableComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_brand_service_service__WEBPACK_IMPORTED_MODULE_1__.BrandServiceService));
+  };
+  TableComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
+    type: TableComponent,
+    selectors: [["app-table"]],
+    viewQuery: function TableComponent_Query(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵviewQuery"](_angular_material_paginator__WEBPACK_IMPORTED_MODULE_4__.MatPaginator, 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵviewQuery"](_angular_material_sort__WEBPACK_IMPORTED_MODULE_5__.MatSort, 5);
+      }
+      if (rf & 2) {
+        let _t;
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵloadQuery"]()) && (ctx.paginator = _t.first);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵloadQuery"]()) && (ctx.sort = _t.first);
+      }
+    },
+    inputs: {
+      curTab: "curTab",
+      searchFields: "searchFields"
+    },
+    outputs: {
+      rowClicked: "rowClicked"
+    },
+    features: [_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵNgOnChangesFeature"]],
+    decls: 3,
+    vars: 3,
+    consts: [[1, "mat-elevation-z8"], ["class", "mat-elevation-z8", 3, "dataSource", 4, "ngIf"], ["showFirstLastButtons", "", 3, "pageSizeOptions"], [1, "mat-elevation-z8", 3, "dataSource"], ["table", ""], [3, "matColumnDef", 4, "ngFor", "ngForOf"], [4, "matHeaderRowDef"], [3, "demo-row-is-clicked", "click", 4, "matRowDef", "matRowDefColumns"], [3, "matColumnDef"], ["mat-sort-header", "", 4, "matHeaderCellDef"], [4, "matCellDef"], ["mat-sort-header", ""], [3, "click"]],
+    template: function TableComponent_Template(rf, ctx) {
+      if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](1, TableComponent_mat_table_1_Template, 5, 4, "mat-table", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "mat-paginator", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      }
+      if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx.columns.length > 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("pageSizeOptions", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpureFunction0"](2, _c0));
+      }
+    },
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_6__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_6__.NgIf, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatTable, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatRow, _angular_material_paginator__WEBPACK_IMPORTED_MODULE_4__.MatPaginator],
+    styles: [".mat-mdc-row[_ngcontent-%COMP%]:hover   .mat-mdc-cell[_ngcontent-%COMP%] {\r\n    border-color: currentColor;\r\n  }\r\n  \r\n  .demo-row-is-clicked[_ngcontent-%COMP%] {\r\n    font-weight: bold;\r\n  }"]
+  });
+  return TableComponent;
+})();
 /** Builds and returns a new User. */
-TableComponent.ɵfac = function TableComponent_Factory(t) {
-  return new (t || TableComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_brand_service_service__WEBPACK_IMPORTED_MODULE_1__.BrandServiceService));
-};
-TableComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
-  type: TableComponent,
-  selectors: [["app-table"]],
-  viewQuery: function TableComponent_Query(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵviewQuery"](_angular_material_paginator__WEBPACK_IMPORTED_MODULE_4__.MatPaginator, 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵviewQuery"](_angular_material_sort__WEBPACK_IMPORTED_MODULE_5__.MatSort, 5);
-    }
-    if (rf & 2) {
-      let _t;
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵloadQuery"]()) && (ctx.paginator = _t.first);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵloadQuery"]()) && (ctx.sort = _t.first);
-    }
-  },
-  inputs: {
-    curTab: "curTab",
-    searchFields: "searchFields"
-  },
-  outputs: {
-    rowClicked: "rowClicked"
-  },
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵNgOnChangesFeature"]],
-  decls: 3,
-  vars: 3,
-  consts: [[1, "mat-elevation-z8"], ["class", "mat-elevation-z8", 3, "dataSource", 4, "ngIf"], ["showFirstLastButtons", "", 3, "pageSizeOptions"], [1, "mat-elevation-z8", 3, "dataSource"], ["table", ""], [3, "matColumnDef", 4, "ngFor", "ngForOf"], [4, "matHeaderRowDef"], [3, "demo-row-is-clicked", "click", 4, "matRowDef", "matRowDefColumns"], [3, "matColumnDef"], ["mat-sort-header", "", 4, "matHeaderCellDef"], [4, "matCellDef"], ["mat-sort-header", ""], [3, "click"]],
-  template: function TableComponent_Template(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](1, TableComponent_mat_table_1_Template, 5, 4, "mat-table", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "mat-paginator", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-    }
-    if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx.columns.length > 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("pageSizeOptions", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpureFunction0"](2, _c0));
-    }
-  },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_6__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_6__.NgIf, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatTable, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatRow, _angular_material_paginator__WEBPACK_IMPORTED_MODULE_4__.MatPaginator],
-  styles: [".mat-mdc-row[_ngcontent-%COMP%]:hover   .mat-mdc-cell[_ngcontent-%COMP%] {\r\n    border-color: currentColor;\r\n  }\r\n  \r\n  .demo-row-is-clicked[_ngcontent-%COMP%] {\r\n    font-weight: bold;\r\n  }"]
-});
 function createNewUser(id) {
   const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' + NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
   return {
@@ -2006,10 +2058,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ControlsErrorMessages": () => (/* binding */ ControlsErrorMessages)
 /* harmony export */ });
-class ControlsErrorMessages {}
-ControlsErrorMessages.Requird = "Field is required";
-ControlsErrorMessages.Email = "Email format is not correct";
-ControlsErrorMessages.Range = "Range is not proper";
+let ControlsErrorMessages = /*#__PURE__*/(() => {
+  class ControlsErrorMessages {}
+  ControlsErrorMessages.Requird = "Field is required";
+  ControlsErrorMessages.Email = "Email format is not correct";
+  ControlsErrorMessages.Range = "Range is not proper";
+  return ControlsErrorMessages;
+})();
 
 /***/ }),
 
@@ -2068,50 +2123,53 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class AuthService {
-  constructor(http, route, router) {
-    this.http = http;
-    this.route = route;
-    this.router = router;
-    this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders().set('Content-Type', 'application/json');
-    this.configUrl = "./api/";
-    localStorage.setItem("configUrl", this.configUrl);
-  }
-  signIn(user) {
-    return this.http.post(this.configUrl + "token/get", user, {
-      headers: this.headers
-    }).subscribe(res => {
-      localStorage.setItem('authResponse', JSON.stringify(res));
-      this.router.navigate(['./home'], {
-        skipLocationChange: true,
-        relativeTo: this.route
-      });
-    });
-  }
-  getHttpHeaders() {
-    let tHeader = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders().set('Content-Type', 'application/json').set("Authorization", "Bearer " + this.getToken());
-    return tHeader;
-  }
-  getToken() {
-    let authResp = localStorage.getItem('authResponse');
-    let token = '';
-    if (typeof authResp != 'undefined' && authResp != null && authResp != '') {
-      token = JSON.parse(authResp).auth.Token;
+let AuthService = /*#__PURE__*/(() => {
+  class AuthService {
+    constructor(http, route, router) {
+      this.http = http;
+      this.route = route;
+      this.router = router;
+      this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders().set('Content-Type', 'application/json');
+      this.configUrl = "./api/";
+      localStorage.setItem("configUrl", this.configUrl);
     }
-    return token;
+    signIn(user) {
+      return this.http.post(this.configUrl + "token/get", user, {
+        headers: this.headers
+      }).subscribe(res => {
+        localStorage.setItem('authResponse', JSON.stringify(res));
+        this.router.navigate(['./home'], {
+          skipLocationChange: true,
+          relativeTo: this.route
+        });
+      });
+    }
+    getHttpHeaders() {
+      let tHeader = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpHeaders().set('Content-Type', 'application/json').set("Authorization", "Bearer " + this.getToken());
+      return tHeader;
+    }
+    getToken() {
+      let authResp = localStorage.getItem('authResponse');
+      let token = '';
+      if (typeof authResp != 'undefined' && authResp != null && authResp != '') {
+        token = JSON.parse(authResp).auth.Token;
+      }
+      return token;
+    }
+    getConfigUrl() {
+      return localStorage.getItem('configUrl');
+    }
   }
-  getConfigUrl() {
-    return localStorage.getItem('configUrl');
-  }
-}
-AuthService.ɵfac = function AuthService_Factory(t) {
-  return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.Router));
-};
-AuthService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
-  token: AuthService,
-  factory: AuthService.ɵfac,
-  providedIn: 'root'
-});
+  AuthService.ɵfac = function AuthService_Factory(t) {
+    return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_0__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.Router));
+  };
+  AuthService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+    token: AuthService,
+    factory: AuthService.ɵfac,
+    providedIn: 'root'
+  });
+  return AuthService;
+})();
 
 /***/ }),
 
@@ -2131,125 +2189,133 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class BrandServiceService {
-  constructor(http, authService) {
-    this.http = http;
-    this.authService = authService;
-    this.configUrl = authService.getConfigUrl();
+let BrandServiceService = /*#__PURE__*/(() => {
+  class BrandServiceService {
+    constructor(http, authService) {
+      this.http = http;
+      this.authService = authService;
+      this.configUrl = authService.getConfigUrl();
+    }
+    CreateBrand(request) {
+      return this.http.post(this.configUrl + "Brand/CreateBrand", request, {
+        headers: this.authService.getHttpHeaders()
+      });
+    }
+    UpdateBrand(request) {
+      return this.http.post(this.configUrl + "Brand/Update", request, {
+        headers: this.authService.getHttpHeaders()
+      });
+    }
+    GetBrands(request) {
+      return this.http.post(this.configUrl + "Brand/GetBrands", request, {
+        headers: this.authService.getHttpHeaders()
+      });
+    }
+    GetAllBrands() {
+      let brands = [{
+        aBrandId: 0,
+        tBrandName: "Dunkin",
+        tBrandDescription: "Dunkin",
+        tBrandWebsite: "Dunkin",
+        tBrandCountry: "Dunkin",
+        tBrandEstablished: new Date(),
+        tBrandCategory: "Dunkin",
+        tBrandContact: "Dunkin",
+        nBrandLogoAttachmentID: 1,
+        nCreatedBy: 1,
+        nUpdateBy: 1,
+        dtCreatedOn: new Date(),
+        dtUpdatedOn: new Date(),
+        tIconURL: "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png"
+      }, {
+        aBrandId: 0,
+        tBrandName: "Baskin Robins",
+        tBrandDescription: "Baskin Robins",
+        tBrandWebsite: "Baskin Robins",
+        tBrandCountry: "Baskin Robins",
+        tBrandEstablished: new Date(),
+        tBrandCategory: "Baskin Robins",
+        tBrandContact: "Baskin Robins",
+        nBrandLogoAttachmentID: 1,
+        nCreatedBy: 1,
+        nUpdateBy: 1,
+        dtCreatedOn: new Date(),
+        dtUpdatedOn: new Date(),
+        tIconURL: "https://1000logos.net/wp-content/uploads/2016/10/Baskin-Robbins-Logo-2020.png"
+      }, {
+        aBrandId: 0,
+        tBrandName: "Buffalo Wild Wings",
+        tBrandDescription: "Buffalo Wild Wings",
+        tBrandWebsite: "Buffalo Wild Wings",
+        tBrandCountry: "Buffalo Wild Wings",
+        tBrandEstablished: new Date(),
+        tBrandCategory: "Buffalo Wild Wings",
+        tBrandContact: "Buffalo Wild Wings",
+        nBrandLogoAttachmentID: 1,
+        nCreatedBy: 1,
+        nUpdateBy: 1,
+        dtCreatedOn: new Date(),
+        dtUpdatedOn: new Date(),
+        tIconURL: "https://logos-world.net/wp-content/uploads/2022/01/Buffalo-Wild-Wings-Logo.png"
+      }, {
+        aBrandId: 0,
+        tBrandName: "Arbys",
+        tBrandDescription: "Arbys",
+        tBrandWebsite: "Arbys",
+        tBrandCountry: "Arbys",
+        tBrandEstablished: new Date(),
+        tBrandCategory: "Arbys",
+        tBrandContact: "Arbys",
+        nBrandLogoAttachmentID: 1,
+        nCreatedBy: 1,
+        nUpdateBy: 1,
+        dtCreatedOn: new Date(),
+        dtUpdatedOn: new Date(),
+        tIconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Arby%27s_logo.svg/2394px-Arby%27s_logo.svg.png"
+      }, {
+        aBrandId: 0,
+        tBrandName: "Jimmy Johns",
+        tBrandDescription: "Jimmy Johns",
+        tBrandWebsite: "Jimmy Johns",
+        tBrandCountry: "Jimmy Johns",
+        tBrandEstablished: new Date(),
+        tBrandCategory: "Jimmy Johns",
+        tBrandContact: "Jimmy Johns",
+        nBrandLogoAttachmentID: 1,
+        nCreatedBy: 1,
+        nUpdateBy: 1,
+        dtCreatedOn: new Date(),
+        dtUpdatedOn: new Date(),
+        tIconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Jimmy_Johns_logo.svg/1200px-Jimmy_Johns_logo.svg.png"
+      }, {
+        aBrandId: 0,
+        tBrandName: "Sonic",
+        tBrandDescription: "Sonic",
+        tBrandWebsite: "Sonic",
+        tBrandCountry: "Sonic",
+        tBrandEstablished: new Date(),
+        tBrandCategory: "Sonic",
+        tBrandContact: "Sonic",
+        nBrandLogoAttachmentID: 1,
+        nCreatedBy: 1,
+        nUpdateBy: 1,
+        dtCreatedOn: new Date(),
+        dtUpdatedOn: new Date(),
+        tIconURL: "https://upload.wikimedia.org/wikipedia/commons/f/ff/SONIC_New_Logo_2020.svg"
+      }];
+      return brands;
+    }
   }
-  CreateBrand(request) {
-    return this.http.post(this.configUrl + "Brand/CreateBrand", request, {
-      headers: this.authService.getHttpHeaders()
-    });
-  }
-  GetBrands(request) {
-    return this.http.post(this.configUrl + "Brand/GetBrands", request, {
-      headers: this.authService.getHttpHeaders()
-    });
-  }
-  GetAllBrands() {
-    let brands = [{
-      aBrandId: 0,
-      tBrandName: "Dunkin",
-      tBrandDescription: "Dunkin",
-      tBrandWebsite: "Dunkin",
-      tBrandCountry: "Dunkin",
-      tBrandEstablished: new Date(),
-      tBrandCategory: "Dunkin",
-      tBrandContact: "Dunkin",
-      nBrandLogoAttachmentID: 1,
-      nCreatedBy: 1,
-      nUpdateBy: 1,
-      dtCreatedOn: new Date(),
-      dtUpdatedOn: new Date(),
-      tIconURL: "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png"
-    }, {
-      aBrandId: 0,
-      tBrandName: "Baskin Robins",
-      tBrandDescription: "Baskin Robins",
-      tBrandWebsite: "Baskin Robins",
-      tBrandCountry: "Baskin Robins",
-      tBrandEstablished: new Date(),
-      tBrandCategory: "Baskin Robins",
-      tBrandContact: "Baskin Robins",
-      nBrandLogoAttachmentID: 1,
-      nCreatedBy: 1,
-      nUpdateBy: 1,
-      dtCreatedOn: new Date(),
-      dtUpdatedOn: new Date(),
-      tIconURL: "https://1000logos.net/wp-content/uploads/2016/10/Baskin-Robbins-Logo-2020.png"
-    }, {
-      aBrandId: 0,
-      tBrandName: "Buffalo Wild Wings",
-      tBrandDescription: "Buffalo Wild Wings",
-      tBrandWebsite: "Buffalo Wild Wings",
-      tBrandCountry: "Buffalo Wild Wings",
-      tBrandEstablished: new Date(),
-      tBrandCategory: "Buffalo Wild Wings",
-      tBrandContact: "Buffalo Wild Wings",
-      nBrandLogoAttachmentID: 1,
-      nCreatedBy: 1,
-      nUpdateBy: 1,
-      dtCreatedOn: new Date(),
-      dtUpdatedOn: new Date(),
-      tIconURL: "https://logos-world.net/wp-content/uploads/2022/01/Buffalo-Wild-Wings-Logo.png"
-    }, {
-      aBrandId: 0,
-      tBrandName: "Arbys",
-      tBrandDescription: "Arbys",
-      tBrandWebsite: "Arbys",
-      tBrandCountry: "Arbys",
-      tBrandEstablished: new Date(),
-      tBrandCategory: "Arbys",
-      tBrandContact: "Arbys",
-      nBrandLogoAttachmentID: 1,
-      nCreatedBy: 1,
-      nUpdateBy: 1,
-      dtCreatedOn: new Date(),
-      dtUpdatedOn: new Date(),
-      tIconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Arby%27s_logo.svg/2394px-Arby%27s_logo.svg.png"
-    }, {
-      aBrandId: 0,
-      tBrandName: "Jimmy Johns",
-      tBrandDescription: "Jimmy Johns",
-      tBrandWebsite: "Jimmy Johns",
-      tBrandCountry: "Jimmy Johns",
-      tBrandEstablished: new Date(),
-      tBrandCategory: "Jimmy Johns",
-      tBrandContact: "Jimmy Johns",
-      nBrandLogoAttachmentID: 1,
-      nCreatedBy: 1,
-      nUpdateBy: 1,
-      dtCreatedOn: new Date(),
-      dtUpdatedOn: new Date(),
-      tIconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Jimmy_Johns_logo.svg/1200px-Jimmy_Johns_logo.svg.png"
-    }, {
-      aBrandId: 0,
-      tBrandName: "Sonic",
-      tBrandDescription: "Sonic",
-      tBrandWebsite: "Sonic",
-      tBrandCountry: "Sonic",
-      tBrandEstablished: new Date(),
-      tBrandCategory: "Sonic",
-      tBrandContact: "Sonic",
-      nBrandLogoAttachmentID: 1,
-      nCreatedBy: 1,
-      nUpdateBy: 1,
-      dtCreatedOn: new Date(),
-      dtUpdatedOn: new Date(),
-      tIconURL: "https://upload.wikimedia.org/wikipedia/commons/f/ff/SONIC_New_Logo_2020.svg"
-    }];
-    return brands;
-  }
-}
-BrandServiceService.ɵfac = function BrandServiceService_Factory(t) {
-  return new (t || BrandServiceService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_auth_service__WEBPACK_IMPORTED_MODULE_0__.AuthService));
-};
-BrandServiceService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
-  token: BrandServiceService,
-  factory: BrandServiceService.ɵfac,
-  providedIn: 'root'
-});
+  BrandServiceService.ɵfac = function BrandServiceService_Factory(t) {
+    return new (t || BrandServiceService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_auth_service__WEBPACK_IMPORTED_MODULE_0__.AuthService));
+  };
+  BrandServiceService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+    token: BrandServiceService,
+    factory: BrandServiceService.ɵfac,
+    providedIn: 'root'
+  });
+  return BrandServiceService;
+})();
 
 /***/ }),
 
@@ -2273,452 +2339,455 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class HomeService {
-  constructor(http, authService) {
-    this.http = http;
-    this.authService = authService;
-    this.loginGet = () => {
-      return this.http.get(this.configUrl + "login/get?username=cuong&password=1", {
-        headers: this.authService.getHttpHeaders()
-      });
-    };
-    this.configUrl = authService.getConfigUrl();
-  }
-  GetAllTabs() {
-    return [{
-      tab_name: "Users",
-      tab_header: "Users search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Users,
-      tab_unique_name: "",
-      search_fields: [{
-        field_name: "User Name",
-        fieldUniqeName: "ABCD",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter USer Name",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "Name",
-        fieldUniqeName: "Name",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Name",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Mobile",
-        fieldUniqeName: "Mobile",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Name",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Email",
-        fieldUniqeName: "Email",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.email,
-        field_placeholder: "Enter mail",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "User DOB",
-        fieldUniqeName: "DOB",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
-        field_placeholder: "Enter DOB",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Created Time",
-        fieldUniqeName: "Time",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.time,
-        field_placeholder: "Enter Created Time",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "User Time",
-        fieldUniqeName: "uTime",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.dropdown,
-        field_placeholder: "Enter User Roles",
-        validator: [],
-        mandatory: false,
-        hidden: false,
-        options: [{
-          optionDisplayName: "Admin",
-          optionIndex: 0,
-          optionOrder: 1
+let HomeService = /*#__PURE__*/(() => {
+  class HomeService {
+    constructor(http, authService) {
+      this.http = http;
+      this.authService = authService;
+      this.loginGet = () => {
+        return this.http.get(this.configUrl + "login/get?username=cuong&password=1", {
+          headers: this.authService.getHttpHeaders()
+        });
+      };
+      this.configUrl = authService.getConfigUrl();
+    }
+    GetAllTabs() {
+      return [{
+        tab_name: "Users",
+        tab_header: "Users search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Users,
+        tab_unique_name: "",
+        search_fields: [{
+          field_name: "User Name",
+          fieldUniqeName: "ABCD",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter USer Name",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }],
+        fields: [{
+          field_name: "Name",
+          fieldUniqeName: "Name",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Name",
+          validator: [],
+          mandatory: false,
+          hidden: false
         }, {
-          optionDisplayName: "User",
-          optionIndex: 1,
-          optionOrder: 2
+          field_name: "Mobile",
+          fieldUniqeName: "Mobile",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Name",
+          validator: [],
+          mandatory: false,
+          hidden: false
         }, {
-          optionDisplayName: "Vendor",
-          optionIndex: 2,
-          optionOrder: 3
-        }]
-      }]
-    }, {
-      tab_name: "Brands",
-      tab_header: "Brands search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Brands,
-      tab_unique_name: "",
-      search_fields: [{
-        field_name: "Brands Name",
-        fieldUniqeName: "tBrandName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Name",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "Brand Id",
-        fieldUniqeName: "aBrandId",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
-        field_placeholder: "Enter Brands Id",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Brands Name",
-        fieldUniqeName: "tBrandName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Brands Description",
-        fieldUniqeName: "tBrandDescription",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Description",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Brands Website",
-        fieldUniqeName: "tBrandWebsite",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Website",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Brands Country",
-        fieldUniqeName: "tBrandCountry",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.dropdown,
-        field_placeholder: "Enter Brands Country",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false,
-        options: [{
-          optionDisplayName: "India",
-          optionIndex: 0,
-          optionOrder: 1
+          field_name: "Email",
+          fieldUniqeName: "Email",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.email,
+          field_placeholder: "Enter mail",
+          validator: [],
+          mandatory: false,
+          hidden: false
         }, {
-          optionDisplayName: "USA",
-          optionIndex: 1,
-          optionOrder: 2
+          field_name: "User DOB",
+          fieldUniqeName: "DOB",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
+          field_placeholder: "Enter DOB",
+          validator: [],
+          mandatory: false,
+          hidden: false
         }, {
-          optionDisplayName: "UAE",
-          optionIndex: 2,
-          optionOrder: 3
+          field_name: "Created Time",
+          fieldUniqeName: "Time",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.time,
+          field_placeholder: "Enter Created Time",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "User Time",
+          fieldUniqeName: "uTime",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.dropdown,
+          field_placeholder: "Enter User Roles",
+          validator: [],
+          mandatory: false,
+          hidden: false,
+          options: [{
+            optionDisplayName: "Admin",
+            optionIndex: 0,
+            optionOrder: 1
+          }, {
+            optionDisplayName: "User",
+            optionIndex: 1,
+            optionOrder: 2
+          }, {
+            optionDisplayName: "Vendor",
+            optionIndex: 2,
+            optionOrder: 3
+          }]
         }]
       }, {
-        field_name: "Brands Established",
-        fieldUniqeName: "tBrandEstablished",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
-        field_placeholder: "Enter Brands Establishment date",
-        validator: [],
-        mandatory: false,
-        hidden: false
+        tab_name: "Brands",
+        tab_header: "Brands search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Brands,
+        tab_unique_name: "",
+        search_fields: [{
+          field_name: "Brands Name",
+          fieldUniqeName: "tBrandName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Name",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }],
+        fields: [{
+          field_name: "Brand Id",
+          fieldUniqeName: "aBrandId",
+          defaultVal: "",
+          readOnly: true,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
+          field_placeholder: "Enter Brands Id",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }, {
+          field_name: "Brands Name",
+          fieldUniqeName: "tBrandName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Description",
+          fieldUniqeName: "tBrandDescription",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Description",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Website",
+          fieldUniqeName: "tBrandWebsite",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Website",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Country",
+          fieldUniqeName: "tBrandCountry",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.dropdown,
+          field_placeholder: "Enter Brands Country",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false,
+          options: [{
+            optionDisplayName: "India",
+            optionIndex: 0,
+            optionOrder: 1
+          }, {
+            optionDisplayName: "USA",
+            optionIndex: 1,
+            optionOrder: 2
+          }, {
+            optionDisplayName: "UAE",
+            optionIndex: 2,
+            optionOrder: 3
+          }]
+        }, {
+          field_name: "Brands Established",
+          fieldUniqeName: "tBrandEstablished",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
+          field_placeholder: "Enter Brands Establishment date",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Category",
+          fieldUniqeName: "tBrandCategory",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Category",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Contact",
+          fieldUniqeName: "tBrandContact",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Brands Contact",
+          validator: [],
+          mandatory: false,
+          hidden: false
+        }, {
+          field_name: "Brands Attachment Id",
+          fieldUniqeName: "nBrandLogoAttachmentID",
+          defaultVal: "0",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
+          field_placeholder: "Enter Brands Attachment",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }, {
+          field_name: "Brands Created By",
+          fieldUniqeName: "nCreatedBy",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
+          field_placeholder: "Enter Brands Created By",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }, {
+          field_name: "Brands Updated by",
+          fieldUniqeName: "nUpdateBy",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
+          field_placeholder: "Enter Brands Updated by",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }, {
+          field_name: "Brands Created on",
+          fieldUniqeName: "dtCreatedOn",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
+          field_placeholder: "Enter Brands Created on",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }, {
+          field_name: "Brands Updated on",
+          fieldUniqeName: "dtUpdatedOn",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
+          field_placeholder: "Enter Brands Updated on",
+          validator: [],
+          mandatory: false,
+          hidden: true
+        }]
       }, {
-        field_name: "Brands Category",
-        fieldUniqeName: "tBrandCategory",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Category",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
+        tab_name: "Vendors",
+        tab_header: "Vendors search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Vendor,
+        tab_unique_name: "",
+        search_fields: [{
+          field_name: "Vendor Name",
+          fieldUniqeName: "tVendorName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Vendor Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }],
+        fields: [{
+          field_name: "Vendor Name",
+          fieldUniqeName: "tVendorName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Vendor Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }]
       }, {
-        field_name: "Brands Contact",
-        fieldUniqeName: "tBrandContact",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Brands Contact",
-        validator: [],
-        mandatory: false,
-        hidden: false
+        tab_name: "Tech Components",
+        tab_header: "Tech Components search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.TechComponent,
+        tab_unique_name: "",
+        search_fields: [{
+          field_name: "Tech Comp Name",
+          fieldUniqeName: "tTechCompName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Tech Comp Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }],
+        fields: [{
+          field_name: "Tech Comp Name",
+          fieldUniqeName: "tTechCompName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Tech Comp Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }]
       }, {
-        field_name: "Brands Attachment Id",
-        fieldUniqeName: "nBrandLogoAttachmentID",
-        defaultVal: "0",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
-        field_placeholder: "Enter Brands Attachment",
-        validator: [],
-        mandatory: false,
-        hidden: true
+        tab_name: "Franchises",
+        tab_header: "Franchises search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Franchise,
+        tab_unique_name: "",
+        search_fields: [{
+          field_name: "Frenchise Name",
+          fieldUniqeName: "tFrenchiseName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Frenchise Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }],
+        fields: [{
+          field_name: "Frenchise Name",
+          fieldUniqeName: "tFrenchiseName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Frenchise Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }]
       }, {
-        field_name: "Brands Created By",
-        fieldUniqeName: "nCreatedBy",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
-        field_placeholder: "Enter Brands Created By",
-        validator: [],
-        mandatory: false,
-        hidden: true
+        tab_name: "Stores",
+        tab_header: "Stores search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Store,
+        tab_unique_name: "",
+        search_fields: [{
+          field_name: "Stores Name",
+          fieldUniqeName: "tStoreName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Stores Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }],
+        fields: [{
+          field_name: "Stores Name",
+          fieldUniqeName: "tStoreName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Stores Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }]
       }, {
-        field_name: "Brands Updated by",
-        fieldUniqeName: "nUpdateBy",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.number,
-        field_placeholder: "Enter Brands Updated by",
-        validator: [],
-        mandatory: false,
-        hidden: true
+        tab_name: "Tech Component Tools",
+        tab_header: "Tech Component Tools search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.TechComponentTools,
+        tab_unique_name: "",
+        search_fields: [{
+          field_name: "Tech Component Tools Name",
+          fieldUniqeName: "tTechComponentToolsName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Tech Component Tools Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }],
+        fields: [{
+          field_name: "Tech Component Tools Name",
+          fieldUniqeName: "tTechComponentToolsName",
+          defaultVal: "",
+          readOnly: false,
+          invalid: false,
+          field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
+          field_placeholder: "Enter Tech Component Tools Name",
+          validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+          mandatory: false,
+          hidden: false
+        }]
       }, {
-        field_name: "Brands Created on",
-        fieldUniqeName: "dtCreatedOn",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
-        field_placeholder: "Enter Brands Created on",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      }, {
-        field_name: "Brands Updated on",
-        fieldUniqeName: "dtUpdatedOn",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.date,
-        field_placeholder: "Enter Brands Updated on",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      }]
-    }, {
-      tab_name: "Vendors",
-      tab_header: "Vendors search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Vendor,
-      tab_unique_name: "",
-      search_fields: [{
-        field_name: "Vendor Name",
-        fieldUniqeName: "tVendorName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Vendor Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "Vendor Name",
-        fieldUniqeName: "tVendorName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Vendor Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }]
-    }, {
-      tab_name: "Tech Components",
-      tab_header: "Tech Components search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.TechComponent,
-      tab_unique_name: "",
-      search_fields: [{
-        field_name: "Tech Comp Name",
-        fieldUniqeName: "tTechCompName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Tech Comp Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "Tech Comp Name",
-        fieldUniqeName: "tTechCompName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Tech Comp Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }]
-    }, {
-      tab_name: "Franchises",
-      tab_header: "Franchises search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Franchise,
-      tab_unique_name: "",
-      search_fields: [{
-        field_name: "Frenchise Name",
-        fieldUniqeName: "tFrenchiseName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Frenchise Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "Frenchise Name",
-        fieldUniqeName: "tFrenchiseName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Frenchise Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }]
-    }, {
-      tab_name: "Stores",
-      tab_header: "Stores search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Store,
-      tab_unique_name: "",
-      search_fields: [{
-        field_name: "Stores Name",
-        fieldUniqeName: "tStoreName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Stores Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "Stores Name",
-        fieldUniqeName: "tStoreName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Stores Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }]
-    }, {
-      tab_name: "Tech Component Tools",
-      tab_header: "Tech Component Tools search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.TechComponentTools,
-      tab_unique_name: "",
-      search_fields: [{
-        field_name: "Tech Component Tools Name",
-        fieldUniqeName: "tTechComponentToolsName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Tech Component Tools Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "Tech Component Tools Name",
-        fieldUniqeName: "tTechComponentToolsName",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.FieldType.text,
-        field_placeholder: "Enter Tech Component Tools Name",
-        validator: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-        mandatory: false,
-        hidden: false
-      }]
-    }, {
-      tab_name: "Analytics",
-      tab_header: "Analytics search",
-      tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Analytics,
-      tab_unique_name: "",
-      search_fields: [],
-      fields: []
-    }];
+        tab_name: "Analytics",
+        tab_header: "Analytics search",
+        tab_type: src_app_interfaces_home_tab__WEBPACK_IMPORTED_MODULE_0__.TabType.Analytics,
+        tab_unique_name: "",
+        search_fields: [],
+        fields: []
+      }];
+    }
   }
-}
-HomeService.ɵfac = function HomeService_Factory(t) {
-  return new (t || HomeService)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_4__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵinject"](_auth_service__WEBPACK_IMPORTED_MODULE_1__.AuthService));
-};
-HomeService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjectable"]({
-  token: HomeService,
-  factory: HomeService.ɵfac,
-  providedIn: 'root'
-});
+  HomeService.ɵfac = function HomeService_Factory(t) {
+    return new (t || HomeService)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_4__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵinject"](_auth_service__WEBPACK_IMPORTED_MODULE_1__.AuthService));
+  };
+  HomeService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjectable"]({
+    token: HomeService,
+    factory: HomeService.ɵfac,
+    providedIn: 'root'
+  });
+  return HomeService;
+})();
 
 /***/ }),
 
@@ -7354,7 +7423,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ɵPRE_STYLE": () => (/* binding */ ɵPRE_STYLE)
 /* harmony export */ });
 /**
- * @license Angular v15.1.2
+ * @license Angular v15.2.2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -8611,7 +8680,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/animations */ 7340);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 4650);
 /**
- * @license Angular v15.1.2
+ * @license Angular v15.2.2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -10372,6 +10441,7 @@ class TimelineBuilder {
     this.startTime = startTime;
     this._elementTimelineStylesLookup = _elementTimelineStylesLookup;
     this.duration = 0;
+    this.easing = null;
     this._previousKeyframe = new Map();
     this._currentKeyframe = new Map();
     this._keyframes = new Map();
@@ -10793,13 +10863,20 @@ function checkNonAnimatableInTimelines(timelines, triggerName, driver) {
   if (!driver.validateAnimatableStyleProperty) {
     return;
   }
+  const allowedNonAnimatableProps = new Set([
+  // 'easing' is a utility/synthetic prop we use to represent
+  // easing functions, it represents a property of the animation
+  // which is not animatable but different values can be used
+  // in different steps
+  'easing']);
   const invalidNonAnimatableProps = new Set();
   timelines.forEach(({
     keyframes
   }) => {
     const nonAnimatablePropsInitialValues = new Map();
     keyframes.forEach(keyframe => {
-      for (const [prop, value] of keyframe.entries()) {
+      const entriesToCheck = Array.from(keyframe.entries()).filter(([prop]) => !allowedNonAnimatableProps.has(prop));
+      for (const [prop, value] of entriesToCheck) {
         if (!driver.validateAnimatableStyleProperty(prop)) {
           if (nonAnimatablePropsInitialValues.has(prop) && !invalidNonAnimatableProps.has(prop)) {
             const propInitialValue = nonAnimatablePropsInitialValues.get(prop);
@@ -12276,6 +12353,7 @@ class TransitionAnimationPlayer {
     this._containsRealPlayer = false;
     this._queuedCallbacks = new Map();
     this.destroyed = false;
+    this.parentPlayer = null;
     this.markedForDestroy = false;
     this.disabled = false;
     this.queued = true;
@@ -12724,6 +12802,7 @@ class WebAnimationsPlayer {
     if (this._initialized) return;
     this._initialized = true;
     const keyframes = this.keyframes;
+    // @ts-expect-error overwriting a readonly property
     this.domPlayer = this._triggerWebAnimation(this.element, keyframes, this.options);
     this._finalKeyframe = keyframes.length ? keyframes[keyframes.length - 1] : new Map();
     this.domPlayer.addEventListener('finish', () => this._onFinish());
@@ -15768,7 +15847,7 @@ __webpack_require__.r(__webpack_exports__);
  * found in the LICENSE file at https://angular.io/license
  */
 /** Current version of the Angular Component Development Kit. */
-const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.1.2');
+const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.2.2');
 
 /**
  * @license
@@ -16295,15 +16374,7 @@ class SelectionModel {
    * Determines whether a value is selected.
    */
   isSelected(value) {
-    if (this.compareWith) {
-      for (const otherValue of this._selection) {
-        if (this.compareWith(otherValue, value)) {
-          return true;
-        }
-      }
-      return false;
-    }
-    return this._selection.has(value);
+    return this._selection.has(this._getConcreteValue(value));
   }
   /**
    * Determines whether the model does not have a value.
@@ -16347,6 +16418,7 @@ class SelectionModel {
   }
   /** Selects a value. */
   _markSelected(value) {
+    value = this._getConcreteValue(value);
     if (!this.isSelected(value)) {
       if (!this._multiple) {
         this._unmarkAll();
@@ -16361,6 +16433,7 @@ class SelectionModel {
   }
   /** Deselects a value. */
   _unmarkSelected(value) {
+    value = this._getConcreteValue(value);
     if (this.isSelected(value)) {
       this._selection.delete(value);
       if (this._emitChanges) {
@@ -16386,6 +16459,19 @@ class SelectionModel {
   /** Whether there are queued up change to be emitted. */
   _hasQueuedChanges() {
     return !!(this._deselectedToEmit.length || this._selectedToEmit.length);
+  }
+  /** Returns a value that is comparable to inputValue by applying compareWith function, returns the same inputValue otherwise. */
+  _getConcreteValue(inputValue) {
+    if (!this.compareWith) {
+      return inputValue;
+    } else {
+      for (let selectedValue of this._selection) {
+        if (this.compareWith(inputValue, selectedValue)) {
+          return selectedValue;
+        }
+      }
+      return inputValue;
+    }
   }
 }
 /**
@@ -26362,7 +26448,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "provideImageKitLoader": () => (/* binding */ provideImageKitLoader),
 /* harmony export */   "provideImgixLoader": () => (/* binding */ provideImgixLoader),
 /* harmony export */   "registerLocaleData": () => (/* binding */ registerLocaleData),
-/* harmony export */   "ɵBrowserPlatformLocation": () => (/* binding */ BrowserPlatformLocation),
 /* harmony export */   "ɵDomAdapter": () => (/* binding */ DomAdapter),
 /* harmony export */   "ɵNullViewportScroller": () => (/* binding */ NullViewportScroller),
 /* harmony export */   "ɵPLATFORM_BROWSER_ID": () => (/* binding */ PLATFORM_BROWSER_ID),
@@ -26375,7 +26460,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 4650);
 /**
- * @license Angular v15.1.2
+ * @license Angular v15.2.2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -27134,7 +27219,14 @@ function createLocation() {
   return new Location((0,_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"])(LocationStrategy));
 }
 function _stripBasePath(basePath, url) {
-  return basePath && new RegExp(`^${basePath}([/;?#]|$)`).test(url) ? url.substring(basePath.length) : url;
+  if (!basePath || !url.startsWith(basePath)) {
+    return url;
+  }
+  const strippedUrl = url.substring(basePath.length);
+  if (strippedUrl === '' || ['/', ';', '?', '#'].includes(strippedUrl[0])) {
+    return strippedUrl;
+  }
+  return url;
 }
 function _stripIndexHtml(url) {
   return url.replace(/\/index.html$/, '');
@@ -31381,25 +31473,6 @@ let PercentPipe = /*#__PURE__*/(() => {
  * that determine group sizing and separator, decimal-point character,
  * and other locale-specific configurations.
  *
- * {@a currency-code-deprecation}
- * <div class="alert is-helpful">
- *
- * **Deprecation notice:**
- *
- * The default currency code is currently always `USD` but this is deprecated from v9.
- *
- * **In v11 the default currency code will be taken from the current locale identified by
- * the `LOCALE_ID` token. See the [i18n guide](guide/i18n-common-locale-id) for
- * more information.**
- *
- * If you need the previous behavior then set it by creating a `DEFAULT_CURRENCY_CODE` provider in
- * your application `NgModule`:
- *
- * ```ts
- * {provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}
- * ```
- *
- * </div>
  *
  * @see `getCurrencySymbol()`
  * @see `formatCurrency()`
@@ -31646,7 +31719,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * @publicApi
  */
-const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.1.2');
+const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.2.2');
 
 /**
  * Defines a scroll position manager. Implemented by `BrowserViewportScroller`.
@@ -32667,6 +32740,8 @@ let NgOptimizedImage = /*#__PURE__*/(() => {
           assertNoComplexSizes(this);
         }
         assertNotMissingBuiltInLoader(this.ngSrc, this.imageLoader);
+        assertNoNgSrcsetWithoutLoader(this, this.imageLoader);
+        assertNoLoaderParamsWithoutLoader(this, this.imageLoader);
         if (this.priority) {
           const checker = this.injector.get(PreconnectLinkChecker);
           checker.assertPreconnect(this.getRewrittenSrc(), this.ngSrc);
@@ -32723,8 +32798,15 @@ let NgOptimizedImage = /*#__PURE__*/(() => {
     /** @nodoc */
     ngOnChanges(changes) {
       if (ngDevMode) {
-        assertNoPostInitInputChange(this, changes, ['ngSrc', 'ngSrcset', 'width', 'height', 'priority', 'fill', 'loading', 'sizes', 'disableOptimizedSrcset']);
+        assertNoPostInitInputChange(this, changes, ['ngSrc', 'ngSrcset', 'width', 'height', 'priority', 'fill', 'loading', 'sizes', 'loaderParams', 'disableOptimizedSrcset']);
       }
+    }
+    callImageLoader(configWithoutCustomParams) {
+      let augmentedConfig = configWithoutCustomParams;
+      if (this.loaderParams) {
+        augmentedConfig.loaderParams = this.loaderParams;
+      }
+      return this.imageLoader(augmentedConfig);
     }
     getLoadingBehavior() {
       if (!this.priority && this.loading !== undefined) {
@@ -32744,7 +32826,7 @@ let NgOptimizedImage = /*#__PURE__*/(() => {
           src: this.ngSrc
         };
         // Cache calculated image src to reuse it later in the code.
-        this._renderedSrc = this.imageLoader(imgConfig);
+        this._renderedSrc = this.callImageLoader(imgConfig);
       }
       return this._renderedSrc;
     }
@@ -32753,7 +32835,7 @@ let NgOptimizedImage = /*#__PURE__*/(() => {
       const finalSrcs = this.ngSrcset.split(',').filter(src => src !== '').map(srcStr => {
         srcStr = srcStr.trim();
         const width = widthSrcSet ? parseFloat(srcStr) : parseFloat(srcStr) * this.width;
-        return `${this.imageLoader({
+        return `${this.callImageLoader({
           src: this.ngSrc,
           width
         })} ${srcStr}`;
@@ -32777,14 +32859,14 @@ let NgOptimizedImage = /*#__PURE__*/(() => {
         // breakpoints with full viewport widths.
         filteredBreakpoints = breakpoints.filter(bp => bp >= VIEWPORT_BREAKPOINT_CUTOFF);
       }
-      const finalSrcs = filteredBreakpoints.map(bp => `${this.imageLoader({
+      const finalSrcs = filteredBreakpoints.map(bp => `${this.callImageLoader({
         src: this.ngSrc,
         width: bp
       })} ${bp}w`);
       return finalSrcs.join(', ');
     }
     getFixedSrcset() {
-      const finalSrcs = DENSITY_SRCSET_MULTIPLIERS.map(multiplier => `${this.imageLoader({
+      const finalSrcs = DENSITY_SRCSET_MULTIPLIERS.map(multiplier => `${this.callImageLoader({
         src: this.ngSrc,
         width: this.width * multiplier
       })} ${multiplier}x`);
@@ -32825,6 +32907,7 @@ let NgOptimizedImage = /*#__PURE__*/(() => {
       height: "height",
       loading: "loading",
       priority: "priority",
+      loaderParams: "loaderParams",
       disableOptimizedSrcset: "disableOptimizedSrcset",
       fill: "fill",
       src: "src",
@@ -33094,6 +33177,23 @@ function assertNotMissingBuiltInLoader(ngSrc, imageLoader) {
     }
   }
 }
+/**
+ * Warns if ngSrcset is present and no loader is configured (i.e. the default one is being used).
+ */
+function assertNoNgSrcsetWithoutLoader(dir, imageLoader) {
+  if (dir.ngSrcset && imageLoader === noopImageLoader) {
+    console.warn((0,_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵformatRuntimeError"])(2963 /* RuntimeErrorCode.MISSING_NECESSARY_LOADER */, `${imgDirectiveDetails(dir.ngSrc)} the \`ngSrcset\` attribute is present but ` + `no image loader is configured (i.e. the default one is being used), ` + `which would result in the same image being used for all configured sizes. ` + `To fix this, provide a loader or remove the \`ngSrcset\` attribute from the image.`));
+  }
+}
+/**
+ * Warns if loaderParams is present and no loader is configured (i.e. the default one is being
+ * used).
+ */
+function assertNoLoaderParamsWithoutLoader(dir, imageLoader) {
+  if (dir.loaderParams && imageLoader === noopImageLoader) {
+    console.warn((0,_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵformatRuntimeError"])(2963 /* RuntimeErrorCode.MISSING_NECESSARY_LOADER */, `${imgDirectiveDetails(dir.ngSrc)} the \`loaderParams\` attribute is present but ` + `no image loader is configured (i.e. the default one is being used), ` + `which means that the loaderParams data will not be consumed and will not affect the URL. ` + `To fix this, provide a custom loader or remove the \`loaderParams\` attribute from the image.`));
+  }
+}
 
 // These exports represent the set of symbols exposed as a public API.
 
@@ -33171,7 +33271,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 9300);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 4004);
 /**
- * @license Angular v15.1.2
+ * @license Angular v15.2.2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -35574,10 +35674,7 @@ let HttpClientModule = /*#__PURE__*/(() => {
     type: HttpClientModule
   });
   HttpClientModule.ɵinj = /* @__PURE__ */_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjector"]({
-    providers: [provideHttpClient(withInterceptorsFromDi(), withXsrfConfiguration({
-      cookieName: XSRF_DEFAULT_COOKIE_NAME,
-      headerName: XSRF_DEFAULT_HEADER_NAME
-    }))]
+    providers: [provideHttpClient(withInterceptorsFromDi())]
   });
   return HttpClientModule;
 })();
@@ -35752,7 +35849,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "setTestabilityGetter": () => (/* binding */ setTestabilityGetter),
 /* harmony export */   "ɵALLOW_MULTIPLE_PLATFORMS": () => (/* binding */ ALLOW_MULTIPLE_PLATFORMS),
 /* harmony export */   "ɵAPP_ID_RANDOM_PROVIDER": () => (/* binding */ APP_ID_RANDOM_PROVIDER),
-/* harmony export */   "ɵChangeDetectorStatus": () => (/* binding */ ChangeDetectorStatus),
 /* harmony export */   "ɵComponentFactory": () => (/* binding */ ComponentFactory$1),
 /* harmony export */   "ɵConsole": () => (/* binding */ Console),
 /* harmony export */   "ɵDEFAULT_LOCALE_ID": () => (/* binding */ DEFAULT_LOCALE_ID),
@@ -35820,14 +35916,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ɵinjectChangeDetectorRef": () => (/* binding */ injectChangeDetectorRef),
 /* harmony export */   "ɵinternalCreateApplication": () => (/* binding */ internalCreateApplication),
 /* harmony export */   "ɵisBoundToModule": () => (/* binding */ isBoundToModule),
-/* harmony export */   "ɵisDefaultChangeDetectionStrategy": () => (/* binding */ isDefaultChangeDetectionStrategy),
 /* harmony export */   "ɵisEnvironmentProviders": () => (/* binding */ isEnvironmentProviders),
 /* harmony export */   "ɵisInjectable": () => (/* binding */ isInjectable),
-/* harmony export */   "ɵisListLikeIterable": () => (/* binding */ isListLikeIterable),
+/* harmony export */   "ɵisNgModule": () => (/* binding */ isNgModule),
 /* harmony export */   "ɵisObservable": () => (/* binding */ isObservable),
 /* harmony export */   "ɵisPromise": () => (/* binding */ isPromise),
 /* harmony export */   "ɵisSubscribable": () => (/* binding */ isSubscribable),
-/* harmony export */   "ɵivyEnabled": () => (/* binding */ ɵivyEnabled),
 /* harmony export */   "ɵmakeDecorator": () => (/* binding */ makeDecorator),
 /* harmony export */   "ɵnoSideEffects": () => (/* binding */ noSideEffects),
 /* harmony export */   "ɵpatchComponentDefWithScope": () => (/* binding */ patchComponentDefWithScope),
@@ -36013,7 +36107,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 6451);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ 3099);
 /**
- * @license Angular v15.1.2
+ * @license Angular v15.2.2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -36404,9 +36498,7 @@ function getInheritedInjectableDef(type) {
   const def = type && (type[NG_PROV_DEF] || type[NG_INJECTABLE_DEF]);
   if (def) {
     const typeName = getTypeName(type);
-    // TODO(FW-1307): Re-add ngDevMode when closure can handle it
-    // ngDevMode &&
-    console.warn(`DEPRECATED: DI is instantiating a token "${typeName}" that inherits its @Injectable decorator but does not provide one itself.\n` + `This will become an error in a future version of Angular. Please add @Injectable() to the "${typeName}" class.`);
+    ngDevMode && console.warn(`DEPRECATED: DI is instantiating a token "${typeName}" that inherits its @Injectable decorator but does not provide one itself.\n` + `This will become an error in a future version of Angular. Please add @Injectable() to the "${typeName}" class.`);
     return def;
   } else {
     return null;
@@ -36846,55 +36938,6 @@ var ChangeDetectionStrategy = /*#__PURE__*/(() => {
   ChangeDetectionStrategy[ChangeDetectionStrategy["Default"] = 1] = "Default";
   return ChangeDetectionStrategy;
 })();
-/**
- * Defines the possible states of the default change detector.
- * @see `ChangeDetectorRef`
- */
-var ChangeDetectorStatus = /*#__PURE__*/(() => {
-  ChangeDetectorStatus = ChangeDetectorStatus || {};
-  /**
-   * A state in which, after calling `detectChanges()`, the change detector
-   * state becomes `Checked`, and must be explicitly invoked or reactivated.
-   */
-  ChangeDetectorStatus[ChangeDetectorStatus["CheckOnce"] = 0] = "CheckOnce";
-  /**
-   * A state in which change detection is skipped until the change detector mode
-   * becomes `CheckOnce`.
-   */
-  ChangeDetectorStatus[ChangeDetectorStatus["Checked"] = 1] = "Checked";
-  /**
-   * A state in which change detection continues automatically until explicitly
-   * deactivated.
-   */
-  ChangeDetectorStatus[ChangeDetectorStatus["CheckAlways"] = 2] = "CheckAlways";
-  /**
-   * A state in which a change detector sub tree is not a part of the main tree and
-   * should be skipped.
-   */
-  ChangeDetectorStatus[ChangeDetectorStatus["Detached"] = 3] = "Detached";
-  /**
-   * Indicates that the change detector encountered an error checking a binding
-   * or calling a directive lifecycle method and is now in an inconsistent state. Change
-   * detectors in this state do not detect changes.
-   */
-  ChangeDetectorStatus[ChangeDetectorStatus["Errored"] = 4] = "Errored";
-  /**
-   * Indicates that the change detector has been destroyed.
-   */
-  ChangeDetectorStatus[ChangeDetectorStatus["Destroyed"] = 5] = "Destroyed";
-  return ChangeDetectorStatus;
-})();
-/**
- * Reports whether a given strategy is currently the default for change detection.
- * @param changeDetectionStrategy The strategy to check.
- * @returns True if the given strategy is the current default, false otherwise.
- * @see `ChangeDetectorStatus`
- * @see `ChangeDetectorRef`
- */
-function isDefaultChangeDetectionStrategy(changeDetectionStrategy) {
-  return changeDetectionStrategy == null || changeDetectionStrategy === ChangeDetectionStrategy.Default;
-}
-
 /**
  * Defines the CSS styles encapsulation policies for the {@link Component} decorator's
  * `encapsulation` option.
@@ -42807,69 +42850,18 @@ class DOMParserHelper {
   }
 }
 /**
- * Use an HTML5 `template` element, if supported, or an inert body element created via
- * `createHtmlDocument` to create and fill an inert DOM element.
+ * Use an HTML5 `template` element to create and fill an inert DOM element.
  * This is the fallback strategy if the browser does not support DOMParser.
  */
 class InertDocumentHelper {
   constructor(defaultDoc) {
     this.defaultDoc = defaultDoc;
     this.inertDocument = this.defaultDoc.implementation.createHTMLDocument('sanitization-inert');
-    if (this.inertDocument.body == null) {
-      // usually there should be only one body element in the document, but IE doesn't have any, so
-      // we need to create one.
-      const inertHtml = this.inertDocument.createElement('html');
-      this.inertDocument.appendChild(inertHtml);
-      const inertBodyElement = this.inertDocument.createElement('body');
-      inertHtml.appendChild(inertBodyElement);
-    }
   }
   getInertBodyElement(html) {
-    // Prefer using <template> element if supported.
     const templateEl = this.inertDocument.createElement('template');
-    if ('content' in templateEl) {
-      templateEl.innerHTML = trustedHTMLFromString(html);
-      return templateEl;
-    }
-    // Note that previously we used to do something like `this.inertDocument.body.innerHTML = html`
-    // and we returned the inert `body` node. This was changed, because IE seems to treat setting
-    // `innerHTML` on an inserted element differently, compared to one that hasn't been inserted
-    // yet. In particular, IE appears to split some of the text into multiple text nodes rather
-    // than keeping them in a single one which ends up messing with Ivy's i18n parsing further
-    // down the line. This has been worked around by creating a new inert `body` and using it as
-    // the root node in which we insert the HTML.
-    const inertBody = this.inertDocument.createElement('body');
-    inertBody.innerHTML = trustedHTMLFromString(html);
-    // Support: IE 11 only
-    // strip custom-namespaced attributes on IE<=11
-    if (this.defaultDoc.documentMode) {
-      this.stripCustomNsAttrs(inertBody);
-    }
-    return inertBody;
-  }
-  /**
-   * When IE11 comes across an unknown namespaced attribute e.g. 'xlink:foo' it adds 'xmlns:ns1'
-   * attribute to declare ns1 namespace and prefixes the attribute with 'ns1' (e.g.
-   * 'ns1:xlink:foo').
-   *
-   * This is undesirable since we don't want to allow any of these custom attributes. This method
-   * strips them all.
-   */
-  stripCustomNsAttrs(el) {
-    const elAttrs = el.attributes;
-    // loop backwards so that we can support removals.
-    for (let i = elAttrs.length - 1; 0 < i; i--) {
-      const attrib = elAttrs.item(i);
-      const attrName = attrib.name;
-      if (attrName === 'xmlns:ns1' || attrName.indexOf('ns1:') === 0) {
-        el.removeAttribute(attrName);
-      }
-    }
-    let childNode = el.firstChild;
-    while (childNode) {
-      if (childNode.nodeType === Node.ELEMENT_NODE) this.stripCustomNsAttrs(childNode);
-      childNode = childNode.nextSibling;
-    }
+    templateEl.innerHTML = trustedHTMLFromString(html);
+    return templateEl;
   }
 }
 /**
@@ -44213,7 +44205,7 @@ class Version {
 /**
  * @publicApi
  */
-const VERSION = /*#__PURE__*/new Version('15.1.2');
+const VERSION = /*#__PURE__*/new Version('15.2.2');
 
 // This default value is when checking the hierarchy for a token.
 //
@@ -46024,6 +46016,7 @@ function createTNodeAtIndex(tView, index, type, name, attrs) {
         // In the case of i18n the `currentTNode` may already be linked, in which case we don't want
         // to break the links which i18n created.
         currentTNode.next = tNode;
+        tNode.prev = currentTNode;
       }
     }
   }
@@ -46455,8 +46448,9 @@ function createTNode(tView, tParent, type, index, value, attrs) {
     initialInputs: undefined,
     inputs: null,
     outputs: null,
-    tViews: null,
+    tView: null,
     next: null,
+    prev: null,
     projectionNext: null,
     child: null,
     parent: tParent,
@@ -46654,7 +46648,6 @@ function resolveDirectives(tView, lView, tNode, localRefs) {
   // Please make sure to have explicit type for `exportsMap`. Inferred type triggers bug in
   // tsickle.
   ngDevMode && assertFirstCreatePass(tView);
-  let hasDirectives = false;
   if (getBindingsEnabled()) {
     const exportsMap = localRefs === null ? null : {
       '': -1
@@ -46668,14 +46661,12 @@ function resolveDirectives(tView, lView, tNode, localRefs) {
       [directiveDefs, hostDirectiveDefs] = matchResult;
     }
     if (directiveDefs !== null) {
-      hasDirectives = true;
       initializeDirectives(tView, lView, tNode, directiveDefs, exportsMap, hostDirectiveDefs);
     }
     if (exportsMap) cacheMatchingLocalNames(tNode, localRefs, exportsMap);
   }
   // Merge the template attrs last so that they have the highest priority.
   tNode.mergedAttrs = mergeHostAttrs(tNode.mergedAttrs, tNode.attrs);
-  return hasDirectives;
 }
 /** Initializes the data structures necessary for a list of directives to be instantiated. */
 function initializeDirectives(tView, lView, tNode, directives, exportsMap, hostDirectiveDefs) {
@@ -48458,38 +48449,19 @@ function validateMappings(bindingType, def, hostDirectiveBindings) {
     }
   }
 }
-let _symbolIterator = null;
-function getSymbolIterator() {
-  if (!_symbolIterator) {
-    const Symbol = _global['Symbol'];
-    if (Symbol && Symbol.iterator) {
-      _symbolIterator = Symbol.iterator;
-    } else {
-      // es6-shim specific logic
-      const keys = Object.getOwnPropertyNames(Map.prototype);
-      for (let i = 0; i < keys.length; ++i) {
-        const key = keys[i];
-        if (key !== 'entries' && key !== 'size' && Map.prototype[key] === Map.prototype['entries']) {
-          _symbolIterator = key;
-        }
-      }
-    }
-  }
-  return _symbolIterator;
-}
 function isIterable(obj) {
-  return obj !== null && typeof obj === 'object' && obj[getSymbolIterator()] !== undefined;
+  return obj !== null && typeof obj === 'object' && obj[Symbol.iterator] !== undefined;
 }
 function isListLikeIterable(obj) {
   if (!isJsObject(obj)) return false;
   return Array.isArray(obj) || !(obj instanceof Map) &&
   // JS Map are iterables but return entries as [k, v]
-  getSymbolIterator() in obj; // JS Iterable have a Symbol.iterator prop
+  Symbol.iterator in obj; // JS Iterable have a Symbol.iterator prop
 }
 
 function areIterablesEqual(a, b, comparator) {
-  const iterator1 = a[getSymbolIterator()]();
-  const iterator2 = b[getSymbolIterator()]();
+  const iterator1 = a[Symbol.iterator]();
+  const iterator2 = b[Symbol.iterator]();
   while (true) {
     const item1 = iterator1.next();
     const item2 = iterator2.next();
@@ -48504,7 +48476,7 @@ function iterateListLike(obj, fn) {
       fn(obj[i]);
     }
   } else {
-    const iterator = obj[getSymbolIterator()]();
+    const iterator = obj[Symbol.iterator]();
     let item;
     while (!(item = iterator.next()).done) {
       fn(item.value);
@@ -49127,7 +49099,7 @@ function templateFirstCreatePass(index, tView, lView, templateFn, decls, vars, t
   const tNode = getOrCreateTNode(tView, index, 4 /* TNodeType.Container */, tagName || null, getConstant(tViewConsts, attrsIndex));
   resolveDirectives(tView, lView, tNode, getConstant(tViewConsts, localRefsIndex));
   registerPostOrderHooks(tView, tNode);
-  const embeddedTView = tNode.tViews = createTView(2 /* TViewType.Embedded */, tNode, templateFn, decls, vars, tView.directiveRegistry, tView.pipeRegistry, null, tView.schemas, tViewConsts);
+  const embeddedTView = tNode.tView = createTView(2 /* TViewType.Embedded */, tNode, templateFn, decls, vars, tView.directiveRegistry, tView.pipeRegistry, null, tView.schemas, tViewConsts);
   if (tView.queries !== null) {
     tView.queries.template(tView, tNode);
     embeddedTView.queries = tView.queries.embeddedTView(tNode);
@@ -49235,16 +49207,13 @@ function setDirectiveInputsWhichShadowsStyling(tView, tNode, lView, value, isCla
   // We support both 'class' and `className` hence the fallback.
   setInputsForProperty(tView, lView, inputs[property], property, value);
 }
-function elementStartFirstCreatePass(index, tView, lView, native, name, attrsIndex, localRefsIndex) {
+function elementStartFirstCreatePass(index, tView, lView, name, attrsIndex, localRefsIndex) {
   ngDevMode && assertFirstCreatePass(tView);
   ngDevMode && ngDevMode.firstCreatePass++;
   const tViewConsts = tView.consts;
   const attrs = getConstant(tViewConsts, attrsIndex);
   const tNode = getOrCreateTNode(tView, index, 2 /* TNodeType.Element */, name, attrs);
-  const hasDirectives = resolveDirectives(tView, lView, tNode, getConstant(tViewConsts, localRefsIndex));
-  if (ngDevMode) {
-    validateElementIsKnown(native, lView, tNode.value, tView.schemas, hasDirectives);
-  }
+  resolveDirectives(tView, lView, tNode, getConstant(tViewConsts, localRefsIndex));
   if (tNode.attrs !== null) {
     computeStaticStyling(tNode, tNode.attrs, false);
   }
@@ -49278,8 +49247,12 @@ function ɵɵelementStart(index, name, attrsIndex, localRefsIndex) {
   ngDevMode && assertEqual(getBindingIndex(), tView.bindingStartIndex, 'elements should be created before any bindings');
   ngDevMode && assertIndexInRange(lView, adjustedIndex);
   const renderer = lView[RENDERER];
+  const tNode = tView.firstCreatePass ? elementStartFirstCreatePass(adjustedIndex, tView, lView, name, attrsIndex, localRefsIndex) : tView.data[adjustedIndex];
   const native = lView[adjustedIndex] = createElementNode(renderer, name, getNamespace$1());
-  const tNode = tView.firstCreatePass ? elementStartFirstCreatePass(adjustedIndex, tView, lView, native, name, attrsIndex, localRefsIndex) : tView.data[adjustedIndex];
+  const hasDirectives = isDirectiveHost(tNode);
+  if (ngDevMode && tView.firstCreatePass) {
+    validateElementIsKnown(native, lView, tNode.value, tView.schemas, hasDirectives);
+  }
   setCurrentTNode(tNode, true);
   setupStaticAttributes(renderer, native, tNode);
   if ((tNode.flags & 32 /* TNodeFlags.isDetached */) !== 32 /* TNodeFlags.isDetached */) {
@@ -49294,7 +49267,7 @@ function ɵɵelementStart(index, name, attrsIndex, localRefsIndex) {
     attachPatchData(native, lView);
   }
   increaseElementDepthCount();
-  if (isDirectiveHost(tNode)) {
+  if (hasDirectives) {
     createDirectivesInstances(tView, lView, tNode);
     executeContentQueries(tView, tNode, lView);
   }
@@ -53408,7 +53381,7 @@ function setInsertBeforeIndex(tNode, value) {
 function getTIcu(tView, index) {
   const value = tView.data[index];
   if (value === null || typeof value === 'string') return null;
-  if (ngDevMode && !(value.hasOwnProperty('tViews') || value.hasOwnProperty('currentCaseLViewIndex'))) {
+  if (ngDevMode && !(value.hasOwnProperty('tView') || value.hasOwnProperty('currentCaseLViewIndex'))) {
     throwError('We expect to get \'null\'|\'TIcu\'|\'TIcuContainer\', but got: ' + value);
   }
   // Here the `value.hasOwnProperty('currentCaseLViewIndex')` is a polymorphic read as it can be
@@ -53435,7 +53408,7 @@ function getTIcu(tView, index) {
  */
 function setTIcu(tView, index, tIcu) {
   const tNode = tView.data[index];
-  ngDevMode && assertEqual(tNode === null || tNode.hasOwnProperty('tViews'), true, 'We expect to get \'null\'|\'TIcuContainer\'');
+  ngDevMode && assertEqual(tNode === null || tNode.hasOwnProperty('tView'), true, 'We expect to get \'null\'|\'TIcuContainer\'');
   if (tNode === null) {
     tView.data[index] = tIcu;
   } else {
@@ -56454,7 +56427,8 @@ function _wrapInTimeout(fn) {
  */
 const EventEmitter = EventEmitter_;
 function symbolIterator() {
-  return this._results[getSymbolIterator()]();
+  // @ts-expect-error accessing a private member
+  return this._results[Symbol.iterator]();
 }
 /**
  * An unmodifiable list of items that Angular keeps up to date when the state
@@ -56506,10 +56480,9 @@ class QueryList {
     // This function should be declared on the prototype, but doing so there will cause the class
     // declaration to have side-effects and become not tree-shakable. For this reason we do it in
     // the constructor.
-    // [getSymbolIterator()](): Iterator<T> { ... }
-    const symbol = getSymbolIterator();
+    // [Symbol.iterator](): Iterator<T> { ... }
     const proto = QueryList.prototype;
-    if (!proto[symbol]) proto[symbol] = symbolIterator;
+    if (!proto[Symbol.iterator]) proto[Symbol.iterator] = symbolIterator;
   }
   /**
    * Returns the QueryList entry at `index`.
@@ -56649,7 +56622,7 @@ const R3TemplateRef = class TemplateRef extends ViewEngineTemplateRef {
     this.elementRef = elementRef;
   }
   createEmbeddedView(context, injector) {
-    const embeddedTView = this._declarationTContainer.tViews;
+    const embeddedTView = this._declarationTContainer.tView;
     const embeddedLView = createLView(this._declarationLView, embeddedTView, context, 16 /* LViewFlags.CheckAlways */, null, embeddedTView.declTNode, null, null, null, null, injector || null);
     const declarationLContainer = this._declarationLView[this._declarationTContainer.index];
     ngDevMode && assertLContainer(declarationLContainer);
@@ -56679,7 +56652,7 @@ function injectTemplateRef() {
  */
 function createTemplateRef(hostTNode, hostLView) {
   if (hostTNode.type & 4 /* TNodeType.Container */) {
-    ngDevMode && assertDefined(hostTNode.tViews, 'TView must be allocated');
+    ngDevMode && assertDefined(hostTNode.tView, 'TView must be allocated');
     return new R3TemplateRef(hostLView, hostTNode, createElementRef(hostTNode, hostLView));
   }
   return null;
@@ -58182,8 +58155,7 @@ function compileComponent(type, metadata) {
           changeDetection: metadata.changeDetection,
           encapsulation,
           interpolation: metadata.interpolation,
-          viewProviders: metadata.viewProviders || null,
-          isStandalone: !!metadata.standalone
+          viewProviders: metadata.viewProviders || null
         };
         compilationDepth++;
         try {
@@ -58954,17 +58926,6 @@ const PLATFORM_ID = /*#__PURE__*/new InjectionToken('Platform ID', {
   providedIn: 'platform',
   factory: () => 'unknown' // set a default platform name, when none set explicitly
 });
-/**
- * A [DI token](guide/glossary#di-token "DI token definition") that provides a set of callbacks to
- * be called for every component that is bootstrapped.
- *
- * Each callback must take a `ComponentRef` instance and return nothing.
- *
- * `(componentRef: ComponentRef) => void`
- *
- * @publicApi
- */
-const APP_BOOTSTRAP_LISTENER = /*#__PURE__*/new InjectionToken('appBootstrapListener');
 /**
  * A [DI token](guide/glossary#di-token "DI token definition") that indicates the root directory of
  * the application
@@ -60136,6 +60097,7 @@ function setTestabilityGetter(getter) {
   _testabilityGetter = getter;
 }
 let _testabilityGetter;
+const NG_DEV_MODE = typeof ngDevMode === 'undefined' || ngDevMode;
 let _platformInjector = null;
 /**
  * Internal token to indicate whether having multiple bootstrapped platform should be allowed (only
@@ -60149,7 +60111,17 @@ const ALLOW_MULTIPLE_PLATFORMS = /*#__PURE__*/new InjectionToken('AllowMultipleT
  * entire class tree-shakeable.
  */
 const PLATFORM_DESTROY_LISTENERS = /*#__PURE__*/new InjectionToken('PlatformDestroyListeners');
-const NG_DEV_MODE = typeof ngDevMode === 'undefined' || ngDevMode;
+/**
+ * A [DI token](guide/glossary#di-token "DI token definition") that provides a set of callbacks to
+ * be called for every component that is bootstrapped.
+ *
+ * Each callback must take a `ComponentRef` instance and return nothing.
+ *
+ * `(componentRef: ComponentRef) => void`
+ *
+ * @publicApi
+ */
+const APP_BOOTSTRAP_LISTENER = /*#__PURE__*/new InjectionToken('appBootstrapListener');
 function compileNgModuleFactory(injector, options, moduleType) {
   ngDevMode && assertNgModuleType(moduleType);
   const moduleFactory = new NgModuleFactory(moduleType);
@@ -62836,9 +62808,6 @@ function coerceToBoolean(value) {
   return typeof value === 'boolean' ? value : value != null && value !== 'false';
 }
 
-// TODO(alxhub): allows tests to compile, can be removed when tests have been updated.
-const ɵivyEnabled = true;
-
 /**
  * Compiles a partial directive declaration object into a full directive definition object.
  *
@@ -63194,7 +63163,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 4128);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ 4004);
 /**
- * @license Angular v15.1.2
+ * @license Angular v15.2.2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -64035,8 +64004,6 @@ function toObservable(value) {
 }
 function mergeErrors(arrayOfErrors) {
   let res = {};
-  // Not using Array.reduce here due to a Chrome 80 bug
-  // https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
   arrayOfErrors.forEach(errors => {
     res = errors != null ? {
       ...res,
@@ -67580,6 +67547,7 @@ let RadioControlValueAccessor = /*#__PURE__*/(() => {
       super(renderer, elementRef);
       this._registry = _registry;
       this._injector = _injector;
+      this.setDisabledStateFired = false;
       /**
        * The registered callback function called when a change event occurs on the input element.
        * Note: we declare `onChange` here (also used as host listener) as a function with no arguments
@@ -67588,6 +67556,9 @@ let RadioControlValueAccessor = /*#__PURE__*/(() => {
        * @nodoc
        */
       this.onChange = () => {};
+      this.callSetDisabledState = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.inject)(CALL_SET_DISABLED_STATE, {
+        optional: true
+      }) ?? setDisabledStateDefault;
     }
     /** @nodoc */
     ngOnInit() {
@@ -67617,6 +67588,31 @@ let RadioControlValueAccessor = /*#__PURE__*/(() => {
         fn(this.value);
         this._registry.select(this);
       };
+    }
+    /** @nodoc */
+    setDisabledState(isDisabled) {
+      /**
+       * `setDisabledState` is supposed to be called whenever the disabled state of a control changes,
+       * including upon control creation. However, a longstanding bug caused the method to not fire
+       * when an *enabled* control was attached. This bug was fixed in v15 in #47576.
+       *
+       * This had a side effect: previously, it was possible to instantiate a reactive form control
+       * with `[attr.disabled]=true`, even though the the corresponding control was enabled in the
+       * model. This resulted in a mismatch between the model and the DOM. Now, because
+       * `setDisabledState` is always called, the value in the DOM will be immediately overwritten
+       * with the "correct" enabled value.
+       *
+       * However, the fix also created an exceptional case: radio buttons. Because Reactive Forms
+       * models the entire group of radio buttons as a single `FormControl`, there is no way to
+       * control the disabled state for individual radios, so they can no longer be configured as
+       * disabled. Thus, we keep the old behavior for radio buttons, so that `[attr.disabled]`
+       * continues to work. Specifically, we drop the first call to `setDisabledState` if `disabled`
+       * is `false`, and we are not in legacy mode.
+       */
+      if (this.setDisabledStateFired || isDisabled || this.callSetDisabledState === 'whenDisabledForLegacyCode') {
+        this.setProperty('disabled', isDisabled);
+      }
+      this.setDisabledStateFired = true;
     }
     /**
      * Sets the "value" on the radio input element and unchecks it.
@@ -70141,7 +70137,7 @@ let FormBuilder = /*#__PURE__*/(() => {
     }
     /**
      * @description
-     * Returns a FormBuilder in which automatically constructed @see FormControl} elements
+     * Returns a FormBuilder in which automatically constructed `FormControl` elements
      * have `{nonNullable: true}` and are non-nullable.
      *
      * **Constructing non-nullable controls**
@@ -70347,7 +70343,7 @@ let NonNullableFormBuilder = /*#__PURE__*/(() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && void 0;
 })();
 /**
- * UntypedFormBuilder is the same as @see FormBuilder, but it provides untyped controls.
+ * UntypedFormBuilder is the same as `FormBuilder`, but it provides untyped controls.
  */
 let UntypedFormBuilder = /*#__PURE__*/(() => {
   class UntypedFormBuilder extends FormBuilder {
@@ -70392,7 +70388,7 @@ let UntypedFormBuilder = /*#__PURE__*/(() => {
 /**
  * @publicApi
  */
-const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.1.2');
+const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.2.2');
 
 /**
  * Exports the required providers and directives for template-driven forms,
@@ -71466,28 +71462,37 @@ const _c1 = ["*", "mat-option, ng-container"];
 const _c2 = ["text"];
 function MatOption_mat_pseudo_checkbox_0_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "mat-pseudo-checkbox", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "mat-pseudo-checkbox", 6);
   }
   if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("state", ctx_r0.selected ? "checked" : "unchecked")("disabled", ctx_r0.disabled);
   }
 }
-function MatOption_span_5_Template(rf, ctx) {
+function MatOption_mat_pseudo_checkbox_5_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "mat-pseudo-checkbox", 7);
+  }
+  if (rf & 2) {
+    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx_r2.disabled);
+  }
+}
+function MatOption_span_6_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
   }
   if (rf & 2) {
-    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("(", ctx_r2.group.label, ")");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("(", ctx_r3.group.label, ")");
   }
 }
 const _c3 = [[["mat-icon"]], "*"];
 const _c4 = ["mat-icon", "*"];
-const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.1.2');
+const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.2.2');
 
 /**
  * @license
@@ -72972,6 +72977,11 @@ let MatPseudoCheckbox = /*#__PURE__*/(() => {
       this.state = 'unchecked';
       /** Whether the checkbox is disabled. */
       this.disabled = false;
+      /**
+       * Appearance of the pseudo checkbox. Default appearance of 'full' renders a checkmark/mixedmark
+       * indicator inside a square box. 'minimal' appearance only renders the checkmark/mixedmark.
+       */
+      this.appearance = 'full';
     }
   }
   MatPseudoCheckbox.ɵfac = function MatPseudoCheckbox_Factory(t) {
@@ -72981,20 +72991,21 @@ let MatPseudoCheckbox = /*#__PURE__*/(() => {
     type: MatPseudoCheckbox,
     selectors: [["mat-pseudo-checkbox"]],
     hostAttrs: [1, "mat-pseudo-checkbox"],
-    hostVars: 8,
+    hostVars: 12,
     hostBindings: function MatPseudoCheckbox_HostBindings(rf, ctx) {
       if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("mat-pseudo-checkbox-indeterminate", ctx.state === "indeterminate")("mat-pseudo-checkbox-checked", ctx.state === "checked")("mat-pseudo-checkbox-disabled", ctx.disabled)("_mat-animation-noopable", ctx._animationMode === "NoopAnimations");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("mat-pseudo-checkbox-indeterminate", ctx.state === "indeterminate")("mat-pseudo-checkbox-checked", ctx.state === "checked")("mat-pseudo-checkbox-disabled", ctx.disabled)("mat-pseudo-checkbox-minimal", ctx.appearance === "minimal")("mat-pseudo-checkbox-full", ctx.appearance === "full")("_mat-animation-noopable", ctx._animationMode === "NoopAnimations");
       }
     },
     inputs: {
       state: "state",
-      disabled: "disabled"
+      disabled: "disabled",
+      appearance: "appearance"
     },
     decls: 0,
     vars: 0,
     template: function MatPseudoCheckbox_Template(rf, ctx) {},
-    styles: [".mat-pseudo-checkbox{border:2px solid;border-radius:2px;cursor:pointer;display:inline-block;vertical-align:middle;box-sizing:border-box;position:relative;flex-shrink:0;transition:border-color 90ms cubic-bezier(0, 0, 0.2, 0.1),background-color 90ms cubic-bezier(0, 0, 0.2, 0.1)}.mat-pseudo-checkbox::after{position:absolute;opacity:0;content:\"\";border-bottom:2px solid currentColor;transition:opacity 90ms cubic-bezier(0, 0, 0.2, 0.1)}.mat-pseudo-checkbox.mat-pseudo-checkbox-checked,.mat-pseudo-checkbox.mat-pseudo-checkbox-indeterminate{border-color:rgba(0,0,0,0)}.mat-pseudo-checkbox._mat-animation-noopable{transition:none !important;animation:none !important}.mat-pseudo-checkbox._mat-animation-noopable::after{transition:none}.mat-pseudo-checkbox-disabled{cursor:default}.mat-pseudo-checkbox-indeterminate::after{left:1px;opacity:1;border-radius:2px}.mat-pseudo-checkbox-checked::after{left:1px;border-left:2px solid currentColor;transform:rotate(-45deg);opacity:1;box-sizing:content-box}.mat-pseudo-checkbox{width:18px;height:18px}.mat-pseudo-checkbox-indeterminate::after{top:6px;width:12px}.mat-pseudo-checkbox-checked::after{top:2.7px;width:10px;height:4px}"],
+    styles: [".mat-pseudo-checkbox{border-radius:2px;cursor:pointer;display:inline-block;vertical-align:middle;box-sizing:border-box;position:relative;flex-shrink:0;transition:border-color 90ms cubic-bezier(0, 0, 0.2, 0.1),background-color 90ms cubic-bezier(0, 0, 0.2, 0.1)}.mat-pseudo-checkbox::after{position:absolute;opacity:0;content:\"\";border-bottom:2px solid currentColor;transition:opacity 90ms cubic-bezier(0, 0, 0.2, 0.1)}.mat-pseudo-checkbox._mat-animation-noopable{transition:none !important;animation:none !important}.mat-pseudo-checkbox._mat-animation-noopable::after{transition:none}.mat-pseudo-checkbox-disabled{cursor:default}.mat-pseudo-checkbox-indeterminate::after{left:1px;opacity:1;border-radius:2px}.mat-pseudo-checkbox-checked::after{left:1px;border-left:2px solid currentColor;transform:rotate(-45deg);opacity:1;box-sizing:content-box}.mat-pseudo-checkbox-full{border:2px solid}.mat-pseudo-checkbox-full.mat-pseudo-checkbox-checked,.mat-pseudo-checkbox-full.mat-pseudo-checkbox-indeterminate{border-color:rgba(0,0,0,0)}.mat-pseudo-checkbox{width:18px;height:18px}.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after{width:14px;height:6px;transform-origin:center;top:-4.2426406871px;left:0;bottom:0;right:0;margin:auto}.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-indeterminate::after{top:8px;width:16px}.mat-pseudo-checkbox-full.mat-pseudo-checkbox-checked::after{width:10px;height:4px;transform-origin:center;top:-2.8284271247px;left:0;bottom:0;right:0;margin:auto}.mat-pseudo-checkbox-full.mat-pseudo-checkbox-indeterminate::after{top:6px;width:12px}"],
     encapsulation: 2,
     changeDetection: 0
   });
@@ -73203,6 +73214,10 @@ let _MatOptionBase = /*#__PURE__*/(() => {
     get disableRipple() {
       return !!(this._parent && this._parent.disableRipple);
     }
+    /** Whether to display checkmark for single-selection. */
+    get hideSingleSelectionIndicator() {
+      return !!(this._parent && this._parent.hideSingleSelectionIndicator);
+    }
     constructor(_element, _changeDetectorRef, _parent, group) {
       this._element = _element;
       this._changeDetectorRef = _changeDetectorRef;
@@ -73307,15 +73322,6 @@ let _MatOptionBase = /*#__PURE__*/(() => {
         this._emitSelectionChangeEvent(true);
       }
     }
-    /**
-     * Gets the `aria-selected` value for the option. We explicitly omit the `aria-selected`
-     * attribute from single-selection, unselected options. Including the `aria-selected="false"`
-     * attributes adds a significant amount of noise to screen-reader users without providing useful
-     * information.
-     */
-    _getAriaSelected() {
-      return this.selected || (this.multiple ? false : null);
-    }
     /** Returns the correct tabindex for the option depending on disabled state. */
     _getTabIndex() {
       return this.disabled ? '-1' : '0';
@@ -73403,16 +73409,16 @@ let MatOption = /*#__PURE__*/(() => {
       }
       if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵhostProperty"]("id", ctx.id);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("tabindex", ctx._getTabIndex())("aria-selected", ctx._getAriaSelected())("aria-disabled", ctx.disabled.toString());
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("tabindex", ctx._getTabIndex())("aria-selected", ctx.selected)("aria-disabled", ctx.disabled.toString());
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("mdc-list-item--selected", ctx.selected)("mat-mdc-option-multiple", ctx.multiple)("mat-mdc-option-active", ctx.active)("mdc-list-item--disabled", ctx.disabled);
       }
     },
     exportAs: ["matOption"],
     features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]],
     ngContentSelectors: _c4,
-    decls: 7,
-    vars: 4,
-    consts: [["class", "mat-mdc-option-pseudo-checkbox", 3, "state", "disabled", 4, "ngIf"], [1, "mdc-list-item__primary-text"], ["text", ""], ["class", "cdk-visually-hidden", 4, "ngIf"], ["mat-ripple", "", 1, "mat-mdc-option-ripple", 3, "matRippleTrigger", "matRippleDisabled"], [1, "mat-mdc-option-pseudo-checkbox", 3, "state", "disabled"], [1, "cdk-visually-hidden"]],
+    decls: 8,
+    vars: 5,
+    consts: [["class", "mat-mdc-option-pseudo-checkbox", 3, "state", "disabled", 4, "ngIf"], [1, "mdc-list-item__primary-text"], ["text", ""], ["class", "mat-mdc-option-pseudo-checkbox", "state", "checked", "appearance", "minimal", 3, "disabled", 4, "ngIf"], ["class", "cdk-visually-hidden", 4, "ngIf"], ["mat-ripple", "", 1, "mat-mdc-option-ripple", 3, "matRippleTrigger", "matRippleDisabled"], [1, "mat-mdc-option-pseudo-checkbox", 3, "state", "disabled"], ["state", "checked", "appearance", "minimal", 1, "mat-mdc-option-pseudo-checkbox", 3, "disabled"], [1, "cdk-visually-hidden"]],
     template: function MatOption_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojectionDef"](_c3);
@@ -73421,19 +73427,22 @@ let MatOption = /*#__PURE__*/(() => {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 1, 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojection"](4, 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, MatOption_span_5_Template, 2, 1, "span", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, MatOption_mat_pseudo_checkbox_5_Template, 1, 1, "mat-pseudo-checkbox", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, MatOption_span_6_Template, 2, 1, "span", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "div", 5);
       }
       if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.multiple);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.multiple && ctx.selected && !ctx.hideSingleSelectionIndicator);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.group && ctx.group._inert);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("matRippleTrigger", ctx._getHostElement())("matRippleDisabled", ctx.disabled || ctx.disableRipple);
       }
     },
     dependencies: [MatRipple, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, MatPseudoCheckbox],
-    styles: [".mat-mdc-option{display:flex;position:relative;align-items:center;justify-content:flex-start;overflow:hidden;padding:0;padding-left:16px;padding-right:16px;-webkit-user-select:none;user-select:none;cursor:pointer;-webkit-tap-highlight-color:rgba(0,0,0,0);min-height:48px}.mat-mdc-option:focus{outline:none}[dir=rtl] .mat-mdc-option,.mat-mdc-option[dir=rtl]{padding-left:16px;padding-right:16px}.mat-mdc-option.mdc-list-item{align-items:center}.mat-mdc-option.mdc-list-item--disabled{opacity:.38;cursor:default}.mat-mdc-optgroup .mat-mdc-option:not(.mat-mdc-option-multiple){padding-left:32px}[dir=rtl] .mat-mdc-optgroup .mat-mdc-option:not(.mat-mdc-option-multiple){padding-left:16px;padding-right:32px}.mat-mdc-option .mat-icon,.mat-mdc-option .mat-pseudo-checkbox{margin-right:16px;flex-shrink:0}[dir=rtl] .mat-mdc-option .mat-icon,[dir=rtl] .mat-mdc-option .mat-pseudo-checkbox{margin-right:0;margin-left:16px}.mat-mdc-option .mat-mdc-option-ripple{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none}.mat-mdc-option .mdc-list-item__primary-text{white-space:normal;font-size:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;font-family:inherit;text-decoration:inherit;text-transform:inherit}.cdk-high-contrast-active .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple)::after{content:\"\";position:absolute;top:50%;right:16px;transform:translateY(-50%);width:10px;height:0;border-bottom:solid 10px;border-radius:10px}[dir=rtl] .cdk-high-contrast-active .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple)::after{right:auto;left:16px}.mat-mdc-option-active::before{content:\"\"}"],
+    styles: [".mat-mdc-option{display:flex;position:relative;align-items:center;justify-content:flex-start;overflow:hidden;padding:0;padding-left:16px;padding-right:16px;-webkit-user-select:none;user-select:none;cursor:pointer;-webkit-tap-highlight-color:rgba(0,0,0,0);min-height:48px}.mat-mdc-option:focus{outline:none}[dir=rtl] .mat-mdc-option,.mat-mdc-option[dir=rtl]{padding-left:16px;padding-right:16px}.mat-mdc-option.mdc-list-item{align-items:center}.mat-mdc-option.mdc-list-item--disabled{opacity:.38;cursor:default}.mat-mdc-optgroup .mat-mdc-option:not(.mat-mdc-option-multiple){padding-left:32px}[dir=rtl] .mat-mdc-optgroup .mat-mdc-option:not(.mat-mdc-option-multiple){padding-left:16px;padding-right:32px}.mat-mdc-option .mat-icon,.mat-mdc-option .mat-pseudo-checkbox-full{margin-right:16px;flex-shrink:0}[dir=rtl] .mat-mdc-option .mat-icon,[dir=rtl] .mat-mdc-option .mat-pseudo-checkbox-full{margin-right:0;margin-left:16px}.mat-mdc-option .mat-pseudo-checkbox-minimal{margin-left:16px;flex-shrink:0}[dir=rtl] .mat-mdc-option .mat-pseudo-checkbox-minimal{margin-right:16px;margin-left:0}.mat-mdc-option .mat-mdc-option-ripple{top:0;left:0;right:0;bottom:0;position:absolute;pointer-events:none}.mat-mdc-option .mdc-list-item__primary-text{white-space:normal;font-size:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;font-family:inherit;text-decoration:inherit;text-transform:inherit;margin-right:auto}[dir=rtl] .mat-mdc-option .mdc-list-item__primary-text{margin-right:0;margin-left:auto}.cdk-high-contrast-active .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple)::after{content:\"\";position:absolute;top:50%;right:16px;transform:translateY(-50%);width:10px;height:0;border-bottom:solid 10px;border-radius:10px}[dir=rtl] .cdk-high-contrast-active .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple)::after{right:auto;left:16px}.mat-mdc-option-active::before{content:\"\"}"],
     encapsulation: 2,
     changeDetection: 0
   });
@@ -76960,7 +76969,7 @@ let MatPaginator = /*#__PURE__*/(() => {
     features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]],
     decls: 14,
     vars: 14,
-    consts: [[1, "mat-mdc-paginator-outer-container"], [1, "mat-mdc-paginator-container"], ["class", "mat-mdc-paginator-page-size", 4, "ngIf"], [1, "mat-mdc-paginator-range-actions"], ["aria-live", "polite", 1, "mat-mdc-paginator-range-label"], ["mat-icon-button", "", "type", "button", "class", "mat-mdc-paginator-navigation-first", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click", 4, "ngIf"], ["mat-icon-button", "", "type", "button", 1, "mat-mdc-paginator-navigation-previous", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["viewBox", "0 0 24 24", "focusable", "false", 1, "mat-mdc-paginator-icon"], ["d", "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"], ["mat-icon-button", "", "type", "button", 1, "mat-mdc-paginator-navigation-next", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["d", "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"], ["mat-icon-button", "", "type", "button", "class", "mat-mdc-paginator-navigation-last", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click", 4, "ngIf"], [1, "mat-mdc-paginator-page-size"], [1, "mat-mdc-paginator-page-size-label", 3, "id"], ["class", "mat-mdc-paginator-page-size-select", 3, "appearance", "color", 4, "ngIf"], ["class", "mat-mdc-paginator-page-size-value", 4, "ngIf"], [1, "mat-mdc-paginator-page-size-select", 3, "appearance", "color"], [3, "value", "disabled", "aria-labelledby", "panelClass", "disableOptionCentering", "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "mat-mdc-paginator-page-size-value"], ["mat-icon-button", "", "type", "button", 1, "mat-mdc-paginator-navigation-first", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["d", "M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"], ["mat-icon-button", "", "type", "button", 1, "mat-mdc-paginator-navigation-last", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["d", "M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"]],
+    consts: [[1, "mat-mdc-paginator-outer-container"], [1, "mat-mdc-paginator-container"], ["class", "mat-mdc-paginator-page-size", 4, "ngIf"], [1, "mat-mdc-paginator-range-actions"], ["aria-live", "polite", 1, "mat-mdc-paginator-range-label"], ["mat-icon-button", "", "type", "button", "class", "mat-mdc-paginator-navigation-first", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click", 4, "ngIf"], ["mat-icon-button", "", "type", "button", 1, "mat-mdc-paginator-navigation-previous", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["viewBox", "0 0 24 24", "focusable", "false", 1, "mat-mdc-paginator-icon"], ["d", "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"], ["mat-icon-button", "", "type", "button", 1, "mat-mdc-paginator-navigation-next", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["d", "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"], ["mat-icon-button", "", "type", "button", "class", "mat-mdc-paginator-navigation-last", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click", 4, "ngIf"], [1, "mat-mdc-paginator-page-size"], [1, "mat-mdc-paginator-page-size-label", 3, "id"], ["class", "mat-mdc-paginator-page-size-select", 3, "appearance", "color", 4, "ngIf"], ["class", "mat-mdc-paginator-page-size-value", 4, "ngIf"], [1, "mat-mdc-paginator-page-size-select", 3, "appearance", "color"], ["hideSingleSelectionIndicator", "", 3, "value", "disabled", "aria-labelledby", "panelClass", "disableOptionCentering", "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "mat-mdc-paginator-page-size-value"], ["mat-icon-button", "", "type", "button", 1, "mat-mdc-paginator-navigation-first", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["d", "M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"], ["mat-icon-button", "", "type", "button", 1, "mat-mdc-paginator-navigation-last", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["d", "M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"]],
     template: function MatPaginator_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0)(1, "div", 1);
@@ -78079,6 +78088,7 @@ let MatSelect = /*#__PURE__*/(() => {
         overlayY: 'bottom',
         panelClass: 'mat-mdc-select-panel-above'
       }];
+      this._hideSingleSelectionIndicator = this._defaultOptions?.hideSingleSelectionIndicator ?? false;
     }
     get shouldLabelFloat() {
       // Since the panel doesn't overlap the trigger, we
@@ -78140,6 +78150,22 @@ let MatSelect = /*#__PURE__*/(() => {
       const refToMeasure = this._preferredOverlayOrigin instanceof _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_2__.CdkOverlayOrigin ? this._preferredOverlayOrigin.elementRef : this._preferredOverlayOrigin || this._elementRef;
       return refToMeasure.nativeElement.getBoundingClientRect().width;
     }
+    /** Whether checkmark indicator for single-selection options is hidden. */
+    get hideSingleSelectionIndicator() {
+      return this._hideSingleSelectionIndicator;
+    }
+    set hideSingleSelectionIndicator(value) {
+      this._hideSingleSelectionIndicator = (0,_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_6__.coerceBooleanProperty)(value);
+      this._syncParentProperties();
+    }
+    /** Syncs the parent state with the individual options. */
+    _syncParentProperties() {
+      if (this.options) {
+        for (const option of this.options) {
+          option._changeDetectorRef.markForCheck();
+        }
+      }
+    }
   }
   MatSelect.ɵfac = /* @__PURE__ */function () {
     let ɵMatSelect_BaseFactory;
@@ -78183,7 +78209,8 @@ let MatSelect = /*#__PURE__*/(() => {
     inputs: {
       disabled: "disabled",
       disableRipple: "disableRipple",
-      tabIndex: "tabIndex"
+      tabIndex: "tabIndex",
+      hideSingleSelectionIndicator: "hideSingleSelectionIndicator"
     },
     exportAs: ["matSelect"],
     features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵProvidersFeature"]([{
@@ -83378,8 +83405,8 @@ let MatTabGroup = /*#__PURE__*/(() => {
       useExisting: MatTabGroup
     }]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]],
     decls: 6,
-    vars: 6,
-    consts: [[3, "selectedIndex", "disableRipple", "indexFocused", "selectFocusedIndex"], ["tabHeader", ""], ["class", "mdc-tab mat-mdc-tab mat-mdc-focus-indicator", "role", "tab", "matTabLabelWrapper", "", "cdkMonitorElementFocus", "", 3, "id", "mdc-tab--active", "ngClass", "disabled", "fitInkBarToContent", "click", "cdkFocusChange", 4, "ngFor", "ngForOf"], [1, "mat-mdc-tab-body-wrapper"], ["tabBodyWrapper", ""], ["role", "tabpanel", 3, "id", "mat-mdc-tab-body-active", "ngClass", "content", "position", "origin", "animationDuration", "preserveContent", "_onCentered", "_onCentering", 4, "ngFor", "ngForOf"], ["role", "tab", "matTabLabelWrapper", "", "cdkMonitorElementFocus", "", 1, "mdc-tab", "mat-mdc-tab", "mat-mdc-focus-indicator", 3, "id", "ngClass", "disabled", "fitInkBarToContent", "click", "cdkFocusChange"], ["tabNode", ""], [1, "mdc-tab__ripple"], ["mat-ripple", "", 1, "mat-mdc-tab-ripple", 3, "matRippleTrigger", "matRippleDisabled"], [1, "mdc-tab__content"], [1, "mdc-tab__text-label"], [3, "ngIf", "ngIfElse"], ["tabTextLabel", ""], [3, "cdkPortalOutlet"], ["role", "tabpanel", 3, "id", "ngClass", "content", "position", "origin", "animationDuration", "preserveContent", "_onCentered", "_onCentering"]],
+    vars: 7,
+    consts: [[3, "selectedIndex", "disableRipple", "disablePagination", "indexFocused", "selectFocusedIndex"], ["tabHeader", ""], ["class", "mdc-tab mat-mdc-tab mat-mdc-focus-indicator", "role", "tab", "matTabLabelWrapper", "", "cdkMonitorElementFocus", "", 3, "id", "mdc-tab--active", "ngClass", "disabled", "fitInkBarToContent", "click", "cdkFocusChange", 4, "ngFor", "ngForOf"], [1, "mat-mdc-tab-body-wrapper"], ["tabBodyWrapper", ""], ["role", "tabpanel", 3, "id", "mat-mdc-tab-body-active", "ngClass", "content", "position", "origin", "animationDuration", "preserveContent", "_onCentered", "_onCentering", 4, "ngFor", "ngForOf"], ["role", "tab", "matTabLabelWrapper", "", "cdkMonitorElementFocus", "", 1, "mdc-tab", "mat-mdc-tab", "mat-mdc-focus-indicator", 3, "id", "ngClass", "disabled", "fitInkBarToContent", "click", "cdkFocusChange"], ["tabNode", ""], [1, "mdc-tab__ripple"], ["mat-ripple", "", 1, "mat-mdc-tab-ripple", 3, "matRippleTrigger", "matRippleDisabled"], [1, "mdc-tab__content"], [1, "mdc-tab__text-label"], [3, "ngIf", "ngIfElse"], ["tabTextLabel", ""], [3, "cdkPortalOutlet"], ["role", "tabpanel", 3, "id", "ngClass", "content", "position", "origin", "animationDuration", "preserveContent", "_onCentered", "_onCentering"]],
     template: function MatTabGroup_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-tab-header", 0, 1);
@@ -83395,7 +83422,7 @@ let MatTabGroup = /*#__PURE__*/(() => {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       }
       if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectedIndex", ctx.selectedIndex || 0)("disableRipple", ctx.disableRipple);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectedIndex", ctx.selectedIndex || 0)("disableRipple", ctx.disableRipple)("disablePagination", ctx.disablePagination);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx._tabs);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
@@ -83405,7 +83432,7 @@ let MatTabGroup = /*#__PURE__*/(() => {
       }
     },
     dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_5__.NgClass, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgIf, _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_2__.CdkPortalOutlet, _angular_material_core__WEBPACK_IMPORTED_MODULE_10__.MatRipple, _angular_cdk_a11y__WEBPACK_IMPORTED_MODULE_15__.CdkMonitorFocus, MatTabBody, MatTabLabelWrapper, MatTabHeader],
-    styles: [".mdc-tab{min-width:90px;padding-right:24px;padding-left:24px;display:flex;flex:1 0 auto;justify-content:center;box-sizing:border-box;margin:0;padding-top:0;padding-bottom:0;border:none;outline:none;text-align:center;white-space:nowrap;cursor:pointer;-webkit-appearance:none;z-index:1}.mdc-tab::-moz-focus-inner{padding:0;border:0}.mdc-tab[hidden]{display:none}.mdc-tab--min-width{flex:0 1 auto}.mdc-tab__content{display:flex;align-items:center;justify-content:center;height:inherit;pointer-events:none}.mdc-tab__text-label{transition:150ms color linear;display:inline-block;line-height:1;z-index:2}.mdc-tab__icon{transition:150ms color linear;z-index:2}.mdc-tab--stacked .mdc-tab__content{flex-direction:column;align-items:center;justify-content:center}.mdc-tab--stacked .mdc-tab__text-label{padding-top:6px;padding-bottom:4px}.mdc-tab--active .mdc-tab__text-label,.mdc-tab--active .mdc-tab__icon{transition-delay:100ms}.mdc-tab:not(.mdc-tab--stacked) .mdc-tab__icon+.mdc-tab__text-label{padding-left:8px;padding-right:0}[dir=rtl] .mdc-tab:not(.mdc-tab--stacked) .mdc-tab__icon+.mdc-tab__text-label,.mdc-tab:not(.mdc-tab--stacked) .mdc-tab__icon+.mdc-tab__text-label[dir=rtl]{padding-left:0;padding-right:8px}.mdc-tab-indicator .mdc-tab-indicator__content--underline{border-top-width:2px}.mdc-tab-indicator .mdc-tab-indicator__content--icon{height:34px;font-size:34px}.mdc-tab-indicator{display:flex;position:absolute;top:0;left:0;justify-content:center;width:100%;height:100%;pointer-events:none;z-index:1}.mdc-tab-indicator__content{transform-origin:left;opacity:0}.mdc-tab-indicator__content--underline{align-self:flex-end;box-sizing:border-box;width:100%;border-top-style:solid}.mdc-tab-indicator__content--icon{align-self:center;margin:0 auto}.mdc-tab-indicator--active .mdc-tab-indicator__content{opacity:1}.mdc-tab-indicator .mdc-tab-indicator__content{transition:250ms transform cubic-bezier(0.4, 0, 0.2, 1)}.mdc-tab-indicator--no-transition .mdc-tab-indicator__content{transition:none}.mdc-tab-indicator--fade .mdc-tab-indicator__content{transition:150ms opacity linear}.mdc-tab-indicator--active.mdc-tab-indicator--fade .mdc-tab-indicator__content{transition-delay:100ms}.mat-mdc-tab-ripple{position:absolute;top:0;left:0;bottom:0;right:0;pointer-events:none}.mat-mdc-tab{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-tab.mdc-tab{height:48px;flex-grow:0}.mat-mdc-tab .mdc-tab__ripple::before{content:\"\";display:block;position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;pointer-events:none}.mat-mdc-tab .mdc-tab__text-label{display:inline-flex;align-items:center}.mat-mdc-tab .mdc-tab__content{position:relative}.mat-mdc-tab:hover .mdc-tab__ripple::before{opacity:.04}.mat-mdc-tab.cdk-program-focused .mdc-tab__ripple::before,.mat-mdc-tab.cdk-keyboard-focused .mdc-tab__ripple::before{opacity:.12}.mat-mdc-tab .mat-ripple-element{opacity:.12}.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab{flex-grow:1}.mat-mdc-tab-disabled{opacity:.4}.mat-mdc-tab-group{display:flex;flex-direction:column;max-width:100%}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header-pagination{background-color:var(--mat-mdc-tab-header-with-background-background-color, transparent)}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-tab .mdc-tab__text-label,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-tab-link .mdc-tab__text-label{color:var(--mat-mdc-tab-header-with-background-foreground-color, inherit)}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mdc-tab-indicator__content--underline,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-tab-header-pagination-chevron,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-focus-indicator::before{border-color:var(--mat-mdc-tab-header-with-background-foreground-color, inherit)}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-ripple-element,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mdc-tab__ripple::before,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header-pagination .mat-ripple-element,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header-pagination .mdc-tab__ripple::before{background-color:var(--mat-mdc-tab-header-with-background-foreground-color, inherit)}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-tab-header-pagination-chevron,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header-pagination .mat-mdc-tab-header-pagination-chevron{border-color:var(--mat-mdc-tab-header-with-background-foreground-color, inherit)}.mat-mdc-tab-group.mat-mdc-tab-group-inverted-header{flex-direction:column-reverse}.mat-mdc-tab-group.mat-mdc-tab-group-inverted-header .mdc-tab-indicator__content--underline{align-self:flex-start}.mat-mdc-tab-body-wrapper{position:relative;overflow:hidden;display:flex;transition:height 500ms cubic-bezier(0.35, 0, 0.25, 1)}.mat-mdc-tab-body-wrapper._mat-animation-noopable{transition:none !important;animation:none !important}"],
+    styles: [".mdc-tab{min-width:90px;padding-right:24px;padding-left:24px;display:flex;flex:1 0 auto;justify-content:center;box-sizing:border-box;margin:0;padding-top:0;padding-bottom:0;border:none;outline:none;text-align:center;white-space:nowrap;cursor:pointer;-webkit-appearance:none;z-index:1}.mdc-tab::-moz-focus-inner{padding:0;border:0}.mdc-tab[hidden]{display:none}.mdc-tab--min-width{flex:0 1 auto}.mdc-tab__content{display:flex;align-items:center;justify-content:center;height:inherit;pointer-events:none}.mdc-tab__text-label{transition:150ms color linear;display:inline-block;line-height:1;z-index:2}.mdc-tab__icon{transition:150ms color linear;z-index:2}.mdc-tab--stacked .mdc-tab__content{flex-direction:column;align-items:center;justify-content:center}.mdc-tab--stacked .mdc-tab__text-label{padding-top:6px;padding-bottom:4px}.mdc-tab--active .mdc-tab__text-label,.mdc-tab--active .mdc-tab__icon{transition-delay:100ms}.mdc-tab:not(.mdc-tab--stacked) .mdc-tab__icon+.mdc-tab__text-label{padding-left:8px;padding-right:0}[dir=rtl] .mdc-tab:not(.mdc-tab--stacked) .mdc-tab__icon+.mdc-tab__text-label,.mdc-tab:not(.mdc-tab--stacked) .mdc-tab__icon+.mdc-tab__text-label[dir=rtl]{padding-left:0;padding-right:8px}.mdc-tab-indicator .mdc-tab-indicator__content--underline{border-top-width:2px}.mdc-tab-indicator .mdc-tab-indicator__content--icon{height:34px;font-size:34px}.mdc-tab-indicator{display:flex;position:absolute;top:0;left:0;justify-content:center;width:100%;height:100%;pointer-events:none;z-index:1}.mdc-tab-indicator__content{transform-origin:left;opacity:0}.mdc-tab-indicator__content--underline{align-self:flex-end;box-sizing:border-box;width:100%;border-top-style:solid}.mdc-tab-indicator__content--icon{align-self:center;margin:0 auto}.mdc-tab-indicator--active .mdc-tab-indicator__content{opacity:1}.mdc-tab-indicator .mdc-tab-indicator__content{transition:250ms transform cubic-bezier(0.4, 0, 0.2, 1)}.mdc-tab-indicator--no-transition .mdc-tab-indicator__content{transition:none}.mdc-tab-indicator--fade .mdc-tab-indicator__content{transition:150ms opacity linear}.mdc-tab-indicator--active.mdc-tab-indicator--fade .mdc-tab-indicator__content{transition-delay:100ms}.mat-mdc-tab-ripple{position:absolute;top:0;left:0;bottom:0;right:0;pointer-events:none}.mat-mdc-tab{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-tab.mdc-tab{height:48px;flex-grow:0}.mat-mdc-tab .mdc-tab__ripple::before{content:\"\";display:block;position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;pointer-events:none}.mat-mdc-tab .mdc-tab__text-label{display:inline-flex;align-items:center}.mat-mdc-tab .mdc-tab__content{position:relative;pointer-events:auto}.mat-mdc-tab:hover .mdc-tab__ripple::before{opacity:.04}.mat-mdc-tab.cdk-program-focused .mdc-tab__ripple::before,.mat-mdc-tab.cdk-keyboard-focused .mdc-tab__ripple::before{opacity:.12}.mat-mdc-tab .mat-ripple-element{opacity:.12}.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab{flex-grow:1}.mat-mdc-tab-disabled{opacity:.4}.mat-mdc-tab-group{display:flex;flex-direction:column;max-width:100%}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header-pagination{background-color:var(--mat-mdc-tab-header-with-background-background-color, transparent)}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-tab .mdc-tab__text-label,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-tab-link .mdc-tab__text-label{color:var(--mat-mdc-tab-header-with-background-foreground-color, inherit)}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mdc-tab-indicator__content--underline,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-tab-header-pagination-chevron,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-focus-indicator::before{border-color:var(--mat-mdc-tab-header-with-background-foreground-color, inherit)}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-ripple-element,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mdc-tab__ripple::before,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header-pagination .mat-ripple-element,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header-pagination .mdc-tab__ripple::before{background-color:var(--mat-mdc-tab-header-with-background-foreground-color, inherit)}.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-tab-header-pagination-chevron,.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header-pagination .mat-mdc-tab-header-pagination-chevron{border-color:var(--mat-mdc-tab-header-with-background-foreground-color, inherit)}.mat-mdc-tab-group.mat-mdc-tab-group-inverted-header{flex-direction:column-reverse}.mat-mdc-tab-group.mat-mdc-tab-group-inverted-header .mdc-tab-indicator__content--underline{align-self:flex-start}.mat-mdc-tab-body-wrapper{position:relative;overflow:hidden;display:flex;transition:height 500ms cubic-bezier(0.35, 0, 0.25, 1)}.mat-mdc-tab-body-wrapper._mat-animation-noopable{transition:none !important;animation:none !important}"],
     encapsulation: 2
   });
   return MatTabGroup;
@@ -83821,7 +83848,7 @@ let MatTabLink = /*#__PURE__*/(() => {
       }
     },
     dependencies: [_angular_material_core__WEBPACK_IMPORTED_MODULE_10__.MatRipple],
-    styles: [".mat-mdc-tab-link{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-tab-link.mdc-tab{height:48px;flex-grow:0}.mat-mdc-tab-link .mdc-tab__ripple::before{content:\"\";display:block;position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;pointer-events:none}.mat-mdc-tab-link .mdc-tab__text-label{display:inline-flex;align-items:center}.mat-mdc-tab-link .mdc-tab__content{position:relative}.mat-mdc-tab-link:hover .mdc-tab__ripple::before{opacity:.04}.mat-mdc-tab-link.cdk-program-focused .mdc-tab__ripple::before,.mat-mdc-tab-link.cdk-keyboard-focused .mdc-tab__ripple::before{opacity:.12}.mat-mdc-tab-link .mat-ripple-element{opacity:.12}.mat-mdc-tab-link.mat-mdc-tab-disabled{pointer-events:none;opacity:.4}.mat-mdc-tab-header.mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link{flex-grow:1}.mat-mdc-tab-link::before{margin:5px}@media(max-width: 599px){.mat-mdc-tab-link{min-width:72px}}"],
+    styles: [".mat-mdc-tab-link{-webkit-tap-highlight-color:rgba(0,0,0,0)}.mat-mdc-tab-link.mdc-tab{height:48px;flex-grow:0}.mat-mdc-tab-link .mdc-tab__ripple::before{content:\"\";display:block;position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;pointer-events:none}.mat-mdc-tab-link .mdc-tab__text-label{display:inline-flex;align-items:center}.mat-mdc-tab-link .mdc-tab__content{position:relative;pointer-events:auto}.mat-mdc-tab-link:hover .mdc-tab__ripple::before{opacity:.04}.mat-mdc-tab-link.cdk-program-focused .mdc-tab__ripple::before,.mat-mdc-tab-link.cdk-keyboard-focused .mdc-tab__ripple::before{opacity:.12}.mat-mdc-tab-link .mat-ripple-element{opacity:.12}.mat-mdc-tab-link.mat-mdc-tab-disabled{pointer-events:none;opacity:.4}.mat-mdc-tab-header.mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link{flex-grow:1}.mat-mdc-tab-link::before{margin:5px}@media(max-width: 599px){.mat-mdc-tab-link{min-width:72px}}"],
     encapsulation: 2,
     changeDetection: 0
   });
@@ -84981,7 +85008,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/animations/browser */ 5001);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 6895);
 /**
- * @license Angular v15.1.2
+ * @license Angular v15.2.2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -85582,6 +85609,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "HammerGestureConfig": () => (/* binding */ HammerGestureConfig),
 /* harmony export */   "HammerModule": () => (/* binding */ HammerModule),
 /* harmony export */   "Meta": () => (/* binding */ Meta),
+/* harmony export */   "REMOVE_STYLES_ON_COMPONENT_DESTROY": () => (/* binding */ REMOVE_STYLES_ON_COMPONENT_DESTROY),
 /* harmony export */   "Title": () => (/* binding */ Title),
 /* harmony export */   "TransferState": () => (/* binding */ TransferState),
 /* harmony export */   "VERSION": () => (/* binding */ VERSION),
@@ -85614,7 +85642,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common */ 6895);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 4650);
 /**
- * @license Angular v15.1.2
+ * @license Angular v15.2.2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -85835,7 +85863,9 @@ let EventManager = /*#__PURE__*/(() => {
     constructor(plugins, _zone) {
       this._zone = _zone;
       this._eventNameToPlugin = new Map();
-      plugins.forEach(p => p.manager = this);
+      plugins.forEach(plugin => {
+        plugin.manager = this;
+      });
       this._plugins = plugins.slice().reverse();
     }
     /**
@@ -85915,22 +85945,45 @@ class EventManagerPlugin {
 let SharedStylesHost = /*#__PURE__*/(() => {
   class SharedStylesHost {
     constructor() {
-      /** @internal */
-      this._stylesSet = new Set();
+      this.usageCount = new Map();
     }
     addStyles(styles) {
-      const additions = new Set();
-      styles.forEach(style => {
-        if (!this._stylesSet.has(style)) {
-          this._stylesSet.add(style);
-          additions.add(style);
+      for (const style of styles) {
+        const usageCount = this.changeUsageCount(style, 1);
+        if (usageCount === 1) {
+          this.onStyleAdded(style);
         }
-      });
-      this.onStylesAdded(additions);
+      }
     }
-    onStylesAdded(additions) {}
+    removeStyles(styles) {
+      for (const style of styles) {
+        const usageCount = this.changeUsageCount(style, -1);
+        if (usageCount === 0) {
+          this.onStyleRemoved(style);
+        }
+      }
+    }
+    onStyleRemoved(style) {}
+    onStyleAdded(style) {}
     getAllStyles() {
-      return Array.from(this._stylesSet);
+      return this.usageCount.keys();
+    }
+    changeUsageCount(style, delta) {
+      const map = this.usageCount;
+      let usage = map.get(style) ?? 0;
+      usage += delta;
+      if (usage > 0) {
+        map.set(style, usage);
+      } else {
+        map.delete(style);
+      }
+      return usage;
+    }
+    ngOnDestroy() {
+      for (const style of this.getAllStyles()) {
+        this.onStyleRemoved(style);
+      }
+      this.usageCount.clear();
     }
   }
   SharedStylesHost.ɵfac = function SharedStylesHost_Factory(t) {
@@ -85947,39 +86000,55 @@ let SharedStylesHost = /*#__PURE__*/(() => {
 })();
 let DomSharedStylesHost = /*#__PURE__*/(() => {
   class DomSharedStylesHost extends SharedStylesHost {
-    constructor(_doc) {
+    constructor(doc) {
       super();
-      this._doc = _doc;
+      this.doc = doc;
       // Maps all registered host nodes to a list of style nodes that have been added to the host node.
-      this._hostNodes = new Map();
-      this._hostNodes.set(_doc.head, []);
+      this.styleRef = new Map();
+      this.hostNodes = new Set();
+      this.resetHostNodes();
     }
-    _addStylesToHost(styles, host, styleNodes) {
-      styles.forEach(style => {
-        const styleEl = this._doc.createElement('style');
-        styleEl.textContent = style;
-        styleNodes.push(host.appendChild(styleEl));
-      });
-    }
-    addHost(hostNode) {
-      const styleNodes = [];
-      this._addStylesToHost(this._stylesSet, hostNode, styleNodes);
-      this._hostNodes.set(hostNode, styleNodes);
-    }
-    removeHost(hostNode) {
-      const styleNodes = this._hostNodes.get(hostNode);
-      if (styleNodes) {
-        styleNodes.forEach(removeStyle);
+    onStyleAdded(style) {
+      for (const host of this.hostNodes) {
+        this.addStyleToHost(host, style);
       }
-      this._hostNodes.delete(hostNode);
     }
-    onStylesAdded(additions) {
-      this._hostNodes.forEach((styleNodes, hostNode) => {
-        this._addStylesToHost(additions, hostNode, styleNodes);
-      });
+    onStyleRemoved(style) {
+      const styleRef = this.styleRef;
+      const styleElements = styleRef.get(style);
+      styleElements?.forEach(e => e.remove());
+      styleRef.delete(style);
     }
     ngOnDestroy() {
-      this._hostNodes.forEach(styleNodes => styleNodes.forEach(removeStyle));
+      super.ngOnDestroy();
+      this.styleRef.clear();
+      this.resetHostNodes();
+    }
+    addHost(hostNode) {
+      this.hostNodes.add(hostNode);
+      for (const style of this.getAllStyles()) {
+        this.addStyleToHost(hostNode, style);
+      }
+    }
+    removeHost(hostNode) {
+      this.hostNodes.delete(hostNode);
+    }
+    addStyleToHost(host, style) {
+      const styleEl = this.doc.createElement('style');
+      styleEl.textContent = style;
+      host.appendChild(styleEl);
+      const styleElRef = this.styleRef.get(style);
+      if (styleElRef) {
+        styleElRef.push(styleEl);
+      } else {
+        this.styleRef.set(style, [styleEl]);
+      }
+    }
+    resetHostNodes() {
+      const hostNodes = this.hostNodes;
+      hostNodes.clear();
+      // Re-add the head element back since this is the default host.
+      hostNodes.add(this.doc.head);
     }
   }
   DomSharedStylesHost.ɵfac = function DomSharedStylesHost_Factory(t) {
@@ -85994,9 +86063,6 @@ let DomSharedStylesHost = /*#__PURE__*/(() => {
 /*#__PURE__*/(function () {
   (typeof ngDevMode === "undefined" || ngDevMode) && void 0;
 })();
-function removeStyle(styleNode) {
-  (0,_angular_common__WEBPACK_IMPORTED_MODULE_0__["ɵgetDOM"])().remove(styleNode);
-}
 const NAMESPACE_URIS = {
   'svg': 'http://www.w3.org/2000/svg',
   'xhtml': 'http://www.w3.org/1999/xhtml',
@@ -86010,6 +86076,21 @@ const NG_DEV_MODE$1 = typeof ngDevMode === 'undefined' || !!ngDevMode;
 const COMPONENT_VARIABLE = '%COMP%';
 const HOST_ATTR = `_nghost-${COMPONENT_VARIABLE}`;
 const CONTENT_ATTR = `_ngcontent-${COMPONENT_VARIABLE}`;
+/**
+ * The default value for the `REMOVE_STYLES_ON_COMPONENT_DESTROY` DI token.
+ */
+const REMOVE_STYLES_ON_COMPONENT_DESTROY_DEFAULT = false;
+/**
+ * A [DI token](guide/glossary#di-token "DI token definition") that indicates whether styles
+ * of destroyed components should be removed from DOM.
+ *
+ * By default, the value is set to `false`. This will be changed in the next major version.
+ * @publicApi
+ */
+const REMOVE_STYLES_ON_COMPONENT_DESTROY = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_1__.InjectionToken('RemoveStylesOnCompDestory', {
+  providedIn: 'root',
+  factory: () => REMOVE_STYLES_ON_COMPONENT_DESTROY_DEFAULT
+});
 function shimContentAttribute(componentShortId) {
   return CONTENT_ATTR.replace(COMPONENT_REGEX, componentShortId);
 }
@@ -86045,10 +86126,11 @@ function decoratePreventDefault(eventHandler) {
 }
 let DomRendererFactory2 = /*#__PURE__*/(() => {
   class DomRendererFactory2 {
-    constructor(eventManager, sharedStylesHost, appId) {
+    constructor(eventManager, sharedStylesHost, appId, removeStylesOnCompDestory) {
       this.eventManager = eventManager;
       this.sharedStylesHost = sharedStylesHost;
       this.appId = appId;
+      this.removeStylesOnCompDestory = removeStylesOnCompDestory;
       this.rendererByCompId = new Map();
       this.defaultRenderer = new DefaultDomRenderer2(eventManager);
     }
@@ -86056,35 +86138,46 @@ let DomRendererFactory2 = /*#__PURE__*/(() => {
       if (!element || !type) {
         return this.defaultRenderer;
       }
-      switch (type.encapsulation) {
-        case _angular_core__WEBPACK_IMPORTED_MODULE_1__.ViewEncapsulation.Emulated:
-          {
-            let renderer = this.rendererByCompId.get(type.id);
-            if (!renderer) {
-              renderer = new EmulatedEncapsulationDomRenderer2(this.eventManager, this.sharedStylesHost, type, this.appId);
-              this.rendererByCompId.set(type.id, renderer);
-            }
-            renderer.applyToHost(element);
-            return renderer;
-          }
-        case _angular_core__WEBPACK_IMPORTED_MODULE_1__.ViewEncapsulation.ShadowDom:
-          return new ShadowDomRenderer(this.eventManager, this.sharedStylesHost, element, type);
-        default:
-          {
-            if (!this.rendererByCompId.has(type.id)) {
-              const styles = flattenStyles(type.id, type.styles);
-              this.sharedStylesHost.addStyles(styles);
-              this.rendererByCompId.set(type.id, this.defaultRenderer);
-            }
-            return this.defaultRenderer;
-          }
+      const renderer = this.getOrCreateRenderer(element, type);
+      // Renderers have different logic due to different encapsulation behaviours.
+      // Ex: for emulated, an attribute is added to the element.
+      if (renderer instanceof EmulatedEncapsulationDomRenderer2) {
+        renderer.applyToHost(element);
+      } else if (renderer instanceof NoneEncapsulationDomRenderer) {
+        renderer.applyStyles();
       }
+      return renderer;
+    }
+    getOrCreateRenderer(element, type) {
+      const rendererByCompId = this.rendererByCompId;
+      let renderer = rendererByCompId.get(type.id);
+      if (!renderer) {
+        const eventManager = this.eventManager;
+        const sharedStylesHost = this.sharedStylesHost;
+        const removeStylesOnCompDestory = this.removeStylesOnCompDestory;
+        switch (type.encapsulation) {
+          case _angular_core__WEBPACK_IMPORTED_MODULE_1__.ViewEncapsulation.Emulated:
+            renderer = new EmulatedEncapsulationDomRenderer2(eventManager, sharedStylesHost, type, this.appId, removeStylesOnCompDestory);
+            break;
+          case _angular_core__WEBPACK_IMPORTED_MODULE_1__.ViewEncapsulation.ShadowDom:
+            return new ShadowDomRenderer(eventManager, sharedStylesHost, element, type);
+          default:
+            renderer = new NoneEncapsulationDomRenderer(eventManager, sharedStylesHost, type, removeStylesOnCompDestory);
+            break;
+        }
+        renderer.onDestroy = () => rendererByCompId.delete(type.id);
+        rendererByCompId.set(type.id, renderer);
+      }
+      return renderer;
+    }
+    ngOnDestroy() {
+      this.rendererByCompId.clear();
     }
     begin() {}
     end() {}
   }
   DomRendererFactory2.ɵfac = function DomRendererFactory2_Factory(t) {
-    return new (t || DomRendererFactory2)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](EventManager), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](DomSharedStylesHost), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__.APP_ID));
+    return new (t || DomRendererFactory2)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](EventManager), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](DomSharedStylesHost), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__.APP_ID), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](REMOVE_STYLES_ON_COMPONENT_DESTROY));
   };
   DomRendererFactory2.ɵprov = /* @__PURE__ */_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
     token: DomRendererFactory2,
@@ -86227,24 +86320,6 @@ function checkNoSyntheticProp(name, nameKind) {
 function isTemplateNode(node) {
   return node.tagName === 'TEMPLATE' && node.content !== undefined;
 }
-class EmulatedEncapsulationDomRenderer2 extends DefaultDomRenderer2 {
-  constructor(eventManager, sharedStylesHost, component, appId) {
-    super(eventManager);
-    this.component = component;
-    const styles = flattenStyles(appId + '-' + component.id, component.styles);
-    sharedStylesHost.addStyles(styles);
-    this.contentAttr = shimContentAttribute(appId + '-' + component.id);
-    this.hostAttr = shimHostAttribute(appId + '-' + component.id);
-  }
-  applyToHost(element) {
-    super.setAttribute(element, this.hostAttr, '');
-  }
-  createElement(parent, name) {
-    const el = super.createElement(parent, name);
-    super.setAttribute(el, this.contentAttr, '');
-    return el;
-  }
-}
 class ShadowDomRenderer extends DefaultDomRenderer2 {
   constructor(eventManager, sharedStylesHost, hostEl, component) {
     super(eventManager);
@@ -86255,17 +86330,14 @@ class ShadowDomRenderer extends DefaultDomRenderer2 {
     });
     this.sharedStylesHost.addHost(this.shadowRoot);
     const styles = flattenStyles(component.id, component.styles);
-    for (let i = 0; i < styles.length; i++) {
+    for (const style of styles) {
       const styleEl = document.createElement('style');
-      styleEl.textContent = styles[i];
+      styleEl.textContent = style;
       this.shadowRoot.appendChild(styleEl);
     }
   }
   nodeOrShadowRoot(node) {
     return node === this.hostEl ? this.shadowRoot : node;
-  }
-  destroy() {
-    this.sharedStylesHost.removeHost(this.shadowRoot);
   }
   appendChild(parent, newChild) {
     return super.appendChild(this.nodeOrShadowRoot(parent), newChild);
@@ -86278,6 +86350,49 @@ class ShadowDomRenderer extends DefaultDomRenderer2 {
   }
   parentNode(node) {
     return this.nodeOrShadowRoot(super.parentNode(this.nodeOrShadowRoot(node)));
+  }
+  destroy() {
+    this.sharedStylesHost.removeHost(this.shadowRoot);
+  }
+}
+class NoneEncapsulationDomRenderer extends DefaultDomRenderer2 {
+  constructor(eventManager, sharedStylesHost, component, removeStylesOnCompDestory, compId = component.id) {
+    super(eventManager);
+    this.sharedStylesHost = sharedStylesHost;
+    this.removeStylesOnCompDestory = removeStylesOnCompDestory;
+    this.rendererUsageCount = 0;
+    this.styles = flattenStyles(compId, component.styles);
+  }
+  applyStyles() {
+    this.sharedStylesHost.addStyles(this.styles);
+    this.rendererUsageCount++;
+  }
+  destroy() {
+    if (!this.removeStylesOnCompDestory) {
+      return;
+    }
+    this.sharedStylesHost.removeStyles(this.styles);
+    this.rendererUsageCount--;
+    if (this.rendererUsageCount === 0) {
+      this.onDestroy?.();
+    }
+  }
+}
+class EmulatedEncapsulationDomRenderer2 extends NoneEncapsulationDomRenderer {
+  constructor(eventManager, sharedStylesHost, component, appId, removeStylesOnCompDestory) {
+    const compId = appId + '-' + component.id;
+    super(eventManager, sharedStylesHost, component, removeStylesOnCompDestory, compId);
+    this.contentAttr = shimContentAttribute(compId);
+    this.hostAttr = shimHostAttribute(compId);
+  }
+  applyToHost(element) {
+    this.applyStyles();
+    this.setAttribute(element, this.hostAttr, '');
+  }
+  createElement(parent, name) {
+    const el = super.createElement(parent, name);
+    super.setAttribute(el, this.contentAttr, '');
+    return el;
   }
 }
 let DomEventsPlugin = /*#__PURE__*/(() => {
@@ -86666,7 +86781,7 @@ const BROWSER_MODULE_PROVIDERS = [{
 }, {
   provide: DomRendererFactory2,
   useClass: DomRendererFactory2,
-  deps: [EventManager, DomSharedStylesHost, _angular_core__WEBPACK_IMPORTED_MODULE_1__.APP_ID]
+  deps: [EventManager, DomSharedStylesHost, _angular_core__WEBPACK_IMPORTED_MODULE_1__.APP_ID, REMOVE_STYLES_ON_COMPONENT_DESTROY]
 }, {
   provide: _angular_core__WEBPACK_IMPORTED_MODULE_1__.RendererFactory2,
   useExisting: DomRendererFactory2
@@ -86977,14 +87092,7 @@ let Title = /*#__PURE__*/(() => {
 /*#__PURE__*/(function () {
   (typeof ngDevMode === "undefined" || ngDevMode) && void 0;
 })();
-const CAMEL_CASE_REGEXP = /([A-Z])/g;
-const DASH_CASE_REGEXP = /-([a-z])/g;
-function camelCaseToDashCase(input) {
-  return input.replace(CAMEL_CASE_REGEXP, (...m) => '-' + m[1].toLowerCase());
-}
-function dashCaseToCamelCase(input) {
-  return input.replace(DASH_CASE_REGEXP, (...m) => m[1].toUpperCase());
-}
+
 /**
  * Exports the value under a given `name` in the global property `ng`. For example `ng.probe` if
  * `name` is `'probe'`.
@@ -87144,6 +87252,7 @@ let TransferState = /*#__PURE__*/(() => {
     constructor() {
       this.store = {};
       this.onSerializeCallbacks = {};
+      this.store = retrieveTransferredState((0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_common__WEBPACK_IMPORTED_MODULE_0__.DOCUMENT), (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.APP_ID));
     }
     /**
      * Get the value corresponding to a key. Return `defaultValue` if key is not found.
@@ -87203,15 +87312,7 @@ let TransferState = /*#__PURE__*/(() => {
   };
   TransferState.ɵprov = /* @__PURE__ */_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
     token: TransferState,
-    factory: function () {
-      return (() => {
-        const doc = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_common__WEBPACK_IMPORTED_MODULE_0__.DOCUMENT);
-        const appId = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.APP_ID);
-        const state = new TransferState();
-        state.store = retrieveTransferredState(doc, appId);
-        return state;
-      })();
-    },
+    factory: TransferState.ɵfac,
     providedIn: 'root'
   });
   return TransferState;
@@ -87707,7 +87808,7 @@ let DomSanitizerImpl = /*#__PURE__*/(() => {
 /**
  * @publicApi
  */
-const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_1__.Version('15.1.2');
+const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_1__.Version('15.2.2');
 
 /**
  * @module
@@ -87794,10 +87895,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "withEnabledBlockingInitialNavigation": () => (/* binding */ withEnabledBlockingInitialNavigation),
 /* harmony export */   "withHashLocation": () => (/* binding */ withHashLocation),
 /* harmony export */   "withInMemoryScrolling": () => (/* binding */ withInMemoryScrolling),
+/* harmony export */   "withNavigationErrorHandler": () => (/* binding */ withNavigationErrorHandler),
 /* harmony export */   "withPreloading": () => (/* binding */ withPreloading),
 /* harmony export */   "withRouterConfig": () => (/* binding */ withRouterConfig),
 /* harmony export */   "ɵEmptyOutletComponent": () => (/* binding */ ɵEmptyOutletComponent),
 /* harmony export */   "ɵROUTER_PROVIDERS": () => (/* binding */ ROUTER_PROVIDERS),
+/* harmony export */   "ɵafterNextNavigation": () => (/* binding */ afterNextNavigation),
 /* harmony export */   "ɵflatten": () => (/* binding */ flatten),
 /* harmony export */   "ɵwithPreloading": () => (/* binding */ withPreloading)
 /* harmony export */ });
@@ -87837,7 +87940,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! rxjs/operators */ 8189);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @angular/platform-browser */ 1481);
 /**
- * @license Angular v15.1.2
+ * @license Angular v15.2.2
  * (c) 2010-2022 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -89504,7 +89607,18 @@ let LegacyCreateUrlTree = /*#__PURE__*/(() => {
   class LegacyCreateUrlTree {
     createUrlTree(relativeTo, currentState, currentUrlTree, commands, queryParams, fragment) {
       const a = relativeTo || currentState.root;
-      return createUrlTree(a, currentUrlTree, commands, queryParams, fragment);
+      const tree = createUrlTree(a, currentUrlTree, commands, queryParams, fragment);
+      if (NG_DEV_MODE$9) {
+        const treeFromSnapshotStrategy = new CreateUrlTreeUsingSnapshot().createUrlTree(relativeTo, currentState, currentUrlTree, commands, queryParams, fragment);
+        if (treeFromSnapshotStrategy.toString() !== tree.toString()) {
+          let warningString = `The navigation to ${tree.toString()} will instead go to ${treeFromSnapshotStrategy.toString()} in an upcoming version of Angular.`;
+          if (!!relativeTo) {
+            warningString += ' `relativeTo` might need to be removed from the `UrlCreationOptions`.';
+          }
+          tree._warnIfUsedForNavigation = warningString;
+        }
+      }
+      return tree;
     }
   }
   LegacyCreateUrlTree.ɵfac = function LegacyCreateUrlTree_Factory(t) {
@@ -89532,9 +89646,6 @@ let CreateUrlTreeUsingSnapshot = /*#__PURE__*/(() => {
         // Note: the difference between having this fallback for invalid `ActivatedRoute` setups and
         // just throwing is ~500 test failures. Fixing all of those tests by hand is not feasible at
         // the moment.
-        if (NG_DEV_MODE$9) {
-          console.warn(`The ActivatedRoute has an invalid structure. This is likely due to an incomplete mock in tests.`);
-        }
         if (typeof commands[0] !== 'string' || !commands[0].startsWith('/')) {
           // Navigations that were absolute in the old way of creating UrlTrees
           // would still work because they wouldn't attempt to match the
@@ -90538,7 +90649,9 @@ function validateConfig(config, parentPath = '', requireStandaloneComponents = f
   }
 }
 function assertStandalone(fullPath, component) {
-  if (component && !(0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.isStandalone)(component)) {
+  if (component && (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵisNgModule"])(component)) {
+    throw new _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵRuntimeError"](4014 /* RuntimeErrorCode.INVALID_ROUTE_CONFIG */, `Invalid configuration of route '${fullPath}'. You are using 'loadComponent' with a module, ` + `but it must be used with standalone components. Use 'loadChildren' instead.`);
+  } else if (component && !(0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.isStandalone)(component)) {
     throw new _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵRuntimeError"](4014 /* RuntimeErrorCode.INVALID_ROUTE_CONFIG */, `Invalid configuration of route '${fullPath}'. The component must be standalone.`);
   }
 }
@@ -92858,6 +92971,8 @@ let Router = /*#__PURE__*/(() => {
        * A handler for navigation errors in this NgModule.
        *
        * @deprecated Subscribe to the `Router` events and watch for `NavigationError` instead.
+       *   `provideRouter` has the `withNavigationErrorHandler` feature to make this easier.
+       * @see `withNavigationErrorHandler`
        */
       this.errorHandler = this.options.errorHandler || defaultErrorHandler;
       /**
@@ -92866,8 +92981,8 @@ let Router = /*#__PURE__*/(() => {
        * The most common case is a `%` sign
        * that's not encoded and is not part of a percent encoded sequence.
        *
-       * @deprecated Configure this through `RouterModule.forRoot` instead:
-       *   `RouterModule.forRoot(routes, {malformedUriErrorHandler: myHandler})`
+       * @deprecated URI parsing errors should be handled in the `UrlSerializer`.
+       *
        * @see `RouterModule`
        */
       this.malformedUriErrorHandler = this.options.malformedUriErrorHandler || defaultMalformedUriErrorHandler;
@@ -93207,8 +93322,13 @@ let Router = /*#__PURE__*/(() => {
     navigateByUrl(url, extras = {
       skipLocationChange: false
     }) {
-      if (typeof ngDevMode === 'undefined' || ngDevMode && this.isNgZoneEnabled && !_angular_core__WEBPACK_IMPORTED_MODULE_0__.NgZone.isInAngularZone()) {
-        this.console.warn(`Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?`);
+      if (NG_DEV_MODE$2) {
+        if (this.isNgZoneEnabled && !_angular_core__WEBPACK_IMPORTED_MODULE_0__.NgZone.isInAngularZone()) {
+          this.console.warn(`Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?`);
+        }
+        if (url instanceof UrlTree && url._warnIfUsedForNavigation) {
+          this.console.warn(url._warnIfUsedForNavigation);
+        }
       }
       const urlTree = isUrlTree(url) ? url : this.parseUrl(url);
       const mergedTree = this.urlHandlingStrategy.merge(urlTree, this.rawUrlTree);
@@ -93567,8 +93687,8 @@ let RouterLink = /*#__PURE__*/(() => {
       this.commands = null;
       /** @internal */
       this.onChanges = new rxjs__WEBPACK_IMPORTED_MODULE_30__.Subject();
-      const tagName = el.nativeElement.tagName;
-      this.isAnchorElement = tagName === 'A' || tagName === 'AREA';
+      const tagName = el.nativeElement.tagName?.toLowerCase();
+      this.isAnchorElement = tagName === 'a' || tagName === 'area';
       if (this.isAnchorElement) {
         this.subscription = router.events.subscribe(s => {
           if (s instanceof NavigationEnd) {
@@ -94228,6 +94348,33 @@ let RouterScroller = /*#__PURE__*/(() => {
 /*#__PURE__*/(function () {
   (typeof ngDevMode === "undefined" || ngDevMode) && void 0;
 })();
+var NavigationResult = /*#__PURE__*/(() => {
+  NavigationResult = NavigationResult || {};
+  NavigationResult[NavigationResult["COMPLETE"] = 0] = "COMPLETE";
+  NavigationResult[NavigationResult["FAILED"] = 1] = "FAILED";
+  NavigationResult[NavigationResult["REDIRECTING"] = 2] = "REDIRECTING";
+  return NavigationResult;
+})();
+/**
+ * Performs the given action once the router finishes its next/current navigation.
+ *
+ * The navigation is considered complete under the following conditions:
+ * - `NavigationCancel` event emits and the code is not `NavigationCancellationCode.Redirect` or
+ * `NavigationCancellationCode.SupersededByNewNavigation`. In these cases, the
+ * redirecting/superseding navigation must finish.
+ * - `NavigationError`, `NavigationEnd`, or `NavigationSkipped` event emits
+ */
+function afterNextNavigation(router, action) {
+  router.events.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_10__.filter)(e => e instanceof NavigationEnd || e instanceof NavigationCancel || e instanceof NavigationError || e instanceof NavigationSkipped), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(e => {
+    if (e instanceof NavigationEnd || e instanceof NavigationSkipped) {
+      return NavigationResult.COMPLETE;
+    }
+    const redirecting = e instanceof NavigationCancel ? e.code === 0 /* NavigationCancellationCode.Redirect */ || e.code === 1 /* NavigationCancellationCode.SupersededByNewNavigation */ : false;
+    return redirecting ? NavigationResult.REDIRECTING : NavigationResult.FAILED;
+  }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_10__.filter)(result => result !== NavigationResult.REDIRECTING), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.take)(1)).subscribe(() => {
+    action();
+  });
+}
 const NG_DEV_MODE$1 = typeof ngDevMode === 'undefined' || ngDevMode;
 /**
  * Sets up providers necessary to enable `Router` functionality for the application.
@@ -94446,31 +94593,12 @@ function withEnabledBlockingInitialNavigation() {
     deps: [_angular_core__WEBPACK_IMPORTED_MODULE_0__.Injector],
     useFactory: injector => {
       const locationInitialized = injector.get(_angular_common__WEBPACK_IMPORTED_MODULE_33__.LOCATION_INITIALIZED, Promise.resolve());
-      /**
-       * Performs the given action once the router finishes its next/current navigation.
-       *
-       * If the navigation is canceled or errors without a redirect, the navigation is considered
-       * complete. If the `NavigationEnd` event emits, the navigation is also considered complete.
-       */
-      function afterNextNavigation(action) {
-        const router = injector.get(Router);
-        router.events.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_10__.filter)(e => e instanceof NavigationEnd || e instanceof NavigationCancel || e instanceof NavigationError), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(e => {
-          if (e instanceof NavigationEnd) {
-            // Navigation assumed to succeed if we get `ActivationStart`
-            return true;
-          }
-          const redirecting = e instanceof NavigationCancel ? e.code === 0 /* NavigationCancellationCode.Redirect */ || e.code === 1 /* NavigationCancellationCode.SupersededByNewNavigation */ : false;
-          return redirecting ? null : false;
-        }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_10__.filter)(result => result !== null), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.take)(1)).subscribe(() => {
-          action();
-        });
-      }
       return () => {
         return locationInitialized.then(() => {
           return new Promise(resolve => {
             const router = injector.get(Router);
             const bootstrapDone = injector.get(BOOTSTRAP_DONE);
-            afterNextNavigation(() => {
+            afterNextNavigation(router, () => {
               // Unblock APP_INITIALIZER in case the initial navigation was canceled or errored
               // without a redirect.
               resolve(true);
@@ -94681,6 +94809,50 @@ function withHashLocation() {
     useClass: _angular_common__WEBPACK_IMPORTED_MODULE_33__.HashLocationStrategy
   }];
   return routerFeature(5 /* RouterFeatureKind.RouterConfigurationFeature */, providers);
+}
+/**
+ * Subscribes to the Router's navigation events and calls the given function when a
+ * `NavigationError` happens.
+ *
+ * This function is run inside application's injection context so you can use the `inject` function.
+ *
+ * @usageNotes
+ *
+ * Basic example of how you can use the error handler option:
+ * ```
+ * const appRoutes: Routes = [];
+ * bootstrapApplication(AppComponent,
+ *   {
+ *     providers: [
+ *       provideRouter(appRoutes, withNavigationErrorHandler((e: NavigationError) =>
+ * inject(MyErrorTracker).trackError(e)))
+ *     ]
+ *   }
+ * );
+ * ```
+ *
+ * @see `NavigationError`
+ * @see `inject`
+ * @see `EnvironmentInjector#runInContext`
+ *
+ * @returns A set of providers for use with `provideRouter`.
+ *
+ * @publicApi
+ */
+function withNavigationErrorHandler(fn) {
+  const providers = [{
+    provide: _angular_core__WEBPACK_IMPORTED_MODULE_0__.ENVIRONMENT_INITIALIZER,
+    multi: true,
+    useValue: () => {
+      const injector = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_0__.EnvironmentInjector);
+      (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.inject)(Router).events.subscribe(e => {
+        if (e instanceof NavigationError) {
+          injector.runInContext(() => fn(e));
+        }
+      });
+    }
+  }];
+  return routerFeature(7 /* RouterFeatureKind.NavigationErrorHandlerFeature */, providers);
 }
 const NG_DEV_MODE = typeof ngDevMode === 'undefined' || ngDevMode;
 /**
@@ -94893,7 +95065,7 @@ function provideRouterInitializer() {
 /**
  * @publicApi
  */
-const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.1.2');
+const VERSION = /*#__PURE__*/new _angular_core__WEBPACK_IMPORTED_MODULE_0__.Version('15.2.2');
 
 /**
  * @module
