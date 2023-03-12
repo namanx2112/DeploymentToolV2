@@ -23,7 +23,7 @@ namespace DeploymentTool.Controller
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             var dal = new FranchiseDAL();
-            var result = dal.GetFranchises(inputFranchise, inputFranchise.nUserID);
+            var result = dal.GetFranchises(inputFranchise, (int)securityContext.nUserID);
 
             if (result == null)
             {
@@ -69,10 +69,10 @@ namespace DeploymentTool.Controller
         public HttpResponseMessage Update([FromBody] Franchise franchise)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            if (!ModelState.IsValid)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            //}
             if (securityContext == null)
                 throw new HttpRequestValidationException("Exception while creating Security Context");
             var franchiseDAL = new FranchiseDAL();
@@ -95,15 +95,12 @@ namespace DeploymentTool.Controller
         public HttpResponseMessage CreateFranchise([FromBody] Franchise franchise)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            if (!ModelState.IsValid)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            //}
             if (securityContext == null)
-                throw new HttpRequestValidationException("Exception while creating Security Context"); if (!ModelState.IsValid)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
+                throw new HttpRequestValidationException("Exception while creating Security Context"); 
 
 
             var franchiseDAL = new FranchiseDAL();

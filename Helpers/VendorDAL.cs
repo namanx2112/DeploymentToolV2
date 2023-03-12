@@ -23,8 +23,8 @@ namespace DeploymentTool.Helpers
                 new SqlParameter("@nTechComponentID", inputvendor.nTechComponentID),
                 new SqlParameter("@tVendorName", inputvendor.tVendorName),
                 new SqlParameter("@nUserID", nUserID),
-                new SqlParameter("@nPageSize", inputvendor.nPageSize),
-                new SqlParameter("@nPageNumber", inputvendor.nPageNumber)
+                new SqlParameter("@PageSize", inputvendor.nPageSize),
+                new SqlParameter("@PageNumber", inputvendor.nPageNumber)
                 };
             }
             else
@@ -56,7 +56,7 @@ namespace DeploymentTool.Helpers
                     vendor.nCreatedBy = reader["nCreatedBy"] is DBNull ? 0 : (int)reader["nCreatedBy"];
                     vendor.nBrandID = reader["aBrandID"] is DBNull ? 0 : (int)reader["aBrandID"];
                     vendor.nTechComponentID = reader["aTechComponentID"] is DBNull ? 0 : (int)reader["aTechComponentID"];
-                    vendor.nUpdatedBy = reader["nUpdateBy"] is DBNull ? 0 : (int)reader["nUpdateBy"];
+                    vendor.nUpdatedBy = reader["nUpdatedBy"] is DBNull ? 0 : (int)reader["nUpdatedBy"];
                     vendor.dtCreatedOn = reader["dtCreatedOn"] is DBNull ? DateTime.MinValue : (DateTime)reader["dtCreatedOn"];
                     vendor.dtUpdatedOn = reader["dtUpdatedOn"] is DBNull ? DateTime.MinValue : (DateTime)reader["dtUpdatedOn"];
                     vendor.bDeleted = (bool)reader["bDeleted"];

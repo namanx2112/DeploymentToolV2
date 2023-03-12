@@ -9,18 +9,29 @@
     width: 100%;
     line-height: 35px;
     float: left;
-    font-size: 15px;
-    font-variant: small-caps;
+    font-size: 15px;    
     color: #444;
     font-weight: bold;
 }
+.mat-icon{
+    height: auto;
+    line-height: 16px;
+    cursor: pointer;
+}
 .SearchPart{
-    height: calc(30% - 90px);
+    height: calc(30% - 40px);
     width: 100%;
     float: left;
+    overflow: auto;
+}
+.newEditPart{
+    height: calc(100% - 40px);
+    width: 100%;
+    float: left;
+    overflow: auto;
 }
 .tablePart{
-    height: calc(70% - 90px);
+    height: calc(70% - 40px);
     width: 100%;
     float: left;
     overflow: auto;

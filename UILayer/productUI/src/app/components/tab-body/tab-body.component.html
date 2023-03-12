@@ -1,13 +1,19 @@
 <div class="tabsBody">
-  <div class="header">{{curTab.tab_header}}</div>
-  <div class="SearchPart">
-    <app-controls [fields]="curTab.search_fields" [controlValues]="searchControlVals" [SubmitLabel]="SubmitLabel" (onSubmit)="onSubmit($event)"></app-controls>
+  <div class="header"><mat-icon *ngIf="secondPart == 'newEdit'" class="tIcon"
+      (click)="secondPart = 'table'">arrow_back_ios</mat-icon>{{curTab.tab_header}}</div>
+  <div class="SearchPart" *ngIf="secondPart != 'newEdit'">
+    <app-controls [fields]="curTab.search_fields" [controlValues]="searchControlVals" [SubmitLabel]="SubmitLabel"
+      (onSubmit)="onSubmit($event)"></app-controls>
     <button mat-raised-button class="searchButton" (click)="OpenNew()">
       New
     </button>
   </div>
-  <div class="tablePart">
-      <app-table *ngIf="secondPart == 'table'" [curTab]="curTab" [searchFields]="searchFields" (rowClicked)="rowClicked($event)"></app-table>
-      <app-new-edit-object *ngIf="secondPart == 'newEdit'" [controlValues]="curControlVals" [curTab]="curTab" (returnBack)="returnBack($event)"></app-new-edit-object>
+  <div class="tablePart" *ngIf="secondPart != 'newEdit'">
+    <app-table *ngIf="secondPart == 'table'" [curTab]="curTab" [searchFields]="searchFields"
+      (rowClicked)="rowClicked($event)"></app-table>
+  </div>
+  <div class="newEditPart" *ngIf="secondPart == 'newEdit'">
+    <app-new-edit-object [controlValues]="curControlVals" [curTab]="curTab"
+      (returnBack)="returnBack($event)"></app-new-edit-object>
   </div>
 </div>

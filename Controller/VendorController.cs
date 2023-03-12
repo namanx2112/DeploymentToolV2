@@ -42,15 +42,15 @@ namespace DeploymentTool.Controller
         public HttpResponseMessage CreateVendor([FromBody] Vendor vendor)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            if (!ModelState.IsValid)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
-            if (securityContext == null)
-                throw new HttpRequestValidationException("Exception while creating Security Context"); if (!ModelState.IsValid)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            //}
+            //if (securityContext == null)
+            //    throw new HttpRequestValidationException("Exception while creating Security Context"); if (!ModelState.IsValid)
+            //{
+            //    return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            //}
 
             int nuserid = 1;
             var vendorDAL = new VendorDAL();
@@ -69,12 +69,12 @@ namespace DeploymentTool.Controller
         public HttpResponseMessage Update([FromBody] Vendor vendor)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            if (!ModelState.IsValid)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
-            if (securityContext == null)
-                throw new HttpRequestValidationException("Exception while creating Security Context");
+            //if (!ModelState.IsValid)
+            //{
+            //    return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            //}
+            //if (securityContext == null)
+            //    throw new HttpRequestValidationException("Exception while creating Security Context");
             var vendorDAL = new VendorDAL();
 
             vendor.nUpdatedBy = (int)securityContext.nUserID;

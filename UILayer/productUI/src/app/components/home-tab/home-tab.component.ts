@@ -105,17 +105,17 @@ export class HomeTabComponent {
               options: [
                 {
                   optionDisplayName: "Admin",
-                  optionIndex: 0,
+                  optionIndex: "Admin",
                   optionOrder: 1
                 },
                 {
                   optionDisplayName: "User",
-                  optionIndex: 1,
+                  optionIndex: "Admin",
                   optionOrder: 2
                 },
                 {
                   optionDisplayName: "Vendor",
-                  optionIndex: 2,
+                  optionIndex: "Admin",
                   optionOrder: 3
                 }
               ]
@@ -199,23 +199,7 @@ export class HomeTabComponent {
               validator: [Validators.required],
               mandatory: false,
               hidden: false,
-              options: [
-                {
-                  optionDisplayName: "India",
-                  optionIndex: 0,
-                  optionOrder: 1
-                },
-                {
-                  optionDisplayName: "USA",
-                  optionIndex: 1,
-                  optionOrder: 2
-                },
-                {
-                  optionDisplayName: "UAE",
-                  optionIndex: 2,
-                  optionOrder: 3
-                }
-              ]
+              options: []
             },
             {
               field_name: "Brands Established",

@@ -909,9 +909,12 @@
     <Compile Include="Controller\AttachmentController.cs" />
     <Compile Include="Controller\BrandController.cs" />
     <Compile Include="Controller\FranchiseController.cs" />
+    <Compile Include="Controller\MyApiContext.cs" />
     <Compile Include="Controller\StoreScreenConfigController.cs" />
     <Compile Include="Controller\TableController.cs" />
+    <Compile Include="Controller\TechComponentController.cs" />
     <Compile Include="Controller\TokenController.cs" />
+    <Compile Include="Controller\VendorController.cs" />
     <Compile Include="Filters\AddChallengeOnUnauthorizedResult.cs" />
     <Compile Include="Filters\AuthenticationFailureResult.cs" />
     <Compile Include="Filters\JwtAuthenticationAttribute.cs" />
@@ -925,16 +928,25 @@
     <Compile Include="Helpers\DBHelper.cs" />
     <Compile Include="Helpers\FranchiseDAL.cs" />
     <Compile Include="Helpers\StoreDAL.cs" />
+    <Compile Include="Helpers\TechComponentDAL.cs" />
+    <Compile Include="Helpers\VendorDAL.cs" />
     <Compile Include="Model\Attachment.cs" />
     <Compile Include="Model\Brand.cs" />
     <Compile Include="Model\Franchise.cs" />
+    <Compile Include="Model\MyApiContext.cs" />
     <Compile Include="Model\Params.cs" />
+    <Compile Include="Model\Project.cs" />
+    <Compile Include="Model\ProjectComponent.cs" />
+    <Compile Include="Model\ProjectComponentUpload.cs" />
     <Compile Include="Model\SearchField.cs" />
+    <Compile Include="Model\SecurityContext.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Model\StoreFieldConfig.cs" />
     <Compile Include="Model\StoreScreenConfiguration.cs" />
     <Compile Include="Model\TableFields.cs" />
+    <Compile Include="Model\TechComponent.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

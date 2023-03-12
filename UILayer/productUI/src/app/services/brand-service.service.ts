@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { Fields, FieldType } from '../interfaces/home-tab';
 import { BrandModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,7 @@ import { AuthService } from './auth.service';
 export class BrandServiceService {
 
   configUrl: any;
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
     this.configUrl = authService.getConfigUrl();
   }
 
@@ -21,8 +24,211 @@ export class BrandServiceService {
     return this.http.post<BrandModel>(this.configUrl + "Brand/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetBrands(request: BrandModel | null){
+  GetBrands(request: BrandModel | null) {
     return this.http.post<BrandModel[]>(this.configUrl + "Brand/GetBrands", request, { headers: this.authService.getHttpHeaders() });
+  }
+
+  GetBrandSearchFields(): Fields[] {
+    let fields = [{
+      field_name: "Brands Name",
+      fieldUniqeName: "tBrandName",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Brands Name",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },
+    {
+      field_name: "Page Size",
+      fieldUniqeName: "nPageSize",
+      defaultVal: "10",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter Page Size",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },
+    {
+      field_name: "Page Number",
+      fieldUniqeName: "nPageNumber",
+      defaultVal: "1",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter Page Number",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    }]
+    return fields;
+  }
+
+  GetBrandFields(): Fields[] {
+    let fields = [
+      {
+        field_name: "Brand Id",
+        fieldUniqeName: "aBrandId",
+        defaultVal: "",
+        readOnly: true,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Brands Id",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "Brands Name",
+        fieldUniqeName: "tBrandName",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Brands Name",
+        validator: [Validators.required],
+        mandatory: true,
+        hidden: false
+      },
+      {
+        field_name: "Brands Description",
+        fieldUniqeName: "tBrandDescription",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Brands Description",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Brands Website",
+        fieldUniqeName: "tBrandWebsite",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Brands Website",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Brands Country",
+        fieldUniqeName: "tBrandCountry",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Brands Country",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false,
+        options: this.commonService.GetCountryDropdowns() 
+      },
+      {
+        field_name: "Brands Established",
+        fieldUniqeName: "tBrandEstablished",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Brands Establishment date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Brands Category",
+        fieldUniqeName: "tBrandCategory",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Brands Category",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Brands Contact",
+        fieldUniqeName: "tBrandContact",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Brands Contact",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Brands Attachment Id",
+        fieldUniqeName: "nBrandLogoAttachmentID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Brands Attachment",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "Brands Created By",
+        fieldUniqeName: "nCreatedBy",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Brands Created By",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "Brands Updated by",
+        fieldUniqeName: "nUpdateBy",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Brands Updated by",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "Brands Created on",
+        fieldUniqeName: "dtCreatedOn",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Brands Created on",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "Brands Updated on",
+        fieldUniqeName: "dtUpdatedOn",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Brands Updated on",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }
+    ];
+    return fields;
   }
 
   GetAllBrands(): BrandModel[] {

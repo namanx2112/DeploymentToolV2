@@ -82,20 +82,29 @@ namespace DeploymentTool.Helpers
             }
             return franchiseID;
         }
-        public List<Franchise> GetFranchises(Franchise objFranchises, int UserID)
+        public List<Franchise> GetFranchises(Franchise objFranchises, int nUserID)
         {
-            var parameters = new SqlParameter[]
+
+            SqlParameter[] parameters = null;
+            if (objFranchises != null)
             {
+                parameters = new SqlParameter[]
+                {
                 new SqlParameter("@nFranchiseId", objFranchises.aFranchiseId),
                 new SqlParameter("@tFranchiseName", objFranchises.tFranchiseName),
                 new SqlParameter("@nBrandID", objFranchises.nBrandId),
                 new SqlParameter("@tFranchiseEmail", objFranchises.tFranchiseEmail),
                 new SqlParameter("@tFranchiseOwner", objFranchises.tFranchiseOwner),
-                new SqlParameter("@tFranchisePhone", objFranchises.tFranchisePhone),               
-                new SqlParameter("@nUserID", UserID),
+                new SqlParameter("@tFranchisePhone", objFranchises.tFranchisePhone),
+                new SqlParameter("@nUserID", nUserID),
                 new SqlParameter("@nPageSize", objFranchises.nPageSize),
                 new SqlParameter("@nPageNumber", objFranchises.nPageNumber)
-            };
+                };
+            }
+            else
+            {
+                parameters = new SqlParameter[] { new SqlParameter("@nUserID", nUserID) };
+            }
 
             return DBHelper.ExecuteProcedure<List<Franchise>>("sprocFranchiseGet", reader =>
             {
@@ -122,7 +131,7 @@ namespace DeploymentTool.Helpers
                     franchise.nUpdateBy = reader["nUpdateBy"] is DBNull ? 0 : (int)reader["nUpdateBy"];
                     franchise.dtCreatedOn = reader["dtCreatedOn"] is DBNull ? DateTime.MinValue : (DateTime)reader["dtCreatedOn"];
                     franchise.dtUpdatedOn = reader["dtUpdatedOn"] is DBNull ? DateTime.MinValue : (DateTime)reader["dtUpdatedOn"];
-                    franchise.bDeleted = (bool)reader["bDeleted"];
+                    franchise.bDeleted = reader["bDeleted"] is DBNull ? false: (bool)reader["bDeleted"];
                     franchises.Add(franchise);
                 }
 

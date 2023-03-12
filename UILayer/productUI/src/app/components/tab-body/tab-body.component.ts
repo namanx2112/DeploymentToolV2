@@ -26,6 +26,7 @@ export class TabBodyComponent {
   }
 
   OpenNew() {
+    this.curControlVals = {};
     this.secondPart = "newEdit";
   }
 

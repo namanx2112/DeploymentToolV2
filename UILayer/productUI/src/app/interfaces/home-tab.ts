@@ -36,7 +36,7 @@ export enum FieldType{
 
 export interface OptionType{
     optionDisplayName: string,
-    optionIndex: number,
+    optionIndex: string,
     optionOrder: number
 }
 

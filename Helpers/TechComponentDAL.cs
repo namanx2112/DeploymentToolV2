@@ -55,7 +55,12 @@ namespace DeploymentTool.Helpers
             }
             else
             {
-                parameters = new SqlParameter[] { new SqlParameter("@nUserID", nUserID) };
+                parameters = new SqlParameter[]
+                {
+
+                new SqlParameter("@nTechComponentID", null),
+                new SqlParameter("@nBrandID", null)
+                };
             }
 
             return DBHelper.ExecuteProcedure<List<TechComponent>>("sprocTechComponentGet", reader =>
