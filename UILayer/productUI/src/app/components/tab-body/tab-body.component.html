@@ -1,0 +1,13 @@
+<div class="tabsBody">
+  <div class="header">{{curTab.tab_header}}</div>
+  <div class="SearchPart">
+    <app-controls [fields]="curTab.search_fields" [controlValues]="searchControlVals" [SubmitLabel]="SubmitLabel" (onSubmit)="onSubmit($event)"></app-controls>
+    <button mat-raised-button class="searchButton" (click)="OpenNew()">
+      New
+    </button>
+  </div>
+  <div class="tablePart">
+      <app-table *ngIf="secondPart == 'table'" [curTab]="curTab" [searchFields]="searchFields" (rowClicked)="rowClicked($event)"></app-table>
+      <app-new-edit-object *ngIf="secondPart == 'newEdit'" [controlValues]="curControlVals" [curTab]="curTab" (returnBack)="returnBack($event)"></app-new-edit-object>
+  </div>
+</div>

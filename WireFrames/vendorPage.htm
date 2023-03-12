@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="images/csg_logo.png" type="image/gif" sizes="16x16">
+    <link href="bootstrap-3.3.7/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-3.1.1.js" type="text/javascript"></script>
+    <script src="bootstrap-3.3.7/dist/js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/jquery.imgzoom.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <span class="closebtn1" style="cursor: pointer">
+            <i class="glyphicon glyphicon-cog"></i>
+        </span>
+        <a href="#"><b class="btn btn-warning  btn-block">Themes</b></a>
+        <br />
+        <a href="#" id="default_1">Default theme </a>
+        <a href="#" id="default_2">Theme 1 </a>
+        <a href="#" id="default_3">Theme 3</a> 
+        <a href="#">Customize theme :
+            <input type="color" id="pickColorTheme" />
+        </a>
+        <a href="#">
+            <button id="apply" class="btn btn-primary">Apply</button>
+        </a>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+    
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Inspire Brands</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+            <li><a class="active" href="Home.htm">Home</a></li>
+            <li><a href="index.htm">Add Store</a></li>
+            
+            <li><a href="#">Franchise</a></li>
+            
+            <li><a href="vendorPage.htm">Vendor</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="reModelStore.htm">Re-Model</a></li>
+          </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login.htm"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+      </ul>
+    </div>
+  </div>
+    </nav>
+    <br />
+    <br />
+    <br />
+    <br />
+    <span class="settings" style="cursor: pointer"><i class="settingCog glyphicon glyphicon-cog">
+    </i></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-6">
+                <input type="text" class="form-control" placeholder="Search............." />
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <button class="btn btn-danger">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </div>
+            <!-- <div class="col-md-2 col-sm-2 col-xs-4">
+                <a class="btn btn-warning btn-block">Upload File &nbsp;&nbsp;<i class="glyphicon glyphicon-cloud-upload">
+                </i> </a>
+            </div> -->
+        </div>
+        <br />
+        <div class=" item-header ">
+            WELCOME TO THE VENDOR PAGE</div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">Vendor type<br>
+                    <select class="form-select form-select-sm mt-3 form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </select>
+                </div>
+                <div class="col-md-4">Address<br>
+                    <input class="form-control"/></div>
+                    <div class="col-md-4">Service<br>
+                        <select class="form-select form-select-sm mt-3 form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </select></div>
+            </div>
+            <div class="row">
+                
+                <div class="col-md-4">
+                    Start Date<br>
+                    <input class="form-control"/>
+                </div>
+                <div class="col-md-4">
+                    End Date<br>
+                    <input class="form-control"/>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    Status<br>
+                    <select class="form-select form-select-sm mt-3 form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </select>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-danger">
+                        Cancel <i class="glyphicon glyphicon-floppy-remove"></i>
+                    </button>
+                    <button class="btn btn-warning">
+                        Submit <i class="glyphicon glyphicon-floppy-saved"></i>
+                    </button>
+                </div>
+            </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <pre>
+      <span class="h5 text-bold badge">Address 1</span>
+      <span class="h5 text-bold">Company Name</span>
+      Area Name, Cross #9,
+      Street name, 2nd stage
+      Bangalore, 
+      India.
+      </pre>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <pre>
+      <span class="h5 text-bold badge">Address 2</span>
+      <span class="h5 text-bold">Company Name</span>
+      Area Name, Cross #19,
+      Street name, 3nd stage
+      Bangalore,
+      India.
+      </pre>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <pre>
+      <span class="h5 text-bold badge">Contact</span>
+      <i class="glyphicon glyphicon-envelope"></i> : inspirebrands.com
+      <i class="glyphicon glyphicon-phone"></i> : xxxxxxxxx
+
+      <i class="glyphicon glyphicon-map-marker"></i> : Bangalore, India
+      </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright text-center small">
+        Designed & Developed by xxxxxx @ 2023<br />
+        <br />
+    </div>
+    <!-----------------------------------------Popup Image Desc----------------------------------------------------------->
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;</button>
+                    <h4 class="modal-title">
+                        Dress Name</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-4 dressimg ">
+                            <div class="imgBox_zoom">
+                                <img src="images/men/m1.png" class="popupimg" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-8 text-left">
+                            <b>Specifications</b>
+                            <hr />
+                            <table class="desc">
+                                <tr>
+                                    <td>
+                                        Style Code
+                                    </td>
+                                    <td>
+                                        : 11GREYWOLVERINE
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Sales Package
+                                    </td>
+                                    <td>
+                                        : 1 Sweatshirt
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Occasion
+                                    </td>
+                                    <td>
+                                        : Casual
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Neck
+                                    </td>
+                                    <td>
+                                        : Turtle
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Sleeve
+                                    </td>
+                                    <td>
+                                        : Full sleev
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Hooded
+                                    </td>
+                                    <td>
+                                        : Yes
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Reversible
+                                    </td>
+                                    <td>
+                                        : No
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">
+                        Price : $ 90</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        ADD TO CART <span class="glyphicon glyphicon-shopping-cart"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!----------------------------------------------------------------------------------------------------->
+</body>
+<script type="text/javascript">
+    $('.imgBox_zoom').imgZoom({
+        boxWidth: 300,
+        boxHeight: 300,
+        marginLeft: 2,
+        origin: 'data-origin'
+    });
+</script>
+</html>

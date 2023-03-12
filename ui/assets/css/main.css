@@ -1,0 +1,210 @@
+﻿/*!
+ * Author:Chandradhar S G
+ * Bangalore,India
+ * Date: 3-2-2017
+ */
+body
+{
+    background-color: #f3f3f3;
+    _background: url(../images/offerImages/header-bg.png);
+    font-family: Arial;
+    font-size: 12px;
+}
+.text-bold
+{
+    font-weight: bold;
+}
+pre
+{
+    overflow: hidden;
+}
+div
+{
+    _border: 1px solid silver;
+}
+.dress
+{
+    max-height: 200px;
+    width: auto;
+}
+.slidebg
+{
+    _background: #D62225;
+    _background: #f5f5f5;
+    padding-top: 20px;
+    _margin-left: -15px;
+}
+.offerimg
+{
+    margin-top: 30%;
+    width: 100%;
+}
+.arrowmark
+{
+    _background: white;
+    padding: 0px;
+    width: 20px;
+}
+.imgBox
+{
+    border: 1px solid silver;
+    text-align: center;
+}
+
+/*---------------------------------right nav bar-----------------------------------------------*/
+.settings
+{
+    height: auto;
+    color: White;
+    padding: 5px;
+    border-top-left-radius: 20%;
+    border-bottom-left-radius: 20%;
+    position: fixed;
+    z-index: 1;
+    top: 25%;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 10px;
+    font-size: 20px;
+}
+.settingCog
+{
+    transition: 1s;
+}
+.settingCog:hover
+{
+    transform: rotate(360deg);
+}
+.closebtn1
+{
+    display: none;
+    height: auto;
+    font-size: 20px;
+    color: White;
+    padding: 5px;
+    border-top-left-radius: 20%;
+    border-bottom-left-radius: 20%;
+    position: fixed;
+    z-index: 1;
+    top: 25%;
+    right: 0px;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+}
+
+.sidenav
+{
+    height: 290px;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 25%;
+    right: 0;
+    background-color: #111;
+    overflow: hidden;
+    transition: 0.5s;
+    padding: 20px 0px;
+}
+
+.sidenav a
+{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 12px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.sidenav a:hover, .offcanvas a:focus
+{
+    color: #f1f1f1;
+    font-size: 12px;
+}
+
+@media screen and (max-height: 450px)
+{
+    .sidenav
+    {
+        padding-top: 15px;
+    }
+    .sidenav a
+    {
+        font-size: 18px;
+    }
+}
+
+/*---------------------------------/right nav bar-----------------------------------------------*/
+.item-header
+{
+    background: #444;
+    padding: 10px;
+    width: 100%;
+    font-size: 15px;
+    font-variant: small-caps;
+    color: White;
+    font-weight: bold;
+}
+.footer
+{
+    background: #444;
+    padding: 5px;
+    color: #aaaaaa;
+    font-size: 12px;
+}
+.copyright
+{
+    background: #333333;
+    padding-top: 15px;
+    color: #aaaaaa;
+}
+.popupimg
+{
+    height: 250px;
+}
+.full-height{
+    min-height: 320px;
+}
+.desc td
+{
+    padding: 5px 0px;
+    word-wrap: break-word;
+}
+.white{
+    color: white;
+}
+.more
+{
+    font-size: 14px;
+}
+.row{
+    margin-bottom: 20px;
+}
+h5{
+    font-weight: bold;
+}
+.pr-0{
+    padding-right: 0px;
+}
+.pl-0{
+    padding-left: 0px;
+}
+.tab-content{
+    padding:15px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    min-height: 100px;
+}
+@media only screen and (max-width: 420px) 
+{
+    .dress, .popupimg
+    {
+        height:120px
+    }
+} 

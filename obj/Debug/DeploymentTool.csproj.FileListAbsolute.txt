@@ -1,0 +1,438 @@
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\DeploymentTool.dll.config
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\DeploymentTool.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\DeploymentTool.pdb
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\csc.exe
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\csc.exe.config
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\csc.rsp
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\csi.exe
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\csi.exe.config
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\csi.rsp
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.AppContext.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Console.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.IO.Compression.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Net.Http.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Net.Sockets.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.ValueTuple.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Xml.XPath.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\vbc.exe
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\vbc.exe.config
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\vbc.rsp
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\VBCSCompiler.exe
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\obj\Debug\DeploymentTool.csproj.CopyComplete
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\obj\Debug\DeploymentTool.dll
+C:\Users\vikram Rangaswamy\source\repos\DeploymentTool\obj\Debug\DeploymentTool.pdb
+E:\DeploymentTool\bin\DeploymentTool.dll.config
+E:\DeploymentTool\bin\DeploymentTool.dll
+E:\DeploymentTool\bin\DeploymentTool.pdb
+E:\DeploymentTool\bin\roslyn\csc.exe
+E:\DeploymentTool\bin\roslyn\csc.exe.config
+E:\DeploymentTool\bin\roslyn\csc.rsp
+E:\DeploymentTool\bin\roslyn\csi.exe
+E:\DeploymentTool\bin\roslyn\csi.exe.config
+E:\DeploymentTool\bin\roslyn\csi.rsp
+E:\DeploymentTool\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\DeploymentTool\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\DeploymentTool\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\DeploymentTool\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\DeploymentTool\bin\roslyn\Microsoft.Managed.Core.targets
+E:\DeploymentTool\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\DeploymentTool\bin\roslyn\Microsoft.Win32.Primitives.dll
+E:\DeploymentTool\bin\roslyn\System.AppContext.dll
+E:\DeploymentTool\bin\roslyn\System.Collections.Immutable.dll
+E:\DeploymentTool\bin\roslyn\System.Console.dll
+E:\DeploymentTool\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+E:\DeploymentTool\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\DeploymentTool\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\DeploymentTool\bin\roslyn\System.Globalization.Calendars.dll
+E:\DeploymentTool\bin\roslyn\System.IO.Compression.dll
+E:\DeploymentTool\bin\roslyn\System.IO.Compression.ZipFile.dll
+E:\DeploymentTool\bin\roslyn\System.IO.FileSystem.dll
+E:\DeploymentTool\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\DeploymentTool\bin\roslyn\System.Net.Http.dll
+E:\DeploymentTool\bin\roslyn\System.Net.Sockets.dll
+E:\DeploymentTool\bin\roslyn\System.Reflection.Metadata.dll
+E:\DeploymentTool\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+E:\DeploymentTool\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\DeploymentTool\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\DeploymentTool\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\DeploymentTool\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\DeploymentTool\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\DeploymentTool\bin\roslyn\System.Threading.Tasks.Extensions.dll
+E:\DeploymentTool\bin\roslyn\System.ValueTuple.dll
+E:\DeploymentTool\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\DeploymentTool\bin\roslyn\System.Xml.XmlDocument.dll
+E:\DeploymentTool\bin\roslyn\System.Xml.XPath.dll
+E:\DeploymentTool\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\DeploymentTool\bin\roslyn\vbc.exe
+E:\DeploymentTool\bin\roslyn\vbc.exe.config
+E:\DeploymentTool\bin\roslyn\vbc.rsp
+E:\DeploymentTool\bin\roslyn\VBCSCompiler.exe
+E:\DeploymentTool\bin\roslyn\VBCSCompiler.exe.config
+E:\DeploymentTool\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\DeploymentTool\bin\Newtonsoft.Json.dll
+E:\DeploymentTool\bin\System.Net.Http.Formatting.dll
+E:\DeploymentTool\bin\System.Web.Http.dll
+E:\DeploymentTool\bin\System.Web.Http.WebHost.dll
+E:\DeploymentTool\bin\Newtonsoft.Json.xml
+E:\DeploymentTool\bin\System.Net.Http.Formatting.xml
+E:\DeploymentTool\bin\System.Web.Http.xml
+E:\DeploymentTool\bin\System.Web.Http.WebHost.xml
+E:\DeploymentTool\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\DeploymentTool\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
+E:\DeploymentTool\obj\Debug\DeploymentTool.csproj.CopyComplete
+E:\DeploymentTool\obj\Debug\DeploymentTool.dll
+E:\DeploymentTool\obj\Debug\DeploymentTool.pdb
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\DeploymentTool.dll.config
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\DeploymentTool.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\DeploymentTool.pdb
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\csc.exe
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\csc.exe.config
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\csc.rsp
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\csi.exe
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\csi.exe.config
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\csi.rsp
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.AppContext.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Console.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.IO.Compression.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Net.Http.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Net.Sockets.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.ValueTuple.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\vbc.exe
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\vbc.exe.config
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\vbc.rsp
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\VBCSCompiler.exe
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Newtonsoft.Json.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Net.Http.Formatting.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Web.Http.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Web.Http.WebHost.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Newtonsoft.Json.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Net.Http.Formatting.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Web.Http.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Web.Http.WebHost.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\obj\Debug\DeploymentTool.csproj.CopyComplete
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\obj\Debug\DeploymentTool.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\obj\Debug\DeploymentTool.pdb
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Buffers.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Memory.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Numerics.Vectors.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Text.Encodings.Web.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Text.Json.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.ValueTuple.dll
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.IdentityModel.Abstractions.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Buffers.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Memory.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Numerics.Vectors.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Text.Encodings.Web.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Text.Json.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\Roshan\source\repos\namanx2112\DeploymentTool\bin\System.ValueTuple.xml
+C:\CodeRepo\bin\DeploymentTool.dll.config
+C:\CodeRepo\bin\DeploymentTool.dll
+C:\CodeRepo\bin\DeploymentTool.pdb
+C:\CodeRepo\bin\roslyn\csc.exe
+C:\CodeRepo\bin\roslyn\csc.exe.config
+C:\CodeRepo\bin\roslyn\csc.rsp
+C:\CodeRepo\bin\roslyn\csi.exe
+C:\CodeRepo\bin\roslyn\csi.exe.config
+C:\CodeRepo\bin\roslyn\csi.rsp
+C:\CodeRepo\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\CodeRepo\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\CodeRepo\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\CodeRepo\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\CodeRepo\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\CodeRepo\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\CodeRepo\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\CodeRepo\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\CodeRepo\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\CodeRepo\bin\roslyn\Microsoft.Managed.Core.targets
+C:\CodeRepo\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\CodeRepo\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\CodeRepo\bin\roslyn\System.AppContext.dll
+C:\CodeRepo\bin\roslyn\System.Collections.Immutable.dll
+C:\CodeRepo\bin\roslyn\System.Console.dll
+C:\CodeRepo\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\CodeRepo\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\CodeRepo\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\CodeRepo\bin\roslyn\System.Globalization.Calendars.dll
+C:\CodeRepo\bin\roslyn\System.IO.Compression.dll
+C:\CodeRepo\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\CodeRepo\bin\roslyn\System.IO.FileSystem.dll
+C:\CodeRepo\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\CodeRepo\bin\roslyn\System.Net.Http.dll
+C:\CodeRepo\bin\roslyn\System.Net.Sockets.dll
+C:\CodeRepo\bin\roslyn\System.Reflection.Metadata.dll
+C:\CodeRepo\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\CodeRepo\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\CodeRepo\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\CodeRepo\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\CodeRepo\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\CodeRepo\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\CodeRepo\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\CodeRepo\bin\roslyn\System.ValueTuple.dll
+C:\CodeRepo\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\CodeRepo\bin\roslyn\System.Xml.XmlDocument.dll
+C:\CodeRepo\bin\roslyn\System.Xml.XPath.dll
+C:\CodeRepo\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\CodeRepo\bin\roslyn\vbc.exe
+C:\CodeRepo\bin\roslyn\vbc.exe.config
+C:\CodeRepo\bin\roslyn\vbc.rsp
+C:\CodeRepo\bin\roslyn\VBCSCompiler.exe
+C:\CodeRepo\bin\roslyn\VBCSCompiler.exe.config
+C:\CodeRepo\bin\Microsoft.Bcl.AsyncInterfaces.dll
+C:\CodeRepo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\CodeRepo\bin\Microsoft.IdentityModel.Abstractions.dll
+C:\CodeRepo\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\CodeRepo\bin\Microsoft.IdentityModel.Logging.dll
+C:\CodeRepo\bin\Microsoft.IdentityModel.Tokens.dll
+C:\CodeRepo\bin\Newtonsoft.Json.dll
+C:\CodeRepo\bin\System.Buffers.dll
+C:\CodeRepo\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\CodeRepo\bin\System.Memory.dll
+C:\CodeRepo\bin\System.Net.Http.Formatting.dll
+C:\CodeRepo\bin\System.Numerics.Vectors.dll
+C:\CodeRepo\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\CodeRepo\bin\System.Text.Encodings.Web.dll
+C:\CodeRepo\bin\System.Text.Json.dll
+C:\CodeRepo\bin\System.Threading.Tasks.Extensions.dll
+C:\CodeRepo\bin\System.ValueTuple.dll
+C:\CodeRepo\bin\System.Web.Http.dll
+C:\CodeRepo\bin\System.Web.Http.WebHost.dll
+C:\CodeRepo\bin\Microsoft.Bcl.AsyncInterfaces.xml
+C:\CodeRepo\bin\Microsoft.IdentityModel.Abstractions.xml
+C:\CodeRepo\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\CodeRepo\bin\Microsoft.IdentityModel.Logging.xml
+C:\CodeRepo\bin\Microsoft.IdentityModel.Tokens.xml
+C:\CodeRepo\bin\Newtonsoft.Json.xml
+C:\CodeRepo\bin\System.Buffers.xml
+C:\CodeRepo\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\CodeRepo\bin\System.Memory.xml
+C:\CodeRepo\bin\System.Net.Http.Formatting.xml
+C:\CodeRepo\bin\System.Numerics.Vectors.xml
+C:\CodeRepo\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\CodeRepo\bin\System.Text.Encodings.Web.xml
+C:\CodeRepo\bin\System.Text.Json.xml
+C:\CodeRepo\bin\System.Threading.Tasks.Extensions.xml
+C:\CodeRepo\bin\System.ValueTuple.xml
+C:\CodeRepo\bin\System.Web.Http.xml
+C:\CodeRepo\bin\System.Web.Http.WebHost.xml
+C:\CodeRepo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\CodeRepo\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
+C:\CodeRepo\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
+C:\CodeRepo\obj\Debug\DeploymentTool.csproj.CopyComplete
+C:\CodeRepo\obj\Debug\DeploymentTool.dll
+C:\CodeRepo\obj\Debug\DeploymentTool.pdb
+E:\DeploymentTool\bin\Microsoft.Bcl.AsyncInterfaces.dll
+E:\DeploymentTool\bin\Microsoft.IdentityModel.Abstractions.dll
+E:\DeploymentTool\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\DeploymentTool\bin\Microsoft.IdentityModel.Logging.dll
+E:\DeploymentTool\bin\Microsoft.IdentityModel.Tokens.dll
+E:\DeploymentTool\bin\System.Buffers.dll
+E:\DeploymentTool\bin\System.IdentityModel.Tokens.Jwt.dll
+E:\DeploymentTool\bin\System.Memory.dll
+E:\DeploymentTool\bin\System.Numerics.Vectors.dll
+E:\DeploymentTool\bin\System.Runtime.CompilerServices.Unsafe.dll
+E:\DeploymentTool\bin\System.Text.Encodings.Web.dll
+E:\DeploymentTool\bin\System.Text.Json.dll
+E:\DeploymentTool\bin\System.Threading.Tasks.Extensions.dll
+E:\DeploymentTool\bin\System.ValueTuple.dll
+E:\DeploymentTool\bin\Microsoft.Bcl.AsyncInterfaces.xml
+E:\DeploymentTool\bin\Microsoft.IdentityModel.Abstractions.xml
+E:\DeploymentTool\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+E:\DeploymentTool\bin\Microsoft.IdentityModel.Logging.xml
+E:\DeploymentTool\bin\Microsoft.IdentityModel.Tokens.xml
+E:\DeploymentTool\bin\System.Buffers.xml
+E:\DeploymentTool\bin\System.IdentityModel.Tokens.Jwt.xml
+E:\DeploymentTool\bin\System.Memory.xml
+E:\DeploymentTool\bin\System.Numerics.Vectors.xml
+E:\DeploymentTool\bin\System.Runtime.CompilerServices.Unsafe.xml
+E:\DeploymentTool\bin\System.Text.Encodings.Web.xml
+E:\DeploymentTool\bin\System.Text.Json.xml
+E:\DeploymentTool\bin\System.Threading.Tasks.Extensions.xml
+E:\DeploymentTool\bin\System.ValueTuple.xml
+E:\DeploymentTool\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
+C:\Repos\bin\DeploymentTool.dll.config
+C:\Repos\bin\DeploymentTool.dll
+C:\Repos\bin\DeploymentTool.pdb
+C:\Repos\bin\roslyn\csc.exe
+C:\Repos\bin\roslyn\csc.exe.config
+C:\Repos\bin\roslyn\csc.rsp
+C:\Repos\bin\roslyn\csi.exe
+C:\Repos\bin\roslyn\csi.exe.config
+C:\Repos\bin\roslyn\csi.rsp
+C:\Repos\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Repos\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Repos\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Repos\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Repos\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Repos\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Repos\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Repos\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Repos\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Repos\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Repos\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Repos\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Repos\bin\roslyn\System.AppContext.dll
+C:\Repos\bin\roslyn\System.Collections.Immutable.dll
+C:\Repos\bin\roslyn\System.Console.dll
+C:\Repos\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Repos\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Repos\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Repos\bin\roslyn\System.Globalization.Calendars.dll
+C:\Repos\bin\roslyn\System.IO.Compression.dll
+C:\Repos\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Repos\bin\roslyn\System.IO.FileSystem.dll
+C:\Repos\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Repos\bin\roslyn\System.Net.Http.dll
+C:\Repos\bin\roslyn\System.Net.Sockets.dll
+C:\Repos\bin\roslyn\System.Reflection.Metadata.dll
+C:\Repos\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Repos\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Repos\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Repos\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Repos\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Repos\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Repos\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Repos\bin\roslyn\System.ValueTuple.dll
+C:\Repos\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Repos\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Repos\bin\roslyn\System.Xml.XPath.dll
+C:\Repos\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Repos\bin\roslyn\vbc.exe
+C:\Repos\bin\roslyn\vbc.exe.config
+C:\Repos\bin\roslyn\vbc.rsp
+C:\Repos\bin\roslyn\VBCSCompiler.exe
+C:\Repos\bin\roslyn\VBCSCompiler.exe.config
+C:\Repos\bin\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Repos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Repos\bin\Microsoft.IdentityModel.Abstractions.dll
+C:\Repos\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Repos\bin\Microsoft.IdentityModel.Logging.dll
+C:\Repos\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Repos\bin\Newtonsoft.Json.dll
+C:\Repos\bin\System.Buffers.dll
+C:\Repos\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Repos\bin\System.Memory.dll
+C:\Repos\bin\System.Net.Http.Formatting.dll
+C:\Repos\bin\System.Numerics.Vectors.dll
+C:\Repos\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Repos\bin\System.Text.Encodings.Web.dll
+C:\Repos\bin\System.Text.Json.dll
+C:\Repos\bin\System.Threading.Tasks.Extensions.dll
+C:\Repos\bin\System.ValueTuple.dll
+C:\Repos\bin\System.Web.Http.dll
+C:\Repos\bin\System.Web.Http.WebHost.dll
+C:\Repos\bin\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Repos\bin\Microsoft.IdentityModel.Abstractions.xml
+C:\Repos\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Repos\bin\Microsoft.IdentityModel.Logging.xml
+C:\Repos\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Repos\bin\Newtonsoft.Json.xml
+C:\Repos\bin\System.Buffers.xml
+C:\Repos\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Repos\bin\System.Memory.xml
+C:\Repos\bin\System.Net.Http.Formatting.xml
+C:\Repos\bin\System.Numerics.Vectors.xml
+C:\Repos\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Repos\bin\System.Text.Encodings.Web.xml
+C:\Repos\bin\System.Text.Json.xml
+C:\Repos\bin\System.Threading.Tasks.Extensions.xml
+C:\Repos\bin\System.ValueTuple.xml
+C:\Repos\bin\System.Web.Http.xml
+C:\Repos\bin\System.Web.Http.WebHost.xml
+C:\Repos\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Repos\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
+C:\Repos\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
+C:\Repos\obj\Debug\DeploymentTool.csproj.CopyComplete
+C:\Repos\obj\Debug\DeploymentTool.dll
+C:\Repos\obj\Debug\DeploymentTool.pdb

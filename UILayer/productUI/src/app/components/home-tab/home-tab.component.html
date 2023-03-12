@@ -1,0 +1,7 @@
+<mat-tab-group class="matTab">
+    <mat-tab *ngFor="let item of tabsArray; let index = index" label="{{item.tab_name}}">
+        <ng-template matTabContent>
+            <app-tab-body [curTab]="item"></app-tab-body>
+          </ng-template>
+      </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,54 @@
+.floatLeft {
+    float: left;
+}
+
+.leftPart {
+    width: 60%;
+    overflow: auto;
+}
+
+.rightPart {
+    width: 40%;
+    overflow: auto;
+}
+
+.chips {
+    min-height: 50px;
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 10px;
+    background-color: #E8E8E8;
+}
+
+.chipsHeader {
+    font-size: 18px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 40px;
+}
+
+.whiteBG{
+    background-color: #fff;
+}
+.chipsBody {
+    width: 100%;    
+    width: 100%;
+    min-height: 10px;
+}
+
+.brands{
+    border-radius: 5px;
+    margin: 20px;
+    padding: 10px;
+    display: inline-block;
+    background-color: #fff;
+    cursor: pointer;
+}
+.brands img{
+    width: 80px;
+    height: 80px;
+}

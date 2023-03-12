@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/obj/Debug/DeploymentTool.csproj.AssemblyReference.cache
+/.vs/DeploymentTool/v17/.wsuo
+/.vs/Repos/v17
+/.vs/DeploymentTool/FileContentIndex

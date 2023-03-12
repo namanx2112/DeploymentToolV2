@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="images/csg_logo.png" type="image/gif" sizes="16x16">
+    <link href="bootstrap-3.3.7/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+    <link href="css/tabMenu.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-3.1.1.js" type="text/javascript"></script>
+    <script src="bootstrap-3.3.7/dist/js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/jquery.imgzoom.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <span class="closebtn1" style="cursor: pointer">
+            <i class="glyphicon glyphicon-cog"></i>
+        </span>
+        <a href="#"><b class="btn btn-warning  btn-block">Themes</b></a>
+        <br />
+        <a href="#" id="default_1">Default theme </a>
+        <a href="#" id="default_2">Theme 1 </a>
+        <a href="#" id="default_3">Theme 3</a> 
+        <a href="#">Customize theme :
+            <input type="color" id="pickColorTheme" />
+        </a>
+        <a href="#">
+            <button id="apply" class="btn btn-primary">Apply</button>
+        </a>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+    
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Inspire Brands</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+            <li><a class="active" href="Home.htm">Home</a></li>
+            <li><a href="index.htm">Add Stores</a></li>
+            
+            <li><a href="#">Franchise</a></li>
+            
+            <li><a href="vendorPage.htm">Vendor</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="reModelStore.htm">Re-Model</a></li>
+          </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login.htm"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+      </ul>
+    </div>
+  </div>
+    </nav>
+    <br />
+    <br />
+    <br />
+    <br />
+    <span class="settings" style="cursor: pointer"><i class="settingCog glyphicon glyphicon-cog">
+    </i></span>
+    <div>
+      
+        <!-- <br />
+        <div class="item-header">
+            WELCOME TO HOME</div>
+            <br/> -->
+            <div class="verticleMenu"> <!-- style="overflow:hidden" -->
+              
+              
+                <div class="row">
+                    <div class="col-md-12" style="overflow:auto">
+                        <div id="MyAccountsTab" class="tabbable tabs-left">
+                        <!-- Account selection for desktop - I -->
+                        <ul  class="nav nav-tabs col-md-2 col-xs-12">
+                            <li class="active">
+                                <div data-target="#lA" data-toggle="tab">
+                                    <div class="ellipsis">
+                                        <span class="account-type">Users</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-target="#lB" data-toggle="tab">
+                                    <div>
+                                        <span class="account-type">Brands</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-target="#lC" data-toggle="tab">
+                                    <div>
+                                        <span class="account-type">Franchise</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-target="#lD" data-toggle="tab">
+                                    <div>
+                                        <span class="account-type">Store</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-target="#lE" data-toggle="tab">
+                                    <div>
+                                        <span class="account-type">Tech Components</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-target="#lF" data-toggle="tab">
+                                    <div>
+                                        <span class="account-type">Vendors</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-target="#lG" data-toggle="tab">
+                                    <div>
+                                        <span class="account-type">Tech Component Tools</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-target="#lH" data-toggle="tab">
+                                    <div>
+                                        <span class="account-type">Analytics</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="tab-content col-md-10 col-xs-12">
+                            <div class="tab-pane active" id="lA">
+                                <div class="item-header">
+                                    User Search</div>
+                                    <br/>
+                                <div class="row">
+                                    <div class="col-md-4">Name<br>
+                                        <input class="form-control"/>
+                                    </div>
+                                    <div class="col-md-4">Mobile<br>
+                                        <input class="form-control"/></div>
+                                        <div class="col-md-4">Email<br>
+                                            <input class="form-control" type="email"/>   
+                                        </div>
+                                </div>
+                                <div class="row">
+                                    
+                                    <div class="col-md-4">
+                                        User Name<br>
+                                        <input class="form-control"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        User Role<br>
+                                        <select class="form-select form-select-sm mt-3 form-control">
+                                            <option>role 1</option>
+                                            <option>role 2</option>
+                                            <option>role 3</option>
+                                            <option>role 4</option>
+                                          </select>
+                                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10 col-sm-10 col-xs-12">
+                                   </div>
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <a class="btn btn-warning btn-block"><i class="glyphicon glyphicon-search">
+                                        </i>&nbsp;Search </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">          
+                                            <table class="table">
+                                              <thead>
+                                                <tr>
+                                                  <th>User ID#</th>
+                                                  <th>Name</th>
+                                                  <th>Email</th>
+                                                  <th>Mobile</th>
+                                                  <th>UserType</th>
+                                                  <th></th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <td>1</td>
+                                                  <td>Anna</td>
+                                                  <td>email@gmail.com</td>
+                                                  <td>35</td>
+                                                  <td>Admin</td>
+                                                  <td>X</td>
+                                                </tr> <tr>
+                                                  <td>2</td>
+                                                  <td>Ram</td>
+                                                  <td>elail2@gmail.com</td>
+                                                  <td>35</td>
+                                                  <td>User 1</td>
+                                                  <td>X</td>
+                                                </tr>
+                                            </tr> <tr>
+                                                <td>3</td>
+                                                <td>Ram</td>
+                                                <td>elail2@gmail.com</td>
+                                                <td>35</td>
+                                                <td>User 1</td>
+                                                <td>X</td>
+                                              </tr>
+                                            </tr> <tr>
+                                                <td>4</td>
+                                                <td>Ram</td>
+                                                <td>elail2@gmail.com</td>
+                                                <td>35</td>
+                                                <td>User 1</td>
+                                                <td>X</td>
+                                              </tr>
+                                            </tr> <tr>
+                                                <td>5</td>
+                                                <td>Ram</td>
+                                                <td>elail2@gmail.com</td>
+                                                <td>35</td>
+                                                <td>User 1</td>
+                                                <td>X</td>
+                                              </tr>
+                                              </tbody>
+                                            </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 col-sm-10 col-xs-12">
+                                       </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <a class="btn btn-warning btn-block" data-toggle="modal" data-target="#addUser">
+                                                <i class="glyphicon glyphicon-plus">
+                                            </i>&nbsp;Add User </a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="lB">
+                               Brands
+                            </div>
+                            <div class="tab-pane" id="lC">
+                                Franchise
+                            </div>
+                            <div class="tab-pane" id="lD">
+                               Store
+                            </div>
+                            <div class="tab-pane" id="lE">
+                                Tech Components
+                             </div>
+                             <div class="tab-pane" id="lF">
+                                Vendors
+                             </div>
+                             <div class="tab-pane" id="lG">
+                                Tech Component tools
+                             </div>
+                             <div class="tab-pane" id="lH">
+                                Analytics
+                             </div>
+                        </div>
+                        <!-- Account selection for desktop - F -->
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+        <br />
+        
+       
+        <br />
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <pre>
+      <span class="h5 text-bold badge">Address 1</span>
+      <span class="h5 text-bold">Company Name</span>
+      Area Name, Cross #9,
+      Street name, 2nd stage
+      Bangalore, 
+      India.
+      </pre>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <pre>
+      <span class="h5 text-bold badge">Address 2</span>
+      <span class="h5 text-bold">Company Name</span>
+      Area Name, Cross #19,
+      Street name, 3nd stage
+      Bangalore,
+      India.
+      </pre>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <pre>
+      <span class="h5 text-bold badge">Contact</span>
+      <i class="glyphicon glyphicon-envelope"></i> : inspirebrands.com
+      <i class="glyphicon glyphicon-phone"></i> : xxxxxxxxx
+
+      <i class="glyphicon glyphicon-map-marker"></i> : Bangalore, India
+      </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright text-center small">
+        Designed & Developed by xxxxxx @ 2023<br />
+        <br />
+    </div>
+    <!-----------------------------------------Popup Image Desc----------------------------------------------------------->
+    <!-- Modal -->
+    <div id="addUser" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;</button>
+                    <h4 class="modal-title">
+                        Add User</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">Name<br>
+                            <input class="form-control"/>
+                        </div>
+                        <div class="col-md-4">Mobile<br>
+                            <input class="form-control"/></div>
+                            <div class="col-md-4">Email<br>
+                                <input class="form-control" type="email"/>   
+                            </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-md-4">
+                            User Name<br>
+                            <input class="form-control"/>
+                        </div>
+                        <div class="col-md-4">
+                            User Role<br>
+                            <select class="form-select form-select-sm mt-3 form-control">
+                                <option>role 1</option>
+                                <option>role 2</option>
+                                <option>role 3</option>
+                                <option>role 4</option>
+                              </select>
+                            
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-plus"></span> Add / Update 
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!----------------------------------------------------------------------------------------------------->
+</body>
+</html>
