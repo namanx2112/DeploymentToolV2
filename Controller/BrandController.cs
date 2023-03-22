@@ -59,7 +59,7 @@ namespace DeploymentTool.Controller
 
             int nuserid = 1;
             var brandDAL = new BrandDAL();
-            brandDAL.Update(brand);
+            brandDAL.CreateBrand(brand, (int)securityContext.nUserID);
 
             return new HttpResponseMessage(HttpStatusCode.OK)
             {

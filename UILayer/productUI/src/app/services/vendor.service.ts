@@ -40,6 +40,7 @@ export class VendorService {
         field_placeholder: "Enter Vendor Id",
         validator: [],
         mandatory: false,
+        icon: "search",
         hidden: false
       },
       {
@@ -52,6 +53,7 @@ export class VendorService {
         field_placeholder: "Enter Vendor Name",
         validator: [],
         mandatory: false,
+        icon: "search",
         hidden: false
       },
       {
@@ -64,6 +66,7 @@ export class VendorService {
         field_placeholder: "Enter Brand Id",
         validator: [],
         mandatory: false,
+        icon: "search",
         hidden: false
       },
       {
@@ -76,6 +79,7 @@ export class VendorService {
         field_placeholder: "Enter Vendor TechComponent ID",
         validator: [],
         mandatory: false,
+        icon: "search",
         hidden: false
       },
       {

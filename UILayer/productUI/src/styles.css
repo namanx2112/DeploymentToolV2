@@ -7,3 +7,38 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mdc-text-field--filled:not(.mdc-text-field--disabled){
     background-color: #fff!important;
 }
+
+.whiteGrayTheme{
+    background-color: white;
+}
+.whiteGray .mat-mdc-text-field-wrapper{
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+}
+.whiteGray .mdc-floating-label--float-above{
+    background-color: white;
+    color: gray;
+    padding: 5px;
+}
+.grayWhiteTheme{
+    background-color: gray;
+}
+.grayWhite .mat-mdc-text-field-wrapper{
+    background-color: white;
+    color: gray;
+    border-radius: 5px;
+}
+.grayWhite .mdc-floating-label--float-above{
+    background-color: gray;
+    color: #fff;
+    padding: 5px;
+}
+.buttonPart {
+    background-color: #fff;
+}
+
+button{
+    width: 120px;
+    height: 50px;
+}

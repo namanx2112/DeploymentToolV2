@@ -14,9 +14,18 @@ import { FranchiseService } from 'src/app/services/frenchise.service';
   styleUrls: ['./new-edit-object.component.css']
 })
 export class NewEditObjectComponent {
-  @Input() curTab: HomeTab;
+  _curTab: HomeTab;
+  @Input() set curTab(val: HomeTab) {
+    this._curTab = val;
+    this.childCount = val.childTabs.length;
+  }
+  get curTab(): HomeTab {
+    return this._curTab;
+  }
   @Output() returnBack = new EventEmitter<any>()
   private _controlValues: Dictionary<string>;
+  activeTabIndex: number;
+  childCount: number;
   @Input() set controlValues(value: Dictionary<string>) {
     this._controlValues = value;
     this.valueChanged();
@@ -29,10 +38,15 @@ export class NewEditObjectComponent {
     private franchiseService: FranchiseService) {
     this.SubmitLabel = "Submit";
     this.controlValues = {};
+    this.activeTabIndex = -1;
   }
 
   valueChanged() {
 
+  }
+
+  showTab(index: number) {
+    this.activeTabIndex = index;
   }
 
   onSubmit(controlVals: FormGroup) {

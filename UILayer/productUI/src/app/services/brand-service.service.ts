@@ -39,7 +39,8 @@ export class BrandServiceService {
       field_placeholder: "Enter Brands Name",
       validator: [],
       mandatory: false,
-      hidden: false
+      hidden: false,
+      icon: "search"
     },
     {
       field_name: "Page Size",

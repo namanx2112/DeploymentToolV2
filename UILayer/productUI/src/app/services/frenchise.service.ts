@@ -40,6 +40,7 @@ export class FranchiseService {
         field_placeholder: "Enter Franchise Id",
         validator: [],
         mandatory: false,
+        icon: "search",
         hidden: false
       },
       {
@@ -52,6 +53,7 @@ export class FranchiseService {
         field_placeholder: "Enter Franchise Name",
         validator: [],
         mandatory: false,
+        icon: "search",
         hidden: false
       },
       {
@@ -64,6 +66,7 @@ export class FranchiseService {
         field_placeholder: "Enter Brand Id",
         validator: [],
         mandatory: false,
+        icon: "search",
         hidden: false
       },
       {

@@ -37,5 +37,10 @@
     overflow: auto;
 }
 .searchButton{
-    float: right;
+    float: left;
+    margin: 15px 10px;
+}
+.searchControls{
+    float: left;
+    width: calc(100% - 250px);
 }

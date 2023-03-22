@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-admin-dashboard-shortcuts',
@@ -7,8 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AdminDashboardShortcutsComponent {
 
+  @Output() ShortcutSelection = new EventEmitter<string>();
+  constructor(){}
 
   ShortcutClick(type: string){
+ this.ShortcutSelection.emit(type);
     
   }
 }

@@ -6,15 +6,21 @@ export interface HomeTab {
     tab_unique_name: string,
     tab_type: TabType,
     search_fields: Fields[],
-    fields: Fields[]
+    fields: Fields[],
+    childTabs: HomeTab[],
+    instanceType: TabInstanceType
 }
 
-export enum TabType{
+export enum TabInstanceType {
+    Single, Table
+}
+
+export enum TabType {
     Users, Brands, Franchise, Store, TechComponent, Vendor, TechComponentTools, Analytics
 }
 
 
-export interface Fields{
+export interface Fields {
     field_name: string,
     fieldUniqeName: string,
     icon?: string,
@@ -30,17 +36,17 @@ export interface Fields{
     hidden: boolean
 }
 
-export enum FieldType{
+export enum FieldType {
     text, email, date, time, dropdown, number
 }
 
-export interface OptionType{
+export interface OptionType {
     optionDisplayName: string,
     optionIndex: string,
     optionOrder: number
 }
 
-export interface ConditionalOption{
+export interface ConditionalOption {
     field_name: string,
     value: string
 }

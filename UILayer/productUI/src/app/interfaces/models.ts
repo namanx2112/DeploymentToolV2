@@ -38,7 +38,7 @@ export interface VendorModel {
     bDeleted: boolean,
 }
 
-export interface TechComponentModel{
+export interface TechComponentModel {
     aTechComponentId: number,
     tTechComponentName: string,
     nBrandID: number,
@@ -51,10 +51,10 @@ export interface TechComponentModel{
     bDeleted: boolean
 }
 
-export interface FranchiseModel{
+export interface FranchiseModel {
     aFranchiseId: number,
     tFranchiseName: string,
-    nBrandId:number,
+    nBrandId: number,
     tFranchiseDescription: string,
     tFranchiseLocation: string,
     dFranchiseEstablished: Date,
@@ -73,6 +73,18 @@ export interface FranchiseModel{
     bDeleted: boolean
 }
 
-export interface UserModel{
+export interface PartsModel {
+    aPartsId: number,
+    tPartsName: string,
+    nPartsNumber: number,
+    nPartsPrice: number
+}
 
+export interface UserModel {
+    aUserId: number,
+    tUserName: string,
+    tUserEmail: string,
+    tContactNumber: string,
+    tRole: string,
+    nBrandId: number
 }

@@ -12,6 +12,8 @@ import { Fields, FieldType, HomeTab } from 'src/app/interfaces/home-tab';
 export class ControlsComponent {
   private _controlValues: Dictionary<string>;
   @Input() fields: Fields[];
+  @Input() needButton: boolean;
+  @Input() themeClass: string;
   @Input() set controlValues(value: Dictionary<string>) {
     this._controlValues = value;
     this.valueChanged();
@@ -22,7 +24,9 @@ export class ControlsComponent {
   @Input() SubmitLabel: string;
   @Output() onSubmit = new EventEmitter<FormGroup>();
   formGroup = new FormGroup({});
+  fieldClass: string;
   constructor() {
+    this.fieldClass = "curField";
   }
 
   ngOnChanges(): void {
@@ -37,6 +41,7 @@ export class ControlsComponent {
       this.formGroup.addControl(formField.fieldUniqeName, new FormControl(
         "", formField.validator));
     }
+    this.fieldClass = (this.fields.filter(x => x.hidden == false).length == 1) ? "curSingleField" : "curField";
   }
 
   hasEror(cControl: Fields): boolean {
@@ -66,5 +71,12 @@ export class ControlsComponent {
     // if (this.formGroup.valid) {
     this.onSubmit.emit(this.formGroup);
     // }
+  }
+
+  onKeydown(event: any) {
+    if (event.key === "Enter") {
+      if (this.formGroup.valid)
+        this.onSubmit.emit(this.formGroup);
+    }
   }
 }

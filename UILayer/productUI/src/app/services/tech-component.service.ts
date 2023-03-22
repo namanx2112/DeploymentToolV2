@@ -38,6 +38,7 @@ export class TechComponenttService {
         field_placeholder: "Enter TechComponent Id",
         validator: [],
         mandatory: false,
+        icon: "search",
         hidden: false
       },
       {
@@ -50,6 +51,7 @@ export class TechComponenttService {
         field_placeholder: "Enter Brand Id",
         validator: [],
         mandatory: false,
+        icon: "search",
         hidden: false
       },
       {
