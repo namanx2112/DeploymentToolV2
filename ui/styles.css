@@ -18,12 +18,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .whiteGrayTheme{
     background-color: white;
 }
+.whiteGray input{
+    color: #fff;
+}
 .whiteGray .mat-mdc-text-field-wrapper{
     background-color: gray;
     color: white;
     border-radius: 5px;
 }
-.whiteGray .mdc-floating-label:not(.mdc-floating-label--float-above){
+.whiteGray .mdc-floating-label--float-above{
     background-color: white;
     color: gray;
     padding: 5px;
@@ -31,15 +34,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .grayWhiteTheme{
     background-color: gray;
 }
+.grayWhiteTheme .details,.grayWhiteTheme .tables{
+    background-color: #fff;
+}
 .grayWhite .mat-mdc-text-field-wrapper{
     background-color: white;
     color: gray;
     border-radius: 5px;
 }
-.grayWhite .mdc-floating-label:not(.mdc-floating-label--float-above){
+.grayWhite .mdc-floating-label--float-above{
     background-color: gray;
     color: #fff;
     padding: 5px;
+}
+.grayWhite .fleidLabel{
+    color: #fff;
 }
 .buttonPart {
     background-color: #fff;
@@ -48,4 +57,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 button{
     width: 120px;
     height: 50px;
+}
+
+.table-container{
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.mat-mdc-paginator{
+    border-radius: 0px 0px 10px 10px;
+}
+
+.fleidLabel{
+    font-weight: 900;
+}
+
+.mat-mdc-table{
+    white-space: nowrap!important;
+}
+
+.mdc-data-table__header-cell{
+    overflow: visibles!important;
 }

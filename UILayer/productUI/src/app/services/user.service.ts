@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Fields, FieldType } from '../interfaces/home-tab';
 import { UserModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
@@ -23,7 +24,34 @@ export class UserService {
   }
 
   GetUsers(request: UserModel | null) {
-    return this.http.post<UserModel[]>(this.configUrl + "User/GetUsers", request, { headers: this.authService.getHttpHeaders() });
+    //return this.http.post<UserModel[]>(this.configUrl + "User/GetUsers", request, { headers: this.authService.getHttpHeaders() });
+    return new Observable<UserModel[]>((obj) => {
+      let items = [{
+        aUserId: 0,
+        tUserName: "Tom",
+        tUserEmail: "tom@tom.com",
+        tContactNumber: "9898989839",
+        tRole: "Admin",
+        nBrandId: 1
+      },
+      {
+        aUserId: 0,
+        tUserName: "Pom",
+        tUserEmail: "pom@tom.com",
+        tContactNumber: "8898989839",
+        tRole: "Admin",
+        nBrandId: 1
+      },
+      {
+        aUserId: 0,
+        tUserName: "Com",
+        tUserEmail: "Com@tom.com",
+        tContactNumber: "7898989839",
+        tRole: "Admin",
+        nBrandId: 1
+      }];
+        obj.next(items);
+    });
   }
 
   GetUserSearchFields(): Fields[] {

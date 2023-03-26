@@ -7,6 +7,7 @@ import { BrandModel, FranchiseModel, TechComponentModel, VendorModel } from 'src
 import { TechComponenttService } from 'src/app/services/tech-component.service';
 import { VendorService } from 'src/app/services/vendor.service';
 import { FranchiseService } from 'src/app/services/frenchise.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-new-edit-object',
@@ -35,7 +36,7 @@ export class NewEditObjectComponent {
   }
   SubmitLabel: string;
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
-    private franchiseService: FranchiseService) {
+    private franchiseService: FranchiseService, private userSerice: UserService) {
     this.SubmitLabel = "Submit";
     this.controlValues = {};
     this.activeTabIndex = -1;
@@ -49,6 +50,36 @@ export class NewEditObjectComponent {
     this.activeTabIndex = index;
   }
 
+  isEditMode() {
+    let isMode = false;
+    if (this.curTab.tab_type == TabType.Brands) {
+      if (this.controlValues["aBrandId"] && parseInt(this.controlValues["aBrandId"]) > 0) {
+        isMode = true;
+      }
+    }
+    else if (this.curTab.tab_type == TabType.TechComponent) {
+      if (this.controlValues["aTechCompId"] && parseInt(this.controlValues["aTechCompId"]) > 0) {
+        isMode = true;
+      }
+    }
+    else if (this.curTab.tab_type == TabType.Vendor) {
+      if (this.controlValues["aVendorId"] && parseInt(this.controlValues["aVendorId"]) > 0) {
+        isMode = true;
+      }
+    }
+    else if (this.curTab.tab_type == TabType.Franchise) {
+      if (this.controlValues["aFranchiseId"] && parseInt(this.controlValues["aFranchiseId"]) > 0) {
+        isMode = true;
+      }
+    }
+    return isMode;
+  }
+
+  rowClicked(ev: any){
+
+  }
+
+  
   onSubmit(controlVals: FormGroup) {
     if (this.curTab.tab_type == TabType.Brands) {
       this.SaveUpdateBrand(controlVals);
@@ -80,16 +111,19 @@ export class NewEditObjectComponent {
   }
 
   SaveUpdateVendor(controlVals: FormGroup) {
+    let cThis = this;
     if (controlVals.value["aVendorId"] && parseInt(controlVals.value["aVendorId"]) > 0) {
       this.verndorService.UpdateVendor(controlVals.value).subscribe((resp: VendorModel) => {
+        cThis.controlValues = controlVals.value;
         console.log(resp);
-        this.returnBack.emit(resp);
+        //this.returnBack.emit(resp);
       });
     }
     else {
       this.verndorService.CreateVendor(controlVals.value).subscribe((resp: VendorModel) => {
+        cThis.controlValues = controlVals.value;
         console.log(resp);
-        this.returnBack.emit(resp);
+        //this.returnBack.emit(resp);
       });
     }
   }

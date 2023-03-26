@@ -1,26 +1,26 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmitClick()" class="{{'form ' + themeClass}}">
     <ng-container *ngFor="let curControl of fields; let index = index">
-        <mat-form-field appearance="outline"  [ngClass]="curControl.hidden ? 'curField hidden' :fieldClass" *ngIf="(curControl.field_type == 0 || curControl.field_type == 1 || curControl.field_type == 2||
+        <div [ngClass]="curControl.hidden ? 'curField hidden' :fieldClass">
+            <mat-label class="fleidLabel" [attr.for]="curControl.field_name">{{curControl.field_name}}</mat-label>
+            <mat-form-field appearance="outline" *ngIf="(curControl.field_type == 0 || curControl.field_type == 1 || curControl.field_type == 2||
     curControl.field_type == 3 || curControl.field_type == 5)">
-            <mat-label [attr.for]="curControl.field_name">{{curControl.field_name}}</mat-label>
-            <input matInput placeholder="{{curControl.field_placeholder}}" [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 2)?
+                <input matInput placeholder="{{curControl.field_placeholder}}" [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 2)?
             'date' : (curControl.field_type == 3) ? 'time' : 'number'" formControlName="{{curControl.fieldUniqeName}}"
-                [ngModel]="controlValues[curControl.fieldUniqeName]" (keydown)="onKeydown($event)">
-            <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon>
-            <mat-error
-                *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" [ngClass]="curControl.hidden ? 'curField hidden' :fieldClass"
-            *ngIf="curControl.field_type == 4">
-            <mat-label [attr.for]="curControl.field_name">{{curControl.field_name}}</mat-label>
-            <mat-select formControlName="{{curControl.fieldUniqeName}}"
-                [ngModel]="controlValues[curControl.fieldUniqeName]">
-                <mat-option *ngFor="let opt of curControl.options"
-                    [value]="opt.optionIndex">{{opt.optionDisplayName}}</mat-option>
-            </mat-select>
-            <mat-error
-                *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
-        </mat-form-field>
+                    [ngModel]="controlValues[curControl.fieldUniqeName]" (keydown)="onKeydown($event)">
+                <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon>
+                <mat-error
+                    *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="curControl.field_type == 4">
+                <mat-select formControlName="{{curControl.fieldUniqeName}}"
+                    [ngModel]="controlValues[curControl.fieldUniqeName]">
+                    <mat-option *ngFor="let opt of curControl.options"
+                        [value]="opt.optionIndex">{{opt.optionDisplayName}}</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
+            </mat-form-field>
+        </div>
     </ng-container>
     <div *ngIf="needButton" class="controlButton">
         <button type="submit" mat-raised-button [disabled]="!formGroup.valid"

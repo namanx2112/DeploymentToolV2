@@ -28,6 +28,16 @@ export class VendorService {
     return this.http.post<VendorModel[]>(this.configUrl + "Vendor/GetVendors", request, { headers: this.authService.getHttpHeaders() });
   }
 
+  GetTableVisibleColumns(){
+    return [
+      "aVendorId",
+      "tVendorName",
+      "tVendorEmail",
+      "tVendorPhone",
+      "tVendorCategory"
+    ];
+  }
+
   GetVendorSearchFields(): Fields[]{
     let fields = [
       {

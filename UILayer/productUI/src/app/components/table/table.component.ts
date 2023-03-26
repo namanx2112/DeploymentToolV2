@@ -3,10 +3,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatRow, MatTableDataSource } from '@angular/material/table';
 import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
-import { BrandModel, FranchiseModel, TechComponentModel, VendorModel } from 'src/app/interfaces/models';
+import { BrandModel, FranchiseModel, TechComponentModel, VendorModel, UserModel } from 'src/app/interfaces/models';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { FranchiseService } from 'src/app/services/frenchise.service';
 import { TechComponenttService } from 'src/app/services/tech-component.service';
+import { UserService } from 'src/app/services/user.service';
 import { VendorService } from 'src/app/services/vendor.service';
 
 
@@ -34,7 +35,7 @@ export class TableComponent {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
-    private franchiseSerice: FranchiseService) {
+    private franchiseSerice: FranchiseService, private userSerice: UserService) {
   }
 
   rowClick(row: MatRow) {
@@ -57,9 +58,25 @@ export class TableComponent {
       else if (this.curTab.tab_type == TabType.Franchise) {
         this.getFranchise(this.searchFields);
       }
+      else if (this.curTab.tab_type == TabType.Users) {
+        this.getUsers(this.searchFields);
+      }
     }
   }
-  
+
+  getUsers(searchFields: any) {
+    this.userSerice.GetUsers(searchFields).subscribe((resp: UserModel[]) => {
+      this.dataSource = new MatTableDataSource(resp);
+      for (var indx in this.curTab.fields) {
+        this.displayedColumns.push(this.curTab.fields[indx].fieldUniqeName);
+        this.columns.push({
+          columnDef: this.curTab.fields[indx].fieldUniqeName,
+          header: this.curTab.fields[indx].field_name
+        });
+      }
+    });
+  }
+
   getFranchise(searchFields: any) {
     this.franchiseSerice.GetFranchises(searchFields).subscribe((resp: FranchiseModel[]) => {
       this.dataSource = new MatTableDataSource(resp);
@@ -80,7 +97,10 @@ export class TableComponent {
   getVendor(searchFields: any) {
     this.verndorService.GetVendors(searchFields).subscribe((resp: VendorModel[]) => {
       this.dataSource = new MatTableDataSource(resp);
+      let fColumns = this.verndorService.GetTableVisibleColumns();
       for (var indx in this.curTab.fields) {
+        if (fColumns.indexOf(this.curTab.fields[indx].fieldUniqeName) == -1)
+          continue;
         this.displayedColumns.push(this.curTab.fields[indx].fieldUniqeName);
         this.columns.push({
           columnDef: this.curTab.fields[indx].fieldUniqeName,
