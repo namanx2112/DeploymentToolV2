@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { BrandModel } from 'src/app/interfaces/models';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { HomeService } from 'src/app/services/home.service';
@@ -10,6 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 })
 export class HomeDashboardComponent {
   brands: BrandModel[];
+  @Output() brandClicked = new EventEmitter<BrandModel>()
   constructor(private homeService: HomeService, private brandService: BrandServiceService) {
     this.getBrands();
   }
@@ -32,10 +33,14 @@ export class HomeDashboardComponent {
     //   dtUpdatedOn: null,
     //   tIconURL: ''
     // }
-    this.brandService.GetBrands(null).subscribe((resp: BrandModel[]) => {
+    this.brandService.Get(null).subscribe((resp: BrandModel[]) => {
       this.brands = resp;
       this.updateIconsTemp();
     })
+  }
+
+  showBrand(brand: BrandModel) {
+    this.brandClicked.emit(brand);
   }
 
   updateIconsTemp() {
@@ -57,7 +62,7 @@ export class HomeDashboardComponent {
       }
       else if (this.brands[i].tBrandName?.toLowerCase().indexOf("sonic")) {
         this.brands[i].tIconURL = "https://upload.wikimedia.org/wikipedia/commons/f/ff/SONIC_New_Logo_2020.svg";
-      }      
+      }
       else {
         this.brands[i].tIconURL = "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png";
       }

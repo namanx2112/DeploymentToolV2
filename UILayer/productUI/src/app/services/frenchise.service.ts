@@ -16,19 +16,28 @@ export class FranchiseService {
     this.configUrl = authService.getConfigUrl();
   }
 
-  CreateFranchise(request: any) {
+  Create(request: any) {
     return this.http.post<FranchiseModel>(this.configUrl + "Franchise/CreateFranchise", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  UpdateFranchise(request: any) {
+  Update(request: any) {
     return this.http.post<FranchiseModel>(this.configUrl + "Franchise/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetFranchises(request: FranchiseModel | null){
+  Get(request: FranchiseModel | null){
     return this.http.post<FranchiseModel[]>(this.configUrl + "Franchise/GetFranchises", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetFranchiseSearchFields(): Fields[]{
+  GetTableVisibleColumns(){
+    return [
+      "tFranchiseName",
+      "tFranchiseEmail",
+      "tFranchiseOwner",
+      "tFranchiseLocation"
+    ];
+  }
+
+  GetSearchFields(): Fields[]{
     let fields = [
       {
         field_name: "Franchise Id",
@@ -133,7 +142,7 @@ export class FranchiseService {
     return fields;
   }
 
-  GetFranchiseFields(): Fields[]{
+  GetFields(): Fields[]{
     let fields = [
       {
         field_name: "Franchise Id",

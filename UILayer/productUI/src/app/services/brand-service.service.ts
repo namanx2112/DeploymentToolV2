@@ -16,19 +16,35 @@ export class BrandServiceService {
     this.configUrl = authService.getConfigUrl();
   }
 
-  CreateBrand(request: any) {
+  //Create
+  //Update
+  //Get
+  //GetSearchFields
+  //GetFields
+  //GetTableVisibleColumns
+
+  Create(request: any) {
     return this.http.post<BrandModel>(this.configUrl + "Brand/CreateBrand", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  UpdateBrand(request: any) {
+  Update(request: any) {
     return this.http.post<BrandModel>(this.configUrl + "Brand/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetBrands(request: BrandModel | null) {
+  Get(request: BrandModel | null) {
     return this.http.post<BrandModel[]>(this.configUrl + "Brand/GetBrands", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetBrandSearchFields(): Fields[] {
+  GetTableVisibleColumns(){
+    return [
+      "tBrandName",
+      "tBrandWebsite",
+      "tBrandCountry",
+      "tBrandContact"
+    ];
+  }
+
+  GetSearchFields(): Fields[] {
     let fields = [{
       field_name: "Brands Name",
       fieldUniqeName: "tBrandName",
@@ -69,7 +85,7 @@ export class BrandServiceService {
     return fields;
   }
 
-  GetBrandFields(): Fields[] {
+  GetFields(): Fields[] {
     let fields = [
       {
         field_name: "Brand Id",

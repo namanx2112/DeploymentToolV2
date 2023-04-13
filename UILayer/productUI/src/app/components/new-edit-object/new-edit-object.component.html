@@ -1,7 +1,7 @@
 <ng-container *ngIf="activeTabIndex == -1">
     <div class="tBody grayWhiteTheme">
         <app-controls [fields]="curTab.fields" [needButton]="true" [controlValues]="controlValues"
-            [SubmitLabel]="SubmitLabel" (onSubmit)="onSubmit($event)" [themeClass]="'grayWhite'"></app-controls>
+            [SubmitLabel]="SubmitLabel" (onSubmit)="onSubmit($event, curTab)" [themeClass]="'grayWhite'"></app-controls>
     </div>
     <div *ngIf="curTab.childTabs.length > 0 && isEditMode()" class="tButton">
         <button mat-raised-button class="searchButton" (click)="showTab(0);">Next</button>
@@ -14,8 +14,8 @@
                 (rowClicked)="rowClicked($event)"></app-table>
         </div>
         <div class="details">
-            <app-controls [fields]="tTab.fields" [needButton]="true" [controlValues]="controlValues"
-                [SubmitLabel]="SubmitLabel" (onSubmit)="onSubmit($event)" [themeClass]="'whiteGray'"></app-controls>
+            <app-controls [fields]="tTab.fields" [needButton]="_innerMode == 0" [controlValues]="innerControlValues"
+                [SubmitLabel]="SubmitLabel" (onSubmit)="onSubmit($event, tTab)" [themeClass]="'grayWhite'"></app-controls>
         </div>
     </div>
     <div *ngIf="activeTabIndex == index" class="tButton">

@@ -14,19 +14,26 @@ export class TechComponenttService {
     this.configUrl = authService.getConfigUrl();
   }
 
-  CreateTechComponent(request: any) {
+  Create(request: any) {
     return this.http.post<TechComponentModel>(this.configUrl + "TechComponent/CreateTechComponent", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  UpdateTechComponent(request: any) {
+  GetTableVisibleColumns(){
+    return [
+      "tTechComponentName",
+      "tComponentType"
+    ];
+  }
+
+  Update(request: any) {
     return this.http.post<TechComponentModel>(this.configUrl + "TechComponent/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetTechComponents(request: TechComponentModel | null){
+  Get(request: TechComponentModel | null){
     return this.http.post<TechComponentModel[]>(this.configUrl + "TechComponent/GetTechComponents", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetTechComponentSearchFields(): Fields[]{
+  GetSearchFields(): Fields[]{
     let fields = [
       {
         field_name: "TechComponent Id",
@@ -82,7 +89,7 @@ export class TechComponenttService {
     return fields;
   }
 
-  GetTechComponentFields(): Fields[]{
+  GetFields(): Fields[]{
     let fields = [
       {
         field_name: "TechComponent Id",

@@ -33,6 +33,7 @@ export class TableComponent {
   clickedRows = new Set<any>();
 
   @ViewChild(MatSort) sort: MatSort;
+  cService: any;
 
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseSerice: FranchiseService, private userSerice: UserService) {
@@ -42,62 +43,34 @@ export class TableComponent {
     this.rowClicked.emit(row);
   }
 
-  getTable() {
+  initTable() {
     if (typeof this.curTab != 'undefined') {
       this.displayedColumns = [];
       this.columns = [];
       if (this.curTab.tab_type == TabType.Brands) {
-        this.getBrands(this.searchFields);
+        this.cService = this.brandService;
       }
       else if (this.curTab.tab_type == TabType.Vendor) {
-        this.getVendor(this.searchFields);
+        this.cService = this.verndorService;
       }
       else if (this.curTab.tab_type == TabType.TechComponent) {
-        this.getTechComponent(this.searchFields);
+        this.cService = this.techCompService;
       }
       else if (this.curTab.tab_type == TabType.Franchise) {
-        this.getFranchise(this.searchFields);
+        this.cService = this.franchiseSerice;
       }
       else if (this.curTab.tab_type == TabType.Users) {
-        this.getUsers(this.searchFields);
+        this.cService = this.userSerice;
       }
     }
+
+    this.getTable();
   }
 
-  getUsers(searchFields: any) {
-    this.userSerice.GetUsers(searchFields).subscribe((resp: UserModel[]) => {
+  getTable() {
+    this.cService.Get(this.searchFields).subscribe((resp: any[]) => {
       this.dataSource = new MatTableDataSource(resp);
-      for (var indx in this.curTab.fields) {
-        this.displayedColumns.push(this.curTab.fields[indx].fieldUniqeName);
-        this.columns.push({
-          columnDef: this.curTab.fields[indx].fieldUniqeName,
-          header: this.curTab.fields[indx].field_name
-        });
-      }
-    });
-  }
-
-  getFranchise(searchFields: any) {
-    this.franchiseSerice.GetFranchises(searchFields).subscribe((resp: FranchiseModel[]) => {
-      this.dataSource = new MatTableDataSource(resp);
-      for (var indx in this.curTab.fields) {
-        this.displayedColumns.push(this.curTab.fields[indx].fieldUniqeName);
-        this.columns.push({
-          columnDef: this.curTab.fields[indx].fieldUniqeName,
-          header: this.curTab.fields[indx].field_name
-        });
-      }
-      // Assign the data to the data source for the table to render
-
-      //
-    });
-  }
-
-
-  getVendor(searchFields: any) {
-    this.verndorService.GetVendors(searchFields).subscribe((resp: VendorModel[]) => {
-      this.dataSource = new MatTableDataSource(resp);
-      let fColumns = this.verndorService.GetTableVisibleColumns();
+      let fColumns = this.cService.GetTableVisibleColumns();
       for (var indx in this.curTab.fields) {
         if (fColumns.indexOf(this.curTab.fields[indx].fieldUniqeName) == -1)
           continue;
@@ -113,43 +86,11 @@ export class TableComponent {
     });
   }
 
-  getTechComponent(searchFields: any) {
-    this.techCompService.GetTechComponents(searchFields).subscribe((resp: TechComponentModel[]) => {
-      this.dataSource = new MatTableDataSource(resp);
-      for (var indx in this.curTab.fields) {
-        this.displayedColumns.push(this.curTab.fields[indx].fieldUniqeName);
-        this.columns.push({
-          columnDef: this.curTab.fields[indx].fieldUniqeName,
-          header: this.curTab.fields[indx].field_name
-        });
-      }
-      // Assign the data to the data source for the table to render
-
-      //
-    });
-  }
-
-  getBrands(searchFields: any) {
-    this.brandService.GetBrands(searchFields).subscribe((resp: BrandModel[]) => {
-      this.dataSource = new MatTableDataSource(resp);
-      for (var indx in this.curTab.fields) {
-        this.displayedColumns.push(this.curTab.fields[indx].fieldUniqeName);
-        this.columns.push({
-          columnDef: this.curTab.fields[indx].fieldUniqeName,
-          header: this.curTab.fields[indx].field_name
-        });
-      }
-      // Assign the data to the data source for the table to render
-
-      //
-    });
-  }
-
   ngOnChanges() {
-    this.getTable();
+    this.initTable();
   }
   ngAfterViewInit2() {
-    this.getTable();
+    //this.getTable();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

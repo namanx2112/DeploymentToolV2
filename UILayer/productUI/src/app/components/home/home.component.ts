@@ -23,4 +23,8 @@ export class HomeComponent {
   switchView(vName: string){
     this.viewName = vName;
   }
+
+  brandClicked(brand: BrandModel){
+    this.viewName = "Sonic";
+  }
 }

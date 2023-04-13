@@ -32,8 +32,8 @@ export class HomeService {
       tab_header: "Parts search",
       tab_type: TabType.Users,
       tab_unique_name: "",
-      search_fields: this.partsService.GetPartsSearchFields(),
-      fields: this.partsService.GetPartsFields(),
+      search_fields: this.partsService.GetSearchFields(),
+      fields: this.partsService.GetFields(),
       instanceType: instType,
       childTabs: []
     };
@@ -45,8 +45,8 @@ export class HomeService {
       tab_header: "Users search",
       tab_type: TabType.Users,
       tab_unique_name: "",
-      search_fields: this.userSerice.GetUserSearchFields(),
-      fields: this.userSerice.GetUserFields(),
+      search_fields: this.userSerice.GetSearchFields(),
+      fields: this.userSerice.GetFields(),
       instanceType: instType,
       childTabs: []
     };
@@ -58,8 +58,8 @@ export class HomeService {
       tab_header: "Brands search",
       tab_type: TabType.Brands,
       tab_unique_name: "",
-      search_fields: this.brandService.GetBrandSearchFields(),
-      fields: this.brandService.GetBrandFields(),
+      search_fields: this.brandService.GetSearchFields(),
+      fields: this.brandService.GetFields(),
       instanceType: instType,
       childTabs: []
     };
@@ -71,8 +71,8 @@ export class HomeService {
       tab_header: "Vendors search",
       tab_type: TabType.Vendor,
       tab_unique_name: "",
-      search_fields: this.vendorService.GetVendorSearchFields(),
-      fields: this.vendorService.GetVendorFields(),
+      search_fields: this.vendorService.GetSearchFields(),
+      fields: this.vendorService.GetFields(),
       instanceType: instType,
       childTabs: [
 this.GetUsersTab(TabInstanceType.Table),
@@ -87,8 +87,8 @@ this.GetPartsTab(TabInstanceType.Table)
       tab_header: "Tech Components search",
       tab_type: TabType.TechComponent,
       tab_unique_name: "",
-      search_fields: this.techComponentService.GetTechComponentSearchFields(),
-      fields: this.techComponentService.GetTechComponentFields(),
+      search_fields: this.techComponentService.GetSearchFields(),
+      fields: this.techComponentService.GetFields(),
       instanceType: instType,
       childTabs: []
     };
@@ -100,8 +100,8 @@ this.GetPartsTab(TabInstanceType.Table)
       tab_header: "Franchises search",
       tab_type: TabType.Franchise,
       tab_unique_name: "",
-      search_fields: this.franchiseSerice.GetFranchiseSearchFields(),
-      fields: this.franchiseSerice.GetFranchiseFields(),
+      search_fields: this.franchiseSerice.GetSearchFields(),
+      fields: this.franchiseSerice.GetFields(),
       instanceType: instType,
       childTabs: []
     };

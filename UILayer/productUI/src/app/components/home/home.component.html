@@ -43,9 +43,10 @@
                 </div>
             </div>
             <div class="mainBody floatLeft">
-                <app-home-dashboard *ngIf="viewName=='Dashboard'"></app-home-dashboard>
+                <app-home-dashboard (brandClicked)="brandClicked($event);" *ngIf="viewName=='Dashboard'"></app-home-dashboard>
                 <app-admin-config *ngIf="viewName=='Configurations'"></app-admin-config>
                 <app-not-implemented *ngIf="viewName!='Dashboard' && viewName!='Configurations'"></app-not-implemented>
+                <app-sonic-home-page *ngIf="viewName=='Sonic'"></app-sonic-home-page>
             </div>
         </div>
     </div>

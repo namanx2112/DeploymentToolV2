@@ -14,19 +14,27 @@ export class PartsService {
     this.configUrl = authService.getConfigUrl();
   }
 
-  CreateParts(request: any) {
+  GetTableVisibleColumns(){
+    return [
+      "tPartsName",
+      "nPartsNumber",
+      "nPartsPrice"
+    ];
+  }
+
+  Create(request: any) {
     return this.http.post<PartsModel>(this.configUrl + "Parts/CreateParts", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  UpdateParts(request: any) {
+  Update(request: any) {
     return this.http.post<PartsModel>(this.configUrl + "Parts/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetPartss(request: PartsModel | null) {
+  Get(request: PartsModel | null) {
     return this.http.post<PartsModel[]>(this.configUrl + "Parts/GetPartss", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetPartsSearchFields(): Fields[] {
+  GetSearchFields(): Fields[] {
     let fields = [{
       field_name: "Parts Number",
       fieldUniqeName: "nPartsNumber",
@@ -41,7 +49,7 @@ export class PartsService {
     }]
     return fields;
   }
-  GetPartsFields(): Fields[] {
+  GetFields(): Fields[] {
     let fields = [{
       field_name: "Parts Id",
       fieldUniqeName: "aPartsId",

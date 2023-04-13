@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
-import { Dictionary } from 'src/app/interfaces/commons';
+import { Dictionary, FormsModes } from 'src/app/interfaces/commons';
 import { FormGroup } from '@angular/forms';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { BrandModel, FranchiseModel, TechComponentModel, VendorModel } from 'src/app/interfaces/models';
@@ -35,15 +35,51 @@ export class NewEditObjectComponent {
     return this._controlValues;
   }
   SubmitLabel: string;
+  cService: any;
+  _innerControlValues: Dictionary<string>;
+  _innerMode: FormsModes;
+  get innerControlValues(): Dictionary<string> {
+    return this._innerControlValues;
+  }
+  set innerControlValues(val: Dictionary<string>) {
+    this._innerControlValues = val;
+    if (Object.keys(val).length > 0)
+      this._innerMode = FormsModes.Edit;
+    else
+      this._innerMode = FormsModes.None;
+  };
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseService: FranchiseService, private userSerice: UserService) {
     this.SubmitLabel = "Submit";
     this.controlValues = {};
+    this._innerControlValues = {};
     this.activeTabIndex = -1;
   }
 
   valueChanged() {
 
+  }
+
+  getService(tab: HomeTab) {
+    let tService: any;
+    switch (tab.tab_type) {
+      case TabType.Brands:
+        tService = this.brandService;
+        break;
+      case TabType.Franchise:
+        tService = this.franchiseService;
+        break;
+      case TabType.TechComponent:
+        tService = this.techCompService;
+        break;
+      case TabType.Users:
+        tService = this.userSerice;
+        break;
+      case TabType.Vendor:
+        tService = this.verndorService;
+        break;
+    }
+    return tService;
   }
 
   showTab(index: number) {
@@ -75,83 +111,24 @@ export class NewEditObjectComponent {
     return isMode;
   }
 
-  rowClicked(ev: any){
-
-  }
-
-  
-  onSubmit(controlVals: FormGroup) {
-    if (this.curTab.tab_type == TabType.Brands) {
-      this.SaveUpdateBrand(controlVals);
-    }
-    else if (this.curTab.tab_type == TabType.TechComponent) {
-      this.SaveUpdateTechComponent(controlVals);
-    }
-    else if (this.curTab.tab_type == TabType.Vendor) {
-      this.SaveUpdateVendor(controlVals);
-    }
-    else if (this.curTab.tab_type == TabType.Franchise) {
-      this.SaveUpdateFranchise(controlVals);
+  rowClicked(row: any) {
+    this.innerControlValues = {};
+    for (var i in row) {
+      this.innerControlValues[i] = row[i];
     }
   }
 
-  SaveUpdateFranchise(controlVals: FormGroup) {
-    if (controlVals.value["aFranchiseId"] && parseInt(controlVals.value["aFranchiseId"]) > 0) {
-      this.franchiseService.UpdateFranchise(controlVals.value).subscribe((resp: FranchiseModel) => {
+
+  onSubmit(controlVals: FormGroup, tab: HomeTab) {
+    this.cService = this.getService(tab);
+    if (this.isEditMode()) {
+      this.cService.Update(controlVals.value).subscribe((resp: FranchiseModel) => {
         console.log(resp);
         this.returnBack.emit(resp);
       });
     }
     else {
-      this.franchiseService.CreateFranchise(controlVals.value).subscribe((resp: FranchiseModel) => {
-        console.log(resp);
-        this.returnBack.emit(resp);
-      });
-    }
-  }
-
-  SaveUpdateVendor(controlVals: FormGroup) {
-    let cThis = this;
-    if (controlVals.value["aVendorId"] && parseInt(controlVals.value["aVendorId"]) > 0) {
-      this.verndorService.UpdateVendor(controlVals.value).subscribe((resp: VendorModel) => {
-        cThis.controlValues = controlVals.value;
-        console.log(resp);
-        //this.returnBack.emit(resp);
-      });
-    }
-    else {
-      this.verndorService.CreateVendor(controlVals.value).subscribe((resp: VendorModel) => {
-        cThis.controlValues = controlVals.value;
-        console.log(resp);
-        //this.returnBack.emit(resp);
-      });
-    }
-  }
-
-  SaveUpdateTechComponent(controlVals: FormGroup) {
-    if (controlVals.value["aTechComponentId"] && parseInt(controlVals.value["aTechComponentId"]) > 0) {
-      this.techCompService.UpdateTechComponent(controlVals.value).subscribe((resp: TechComponentModel) => {
-        console.log(resp);
-        this.returnBack.emit(resp);
-      });
-    }
-    else {
-      this.techCompService.CreateTechComponent(controlVals.value).subscribe((resp: TechComponentModel) => {
-        console.log(resp);
-        this.returnBack.emit(resp);
-      });
-    }
-  }
-
-  SaveUpdateBrand(controlVals: FormGroup) {
-    if (controlVals.value["aBrandId"] && parseInt(controlVals.value["aBrandId"]) > 0) {
-      this.brandService.UpdateBrand(controlVals.value).subscribe((resp: BrandModel) => {
-        console.log(resp);
-        this.returnBack.emit(resp);
-      });
-    }
-    else {
-      this.brandService.CreateBrand(controlVals.value).subscribe((resp: BrandModel) => {
+      this.cService.Create(controlVals.value).subscribe((resp: FranchiseModel) => {
         console.log(resp);
         this.returnBack.emit(resp);
       });

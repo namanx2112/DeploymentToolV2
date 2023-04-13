@@ -26,6 +26,9 @@ import { NotImplementedComponent } from './components/not-implemented/not-implem
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { AdminDashboardShortcutsComponent } from './components/admin-dashboard-shortcuts/admin-dashboard-shortcuts.component';
 import { ManageDropdownsComponent } from './components/manage-dropdowns/manage-dropdowns.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { SonicHomePageComponent } from './components/Sonic/sonic-home-page/sonic-home-page.component';
+import { SonicDashboardComponent } from './components/Sonic/sonic-dashboard/sonic-dashboard.component'
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { ManageDropdownsComponent } from './components/manage-dropdowns/manage-d
     AdminConfigComponent,
     NotImplementedComponent,
     AdminDashboardShortcutsComponent,
-    ManageDropdownsComponent
+    ManageDropdownsComponent,
+    SonicHomePageComponent,
+    SonicDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,8 @@ import { ManageDropdownsComponent } from './components/manage-dropdowns/manage-d
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

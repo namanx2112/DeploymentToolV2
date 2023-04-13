@@ -16,15 +16,15 @@ export class VendorService {
     this.configUrl = authService.getConfigUrl();
   }
 
-  CreateVendor(request: any) {
+  Create(request: any) {
     return this.http.post<VendorModel>(this.configUrl + "Vendor/CreateVendor", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  UpdateVendor(request: any) {
+  Update(request: any) {
     return this.http.post<VendorModel>(this.configUrl + "Vendor/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetVendors(request: VendorModel | null){
+  Get(request: VendorModel | null){
     return this.http.post<VendorModel[]>(this.configUrl + "Vendor/GetVendors", request, { headers: this.authService.getHttpHeaders() });
   }
 
@@ -38,7 +38,7 @@ export class VendorService {
     ];
   }
 
-  GetVendorSearchFields(): Fields[]{
+  GetSearchFields(): Fields[]{
     let fields = [
       {
         field_name: "Vendor Id",
@@ -120,7 +120,7 @@ export class VendorService {
     return fields;
   }
 
-  GetVendorFields(): Fields[]{
+  GetFields(): Fields[]{
     let fields = [
       {
         field_name: "Vendor Id",

@@ -10,3 +10,7 @@ export class ControlsErrorMessages{
     public static Email = "Email format is not correct";
     public static Range = "Range is not proper";
 }
+
+export enum FormsModes{
+    None, New, Edit
+}

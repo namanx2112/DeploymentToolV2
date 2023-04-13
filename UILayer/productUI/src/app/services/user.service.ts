@@ -15,15 +15,24 @@ export class UserService {
     this.configUrl = authService.getConfigUrl();
   }
 
-  CreateUser(request: any) {
+  Create(request: any) {
     return this.http.post<UserModel>(this.configUrl + "User/CreateUser", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  UpdateUser(request: any) {
+  Update(request: any) {
     return this.http.post<UserModel>(this.configUrl + "User/Update", request, { headers: this.authService.getHttpHeaders() });
   }
+  
+  GetTableVisibleColumns(){
+    return [
+      "tUserName",
+      "tUserEmail",
+      "tContactNumber",
+      "tRole"
+    ];
+  }
 
-  GetUsers(request: UserModel | null) {
+  Get(request: UserModel | null) {
     //return this.http.post<UserModel[]>(this.configUrl + "User/GetUsers", request, { headers: this.authService.getHttpHeaders() });
     return new Observable<UserModel[]>((obj) => {
       let items = [{
@@ -54,7 +63,7 @@ export class UserService {
     });
   }
 
-  GetUserSearchFields(): Fields[] {
+  GetSearchFields(): Fields[] {
     let fields = [{
       field_name: "User Name",
       fieldUniqeName: "tUserName",
@@ -69,7 +78,7 @@ export class UserService {
     }]
     return fields;
   }
-  GetUserFields(): Fields[] {
+  GetFields(): Fields[] {
     let fields = [{
       field_name: "User Id",
       fieldUniqeName: "aUserId",

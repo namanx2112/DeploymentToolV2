@@ -3,7 +3,9 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
+.mdc-data-table__cell{
+    position: relative;
+}
 .mdc-text-field--filled:not(.mdc-text-field--disabled){
     background-color: #fff!important;
 }
@@ -27,7 +29,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .grayWhiteTheme{
     background-color: gray;
 }
-.grayWhiteTheme .details,.grayWhiteTheme .tables{
+.grayWhiteTheme .details,.grayWhiteTheme .tables,.grayWhiteTheme .tBody{
     background-color: #fff;
 }
 .grayWhite .mat-mdc-text-field-wrapper{
@@ -63,6 +65,10 @@ button{
 
 .fleidLabel{
     font-weight: 900;
+    word-wrap: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .mat-mdc-table{
@@ -71,4 +77,10 @@ button{
 
 .mdc-data-table__header-cell{
     overflow: visibles!important;
+}
+
+.mat-mdc-form-field-infix{
+    min-height: 40px!important;
+    height: 40px!important;
+    padding: 12px 0px!important;
 }

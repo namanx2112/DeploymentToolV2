@@ -2,7 +2,7 @@
     <div class="chips">
         <div class="chipsHeader">Brands</div>
         <div class="chipsBody">
-            <span class="brands" *ngFor="let brand of brands">
+            <span class="brands" *ngFor="let brand of brands" (click)="showBrand(brand)">
                 <img src="{{brand.tIconURL}}" />
             </span>
         </div>
