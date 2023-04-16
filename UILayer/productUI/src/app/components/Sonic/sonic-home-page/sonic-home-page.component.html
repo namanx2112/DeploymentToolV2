@@ -1,38 +1,41 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="sideNav" mode="side" opened="true">
         <div class="logoPart">
-            <img src="https://order.sonicdrivein.com/icons/sonic_logo.svg"> 
-            <span>Sonic</span>
+            <div>
+                <img src="https://order.sonicdrivein.com/icons/sonic_logo.svg">
+                <span>Sonic</span>
+            </div>
         </div>
         <div class="menuPart">
             <button mat-button [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon>New Project</button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item>New Store</button>                
-                <button mat-menu-item>Remodel Store</button>                
-                <button mat-menu-item>Rebuild Store</button>                
-                <button mat-menu-item>Relocation</button>
-                <button mat-menu-item>Acquisition</button>
-                <button mat-menu-item>POS Installation</button>
-                <button mat-menu-item>Audio Installation</button>
-                <button mat-menu-item>Menu Installation</button>
-                <button mat-menu-item>Payment Terminal Installation</button>
-                <button mat-menu-item>Parts Replacement</button>
+                <button mat-menu-item (click)="menuClick('newstore');">New Store</button>
+                <button mat-menu-item (click)="menuClick('remodelstore');">Remodel Store</button>
+                <button mat-menu-item (click)="menuClick('rebuildstore');">Rebuild Store</button>
+                <button mat-menu-item (click)="menuClick('relocationstore');">Relocation</button>
+                <button mat-menu-item (click)="menuClick('acquisition');">Acquisition</button>
+                <button mat-menu-item (click)="menuClick('posinstallation');">POS Installation</button>
+                <button mat-menu-item (click)="menuClick('audioinstallation');">Audio Installation</button>
+                <button mat-menu-item  (click)="menuClick('menuinstallation');">Menu Installation</button>
+                <button mat-menu-item (click)="menuClick('paymentterminalinstllation');">Payment Terminal Installation</button>
+                <button mat-menu-item (click)="menuClick('partsreplacement');">Parts Replacement</button>
             </mat-menu>
+            <button mat-button [matMenuTriggerFor]="menu"><mat-icon>search</mat-icon>Search Project</button>
+            <button mat-button [matMenuTriggerFor]="menu"><mat-icon>attach_file</mat-icon>Import Project</button>
         </div>
         <div class="ConfigList">
             <span (click)="clickOption(-1)">Sonic Homepage</span>
-            <span (click)="clickOption(-1)">Project Workbench</span>
-            <span (click)="clickOption(-1)">All Project Reports</span>
-            <span (click)="clickOption(-1)">Vendor Reports</span>
-            <span (click)="clickOption(-1)">Reports by Project Manager</span>
-            <span (click)="clickOption(-1)">Internal Reports</span>
-            <span (click)="clickOption(-1)">Super Admin Report</span>
+            <span (click)="clickOption(-1)">Project Portfolio</span>
+            <span (click)="clickOption(-1)">Report Generator</span>
+            <span (click)="clickOption(-1)">Saved Reports</span>
         </div>
     </mat-drawer>
     <div class="sideNavContent">
         <span [ngClass]="drawer.opened ? 'toggleIcon opened' : 'toggleIcon'" (click)="drawer.toggle()">
             <mat-icon>play_arrow</mat-icon>
         </span>
-        <app-sonic-dashboard></app-sonic-dashboard>
+        <app-sonic-dashboard *ngIf="showMode == 'dashboard'"></app-sonic-dashboard>
+        <app-new-project *ngIf="showMode == 'newstore'"></app-new-project>
+        <app-not-implemented *ngIf="showMode != 'newstore' && showMode != 'dashboard'"></app-not-implemented>
     </div>
 </mat-drawer-container>

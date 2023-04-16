@@ -1,0 +1,42 @@
+.projectHeader{
+    float: left;
+    width: 100%;
+}
+
+.projectHeader h4{
+    display: inline-block;
+}
+
+.tabs{
+    float: left;
+    width: 178px;
+    border: 1px solid black;
+    height: calc(100% - 2px);
+}
+
+.tabHeader{
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding: 10px  0px;
+}
+
+.tabName{
+    float: left;
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.tabBody{
+    float: left;
+    width: calc(80% - 180px);
+    padding: 0px 10%;
+    min-height: 100%;
+    background-color: gray;
+}
+
+
+.tabForm{
+    float: left;
+    width: 100%;
+    min-height: 80%;
+}

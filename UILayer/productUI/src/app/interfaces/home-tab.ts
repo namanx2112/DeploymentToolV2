@@ -16,7 +16,9 @@ export enum TabInstanceType {
 }
 
 export enum TabType {
-    Users, Brands, Franchise, Store, TechComponent, Vendor, TechComponentTools, Analytics
+    Users, Brands, Franchise, Store, TechComponent, Vendor, TechComponentTools, Analytics,
+    StoreContact, StoreConfiguration, StoreStackHolder, StoreNetworking, StorePOS, StoreAudio, StoreExteriorMenus, StorePaymetSystem, 
+    StoreInteriorMenus, StoreSonicRadio, StoreInstallation
 }
 
 

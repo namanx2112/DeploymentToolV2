@@ -1,0 +1,18 @@
+<div class="projectHeader">
+    <mat-icon>arrow_back_ios</mat-icon>
+    <h4>Project - New Store</h4>
+</div>
+<div class="tabs">
+    <div class="tabHeader" *ngFor="let tmpTab of allTabs">
+        <div (click)="clickTab(tmpTab);">{{tmpTab.tab_name}}</div>
+    </div>
+</div>
+<div class="tabBody">
+    <div *ngFor="let tTab of allTabs">
+        <h3 *ngIf="tTab.tab_type == curTab.tab_type" class="tabName">{{tTab.tab_header}}</h3>
+        <app-controls class="tabForm" *ngIf="tTab.tab_type == curTab.tab_type" [fields]="tTab.fields" [needButton]="true"
+            [controlValues]="tValues" [SubmitLabel]="SubmitLabel" (onSubmit)="onSubmit($event, tTab)"
+            [themeClass]="'grayWhite'"></app-controls>
+    </div>
+
+</div>

@@ -14,3 +14,8 @@ export class ControlsErrorMessages{
 export enum FormsModes{
     None, New, Edit
 }
+
+export interface SonicProjectHighlights{
+    title: string,
+    count: number
+}
