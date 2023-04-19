@@ -14,6 +14,7 @@ export class ControlsComponent {
   @Input() fields: Fields[];
   @Input() needButton: boolean;
   @Input() themeClass: string;
+  @Input() numberOfControlsInARow: number;
   @Input() set controlValues(value: Dictionary<string>) {
     this._controlValues = value;
     this.valueChanged();
@@ -41,7 +42,12 @@ export class ControlsComponent {
       this.formGroup.addControl(formField.fieldUniqeName, new FormControl(
         "", formField.validator));
     }
-    this.fieldClass = (this.fields.filter(x => x.hidden == false).length == 1) ? "curSingleField" : "curField";
+    if (this.numberOfControlsInARow > 0) {
+      if (this.numberOfControlsInARow == 1)
+        this.fieldClass = "curSingleField";
+      else if (this.numberOfControlsInARow == 3)
+        this.fieldClass = "curThreeField";
+    }
   }
 
   hasEror(cControl: Fields): boolean {

@@ -3,13 +3,14 @@ import { SonicProjectHighlights } from '../interfaces/commons';
 import { Observable } from 'rxjs';
 import { FieldType, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SonicService {
 
-  constructor() { }
+  constructor(private commonService: CommonService) { }
 
   GetProjecthighlights() {
     return new Observable<SonicProjectHighlights[]>((obj) => {
@@ -86,7 +87,7 @@ export class SonicService {
         field_name: "Store Name",
         fieldUniqeName: "tStoreName",
         defaultVal: "",
-        readOnly: false,
+        readOnly: true,
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter Store Name",
@@ -97,7 +98,7 @@ export class SonicService {
         field_name: "Address1",
         fieldUniqeName: "tStoreAddressLine1",
         defaultVal: "",
-        readOnly: false,
+        readOnly: true,
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter Store Address",
@@ -108,7 +109,7 @@ export class SonicService {
         field_name: "Store Address2",
         fieldUniqeName: "tStoreAddressLine2",
         defaultVal: "",
-        readOnly: false,
+        readOnly: true,
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter Store Address2",
@@ -119,7 +120,7 @@ export class SonicService {
         field_name: "Store City",
         fieldUniqeName: "tCity",
         defaultVal: "",
-        readOnly: false,
+        readOnly: true,
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter Store City",
@@ -130,7 +131,7 @@ export class SonicService {
         field_name: "Store State",
         fieldUniqeName: "nStoreState",
         defaultVal: "",
-        readOnly: false,
+        readOnly: true,
         invalid: false,
         field_type: FieldType.dropdown,
         field_placeholder: "Enter Store State",
@@ -141,7 +142,7 @@ export class SonicService {
         field_name: "Store Zip",
         fieldUniqeName: "tStoreZip",
         defaultVal: "",
-        readOnly: false,
+        readOnly: true,
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter Store Zip",
@@ -152,7 +153,7 @@ export class SonicService {
         field_name: "Store Manager",
         fieldUniqeName: "tStoreManager",
         defaultVal: "",
-        readOnly: false,
+        readOnly: true,
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter Store Manager",
@@ -250,6 +251,18 @@ export class SonicService {
         hidden: false
       }],
       fields: [{
+        field_name: "Project Type",
+        fieldUniqeName: "nProjectType",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Project Type",
+        options: this.commonService.GetDropdown("nProjectType"),
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },{
         field_name: "Stall Count",
         fieldUniqeName: "nStallCount",
         defaultVal: "",
@@ -258,6 +271,65 @@ export class SonicService {
         field_type: FieldType.text,
         field_placeholder: "Enter Stall Count",
         validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Drive-Thru",
+        fieldUniqeName: "nDriveThrou",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Drive-Thru",
+        options: this.commonService.GetDropdown("nDriveThrou"),
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Inside Dining",
+        fieldUniqeName: "nInsideDining",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Inside Dining",
+        options: this.commonService.GetDropdown("nInsideDining"),
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },{
+        field_name: "Ground Break",
+        fieldUniqeName: "tGroundBreak",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Ground Break",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },{
+        field_name: "Kitchen Install",
+        fieldUniqeName: "tKitchenInstall",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Kitchen Install",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },{
+        field_name: "Project Cost",
+        fieldUniqeName: "nProjectCost",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Project Cost",
+        validator: [],
         mandatory: false,
         hidden: false
       }]

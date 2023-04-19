@@ -7,6 +7,10 @@
     width: 45%;
 }
 
+.curThreeField{
+    width: 30%;
+}
+
 .curSingleField{
     width: 100%;
 }
@@ -23,9 +27,13 @@
 .controlButton{
     width: 100%;
     float: left;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 .buttonClass{
     float: right;
     width: 150px;
+}
+
+.readOnlyControl {
+    height: 12px;
 }

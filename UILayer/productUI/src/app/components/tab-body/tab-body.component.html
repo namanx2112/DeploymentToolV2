@@ -2,7 +2,7 @@
   <div class="header"><mat-icon *ngIf="secondPart == 'newEdit'" class="tIcon"
       (click)="secondPart = 'table'">arrow_back_ios</mat-icon>{{curTab.tab_header}}</div>
   <div class="SearchPart whiteGrayTheme" *ngIf="secondPart != 'newEdit'">
-    <app-controls [themeClass]="'whiteGray'" [needButton]="false" [fields]="curTab.search_fields" [controlValues]="searchControlVals" [SubmitLabel]="SubmitLabel"
+    <app-controls [themeClass]="'whiteGray'"  [numberOfControlsInARow]="1" [needButton]="false" [fields]="curTab.search_fields" [controlValues]="searchControlVals" [SubmitLabel]="SubmitLabel"
       (onSubmit)="onSubmit($event)" class="searchControls"></app-controls>
     <button mat-raised-button class="searchButton" (click)="OpenNew()">{{NewInstanceName}}</button>
   </div>
