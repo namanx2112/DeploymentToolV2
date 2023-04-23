@@ -29,7 +29,8 @@ import { ManageDropdownsComponent } from './components/manage-dropdowns/manage-d
 import {MatMenuModule} from '@angular/material/menu';
 import { SonicHomePageComponent } from './components/Sonic/sonic-home-page/sonic-home-page.component';
 import { SonicDashboardComponent } from './components/Sonic/sonic-dashboard/sonic-dashboard.component';
-import { NewProjectComponent } from './components/Sonic/new-project/new-project.component'
+import { NewProjectComponent } from './components/Sonic/new-project/new-project.component';
+import { StoreViewComponent } from './components/Sonic/store-view/store-view.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { NewProjectComponent } from './components/Sonic/new-project/new-project.
     ManageDropdownsComponent,
     SonicHomePageComponent,
     SonicDashboardComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    StoreViewComponent
   ],
   imports: [
     BrowserModule,

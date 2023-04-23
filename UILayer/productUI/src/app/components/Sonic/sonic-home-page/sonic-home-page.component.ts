@@ -16,4 +16,8 @@ export class SonicHomePageComponent {
   menuClick(tMode: string){
     this.showMode = tMode;
   }
+
+  SearchedResult(txt: any){
+    this.showMode = "storeview";
+  }
 }

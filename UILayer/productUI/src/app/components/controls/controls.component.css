@@ -1,39 +1,59 @@
-.curField, .curSingleField {
+.curField,
+.curSingleField {
     display: flex;
     flex-direction: column;
+}
+
+.readOnlyField {
+    flex-direction: row!important;
+    height: 35px;
 }
 
 .curField {
     width: 45%;
 }
 
-.curThreeField{
+.curThreeField {
     width: 30%;
 }
 
-.curSingleField{
+.curSingleField {
     width: 100%;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.form{
+.fieldGroup {
+    font-size: 18px;
+}
+
+.form {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.controlButton{
+
+.controlButton {
     width: 100%;
     float: left;
     margin-top: 10px;
 }
-.buttonClass{
+
+.buttonClass {
     float: right;
     width: 150px;
 }
 
 .readOnlyControl {
-    height: 12px;
+    float: right;
+    width: 50%;
+    overflow: hidden;
+}
+
+.readOnlyField .fleidLabel {
+    float: left;
+    width: 40%;
+    overflow: hidden;
 }

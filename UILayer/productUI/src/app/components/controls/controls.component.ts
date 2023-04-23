@@ -23,11 +23,14 @@ export class ControlsComponent {
     return this._controlValues;
   }
   @Input() SubmitLabel: string;
+  @Input() readOnlyForm: boolean;
   @Output() onSubmit = new EventEmitter<FormGroup>();
   formGroup = new FormGroup({});
   fieldClass: string;
+  groupLabel: string;
   constructor() {
     this.fieldClass = "curField";
+    this.groupLabel = "";
   }
 
   ngOnChanges(): void {
@@ -73,6 +76,16 @@ export class ControlsComponent {
     return eMsg;
   }
 
+  getLabelClass(field: Fields): string {
+    let clssName = this.fieldClass;
+    if (field.hidden)
+      clssName = 'curField hidden';
+    else if (this.readOnlyForm || field.readOnly) {
+      clssName = this.fieldClass + " readOnlyField";
+    }
+    return clssName;
+  }
+
   onSubmitClick(): void {
     // if (this.formGroup.valid) {
     this.onSubmit.emit(this.formGroup);
@@ -84,5 +97,16 @@ export class ControlsComponent {
       if (this.formGroup.valid)
         this.onSubmit.emit(this.formGroup);
     }
+  }
+
+  showGroupHeader(curField: Fields): boolean {
+    let show = false;
+    if (curField.field_group) {
+      if (this.groupLabel != curField.field_group) {
+        this.groupLabel = curField.field_group;
+        show = true;
+      }
+    }
+    return show;
   }
 }

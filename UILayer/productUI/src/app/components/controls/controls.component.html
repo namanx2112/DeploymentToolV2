@@ -1,9 +1,10 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmitClick()" class="{{'form ' + themeClass}}">
     <ng-container *ngFor="let curControl of fields; let index = index">
-        <div [ngClass]="curControl.hidden ? 'curField hidden' :fieldClass">
+        <h4 *ngIf="showGroupHeader(curControl)" class="fieldGroup">{{groupLabel}}</h4>
+        <div [ngClass]="getLabelClass(curControl)">
             <mat-label class="fleidLabel" [attr.for]="curControl.field_name">{{curControl.field_name}}</mat-label>
-            <span class="readOnlyControl" *ngIf="curControl.readOnly">{{controlValues[curControl.fieldUniqeName]}}</span>
-            <mat-form-field appearance="outline" *ngIf="!curControl.readOnly && (curControl.field_type == 0 || curControl.field_type == 1 || curControl.field_type == 2||
+            <span class="readOnlyControl" *ngIf="readOnlyForm || curControl.readOnly">{{controlValues[curControl.fieldUniqeName]}}</span>
+            <mat-form-field appearance="outline" *ngIf="!(curControl.readOnly || readOnlyForm) && (curControl.field_type == 0 || curControl.field_type == 1 || curControl.field_type == 2||
     curControl.field_type == 3 || curControl.field_type == 5)">
                 
                 <input matInput *ngIf="!curControl.readOnly" placeholder="{{curControl.field_placeholder}}" [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 2)?
@@ -13,7 +14,7 @@
                 <mat-error
                     *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" *ngIf="!curControl.readOnly && curControl.field_type == 4">                
+            <mat-form-field appearance="outline" *ngIf="!(curControl.readOnly || readOnlyForm) && curControl.field_type == 4">                
                 <mat-select formControlName="{{curControl.fieldUniqeName}}"
                     [ngModel]="controlValues[curControl.fieldUniqeName]">
                     <mat-option *ngFor="let opt of curControl.options"

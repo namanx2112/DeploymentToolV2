@@ -2,7 +2,7 @@
 <div class="searchPart">
     <mat-form-field appearance="outline" class="searchField">
         <mat-label>Search Store Id, Project Type, Reports and Dates</mat-label>
-        <input matInput placeholder="Placeholder">
+        <input matInput placeholder="Placeholder" (keydown)="SearchStore($event);">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
 </div>

@@ -24,6 +24,7 @@ export enum TabType {
 
 export interface Fields {
     field_name: string,
+    field_group?: string,
     fieldUniqeName: string,
     icon?: string,
     field_type: FieldType,

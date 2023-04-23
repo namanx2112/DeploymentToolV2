@@ -34,8 +34,9 @@
         <span [ngClass]="drawer.opened ? 'toggleIcon opened' : 'toggleIcon'" (click)="drawer.toggle()">
             <mat-icon>play_arrow</mat-icon>
         </span>
-        <app-sonic-dashboard *ngIf="showMode == 'dashboard'"></app-sonic-dashboard>
+        <app-sonic-dashboard *ngIf="showMode == 'dashboard'" (SearchedResult)="SearchedResult($event)"></app-sonic-dashboard>
         <app-new-project *ngIf="showMode == 'newstore'"></app-new-project>
-        <app-not-implemented *ngIf="showMode != 'newstore' && showMode != 'dashboard'"></app-not-implemented>
+        <app-store-view *ngIf="showMode == 'storeview'"></app-store-view>
+        <app-not-implemented *ngIf="showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' "></app-not-implemented>
     </div>
 </mat-drawer-container>

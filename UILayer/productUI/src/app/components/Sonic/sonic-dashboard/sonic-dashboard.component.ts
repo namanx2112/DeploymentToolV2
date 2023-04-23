@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { SonicProjectHighlights } from 'src/app/interfaces/commons';
 import { SonicService } from 'src/app/services/sonic.service';
 
@@ -9,6 +9,7 @@ import { SonicService } from 'src/app/services/sonic.service';
 })
 export class SonicDashboardComponent {
   projects: SonicProjectHighlights[];
+  @Output() SearchedResult = new EventEmitter<string>();
   constructor(private service: SonicService) {
     this.getProjectHoghlights();
   }
@@ -17,5 +18,9 @@ export class SonicDashboardComponent {
     this.service.GetProjecthighlights().subscribe((resp: SonicProjectHighlights[]) => {
       this.projects = resp;
     });
+  }
+
+  SearchStore(txt: any){
+    this.SearchedResult.emit(txt);
   }
 }

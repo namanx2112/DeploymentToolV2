@@ -10,6 +10,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: #fff!important;
 }
 
+.fullTile, .halfTile,.tabHeader > div, .tabBody, .lightGray{
+    background-color: lightgray;
+}
+
 .whiteGrayTheme{
     background-color: white;
 }
@@ -25,6 +29,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: white;
     color: gray;
     padding: 5px;
+}
+.white{
+    background-color: #fff;
+}
+.blackBorder{
+    border-color: black;
 }
 .grayWhiteTheme{
     background-color: gray;
@@ -42,13 +52,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #fff;
     padding: 5px;
 }
-.grayWhite .fleidLabel{
-    color: #fff;
+.grayWhite .fleidLabel,.grayWhite  .fieldGroup{
+    color:  black;
 }
 .buttonPart {
     background-color: #fff;
 }
-
+.storeStatus{
+    background-color: chartreuse;
+}
 button{
     width: 120px;
     height: 50px;
@@ -83,4 +95,7 @@ button{
     min-height: 40px!important;
     height: 40px!important;
     padding: 12px 0px!important;
+}
+.noBorderButton{
+    border: 0px none;
 }
