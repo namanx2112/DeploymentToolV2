@@ -33,7 +33,7 @@ export class ControlsComponent {
     this.groupLabel = "";
   }
 
-  ngOnChanges(): void {
+  ngAfterContentInit(): void {
     this.valueChanged();
   }
 

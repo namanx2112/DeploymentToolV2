@@ -1,0 +1,19 @@
+.controlComp{
+    width: 80%;
+    height: 90%;
+    padding: 3%;
+    margin: auto;
+    display: block;
+}
+
+h4{    
+    width: 80%;
+    padding: 3%;
+    margin: auto;
+    display: block;
+}
+
+.outerDiv{
+    float: left;
+    width: 100%;
+}

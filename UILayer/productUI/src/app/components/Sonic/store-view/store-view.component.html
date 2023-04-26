@@ -51,7 +51,7 @@
         <div class="tabBody">
             <div class="tHeader">
                 <h4>{{tabForUI[selectedTab].tab_header}}</h4>
-                <div class="right"><button class="noBorderButton white">Edit</button></div>
+                <div class="right"><button class="noBorderButton white" (click)="editTab(tabForUI[selectedTab])">Edit</button></div>
             </div>
             <app-controls class="tabForm white" [numberOfControlsInARow]="1" [fields]="tabForUI[selectedTab].fields"
                 [readOnlyForm]="true" [needButton]="false" [controlValues]="tValues[tabForUI[selectedTab].tab_name]"

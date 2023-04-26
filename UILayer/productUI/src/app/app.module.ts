@@ -31,6 +31,8 @@ import { SonicHomePageComponent } from './components/Sonic/sonic-home-page/sonic
 import { SonicDashboardComponent } from './components/Sonic/sonic-dashboard/sonic-dashboard.component';
 import { NewProjectComponent } from './components/Sonic/new-project/new-project.component';
 import { StoreViewComponent } from './components/Sonic/store-view/store-view.component'
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogControlsComponent } from './components/dialog-controls/dialog-controls.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { StoreViewComponent } from './components/Sonic/store-view/store-view.com
     SonicHomePageComponent,
     SonicDashboardComponent,
     NewProjectComponent,
-    StoreViewComponent
+    StoreViewComponent,
+    DialogControlsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { StoreViewComponent } from './components/Sonic/store-view/store-view.com
     MatTableModule,
     MatPaginatorModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

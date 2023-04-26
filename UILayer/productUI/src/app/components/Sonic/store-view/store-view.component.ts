@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
 import { SonicService } from 'src/app/services/sonic.service';
+import { ControlsComponent } from '../../controls/controls.component';
+import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 
 @Component({
   selector: 'app-store-view',
@@ -15,7 +18,7 @@ export class StoreViewComponent {
   selectedTab: number;
   storeName: string;
   viewName: string;
-  constructor(private service: SonicService) {
+  constructor(private service: SonicService, private dialog: MatDialog) {
     this.initTab();
     this.viewName = "tabview";
   }
@@ -85,5 +88,34 @@ export class StoreViewComponent {
 
   tabClick(tabIndex: number) {
     this.selectedTab = tabIndex;
+  }
+
+  editTab(cTab: HomeTab) {
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '80%';
+    dialogConfig.width = '60%';
+
+    dialogConfig.data = {
+      numberOfControlsInARow: 1,
+      title: cTab.tab_header,
+      fields: cTab.fields,
+      readOnlyForm: false,
+      needButton: true,
+      controlValues: this.tValues[cTab.tab_name],
+      SubmitLabel: "Save",
+      onSubmit: function (data: any) {
+        let clickedVal = data.values;
+        dialogRef.close();
+      },
+      themeClass: "grayWhite",
+      dialogTheme: "grayWhiteTheme"
+    };
+    dialogRef = this.dialog.open(DialogControlsComponent, dialogConfig);
+    // dialogRef.afterClosed().subscribe(result => {
+    //   //console.log(`Dialog result: ${result}`);
+    //   let t = result;
+    // });
   }
 }
