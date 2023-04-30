@@ -6,6 +6,7 @@ import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
 import { BrandModel, FranchiseModel, TechComponentModel, VendorModel, UserModel } from 'src/app/interfaces/models';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { FranchiseService } from 'src/app/services/frenchise.service';
+import { SonicService } from 'src/app/services/sonic.service';
 import { TechComponenttService } from 'src/app/services/tech-component.service';
 import { UserService } from 'src/app/services/user.service';
 import { VendorService } from 'src/app/services/vendor.service';
@@ -26,6 +27,7 @@ export class TableComponent {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @Input() curTab: HomeTab;
   @Input() searchFields: any;
+  @Input() clickCol: string = "";
   @Output() rowClicked = new EventEmitter<MatRow>();
   displayedColumns: string[] = [];
   columns: TableColumnDef[] = [];
@@ -36,11 +38,17 @@ export class TableComponent {
   cService: any;
 
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
-    private franchiseSerice: FranchiseService, private userSerice: UserService) {
+    private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService) {
+  }
+
+
+  cellClick(row: MatRow) {
+    this.rowClicked.emit(row);
   }
 
   rowClick(row: MatRow) {
-    this.rowClicked.emit(row);
+    if (this.clickCol == 'all')
+      this.rowClicked.emit(row);
   }
 
   initTable() {
@@ -62,15 +70,21 @@ export class TableComponent {
       else if (this.curTab.tab_type == TabType.Users) {
         this.cService = this.userSerice;
       }
+      else if (this.curTab.tab_type == TabType.StoreProjects) {
+        this.cService = this.sonicService;
+      } 
+      else if (this.curTab.tab_type == TabType.StoreNotes) {
+        this.cService = this.sonicService;
+      }
     }
 
     this.getTable();
   }
 
   getTable() {
-    this.cService.Get(this.searchFields).subscribe((resp: any[]) => {
+    this.cService.Get(this.searchFields, this.curTab).subscribe((resp: any[]) => {
       this.dataSource = new MatTableDataSource(resp);
-      let fColumns = this.cService.GetTableVisibleColumns();
+      let fColumns = this.cService.GetTableVisibleColumns(this.curTab);
       for (var indx in this.curTab.fields) {
         if (fColumns.indexOf(this.curTab.fields[indx].fieldUniqeName) == -1)
           continue;

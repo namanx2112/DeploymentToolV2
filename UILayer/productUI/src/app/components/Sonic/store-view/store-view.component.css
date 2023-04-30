@@ -147,6 +147,7 @@
 
 .noBorderButton {
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .tabBody h4 {

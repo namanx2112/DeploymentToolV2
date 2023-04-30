@@ -128,3 +128,23 @@ export interface StoreInstallation {
     nProjectStatus: number,
     cCost: number
 }
+
+export interface StoreProjects {
+    nStoreNo: number,
+    dProjectGoliveDate: Date,
+    dProjEndDate: Date,
+    tProjectType: string,
+    tStatus: string,
+    tPrevProjManager: string,
+    tProjManager: string,
+    tOldVendor: string,
+    tNewVendor: string
+}
+
+export interface SonicNotes {
+    aNotesId: number,
+    dNotesDate: Date,
+    tType: string,
+    tSource: string,
+    tNote: string
+}

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
 import { SonicService } from 'src/app/services/sonic.service';
 import { ControlsComponent } from '../../controls/controls.component';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
+import { NotesListComponent } from '../notes-list/notes-list.component';
 
 @Component({
   selector: 'app-store-view',
@@ -18,6 +19,7 @@ export class StoreViewComponent {
   selectedTab: number;
   storeName: string;
   viewName: string;
+  @Output() ChangeView = new EventEmitter<any>();
   constructor(private service: SonicService, private dialog: MatDialog) {
     this.initTab();
     this.viewName = "tabview";
@@ -37,8 +39,12 @@ export class StoreViewComponent {
     this.selectedTab = 3;
   }
 
-  changeView(tName: string) {
+  changeTileView(tName: string) {
     this.viewName = tName;
+  }
+
+  ShowProject(view: string) {
+    this.ChangeView.emit(view);
   }
 
   changeTab(tTab: HomeTab): HomeTab {
@@ -90,6 +96,19 @@ export class StoreViewComponent {
     this.selectedTab = tabIndex;
   }
 
+  ShowNotes() {
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+
+    dialogConfig.data = {
+      themeClass: "grayWhite",
+      dialogTheme: "lightGrayWhiteTheme"
+    };
+    dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
+  }
+
   editTab(cTab: HomeTab) {
     const dialogConfig = new MatDialogConfig();
     let dialogRef: any;
@@ -110,12 +129,16 @@ export class StoreViewComponent {
         dialogRef.close();
       },
       themeClass: "grayWhite",
-      dialogTheme: "grayWhiteTheme"
+      dialogTheme: "lightGrayWhiteTheme"
     };
     dialogRef = this.dialog.open(DialogControlsComponent, dialogConfig);
     // dialogRef.afterClosed().subscribe(result => {
     //   //console.log(`Dialog result: ${result}`);
     //   let t = result;
     // });
+  }
+
+  goBack(){
+    this.ChangeView.emit("dashboard");
   }
 }

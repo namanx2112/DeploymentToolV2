@@ -1,6 +1,6 @@
 <div class="storeView">
     <div class="projectHeader">
-        <mat-icon class="backIcon">arrow_back_ios</mat-icon>
+        <mat-icon class="backIcon" (click)="goBack()">arrow_back_ios</mat-icon>
         <h4 class="projHeader">Project - {{storeName}}</h4>
         <button class="noBorderButton lightGray">Workflows</button>
     </div>
@@ -29,18 +29,18 @@
                     [themeClass]="'grayWhite'"></app-controls>
             </div>
             <div class="tileGroup tileButtonGroup">
-                <button class="noBorderButton  lightGray"><mat-icon>event_note</mat-icon>Tasks</button>
-                <button class="noBorderButton lightGray"><mat-icon> notes</mat-icon>Notes</button>
-                <button class="noBorderButton lightGray">Active Projects</button>
-                <button class="noBorderButton lightGray">Historical Projects</button>
+                <button class="noBorderButton lightGray" mat-raised-button><mat-icon>event_note</mat-icon>Tasks</button>
+                <button class="noBorderButton lightGray" mat-raised-button (click)="ShowNotes();"><mat-icon> notes</mat-icon>Notes</button>
+                <button class="noBorderButton lightGray" (click)="ShowProject('projecttaleview')">Active Projects</button>
+                <button class="noBorderButton lightGray"  (click)="ShowProject('projecttaleview')">Historical Projects</button>
             </div>
         </div>
     </div>
     <div class="TechAreaTitleBar">
         <h3>Technology Areas</h3>
         <div class="right">
-            <a (click)="changeView('tabview')" [ngClass]="(viewName == 'tabview')? 'selected' : ''">Tab View</a>
-            <a (click)="changeView('fullview')" [ngClass]="(viewName == 'fullview')? 'selected' : ''">Full Page View</a>
+            <a (click)="changeTileView('tabview')" [ngClass]="(viewName == 'tabview')? 'selected' : ''">Tab View</a>
+            <a (click)="changeTileView('fullview')" [ngClass]="(viewName == 'fullview')? 'selected' : ''">Full Page View</a>
         </div>
     </div>
     <div class="TechAreaTabBar" *ngIf="viewName == 'tabview'">

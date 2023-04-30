@@ -18,7 +18,7 @@ export enum TabInstanceType {
 export enum TabType {
     Users, Brands, Franchise, Store, TechComponent, Vendor, TechComponentTools, Analytics,
     StoreContact, StoreConfiguration, StoreStackHolder, StoreNetworking, StorePOS, StoreAudio, StoreExteriorMenus, StorePaymetSystem, 
-    StoreInteriorMenus, StoreSonicRadio, StoreInstallation
+    StoreInteriorMenus, StoreSonicRadio, StoreInstallation, StoreProjects, StoreNotes
 }
 
 
@@ -40,7 +40,7 @@ export interface Fields {
 }
 
 export enum FieldType {
-    text, email, date, time, dropdown, number
+    text, email, date, time, dropdown, number, textarea
 }
 
 export interface OptionType {

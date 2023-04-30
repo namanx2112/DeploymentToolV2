@@ -20,4 +20,8 @@ export class SonicHomePageComponent {
   SearchedResult(txt: any){
     this.showMode = "storeview";
   }
+
+  ChangeView(view: any){
+    this.showMode = view;
+  }
 }

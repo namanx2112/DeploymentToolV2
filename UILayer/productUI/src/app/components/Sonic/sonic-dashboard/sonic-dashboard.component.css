@@ -1,6 +1,7 @@
 .searchPart,.tilesPart,.mapPart,.headerPart{
-    width: 80%;
+    width: 95%;
     margin: 20px auto;
+    float: left;
 }
 
 .tilesPart{

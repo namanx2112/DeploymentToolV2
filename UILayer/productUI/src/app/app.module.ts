@@ -33,6 +33,8 @@ import { NewProjectComponent } from './components/Sonic/new-project/new-project.
 import { StoreViewComponent } from './components/Sonic/store-view/store-view.component'
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogControlsComponent } from './components/dialog-controls/dialog-controls.component';
+import { ProjectTableComponent } from './components/Sonic/project-table/project-table.component';
+import { NotesListComponent } from './components/Sonic/notes-list/notes-list.component'
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { DialogControlsComponent } from './components/dialog-controls/dialog-con
     SonicDashboardComponent,
     NewProjectComponent,
     StoreViewComponent,
-    DialogControlsComponent
+    DialogControlsComponent,
+    ProjectTableComponent,
+    NotesListComponent
   ],
   imports: [
     BrowserModule,

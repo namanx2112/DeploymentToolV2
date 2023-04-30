@@ -36,7 +36,8 @@
         </span>
         <app-sonic-dashboard *ngIf="showMode == 'dashboard'" (SearchedResult)="SearchedResult($event)"></app-sonic-dashboard>
         <app-new-project *ngIf="showMode == 'newstore'"></app-new-project>
-        <app-store-view *ngIf="showMode == 'storeview'"></app-store-view>
-        <app-not-implemented *ngIf="showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' "></app-not-implemented>
+        <app-store-view *ngIf="showMode == 'storeview'" (ChangeView)="ChangeView($event)"></app-store-view>
+        <app-project-table *ngIf="showMode == 'projecttaleview'" (ChangeView)="ChangeView($event)"></app-project-table>
+        <app-not-implemented *ngIf="showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecttaleview'"></app-not-implemented>
     </div>
 </mat-drawer-container>

@@ -20,7 +20,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .fullTile, .halfTile,.tabHeader > div, .tabBody, .lightGray{
     background-color: lightgray;
 }
-
+.backIcon{
+    cursor: pointer;
+}
 .whiteGrayTheme{
     background-color: white;
 }
@@ -45,6 +47,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .grayWhiteTheme{
     background-color: gray;
+}
+.lightGrayWhiteTheme{
+    background-color: lightgrey;
 }
 .grayWhiteTheme .details,.grayWhiteTheme .tables,.grayWhiteTheme .tBody{
     background-color: #fff;

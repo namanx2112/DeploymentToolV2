@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { SonicProjectHighlights } from '../interfaces/commons';
 import { Observable } from 'rxjs';
-import { FieldType, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
+import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
+import { SonicNotes, StoreProjects } from '../interfaces/sonic';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,158 @@ import { CommonService } from './common.service';
 export class SonicService {
 
   constructor(private commonService: CommonService) { }
+
+  GetTableVisibleColumns(tab: HomeTab) {
+    if (tab.tab_type == TabType.StoreProjects) {
+      if (tab.tab_header == "Historical Projects") {
+        return [
+          "nStoreNo",
+          "dProjectGoliveDate",
+          "tProjectType",
+          "dProjEndDate",
+          "tProjManager",
+          "tOldVendor"
+        ];
+      }
+      else {
+        return [
+          "nStoreNo",
+          "dProjectGoliveDate",
+          "tProjectType",
+          "tStatus",
+          "tPrevProjManager",
+          "tProjManager",
+          "tOldVendor",
+          "tNewVendor"
+        ];
+      }
+    }
+    else if (tab.tab_type == TabType.StoreNotes) {
+      return [
+        "dNotesDate",
+        "tType",
+        "tSource",
+        "tNote"
+      ];
+    }
+    else
+      return [];
+  }
+
+
+  Get(fields: Fields, tab: HomeTab) {
+    if (tab.tab_type == TabType.StoreProjects)
+      return this.getProjects();
+    else
+      return this.getNotes();
+
+  }
+
+  getNotes() {
+    return new Observable<SonicNotes[]>((obj) => {
+      let items: SonicNotes[] = [
+        {
+          aNotesId: 1005,
+          dNotesDate: new Date(),
+          tType: "General",
+          tSource: "Clark Kent",
+          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+        },
+        {
+          aNotesId: 1005,
+          dNotesDate: new Date(),
+          tType: "POPS",
+          tSource: "Clark Kent",
+          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+        },
+        {
+          aNotesId: 1005,
+          dNotesDate: new Date(),
+          tType: "TEGS",
+          tSource: "Clark Kent",
+          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+        },
+        {
+          aNotesId: 1005,
+          dNotesDate: new Date(),
+          tType: "DFDDSD",
+          tSource: "Clark Kent",
+          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+        },
+        {
+          aNotesId: 1005,
+          dNotesDate: new Date(),
+          tType: "RRSD",
+          tSource: "Clark Kent",
+          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+        }
+      ];
+      obj.next(items);
+    });
+  }
+
+  getProjects() {
+    return new Observable<StoreProjects[]>((obj) => {
+      let items: StoreProjects[] = [
+        {
+          nStoreNo: 1005,
+          tProjectType: "Audio Installation",
+          tStatus: "On Track",
+          tPrevProjManager: "Clark Kent",
+          tProjManager: "Berry Alien",
+          dProjectGoliveDate: new Date(),
+          dProjEndDate: new Date(),
+          tOldVendor: "ABC Inc",
+          tNewVendor: "HME"
+        },
+        {
+          nStoreNo: 1005,
+          tProjectType: "POS Installation",
+          tStatus: "Action Required",
+          tPrevProjManager: "Tony Kent",
+          tProjManager: "Ben Alien",
+          dProjectGoliveDate: new Date(),
+          dProjEndDate: new Date(),
+          tOldVendor: "ABC Inc",
+          tNewVendor: "HME"
+        },
+        {
+          nStoreNo: 1005,
+          tProjectType: "Parts Replacement",
+          tStatus: "At Risk",
+          tPrevProjManager: "Berry Kent",
+          tProjManager: "Kent Alien",
+          dProjectGoliveDate: new Date(),
+          dProjEndDate: new Date(),
+          tOldVendor: "XYZ Inc",
+          tNewVendor: "HXX"
+        },
+        {
+          nStoreNo: 1005,
+          tProjectType: "Audio Installation",
+          tStatus: "On Track",
+          tPrevProjManager: "Clark Kent",
+          tProjManager: "Berry Alien",
+          dProjectGoliveDate: new Date(),
+          dProjEndDate: new Date(),
+          tOldVendor: "ABC Inc",
+          tNewVendor: "HME"
+        },
+        {
+          nStoreNo: 1005,
+          tProjectType: "Display Installation",
+          tStatus: "On Track",
+          tPrevProjManager: "Clark Kent",
+          tProjManager: "Berry Alien",
+          dProjectGoliveDate: new Date(),
+          dProjEndDate: new Date(),
+          tOldVendor: "ABC Inc",
+          tNewVendor: "HME"
+        }
+      ];
+      obj.next(items);
+    });
+  }
 
   GetProjecthighlights() {
     return new Observable<SonicProjectHighlights[]>((obj) => {
@@ -46,7 +199,7 @@ export class SonicService {
     });
   }
 
-  GetStoretabs(): HomeTab[]{
+  GetStoretabs(): HomeTab[] {
     let tabs = [
       this.GetStoreContactTab(TabInstanceType.Single),
       this.GetStoreConfigurationTab(TabInstanceType.Single),
@@ -94,7 +247,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Address1",
         fieldUniqeName: "tStoreAddressLine1",
         defaultVal: "",
@@ -105,7 +258,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store Address2",
         fieldUniqeName: "tStoreAddressLine2",
         defaultVal: "",
@@ -116,7 +269,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store City",
         fieldUniqeName: "tCity",
         defaultVal: "",
@@ -127,7 +280,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store State",
         fieldUniqeName: "nStoreState",
         defaultVal: "",
@@ -138,7 +291,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store Zip",
         fieldUniqeName: "tStoreZip",
         defaultVal: "",
@@ -149,7 +302,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store Manager",
         fieldUniqeName: "tStoreManager",
         defaultVal: "",
@@ -160,7 +313,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store POC",
         fieldUniqeName: "tPOC",
         defaultVal: "",
@@ -171,7 +324,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store POC Phone",
         fieldUniqeName: "tPOCPhone",
         defaultVal: "",
@@ -182,7 +335,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store POC Email",
         fieldUniqeName: "tPOCEmail",
         defaultVal: "",
@@ -193,7 +346,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store GC",
         fieldUniqeName: "tGC",
         defaultVal: "",
@@ -204,7 +357,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store GC Phone",
         fieldUniqeName: "tGCPhone",
         defaultVal: "",
@@ -215,7 +368,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Store GC Email",
         fieldUniqeName: "tGCEMail",
         defaultVal: "",
@@ -262,7 +415,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Stall Count",
         fieldUniqeName: "nStallCount",
         defaultVal: "",
@@ -299,7 +452,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Ground Break",
         fieldUniqeName: "tGroundBreak",
         defaultVal: "",
@@ -310,7 +463,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Kitchen Install",
         fieldUniqeName: "tKitchenInstall",
         defaultVal: "",
@@ -321,7 +474,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Project Cost",
         fieldUniqeName: "nProjectCost",
         defaultVal: "",
@@ -404,7 +557,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "IT PM",
         fieldUniqeName: "nITPM",
         defaultVal: "",
@@ -986,7 +1139,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "BuyPass ID",
         fieldUniqeName: "nBuyPassID",
         defaultVal: "",
@@ -998,7 +1151,7 @@ export class SonicService {
         options: this.commonService.GetDropdown("nBuyPassID"),
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "ServerEPS",
         fieldUniqeName: "nServerEPS",
         defaultVal: "",
@@ -1010,7 +1163,7 @@ export class SonicService {
         options: this.commonService.GetDropdown("nServerEPS"),
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Status",
         fieldUniqeName: "nStatus",
         defaultVal: "",
@@ -1070,7 +1223,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "DT Enclosures",
         fieldUniqeName: "tDT Enclosures",
         defaultVal: "",
@@ -1093,7 +1246,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "UPS",
         fieldUniqeName: "tUPS",
         defaultVal: "",
@@ -1104,7 +1257,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Shelf",
         fieldUniqeName: "tShelf",
         defaultVal: "",
@@ -1115,7 +1268,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Cost",
         fieldUniqeName: "Cost",
         defaultVal: "",
@@ -1390,7 +1543,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Install Date",
         fieldUniqeName: "dInstall Date",
         defaultVal: "",
@@ -1401,7 +1554,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Install End",
         fieldUniqeName: "dInstall End",
         defaultVal: "",
@@ -1471,6 +1624,209 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter Cost",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      }]
+    };
+  }
+
+  GetProjectsTab(instType: TabInstanceType): HomeTab {
+    return {
+      tab_name: "Projects",
+      tab_header: "Projects",
+      tab_type: TabType.StoreProjects,
+      tab_unique_name: "",
+      instanceType: instType,
+      childTabs: [],
+      search_fields: [{
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Vendor",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      }],
+      fields: [{
+        field_name: "Store No",
+        fieldUniqeName: "nStoreNo",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Store No",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Project Type",
+        fieldUniqeName: "tProjectType",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Store Type",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Status",
+        fieldUniqeName: "tStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Status",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Prev Proj Manager",
+        fieldUniqeName: "tPrevProjManager",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Prev Proj Manager",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Proj Manager",
+        fieldUniqeName: "tProjManager",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Proj Manager",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Project GoliveDate",
+        fieldUniqeName: "dProjectGoliveDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter ProjectGoliveDate",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Old Vendor",
+        fieldUniqeName: "tOldVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Old Vendor",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "New Vendor",
+        fieldUniqeName: "tNewVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter New Vendor",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      }]
+    };
+  }
+
+  GetNotesTab(instType: TabInstanceType): HomeTab {
+    return {
+      tab_name: "Notes",
+      tab_header: "Notes",
+      tab_type: TabType.StoreNotes,
+      tab_unique_name: "",
+      instanceType: instType,
+      childTabs: [],
+      search_fields: [{
+        field_name: "aNotesId",
+        fieldUniqeName: "aNotesId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Notes Id",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      }],
+      fields: [{
+        field_name: "aNotesId",
+        fieldUniqeName: "aNotesId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Notes Id",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "Date",
+        fieldUniqeName: "dNotesDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Date",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "Type",
+        fieldUniqeName: "tType",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        options: this.commonService.GetDropdown("SonicNote.tType"),
+        field_placeholder: "Enter Type",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Source",
+        fieldUniqeName: "tSource",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Source",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Note",
+        fieldUniqeName: "tNote",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.textarea,
+        field_placeholder: "Enter Note",
         validator: [Validators.required],
         mandatory: false,
         hidden: false
