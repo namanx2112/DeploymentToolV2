@@ -21,7 +21,7 @@
                 <button mat-menu-item (click)="menuClick('partsreplacement');">Parts Replacement</button>
             </mat-menu>
             <button mat-button [matMenuTriggerFor]="menu"><mat-icon>search</mat-icon>Search Project</button>
-            <button mat-button [matMenuTriggerFor]="menu"><mat-icon>attach_file</mat-icon>Import Project</button>
+            <button mat-button (click)="menuClick('importproject')"><mat-icon>attach_file</mat-icon>Import Project</button>
         </div>
         <div class="ConfigList">
             <span (click)="clickOption(-1)">Sonic Homepage</span>
@@ -38,6 +38,7 @@
         <app-new-project *ngIf="showMode == 'newstore'"></app-new-project>
         <app-store-view *ngIf="showMode == 'storeview'" (ChangeView)="ChangeView($event)"></app-store-view>
         <app-project-table *ngIf="showMode == 'projecttaleview'" (ChangeView)="ChangeView($event)"></app-project-table>
-        <app-not-implemented *ngIf="showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecttaleview'"></app-not-implemented>
+        <app-import-projects *ngIf="showMode == 'importproject'" (ChangeView)="ChangeView($event)"></app-import-projects>
+        <app-not-implemented *ngIf="showMode != 'importproject' && showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecttaleview'"></app-not-implemented>
     </div>
 </mat-drawer-container>

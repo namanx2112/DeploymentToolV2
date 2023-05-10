@@ -1,0 +1,59 @@
+.projectHeader {
+    float: left;
+    height: 55px;
+    width: 95%;
+    z-index: 4;
+    background-color: #fff;
+    position: absolute;
+}
+
+a{
+    color: blue;
+    cursor: pointer;
+}
+
+.projectHeader h4 {
+    display: inline-block;
+    line-height: 2px;
+}
+
+#file{
+    display: none;
+}
+
+.backIcon {
+    float: left;
+    margin-top: 10px;
+}
+.uploadDiv{
+    width: 90%;
+    margin: 10% auto;
+    padding-top: 100px;
+    height: 200px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+}
+.fileName{
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+.uploadDiv > span{
+    display: block;
+    min-height: 50px;
+    text-align: center;
+}
+.uploadIcon{
+    margin: auto;
+    display: block;
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+}
+.msg{
+    font-weight: bold;
+}
+
+.fileType{
+    color: gray;
+}

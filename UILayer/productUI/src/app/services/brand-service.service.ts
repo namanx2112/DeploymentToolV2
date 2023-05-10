@@ -5,6 +5,7 @@ import { Fields, FieldType } from '../interfaces/home-tab';
 import { BrandModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +33,31 @@ export class BrandServiceService {
   }
 
   Get(request: BrandModel | null) {
-    return this.http.post<BrandModel[]>(this.configUrl + "Brand/GetBrands", request, { headers: this.authService.getHttpHeaders() });
+    return new Observable<BrandModel[]>((obj) => {
+      let items: BrandModel[] = [
+        {
+          aBrandId: 1,
+          tBrandName: "Sonic",
+          tBrandDescription: "Sonic",
+          tBrandWebsite: "www.sonic.com",
+          tBrandCountry: "USA",
+          tBrandEstablished: new Date(),
+          tBrandCategory: "string",
+          tBrandContact: "string",
+          nBrandLogoAttachmentID: 1,
+          nCreatedBy: 1,
+          nUpdateBy: 1,
+          dtCreatedOn: new Date(),
+          dtUpdatedOn: new Date(),
+          tIconURL: "string"
+        }
+      ];
+      obj.next(items);
+    });
+    //return this.http.post<BrandModel[]>(this.configUrl + "Brand/GetBrands", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetTableVisibleColumns(){
+  GetTableVisibleColumns() {
     return [
       "tBrandName",
       "tBrandWebsite",
@@ -146,7 +168,7 @@ export class BrandServiceService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false,
-        options: this.commonService.GetCountryDropdowns() 
+        options: this.commonService.GetCountryDropdowns()
       },
       {
         field_name: "Brands Established",

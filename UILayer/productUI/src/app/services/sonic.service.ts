@@ -5,13 +5,24 @@ import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfa
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
 import { SonicNotes, StoreProjects } from '../interfaces/sonic';
+import { AuthService } from './auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SonicService {
+  configUrl: any;
+  constructor(private http: HttpClient, private commonService: CommonService, private authService: AuthService) { 
+    this.configUrl = authService.getConfigUrl();
+  }
 
-  constructor(private commonService: CommonService) { }
+  postFile(fileToUpload: File): Observable<boolean> {
+    const endpoint = 'your-destination-url';
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    return this.http.post<boolean>(this.configUrl + "Brand/CreateBrand", formData, { headers: this.authService.getHttpHeaders() });
+  }
 
   GetTableVisibleColumns(tab: HomeTab) {
     if (tab.tab_type == TabType.StoreProjects) {
