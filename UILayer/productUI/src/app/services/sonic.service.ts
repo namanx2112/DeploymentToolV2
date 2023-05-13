@@ -227,6 +227,42 @@ export class SonicService {
     return tabs;
   }
 
+  GetPOSInstallationTabs(): HomeTab[] {
+    let tabs = [
+      this.GetStoreContactTab(TabInstanceType.Single),
+      this.GetStoreStackholderTab(TabInstanceType.Single),
+      this.GetStorePOSTab(TabInstanceType.Single)
+    ];
+    return tabs;
+  }
+
+  GetAudioInstallationTabs(): HomeTab[] {
+    let tabs = [
+      this.GetStoreContactTab(TabInstanceType.Single),
+      this.GetStoreStackholderTab(TabInstanceType.Single),
+      this.GetStoreAudioTab(TabInstanceType.Single)
+    ];
+    return tabs;
+  }
+
+  GetMenuInstallationTabs(): HomeTab[] {
+    let tabs = [
+      this.GetStoreContactTab(TabInstanceType.Single),
+      this.GetStoreStackholderTab(TabInstanceType.Single),
+      this.GetStoreExteriorMenusTab(TabInstanceType.Single)
+    ];
+    return tabs;
+  }
+
+  GetPaymentTerminalInstallationTabs(): HomeTab[] {
+    let tabs = [
+      this.GetStoreContactTab(TabInstanceType.Single),
+      this.GetStoreStackholderTab(TabInstanceType.Single),
+      this.GetStorePaymentSystemTab(TabInstanceType.Single)
+    ];
+    return tabs;
+  }
+
   GetStoreContactTab(instType: TabInstanceType): HomeTab {
     return {
       tab_name: "Store Contact",

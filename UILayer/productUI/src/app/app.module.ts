@@ -37,7 +37,11 @@ import { ProjectTableComponent } from './components/Sonic/project-table/project-
 import { NotesListComponent } from './components/Sonic/notes-list/notes-list.component';
 import { ProjectPortfolioComponent } from './components/Sonic/project-portfolio/project-portfolio.component';
 import { ImportProjectsComponent } from './components/Sonic/import-projects/import-projects.component';
-import { DropzoneDirective } from './directives/dropzone.directive'
+import { DropzoneDirective } from './directives/dropzone.directive';
+import { PosInstallationComponent } from './components/Sonic/pos-installation/pos-installation.component';
+import { AudioInstallationComponent } from './components/Sonic/audio-installation/audio-installation.component';
+import { MenuInstallationComponent } from './components/Sonic/menu-installation/menu-installation.component';
+import { PaymentTerminalInstallationComponent } from './components/Sonic/payment-terminal-installation/payment-terminal-installation.component'
 
 @NgModule({
   declarations: [
@@ -63,7 +67,11 @@ import { DropzoneDirective } from './directives/dropzone.directive'
     NotesListComponent,
     ProjectPortfolioComponent,
     ImportProjectsComponent,
-    DropzoneDirective
+    DropzoneDirective,
+    PosInstallationComponent,
+    AudioInstallationComponent,
+    MenuInstallationComponent,
+    PaymentTerminalInstallationComponent
   ],
   imports: [
     BrowserModule,

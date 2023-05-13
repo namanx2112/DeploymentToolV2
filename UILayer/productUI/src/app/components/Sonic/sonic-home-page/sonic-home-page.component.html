@@ -39,6 +39,10 @@
         <app-store-view *ngIf="showMode == 'storeview'" (ChangeView)="ChangeView($event)"></app-store-view>
         <app-project-table *ngIf="showMode == 'projecttaleview'" (ChangeView)="ChangeView($event)"></app-project-table>
         <app-import-projects *ngIf="showMode == 'importproject'" (ChangeView)="ChangeView($event)"></app-import-projects>
-        <app-not-implemented *ngIf="showMode != 'importproject' && showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecttaleview'"></app-not-implemented>
+        <app-pos-installation *ngIf="showMode == 'posinstallation'" (ChangeView)="ChangeView($event)"></app-pos-installation>   
+        <app-payment-terminal-installation *ngIf="showMode == 'paymentterminalinstllation'" (ChangeView)="ChangeView($event)"></app-payment-terminal-installation>     
+        <app-menu-installation *ngIf="showMode == 'menuinstallation'" (ChangeView)="ChangeView($event)"></app-menu-installation>
+        <app-audio-installation *ngIf="showMode == 'audioinstallation'" (ChangeView)="ChangeView($event)"></app-audio-installation>
+        <app-not-implemented *ngIf="showMode != 'menuinstallation' && showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecttaleview'"></app-not-implemented>
     </div>
 </mat-drawer-container>
