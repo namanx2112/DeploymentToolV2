@@ -36,11 +36,12 @@ export interface Fields {
     defaultVal: string,
     conditional_mandatory?: ConditionalOption,
     options?: OptionType[],
-    hidden: boolean
+    hidden: boolean,
+    relations?: HomeTab[]
 }
 
 export enum FieldType {
-    text, email, date, time, dropdown, number, textarea
+    text, email, date, time, dropdown, number, textarea, multiTab
 }
 
 export interface OptionType {

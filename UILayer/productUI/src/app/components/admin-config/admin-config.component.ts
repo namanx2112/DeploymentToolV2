@@ -16,7 +16,7 @@ export class AdminConfigComponent {
   constructor(private homeService: HomeService) {
     this.getAllTabs();
     this.tabIndex = -1;
-    this.tabItems = ["Dashboard", "Users", "Brands Profile", "Vendors", "Manage Dropdowns", "Technology Areas", "Franchise"];
+  this.tabItems = ["Dashboard", "Users", "Brands Profile", "Vendors", "Manage Dropdowns", "Technology Areas", "Franchise", "Quote Request Workflow Config", "PO Workflow Config"];
     this.needNew = false;
     //Users, Brands, Vendors, Tech Components, Franchises, Stores, Tech Component Tools, Analytics
   }

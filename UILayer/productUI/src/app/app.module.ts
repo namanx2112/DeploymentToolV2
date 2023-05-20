@@ -41,7 +41,11 @@ import { DropzoneDirective } from './directives/dropzone.directive';
 import { PosInstallationComponent } from './components/Sonic/pos-installation/pos-installation.component';
 import { AudioInstallationComponent } from './components/Sonic/audio-installation/audio-installation.component';
 import { MenuInstallationComponent } from './components/Sonic/menu-installation/menu-installation.component';
-import { PaymentTerminalInstallationComponent } from './components/Sonic/payment-terminal-installation/payment-terminal-installation.component'
+import { PaymentTerminalInstallationComponent } from './components/Sonic/payment-terminal-installation/payment-terminal-installation.component';
+import { WorkflowsComponent } from './components/Sonic/workflows/workflows.component';
+import { QuoteRequestWorkflowTemplateComponent } from './components/quote-request-workflow-template/quote-request-workflow-template.component';
+import { POWorkflowTemplateComponent } from './components/poworkflow-template/poworkflow-template.component'
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -71,7 +75,10 @@ import { PaymentTerminalInstallationComponent } from './components/Sonic/payment
     PosInstallationComponent,
     AudioInstallationComponent,
     MenuInstallationComponent,
-    PaymentTerminalInstallationComponent
+    PaymentTerminalInstallationComponent,
+    WorkflowsComponent,
+    QuoteRequestWorkflowTemplateComponent,
+    POWorkflowTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +97,8 @@ import { PaymentTerminalInstallationComponent } from './components/Sonic/payment
     MatPaginatorModule,
     MatSidenavModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

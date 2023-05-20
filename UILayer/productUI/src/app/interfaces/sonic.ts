@@ -148,3 +148,8 @@ export interface SonicNotes {
     tSource: string,
     tNote: string
 }
+
+export interface SonicNotification{
+    aNotification: number,
+    tHeader: string
+}

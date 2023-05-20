@@ -1,3 +1,5 @@
+import { HomeTab } from "./home-tab"
+
 export interface BrandModel {
     aBrandId: number,
     tBrandName: string,
@@ -87,4 +89,72 @@ export interface UserModel {
     tContactNumber: string,
     tRole: string,
     nBrandId: number
+}
+
+export interface QuoteRequestTemplate {
+    aQuoteTemplateID: number,
+    tName: string,
+    nBrandID: number,
+    arTechAreas: QuoteRequestTechAreas[],
+    nCreatedBy: number,
+    nUpdateBy: number,
+    dtCreatedOn: Date
+    dtUpdatedOn: Date,
+    bDeleted: boolean
+}
+
+export interface QuoteRequestTechAreas {
+    part: HomeTab,
+    fields: QuoteRequestFields[],
+    nCreatedBy: number,
+    nUpdateBy: number,
+    dtCreatedOn: Date
+    dtUpdatedOn: Date,
+    bDeleted: boolean
+}
+
+export interface QuoteRequestFields {
+    techAreaFieldId: string 
+}
+
+export interface POConfigTemplate {
+    aPOConfigID: number,
+    nBrandID: number,
+    nVendorID: number,
+    parts: POConfigPart[],
+    nCreatedBy: number,
+    nUpdateBy: number,
+    dtCreatedOn: Date
+    dtUpdatedOn: Date,
+    bDeleted: boolean
+}
+
+export interface POConfigPart {
+    aPOConfigPart: number,
+    nPartID: number,
+    nConfigProjectFieldID: number,
+    arTechAreas: HomeTab[]
+}
+
+export interface POSection {
+    aPOID: number,
+    tPONumber: number,
+    nStoreID: number,
+    tBillingName: string,
+    tBillingPhone: string,
+    tBillingEmail: string,
+    tBillingAddress: string,
+    tShippingName: string,
+    tShippingPhone: string,
+    tShippingEmail: string,
+    tShippingAddress: string,
+    tNotes: string,
+    dDeliver: Date,
+    cTotal: number,
+    nOutgoingEmailID: string,
+    nCreatedBy: number,
+    nUpdateBy: number,
+    dtCreatedOn: Date
+    dtUpdatedOn: Date,
+    bDeleted: boolean
 }
