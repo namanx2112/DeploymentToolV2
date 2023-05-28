@@ -1,119 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
+using System.Threading.Tasks;
 using System.Web.Http;
-using DeploymentTool.Model;
-using System.IdentityModel.Tokens.Jwt;
-using System.Web;
-using DeploymentTool.Helpers;
+using System.Web.Http.Description;
+using DeploymentTool;
 
 namespace DeploymentTool.Controller
 {
     public class BrandController : ApiController
     {
+        private dtDBEntities db = new dtDBEntities();
 
-        
-        // GET api/<controller>
+        // GET: api/tblBrand
         [Authorize]
         [HttpPost]
-        [ActionName("GetBrands")]
-        public HttpResponseMessage GetBrands([FromBody] Brand inputbrand)
+        public IQueryable<tblBrand> Get(Dictionary<string, string> searchFields)
         {
-            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            var dal = new BrandDAL();
-            var result = dal.GetBrands(inputbrand,(int)securityContext.nUserID);
+            return db.tblBrand;
+        }
 
-            if (result == null)
+        // GET: api/tblBrand/5
+        [ResponseType(typeof(tblBrand))]
+        public async Task<IHttpActionResult> GettblBrand(int id)
+        {
+            tblBrand tblBrand = await db.tblBrand.FindAsync(id);
+            if (tblBrand == null)
             {
-                return new HttpResponseMessage(HttpStatusCode.NoContent);
+                return NotFound();
             }
-            else
+
+            return Ok(tblBrand);
+        }
+
+        // PUT: api/tblBrand/5
+        [Authorize]
+        [HttpPost]
+        public async Task<IHttpActionResult> Update(tblBrand tblBrand)
+        {
+            if (!ModelState.IsValid)
             {
-                return new HttpResponseMessage(HttpStatusCode.OK)
+                return BadRequest(ModelState);
+            }
+
+            db.Entry(tblBrand).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!tblBrandExists(tblBrand.aBrandId))
                 {
-                    Content = new ObjectContent<List<Brand>>(result, new JsonMediaTypeFormatter())
-                };
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-
-       
+        // POST: api/tblBrand
         [Authorize]
         [HttpPost]
-        [ActionName("CreateBrand")]
-        // POST api/<controller>
-        public HttpResponseMessage CreateBrand([FromBody] Brand brand)
+        public async Task<IHttpActionResult> Create(tblBrand tblBrand)
         {
-            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            //if (!ModelState.IsValid)
-            //{
-            //    return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            //}
-            if (securityContext == null)
-                throw new HttpRequestValidationException("Exception while creating Security Context"); 
-
-            int nuserid = 1;
-            var brandDAL = new BrandDAL();
-            brandDAL.CreateBrand(brand, (int)securityContext.nUserID);
-
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new ObjectContent<Brand>(brand, new JsonMediaTypeFormatter())
-            };
-        }
-
-
-        [Authorize]
-        [HttpPost]
-        [Route("api/Brand/update")]
-        // PUT api/<controller>/5
-        public HttpResponseMessage Update([FromBody] Brand brand)
-        {
-            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             if (!ModelState.IsValid)
             {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
-            if (securityContext == null)
-                throw new HttpRequestValidationException("Exception while creating Security Context");
-            var brandDAL = new BrandDAL();
-            
-            brand.nUpdateBy = (int)securityContext.nUserID;
-            brandDAL.Update(brand);
 
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new ObjectContent<Brand>(brand, new JsonMediaTypeFormatter())
-            };
+            db.tblBrand.Add(tblBrand);
+            await db.SaveChangesAsync();
 
+            return Json(tblBrand);
         }
 
-        // DELETE api/<controller>/5
-
+        // DELETE: api/tblBrand/5
         [Authorize]
         [HttpPost]
-        [Route("api/Brand/delete")]
-        public HttpResponseMessage Delete(Brand brand)
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            if (!ModelState.IsValid)
+            tblBrand tblBrand = await db.tblBrand.FindAsync(id);
+            if (tblBrand == null)
             {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+                return NotFound();
             }
-            if (securityContext == null)
-                throw new HttpRequestValidationException("Exception while creating Security Context");
-            int nUserid = (int)securityContext.nUserID;
-            var brandDAL = new BrandDAL();
-            brandDAL.Delete(brand, nUserid);
 
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            db.tblBrand.Remove(tblBrand);
+            await db.SaveChangesAsync();
 
+            return Ok(tblBrand);
+        }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool tblBrandExists(int id)
+        {
+            return db.tblBrand.Count(e => e.aBrandId == id) > 0;
         }
     }
 }

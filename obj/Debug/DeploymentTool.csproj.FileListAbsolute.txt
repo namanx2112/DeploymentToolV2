@@ -488,6 +488,8 @@ D:\Projects\InspireBrand\bin\roslyn\vbc.exe.config
 D:\Projects\InspireBrand\bin\roslyn\vbc.rsp
 D:\Projects\InspireBrand\bin\roslyn\VBCSCompiler.exe
 D:\Projects\InspireBrand\bin\roslyn\VBCSCompiler.exe.config
+D:\Projects\InspireBrand\bin\EntityFramework.dll
+D:\Projects\InspireBrand\bin\EntityFramework.SqlServer.dll
 D:\Projects\InspireBrand\bin\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Projects\InspireBrand\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Projects\InspireBrand\bin\Microsoft.IdentityModel.Abstractions.dll
@@ -507,6 +509,8 @@ D:\Projects\InspireBrand\bin\System.Threading.Tasks.Extensions.dll
 D:\Projects\InspireBrand\bin\System.ValueTuple.dll
 D:\Projects\InspireBrand\bin\System.Web.Http.dll
 D:\Projects\InspireBrand\bin\System.Web.Http.WebHost.dll
+D:\Projects\InspireBrand\bin\EntityFramework.xml
+D:\Projects\InspireBrand\bin\EntityFramework.SqlServer.xml
 D:\Projects\InspireBrand\bin\Microsoft.Bcl.AsyncInterfaces.xml
 D:\Projects\InspireBrand\bin\Microsoft.IdentityModel.Abstractions.xml
 D:\Projects\InspireBrand\bin\Microsoft.IdentityModel.JsonWebTokens.xml

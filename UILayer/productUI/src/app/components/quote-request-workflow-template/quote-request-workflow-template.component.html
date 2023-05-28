@@ -2,6 +2,7 @@
     <div class="header"><mat-icon class="tIcon" (click)="goBack()">arrow_back_ios</mat-icon>Create New Quote Request
         Workflow</div>
     <div class="controlPart grayWhiteTheme grayWhite">
+        <!-- <app-poworkflow-template *ngIf="tabIndex == 7" [NeedNew]="needNew"></app-poworkflow-template> -->
         <mat-label class="fleidLabel" [attr.for]="">Name of the Workflow</mat-label>
         <mat-form-field class="curField" appearance="outline">
             <input matInput [type]="'text'" [ngModel]="quoteRequestTemplate.tName" (keydown)="onKeydown($event)">

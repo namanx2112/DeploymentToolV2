@@ -3,18 +3,20 @@ import { HomeTab } from "./home-tab"
 export interface BrandModel {
     aBrandId: number,
     tBrandName: string,
-    tBrandDescription: string,
-    tBrandWebsite: string,
-    tBrandCountry: string,
-    tBrandEstablished: Date,
-    tBrandCategory: string,
-    tBrandContact: string,
+    tBrandDomain: string,
+    tBrandAddressLine1: string,
+    tBrandAddressLine2: string,
+    tBrandCity: string,
+    nBrandState: number,
+    nBrandCountry: number,
+    tBrandZipCode: string,
     nBrandLogoAttachmentID: number,
     nCreatedBy: number,
     nUpdateBy: number,
     dtCreatedOn: Date,
     dtUpdatedOn: Date,
-    tIconURL: string
+    bDeleted: boolean,
+    tIconURL:string
 }
 
 
@@ -83,11 +85,14 @@ export interface PartsModel {
 }
 
 export interface UserModel {
-    aUserId: number,
+    aUserID: number,
+    tName: string,
     tUserName: string,
-    tUserEmail: string,
-    tContactNumber: string,
-    tRole: string,
+    tEmail: string,
+    nDepartment: number,
+    nRole: number,
+    tEmpID: string,
+    tMobile: string,
     nBrandId: number
 }
 

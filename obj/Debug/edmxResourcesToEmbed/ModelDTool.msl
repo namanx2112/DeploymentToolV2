@@ -1,0 +1,526 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dtDBModelStoreContainer" CdmEntityContainer="dtDBEntities">
+    <EntitySetMapping Name="tblBrand">
+      <EntityTypeMapping TypeName="dtDBModel.tblBrand">
+        <MappingFragment StoreEntitySet="tblBrand">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nBrandLogoAttachmentID" ColumnName="nBrandLogoAttachmentID" />
+          <ScalarProperty Name="tBrandZipCode" ColumnName="tBrandZipCode" />
+          <ScalarProperty Name="nBrandCountry" ColumnName="nBrandCountry" />
+          <ScalarProperty Name="nBrandState" ColumnName="nBrandState" />
+          <ScalarProperty Name="tBrandCity" ColumnName="tBrandCity" />
+          <ScalarProperty Name="tBrandAddressLine2" ColumnName="tBrandAddressLine2" />
+          <ScalarProperty Name="tBrandAddressLine1" ColumnName="tBrandAddressLine1" />
+          <ScalarProperty Name="tBrandDomain" ColumnName="tBrandDomain" />
+          <ScalarProperty Name="tBrandName" ColumnName="tBrandName" />
+          <ScalarProperty Name="aBrandId" ColumnName="aBrandId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUser">
+      <EntityTypeMapping TypeName="dtDBModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="dLastLoggedInTime" ColumnName="dLastLoggedInTime" />
+          <ScalarProperty Name="tMobile" ColumnName="tMobile" />
+          <ScalarProperty Name="tEmpID" ColumnName="tEmpID" />
+          <ScalarProperty Name="nRole" ColumnName="nRole" />
+          <ScalarProperty Name="nDepartment" ColumnName="nDepartment" />
+          <ScalarProperty Name="tEmail" ColumnName="tEmail" />
+          <ScalarProperty Name="tPassword" ColumnName="tPassword" />
+          <ScalarProperty Name="tUserName" ColumnName="tUserName" />
+          <ScalarProperty Name="tName" ColumnName="tName" />
+          <ScalarProperty Name="aUserID" ColumnName="aUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVendor">
+      <EntityTypeMapping TypeName="dtDBModel.tblVendor">
+        <MappingFragment StoreEntitySet="tblVendor">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdatedBy" ColumnName="nUpdatedBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tVendorContact" ColumnName="tVendorContact" />
+          <ScalarProperty Name="tVendorCategory" ColumnName="tVendorCategory" />
+          <ScalarProperty Name="tVendorEstablished" ColumnName="tVendorEstablished" />
+          <ScalarProperty Name="tVendorCountry" ColumnName="tVendorCountry" />
+          <ScalarProperty Name="tVendorWebsite" ColumnName="tVendorWebsite" />
+          <ScalarProperty Name="tVendorContactPerson" ColumnName="tVendorContactPerson" />
+          <ScalarProperty Name="tVendorPhone" ColumnName="tVendorPhone" />
+          <ScalarProperty Name="tVendorAddress" ColumnName="tVendorAddress" />
+          <ScalarProperty Name="tVendorEmail" ColumnName="tVendorEmail" />
+          <ScalarProperty Name="tVendorDescription" ColumnName="tVendorDescription" />
+          <ScalarProperty Name="nTechComponentID" ColumnName="nTechComponentID" />
+          <ScalarProperty Name="tVendorName" ColumnName="tVendorName" />
+          <ScalarProperty Name="aVendorId" ColumnName="aVendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAttachments">
+      <EntityTypeMapping TypeName="dtDBModel.tblAttachment">
+        <MappingFragment StoreEntitySet="tblAttachment">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tAttachmentURL" ColumnName="tAttachmentURL" />
+          <ScalarProperty Name="tAttachmentBlob" ColumnName="tAttachmentBlob" />
+          <ScalarProperty Name="tAttachmentComments" ColumnName="tAttachmentComments" />
+          <ScalarProperty Name="tAttachmentType" ColumnName="tAttachmentType" />
+          <ScalarProperty Name="tfileType" ColumnName="tfileType" />
+          <ScalarProperty Name="tFileExt" ColumnName="tFileExt" />
+          <ScalarProperty Name="tfileName" ColumnName="tfileName" />
+          <ScalarProperty Name="aAttachmentId" ColumnName="aAttachmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjects">
+      <EntityTypeMapping TypeName="dtDBModel.tblProject">
+        <MappingFragment StoreEntitySet="tblProject">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
+          <ScalarProperty Name="tDMA" ColumnName="tDMA" />
+          <ScalarProperty Name="nDMAID" ColumnName="nDMAID" />
+          <ScalarProperty Name="nProjectStatus" ColumnName="nProjectStatus" />
+          <ScalarProperty Name="nProjectType" ColumnName="nProjectType" />
+          <ScalarProperty Name="dGoLiveDate" ColumnName="dGoLiveDate" />
+          <ScalarProperty Name="nStoreID" ColumnName="nStoreID" />
+          <ScalarProperty Name="tProjectName" ColumnName="tProjectName" />
+          <ScalarProperty Name="aProjectID" ColumnName="aProjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectAudios">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectAudio">
+        <MappingFragment StoreEntitySet="tblProjectAudio">
+          <ScalarProperty Name="cCost" ColumnName="cCost" />
+          <ScalarProperty Name="dLoopDeliveryDate" ColumnName="dLoopDeliveryDate" />
+          <ScalarProperty Name="nLoopType" ColumnName="nLoopType" />
+          <ScalarProperty Name="nLoopStatus" ColumnName="nLoopStatus" />
+          <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
+          <ScalarProperty Name="nConfiguration" ColumnName="nConfiguration" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectAudioID" ColumnName="aProjectAudioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectBillToes">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectBillTo">
+        <MappingFragment StoreEntitySet="tblProjectBillTo">
+          <ScalarProperty Name="tBillToEmail" ColumnName="tBillToEmail" />
+          <ScalarProperty Name="tBillToZipCode" ColumnName="tBillToZipCode" />
+          <ScalarProperty Name="tBillToState" ColumnName="tBillToState" />
+          <ScalarProperty Name="tBillToAddressLine2" ColumnName="tBillToAddressLine2" />
+          <ScalarProperty Name="tBillToAddressLine1" ColumnName="tBillToAddressLine1" />
+          <ScalarProperty Name="tCompany" ColumnName="tCompany" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectBillToID" ColumnName="aProjectBillToID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectConfigs">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectConfig">
+        <MappingFragment StoreEntitySet="tblProjectConfig">
+          <ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
+          <ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
+          <ScalarProperty Name="dGroundBreak" ColumnName="dGroundBreak" />
+          <ScalarProperty Name="nInsideDining" ColumnName="nInsideDining" />
+          <ScalarProperty Name="nDriveThru" ColumnName="nDriveThru" />
+          <ScalarProperty Name="nStallCount" ColumnName="nStallCount" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectConfigID" ColumnName="aProjectConfigID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectExteriorMenus">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectExteriorMenu">
+        <MappingFragment StoreEntitySet="tblProjectExteriorMenus">
+          <ScalarProperty Name="cTotalCost" ColumnName="cTotalCost" />
+          <ScalarProperty Name="cIDTechCost" ColumnName="cIDTechCost" />
+          <ScalarProperty Name="cFabConCost" ColumnName="cFabConCost" />
+          <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nDTMenu" ColumnName="nDTMenu" />
+          <ScalarProperty Name="nDTPops" ColumnName="nDTPops" />
+          <ScalarProperty Name="nFlat" ColumnName="nFlat" />
+          <ScalarProperty Name="nPatio" ColumnName="nPatio" />
+          <ScalarProperty Name="nStalls" ColumnName="nStalls" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectExteriorMenuID" ColumnName="aProjectExteriorMenuID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectInstallations">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectInstallation">
+        <MappingFragment StoreEntitySet="tblProjectInstallation">
+          <ScalarProperty Name="cCost" ColumnName="cCost" />
+          <ScalarProperty Name="nProjectStatus" ColumnName="nProjectStatus" />
+          <ScalarProperty Name="nTestTransactions" ColumnName="nTestTransactions" />
+          <ScalarProperty Name="nSignoffs" ColumnName="nSignoffs" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="dInstallEnd" ColumnName="dInstallEnd" />
+          <ScalarProperty Name="dInstallDate" ColumnName="dInstallDate" />
+          <ScalarProperty Name="tLeadTech" ColumnName="tLeadTech" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectInstallationID" ColumnName="aProjectInstallationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectInteriorMenus">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectInteriorMenu">
+        <MappingFragment StoreEntitySet="tblProjectInteriorMenus">
+          <ScalarProperty Name="cCost" ColumnName="cCost" />
+          <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nDMBQuantity" ColumnName="nDMBQuantity" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectInteriorMenuID" ColumnName="aProjectInteriorMenuID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectNetworkings">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectNetworking">
+        <MappingFragment StoreEntitySet="tblProjectNetworking">
+          <ScalarProperty Name="nTempType" ColumnName="nTempType" />
+          <ScalarProperty Name="dTempDate" ColumnName="dTempDate" />
+          <ScalarProperty Name="nTempStatus" ColumnName="nTempStatus" />
+          <ScalarProperty Name="nBackupType" ColumnName="nBackupType" />
+          <ScalarProperty Name="dBackupDate" ColumnName="dBackupDate" />
+          <ScalarProperty Name="nBackupStatus" ColumnName="nBackupStatus" />
+          <ScalarProperty Name="nPrimaryType" ColumnName="nPrimaryType" />
+          <ScalarProperty Name="dPrimaryDate" ColumnName="dPrimaryDate" />
+          <ScalarProperty Name="nPrimaryStatus" ColumnName="nPrimaryStatus" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectNetworkingID" ColumnName="aProjectNetworkingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectNotes">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectNote">
+        <MappingFragment StoreEntitySet="tblProjectNotes">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tNoteDesc" ColumnName="tNoteDesc" />
+          <ScalarProperty Name="tSource" ColumnName="tSource" />
+          <ScalarProperty Name="nNoteType" ColumnName="nNoteType" />
+          <ScalarProperty Name="nStoreID" ColumnName="nStoreID" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aNoteID" ColumnName="aNoteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectPaymentSystems">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectPaymentSystem">
+        <MappingFragment StoreEntitySet="tblProjectPaymentSystem">
+          <ScalarProperty Name="cCost" ColumnName="cCost" />
+          <ScalarProperty Name="nShelf" ColumnName="nShelf" />
+          <ScalarProperty Name="nUPS" ColumnName="nUPS" />
+          <ScalarProperty Name="n15SunShields" ColumnName="n15SunShields" />
+          <ScalarProperty Name="nDTEnclosures" ColumnName="nDTEnclosures" />
+          <ScalarProperty Name="n90Enclosures" ColumnName="n90Enclosures" />
+          <ScalarProperty Name="n45Enclosures" ColumnName="n45Enclosures" />
+          <ScalarProperty Name="nPAYSUnits" ColumnName="nPAYSUnits" />
+          <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nServerEPS" ColumnName="nServerEPS" />
+          <ScalarProperty Name="nBuyPassID" ColumnName="nBuyPassID" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectPaymentSystemID" ColumnName="aProjectPaymentSystemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectPOS">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectPOS">
+        <MappingFragment StoreEntitySet="tblProjectPOS">
+          <ScalarProperty Name="cCost" ColumnName="cCost" />
+          <ScalarProperty Name="nPaperworkStatus" ColumnName="nPaperworkStatus" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="dSupportDate" ColumnName="dSupportDate" />
+          <ScalarProperty Name="dConfigDate" ColumnName="dConfigDate" />
+          <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectPOSID" ColumnName="aProjectPOSID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectSonicRadios">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectSonicRadio">
+        <MappingFragment StoreEntitySet="tblProjectSonicRadio">
+          <ScalarProperty Name="cCost" ColumnName="cCost" />
+          <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nServerRacks" ColumnName="nServerRacks" />
+          <ScalarProperty Name="nZones" ColumnName="nZones" />
+          <ScalarProperty Name="nIndoorSpeakers" ColumnName="nIndoorSpeakers" />
+          <ScalarProperty Name="nColors" ColumnName="nColors" />
+          <ScalarProperty Name="nOutdoorSpeakers" ColumnName="nOutdoorSpeakers" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectSonicRadioID" ColumnName="aProjectSonicRadioID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectStakeHolders">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectStakeHolder">
+        <MappingFragment StoreEntitySet="tblProjectStakeHolders">
+          <ScalarProperty Name="tPrincipalPartner" ColumnName="tPrincipalPartner" />
+          <ScalarProperty Name="tAandE" ColumnName="tAandE" />
+          <ScalarProperty Name="tCM" ColumnName="tCM" />
+          <ScalarProperty Name="tRED" ColumnName="tRED" />
+          <ScalarProperty Name="nITPM" ColumnName="nITPM" />
+          <ScalarProperty Name="nCD" ColumnName="nCD" />
+          <ScalarProperty Name="tFBC" ColumnName="tFBC" />
+          <ScalarProperty Name="tRVP" ColumnName="tRVP" />
+          <ScalarProperty Name="nFranchisee" ColumnName="nFranchisee" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectStakeHolderID" ColumnName="aProjectStakeHolderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectStores">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectStore">
+        <MappingFragment StoreEntitySet="tblProjectStore">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tGCEMail" ColumnName="tGCEMail" />
+          <ScalarProperty Name="tGCPhone" ColumnName="tGCPhone" />
+          <ScalarProperty Name="tGC" ColumnName="tGC" />
+          <ScalarProperty Name="tPOCEmail" ColumnName="tPOCEmail" />
+          <ScalarProperty Name="tPOCPhone" ColumnName="tPOCPhone" />
+          <ScalarProperty Name="tPOC" ColumnName="tPOC" />
+          <ScalarProperty Name="tStoreManager" ColumnName="tStoreManager" />
+          <ScalarProperty Name="tStoreZip" ColumnName="tStoreZip" />
+          <ScalarProperty Name="nStoreState" ColumnName="nStoreState" />
+          <ScalarProperty Name="tCity" ColumnName="tCity" />
+          <ScalarProperty Name="tStoreAddressLine2" ColumnName="tStoreAddressLine2" />
+          <ScalarProperty Name="tStoreAddressLine1" ColumnName="tStoreAddressLine1" />
+          <ScalarProperty Name="tStoreName" ColumnName="tStoreName" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectStoreID" ColumnName="aProjectStoreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStores">
+      <EntityTypeMapping TypeName="dtDBModel.tblStore">
+        <MappingFragment StoreEntitySet="tblStore">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tStoreNumber" ColumnName="tStoreNumber" />
+          <ScalarProperty Name="aStoreID" ColumnName="aStoreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers1">
+      <EntityTypeMapping TypeName="dtDBModel.tblUser1">
+        <MappingFragment StoreEntitySet="tblUsers">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="dLastLoggedInTime" ColumnName="dLastLoggedInTime" />
+          <ScalarProperty Name="tMobile" ColumnName="tMobile" />
+          <ScalarProperty Name="tEmpID" ColumnName="tEmpID" />
+          <ScalarProperty Name="nRole" ColumnName="nRole" />
+          <ScalarProperty Name="nDepartment" ColumnName="nDepartment" />
+          <ScalarProperty Name="tEmail" ColumnName="tEmail" />
+          <ScalarProperty Name="tPassword" ColumnName="tPassword" />
+          <ScalarProperty Name="tUserName" ColumnName="tUserName" />
+          <ScalarProperty Name="tName" ColumnName="tName" />
+          <ScalarProperty Name="aUserID" ColumnName="aUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBrandBKPs">
+      <EntityTypeMapping TypeName="dtDBModel.tblBrandBKP">
+        <MappingFragment StoreEntitySet="tblBrandBKP">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nBrandLogoAttachmentID" ColumnName="nBrandLogoAttachmentID" />
+          <ScalarProperty Name="tBrandZipCode" ColumnName="tBrandZipCode" />
+          <ScalarProperty Name="nBrandCountry" ColumnName="nBrandCountry" />
+          <ScalarProperty Name="nBrandState" ColumnName="nBrandState" />
+          <ScalarProperty Name="tBrandCity" ColumnName="tBrandCity" />
+          <ScalarProperty Name="tBrandAddressLine2" ColumnName="tBrandAddressLine2" />
+          <ScalarProperty Name="tBrandAddressLine1" ColumnName="tBrandAddressLine1" />
+          <ScalarProperty Name="tBrandDomain" ColumnName="tBrandDomain" />
+          <ScalarProperty Name="tBrandName" ColumnName="tBrandName" />
+          <ScalarProperty Name="aBrandId" ColumnName="aBrandId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCountries">
+      <EntityTypeMapping TypeName="dtDBModel.tblCountry">
+        <MappingFragment StoreEntitySet="tblCountry">
+          <ScalarProperty Name="tCountryName" ColumnName="tCountryName" />
+          <ScalarProperty Name="aCountryId" ColumnName="aCountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEnums">
+      <EntityTypeMapping TypeName="dtDBModel.tblEnum">
+        <MappingFragment StoreEntitySet="tblEnum">
+          <ScalarProperty Name="tDisplayName" ColumnName="tDisplayName" />
+          <ScalarProperty Name="nIndexID" ColumnName="nIndexID" />
+          <ScalarProperty Name="nConstraintID" ColumnName="nConstraintID" />
+          <ScalarProperty Name="aEnumID" ColumnName="aEnumID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEnumTableFields">
+      <EntityTypeMapping TypeName="dtDBModel.tblEnumTableField">
+        <MappingFragment StoreEntitySet="tblEnumTableField">
+          <ScalarProperty Name="tColumnName" ColumnName="tColumnName" />
+          <ScalarProperty Name="tTableName" ColumnName="tTableName" />
+          <ScalarProperty Name="aConstraintID" ColumnName="aConstraintID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFranchises">
+      <EntityTypeMapping TypeName="dtDBModel.tblFranchise">
+        <MappingFragment StoreEntitySet="tblFranchise">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nFranchiseRevenue" ColumnName="nFranchiseRevenue" />
+          <ScalarProperty Name="nFranchiseEmployeeCount" ColumnName="nFranchiseEmployeeCount" />
+          <ScalarProperty Name="tFranchiseAddress" ColumnName="tFranchiseAddress" />
+          <ScalarProperty Name="tFranchisePhone" ColumnName="tFranchisePhone" />
+          <ScalarProperty Name="tFranchiseEmail" ColumnName="tFranchiseEmail" />
+          <ScalarProperty Name="tFranchiseOwner" ColumnName="tFranchiseOwner" />
+          <ScalarProperty Name="tFranchiseContact" ColumnName="tFranchiseContact" />
+          <ScalarProperty Name="dFranchiseEstablished" ColumnName="dFranchiseEstablished" />
+          <ScalarProperty Name="tFranchiseLocation" ColumnName="tFranchiseLocation" />
+          <ScalarProperty Name="tFranchiseDescription" ColumnName="tFranchiseDescription" />
+          <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
+          <ScalarProperty Name="tFranchiseName" ColumnName="tFranchiseName" />
+          <ScalarProperty Name="aFranchiseId" ColumnName="aFranchiseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFunctions">
+      <EntityTypeMapping TypeName="dtDBModel.tblFunction">
+        <MappingFragment StoreEntitySet="tblFunctions">
+          <ScalarProperty Name="tFunctionName" ColumnName="tFunctionName" />
+          <ScalarProperty Name="aFunctionID" ColumnName="aFunctionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectComponents">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectComponent">
+        <MappingFragment StoreEntitySet="tblProjectComponent">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tComments" ColumnName="tComments" />
+          <ScalarProperty Name="tSignOffStatus" ColumnName="tSignOffStatus" />
+          <ScalarProperty Name="dEndExpectedDate" ColumnName="dEndExpectedDate" />
+          <ScalarProperty Name="dEndDate" ColumnName="dEndDate" />
+          <ScalarProperty Name="dStartDate" ColumnName="dStartDate" />
+          <ScalarProperty Name="tStatus" ColumnName="tStatus" />
+          <ScalarProperty Name="nVendorId" ColumnName="nVendorId" />
+          <ScalarProperty Name="nTechComponentId" ColumnName="nTechComponentId" />
+          <ScalarProperty Name="nProjectId" ColumnName="nProjectId" />
+          <ScalarProperty Name="aProjectComponentId" ColumnName="aProjectComponentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectComponentUploads">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectComponentUpload">
+        <MappingFragment StoreEntitySet="tblProjectComponentUpload">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nAttachmentId" ColumnName="nAttachmentId" />
+          <ScalarProperty Name="nProjectComponentId" ColumnName="nProjectComponentId" />
+          <ScalarProperty Name="aProjectComponentUploadId" ColumnName="aProjectComponentUploadId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStates">
+      <EntityTypeMapping TypeName="dtDBModel.tblState">
+        <MappingFragment StoreEntitySet="tblState">
+          <ScalarProperty Name="nCountryId" ColumnName="nCountryId" />
+          <ScalarProperty Name="tStateName" ColumnName="tStateName" />
+          <ScalarProperty Name="aStateId" ColumnName="aStateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTechComponents">
+      <EntityTypeMapping TypeName="dtDBModel.tblTechComponent">
+        <MappingFragment StoreEntitySet="tblTechComponent">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tComponentType" ColumnName="tComponentType" />
+          <ScalarProperty Name="tTechComponentDescription" ColumnName="tTechComponentDescription" />
+          <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
+          <ScalarProperty Name="tTechComponentName" ColumnName="tTechComponentName" />
+          <ScalarProperty Name="aTechComponentId" ColumnName="aTechComponentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserBrandRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblUserBrandRel">
+        <MappingFragment StoreEntitySet="tblUserBrandRel">
+          <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
+          <ScalarProperty Name="nUserID" ColumnName="nUserID" />
+          <ScalarProperty Name="aUserBrandRelID" ColumnName="aUserBrandRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserFunctionRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblUserFunctionRel">
+        <MappingFragment StoreEntitySet="tblUserFunctionRel">
+          <ScalarProperty Name="nFunctionID" ColumnName="nFunctionID" />
+          <ScalarProperty Name="nUserID" ColumnName="nUserID" />
+          <ScalarProperty Name="aUserFunctionRelID" ColumnName="aUserFunctionRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -108,6 +108,11 @@ export class NewEditObjectComponent {
         isMode = true;
       }
     }
+    else if (this.curTab.tab_type == TabType.Users) {
+      if (this.controlValues["aUserID"] && parseInt(this.controlValues["aUserID"]) > 0) {
+        isMode = true;
+      }
+    }
     return isMode;
   }
 

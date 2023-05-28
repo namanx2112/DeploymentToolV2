@@ -1,0 +1,16 @@
+<div class="tabsBody">
+    <div class="header">Quote Request Worflow Configurations</div>
+    <div class="SearchPart whiteGrayTheme">
+        <mat-form-field class="curField" appearance="outline">
+            <input matInput [type]="'text'" [ngModel]="searchText" (keydown)="onKeydown($event)">
+            <!-- <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon> -->
+            <!-- <mat-error>{{getErrorMessage(curControl)}}</mat-error> -->
+        </mat-form-field>
+        <button mat-raised-button class="searchButton" (click)="OpenNew()">Create New Workflow</button>
+    </div>
+    <div class="tablePart">
+        <div *ngFor="let item of allRequests" class="lightGray requestTile">
+            <span>{{item.tName}}</span>
+        </div>
+    </div>
+</div>

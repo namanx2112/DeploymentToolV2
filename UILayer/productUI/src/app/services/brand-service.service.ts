@@ -6,6 +6,7 @@ import { BrandModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
 import { Observable } from 'rxjs';
+import { Dictionary } from '../interfaces/commons';
 
 @Injectable({
   providedIn: 'root'
@@ -25,36 +26,38 @@ export class BrandServiceService {
   //GetTableVisibleColumns
 
   Create(request: any) {
-    return this.http.post<BrandModel>(this.configUrl + "Brand/CreateBrand", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<BrandModel>(this.configUrl + "Brand/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: any) {
     return this.http.post<BrandModel>(this.configUrl + "Brand/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  Get(request: BrandModel | null) {
-    return new Observable<BrandModel[]>((obj) => {
-      let items: BrandModel[] = [
-        {
-          aBrandId: 1,
-          tBrandName: "Sonic",
-          tBrandDescription: "Sonic",
-          tBrandWebsite: "www.sonic.com",
-          tBrandCountry: "USA",
-          tBrandEstablished: new Date(),
-          tBrandCategory: "string",
-          tBrandContact: "string",
-          nBrandLogoAttachmentID: 1,
-          nCreatedBy: 1,
-          nUpdateBy: 1,
-          dtCreatedOn: new Date(),
-          dtUpdatedOn: new Date(),
-          tIconURL: "string"
-        }
-      ];
-      obj.next(items);
-    });
-    //return this.http.post<BrandModel[]>(this.configUrl + "Brand/GetBrands", request, { headers: this.authService.getHttpHeaders() });
+  Get(searchFields: Dictionary<string> | null) {
+    // return new Observable<BrandModel[]>((obj) => {
+    //   let items: BrandModel[] = [
+    //     {
+    //       aBrandId: 1,
+    //       tBrandName: "Sonic",
+    //       tBrandDomain: "www.sonic.com",
+    //       tBrandAddressLine1: "",
+    //       tBrandAddressLine2: "",
+    //       nBrandCountry: 1,
+    //       tBrandCity: "Test",
+    //       nBrandState: 1,
+    //       tBrandZipCode: "22",
+    //       nBrandLogoAttachmentID: 1,
+    //       nCreatedBy: 1,
+    //       nUpdateBy: 1,
+    //       dtCreatedOn: new Date(),
+    //       dtUpdatedOn: new Date(),
+    //       bDeleted: false,
+    //       tIconURL:"https://upload.wikimedia.org/wikipedia/commons/f/ff/SONIC_New_Logo_2020.svg"
+    //     }
+    //   ];
+    //   obj.next(items);
+    // });
+    return this.http.post<BrandModel[]>(this.configUrl + "Brand/Get", searchFields, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns() {
@@ -134,32 +137,70 @@ export class BrandServiceService {
         hidden: false
       },
       {
-        field_name: "Brands Description",
-        fieldUniqeName: "tBrandDescription",
+        field_name: "Brands Domain",
+        fieldUniqeName: "tBrandDomain",
         defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.text,
-        field_placeholder: "Enter Brands Description",
+        field_placeholder: "Enter Brands Domain",
         validator: [],
         mandatory: false,
         hidden: false
       },
       {
-        field_name: "Brands Website",
-        fieldUniqeName: "tBrandWebsite",
+        field_name: "Brands Address",
+        fieldUniqeName: "tBrandAddressLine1",
         defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.text,
-        field_placeholder: "Enter Brands Website",
+        field_placeholder: "Enter Brands Address",
         validator: [],
         mandatory: false,
         hidden: false
+      },
+      {
+        field_name: "Brands Address2",
+        fieldUniqeName: "tBrandAddressLine2",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Brands Address",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Brands City",
+        fieldUniqeName: "tBrandCity",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Brands City",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false,
+        options: this.commonService.GetDropdown("tBrandCity")
+      },
+      {
+        field_name: "Brands State",
+        fieldUniqeName: "nBrandState",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Brands State",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false,
+        options: this.commonService.GetDropdown("nBrandState")
       },
       {
         field_name: "Brands Country",
-        fieldUniqeName: "tBrandCountry",
+        fieldUniqeName: "nBrandCountry",
         defaultVal: "",
         readOnly: false,
         invalid: false,
@@ -168,52 +209,28 @@ export class BrandServiceService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false,
-        options: this.commonService.GetCountryDropdowns()
+        options: this.commonService.GetDropdown("nBrandCountry")
       },
       {
-        field_name: "Brands Established",
-        fieldUniqeName: "tBrandEstablished",
+        field_name: "Brands Zip",
+        fieldUniqeName: "tBrandZipCode",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.date,
-        field_placeholder: "Enter Brands Establishment date",
+        field_type: FieldType.text,
+        field_placeholder: "Enter Brands Zip",
         validator: [],
         mandatory: false,
         hidden: false
       },
       {
-        field_name: "Brands Category",
-        fieldUniqeName: "tBrandCategory",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Brands Category",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Brands Contact",
-        fieldUniqeName: "tBrandContact",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Brands Contact",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Brands Attachment Id",
+        field_name: "Brands nBrandLogoAttachmentID",
         fieldUniqeName: "nBrandLogoAttachmentID",
-        defaultVal: "0",
+        defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.number,
-        field_placeholder: "Enter Brands Attachment",
+        field_placeholder: "Enter Brands nBrandLogoAttachmentID",
         validator: [],
         mandatory: false,
         hidden: true
@@ -270,105 +287,105 @@ export class BrandServiceService {
     return fields;
   }
 
-  GetAllBrands(): BrandModel[] {
-    let brands: BrandModel[] = [
-      {
-        aBrandId: 0,
-        tBrandName: "Dunkin",
-        tBrandDescription: "Dunkin",
-        tBrandWebsite: "Dunkin",
-        tBrandCountry: "Dunkin",
-        tBrandEstablished: new Date(),
-        tBrandCategory: "Dunkin",
-        tBrandContact: "Dunkin",
-        nBrandLogoAttachmentID: 1,
-        nCreatedBy: 1,
-        nUpdateBy: 1,
-        dtCreatedOn: new Date(),
-        dtUpdatedOn: new Date(),
-        tIconURL: "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png"
-      },
-      {
-        aBrandId: 0,
-        tBrandName: "Baskin Robins",
-        tBrandDescription: "Baskin Robins",
-        tBrandWebsite: "Baskin Robins",
-        tBrandCountry: "Baskin Robins",
-        tBrandEstablished: new Date(),
-        tBrandCategory: "Baskin Robins",
-        tBrandContact: "Baskin Robins",
-        nBrandLogoAttachmentID: 1,
-        nCreatedBy: 1,
-        nUpdateBy: 1,
-        dtCreatedOn: new Date(),
-        dtUpdatedOn: new Date(),
-        tIconURL: "https://1000logos.net/wp-content/uploads/2016/10/Baskin-Robbins-Logo-2020.png"
-      },
-      {
-        aBrandId: 0,
-        tBrandName: "Buffalo Wild Wings",
-        tBrandDescription: "Buffalo Wild Wings",
-        tBrandWebsite: "Buffalo Wild Wings",
-        tBrandCountry: "Buffalo Wild Wings",
-        tBrandEstablished: new Date(),
-        tBrandCategory: "Buffalo Wild Wings",
-        tBrandContact: "Buffalo Wild Wings",
-        nBrandLogoAttachmentID: 1,
-        nCreatedBy: 1,
-        nUpdateBy: 1,
-        dtCreatedOn: new Date(),
-        dtUpdatedOn: new Date(),
-        tIconURL: "https://logos-world.net/wp-content/uploads/2022/01/Buffalo-Wild-Wings-Logo.png"
-      },
-      {
-        aBrandId: 0,
-        tBrandName: "Arbys",
-        tBrandDescription: "Arbys",
-        tBrandWebsite: "Arbys",
-        tBrandCountry: "Arbys",
-        tBrandEstablished: new Date(),
-        tBrandCategory: "Arbys",
-        tBrandContact: "Arbys",
-        nBrandLogoAttachmentID: 1,
-        nCreatedBy: 1,
-        nUpdateBy: 1,
-        dtCreatedOn: new Date(),
-        dtUpdatedOn: new Date(),
-        tIconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Arby%27s_logo.svg/2394px-Arby%27s_logo.svg.png"
-      },
-      {
-        aBrandId: 0,
-        tBrandName: "Jimmy Johns",
-        tBrandDescription: "Jimmy Johns",
-        tBrandWebsite: "Jimmy Johns",
-        tBrandCountry: "Jimmy Johns",
-        tBrandEstablished: new Date(),
-        tBrandCategory: "Jimmy Johns",
-        tBrandContact: "Jimmy Johns",
-        nBrandLogoAttachmentID: 1,
-        nCreatedBy: 1,
-        nUpdateBy: 1,
-        dtCreatedOn: new Date(),
-        dtUpdatedOn: new Date(),
-        tIconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Jimmy_Johns_logo.svg/1200px-Jimmy_Johns_logo.svg.png"
-      },
-      {
-        aBrandId: 0,
-        tBrandName: "Sonic",
-        tBrandDescription: "Sonic",
-        tBrandWebsite: "Sonic",
-        tBrandCountry: "Sonic",
-        tBrandEstablished: new Date(),
-        tBrandCategory: "Sonic",
-        tBrandContact: "Sonic",
-        nBrandLogoAttachmentID: 1,
-        nCreatedBy: 1,
-        nUpdateBy: 1,
-        dtCreatedOn: new Date(),
-        dtUpdatedOn: new Date(),
-        tIconURL: "https://upload.wikimedia.org/wikipedia/commons/f/ff/SONIC_New_Logo_2020.svg"
-      }
-    ];
-    return brands;
-  }
+  // GetAllBrands(): BrandModel[] {
+  //   let brands: BrandModel[] = [
+  //     {
+  //       aBrandId: 0,
+  //       tBrandName: "Dunkin",
+  //       tBrandDescription: "Dunkin",
+  //       tBrandWebsite: "Dunkin",
+  //       tBrandCountry: "Dunkin",
+  //       tBrandEstablished: new Date(),
+  //       tBrandCategory: "Dunkin",
+  //       tBrandContact: "Dunkin",
+  //       nBrandLogoAttachmentID: 1,
+  //       nCreatedBy: 1,
+  //       nUpdateBy: 1,
+  //       dtCreatedOn: new Date(),
+  //       dtUpdatedOn: new Date(),
+  //       tIconURL: "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png"
+  //     },
+  //     {
+  //       aBrandId: 0,
+  //       tBrandName: "Baskin Robins",
+  //       tBrandDescription: "Baskin Robins",
+  //       tBrandWebsite: "Baskin Robins",
+  //       tBrandCountry: "Baskin Robins",
+  //       tBrandEstablished: new Date(),
+  //       tBrandCategory: "Baskin Robins",
+  //       tBrandContact: "Baskin Robins",
+  //       nBrandLogoAttachmentID: 1,
+  //       nCreatedBy: 1,
+  //       nUpdateBy: 1,
+  //       dtCreatedOn: new Date(),
+  //       dtUpdatedOn: new Date(),
+  //       tIconURL: "https://1000logos.net/wp-content/uploads/2016/10/Baskin-Robbins-Logo-2020.png"
+  //     },
+  //     {
+  //       aBrandId: 0,
+  //       tBrandName: "Buffalo Wild Wings",
+  //       tBrandDescription: "Buffalo Wild Wings",
+  //       tBrandWebsite: "Buffalo Wild Wings",
+  //       tBrandCountry: "Buffalo Wild Wings",
+  //       tBrandEstablished: new Date(),
+  //       tBrandCategory: "Buffalo Wild Wings",
+  //       tBrandContact: "Buffalo Wild Wings",
+  //       nBrandLogoAttachmentID: 1,
+  //       nCreatedBy: 1,
+  //       nUpdateBy: 1,
+  //       dtCreatedOn: new Date(),
+  //       dtUpdatedOn: new Date(),
+  //       tIconURL: "https://logos-world.net/wp-content/uploads/2022/01/Buffalo-Wild-Wings-Logo.png"
+  //     },
+  //     {
+  //       aBrandId: 0,
+  //       tBrandName: "Arbys",
+  //       tBrandDescription: "Arbys",
+  //       tBrandWebsite: "Arbys",
+  //       tBrandCountry: "Arbys",
+  //       tBrandEstablished: new Date(),
+  //       tBrandCategory: "Arbys",
+  //       tBrandContact: "Arbys",
+  //       nBrandLogoAttachmentID: 1,
+  //       nCreatedBy: 1,
+  //       nUpdateBy: 1,
+  //       dtCreatedOn: new Date(),
+  //       dtUpdatedOn: new Date(),
+  //       tIconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Arby%27s_logo.svg/2394px-Arby%27s_logo.svg.png"
+  //     },
+  //     {
+  //       aBrandId: 0,
+  //       tBrandName: "Jimmy Johns",
+  //       tBrandDescription: "Jimmy Johns",
+  //       tBrandWebsite: "Jimmy Johns",
+  //       tBrandCountry: "Jimmy Johns",
+  //       tBrandEstablished: new Date(),
+  //       tBrandCategory: "Jimmy Johns",
+  //       tBrandContact: "Jimmy Johns",
+  //       nBrandLogoAttachmentID: 1,
+  //       nCreatedBy: 1,
+  //       nUpdateBy: 1,
+  //       dtCreatedOn: new Date(),
+  //       dtUpdatedOn: new Date(),
+  //       tIconURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Jimmy_Johns_logo.svg/1200px-Jimmy_Johns_logo.svg.png"
+  //     },
+  //     {
+  //       aBrandId: 0,
+  //       tBrandName: "Sonic",
+  //       tBrandDescription: "Sonic",
+  //       tBrandWebsite: "Sonic",
+  //       tBrandCountry: "Sonic",
+  //       tBrandEstablished: new Date(),
+  //       tBrandCategory: "Sonic",
+  //       tBrandContact: "Sonic",
+  //       nBrandLogoAttachmentID: 1,
+  //       nCreatedBy: 1,
+  //       nUpdateBy: 1,
+  //       dtCreatedOn: new Date(),
+  //       dtUpdatedOn: new Date(),
+  //       tIconURL: "https://upload.wikimedia.org/wikipedia/commons/f/ff/SONIC_New_Logo_2020.svg"
+  //     }
+  //   ];
+  //   return brands;
+  // }
 }

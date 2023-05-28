@@ -1,0 +1,57 @@
+.tabsBody{
+    width: 90%;
+    height: 100%;
+    margin: 0px auto;
+    background-color: #fff;
+}
+.header{
+    height: 40px;
+    width: 100%;
+    line-height: 35px;
+    float: left;
+    font-size: 15px;    
+    color: #444;
+    font-weight: bold;
+}
+.mat-icon{
+    height: auto;
+    line-height: 16px;
+    cursor: pointer;
+}
+.SearchPart{
+    min-height: calc(30% - 40px);
+    width: 100%;
+    float: left;
+}
+.newEditPart{
+    height: calc(100% - 40px);
+    width: 100%;
+    float: left;
+}
+.tablePart{
+    min-height: calc(70% - 40px);
+    width: 100%;
+    float: left;
+}
+.searchButton{
+    float: left;
+    margin: 27px 15px;
+}
+.searchControls{
+    float: left;
+    width: calc(100% - 250px);
+}
+
+.requestTile{
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin: 0px 20px 20px 0px;
+    border-radius: 10px;
+}
+
+.requestTile > span{
+    margin: 40% auto;
+    display: block;
+    text-align: center;
+}

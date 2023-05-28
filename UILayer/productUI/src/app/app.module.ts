@@ -46,6 +46,7 @@ import { WorkflowsComponent } from './components/Sonic/workflows/workflows.compo
 import { QuoteRequestWorkflowTemplateComponent } from './components/quote-request-workflow-template/quote-request-workflow-template.component';
 import { POWorkflowTemplateComponent } from './components/poworkflow-template/poworkflow-template.component'
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { QuoteRequestTemplateListComponent } from './components/quote-request-template-list/quote-request-template-list.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     PaymentTerminalInstallationComponent,
     WorkflowsComponent,
     QuoteRequestWorkflowTemplateComponent,
-    POWorkflowTemplateComponent
+    POWorkflowTemplateComponent,
+    QuoteRequestTemplateListComponent
   ],
   imports: [
     BrowserModule,

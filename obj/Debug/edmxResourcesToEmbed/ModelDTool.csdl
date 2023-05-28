@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dtDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="dtDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblBrand" EntityType="dtDBModel.tblBrand" />
+    <EntitySet Name="tblUser" EntityType="dtDBModel.tblUser" />
+    <EntitySet Name="tblVendor" EntityType="dtDBModel.tblVendor" />
+    <EntitySet Name="tblAttachments" EntityType="dtDBModel.tblAttachment" />
+    <EntitySet Name="tblProjects" EntityType="dtDBModel.tblProject" />
+    <EntitySet Name="tblProjectAudios" EntityType="dtDBModel.tblProjectAudio" />
+    <EntitySet Name="tblProjectBillToes" EntityType="dtDBModel.tblProjectBillTo" />
+    <EntitySet Name="tblProjectConfigs" EntityType="dtDBModel.tblProjectConfig" />
+    <EntitySet Name="tblProjectExteriorMenus" EntityType="dtDBModel.tblProjectExteriorMenu" />
+    <EntitySet Name="tblProjectInstallations" EntityType="dtDBModel.tblProjectInstallation" />
+    <EntitySet Name="tblProjectInteriorMenus" EntityType="dtDBModel.tblProjectInteriorMenu" />
+    <EntitySet Name="tblProjectNetworkings" EntityType="dtDBModel.tblProjectNetworking" />
+    <EntitySet Name="tblProjectNotes" EntityType="dtDBModel.tblProjectNote" />
+    <EntitySet Name="tblProjectPaymentSystems" EntityType="dtDBModel.tblProjectPaymentSystem" />
+    <EntitySet Name="tblProjectPOS" EntityType="dtDBModel.tblProjectPOS" />
+    <EntitySet Name="tblProjectSonicRadios" EntityType="dtDBModel.tblProjectSonicRadio" />
+    <EntitySet Name="tblProjectStakeHolders" EntityType="dtDBModel.tblProjectStakeHolder" />
+    <EntitySet Name="tblProjectStores" EntityType="dtDBModel.tblProjectStore" />
+    <EntitySet Name="tblStores" EntityType="dtDBModel.tblStore" />
+    <EntitySet Name="tblUsers1" EntityType="dtDBModel.tblUser1" />
+    <EntitySet Name="tblBrandBKPs" EntityType="dtDBModel.tblBrandBKP" />
+    <EntitySet Name="tblCountries" EntityType="dtDBModel.tblCountry" />
+    <EntitySet Name="tblEnums" EntityType="dtDBModel.tblEnum" />
+    <EntitySet Name="tblEnumTableFields" EntityType="dtDBModel.tblEnumTableField" />
+    <EntitySet Name="tblFranchises" EntityType="dtDBModel.tblFranchise" />
+    <EntitySet Name="tblFunctions" EntityType="dtDBModel.tblFunction" />
+    <EntitySet Name="tblProjectComponents" EntityType="dtDBModel.tblProjectComponent" />
+    <EntitySet Name="tblProjectComponentUploads" EntityType="dtDBModel.tblProjectComponentUpload" />
+    <EntitySet Name="tblStates" EntityType="dtDBModel.tblState" />
+    <EntitySet Name="tblTechComponents" EntityType="dtDBModel.tblTechComponent" />
+    <EntitySet Name="tblUserBrandRels" EntityType="dtDBModel.tblUserBrandRel" />
+    <EntitySet Name="tblUserFunctionRels" EntityType="dtDBModel.tblUserFunctionRel" />
+  </EntityContainer>
+  <EntityType Name="tblBrand">
+    <Key>
+      <PropertyRef Name="aBrandId" />
+    </Key>
+    <Property Name="aBrandId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tBrandName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBrandDomain" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBrandAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBrandAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBrandCity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nBrandState" Type="Int32" />
+    <Property Name="nBrandCountry" Type="Int32" />
+    <Property Name="tBrandZipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nBrandLogoAttachmentID" Type="Int32" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="aUserID" />
+    </Key>
+    <Property Name="aUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tUserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nDepartment" Type="Int32" />
+    <Property Name="nRole" Type="Int32" />
+    <Property Name="tEmpID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tMobile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dLastLoggedInTime" Type="DateTime" Precision="3" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblVendor">
+    <Key>
+      <PropertyRef Name="aVendorId" />
+    </Key>
+    <Property Name="aVendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tVendorName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nTechComponentID" Type="Int32" />
+    <Property Name="tVendorDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tVendorEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tVendorAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tVendorPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tVendorContactPerson" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tVendorWebsite" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tVendorCountry" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tVendorEstablished" Type="DateTime" Precision="3" />
+    <Property Name="tVendorCategory" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tVendorContact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdatedBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblAttachment">
+    <Key>
+      <PropertyRef Name="aAttachmentId" />
+    </Key>
+    <Property Name="aAttachmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tfileName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tFileExt" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tfileType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tAttachmentType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tAttachmentComments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tAttachmentBlob" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="tAttachmentURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblProject">
+    <Key>
+      <PropertyRef Name="aProjectID" />
+    </Key>
+    <Property Name="aProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tProjectName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nStoreID" Type="Int32" />
+    <Property Name="dGoLiveDate" Type="DateTime" Precision="0" />
+    <Property Name="nProjectType" Type="Int32" />
+    <Property Name="nProjectStatus" Type="Int32" />
+    <Property Name="nDMAID" Type="Int32" />
+    <Property Name="tDMA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nBrandID" Type="Int32" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblProjectAudio">
+    <Key>
+      <PropertyRef Name="aProjectAudioID" />
+    </Key>
+    <Property Name="aProjectAudioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="nConfiguration" Type="Int32" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="nLoopStatus" Type="Int32" />
+    <Property Name="nLoopType" Type="Int32" />
+    <Property Name="dLoopDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblProjectBillTo">
+    <Key>
+      <PropertyRef Name="aProjectBillToID" />
+    </Key>
+    <Property Name="aProjectBillToID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="tCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBillToAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBillToAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBillToState" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBillToZipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBillToEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblProjectConfig">
+    <Key>
+      <PropertyRef Name="aProjectConfigID" />
+    </Key>
+    <Property Name="aProjectConfigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nStallCount" Type="Int32" />
+    <Property Name="nDriveThru" Type="Int32" />
+    <Property Name="nInsideDining" Type="Int32" />
+    <Property Name="dGroundBreak" Type="DateTime" Precision="0" />
+    <Property Name="dKitchenInstall" Type="DateTime" Precision="0" />
+    <Property Name="cProjectCost" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblProjectExteriorMenu">
+    <Key>
+      <PropertyRef Name="aProjectExteriorMenuID" />
+    </Key>
+    <Property Name="aProjectExteriorMenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nStalls" Type="Int32" />
+    <Property Name="nPatio" Type="Int32" />
+    <Property Name="nFlat" Type="Int32" />
+    <Property Name="nDTPops" Type="Int32" />
+    <Property Name="nDTMenu" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="cFabConCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="cIDTechCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="cTotalCost" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblProjectInstallation">
+    <Key>
+      <PropertyRef Name="aProjectInstallationID" />
+    </Key>
+    <Property Name="aProjectInstallationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="tLeadTech" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dInstallDate" Type="DateTime" Precision="0" />
+    <Property Name="dInstallEnd" Type="DateTime" Precision="0" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="nSignoffs" Type="Int32" />
+    <Property Name="nTestTransactions" Type="Int32" />
+    <Property Name="nProjectStatus" Type="Int32" />
+    <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblProjectInteriorMenu">
+    <Key>
+      <PropertyRef Name="aProjectInteriorMenuID" />
+    </Key>
+    <Property Name="aProjectInteriorMenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nDMBQuantity" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblProjectNetworking">
+    <Key>
+      <PropertyRef Name="aProjectNetworkingID" />
+    </Key>
+    <Property Name="aProjectNetworkingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nPrimaryStatus" Type="Int32" />
+    <Property Name="dPrimaryDate" Type="DateTime" Precision="0" />
+    <Property Name="nPrimaryType" Type="Int32" />
+    <Property Name="nBackupStatus" Type="Int32" />
+    <Property Name="dBackupDate" Type="DateTime" Precision="0" />
+    <Property Name="nBackupType" Type="Int32" />
+    <Property Name="nTempStatus" Type="Int32" />
+    <Property Name="dTempDate" Type="DateTime" Precision="0" />
+    <Property Name="nTempType" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblProjectNote">
+    <Key>
+      <PropertyRef Name="aNoteID" />
+    </Key>
+    <Property Name="aNoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nStoreID" Type="Int32" />
+    <Property Name="nNoteType" Type="Int32" />
+    <Property Name="tSource" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tNoteDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblProjectPaymentSystem">
+    <Key>
+      <PropertyRef Name="aProjectPaymentSystemID" />
+    </Key>
+    <Property Name="aProjectPaymentSystemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nBuyPassID" Type="Int32" />
+    <Property Name="nServerEPS" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="nPAYSUnits" Type="Int32" />
+    <Property Name="n45Enclosures" Type="Int32" />
+    <Property Name="n90Enclosures" Type="Int32" />
+    <Property Name="nDTEnclosures" Type="Int32" />
+    <Property Name="n15SunShields" Type="Int32" />
+    <Property Name="nUPS" Type="Int32" />
+    <Property Name="nShelf" Type="Int32" />
+    <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblProjectPOS">
+    <Key>
+      <PropertyRef Name="aProjectPOSID" />
+    </Key>
+    <Property Name="aProjectPOSID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="dConfigDate" Type="DateTime" Precision="0" />
+    <Property Name="dSupportDate" Type="DateTime" Precision="0" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="nPaperworkStatus" Type="Int32" />
+    <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblProjectSonicRadio">
+    <Key>
+      <PropertyRef Name="aProjectSonicRadioID" />
+    </Key>
+    <Property Name="aProjectSonicRadioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nOutdoorSpeakers" Type="Int32" />
+    <Property Name="nColors" Type="Int32" />
+    <Property Name="nIndoorSpeakers" Type="Int32" />
+    <Property Name="nZones" Type="Int32" />
+    <Property Name="nServerRacks" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblProjectStakeHolder">
+    <Key>
+      <PropertyRef Name="aProjectStakeHolderID" />
+    </Key>
+    <Property Name="aProjectStakeHolderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nFranchisee" Type="Int32" />
+    <Property Name="tRVP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tFBC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nCD" Type="Int32" />
+    <Property Name="nITPM" Type="Int32" />
+    <Property Name="tRED" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tCM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tAandE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tPrincipalPartner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblProjectStore">
+    <Key>
+      <PropertyRef Name="aProjectStoreID" />
+    </Key>
+    <Property Name="aProjectStoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="tStoreName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tStoreAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tStoreAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tCity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nStoreState" Type="Int32" />
+    <Property Name="tStoreZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tStoreManager" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tPOC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tPOCPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tPOCEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tGC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tGCPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tGCEMail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblStore">
+    <Key>
+      <PropertyRef Name="aStoreID" />
+    </Key>
+    <Property Name="aStoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tStoreNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblUser1">
+    <Key>
+      <PropertyRef Name="aUserID" />
+    </Key>
+    <Property Name="aUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tUserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="nDepartment" Type="Int32" />
+    <Property Name="nRole" Type="Int32" />
+    <Property Name="tEmpID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dLastLoggedInTime" Type="DateTime" Precision="3" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblBrandBKP">
+    <Key>
+      <PropertyRef Name="aBrandId" />
+    </Key>
+    <Property Name="aBrandId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tBrandName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBrandDomain" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBrandAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBrandAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tBrandCity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nBrandState" Type="Int32" />
+    <Property Name="nBrandCountry" Type="Int32" />
+    <Property Name="tBrandZipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nBrandLogoAttachmentID" Type="Int32" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblCountry">
+    <Key>
+      <PropertyRef Name="aCountryId" />
+      <PropertyRef Name="tCountryName" />
+    </Key>
+    <Property Name="aCountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tCountryName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblEnum">
+    <Key>
+      <PropertyRef Name="aEnumID" />
+    </Key>
+    <Property Name="aEnumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nConstraintID" Type="Int32" />
+    <Property Name="nIndexID" Type="Int32" />
+    <Property Name="tDisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblEnumTableField">
+    <Key>
+      <PropertyRef Name="aConstraintID" />
+    </Key>
+    <Property Name="aConstraintID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tTableName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tColumnName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblFranchise">
+    <Key>
+      <PropertyRef Name="aFranchiseId" />
+    </Key>
+    <Property Name="aFranchiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tFranchiseName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nBrandID" Type="Int32" />
+    <Property Name="tFranchiseDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tFranchiseLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dFranchiseEstablished" Type="DateTime" Precision="3" />
+    <Property Name="tFranchiseContact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tFranchiseOwner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tFranchiseEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tFranchisePhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tFranchiseAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nFranchiseEmployeeCount" Type="Int32" />
+    <Property Name="nFranchiseRevenue" Type="Int32" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblFunction">
+    <Key>
+      <PropertyRef Name="aFunctionID" />
+    </Key>
+    <Property Name="aFunctionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tFunctionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblProjectComponent">
+    <Key>
+      <PropertyRef Name="aProjectComponentId" />
+    </Key>
+    <Property Name="aProjectComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectId" Type="Int32" />
+    <Property Name="nTechComponentId" Type="Int32" />
+    <Property Name="nVendorId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tStatus" Type="Int32" />
+    <Property Name="dStartDate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dEndDate" Type="DateTime" Precision="3" />
+    <Property Name="dEndExpectedDate" Type="DateTime" Precision="3" />
+    <Property Name="tSignOffStatus" Type="DateTime" Precision="3" />
+    <Property Name="tComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblProjectComponentUpload">
+    <Key>
+      <PropertyRef Name="aProjectComponentUploadId" />
+    </Key>
+    <Property Name="aProjectComponentUploadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectComponentId" Type="Int32" />
+    <Property Name="nAttachmentId" Type="Int32" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblState">
+    <Key>
+      <PropertyRef Name="aStateId" />
+      <PropertyRef Name="tStateName" />
+      <PropertyRef Name="nCountryId" />
+    </Key>
+    <Property Name="aStateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tStateName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nCountryId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblTechComponent">
+    <Key>
+      <PropertyRef Name="aTechComponentId" />
+    </Key>
+    <Property Name="aTechComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tTechComponentName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nBrandID" Type="Int32" />
+    <Property Name="tTechComponentDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tComponentType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblUserBrandRel">
+    <Key>
+      <PropertyRef Name="aUserBrandRelID" />
+    </Key>
+    <Property Name="aUserBrandRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nUserID" Type="Int32" />
+    <Property Name="nBrandID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblUserFunctionRel">
+    <Key>
+      <PropertyRef Name="aUserFunctionRelID" />
+    </Key>
+    <Property Name="aUserFunctionRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nUserID" Type="Int32" />
+    <Property Name="nFunctionID" Type="Int32" />
+  </EntityType>
+</Schema>

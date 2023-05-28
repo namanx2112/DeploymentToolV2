@@ -37,6 +37,10 @@ export class AdminConfigComponent {
     }
   }
 
+  moveView(tIndex: any){
+    this.tabIndex = tIndex;
+  }
+
   ShortcutSelection(tName: string) {
     switch (tName) {
       case "NewUser":

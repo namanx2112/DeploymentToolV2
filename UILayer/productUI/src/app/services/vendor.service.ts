@@ -25,7 +25,7 @@ export class VendorService {
   }
 
   Get(request: VendorModel | null){
-    return this.http.post<VendorModel[]>(this.configUrl + "Vendor/GetVendors", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<VendorModel[]>(this.configUrl + "Vendor/Get", request, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(){

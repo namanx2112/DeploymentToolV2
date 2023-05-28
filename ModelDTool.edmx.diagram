@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7764029035f44a829bca60fa328a672d" Name="Diagram1">
+        <EntityTypeShape EntityType="dtDBModel.tblBrand" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblUser" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblVendor" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblAttachment" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProject" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectAudio" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectBillTo" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectConfig" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectExteriorMenu" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectInstallation" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectInteriorMenu" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectNetworking" Width="1.5" PointX="10.75" PointY="4.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectNote" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectPaymentSystem" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectPOS" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectSonicRadio" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectStakeHolder" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectStore" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblStore" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblUser1" Width="1.5" PointX="6.75" PointY="13.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblBrandBKP" Width="1.5" PointX="2.75" PointY="14.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblCountry" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblEnum" Width="1.5" PointX="14.75" PointY="7.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblEnumTableField" Width="1.5" PointX="8.75" PointY="14.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblFranchise" Width="1.5" PointX="14.75" PointY="10.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblFunction" Width="1.5" PointX="10.75" PointY="14.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectComponent" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectComponentUpload" Width="1.5" PointX="16.75" PointY="5.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblState" Width="1.5" PointX="16.75" PointY="9.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblTechComponent" Width="1.5" PointX="16.75" PointY="12.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblUserBrandRel" Width="1.5" PointX="12.75" PointY="16.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblUserFunctionRel" Width="1.5" PointX="14.75" PointY="16.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

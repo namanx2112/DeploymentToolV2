@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Fields, FieldType } from '../interfaces/home-tab';
 import { UserModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
+import { CommonService } from './common.service';
+import { Dictionary } from '../interfaces/commons';
 
 @Injectable({
   providedIn: 'root'
@@ -11,56 +13,57 @@ import { AuthService } from './auth.service';
 export class UserService {
 
   configUrl: any;
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
     this.configUrl = authService.getConfigUrl();
   }
 
   Create(request: any) {
-    return this.http.post<UserModel>(this.configUrl + "User/CreateUser", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<number>(this.configUrl + "User/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<UserModel>(this.configUrl + "User/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<number>(this.configUrl + "User/Update", request, { headers: this.authService.getHttpHeaders() });
   }
   
   GetTableVisibleColumns(){
     return [
+      "tEmail",
       "tUserName",
-      "tUserEmail",
-      "tContactNumber",
-      "tRole"
+      "tEmail",
+      "nDepartment",
+      "nRole"
     ];
   }
 
-  Get(request: UserModel | null) {
-    //return this.http.post<UserModel[]>(this.configUrl + "User/GetUsers", request, { headers: this.authService.getHttpHeaders() });
-    return new Observable<UserModel[]>((obj) => {
-      let items = [{
-        aUserId: 0,
-        tUserName: "Tom",
-        tUserEmail: "tom@tom.com",
-        tContactNumber: "9898989839",
-        tRole: "Admin",
-        nBrandId: 1
-      },
-      {
-        aUserId: 0,
-        tUserName: "Pom",
-        tUserEmail: "pom@tom.com",
-        tContactNumber: "8898989839",
-        tRole: "Admin",
-        nBrandId: 1
-      },
-      {
-        aUserId: 0,
-        tUserName: "Com",
-        tUserEmail: "Com@tom.com",
-        tContactNumber: "7898989839",
-        tRole: "Admin",
-        nBrandId: 1
-      }];
-        obj.next(items);
-    });
+  Get(searchFields: Dictionary<string> | null) {
+    return this.http.post<UserModel[]>(this.configUrl + "User/Get", searchFields, { headers: this.authService.getHttpHeaders() });
+    // return new Observable<UserModel[]>((obj) => {
+    //   let items = [{
+    //     aUserID: 0,
+    //     tUserName: "Tom",
+    //     tUserEmail: "tom@tom.com",
+    //     tContactNumber: "9898989839",
+    //     tRole: "Admin",
+    //     nBrandId: 1
+    //   },
+    //   {
+    //     aUserID: 0,
+    //     tUserName: "Pom",
+    //     tUserEmail: "pom@tom.com",
+    //     tContactNumber: "8898989839",
+    //     tRole: "Admin",
+    //     nBrandId: 1
+    //   },
+    //   {
+    //     aUserID: 0,
+    //     tUserName: "Com",
+    //     tUserEmail: "Com@tom.com",
+    //     tContactNumber: "7898989839",
+    //     tRole: "Admin",
+    //     nBrandId: 1
+    //   }];
+    //     obj.next(items);
+    // });
   }
 
   GetSearchFields(): Fields[] {
@@ -81,7 +84,7 @@ export class UserService {
   GetFields(): Fields[] {
     let fields = [{
       field_name: "User Id",
-      fieldUniqeName: "aUserId",
+      fieldUniqeName: "aUserID",
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -93,7 +96,7 @@ export class UserService {
     },
     {
       field_name: "User Name",
-      fieldUniqeName: "tUserName",
+      fieldUniqeName: "tName",
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -104,8 +107,20 @@ export class UserService {
       hidden: false
     },
     {
+      field_name: "User Login Name",
+      fieldUniqeName: "tUserName",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter User Login Name",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },
+    {
       field_name: "User Email",
-      fieldUniqeName: "tUserEmail",
+      fieldUniqeName: "tEmail",
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -114,42 +129,54 @@ export class UserService {
       validator: [],
       mandatory: false,
       hidden: false
-    },
-    {
-      field_name: "User Contact Number",
-      fieldUniqeName: "tContactNumber",
+    },{
+      field_name: "User Department",
+      fieldUniqeName: "nDepartment",
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.text,
-      field_placeholder: "Enter User Contact Number",
+      field_type: FieldType.dropdown,      
+      options: this.commonService.GetDropdown("nDepartment"),
+      field_placeholder: "Enter User Department",
       validator: [],
       mandatory: false,
       hidden: false
-    },
-    {
+    },{
       field_name: "User Role",
-      fieldUniqeName: "tRole",
+      fieldUniqeName: "nRole",
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.text,
+      field_type: FieldType.dropdown,      
+      options: this.commonService.GetDropdown("nRole"),
       field_placeholder: "Enter User Role",
       validator: [],
       mandatory: false,
       hidden: false
     },
     {
-      field_name: "Brand Id",
-      fieldUniqeName: "nBrandId",
+      field_name: "User Emp Id",
+      fieldUniqeName: "tEmpID",
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.number,
-      field_placeholder: "Enter Brand Id",
+      field_type: FieldType.number,      
+      field_placeholder: "Enter User Emp Id",
       validator: [],
       mandatory: false,
-      hidden: true
+      hidden: false
+    },
+    {
+      field_name: "User Mobile Number",
+      fieldUniqeName: "tMobile",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,      
+      field_placeholder: "Enter User Mobile Number",
+      validator: [],
+      mandatory: false,
+      hidden: false
     }]
     return fields;
   }
