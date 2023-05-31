@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Http;
 using System.Net;
 using System.Web.Http.Results;
+using System.Diagnostics;
 
 namespace DeploymentTool.Controller
 {
@@ -54,6 +55,42 @@ namespace DeploymentTool.Controller
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("api/Attachment/UploadStore")]
+        public async Task<HttpResponseMessage> UploadStore()
+        {
+            try
+            {
+                HttpRequestMessage request = this.Request;
+                if (!request.Content.IsMimeMultipartContent())
+                {
+                    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                }
+
+                
+                try
+                {
+                    var filesReadToProvider = await request.Content.ReadAsMultipartAsync();
+
+                    foreach (var stream in filesReadToProvider.Contents)
+                    {
+                        string FileName = stream.Headers.ContentDisposition.FileName;
+                        var fileBytes = await stream.ReadAsByteArrayAsync();
+                    }
+
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                catch (System.Exception e)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
 

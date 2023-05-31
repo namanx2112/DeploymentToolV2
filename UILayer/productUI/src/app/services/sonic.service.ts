@@ -6,22 +6,24 @@ import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
 import { SonicNotes, StoreProjects } from '../interfaces/sonic';
 import { AuthService } from './auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SonicService {
   configUrl: any;
-  constructor(private http: HttpClient, private commonService: CommonService, private authService: AuthService) { 
+  constructor(private http: HttpClient, private commonService: CommonService, private authService: AuthService) {
     this.configUrl = authService.getConfigUrl();
   }
 
   postFile(fileToUpload: File): Observable<boolean> {
-    const endpoint = 'your-destination-url';
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name);
-    return this.http.post<boolean>(this.configUrl + "Brand/CreateBrand", formData, { headers: this.authService.getHttpHeaders() });
+    let httpHeader = new HttpHeaders({
+      "Authorization": "Bearer " + this.authService.getToken()
+    });
+    return this.http.post<boolean>(this.configUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
   }
 
   GetTableVisibleColumns(tab: HomeTab) {
@@ -462,7 +464,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "nProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "",
@@ -473,7 +475,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Project Type",
         fieldUniqeName: "nProjectType",
         defaultVal: "",
@@ -590,7 +592,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "nProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "",
@@ -601,7 +603,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "Franchise",
         fieldUniqeName: "nFranchisee",
         defaultVal: "",
@@ -674,7 +676,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "tCM",
         fieldUniqeName: "tCM",
         defaultVal: "",
@@ -685,7 +687,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "tAandE",
         fieldUniqeName: "tAandE",
         defaultVal: "",
@@ -696,7 +698,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "tPrincipalPartner",
         fieldUniqeName: "tPrincipalPartner",
         defaultVal: "",
@@ -743,7 +745,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "nProjectID",
         field_group: "Primary",
         fieldUniqeName: "nProjectID",
@@ -755,7 +757,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "Vendor",
         field_group: "Primary",
         fieldUniqeName: "nVendor",
@@ -767,7 +769,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Vendor",
         field_group: "Primary",
         fieldUniqeName: "nVendor",
@@ -1070,7 +1072,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "nProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "",
@@ -1081,7 +1083,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "Vendor",
         fieldUniqeName: "nVendor",
         defaultVal: "",
@@ -1092,7 +1094,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "Vendor",
         fieldUniqeName: "nVendor",
         defaultVal: "",
@@ -1226,7 +1228,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "nProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "",
@@ -1237,7 +1239,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "Vendor",
         fieldUniqeName: "nVendor",
         defaultVal: "",
@@ -1248,7 +1250,7 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      },{
+      }, {
         field_name: "nStalls",
         fieldUniqeName: "nStalls",
         defaultVal: "",
@@ -1403,7 +1405,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "nProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "",
@@ -1414,7 +1416,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "Vendor",
         fieldUniqeName: "nVendor",
         defaultVal: "",
@@ -1600,7 +1602,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "nProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "",
@@ -1611,7 +1613,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "Vendor",
         fieldUniqeName: "nVendor",
         defaultVal: "",
