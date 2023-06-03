@@ -149,7 +149,25 @@ export interface SonicNotes {
     tNote: string
 }
 
-export interface SonicNotification{
+export interface SonicNotification {
     aNotification: number,
     tHeader: string
+}
+
+export interface SonicProjectExcel {
+    tProjectType: string,
+    tStoreNumber: string,
+    tAddress: string,
+    tCity: string,
+    tState: string,
+    nDMAID: number,
+    tDMA: string,
+    tRED: string,
+    tCM: string,
+    tANE: string,
+    tRVP: string,
+    tPrincipalPartner: string,
+    dStatus: Date,
+    dOpenStore: Date,
+    tProjectStatus: string
 }

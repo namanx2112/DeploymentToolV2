@@ -14,6 +14,8 @@ using System.Web.Http;
 using System.Net;
 using System.Web.Http.Results;
 using System.Diagnostics;
+using System.Net.NetworkInformation;
+using System.Net.Http.Formatting;
 
 namespace DeploymentTool.Controller
 {
@@ -79,9 +81,120 @@ namespace DeploymentTool.Controller
                     {
                         string FileName = stream.Headers.ContentDisposition.FileName;
                         var fileBytes = await stream.ReadAsByteArrayAsync();
-                    }
 
-                    return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    List<ProjectExcelFields> fields = new List<ProjectExcelFields>();
+                    fields.Add(new ProjectExcelFields() {
+                        tProjectType = "RELOCATION",
+                        tStoreNumber = "6937",
+                        tAddress = "461 Columbia Ave",
+                        tCity = "Lexington",
+                        tState = "SC",
+                        nDMAID = 546,
+                        tDMA = "COLUMBIA SC",
+                        tRED = "Michael Landru",
+                        tCM = "Kevin Dalpiaz",
+                        tANE = "",
+                        tRVP = "Linda Wiseley",
+                        tPrincipalPartner = "MICHAEL IRONS",
+                        dStatus = DateTime.Now,
+                        dOpenStore = DateTime.Now,
+                        tProjectStatus = "Under Construction"
+                    });
+                    fields.Add(new ProjectExcelFields()
+                    {
+                        tProjectType = "New",
+                        tStoreNumber = "6937",
+                        tAddress = "108 N Lincoln Dr (temp)",
+                        tCity = "Lexington",
+                        tState = "SC",
+                        nDMAID = 546,
+                        tDMA = "COLUMBIA SC",
+                        tRED = "Michael Landru",
+                        tCM = "Kevin Dalpiaz",
+                        tANE = "",
+                        tRVP = "Linda Wiseley",
+                        tPrincipalPartner = "MICHAEL IRONS",
+                        dStatus = DateTime.Now,
+                        dOpenStore = DateTime.Now,
+                        tProjectStatus = "Under Construction"
+                    });
+                    fields.Add(new ProjectExcelFields()
+                    {
+                        tProjectType = "RELOCATION",
+                        tStoreNumber = "5345",
+                        tAddress = "524 TRIMBLE PLAZA SOUTHEAST",
+                        tCity = "Lexington",
+                        tState = "SC",
+                        nDMAID = 546,
+                        tDMA = "COLUMBIA SC",
+                        tRED = "Michael Landru",
+                        tCM = "Kevin Dalpiaz",
+                        tANE = "",
+                        tRVP = "Linda Wiseley",
+                        tPrincipalPartner = "MICHAEL IRONS",
+                        dStatus = DateTime.Now,
+                        dOpenStore = DateTime.Now,
+                        tProjectStatus = "Under Construction"
+                    });
+                    fields.Add(new ProjectExcelFields()
+                    {
+                        tProjectType = "RELOCATION",
+                        tStoreNumber = "54353",
+                        tAddress = "461 Columbia Ave",
+                        tCity = "Lexington",
+                        tState = "SC",
+                        nDMAID = 546,
+                        tDMA = "COLUMBIA SC",
+                        tRED = "Michael Landru",
+                        tCM = "Kevin Dalpiaz",
+                        tANE = "",
+                        tRVP = "Linda Wiseley",
+                        tPrincipalPartner = "MICHAEL IRONS",
+                        dStatus = DateTime.Now,
+                        dOpenStore = DateTime.Now,
+                        tProjectStatus = "Under Construction"
+                    });
+                    fields.Add(new ProjectExcelFields()
+                    {
+                        tProjectType = "REBUILD",
+                        tStoreNumber = "3424",
+                        tAddress = "401 S. POPLAR STREET",
+                        tCity = "Lexington",
+                        tState = "SC",
+                        nDMAID = 546,
+                        tDMA = "COLUMBIA SC",
+                        tRED = "Michael Landru",
+                        tCM = "Kevin Dalpiaz",
+                        tANE = "",
+                        tRVP = "Linda Wiseley",
+                        tPrincipalPartner = "MICHAEL IRONS",
+                        dStatus = DateTime.Now,
+                        dOpenStore = DateTime.Now,
+                        tProjectStatus = "Under Construction"
+                    });
+                    fields.Add(new ProjectExcelFields()
+                    {
+                        tProjectType = "RELOCATION",
+                        tStoreNumber = "34534",
+                        tAddress = "461 Columbia Ave",
+                        tCity = "Lexington",
+                        tState = "SC",
+                        nDMAID = 546,
+                        tDMA = "COLUMBIA SC",
+                        tRED = "Michael Landru",
+                        tCM = "Kevin Dalpiaz",
+                        tANE = "",
+                        tRVP = "Linda Wiseley",
+                        tPrincipalPartner = "MICHAEL IRONS",
+                        dStatus = DateTime.Now,
+                        dOpenStore = DateTime.Now,
+                        tProjectStatus = "Under Construction"
+                    });
+                    return new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new ObjectContent<List<ProjectExcelFields>>(fields, new JsonMediaTypeFormatter())
+                    };
                 }
                 catch (System.Exception e)
                 {

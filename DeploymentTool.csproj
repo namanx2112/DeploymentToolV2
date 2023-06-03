@@ -947,8 +947,10 @@
     <Compile Include="AppStart\RouteConfig.cs" />
     <Compile Include="Auth\JwtManager.cs" />
     <Compile Include="Controller\AttachmentController.cs" />
+    <Compile Include="Controller\DropdownController.cs" />
     <Compile Include="Controller\FranchiseController.cs" />
     <Compile Include="Controller\MyApiContext.cs" />
+    <Compile Include="Controller\SonicController.cs" />
     <Compile Include="Controller\StoreScreenConfigController.cs" />
     <Compile Include="Controller\TableController.cs" />
     <Compile Include="Controller\BrandController.cs" />
@@ -988,12 +990,14 @@
     </Compile>
     <Compile Include="Model\Attachment.cs" />
     <Compile Include="Model\Brand.cs" />
+    <Compile Include="Model\Dropdown.cs" />
     <Compile Include="Model\Franchise.cs" />
     <Compile Include="Model\MyApiContext.cs" />
     <Compile Include="Model\Params.cs" />
     <Compile Include="Model\Project.cs" />
     <Compile Include="Model\ProjectComponent.cs" />
     <Compile Include="Model\ProjectComponentUpload.cs" />
+    <Compile Include="Model\ProjectExcelFields.cs" />
     <Compile Include="Model\SearchField.cs" />
     <Compile Include="Model\SecurityContext.cs" />
     <Compile Include="Model\Store.cs" />
@@ -1014,6 +1018,12 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCountry.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblDropdown.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblDropdownMain.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblEnum.cs">

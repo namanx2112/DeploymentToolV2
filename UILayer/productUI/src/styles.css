@@ -6,8 +6,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mdc-data-table__cell{
     position: relative;
 }
-.mdc-text-field--filled:not(.mdc-text-field--disabled){
+.form .mdc-text-field--filled:not(.mdc-text-field--disabled){
     background-color: #fff!important;
+}
+
+.grayWhiteTheme .mdc-text-field--filled{
+    background-color: gray!important;
 }
 
 /* .fullTile, .halfTile,.tabHeader > div, .tabBody, .lightGray{
@@ -99,7 +103,7 @@ button{
     overflow: visibles!important;
 }
 
-.mat-mdc-form-field-infix{
+.form .mat-mdc-form-field-infix{
     min-height: 40px!important;
     height: 40px!important;
     padding: 12px 0px!important;

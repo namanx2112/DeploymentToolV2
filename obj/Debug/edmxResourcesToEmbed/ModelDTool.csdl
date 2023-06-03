@@ -33,6 +33,28 @@
     <EntitySet Name="tblTechComponents" EntityType="dtDBModel.tblTechComponent" />
     <EntitySet Name="tblUserBrandRels" EntityType="dtDBModel.tblUserBrandRel" />
     <EntitySet Name="tblUserFunctionRels" EntityType="dtDBModel.tblUserFunctionRel" />
+    <EntitySet Name="tblDropdownMains" EntityType="dtDBModel.tblDropdownMain" />
+    <EntitySet Name="tblDropdowns" EntityType="dtDBModel.tblDropdown" />
+    <FunctionImport Name="sproc_CreateStoreFromExcel">
+      <Parameter Name="tStoreName" Mode="In" Type="String" />
+      <Parameter Name="tProjectType" Mode="In" Type="String" />
+      <Parameter Name="tStoreNumber" Mode="In" Type="String" />
+      <Parameter Name="tAddress" Mode="In" Type="String" />
+      <Parameter Name="tCity" Mode="In" Type="String" />
+      <Parameter Name="tState" Mode="In" Type="String" />
+      <Parameter Name="nDMAID" Mode="In" Type="Int32" />
+      <Parameter Name="tDMA" Mode="In" Type="String" />
+      <Parameter Name="tRED" Mode="In" Type="String" />
+      <Parameter Name="tCM" Mode="In" Type="String" />
+      <Parameter Name="tANE" Mode="In" Type="String" />
+      <Parameter Name="tRVP" Mode="In" Type="String" />
+      <Parameter Name="tPrincipalPartner" Mode="In" Type="String" />
+      <Parameter Name="dStatus" Mode="In" Type="DateTime" />
+      <Parameter Name="dOpenStore" Mode="In" Type="DateTime" />
+      <Parameter Name="tProjectStatus" Mode="In" Type="String" />
+      <Parameter Name="nCreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="nBrandId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -525,5 +547,30 @@
     <Property Name="aUserFunctionRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nUserID" Type="Int32" />
     <Property Name="nFunctionID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblDropdownMain">
+    <Key>
+      <PropertyRef Name="aMainId" />
+    </Key>
+    <Property Name="aMainId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nBrandId" Type="Int32" />
+    <Property Name="tModuleName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nDropdownId" Type="Int32" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblDropdown">
+    <Key>
+      <PropertyRef Name="aDropdownId" />
+    </Key>
+    <Property Name="aDropdownId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tDropdownText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
   </EntityType>
 </Schema>

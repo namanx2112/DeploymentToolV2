@@ -47,6 +47,8 @@ import { QuoteRequestWorkflowTemplateComponent } from './components/quote-reques
 import { POWorkflowTemplateComponent } from './components/poworkflow-template/poworkflow-template.component'
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { QuoteRequestTemplateListComponent } from './components/quote-request-template-list/quote-request-template-list.component';
+import { FileStoreSelectionComponent } from './components/Sonic/file-store-selection/file-store-selection.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,8 @@ import { QuoteRequestTemplateListComponent } from './components/quote-request-te
     WorkflowsComponent,
     QuoteRequestWorkflowTemplateComponent,
     POWorkflowTemplateComponent,
-    QuoteRequestTemplateListComponent
+    QuoteRequestTemplateListComponent,
+    FileStoreSelectionComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ import { QuoteRequestTemplateListComponent } from './components/quote-request-te
     MatSidenavModule,
     MatMenuModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

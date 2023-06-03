@@ -522,5 +522,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblDropdownMains">
+      <EntityTypeMapping TypeName="dtDBModel.tblDropdownMain">
+        <MappingFragment StoreEntitySet="tblDropdownMain">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nDropdownId" ColumnName="nDropdownId" />
+          <ScalarProperty Name="tModuleName" ColumnName="tModuleName" />
+          <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
+          <ScalarProperty Name="aMainId" ColumnName="aMainId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDropdowns">
+      <EntityTypeMapping TypeName="dtDBModel.tblDropdown">
+        <MappingFragment StoreEntitySet="tblDropdowns">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="tDropdownText" ColumnName="tDropdownText" />
+          <ScalarProperty Name="aDropdownId" ColumnName="aDropdownId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sproc_CreateStoreFromExcel" FunctionName="dtDBModel.Store.sproc_CreateStoreFromExcel" />
   </EntityContainerMapping>
 </Mapping>

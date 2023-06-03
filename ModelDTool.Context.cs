@@ -12,6 +12,8 @@ namespace DeploymentTool
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class dtDBEntities : DbContext
     {
@@ -57,5 +59,84 @@ namespace DeploymentTool
         public virtual DbSet<tblTechComponent> tblTechComponents { get; set; }
         public virtual DbSet<tblUserBrandRel> tblUserBrandRels { get; set; }
         public virtual DbSet<tblUserFunctionRel> tblUserFunctionRels { get; set; }
+        public virtual DbSet<tblDropdownMain> tblDropdownMains { get; set; }
+        public virtual DbSet<tblDropdown> tblDropdowns { get; set; }
+    
+        public virtual int sproc_CreateStoreFromExcel(string tStoreName, string tProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
+        {
+            var tStoreNameParameter = tStoreName != null ?
+                new ObjectParameter("tStoreName", tStoreName) :
+                new ObjectParameter("tStoreName", typeof(string));
+    
+            var tProjectTypeParameter = tProjectType != null ?
+                new ObjectParameter("tProjectType", tProjectType) :
+                new ObjectParameter("tProjectType", typeof(string));
+    
+            var tStoreNumberParameter = tStoreNumber != null ?
+                new ObjectParameter("tStoreNumber", tStoreNumber) :
+                new ObjectParameter("tStoreNumber", typeof(string));
+    
+            var tAddressParameter = tAddress != null ?
+                new ObjectParameter("tAddress", tAddress) :
+                new ObjectParameter("tAddress", typeof(string));
+    
+            var tCityParameter = tCity != null ?
+                new ObjectParameter("tCity", tCity) :
+                new ObjectParameter("tCity", typeof(string));
+    
+            var tStateParameter = tState != null ?
+                new ObjectParameter("tState", tState) :
+                new ObjectParameter("tState", typeof(string));
+    
+            var nDMAIDParameter = nDMAID.HasValue ?
+                new ObjectParameter("nDMAID", nDMAID) :
+                new ObjectParameter("nDMAID", typeof(int));
+    
+            var tDMAParameter = tDMA != null ?
+                new ObjectParameter("tDMA", tDMA) :
+                new ObjectParameter("tDMA", typeof(string));
+    
+            var tREDParameter = tRED != null ?
+                new ObjectParameter("tRED", tRED) :
+                new ObjectParameter("tRED", typeof(string));
+    
+            var tCMParameter = tCM != null ?
+                new ObjectParameter("tCM", tCM) :
+                new ObjectParameter("tCM", typeof(string));
+    
+            var tANEParameter = tANE != null ?
+                new ObjectParameter("tANE", tANE) :
+                new ObjectParameter("tANE", typeof(string));
+    
+            var tRVPParameter = tRVP != null ?
+                new ObjectParameter("tRVP", tRVP) :
+                new ObjectParameter("tRVP", typeof(string));
+    
+            var tPrincipalPartnerParameter = tPrincipalPartner != null ?
+                new ObjectParameter("tPrincipalPartner", tPrincipalPartner) :
+                new ObjectParameter("tPrincipalPartner", typeof(string));
+    
+            var dStatusParameter = dStatus.HasValue ?
+                new ObjectParameter("dStatus", dStatus) :
+                new ObjectParameter("dStatus", typeof(System.DateTime));
+    
+            var dOpenStoreParameter = dOpenStore.HasValue ?
+                new ObjectParameter("dOpenStore", dOpenStore) :
+                new ObjectParameter("dOpenStore", typeof(System.DateTime));
+    
+            var tProjectStatusParameter = tProjectStatus != null ?
+                new ObjectParameter("tProjectStatus", tProjectStatus) :
+                new ObjectParameter("tProjectStatus", typeof(string));
+    
+            var nCreatedByParameter = nCreatedBy.HasValue ?
+                new ObjectParameter("nCreatedBy", nCreatedBy) :
+                new ObjectParameter("nCreatedBy", typeof(int));
+    
+            var nBrandIdParameter = nBrandId.HasValue ?
+                new ObjectParameter("nBrandId", nBrandId) :
+                new ObjectParameter("nBrandId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sproc_CreateStoreFromExcel", tStoreNameParameter, tProjectTypeParameter, tStoreNumberParameter, tAddressParameter, tCityParameter, tStateParameter, nDMAIDParameter, tDMAParameter, tREDParameter, tCMParameter, tANEParameter, tRVPParameter, tPrincipalPartnerParameter, dStatusParameter, dOpenStoreParameter, tProjectStatusParameter, nCreatedByParameter, nBrandIdParameter);
+        }
     }
 }

@@ -1,0 +1,30 @@
+.DropdownChips{
+    width: 100%;
+}
+
+.dropDowns, .filters{
+    width: calc(100% - 40px);
+    margin: auto;
+}
+
+.outerDiv{
+    width: 90%;
+    margin: auto;
+    min-height: 500px;
+    border-radius: 10px;
+}
+
+.header{
+    height: 40px;
+    width: 90%;
+    line-height: 35px;
+    margin: auto;
+    font-size: 15px;    
+    color: #444;
+    font-weight: bold;
+}
+
+.dropDownField{
+    margin: 20px 20px 10px 0px;
+    border-radius: 10px;
+} 

@@ -16,7 +16,7 @@ export interface BrandModel {
     dtCreatedOn: Date,
     dtUpdatedOn: Date,
     bDeleted: boolean,
-    tIconURL:string
+    tIconURL: string
 }
 
 
@@ -119,7 +119,7 @@ export interface QuoteRequestTechAreas {
 }
 
 export interface QuoteRequestFields {
-    techAreaFieldId: string 
+    techAreaFieldId: string
 }
 
 export interface POConfigTemplate {
@@ -161,5 +161,13 @@ export interface POSection {
     nUpdateBy: number,
     dtCreatedOn: Date
     dtUpdatedOn: Date,
+    bDeleted: boolean
+}
+
+export interface DropwDown {
+    aDropdownId: number,
+    nBrandId: number,
+    tModuleName: string,
+    tDropdownText: string,
     bDeleted: boolean
 }

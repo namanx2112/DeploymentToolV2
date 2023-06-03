@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
-import { SonicNotes, StoreProjects } from '../interfaces/sonic';
+import { SonicNotes, SonicProjectExcel, StoreProjects } from '../interfaces/sonic';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -17,13 +17,17 @@ export class SonicService {
     this.configUrl = authService.getConfigUrl();
   }
 
-  postFile(fileToUpload: File): Observable<boolean> {
+  UploadStore({ fileToUpload }: { fileToUpload: File; }) {
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name);
     let httpHeader = new HttpHeaders({
       "Authorization": "Bearer " + this.authService.getToken()
     });
-    return this.http.post<boolean>(this.configUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
+    return this.http.post<SonicProjectExcel[]>(this.configUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
+  }
+
+  CreateNewStores(request: SonicProjectExcel[]) {
+    return this.http.post<string>(this.configUrl + "Sonic/CreateNewStores", request, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(tab: HomeTab) {

@@ -1,10 +1,19 @@
 .projectHeader {
-    float: left;
     height: 55px;
     width: 95%;
     z-index: 4;
     background-color: #fff;
-    position: absolute;
+}
+
+.projectBody{
+    width: 100%;
+    min-height: 400px;
+    overflow: auto;
+}
+
+.submitButton{
+    float: right;
+    margin: 20px;
 }
 
 a{

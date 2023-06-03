@@ -75,6 +75,31 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
           <Property Name="aCountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tCountryName" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblDropdownMain">
+          <Key>
+            <PropertyRef Name="aMainId" />
+          </Key>
+          <Property Name="aMainId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nBrandId" Type="int" />
+          <Property Name="tModuleName" Type="varchar" MaxLength="500" />
+          <Property Name="nDropdownId" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblDropdowns">
+          <Key>
+            <PropertyRef Name="aDropdownId" />
+          </Key>
+          <Property Name="aDropdownId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tDropdownText" Type="varchar" MaxLength="500" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblEnum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblEnum">
@@ -521,9 +546,31 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
         </EntityType>
+        <Function Name="sproc_CreateStoreFromExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tStoreName" Type="varchar" Mode="In" />
+          <Parameter Name="tProjectType" Type="varchar" Mode="In" />
+          <Parameter Name="tStoreNumber" Type="varchar" Mode="In" />
+          <Parameter Name="tAddress" Type="varchar" Mode="In" />
+          <Parameter Name="tCity" Type="varchar" Mode="In" />
+          <Parameter Name="tState" Type="varchar" Mode="In" />
+          <Parameter Name="nDMAID" Type="int" Mode="In" />
+          <Parameter Name="tDMA" Type="varchar" Mode="In" />
+          <Parameter Name="tRED" Type="varchar" Mode="In" />
+          <Parameter Name="tCM" Type="varchar" Mode="In" />
+          <Parameter Name="tANE" Type="varchar" Mode="In" />
+          <Parameter Name="tRVP" Type="varchar" Mode="In" />
+          <Parameter Name="tPrincipalPartner" Type="varchar" Mode="In" />
+          <Parameter Name="dStatus" Type="datetime" Mode="In" />
+          <Parameter Name="dOpenStore" Type="datetime" Mode="In" />
+          <Parameter Name="tProjectStatus" Type="varchar" Mode="In" />
+          <Parameter Name="nCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="nBrandId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="dtDBModelStoreContainer">
           <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectAudio" EntityType="Self.tblProjectAudio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectBillTo" EntityType="Self.tblProjectBillTo" Schema="dbo" store:Type="Tables" />
@@ -714,6 +761,28 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblTechComponents" EntityType="dtDBModel.tblTechComponent" />
           <EntitySet Name="tblUserBrandRels" EntityType="dtDBModel.tblUserBrandRel" />
           <EntitySet Name="tblUserFunctionRels" EntityType="dtDBModel.tblUserFunctionRel" />
+          <EntitySet Name="tblDropdownMains" EntityType="dtDBModel.tblDropdownMain" />
+          <EntitySet Name="tblDropdowns" EntityType="dtDBModel.tblDropdown" />
+          <FunctionImport Name="sproc_CreateStoreFromExcel">
+            <Parameter Name="tStoreName" Mode="In" Type="String" />
+            <Parameter Name="tProjectType" Mode="In" Type="String" />
+            <Parameter Name="tStoreNumber" Mode="In" Type="String" />
+            <Parameter Name="tAddress" Mode="In" Type="String" />
+            <Parameter Name="tCity" Mode="In" Type="String" />
+            <Parameter Name="tState" Mode="In" Type="String" />
+            <Parameter Name="nDMAID" Mode="In" Type="Int32" />
+            <Parameter Name="tDMA" Mode="In" Type="String" />
+            <Parameter Name="tRED" Mode="In" Type="String" />
+            <Parameter Name="tCM" Mode="In" Type="String" />
+            <Parameter Name="tANE" Mode="In" Type="String" />
+            <Parameter Name="tRVP" Mode="In" Type="String" />
+            <Parameter Name="tPrincipalPartner" Mode="In" Type="String" />
+            <Parameter Name="dStatus" Mode="In" Type="DateTime" />
+            <Parameter Name="dOpenStore" Mode="In" Type="DateTime" />
+            <Parameter Name="tProjectStatus" Mode="In" Type="String" />
+            <Parameter Name="nCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="nBrandId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="tblBrand">
           <Key>
@@ -1206,6 +1275,31 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="aUserFunctionRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nUserID" Type="Int32" />
           <Property Name="nFunctionID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblDropdownMain">
+          <Key>
+            <PropertyRef Name="aMainId" />
+          </Key>
+          <Property Name="aMainId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nBrandId" Type="Int32" />
+          <Property Name="tModuleName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="nDropdownId" Type="Int32" />
+          <Property Name="nCreatedBy" Type="Int32" />
+          <Property Name="nUpdateBy" Type="Int32" />
+          <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="bDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tblDropdown">
+          <Key>
+            <PropertyRef Name="aDropdownId" />
+          </Key>
+          <Property Name="aDropdownId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tDropdownText" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="nUpdateBy" Type="Int32" />
+          <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="bDeleted" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1734,6 +1828,34 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblDropdownMains">
+            <EntityTypeMapping TypeName="dtDBModel.tblDropdownMain">
+              <MappingFragment StoreEntitySet="tblDropdownMain">
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+                <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+                <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+                <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+                <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+                <ScalarProperty Name="nDropdownId" ColumnName="nDropdownId" />
+                <ScalarProperty Name="tModuleName" ColumnName="tModuleName" />
+                <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
+                <ScalarProperty Name="aMainId" ColumnName="aMainId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDropdowns">
+            <EntityTypeMapping TypeName="dtDBModel.tblDropdown">
+              <MappingFragment StoreEntitySet="tblDropdowns">
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+                <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+                <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+                <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+                <ScalarProperty Name="tDropdownText" ColumnName="tDropdownText" />
+                <ScalarProperty Name="aDropdownId" ColumnName="aDropdownId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sproc_CreateStoreFromExcel" FunctionName="dtDBModel.Store.sproc_CreateStoreFromExcel" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
