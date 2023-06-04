@@ -47,7 +47,8 @@ export class ImportProjectsComponent {
   CreateNewStores() {
     if (this.selectedItems.length > 0) {
       this.service.CreateNewStores(this.selectedItems).subscribe((x: string) => {
-        alert("Store Created Successfully");
+        alert("Store Created Successfully you can search store");
+        this.ChangeView.emit("dashboard");
       });
     }
   }

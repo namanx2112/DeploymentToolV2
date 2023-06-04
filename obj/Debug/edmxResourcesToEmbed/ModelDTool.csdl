@@ -55,6 +55,9 @@
       <Parameter Name="nCreatedBy" Mode="In" Type="Int32" />
       <Parameter Name="nBrandId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="sproc_SearchStore" ReturnType="Collection(dtDBModel.sproc_SearchStore_Result)">
+      <Parameter Name="tText" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -196,6 +199,8 @@
     <Property Name="dGroundBreak" Type="DateTime" Precision="0" />
     <Property Name="dKitchenInstall" Type="DateTime" Precision="0" />
     <Property Name="cProjectCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="nGroundBreak" Type="Int32" />
+    <Property Name="nKitchenInstall" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectExteriorMenu">
     <Key>
@@ -295,6 +300,7 @@
     <Property Name="nUPS" Type="Int32" />
     <Property Name="nShelf" Type="Int32" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="nType" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectPOS">
     <Key>
@@ -573,4 +579,10 @@
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
   </EntityType>
+  <ComplexType Name="sproc_SearchStore_Result">
+    <Property Type="Int32" Name="nProjectId" Nullable="true" />
+    <Property Type="String" Name="tStoreName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="tProjectName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="tStoreNumber" Nullable="true" MaxLength="255" />
+  </ComplexType>
 </Schema>

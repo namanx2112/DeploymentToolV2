@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StoreSearchModel } from 'src/app/interfaces/sonic';
 
 @Component({
   selector: 'app-sonic-home-page',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class SonicHomePageComponent {
   showMode: string;
+  curStore: StoreSearchModel;
   constructor(){
     this.showMode = "dashboard";
   }
@@ -17,7 +19,8 @@ export class SonicHomePageComponent {
     this.showMode = tMode;
   }
 
-  SearchedResult(txt: any){
+  SearchedResult(val: any){
+    this.curStore = val;
     this.showMode = "storeview";
   }
 

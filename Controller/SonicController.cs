@@ -64,5 +64,27 @@ namespace DeploymentTool.Controller
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage SearchStore(string searchText)
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            try
+            {
+                if (searchText == null)
+                    searchText = string.Empty;
+                SqlParameter tModuleNameParam = new SqlParameter("@tText", searchText);
+                List<StoreSearchModel> items = db.Database.SqlQuery<StoreSearchModel>("exec sproc_SearchStore @tText", tModuleNameParam).ToList();
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<List<StoreSearchModel>>(items, new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
     }
 }

@@ -22,5 +22,7 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dGroundBreak { get; set; }
         public Nullable<System.DateTime> dKitchenInstall { get; set; }
         public Nullable<decimal> cProjectCost { get; set; }
+        public Nullable<int> nGroundBreak { get; set; }
+        public Nullable<int> nKitchenInstall { get; set; }
     }
 }

@@ -251,6 +251,8 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="dGroundBreak" Type="date" />
           <Property Name="dKitchenInstall" Type="date" />
           <Property Name="cProjectCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="nGroundBreak" Type="int" />
+          <Property Name="nKitchenInstall" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectExteriorMenus">
           <Key>
@@ -350,6 +352,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nUPS" Type="int" />
           <Property Name="nShelf" Type="int" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="nType" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectPOS">
           <Key>
@@ -565,6 +568,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Parameter Name="tProjectStatus" Type="varchar" Mode="In" />
           <Parameter Name="nCreatedBy" Type="int" Mode="In" />
           <Parameter Name="nBrandId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sproc_SearchStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tText" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="dtDBModelStoreContainer">
           <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
@@ -783,6 +789,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
             <Parameter Name="nCreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="nBrandId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sproc_SearchStore" ReturnType="Collection(dtDBModel.sproc_SearchStore_Result)">
+            <Parameter Name="tText" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="tblBrand">
           <Key>
@@ -924,6 +933,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dGroundBreak" Type="DateTime" Precision="0" />
           <Property Name="dKitchenInstall" Type="DateTime" Precision="0" />
           <Property Name="cProjectCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="nGroundBreak" Type="Int32" />
+          <Property Name="nKitchenInstall" Type="Int32" />
         </EntityType>
         <EntityType Name="tblProjectExteriorMenu">
           <Key>
@@ -1023,6 +1034,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="nUPS" Type="Int32" />
           <Property Name="nShelf" Type="Int32" />
           <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="nType" Type="Int32" />
         </EntityType>
         <EntityType Name="tblProjectPOS">
           <Key>
@@ -1301,6 +1313,12 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="bDeleted" Type="Boolean" />
         </EntityType>
+        <ComplexType Name="sproc_SearchStore_Result">
+          <Property Type="Int32" Name="nProjectId" Nullable="true" />
+          <Property Type="String" Name="tStoreName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="tProjectName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="tStoreNumber" Nullable="true" MaxLength="255" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1445,6 +1463,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblProjectConfigs">
             <EntityTypeMapping TypeName="dtDBModel.tblProjectConfig">
               <MappingFragment StoreEntitySet="tblProjectConfig">
+                <ScalarProperty Name="nKitchenInstall" ColumnName="nKitchenInstall" />
+                <ScalarProperty Name="nGroundBreak" ColumnName="nGroundBreak" />
                 <ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
                 <ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
                 <ScalarProperty Name="dGroundBreak" ColumnName="dGroundBreak" />
@@ -1543,6 +1563,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblProjectPaymentSystems">
             <EntityTypeMapping TypeName="dtDBModel.tblProjectPaymentSystem">
               <MappingFragment StoreEntitySet="tblProjectPaymentSystem">
+                <ScalarProperty Name="nType" ColumnName="nType" />
                 <ScalarProperty Name="cCost" ColumnName="cCost" />
                 <ScalarProperty Name="nShelf" ColumnName="nShelf" />
                 <ScalarProperty Name="nUPS" ColumnName="nUPS" />
@@ -1856,6 +1877,16 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sproc_CreateStoreFromExcel" FunctionName="dtDBModel.Store.sproc_CreateStoreFromExcel" />
+          <FunctionImportMapping FunctionImportName="sproc_SearchStore" FunctionName="dtDBModel.Store.sproc_SearchStore">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dtDBModel.sproc_SearchStore_Result">
+                <ScalarProperty Name="nProjectId" ColumnName="nProjectId" />
+                <ScalarProperty Name="tStoreName" ColumnName="tStoreName" />
+                <ScalarProperty Name="tProjectName" ColumnName="tProjectName" />
+                <ScalarProperty Name="tStoreNumber" ColumnName="tStoreNumber" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

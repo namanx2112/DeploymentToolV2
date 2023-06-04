@@ -1,9 +1,18 @@
 <h2 class="headerPart">Sonic Homepage</h2>
 <div class="searchPart">
-    <mat-form-field appearance="outline" class="searchField">
-        <mat-label>Search Store Id, Project Type, Reports and Dates</mat-label>
-        <input matInput placeholder="Placeholder" (keydown)="SearchStore($event);">
-        <mat-icon matSuffix>search</mat-icon>
+    <mat-form-field class="searchField">
+        <mat-label>Search Store Id, Project Type, Store Number</mat-label>
+        <input type="text"
+               placeholder="Search Store"
+               aria-label="Number"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='projectSelect($event)'>
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{"Store Name:" + option.tStoreName + ", Project Name:" + option.tProjectName + ", Store Number:" + option.tStoreNumber}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 </div>
 <div class="tilesPart">

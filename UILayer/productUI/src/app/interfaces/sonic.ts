@@ -171,3 +171,10 @@ export interface SonicProjectExcel {
     dOpenStore: Date,
     tProjectStatus: string
 }
+
+export interface StoreSearchModel {
+    nProjectId: number,
+    tStoreName: string,
+    tProjectName: string,
+    tStoreNumber: string
+}

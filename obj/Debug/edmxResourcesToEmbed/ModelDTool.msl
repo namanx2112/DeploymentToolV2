@@ -139,6 +139,8 @@
     <EntitySetMapping Name="tblProjectConfigs">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectConfig">
         <MappingFragment StoreEntitySet="tblProjectConfig">
+          <ScalarProperty Name="nKitchenInstall" ColumnName="nKitchenInstall" />
+          <ScalarProperty Name="nGroundBreak" ColumnName="nGroundBreak" />
           <ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
           <ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
           <ScalarProperty Name="dGroundBreak" ColumnName="dGroundBreak" />
@@ -237,6 +239,7 @@
     <EntitySetMapping Name="tblProjectPaymentSystems">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectPaymentSystem">
         <MappingFragment StoreEntitySet="tblProjectPaymentSystem">
+          <ScalarProperty Name="nType" ColumnName="nType" />
           <ScalarProperty Name="cCost" ColumnName="cCost" />
           <ScalarProperty Name="nShelf" ColumnName="nShelf" />
           <ScalarProperty Name="nUPS" ColumnName="nUPS" />
@@ -550,5 +553,15 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sproc_CreateStoreFromExcel" FunctionName="dtDBModel.Store.sproc_CreateStoreFromExcel" />
+    <FunctionImportMapping FunctionImportName="sproc_SearchStore" FunctionName="dtDBModel.Store.sproc_SearchStore">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="dtDBModel.sproc_SearchStore_Result">
+          <ScalarProperty Name="nProjectId" ColumnName="nProjectId" />
+          <ScalarProperty Name="tStoreName" ColumnName="tStoreName" />
+          <ScalarProperty Name="tProjectName" ColumnName="tProjectName" />
+          <ScalarProperty Name="tStoreNumber" ColumnName="tStoreNumber" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

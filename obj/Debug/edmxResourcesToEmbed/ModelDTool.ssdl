@@ -246,6 +246,8 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="dGroundBreak" Type="date" />
     <Property Name="dKitchenInstall" Type="date" />
     <Property Name="cProjectCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="nGroundBreak" Type="int" />
+    <Property Name="nKitchenInstall" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectExteriorMenus">
     <Key>
@@ -345,6 +347,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="nUPS" Type="int" />
     <Property Name="nShelf" Type="int" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="nType" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectPOS">
     <Key>
@@ -560,6 +563,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Parameter Name="tProjectStatus" Type="varchar" Mode="In" />
     <Parameter Name="nCreatedBy" Type="int" Mode="In" />
     <Parameter Name="nBrandId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sproc_SearchStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tText" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="dtDBModelStoreContainer">
     <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />

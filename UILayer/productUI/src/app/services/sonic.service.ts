@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
-import { SonicNotes, SonicProjectExcel, StoreProjects } from '../interfaces/sonic';
+import { SonicNotes, SonicProjectExcel, StoreProjects, StoreSearchModel } from '../interfaces/sonic';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -28,6 +28,10 @@ export class SonicService {
 
   CreateNewStores(request: SonicProjectExcel[]) {
     return this.http.post<string>(this.configUrl + "Sonic/CreateNewStores", request, { headers: this.authService.getHttpHeaders() });
+  }
+
+  SearchStore(request: string) {
+    return this.http.get<StoreSearchModel[]>(this.configUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(tab: HomeTab) {

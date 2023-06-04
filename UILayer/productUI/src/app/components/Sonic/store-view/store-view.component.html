@@ -1,7 +1,7 @@
 <div class="storeView">
     <div class="projectHeader">
         <mat-icon class="backIcon" (click)="goBack()">arrow_back_ios</mat-icon>
-        <h4 class="projHeader">Project - {{storeName}}</h4>
+        <h4 class="projHeader">Project - {{curStore.tStoreName}}</h4>
         <button class="noBorderButton lightGray">Workflows</button>
     </div>
     <div class="storeTitle"><span class="storeStatus">New Store 06/13/2023</span></div>
@@ -45,7 +45,7 @@
     </div>
     <div class="TechAreaTabBar" *ngIf="viewName == 'tabview'">
         <div class="tabHeader">
-            <div *ngFor="let tTab of tabForUI;let index = index" (click)="tabClick(index);">{{tTab.tab_header}}
+            <div *ngFor="let tTab of tabForUI;let index = index" [ngClass]="(selectedTab == index) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(index);">{{tTab.tab_header}}
             </div>
         </div>
         <div class="tabBody">

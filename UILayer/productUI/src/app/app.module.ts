@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/Auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -49,6 +49,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { QuoteRequestTemplateListComponent } from './components/quote-request-template-list/quote-request-template-list.component';
 import { FileStoreSelectionComponent } from './components/Sonic/file-store-selection/file-store-selection.component';
 import {MatChipsModule} from '@angular/material/chips';
+import { LoadingComponent } from './components/loading/loading.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoadingInterceptorService } from './services/loading-interceptor.service';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -83,13 +87,15 @@ import {MatChipsModule} from '@angular/material/chips';
     QuoteRequestWorkflowTemplateComponent,
     POWorkflowTemplateComponent,
     QuoteRequestTemplateListComponent,
-    FileStoreSelectionComponent
+    FileStoreSelectionComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatAutocompleteModule,
     MatTabsModule,
     MatFormFieldModule,
     FormsModule,
@@ -104,9 +110,16 @@ import {MatChipsModule} from '@angular/material/chips';
     MatMenuModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatChipsModule
+    MatChipsModule,
+    MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:LoadingInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

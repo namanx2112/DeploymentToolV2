@@ -138,5 +138,14 @@ namespace DeploymentTool
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sproc_CreateStoreFromExcel", tStoreNameParameter, tProjectTypeParameter, tStoreNumberParameter, tAddressParameter, tCityParameter, tStateParameter, nDMAIDParameter, tDMAParameter, tREDParameter, tCMParameter, tANEParameter, tRVPParameter, tPrincipalPartnerParameter, dStatusParameter, dOpenStoreParameter, tProjectStatusParameter, nCreatedByParameter, nBrandIdParameter);
         }
+    
+        public virtual ObjectResult<sproc_SearchStore_Result> sproc_SearchStore(string tText)
+        {
+            var tTextParameter = tText != null ?
+                new ObjectParameter("tText", tText) :
+                new ObjectParameter("tText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sproc_SearchStore_Result>("sproc_SearchStore", tTextParameter);
+        }
     }
 }

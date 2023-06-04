@@ -29,5 +29,6 @@ namespace DeploymentTool
         public Nullable<int> nUPS { get; set; }
         public Nullable<int> nShelf { get; set; }
         public Nullable<decimal> cCost { get; set; }
+        public Nullable<int> nType { get; set; }
     }
 }
