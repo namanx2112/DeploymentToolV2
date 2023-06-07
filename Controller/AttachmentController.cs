@@ -16,6 +16,8 @@ using System.Web.Http.Results;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Net.Http.Formatting;
+using System.Data.OleDb;
+using System.Web.UI.WebControls;
 
 namespace DeploymentTool.Controller
 {
@@ -23,6 +25,7 @@ namespace DeploymentTool.Controller
 
     public class AttachmentController : ApiController
     {
+        private dtDBEntities db = new dtDBEntities();
         private readonly AttachmentDAL _attachmentRepository = new AttachmentDAL();
 
         [HttpPost]
@@ -75,122 +78,134 @@ namespace DeploymentTool.Controller
                 
                 try
                 {
+                    List<ProjectExcelFields> fields = new List<ProjectExcelFields>();
                     var filesReadToProvider = await request.Content.ReadAsMultipartAsync();
 
                     foreach (var stream in filesReadToProvider.Contents)
                     {
-                        string FileName = stream.Headers.ContentDisposition.FileName;
+                        string FileName = stream.Headers.ContentDisposition.FileName.Replace("\"","");
                         var fileBytes = await stream.ReadAsByteArrayAsync();
+                        string URL = HttpRuntime.AppDomainAppPath;
+                      
+                        string strFilePath = URL+@"Attachments\" + FileName;
+                        //string strFilePath = "C:\\Code\\namanx2112\\new\\Attachments\\store.xlsx";
+                        string connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strFilePath + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
 
+                        //using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(@"../Attachments/" + FileName, FileMode.Create)))
+                        using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
+                        {
+                            bw.Write(fileBytes);
+                            bw.Close();
+                        }
+                       ImportExceltoDatabase(fields,strFilePath, connString);
+                        /* fields.Add(new ProjectExcelFields() {
+                             tProjectType = "RELOCATION",
+                             tStoreNumber = "6937",
+                             tAddress = "461 Columbia Ave",
+                             tCity = "Lexington",
+                             tState = "SC",
+                             nDMAID = 546,
+                             tDMA = "COLUMBIA SC",
+                             tRED = "Michael Landru",
+                             tCM = "Kevin Dalpiaz",
+                             tANE = "",
+                             tRVP = "Linda Wiseley",
+                             tPrincipalPartner = "MICHAEL IRONS",
+                             dStatus = DateTime.Now,
+                             dOpenStore = DateTime.Now,
+                             tProjectStatus = "Under Construction"
+                         });
+                         fields.Add(new ProjectExcelFields()
+                         {
+                             tProjectType = "New",
+                             tStoreNumber = "6937",
+                             tAddress = "108 N Lincoln Dr (temp)",
+                             tCity = "Lexington",
+                             tState = "SC",
+                             nDMAID = 546,
+                             tDMA = "COLUMBIA SC",
+                             tRED = "Michael Landru",
+                             tCM = "Kevin Dalpiaz",
+                             tANE = "",
+                             tRVP = "Linda Wiseley",
+                             tPrincipalPartner = "MICHAEL IRONS",
+                             dStatus = DateTime.Now,
+                             dOpenStore = DateTime.Now,
+                             tProjectStatus = "Under Construction"
+                         });
+                         fields.Add(new ProjectExcelFields()
+                         {
+                             tProjectType = "RELOCATION",
+                             tStoreNumber = "5345",
+                             tAddress = "524 TRIMBLE PLAZA SOUTHEAST",
+                             tCity = "Lexington",
+                             tState = "SC",
+                             nDMAID = 546,
+                             tDMA = "COLUMBIA SC",
+                             tRED = "Michael Landru",
+                             tCM = "Kevin Dalpiaz",
+                             tANE = "",
+                             tRVP = "Linda Wiseley",
+                             tPrincipalPartner = "MICHAEL IRONS",
+                             dStatus = DateTime.Now,
+                             dOpenStore = DateTime.Now,
+                             tProjectStatus = "Under Construction"
+                         });
+                         fields.Add(new ProjectExcelFields()
+                         {
+                             tProjectType = "RELOCATION",
+                             tStoreNumber = "54353",
+                             tAddress = "461 Columbia Ave",
+                             tCity = "Lexington",
+                             tState = "SC",
+                             nDMAID = 546,
+                             tDMA = "COLUMBIA SC",
+                             tRED = "Michael Landru",
+                             tCM = "Kevin Dalpiaz",
+                             tANE = "",
+                             tRVP = "Linda Wiseley",
+                             tPrincipalPartner = "MICHAEL IRONS",
+                             dStatus = DateTime.Now,
+                             dOpenStore = DateTime.Now,
+                             tProjectStatus = "Under Construction"
+                         });
+                         fields.Add(new ProjectExcelFields()
+                         {
+                             tProjectType = "REBUILD",
+                             tStoreNumber = "3424",
+                             tAddress = "401 S. POPLAR STREET",
+                             tCity = "Lexington",
+                             tState = "SC",
+                             nDMAID = 546,
+                             tDMA = "COLUMBIA SC",
+                             tRED = "Michael Landru",
+                             tCM = "Kevin Dalpiaz",
+                             tANE = "",
+                             tRVP = "Linda Wiseley",
+                             tPrincipalPartner = "MICHAEL IRONS",
+                             dStatus = DateTime.Now,
+                             dOpenStore = DateTime.Now,
+                             tProjectStatus = "Under Construction"
+                         });
+                         fields.Add(new ProjectExcelFields()
+                         {
+                             tProjectType = "RELOCATION",
+                             tStoreNumber = "34534",
+                             tAddress = "461 Columbia Ave",
+                             tCity = "Lexington",
+                             tState = "SC",
+                             nDMAID = 546,
+                             tDMA = "COLUMBIA SC",
+                             tRED = "Michael Landru",
+                             tCM = "Kevin Dalpiaz",
+                             tANE = "",
+                             tRVP = "Linda Wiseley",
+                             tPrincipalPartner = "MICHAEL IRONS",
+                             dStatus = DateTime.Now,
+                             dOpenStore = DateTime.Now,
+                             tProjectStatus = "Under Construction"
+                         }); */
                     }
-                    List<ProjectExcelFields> fields = new List<ProjectExcelFields>();
-                    fields.Add(new ProjectExcelFields() {
-                        tProjectType = "RELOCATION",
-                        tStoreNumber = "6937",
-                        tAddress = "461 Columbia Ave",
-                        tCity = "Lexington",
-                        tState = "SC",
-                        nDMAID = 546,
-                        tDMA = "COLUMBIA SC",
-                        tRED = "Michael Landru",
-                        tCM = "Kevin Dalpiaz",
-                        tANE = "",
-                        tRVP = "Linda Wiseley",
-                        tPrincipalPartner = "MICHAEL IRONS",
-                        dStatus = DateTime.Now,
-                        dOpenStore = DateTime.Now,
-                        tProjectStatus = "Under Construction"
-                    });
-                    fields.Add(new ProjectExcelFields()
-                    {
-                        tProjectType = "New",
-                        tStoreNumber = "6937",
-                        tAddress = "108 N Lincoln Dr (temp)",
-                        tCity = "Lexington",
-                        tState = "SC",
-                        nDMAID = 546,
-                        tDMA = "COLUMBIA SC",
-                        tRED = "Michael Landru",
-                        tCM = "Kevin Dalpiaz",
-                        tANE = "",
-                        tRVP = "Linda Wiseley",
-                        tPrincipalPartner = "MICHAEL IRONS",
-                        dStatus = DateTime.Now,
-                        dOpenStore = DateTime.Now,
-                        tProjectStatus = "Under Construction"
-                    });
-                    fields.Add(new ProjectExcelFields()
-                    {
-                        tProjectType = "RELOCATION",
-                        tStoreNumber = "5345",
-                        tAddress = "524 TRIMBLE PLAZA SOUTHEAST",
-                        tCity = "Lexington",
-                        tState = "SC",
-                        nDMAID = 546,
-                        tDMA = "COLUMBIA SC",
-                        tRED = "Michael Landru",
-                        tCM = "Kevin Dalpiaz",
-                        tANE = "",
-                        tRVP = "Linda Wiseley",
-                        tPrincipalPartner = "MICHAEL IRONS",
-                        dStatus = DateTime.Now,
-                        dOpenStore = DateTime.Now,
-                        tProjectStatus = "Under Construction"
-                    });
-                    fields.Add(new ProjectExcelFields()
-                    {
-                        tProjectType = "RELOCATION",
-                        tStoreNumber = "54353",
-                        tAddress = "461 Columbia Ave",
-                        tCity = "Lexington",
-                        tState = "SC",
-                        nDMAID = 546,
-                        tDMA = "COLUMBIA SC",
-                        tRED = "Michael Landru",
-                        tCM = "Kevin Dalpiaz",
-                        tANE = "",
-                        tRVP = "Linda Wiseley",
-                        tPrincipalPartner = "MICHAEL IRONS",
-                        dStatus = DateTime.Now,
-                        dOpenStore = DateTime.Now,
-                        tProjectStatus = "Under Construction"
-                    });
-                    fields.Add(new ProjectExcelFields()
-                    {
-                        tProjectType = "REBUILD",
-                        tStoreNumber = "3424",
-                        tAddress = "401 S. POPLAR STREET",
-                        tCity = "Lexington",
-                        tState = "SC",
-                        nDMAID = 546,
-                        tDMA = "COLUMBIA SC",
-                        tRED = "Michael Landru",
-                        tCM = "Kevin Dalpiaz",
-                        tANE = "",
-                        tRVP = "Linda Wiseley",
-                        tPrincipalPartner = "MICHAEL IRONS",
-                        dStatus = DateTime.Now,
-                        dOpenStore = DateTime.Now,
-                        tProjectStatus = "Under Construction"
-                    });
-                    fields.Add(new ProjectExcelFields()
-                    {
-                        tProjectType = "RELOCATION",
-                        tStoreNumber = "34534",
-                        tAddress = "461 Columbia Ave",
-                        tCity = "Lexington",
-                        tState = "SC",
-                        nDMAID = 546,
-                        tDMA = "COLUMBIA SC",
-                        tRED = "Michael Landru",
-                        tCM = "Kevin Dalpiaz",
-                        tANE = "",
-                        tRVP = "Linda Wiseley",
-                        tPrincipalPartner = "MICHAEL IRONS",
-                        dStatus = DateTime.Now,
-                        dOpenStore = DateTime.Now,
-                        tProjectStatus = "Under Construction"
-                    });
                     return new HttpResponseMessage(HttpStatusCode.OK)
                     {
                         Content = new ObjectContent<List<ProjectExcelFields>>(fields, new JsonMediaTypeFormatter())
@@ -205,6 +220,85 @@ namespace DeploymentTool.Controller
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
+        }
+        public void ImportExceltoDatabase(List<ProjectExcelFields> fields, string strFilePath, string connString)
+        {
+          //  
+
+            try
+            {
+                ProjectExcelFields objProjectExcel = new ProjectExcelFields();
+
+                OleDbConnection oledbConn = new OleDbConnection(connString);
+                DataTable dt = new DataTable();
+                try
+                {
+                    oledbConn.Open();
+                    using (OleDbCommand cmd = new OleDbCommand("SELECT * FROM [Sheet1$]", oledbConn))
+                    {
+                        OleDbDataAdapter oleda = new OleDbDataAdapter();
+                        oleda.SelectCommand = cmd;
+                        DataSet ds = new DataSet();
+                        oleda.Fill(ds);
+
+                        dt = ds.Tables[0];
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            // table tblObj = new table();
+
+                            foreach (DataRow row in dt.Rows)
+                            {
+
+
+                                string Name = row["Store Number"].ToString();
+                                SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", Name);
+                                var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber", new SqlParameter("@tStoreNumber", Name)).FirstOrDefault();
+
+
+
+                                if (Name != output)
+                                {
+                                    objProjectExcel = new ProjectExcelFields();
+                                    objProjectExcel.tProjectType = row["Project Type"].ToString();
+                                    objProjectExcel.tStoreNumber = Name;
+                                    objProjectExcel.tAddress = row["Address"].ToString();
+                                    objProjectExcel.tCity = row["City"].ToString();
+                                    objProjectExcel.tState = row["State"].ToString();
+                                    objProjectExcel.nDMAID = Convert.ToInt32(row["DMA ID"]);
+                                    objProjectExcel.tDMA = row["DMA"].ToString();
+                                    objProjectExcel.tRED = row["RED"].ToString();
+                                    objProjectExcel.tCM = row["CM"].ToString();
+                                    objProjectExcel.tANE = row["A&E"].ToString();
+                                    objProjectExcel.tRVP = row["RVP"].ToString();
+                                    objProjectExcel.tPrincipalPartner = row["Principal Partner"].ToString();
+                                    objProjectExcel.dStatus = Convert.ToDateTime(row["Status"]);
+                                    objProjectExcel.dOpenStore = Convert.ToDateTime(row["Open Store"]);
+                                    objProjectExcel.tProjectStatus = row["Project Status"].ToString();
+
+
+                                    fields.Add(objProjectExcel);
+
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //result = false;
+                }
+                finally
+                {
+                    oledbConn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+           // return ip;
+            // return result;
         }
 
         [HttpPost]

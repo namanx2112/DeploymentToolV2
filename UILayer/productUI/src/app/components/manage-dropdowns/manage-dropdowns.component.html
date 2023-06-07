@@ -1,14 +1,14 @@
 <div class="header">Manage Dropdowns</div>
-<div class="outerDiv grayWhiteTheme">
+<div class="outerDiv grayBackground roundedCorner">
     <div class="filters">
-        <mat-form-field class="dropDownField">
+        <mat-form-field class="dropDownField whiteDropdown">
             <mat-label>Select Brand</mat-label>
             <mat-select [(value)]="selectedBrand">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let item of allBrands" [value]="item">{{item.tBrandName}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field class="dropDownField">
+        <mat-form-field class="dropDownField whiteDropdown roundedCorner">
             <mat-label>Select a Section</mat-label>
             <mat-select [(value)]="selectedModule" (selectionChange)="moduleChanged($event)">
                 <mat-option *ngFor="let module of moduleList" [value]="module">{{module}}</mat-option>
@@ -16,7 +16,7 @@
         </mat-form-field>
     </div>
     <div class="dropDowns">
-        <mat-form-field class="DropdownChips">
+        <mat-form-field class="DropdownChips roundedCorner vChips">
             <mat-label>Dropwdown Fields</mat-label>
             <mat-chip-grid #chipGrid aria-label="Enter Field">
                 <mat-chip-row *ngFor="let item of ddList" (removed)="remove(item)" [editable]="true"

@@ -295,6 +295,28 @@ export class SonicService {
         hidden: false
       }],
       fields: [{
+        field_name: "aProjectStoreID",
+        fieldUniqeName: "aProjectStoreID",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter aProjectStoreID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "nProjectID",
+        fieldUniqeName: "nProjectID",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter nProjectID",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },{
         field_name: "Store Name",
         fieldUniqeName: "tStoreName",
         defaultVal: "",
@@ -772,21 +794,10 @@ export class SonicService {
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.text,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Vendor",
-        field_group: "Primary",
-        fieldUniqeName: "nVendor",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Vendor",
-        validator: [Validators.required],
+        options: this.commonService.GetDropdown("nVendor"),
         mandatory: false,
         hidden: false
       },
@@ -959,16 +970,17 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },
-      {
+      },{
         field_name: "Vendor",
+        field_group: "Primary",
         fieldUniqeName: "nVendor",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.text,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [Validators.required],
+        options: this.commonService.GetDropdown("nVendor"),
         mandatory: false,
         hidden: false
       },
@@ -1093,24 +1105,15 @@ export class SonicService {
         hidden: true
       }, {
         field_name: "Vendor",
+        field_group: "Primary",
         fieldUniqeName: "nVendor",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.text,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Vendor",
-        fieldUniqeName: "nVendor",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Vendor",
-        validator: [],
+        options: this.commonService.GetDropdown("nVendor"),
         mandatory: false,
         hidden: false
       },
@@ -1247,15 +1250,17 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      }, {
+      },{
         field_name: "Vendor",
+        field_group: "Primary",
         fieldUniqeName: "nVendor",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.number,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [Validators.required],
+        options: this.commonService.GetDropdown("nVendor"),
         mandatory: false,
         hidden: false
       }, {
@@ -1272,11 +1277,11 @@ export class SonicService {
       },
       {
         field_name: "Patio",
-        fieldUniqeName: "tPatio",
+        fieldUniqeName: "nPatio",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.text,
+        field_type: FieldType.number,
         field_placeholder: "Enter Patio",
         validator: [Validators.required],
         mandatory: false,
@@ -1426,16 +1431,18 @@ export class SonicService {
         hidden: true
       }, {
         field_name: "Vendor",
+        field_group: "Primary",
         fieldUniqeName: "nVendor",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.number,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [Validators.required],
+        options: this.commonService.GetDropdown("nVendor"),
         mandatory: false,
         hidden: false
-      }, {
+      },{
         field_name: "BuyPass ID",
         fieldUniqeName: "nBuyPassID",
         defaultVal: "",
@@ -1575,6 +1582,17 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
+      }, {
+        field_name: "nType",
+        fieldUniqeName: "nType",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter nType",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
       }]
     };
   }
@@ -1621,15 +1639,17 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      }, {
+      },{
         field_name: "Vendor",
+        field_group: "Primary",
         fieldUniqeName: "nVendor",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.text,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [Validators.required],
+        options: this.commonService.GetDropdown("nVendor"),
         mandatory: false,
         hidden: false
       },
@@ -1706,14 +1726,38 @@ export class SonicService {
         hidden: false
       }],
       fields: [{
+        field_name: "aProjectSonicRadioID",
+        fieldUniqeName: "aProjectSonicRadioID",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter aProjectSonicRadioID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "nProjectID",
+        fieldUniqeName: "nProjectID",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter nProjectID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "Vendor",
+        field_group: "Primary",
         fieldUniqeName: "nVendor",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.text,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [Validators.required],
+        options: this.commonService.GetDropdown("nVendor"),
         mandatory: false,
         hidden: false
       },
@@ -1839,14 +1883,38 @@ export class SonicService {
         hidden: false
       }],
       fields: [{
+        field_name: "aProjectInstallationID",
+        fieldUniqeName: "aProjectInstallationID",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter aProjectInstallationID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "nProjectID",
+        fieldUniqeName: "nProjectID",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter nProjectID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "Vendor",
+        field_group: "Primary",
         fieldUniqeName: "nVendor",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.text,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [Validators.required],
+        options: this.commonService.GetDropdown("nVendor"),
         mandatory: false,
         hidden: false
       },

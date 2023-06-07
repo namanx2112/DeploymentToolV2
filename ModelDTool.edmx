@@ -790,7 +790,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
             <Parameter Name="nBrandId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sproc_SearchStore" ReturnType="Collection(dtDBModel.sproc_SearchStore_Result)">
-            <Parameter Name="tText" Mode="In" Type="String" />
+          <Parameter Name="tText" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tblBrand">

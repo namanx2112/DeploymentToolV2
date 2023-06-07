@@ -20,7 +20,8 @@ export interface StoreContact {
 
 }
 export interface StoreConfiguration {
-    aCongigId: number,
+    aProjectConfigID: number,
+    nProjectID: number,
     nStallCount: number,
     nDriveThru: number,
     nInsideDining: number,
@@ -29,7 +30,8 @@ export interface StoreConfiguration {
     cProjectCost: number
 }
 export interface StoreStackholders {
-    aStackHolderId: number,
+    aProjectStakeHolderID: number,
+    nProjectID: number,
     nFranchisee: number,
     tRVP: string,
     tFBC: string,
@@ -41,6 +43,8 @@ export interface StoreStackholders {
     tPrincipalPartner: string
 }
 export interface StoreNetworkings {
+    aProjectNetworkingID: number,
+    nProjectID: number,
     nVendor: number,
     nPrimaryStatus: number,
     dPrimaryDate: Date,
@@ -53,6 +57,8 @@ export interface StoreNetworkings {
     nTempType: number
 }
 export interface StorePOS {
+    aProjectPOSID: number,
+    nProjectID: number,
     nVendor: number,
     dDeliveryDate: Date,
     dConfigDate: Date,
@@ -62,6 +68,8 @@ export interface StorePOS {
     cCost: number
 }
 export interface StoreAudio {
+    aProjectAudioID: number,
+    nProjectID: number,
     nVendor: number,
     nStatus: number,
     nConfiguration: number,
@@ -72,6 +80,8 @@ export interface StoreAudio {
     cCost: number
 }
 export interface StoreExteriorMenus {
+    aProjectExteriorMenuID: number,
+    nProjectID: number,
     nVendor: number,
     nStalls: number,
     nPatio: number,
@@ -85,6 +95,8 @@ export interface StoreExteriorMenus {
     cTotalCost: number
 }
 export interface StorePaymentSystem {
+    aProjectPaymentSystemID: number,
+    nProjectID: number,
     nVendor: number,
     nBuyPassID: number,
     nServerEPS: number,
@@ -97,9 +109,12 @@ export interface StorePaymentSystem {
     n15SunShields: number,
     nUPS: number
     nShelf: number,
-    cCost: number
+    cCost: number,
+    nType: number,
 }
 export interface StoreInteriorMenus {
+    aProjectInteriorMenuID: number,
+    nProjectID: number,
     nVendor: number,
     nDMBQuantity: number,
     nStatus: number,
@@ -107,6 +122,8 @@ export interface StoreInteriorMenus {
     cCost: number
 }
 export interface StoreSonicRadio {
+    aProjectSonicRadioID:number,
+    nProjectID: number,
     nVendor: number,
     nOutdoorSpeakers: number,
     nColors: number
@@ -118,6 +135,8 @@ export interface StoreSonicRadio {
     cCost: number
 }
 export interface StoreInstallation {
+    aProjectInstallationID: number,
+    nProjectID: number,
     nVendor: number,
     tLeadTech: string,
     dInstallDate: Date,

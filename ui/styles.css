@@ -17,6 +17,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: #fff!important;
 }
 
+.whiteDropdown .mdc-text-field--filled{
+    background-color: #fff!important;
+}
+
+.roundedCorner .mdc-text-field--filled{
+    border-radius: 10px!important;
+}
+
+.grayBackground{
+    background-color: gray;
+}
+
 .grayWhiteTheme .mdc-text-field--filled{
     background-color: gray!important;
 }
@@ -117,4 +129,8 @@ button{
 }
 .noBorderButton{
     border: 0px none;
+}
+
+.vChips .mdc-evolution-chip-set__chips{
+    flex-direction: column;
 }
