@@ -251,7 +251,7 @@ export class VendorService {
         field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor Country",
         validator: [Validators.required],
-        options: this.commonService.GetCountryDropdowns(),
+        options: this.commonService.GetDropdown("Country"),
         mandatory: true,
         hidden: false
       },

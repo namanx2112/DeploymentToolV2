@@ -41,7 +41,7 @@ namespace DeploymentTool.Model
         // PUT: api/ProjectAudios/5
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> PuttblProjectAudio(tblProjectAudio tblProjectAudio)
+        public async Task<IHttpActionResult> Update(tblProjectAudio tblProjectAudio)
         {
             if (!ModelState.IsValid)
             {

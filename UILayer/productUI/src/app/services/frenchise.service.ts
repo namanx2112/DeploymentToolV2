@@ -297,7 +297,7 @@ export class FranchiseService {
         field_type: FieldType.dropdown,
         field_placeholder: "Enter Franchise Country",
         validator: [Validators.required],
-        options: this.commonService.GetCountryDropdowns(),
+        options: this.commonService.GetDropdown("Country"),
         mandatory: true,
         hidden: false
       },

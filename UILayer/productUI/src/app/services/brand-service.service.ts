@@ -183,7 +183,7 @@ export class BrandServiceService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false,
-        options: this.commonService.GetDropdown("tBrandCity")
+        options: this.commonService.GetDropdown("City")
       },
       {
         field_name: "Brands State",
@@ -196,7 +196,7 @@ export class BrandServiceService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false,
-        options: this.commonService.GetDropdown("nBrandState")
+        options: this.commonService.GetDropdown("State")
       },
       {
         field_name: "Brands Country",
@@ -209,7 +209,7 @@ export class BrandServiceService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false,
-        options: this.commonService.GetDropdown("nBrandCountry")
+        options: this.commonService.GetDropdown("Country")
       },
       {
         field_name: "Brands Zip",

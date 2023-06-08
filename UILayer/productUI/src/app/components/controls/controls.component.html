@@ -27,8 +27,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline"
                 *ngIf="!(curControl.readOnly || readOnlyForm) && curControl.field_type == 4">
-                <mat-select formControlName="{{curControl.fieldUniqeName}}"
-                    [ngModel]="controlValues[curControl.fieldUniqeName]">
+                <mat-select [compareWith]="compareDropDown" formControlName="{{curControl.fieldUniqeName}}" [(value)]="controlValues[curControl.fieldUniqeName]">
                     <mat-option *ngFor="let opt of curControl.options"
                         [value]="opt.optionIndex">{{opt.optionDisplayName}}</mat-option>
                 </mat-select>

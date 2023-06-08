@@ -30,7 +30,7 @@ export class DropdownServiceService {
   }
 
   Delete(request: number) {
-    return this.http.get<number>(this.configUrl + "Dropdown/Delete?id=" +request, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<number>(this.configUrl + "Dropdown/Delete?id=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
 
@@ -44,9 +44,11 @@ export class DropdownServiceService {
   }
 
   GetAllModules() {
-    let modules = ["Project Type", "Drive Through", "Inside Dining", "CD", "ITPM", "Status", "Primary Type"
-      , "Backup Status", "Temp Status", "Paper Work Status", "Configuration", "Loop Status", "Loop Type", "Buypass Id", "Server EPS", "Colors", "Sonic Note Type",
-      "Department", "Role", "Brand Country", "Brand State", "Brand City"];
+    let modules = ["ProjectType", "ConfigurationDriveThrou", "ConfigurationInsideDining", "StackHolderCD", "StackHolderITPM", "NetworkingStatus", "NetworkingPrimaryType"
+      , "NetworkingBackupStatus", "NetworkingBackupType", "NetworkingTempStatus", "NetworkingTempType", "POSStatus", "POSPaperworkStatus", "AudioStatus", "AudioConfiguration", "AudioLoopStatus  ", "AudioLoopType",
+      "ExteriorMenuStatus", "PaymentSystemBuyPassID", "PaymentSystemServerEPS", "PaymentSystemPaymentSystemStatus", "InteriorMenuStatus",
+      "SonicRaidoColors", "SonicRadioStatus", "InstallationStatus", "SonicNoteType", "ProjectStatus",
+      "UserDepartment", "UserRole", "City", "State", "Country"];
     return modules;
   }
 

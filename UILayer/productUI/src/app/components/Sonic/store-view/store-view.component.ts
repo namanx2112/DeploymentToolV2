@@ -42,7 +42,7 @@ export class StoreViewComponent {
       if (parseInt(tIndx) > 2)
         this.tabForUI.push(tTab);
       this.getValues(tTab);
-    }   
+    }
   }
 
   changeTileView(tName: string) {
@@ -55,8 +55,10 @@ export class StoreViewComponent {
 
   canShowTab(tTab: HomeTab) {
     let can = false;
-    if (typeof this.tValues[tTab.tab_name] != 'undefined')
-      can = true;
+    if (typeof tTab != 'undefined') {
+      if (typeof this.tValues[tTab.tab_name] != 'undefined')
+        can = true;
+    }
     return can;
   }
 

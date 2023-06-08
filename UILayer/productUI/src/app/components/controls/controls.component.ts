@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ControlsErrorMessages, Dictionary } from 'src/app/interfaces/commons';
@@ -9,7 +9,7 @@ import { Fields, FieldType, HomeTab } from 'src/app/interfaces/home-tab';
   templateUrl: './controls.component.html',
   styleUrls: ['./controls.component.css']
 })
-export class ControlsComponent {
+export class ControlsComponent implements AfterViewChecked {
   private _controlValues: Dictionary<string>;
   @Input() fields: Fields[];
   @Input() needButton: boolean;
@@ -28,22 +28,36 @@ export class ControlsComponent {
   formGroup = new FormGroup({});
   fieldClass: string;
   groupLabel: string;
-  constructor() {
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
     this.fieldClass = "curField";
     this.groupLabel = "";
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   ngAfterContentInit(): void {
     this.valueChanged();
   }
 
+  compareDropDown(o1: any, o2: any) {
+    if (o1 == o2)
+      return true;
+    else return false
+  }
+
   valueChanged() {
     this.formGroup = new FormGroup({});
     for (const formField of this.fields) {
-      if (typeof this._controlValues[formField.fieldUniqeName] == 'undefined')
+      let tFormControl = new FormControl(
+        "", formField.validator);
+      if (typeof this._controlValues[formField.fieldUniqeName] == 'undefined') {
         this._controlValues[formField.fieldUniqeName] = formField.defaultVal;
-      this.formGroup.addControl(formField.fieldUniqeName, new FormControl(
-        "", formField.validator));
+      }
+      else
+        tFormControl.setValue(this._controlValues[formField.fieldUniqeName])
+      this.formGroup.addControl(formField.fieldUniqeName, tFormControl);
     }
     if (this.numberOfControlsInARow > 0) {
       if (this.numberOfControlsInARow == 1)

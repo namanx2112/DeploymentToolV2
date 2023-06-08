@@ -27,7 +27,9 @@ namespace DeploymentTool.Controller
         [HttpGet]
         [ActionName("Get")]
         public HttpResponseMessage Get(string tModuleName)
-        {            
+        {
+            if (tModuleName == null)
+                tModuleName = "";
             SqlParameter tModuleNameParam = new SqlParameter("@tModuleName", tModuleName);
             List<Dropdown> items= db.Database.SqlQuery<Dropdown>("exec sproc_GetDropdown @tModuleName", tModuleNameParam).ToList();            
             if (items == null || items.Count == 0)
