@@ -9,10 +9,11 @@
 
 namespace DeploymentTool
 {
+    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblTechComponent
+    public partial class tblTechComponent : ModelParent
     {
         public int aTechComponentId { get; set; }
         public string tTechComponentName { get; set; }

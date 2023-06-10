@@ -82,7 +82,7 @@ namespace DeploymentTool.Controller
             db.tblProjectSonicRadios.Add(tblProjectSonicRadio);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectSonicRadio.aProjectSonicRadioID }, tblProjectSonicRadio);
+            return Json(tblProjectSonicRadio);
         }
         [Authorize]
         [HttpPost]

@@ -83,7 +83,7 @@ namespace DeploymentTool.Model
             db.tblProjectNetworkings.Add(tblProjectNetworking);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectNetworking.aProjectNetworkingID }, tblProjectNetworking);
+            return Json(tblProjectNetworking);
         }
 
         // DELETE: api/ProjectNetworkings/5

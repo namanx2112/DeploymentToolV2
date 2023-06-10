@@ -41,6 +41,11 @@
     margin-top: 10px;
 }
 
+.closeButtonClass{
+    float: left;
+    width: 150px;
+}
+
 .buttonClass {
     float: right;
     width: 150px;

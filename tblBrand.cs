@@ -9,10 +9,11 @@
 
 namespace DeploymentTool
 {
+    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblBrand
+    public partial class tblBrand : ModelParent
     {
         public int aBrandId { get; set; }
         public string tBrandName { get; set; }

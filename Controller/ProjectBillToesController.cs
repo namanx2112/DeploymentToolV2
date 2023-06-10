@@ -84,7 +84,7 @@ namespace DeploymentTool.Controller
             db.tblProjectBillToes.Add(tblProjectBillTo);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectBillTo.aProjectBillToID }, tblProjectBillTo);
+            return Json(tblProjectBillTo);
         }
         [Authorize]
         [HttpPost]

@@ -44,5 +44,9 @@
             <mat-icon *ngIf="SubmitLabel == 'Search'">search</mat-icon>
             {{SubmitLabel}}
         </button>
+        <button *ngIf="CloseLabel != undefined && CloseLabel != ''" type="button" mat-raised-button 
+            class="closeButtonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base" (click)="CloseClicked($event);">
+            {{CloseLabel}}
+        </button>
     </div>
 </form>

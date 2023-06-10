@@ -9,16 +9,16 @@
         <div class="menuPart">
             <button mat-button [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon>New Project</button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="menuClick('newstore');">New Store</button>
-                <button mat-menu-item (click)="menuClick('remodelstore');">Remodel Store</button>
-                <button mat-menu-item (click)="menuClick('rebuildstore');">Rebuild Store</button>
-                <button mat-menu-item (click)="menuClick('relocationstore');">Relocation</button>
-                <button mat-menu-item (click)="menuClick('acquisition');">Acquisition</button>
-                <button mat-menu-item (click)="menuClick('posinstallation');">POS Installation</button>
-                <button mat-menu-item (click)="menuClick('audioinstallation');">Audio Installation</button>
-                <button mat-menu-item  (click)="menuClick('menuinstallation');">Menu Installation</button>
-                <button mat-menu-item (click)="menuClick('paymentterminalinstllation');">Payment Terminal Installation</button>
-                <button mat-menu-item (click)="menuClick('partsreplacement');">Parts Replacement</button>
+                <button mat-menu-item (click)="menuClick('newstore', 'all', 'New');">New Store</button>
+                <button mat-menu-item (click)="menuClick('newstore', 'all','Remodel');">Remodel Store</button>
+                <button mat-menu-item (click)="menuClick('newstore', 'all','Rebuild');">Rebuild Store</button>
+                <button mat-menu-item (click)="menuClick('newstore', 'all','Relocation');">Relocation</button>
+                <button mat-menu-item (click)="menuClick('newstore', 'all','Acquisition');">Acquisition</button>
+                <button mat-menu-item (click)="menuClick('newstore', 'pos', 'New');">POS Installation</button>
+                <button mat-menu-item (click)="menuClick('newstore', 'audio', 'New');">Audio Installation</button>
+                <button mat-menu-item  (click)="menuClick('newstore', 'menu', 'New');">Menu Installation</button>
+                <button mat-menu-item (click)="menuClick('newstore', 'payment', 'New');">Payment Terminal Installation</button>
+                <button mat-menu-item (click)="menuClick('newstore', 'all', 'PartsReplacement');">Parts Replacement</button>
             </mat-menu>
             <button mat-button [matMenuTriggerFor]="menu"><mat-icon>search</mat-icon>Search Project</button>
             <button mat-button (click)="menuClick('importproject')"><mat-icon>attach_file</mat-icon>Import Project</button>
@@ -35,7 +35,7 @@
             <mat-icon>play_arrow</mat-icon>
         </span>
         <app-sonic-dashboard *ngIf="showMode == 'dashboard'" (SearchedResult)="SearchedResult($event)"></app-sonic-dashboard>
-        <app-new-project *ngIf="showMode == 'newstore'"></app-new-project>
+        <app-new-project *ngIf="showMode == 'newstore'" [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-project>
         <app-store-view *ngIf="showMode == 'storeview'" (ChangeView)="ChangeView($event)" [curStore]="curStore"></app-store-view>
         <app-project-table *ngIf="showMode == 'projecttaleview'" (ChangeView)="ChangeView($event)"></app-project-table>
         <app-import-projects *ngIf="showMode == 'importproject'" (ChangeView)="ChangeView($event)"></app-import-projects>

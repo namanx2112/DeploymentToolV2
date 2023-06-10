@@ -87,7 +87,7 @@ namespace DeploymentTool.Controller
             db.tblProjectPOS.Add(tblProjectPOS);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectPOS.aProjectPOSID }, tblProjectPOS);
+            return Json(tblProjectPOS);
         }
 
         // DELETE: api/ProjectPOS/5

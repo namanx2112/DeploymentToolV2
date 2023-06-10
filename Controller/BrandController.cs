@@ -7,9 +7,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
+using DeploymentTool.Misc;
 
 namespace DeploymentTool.Controller
 {
@@ -47,7 +49,7 @@ namespace DeploymentTool.Controller
             {
                 return BadRequest(ModelState);
             }
-
+            Utilities.SetHousekeepingFields(false, HttpContext.Current, tblBrand);
             db.Entry(tblBrand).State = EntityState.Modified;
 
             try
@@ -79,6 +81,7 @@ namespace DeploymentTool.Controller
                 return BadRequest(ModelState);
             }
 
+            Utilities.SetHousekeepingFields(true, HttpContext.Current, tblBrand);
             db.tblBrand.Add(tblBrand);
             await db.SaveChangesAsync();
 

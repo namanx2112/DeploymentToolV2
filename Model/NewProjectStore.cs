@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeploymentTool.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -7,9 +8,11 @@ using System.Web.Http.ModelBinding;
 
 namespace DeploymentTool.Model
 {
-    public class NewProjectStore
+    public class NewProjectStore: ModelParent
     {
         public int nProjectType { get; set; }
+
+        public int nStoreId { get; set; }
         public string tStoreNumber { get; set; }
         public string tAddress { get; set; }
         public int nState { get; set; }
@@ -51,7 +54,7 @@ namespace DeploymentTool.Model
             {
                 aProjectID = (int)this.nProjectID,
                 tProjectName = this.tStoreName,
-                nStoreID = this.aProjectStoreID,
+                nStoreID = this.nStoreId,
                 dGoLiveDate = this.dOpenStore,
                 nProjectType = this.nProjectType,
                 nProjectStatus = this.nProjectStatus,
@@ -63,6 +66,17 @@ namespace DeploymentTool.Model
                 dtCreatedOn = this.dtCreatedOn,
                 dtUpdatedOn = this.dtUpdatedOn,
                 bDeleted = this.bDeleted
+            };
+            return tObj;
+        }
+
+        public tblStore GettblStore()
+        {
+            tblStore tObj = new tblStore() {
+                aStoreID = this.nStoreId,
+                tStoreNumber = this.tStoreNumber,
+                dtCreatedOn= this.dtCreatedOn,
+                nCreatedBy = this.nCreatedBy
             };
             return tObj;
         }

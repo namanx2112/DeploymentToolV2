@@ -9,10 +9,11 @@
 
 namespace DeploymentTool
 {
+    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblEnumTableField
+    public partial class tblEnumTableField : ModelParent
     {
         public int aConstraintID { get; set; }
         public string tTableName { get; set; }

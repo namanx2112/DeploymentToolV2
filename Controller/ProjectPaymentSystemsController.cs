@@ -84,7 +84,7 @@ namespace DeploymentTool.Controller
             db.tblProjectPaymentSystems.Add(tblProjectPaymentSystem);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectPaymentSystem.aProjectPaymentSystemID }, tblProjectPaymentSystem);
+            return Json(tblProjectPaymentSystem);
         }
         [Authorize]
         [HttpPost]

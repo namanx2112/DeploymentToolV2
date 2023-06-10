@@ -985,6 +985,8 @@
     <Compile Include="Helpers\StoreDAL.cs" />
     <Compile Include="Helpers\TechComponentDAL.cs" />
     <Compile Include="Helpers\VendorDAL.cs" />
+    <Compile Include="Misc\ModelParent.cs" />
+    <Compile Include="Misc\Utilities.cs" />
     <Compile Include="ModelDTool.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

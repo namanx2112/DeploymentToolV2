@@ -43,7 +43,7 @@ export class CommonService {
 
   GetDropdown(columnName: string): OptionType[] {
     let ddItems: OptionType[] = [];
-    if (columnName == "Vendor" || columnName == "Franchise") {
+    if (columnName == "Vendor" || columnName == "Franchise" || columnName == "ProjectType") {
       for (var item in CommonService.allItems) {
         if (CommonService.allItems[item].tModuleName == columnName) {
           ddItems.push({

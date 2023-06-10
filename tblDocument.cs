@@ -9,10 +9,11 @@
 
 namespace DeploymentTool
 {
+    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblDocument
+    public partial class tblDocument : ModelParent
     {
         public int aDocumentID { get; set; }
         public string DocumentName { get; set; }

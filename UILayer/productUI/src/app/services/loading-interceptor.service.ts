@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 import { LoadingService } from 'src/app/services/loading.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class LoadingInterceptorService {
   activeRequests: number = 0;
 
     constructor(
-        private loadingScreenService: LoadingService
+        private loadingScreenService: LoadingService,
+        private authService: AuthService
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -29,6 +31,13 @@ export class LoadingInterceptorService {
                 if (this.activeRequests === 0) {
                     this.loadingScreenService.stopLoading();
                 }
+            }),
+            catchError(err => {
+                if (err.status === 401) {
+                    this.authService.loggedOut();
+                }
+                const error = err.error.message || err.statusText;
+                    return throwError(error);
             })
         )
     };

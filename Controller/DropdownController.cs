@@ -9,11 +9,13 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
 using System.Web.ModelBinding;
 using DeploymentTool;
+using DeploymentTool.Misc;
 using DeploymentTool.Model;
 
 namespace DeploymentTool.Controller
@@ -68,6 +70,8 @@ namespace DeploymentTool.Controller
                 bDeleted = request.bDeleted,
                 aDropdownId = request.aDropdownId
             };
+
+            Utilities.SetHousekeepingFields(false, HttpContext.Current, ddObj);
             db.tblDropdowns.Add(ddObj);
 
             db.Entry(ddObj).State = EntityState.Modified;
@@ -101,6 +105,8 @@ namespace DeploymentTool.Controller
             {
                 tDropdownText = request.tDropdownText,
             };
+
+            Utilities.SetHousekeepingFields(true, HttpContext.Current, ddObj);
             db.tblDropdowns.Add(ddObj);
             await db.SaveChangesAsync();
 
@@ -111,6 +117,7 @@ namespace DeploymentTool.Controller
                 tModuleName = request.tModuleName,
             };
 
+            Utilities.SetHousekeepingFields(true, HttpContext.Current, mainObj);
             db.tblDropdownMains.Add(mainObj);
             await db.SaveChangesAsync();
 

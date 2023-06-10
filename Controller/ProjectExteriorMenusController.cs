@@ -83,7 +83,7 @@ namespace DeploymentTool.Model
             db.tblProjectExteriorMenus.Add(tblProjectExteriorMenu);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectExteriorMenu.aProjectExteriorMenuID }, tblProjectExteriorMenu);
+            return Json(tblProjectExteriorMenu);
         }
 
         // DELETE: api/ProjectExteriorMenus/5

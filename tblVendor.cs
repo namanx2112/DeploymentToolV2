@@ -9,10 +9,11 @@
 
 namespace DeploymentTool
 {
+    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblVendor
+    public partial class tblVendor : ModelParent
     {
         public int aVendorId { get; set; }
         public string tVendorName { get; set; }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { OptionType } from 'src/app/interfaces/home-tab';
 import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-sonic-home-page',
@@ -9,22 +11,34 @@ import { StoreSearchModel } from 'src/app/interfaces/sonic';
 export class SonicHomePageComponent {
   showMode: string;
   curStore: StoreSearchModel;
-  constructor(){
+  ProjectTypes: OptionType[];
+  techCompType: string;
+  projectType: OptionType;
+  constructor(private commonService: CommonService) {
     this.showMode = "dashboard";
+    this.techCompType = "all";
+    this.GetAllProjectTypes();
   }
-  clickOption(val: any){} 
+  GetAllProjectTypes() {
+    this.ProjectTypes = this.commonService.GetDropdown("ProjectType");
+  }
+  clickOption(val: any) { }
 
 
-  menuClick(tMode: string){
+  menuClick(tMode: string, techComp?: string, newOption?: string) {
+    if (typeof newOption != 'undefined' && typeof techComp != 'undefined') {
+      this.techCompType = techComp;
+      this.projectType = this.ProjectTypes.filter(x => x.optionDisplayName.toLocaleLowerCase() == newOption.toLocaleLowerCase())[0];
+    }
     this.showMode = tMode;
   }
 
-  SearchedResult(val: any){
+  SearchedResult(val: any) {
     this.curStore = val;
     this.showMode = "storeview";
   }
 
-  ChangeView(view: any){
+  ChangeView(view: any) {
     this.showMode = view;
   }
 }

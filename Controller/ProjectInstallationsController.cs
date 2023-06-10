@@ -73,7 +73,7 @@ namespace DeploymentTool.Controller
         [HttpPost]
         // POST: api/ProjectInstallations
         [ResponseType(typeof(tblProjectInstallation))]
-        public async Task<IHttpActionResult> Cretae(tblProjectInstallation tblProjectInstallation)
+        public async Task<IHttpActionResult> Create(tblProjectInstallation tblProjectInstallation)
         {
             if (!ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace DeploymentTool.Controller
             db.tblProjectInstallations.Add(tblProjectInstallation);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectInstallation.aProjectInstallationID }, tblProjectInstallation);
+            return Json(tblProjectInstallation);
         }
         [Authorize]
         [HttpPost]

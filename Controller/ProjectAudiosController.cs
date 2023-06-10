@@ -84,7 +84,7 @@ namespace DeploymentTool.Model
             db.tblProjectAudios.Add(tblProjectAudio);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectAudio.aProjectAudioID }, tblProjectAudio);
+            return Json(tblProjectAudio);
         }
 
         // DELETE: api/ProjectAudios/5

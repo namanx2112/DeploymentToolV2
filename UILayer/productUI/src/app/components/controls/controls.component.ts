@@ -25,6 +25,8 @@ export class ControlsComponent implements AfterViewChecked {
   @Input() SubmitLabel: string;
   @Input() readOnlyForm: boolean;
   @Output() onSubmit = new EventEmitter<FormGroup>();
+  @Output() onClose = new EventEmitter<FormGroup>();
+  @Input() CloseLabel?: string;
   formGroup = new FormGroup({});
   fieldClass: string;
   groupLabel: string;
@@ -150,5 +152,9 @@ export class ControlsComponent implements AfterViewChecked {
       }
     }
     return show;
+  }
+
+  CloseClicked(ev: any){
+    this.onClose?.emit(this.formGroup);
   }
 }

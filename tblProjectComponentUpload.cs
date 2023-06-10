@@ -9,10 +9,11 @@
 
 namespace DeploymentTool
 {
+    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectComponentUpload
+    public partial class tblProjectComponentUpload : ModelParent
     {
         public int aProjectComponentUploadId { get; set; }
         public Nullable<int> nProjectComponentId { get; set; }

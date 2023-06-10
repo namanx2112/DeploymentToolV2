@@ -84,7 +84,7 @@ namespace DeploymentTool.Controller
             db.tblProjectInteriorMenus.Add(tblProjectInteriorMenu);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectInteriorMenu.aProjectInteriorMenuID }, tblProjectInteriorMenu);
+            return Json(tblProjectInteriorMenu);
         }
         [Authorize]
         [HttpPost]

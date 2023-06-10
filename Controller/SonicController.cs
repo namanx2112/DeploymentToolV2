@@ -1,6 +1,8 @@
-﻿using DeploymentTool.Model;
+﻿using DeploymentTool.Misc;
+using DeploymentTool.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -89,17 +91,60 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> NewStore(NewProjectStore newStore)
+        public HttpResponseMessage NewStore(NewProjectStore newStore)
         {
-            tblProject tProjectModel = newStore.GettblProject();
-            db.tblProjects.Add(tProjectModel);
-            await db.SaveChangesAsync();
-            newStore.nProjectID = tProjectModel.aProjectID;
-            tblProjectStore tblProjectStoreModel = newStore.GettblProjectStores();
-            db.tblProjectStores.Add(tblProjectStoreModel);
-            await db.SaveChangesAsync();
+            try
+            {               
+                Utilities.SetHousekeepingFields(true, HttpContext.Current, newStore);
+                tblStore ttboStore = newStore.GettblStore();
+                db.tblStores.Add(ttboStore);
+                db.SaveChanges();
+                tblProject tProjectModel = newStore.GettblProject();
+                tProjectModel.nStoreID = ttboStore.aStoreID;
+                newStore.nStoreId = ttboStore.aStoreID;
+                db.tblProjects.Add(tProjectModel);
+                db.SaveChanges();
+                newStore.nProjectID = tProjectModel.aProjectID;
+                tblProjectStore tblProjectStoreModel = newStore.GettblProjectStores();
+                db.tblProjectStores.Add(tblProjectStoreModel);
+                db.SaveChanges();
+                newStore.aProjectStoreID = tblProjectStoreModel.aProjectStoreID;
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<NewProjectStore>(newStore, new JsonMediaTypeFormatter())
+                };
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
 
-            return Json(tblProjectStoreModel.aProjectStoreID);
+        [Authorize]
+        [HttpPost]
+        public HttpResponseMessage UpdateStore(NewProjectStore newStore)
+        {
+            try
+            {
+                Utilities.SetHousekeepingFields(false, HttpContext.Current, newStore);
+                tblStore ttboStore = newStore.GettblStore();
+                db.Entry(ttboStore).State = EntityState.Modified;
+                db.SaveChanges();
+                tblProject tProjectModel = newStore.GettblProject();
+                db.Entry(tProjectModel).State = EntityState.Modified;
+                db.SaveChanges();
+                tblProjectStore tblProjectStoreModel = newStore.GettblProjectStores();
+                db.Entry(tblProjectStoreModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<NewProjectStore>(newStore, new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ export class AllTechnologyComponentsService {
   GetStoreContact(request: Dictionary<string>){
     return this.http.post<StoreContact[]>(this.configUrl + "ProjectStoreContacts/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeateStoreContact(request: StoreContact){
+  CreateStoreContact(request: StoreContact){
     return this.http.post<StoreContact>(this.configUrl + "ProjectStoreContacts/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateStoreContact(request: StoreContact){
@@ -27,7 +27,7 @@ export class AllTechnologyComponentsService {
   GetStoreConfig(request: Dictionary<string>){
     return this.http.post<StoreConfiguration[]>(this.configUrl + "ProjectConfigs/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeateStoreConfig(request: StoreConfiguration){
+  CreateStoreConfig(request: StoreConfiguration){
     return this.http.post<StoreConfiguration>(this.configUrl + "ProjectConfigs/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateStoreConfig(request: StoreConfiguration){
@@ -38,7 +38,7 @@ export class AllTechnologyComponentsService {
   GetStackholders(request: Dictionary<string>){
     return this.http.post<StoreStackholders[]>(this.configUrl + "ProjectStakeHolders/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeateStackholders(request: StoreStackholders){
+  CreateStackholders(request: StoreStackholders){
     return this.http.post<StoreStackholders>(this.configUrl + "ProjectStakeHolders/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateStackholders(request: StoreStackholders){
@@ -49,7 +49,7 @@ export class AllTechnologyComponentsService {
   GetNetworking(request: Dictionary<string>){
     return this.http.post<StoreNetworkings[]>(this.configUrl + "ProjectNetworkings/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeateNetworking(request: StoreNetworkings){
+  CreateNetworking(request: StoreNetworkings){
     return this.http.post<StoreNetworkings>(this.configUrl + "ProjectNetworkings/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateNetworking(request: StoreNetworkings){
@@ -59,7 +59,7 @@ export class AllTechnologyComponentsService {
   GetPOS(request: Dictionary<string>){
     return this.http.post<StorePOS[]>(this.configUrl + "ProjectPOS/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeatePOS(request: StorePOS){
+  CreatePOS(request: StorePOS){
     return this.http.post<StorePOS>(this.configUrl + "ProjectPOS/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdatePOS(request: StorePOS){
@@ -70,7 +70,7 @@ export class AllTechnologyComponentsService {
   GetAudio(request: Dictionary<string>){
     return this.http.post<StoreAudio[]>(this.configUrl + "ProjectAudios/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeateAudio(request: StoreAudio){
+  CreateAudio(request: StoreAudio){
     return this.http.post<StoreAudio>(this.configUrl + "ProjectAudios/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateAudio(request: StoreAudio){
@@ -81,7 +81,7 @@ export class AllTechnologyComponentsService {
   GetExteriorMenus(request: Dictionary<string>){
     return this.http.post<StoreExteriorMenus[]>(this.configUrl + "ProjectExteriorMenus/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeateExteriorMenus(request: StoreExteriorMenus){
+  CreateExteriorMenus(request: StoreExteriorMenus){
     return this.http.post<StoreExteriorMenus>(this.configUrl + "ProjectExteriorMenus/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateExteriorMenus(request: StoreExteriorMenus){
@@ -92,7 +92,7 @@ export class AllTechnologyComponentsService {
   GetPaymentSystem(request: Dictionary<string>){
     return this.http.post<StorePaymentSystem[]>(this.configUrl + "ProjectPaymentSystems/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeatePaymentSystem(request: StorePaymentSystem){
+  CreatePaymentSystem(request: StorePaymentSystem){
     return this.http.post<StorePaymentSystem>(this.configUrl + "ProjectPaymentSystems/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdatePaymentSystem(request: StorePaymentSystem){
@@ -103,7 +103,7 @@ export class AllTechnologyComponentsService {
   GetInteriorMenus(request: Dictionary<string>){
     return this.http.post<StoreInteriorMenus[]>(this.configUrl + "ProjectInteriorMenus/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeateInteriorMenus(request: StoreInteriorMenus){
+  CreateInteriorMenus(request: StoreInteriorMenus){
     return this.http.post<StoreInteriorMenus>(this.configUrl + "ProjectInteriorMenus/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateInteriorMenus(request: StoreInteriorMenus){
@@ -114,7 +114,7 @@ export class AllTechnologyComponentsService {
   GetSonicRadio(request: Dictionary<string>){
     return this.http.post<StoreSonicRadio[]>(this.configUrl + "ProjectSonicRadios/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeateSonicRadio(request: StoreSonicRadio){
+  CreateSonicRadio(request: StoreSonicRadio){
     return this.http.post<StoreSonicRadio>(this.configUrl + "ProjectSonicRadios/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateSonicRadio(request: StoreSonicRadio){
@@ -125,7 +125,7 @@ export class AllTechnologyComponentsService {
   GetInstallation(request: Dictionary<string>){
     return this.http.post<StoreInstallation[]>(this.configUrl + "ProjectInstallations/Get", request, { headers: this.authService.getHttpHeaders() });
   }
-  CeateInstallation(request: StoreInstallation){
+  CreateInstallation(request: StoreInstallation){
     return this.http.post<StoreInstallation>(this.configUrl + "ProjectInstallations/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateInstallation(request: StoreInstallation){

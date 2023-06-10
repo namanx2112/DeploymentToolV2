@@ -9,10 +9,11 @@
 
 namespace DeploymentTool
 {
+    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblAttachment
+    public partial class tblAttachment : ModelParent
     {
         public int aAttachmentId { get; set; }
         public string tfileName { get; set; }

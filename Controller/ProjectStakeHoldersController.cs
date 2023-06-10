@@ -84,7 +84,7 @@ namespace DeploymentTool.Controller
             db.tblProjectStakeHolders.Add(tblProjectStakeHolder);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectStakeHolder.aProjectStakeHolderID }, tblProjectStakeHolder);
+            return Json(tblProjectStakeHolder);
         }
         [Authorize]
         [HttpPost]

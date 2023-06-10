@@ -74,7 +74,7 @@ namespace DeploymentTool.Controller
         [HttpPost]
         // POST: api/ProjectConfigs
         [ResponseType(typeof(tblProjectConfig))]
-        public async Task<IHttpActionResult> Cretae(tblProjectConfig tblProjectConfig)
+        public async Task<IHttpActionResult> Create(tblProjectConfig tblProjectConfig)
         {
             if (!ModelState.IsValid)
             {
@@ -83,8 +83,7 @@ namespace DeploymentTool.Controller
 
             db.tblProjectConfigs.Add(tblProjectConfig);
             await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectConfig.aProjectConfigID }, tblProjectConfig);
+            return Json(tblProjectConfig);
         }
         [Authorize]
         [HttpPost]

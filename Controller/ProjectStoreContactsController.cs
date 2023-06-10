@@ -87,7 +87,7 @@ namespace DeploymentTool.Controller
             db.tblProjectStores.Add(tblProjectStore);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = tblProjectStore.aProjectStoreID }, tblProjectStore);
+            return Json(tblProjectStore);
         }
 
         // DELETE: api/ProjectStoreContacts/5

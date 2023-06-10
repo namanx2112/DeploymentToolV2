@@ -24,6 +24,10 @@ export class AuthService {
       });
   }
 
+  loggedOut(){
+    this.router.navigate(['./login'],{skipLocationChange: true, relativeTo:this.route});
+  }
+
   getHttpHeaders(): HttpHeaders{
     let tHeader = new HttpHeaders().set('Content-Type', 'application/json').set("Authorization", "Bearer " + this.getToken());
     return tHeader;

@@ -46,8 +46,8 @@ export class DropdownServiceService {
   GetAllModules() {
     let modules = ["ProjectType", "ConfigurationDriveThrou", "ConfigurationInsideDining", "StackHolderCD", "StackHolderITPM", "NetworkingStatus", "NetworkingPrimaryType"
       , "NetworkingBackupStatus", "NetworkingBackupType", "NetworkingTempStatus", "NetworkingTempType", "POSStatus", "POSPaperworkStatus", "AudioStatus", "AudioConfiguration", "AudioLoopStatus  ", "AudioLoopType",
-      "ExteriorMenuStatus", "PaymentSystemBuyPassID", "PaymentSystemServerEPS", "PaymentSystemPaymentSystemStatus", "InteriorMenuStatus",
-      "SonicRaidoColors", "SonicRadioStatus", "InstallationStatus", "SonicNoteType", "ProjectStatus",
+      "ExteriorMenuStatus", "PaymentSystemType", "PaymentSystemBuyPassID", "PaymentSystemServerEPS", "PaymentSystemPaymentSystemStatus", "InteriorMenuStatus",
+      "SonicRaidoColors", "SonicRadioStatus", "InstallationStatus", "InstallationSignOffs", "InstallationTestTransactions", "SonicNoteType", "ProjectStatus",
       "UserDepartment", "UserRole", "City", "State", "Country"];
     return modules;
   }

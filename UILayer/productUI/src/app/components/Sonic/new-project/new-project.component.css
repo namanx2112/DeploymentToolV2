@@ -41,6 +41,8 @@
     text-align: center;
     padding: 10px  0px;
     position: relative;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .tabName{
