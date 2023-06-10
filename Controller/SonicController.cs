@@ -86,5 +86,20 @@ namespace DeploymentTool.Controller
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IHttpActionResult> NewStore(NewProjectStore newStore)
+        {
+            tblProject tProjectModel = newStore.GettblProject();
+            db.tblProjects.Add(tProjectModel);
+            await db.SaveChangesAsync();
+            newStore.nProjectID = tProjectModel.aProjectID;
+            tblProjectStore tblProjectStoreModel = newStore.GettblProjectStores();
+            db.tblProjectStores.Add(tblProjectStoreModel);
+            await db.SaveChangesAsync();
+
+            return Json(tblProjectStoreModel.aProjectStoreID);
+        }
     }
 }

@@ -58,6 +58,7 @@
     <FunctionImport Name="sproc_SearchStore" ReturnType="Collection(dtDBModel.sproc_SearchStore_Result)">
       <Parameter Name="tText" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="tblDocuments" EntityType="dtDBModel.tblDocument" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -121,6 +122,7 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="nBrand" Type="Int32" />
   </EntityType>
   <EntityType Name="tblAttachment">
     <Key>
@@ -357,7 +359,6 @@
     <Property Name="tStoreName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tStoreAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tStoreAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tCity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="nStoreState" Type="Int32" />
     <Property Name="tStoreZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tStoreManager" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -372,6 +373,7 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="nCity" Type="Int32" />
   </EntityType>
   <EntityType Name="tblStore">
     <Key>
@@ -585,4 +587,17 @@
     <Property Type="String" Name="tProjectName" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="tStoreNumber" Nullable="true" MaxLength="255" />
   </ComplexType>
+  <EntityType Name="tblDocument">
+    <Key>
+      <PropertyRef Name="aDocumentID" />
+    </Key>
+    <Property Name="aDocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
 </Schema>

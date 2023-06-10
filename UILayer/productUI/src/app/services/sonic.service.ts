@@ -274,6 +274,382 @@ export class SonicService {
     return tabs;
   }
 
+  GetNewStoresTab(instType: TabInstanceType): HomeTab{
+    let fields = this.GetStoreContactFields();
+    fields.push({
+      field_name: "nProjectType",
+      fieldUniqeName: "nProjectType",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.dropdown,
+      field_placeholder: "Enter Project Type",      
+      options: this.commonService.GetDropdown("ProjectType"),
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },
+    {
+      field_name: "tStoreNumber",
+      fieldUniqeName: "tStoreNumber",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter StoreNumber",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },
+    {
+      field_name: "tAddress",
+      fieldUniqeName: "tAddress",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Address",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },
+    {
+      field_name: "nCity",
+      fieldUniqeName: "nCity",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.dropdown,
+      field_placeholder: "Enter City",      
+      options: this.commonService.GetDropdown("City"),
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },
+    {
+      field_name: "tState",
+      fieldUniqeName: "tState",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter State",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },
+    {
+      field_name: "nDMAID",
+      fieldUniqeName: "nDMAID",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter DMA ID",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },
+    {
+      field_name: "tDMA",
+      fieldUniqeName: "tDMA",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter DMA Name",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },
+    {
+      field_name: "tRED",
+      fieldUniqeName: "tRED",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter RED",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },
+    {
+      field_name: "tCM",
+      fieldUniqeName: "tCM",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter CM",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },
+    {
+      field_name: "tANE",
+      fieldUniqeName: "tANE",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter ANE",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },{
+      field_name: "tRVP",
+      fieldUniqeName: "tRVP",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter RVP",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },{
+      field_name: "tPrincipalPartner",
+      fieldUniqeName: "tPrincipalPartner",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Principal Partner",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },{
+      field_name: "dStatus",
+      fieldUniqeName: "dStatus",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.date,
+      field_placeholder: "Enter Status",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },{
+      field_name: "dOpenStore",
+      fieldUniqeName: "dOpenStore",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.date,
+      field_placeholder: "Enter Golive Date",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },{
+      field_name: "nProjectStatus",
+      fieldUniqeName: "nProjectStatus",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.dropdown,      
+      options: this.commonService.GetDropdown("ProjectStatus"),
+      field_placeholder: "Enter Project Status",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    });
+
+    return {
+      tab_name: "New Store",
+      tab_header: "New Store",
+      tab_type: TabType.NewStore,
+      tab_unique_name: "",
+      instanceType: instType,
+      childTabs: [],
+      search_fields: [{
+        field_name: "Store Name",
+        fieldUniqeName: "tStoreName",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Store Name",
+        validator: [Validators.required],
+        mandatory: false,
+        hidden: false
+      }],
+      fields: fields
+    };
+  }
+
+  GetStoreContactFields(): Fields[]{
+    let fArray = [{
+      field_name: "aProjectStoreID",
+      fieldUniqeName: "aProjectStoreID",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter aProjectStoreID",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    }, {
+      field_name: "nProjectID",
+      fieldUniqeName: "nProjectID",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter nProjectID",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },{
+      field_name: "Store Name",
+      fieldUniqeName: "tStoreName",
+      defaultVal: "",
+      readOnly: true,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store Name",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Address1",
+      fieldUniqeName: "tStoreAddressLine1",
+      defaultVal: "",
+      readOnly: true,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store Address",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store Address2",
+      fieldUniqeName: "tStoreAddressLine2",
+      defaultVal: "",
+      readOnly: true,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store Address2",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store City",
+      fieldUniqeName: "nCity",
+      defaultVal: "",
+      readOnly: true,
+      invalid: false,
+      field_type: FieldType.dropdown,
+      field_placeholder: "Enter Store City",
+      options: this.commonService.GetDropdown("City"),
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store State",
+      fieldUniqeName: "nStoreState",
+      defaultVal: "",
+      readOnly: true,
+      invalid: false,
+      field_type: FieldType.dropdown,
+      field_placeholder: "Enter Store State",        
+      options: this.commonService.GetDropdown("State"),
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store Zip",
+      fieldUniqeName: "tStoreZip",
+      defaultVal: "",
+      readOnly: true,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter Store Zip",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store Manager",
+      fieldUniqeName: "tStoreManager",
+      defaultVal: "",
+      readOnly: true,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store Manager",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store POC",
+      fieldUniqeName: "tPOC",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store POC",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store POC Phone",
+      fieldUniqeName: "tPOCPhone",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store POC Phone",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store POC Email",
+      fieldUniqeName: "tPOCEmail",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.email,
+      field_placeholder: "Enter Store POC Email",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store GC",
+      fieldUniqeName: "tGC",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store GC",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store GC Phone",
+      fieldUniqeName: "tGCPhone",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store GC Phone",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store GC Email",
+      fieldUniqeName: "tGCEMail",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.email,
+      field_placeholder: "Enter GC Email",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }];
+    return fArray;
+  }
+
   GetStoreContactTab(instType: TabInstanceType): HomeTab {
     return {
       tab_name: "Store Contact",
@@ -294,172 +670,7 @@ export class SonicService {
         mandatory: false,
         hidden: false
       }],
-      fields: [{
-        field_name: "aProjectStoreID",
-        fieldUniqeName: "aProjectStoreID",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter aProjectStoreID",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      }, {
-        field_name: "nProjectID",
-        fieldUniqeName: "nProjectID",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter nProjectID",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },{
-        field_name: "Store Name",
-        fieldUniqeName: "tStoreName",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store Name",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Address1",
-        fieldUniqeName: "tStoreAddressLine1",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store Address",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store Address2",
-        fieldUniqeName: "tStoreAddressLine2",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store Address2",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store City",
-        fieldUniqeName: "tCity",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store City",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store State",
-        fieldUniqeName: "nStoreState",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: FieldType.dropdown,
-        field_placeholder: "Enter Store State",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store Zip",
-        fieldUniqeName: "tStoreZip",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Store Zip",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store Manager",
-        fieldUniqeName: "tStoreManager",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store Manager",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store POC",
-        fieldUniqeName: "tPOC",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store POC",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store POC Phone",
-        fieldUniqeName: "tPOCPhone",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store POC Phone",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store POC Email",
-        fieldUniqeName: "tPOCEmail",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.email,
-        field_placeholder: "Enter Store POC Email",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store GC",
-        fieldUniqeName: "tGC",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store GC",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store GC Phone",
-        fieldUniqeName: "tGCPhone",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store GC Phone",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store GC Email",
-        fieldUniqeName: "tGCEMail",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.email,
-        field_placeholder: "Enter GC Email",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }]
+      fields: this.GetStoreContactFields()
     };
   }
 
@@ -797,7 +1008,7 @@ export class SonicService {
         field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [Validators.required],
-        options: this.commonService.GetDropdown("nVendor"),
+        options: this.commonService.GetDropdown("Vendor"),
         mandatory: false,
         hidden: false
       },

@@ -56,7 +56,7 @@ export class ControlsComponent implements AfterViewChecked {
         this._controlValues[formField.fieldUniqeName] = formField.defaultVal;
       }
       else
-        tFormControl.setValue(this._controlValues[formField.fieldUniqeName])
+        tFormControl.setValue(this.getFormatedValue(formField, this._controlValues[formField.fieldUniqeName]))
       this.formGroup.addControl(formField.fieldUniqeName, tFormControl);
     }
     if (this.numberOfControlsInARow > 0) {
@@ -65,6 +65,34 @@ export class ControlsComponent implements AfterViewChecked {
       else if (this.numberOfControlsInARow == 3)
         this.fieldClass = "curThreeField";
     }
+  }
+
+  getReadOnlyVal(field: Fields, val: string) {
+    let sVal = val;
+    if (field.field_type == FieldType.dropdown) {
+      if (typeof field.options != 'undefined') {
+        for (var indx in field.options) {
+          if (field.options[indx].optionIndex == val) {
+            sVal = field.options[indx].optionDisplayName;
+            break;
+          }
+        }
+      }
+    }
+    else if (field.field_type == FieldType.date) {
+      sVal = val.split('T')[0];
+    }
+    return sVal;
+  }
+
+  getFormatedValue(field: Fields, val: string) {
+    let retVal = val;
+    switch (field.field_type) {
+      case FieldType.date:
+        retVal = val.split('T')[0]
+        break;
+    }
+    return retVal;
   }
 
   hasEror(cControl: Fields): boolean {

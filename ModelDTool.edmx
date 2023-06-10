@@ -75,6 +75,19 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
           <Property Name="aCountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tCountryName" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblDocuments">
+          <Key>
+            <PropertyRef Name="aDocumentID" />
+          </Key>
+          <Property Name="aDocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentName" Type="nvarchar" MaxLength="500" />
+          <Property Name="DocumentPath" Type="nvarchar(max)" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
         <EntityType Name="tblDropdownMain">
           <Key>
             <PropertyRef Name="aMainId" />
@@ -409,7 +422,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="tStoreName" Type="nvarchar" MaxLength="255" />
           <Property Name="tStoreAddressLine1" Type="nvarchar" MaxLength="255" />
           <Property Name="tStoreAddressLine2" Type="nvarchar" MaxLength="255" />
-          <Property Name="tCity" Type="nvarchar" MaxLength="255" />
+          <Property Name="nCity" Type="int" />
           <Property Name="nStoreState" Type="int" />
           <Property Name="tStoreZip" Type="nvarchar" MaxLength="255" />
           <Property Name="tStoreManager" Type="nvarchar" MaxLength="255" />
@@ -548,6 +561,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+          <Property Name="nBrand" Type="int" />
         </EntityType>
         <Function Name="sproc_CreateStoreFromExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tStoreName" Type="varchar" Mode="In" />
@@ -575,6 +589,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
         <EntityContainer Name="dtDBModelStoreContainer">
           <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
@@ -792,6 +807,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <FunctionImport Name="sproc_SearchStore" ReturnType="Collection(dtDBModel.sproc_SearchStore_Result)">
           <Parameter Name="tText" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="tblDocuments" EntityType="dtDBModel.tblDocument" />
         </EntityContainer>
         <EntityType Name="tblBrand">
           <Key>
@@ -855,6 +871,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
           <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="bDeleted" Type="Boolean" />
+          <Property Name="nBrand" Type="Int32" />
         </EntityType>
         <EntityType Name="tblAttachment">
           <Key>
@@ -1091,7 +1108,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="tStoreName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="tStoreAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="tStoreAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="tCity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="nStoreState" Type="Int32" />
           <Property Name="tStoreZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="tStoreManager" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1106,6 +1122,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
           <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="bDeleted" Type="Boolean" />
+          <Property Name="nCity" Type="Int32" />
         </EntityType>
         <EntityType Name="tblStore">
           <Key>
@@ -1319,6 +1336,19 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Type="String" Name="tProjectName" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="tStoreNumber" Nullable="true" MaxLength="255" />
         </ComplexType>
+        <EntityType Name="tblDocument">
+          <Key>
+            <PropertyRef Name="aDocumentID" />
+          </Key>
+          <Property Name="aDocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="nCreatedBy" Type="Int32" />
+          <Property Name="nUpdateBy" Type="Int32" />
+          <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="bDeleted" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1370,6 +1400,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblVendor">
             <EntityTypeMapping TypeName="dtDBModel.tblVendor">
               <MappingFragment StoreEntitySet="tblVendor">
+                <ScalarProperty Name="nBrand" ColumnName="nBrand" />
                 <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
                 <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
                 <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
@@ -1634,6 +1665,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblProjectStores">
             <EntityTypeMapping TypeName="dtDBModel.tblProjectStore">
               <MappingFragment StoreEntitySet="tblProjectStore">
+                <ScalarProperty Name="nCity" ColumnName="nCity" />
                 <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
                 <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
                 <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
@@ -1648,7 +1680,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
                 <ScalarProperty Name="tStoreManager" ColumnName="tStoreManager" />
                 <ScalarProperty Name="tStoreZip" ColumnName="tStoreZip" />
                 <ScalarProperty Name="nStoreState" ColumnName="nStoreState" />
-                <ScalarProperty Name="tCity" ColumnName="tCity" />
                 <ScalarProperty Name="tStoreAddressLine2" ColumnName="tStoreAddressLine2" />
                 <ScalarProperty Name="tStoreAddressLine1" ColumnName="tStoreAddressLine1" />
                 <ScalarProperty Name="tStoreName" ColumnName="tStoreName" />
@@ -1887,6 +1918,20 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tblDocuments">
+            <EntityTypeMapping TypeName="dtDBModel.tblDocument">
+              <MappingFragment StoreEntitySet="tblDocuments">
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+                <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+                <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+                <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+                <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+                <ScalarProperty Name="DocumentPath" ColumnName="DocumentPath" />
+                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+                <ScalarProperty Name="aDocumentID" ColumnName="aDocumentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

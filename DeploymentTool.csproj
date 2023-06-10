@@ -1005,6 +1005,7 @@
     <Compile Include="Model\Dropdown.cs" />
     <Compile Include="Model\Franchise.cs" />
     <Compile Include="Model\MyApiContext.cs" />
+    <Compile Include="Model\NewProjectStore.cs" />
     <Compile Include="Model\Params.cs" />
     <Compile Include="Model\Project.cs" />
     <Compile Include="Model\ProjectComponent.cs" />
@@ -1034,6 +1035,9 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCountry.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblDocument.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblDropdown.cs">

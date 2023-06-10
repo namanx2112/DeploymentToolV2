@@ -7,7 +7,7 @@ export interface StoreContact {
     tStoreName: string,
     tStoreAddressLine1: string,
     tStoreAddressLine2: string,
-    tCity: string,
+    nCity: string,
     nStoreState: string
     tStoreZip: string,
     tStoreManager: string,
@@ -17,7 +17,6 @@ export interface StoreContact {
     tGC: string,
     tGCPhone: string,
     tGCEMail: string
-
 }
 export interface StoreConfiguration {
     aProjectConfigID: number,
@@ -177,7 +176,7 @@ export interface SonicProjectExcel {
     tProjectType: string,
     tStoreNumber: string,
     tAddress: string,
-    tCity: string,
+    nCity: number,
     tState: string,
     nDMAID: number,
     tDMA: string,
@@ -195,5 +194,38 @@ export interface StoreSearchModel {
     nProjectId: number,
     tStoreName: string,
     tProjectName: string,
-    tStoreNumber: string
+    tStoreNumber: string,
+    tProjectType: string,
+    dGoLiveDate: Date
+}
+
+export interface NewProjectStore{
+    nProjectType:number,
+    tStoreNumber: string,
+    tAddress: string,
+    nCity: number,
+    tState: string,
+    nDMAID: number,
+    tDMA: string,
+    tRED: string,
+    tCM: string,
+    tANE: string,
+    tRVP: string,
+    tPrincipalPartner: string,
+    dStatus: Date,
+    dOpenStore: Date,
+    nProjectStatus: string,
+    aStoreId: number,
+    tStoreName: string,
+    tStoreAddressLine1: string,
+    tStoreAddressLine2: string,
+    nStoreState: string
+    tStoreZip: string,
+    tStoreManager: string,
+    tPOC: string,
+    tPOCPhone: string,
+    tPOCEmail: string,
+    tGC: string,
+    tGCPhone: string,
+    tGCEMail: string
 }

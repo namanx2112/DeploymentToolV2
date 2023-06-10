@@ -11,5 +11,7 @@ namespace DeploymentTool.Model
         public string tStoreName { get; set; }
         public string tProjectName { get; set; }
         public string tStoreNumber { get; set; }
+        public string tProjectType { get; set; }
+        public DateTime dGoLiveDate { get; set; }
     }
 }

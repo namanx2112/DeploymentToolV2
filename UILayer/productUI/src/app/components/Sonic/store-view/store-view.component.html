@@ -4,7 +4,7 @@
         <h4 class="projHeader">Project - {{_curStore.tStoreName}}</h4>
         <button class="noBorderButton lightGray">Workflows</button>
     </div>
-    <div class="storeTitle"><span class="storeStatus">New Store 06/13/2023</span></div>
+    <div class="storeTitle"><span class="storeStatus">{{_curStore.tProjectType}} Store {{_curStore.dGoLiveDate.toString().split('T')[0]}}</span></div>
     <div class="storeTiles" *ngIf="allTabs.length > 0">
         <div class="fullTile">
             <h4>{{allTabs[0].tab_header}}</h4>
