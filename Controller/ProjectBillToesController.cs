@@ -21,7 +21,10 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectBillToes
         public IQueryable<tblProjectBillTo> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectBillToes;
+            int nProjectID = searchFields["nProjectID"]!=null  ? Convert.ToInt32(searchFields["nProjectID"]):0;
+
+            return db.tblProjectBillToes.Where(p => p.nProjectID == nProjectID).AsQueryable();
+           
         }
         [Authorize]
         [HttpPost]
@@ -42,13 +45,7 @@ namespace DeploymentTool.Controller
         // PUT: api/ProjectBillToes/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update( tblProjectBillTo tblProjectBillTo)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-          
+        {          
 
             db.Entry(tblProjectBillTo).State = EntityState.Modified;
 
@@ -76,10 +73,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectBillTo))]
         public async Task<IHttpActionResult> Create(tblProjectBillTo tblProjectBillTo)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            tblProjectBillTo.aProjectBillToID = 0;
 
             db.tblProjectBillToes.Add(tblProjectBillTo);
             await db.SaveChangesAsync();

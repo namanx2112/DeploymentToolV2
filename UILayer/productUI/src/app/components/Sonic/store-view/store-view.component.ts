@@ -160,9 +160,18 @@ export class StoreViewComponent {
 
   translateValuesToFields(fields: Fields[], resp: any) {
     let values: any = {};
-    for (var tIndx in fields) {
-      let fieldName = fields[tIndx].fieldUniqeName;
-      values[fieldName] = resp[fieldName];
+    if (typeof resp == 'undefined') {
+      for (var tIndx in fields) {
+        let fieldName = fields[tIndx].fieldUniqeName;
+        let val = (fieldName.toLocaleLowerCase() == 'nprojectid') ? this._curStore.nProjectId : "";
+        values[fieldName] = val;
+      }
+    }
+    else {
+      for (var tIndx in fields) {
+        let fieldName = fields[tIndx].fieldUniqeName;
+        values[fieldName] = resp[fieldName];
+      }
     }
     return values;
   }
@@ -211,6 +220,7 @@ export class StoreViewComponent {
       SubmitLabel: "Save",
       onSubmit: function (data: any) {
         cthis.SaveTechComp(cTab, data, function (val: any) {
+          cthis.tValues[cTab.tab_name] = val;
           dialogRef.close();
         });
       },
@@ -224,64 +234,144 @@ export class StoreViewComponent {
     // });
   }
 
-  SaveTechComp(tabType: HomeTab, data: any, callBack: any) {
+  SaveTechComp(tab: HomeTab, data: any, callBack: any) {
     let fieldValues = data.value;
     fieldValues["nProjectID"] = this._curStore.nProjectId.toString();
-    switch (tabType.tab_type) {
+    switch (tab.tab_type) {
       case TabType.StoreContact:
         this.techCompService.UpdateStoreContact(fieldValues).subscribe((x: StoreContact) => {
           callBack(x);
         });
         break;
       case TabType.StoreConfiguration:
-        this.techCompService.UpdateStoreConfig(fieldValues).subscribe((x: StoreConfiguration) => {
-          callBack(x);
-        });
+        let aProjectConfigID = (this.tValues[tab.tab_name]["aProjectConfigID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectConfigID"]) : 0;
+        if (aProjectConfigID > 0) {
+          this.techCompService.UpdateStoreConfig(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateStoreConfig(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
       case TabType.StoreStackHolder:
-        this.techCompService.UpdateStackholders(fieldValues).subscribe((x: StoreStackholders) => {
-          callBack(x);
-        });
+        let aProjectStakeHolderID = (this.tValues[tab.tab_name]["aProjectStakeHolderID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectStakeHolderID"]) : 0;
+        if (aProjectStakeHolderID > 0) {
+          this.techCompService.UpdateStackholders(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateStackholders(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
       case TabType.StoreNetworking:
-        this.techCompService.UpdateNetworking(fieldValues).subscribe((x: StoreNetworkings) => {
-          callBack(x);
-        });
+        let aProjectNetworkingID = (this.tValues[tab.tab_name]["aProjectNetworkingID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectNetworkingID"]) : 0;
+        if (aProjectNetworkingID > 0) {
+          this.techCompService.UpdateNetworking(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateNetworking(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
       case TabType.StorePOS:
-        this.techCompService.UpdatePOS(fieldValues).subscribe((x: StorePOS) => {
-          callBack(x);
-        });
+        let aProjectPOSID = (this.tValues[tab.tab_name]["aProjectPOSID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectPOSID"]) : 0;
+        if (aProjectPOSID > 0) {
+          this.techCompService.UpdatePOS(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreatePOS(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
       case TabType.StoreAudio:
-        this.techCompService.UpdateAudio(fieldValues).subscribe((x: StoreAudio) => {
-          callBack(x);
-        });
+        let aProjectAudioID = (this.tValues[tab.tab_name]["aProjectAudioID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectAudioID"]) : 0;
+        if (aProjectAudioID > 0) {
+          this.techCompService.UpdateAudio(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateAudio(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
       case TabType.StoreExteriorMenus:
-        this.techCompService.UpdateExteriorMenus(fieldValues).subscribe((x: StoreExteriorMenus) => {
-          callBack(x);
-        });
+        let aProjectExteriorMenuID = (this.tValues[tab.tab_name]["aProjectExteriorMenuID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectExteriorMenuID"]) : 0;
+        if (aProjectExteriorMenuID > 0) {
+          this.techCompService.UpdateExteriorMenus(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateExteriorMenus(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
       case TabType.StorePaymetSystem:
-        this.techCompService.UpdatePaymentSystem(fieldValues).subscribe((x: StorePaymentSystem) => {
-          callBack(x);
-        });
+        let aProjectPaymentSystemID = (this.tValues[tab.tab_name]["aProjectPaymentSystemID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectPaymentSystemID"]) : 0;
+        if (aProjectPaymentSystemID > 0) {
+          this.techCompService.UpdatePaymentSystem(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreatePaymentSystem(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
       case TabType.StoreInteriorMenus:
-        this.techCompService.UpdateInteriorMenus(fieldValues).subscribe((x: StoreInteriorMenus) => {
-          callBack(x);
-        });
+        let aProjectInteriorMenuID = (this.tValues[tab.tab_name]["aProjectInteriorMenuID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectInteriorMenuID"]) : 0;
+        if (aProjectInteriorMenuID > 0) {
+          this.techCompService.UpdateInteriorMenus(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateInteriorMenus(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
       case TabType.StoreSonicRadio:
-        this.techCompService.UpdateSonicRadio(fieldValues).subscribe((x: StoreSonicRadio) => {
-          callBack(x);
-        });
+        let aProjectSonicRadioID = (this.tValues[tab.tab_name]["aProjectSonicRadioID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectSonicRadioID"]) : 0;
+        if (aProjectSonicRadioID > 0) {
+          this.techCompService.UpdateSonicRadio(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateSonicRadio(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
       case TabType.StoreInstallation:
-        this.techCompService.UpdateInstallation(fieldValues).subscribe((x: StoreInstallation) => {
-          callBack(x);
-        });
+        let aProjectInstallationID = (this.tValues[tab.tab_name]["aProjectInstallationID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectInstallationID"]) : 0;
+        if (aProjectInstallationID > 0) {
+          this.techCompService.UpdateInstallation(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateInstallation(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
         break;
     }
   }

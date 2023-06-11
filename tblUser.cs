@@ -9,11 +9,10 @@
 
 namespace DeploymentTool
 {
-    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblUser : ModelParent
+    public partial class tblUser
     {
         public int aUserID { get; set; }
         public string tName { get; set; }

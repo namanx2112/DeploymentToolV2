@@ -22,5 +22,7 @@ namespace DeploymentTool.Model
         public DateTime dStatus { get; set; }
         public DateTime dOpenStore { get; set; }
         public string tProjectStatus { get; set; }
+        public int nStoreExistStatus { get; set; }
+        
     }
 }

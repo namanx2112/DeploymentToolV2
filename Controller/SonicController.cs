@@ -94,7 +94,8 @@ namespace DeploymentTool.Controller
         public HttpResponseMessage NewStore(NewProjectStore newStore)
         {
             try
-            {               
+            {
+                newStore.nProjectID = 0;
                 Utilities.SetHousekeepingFields(true, HttpContext.Current, newStore);
                 tblStore ttboStore = newStore.GettblStore();
                 db.tblStores.Add(ttboStore);

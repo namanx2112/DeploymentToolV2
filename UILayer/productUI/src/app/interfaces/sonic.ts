@@ -24,8 +24,8 @@ export interface StoreConfiguration {
     nStallCount: number,
     nDriveThru: number,
     nInsideDining: number,
-    dGroundBreak: number,
-    dKitchenInstall: Date,
+    nGroundBreak: number,
+    nKitchenInstall: Date,
     cProjectCost: number
 }
 export interface StoreStackholders {

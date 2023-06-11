@@ -19,8 +19,6 @@ namespace DeploymentTool
         public Nullable<int> nStallCount { get; set; }
         public Nullable<int> nDriveThru { get; set; }
         public Nullable<int> nInsideDining { get; set; }
-        public Nullable<System.DateTime> dGroundBreak { get; set; }
-        public Nullable<System.DateTime> dKitchenInstall { get; set; }
         public Nullable<decimal> cProjectCost { get; set; }
         public Nullable<int> nGroundBreak { get; set; }
         public Nullable<int> nKitchenInstall { get; set; }

@@ -21,7 +21,10 @@ namespace DeploymentTool.Model
         // GET: api/ProjectAudios
         public IQueryable<tblProjectAudio> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectAudios;
+            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+
+            return db.tblProjectAudios.Where(p => p.nProjectID == nProjectID).AsQueryable();
+           
         }
 
         // GET: api/ProjectAudios/5
@@ -43,11 +46,6 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Update(tblProjectAudio tblProjectAudio)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
           
 
             db.Entry(tblProjectAudio).State = EntityState.Modified;
@@ -76,10 +74,7 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectAudio tblProjectAudio)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            tblProjectAudio.aProjectAudioID = 0;
 
             db.tblProjectAudios.Add(tblProjectAudio);
             await db.SaveChangesAsync();

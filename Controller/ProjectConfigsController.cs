@@ -21,7 +21,11 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectConfigs
         public IQueryable<tblProjectConfig> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectConfigs;
+            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+
+            return db.tblProjectConfigs.Where(p => p.nProjectID == nProjectID).AsQueryable();
+
+            
         }
         [Authorize]
         [HttpPost]
@@ -43,11 +47,6 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectConfig tblProjectConfig)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
            
 
             db.Entry(tblProjectConfig).State = EntityState.Modified;
@@ -76,10 +75,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectConfig))]
         public async Task<IHttpActionResult> Create(tblProjectConfig tblProjectConfig)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            tblProjectConfig.aProjectConfigID = 0;
 
             db.tblProjectConfigs.Add(tblProjectConfig);
             await db.SaveChangesAsync();

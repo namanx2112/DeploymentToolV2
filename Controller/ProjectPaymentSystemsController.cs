@@ -21,7 +21,10 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectPaymentSystems
         public IQueryable<tblProjectPaymentSystem> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectPaymentSystems;
+            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+
+            return db.tblProjectPaymentSystems.Where(p => p.nProjectID == nProjectID).AsQueryable();
+
         }
         [Authorize]
         [HttpPost]
@@ -42,13 +45,7 @@ namespace DeploymentTool.Controller
         // PUT: api/ProjectPaymentSystems/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectPaymentSystem tblProjectPaymentSystem)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-          
+        {          
 
             db.Entry(tblProjectPaymentSystem).State = EntityState.Modified;
 
@@ -76,11 +73,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectPaymentSystem))]
         public async Task<IHttpActionResult> Create(tblProjectPaymentSystem tblProjectPaymentSystem)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            tblProjectPaymentSystem.aProjectPaymentSystemID = 0;
             db.tblProjectPaymentSystems.Add(tblProjectPaymentSystem);
             await db.SaveChangesAsync();
 

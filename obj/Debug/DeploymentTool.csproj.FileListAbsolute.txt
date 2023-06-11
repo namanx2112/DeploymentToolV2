@@ -436,6 +436,8 @@ C:\Repos\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
 C:\Repos\obj\Debug\DeploymentTool.csproj.CopyComplete
 C:\Repos\obj\Debug\DeploymentTool.dll
 C:\Repos\obj\Debug\DeploymentTool.pdb
+D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
+D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
 D:\Projects\InspireBrand\bin\DeploymentTool.dll.config
 D:\Projects\InspireBrand\bin\DeploymentTool.dll
 D:\Projects\InspireBrand\bin\DeploymentTool.pdb
@@ -543,8 +545,6 @@ D:\Projects\InspireBrand\bin\System.Web.WebPages.xml
 D:\Projects\InspireBrand\bin\System.Web.WebPages.Deployment.xml
 D:\Projects\InspireBrand\bin\System.Web.WebPages.Razor.xml
 D:\Projects\InspireBrand\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
-D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.CopyComplete
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.dll
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.pdb

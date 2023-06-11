@@ -21,7 +21,11 @@ namespace DeploymentTool.Model
         // GET: api/ProjectNetworkings
         public IQueryable<tblProjectNetworking> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectNetworkings;
+            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+
+            return db.tblProjectNetworkings.Where(p => p.nProjectID == nProjectID).AsQueryable();
+
+           
         }
 
         // GET: api/ProjectNetworkings/5
@@ -42,12 +46,6 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> update(tblProjectNetworking tblProjectNetworking)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            
 
             db.Entry(tblProjectNetworking).State = EntityState.Modified;
 
@@ -75,10 +73,7 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectNetworking tblProjectNetworking)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            tblProjectNetworking.aProjectNetworkingID = 0;
 
             db.tblProjectNetworkings.Add(tblProjectNetworking);
             await db.SaveChangesAsync();

@@ -22,7 +22,10 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public IQueryable<tblProjectStore> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectStores;
+
+            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+
+            return db.tblProjectStores.Where(p => p.nProjectID == nProjectID).AsQueryable(); 
         }
 
         // GET: api/ProjectStoreContacts/5
@@ -41,17 +44,8 @@ namespace DeploymentTool.Controller
         // PUT: api/ProjectStoreContacts/5
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Update(int id, tblProjectStore tblProjectStore)
+        public async Task<IHttpActionResult> Update(tblProjectStore tblProjectStore)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != tblProjectStore.aProjectStoreID)
-            {
-                return BadRequest();
-            }
 
             db.Entry(tblProjectStore).State = EntityState.Modified;
 
@@ -61,7 +55,7 @@ namespace DeploymentTool.Controller
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tblProjectStoreExists(id))
+                if (!tblProjectStoreExists(tblProjectStore.aProjectStoreID))
                 {
                     return NotFound();
                 }
@@ -79,10 +73,7 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectStore tblProjectStore)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            tblProjectStore.aProjectStoreID = 0;
 
             db.tblProjectStores.Add(tblProjectStore);
             await db.SaveChangesAsync();

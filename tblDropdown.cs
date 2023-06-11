@@ -13,7 +13,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblDropdown : ModelParent
+    public partial class tblDropdown: ModelParent
     {
         public int aDropdownId { get; set; }
         public string tDropdownText { get; set; }

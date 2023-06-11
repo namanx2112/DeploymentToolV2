@@ -21,7 +21,10 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectPOS
         public IQueryable<tblProjectPOS> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectPOS;
+            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+
+            return db.tblProjectPOS.Where(p => p.nProjectID == nProjectID).AsQueryable();
+
         }
 
         // GET: api/ProjectPOS/5
@@ -43,11 +46,6 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Update( tblProjectPOS tblProjectPOS)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             //if (id != tblProjectPOS.aProjectPOSID)
             //{
             //    return BadRequest();
@@ -79,11 +77,7 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectPOS tblProjectPOS)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            tblProjectPOS.aProjectPOSID = 0;
             db.tblProjectPOS.Add(tblProjectPOS);
             await db.SaveChangesAsync();
 

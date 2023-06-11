@@ -21,7 +21,10 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectStakeHolders
         public IQueryable<tblProjectStakeHolder> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectStakeHolders;
+            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+
+            return db.tblProjectStakeHolders.Where(p => p.nProjectID == nProjectID).AsQueryable();
+
         }
         [Authorize]
         [HttpPost]
@@ -43,12 +46,6 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> update(tblProjectStakeHolder tblProjectStakeHolder)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-           
 
             db.Entry(tblProjectStakeHolder).State = EntityState.Modified;
 
@@ -76,10 +73,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectStakeHolder))]
         public async Task<IHttpActionResult> Create(tblProjectStakeHolder tblProjectStakeHolder)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            tblProjectStakeHolder.aProjectStakeHolderID = 0;
 
             db.tblProjectStakeHolders.Add(tblProjectStakeHolder);
             await db.SaveChangesAsync();

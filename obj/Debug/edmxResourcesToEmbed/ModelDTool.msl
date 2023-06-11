@@ -4,6 +4,7 @@
     <EntitySetMapping Name="tblBrand">
       <EntityTypeMapping TypeName="dtDBModel.tblBrand">
         <MappingFragment StoreEntitySet="tblBrand">
+          <ScalarProperty Name="BrandFile" ColumnName="BrandFile" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
@@ -90,6 +91,7 @@
     <EntitySetMapping Name="tblProjects">
       <EntityTypeMapping TypeName="dtDBModel.tblProject">
         <MappingFragment StoreEntitySet="tblProject">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
@@ -143,8 +145,6 @@
           <ScalarProperty Name="nKitchenInstall" ColumnName="nKitchenInstall" />
           <ScalarProperty Name="nGroundBreak" ColumnName="nGroundBreak" />
           <ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
-          <ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
-          <ScalarProperty Name="dGroundBreak" ColumnName="dGroundBreak" />
           <ScalarProperty Name="nInsideDining" ColumnName="nInsideDining" />
           <ScalarProperty Name="nDriveThru" ColumnName="nDriveThru" />
           <ScalarProperty Name="nStallCount" ColumnName="nStallCount" />
@@ -567,12 +567,12 @@
     <EntitySetMapping Name="tblDocuments">
       <EntityTypeMapping TypeName="dtDBModel.tblDocument">
         <MappingFragment StoreEntitySet="tblDocuments">
+          <ScalarProperty Name="DocumentFile" ColumnName="DocumentFile" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
           <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
           <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-          <ScalarProperty Name="DocumentPath" ColumnName="DocumentPath" />
           <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
           <ScalarProperty Name="aDocumentID" ColumnName="aDocumentID" />
         </MappingFragment>

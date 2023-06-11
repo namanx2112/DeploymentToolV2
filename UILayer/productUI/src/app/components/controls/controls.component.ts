@@ -17,6 +17,7 @@ export class ControlsComponent implements AfterViewChecked {
   @Input() numberOfControlsInARow: number;
   @Input() set controlValues(value: Dictionary<string>) {
     this._controlValues = value;
+    this.checkBlankAndSet();
     this.valueChanged();
   };
   get controlValues(): Dictionary<string> {
@@ -47,6 +48,14 @@ export class ControlsComponent implements AfterViewChecked {
     if (o1 == o2)
       return true;
     else return false
+  }
+
+  checkBlankAndSet() {
+    for (const formField of this.fields) {
+      if (typeof this._controlValues[formField.fieldUniqeName] == 'undefined') {
+        this._controlValues[formField.fieldUniqeName] = "";
+      }
+    }
   }
 
   valueChanged() {
@@ -82,7 +91,8 @@ export class ControlsComponent implements AfterViewChecked {
       }
     }
     else if (field.field_type == FieldType.date) {
-      sVal = val.split('T')[0];
+      if (typeof val != 'undefined' && val != null)
+        sVal = val.split('T')[0];
     }
     return sVal;
   }
@@ -91,7 +101,8 @@ export class ControlsComponent implements AfterViewChecked {
     let retVal = val;
     switch (field.field_type) {
       case FieldType.date:
-        retVal = val.split('T')[0]
+        if (typeof val != 'undefined' && val != null)
+          retVal = val.split('T')[0];
         break;
     }
     return retVal;
@@ -154,7 +165,7 @@ export class ControlsComponent implements AfterViewChecked {
     return show;
   }
 
-  CloseClicked(ev: any){
+  CloseClicked(ev: any) {
     this.onClose?.emit(this.formGroup);
   }
 }

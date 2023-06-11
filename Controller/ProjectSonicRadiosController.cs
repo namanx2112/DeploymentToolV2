@@ -21,7 +21,10 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectSonicRadios
         public IQueryable<tblProjectSonicRadio> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectSonicRadios;
+            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+
+            return db.tblProjectSonicRadios.Where(p => p.nProjectID == nProjectID).AsQueryable();
+
         }
         [Authorize]
         [HttpPost]
@@ -74,10 +77,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectSonicRadio))]
         public async Task<IHttpActionResult> Create(tblProjectSonicRadio tblProjectSonicRadio)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            tblProjectSonicRadio.aProjectSonicRadioID = 0;
 
             db.tblProjectSonicRadios.Add(tblProjectSonicRadio);
             await db.SaveChangesAsync();

@@ -240,46 +240,44 @@ namespace DeploymentTool.Controller
                         oleda.SelectCommand = cmd;
                         DataSet ds = new DataSet();
                         oleda.Fill(ds);
-
                         dt = ds.Tables[0];
-
                         if (dt.Rows.Count > 0)
                         {
-                            // table tblObj = new table();
-
                             foreach (DataRow row in dt.Rows)
                             {
-
-
-                                string Name = row["Store Number"].ToString();
+                                string Name = row["Store Number"] != null ? row["Store Number"].ToString() : "";
                                 SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", Name);
                                 var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber", new SqlParameter("@tStoreNumber", Name)).FirstOrDefault();
 
-
+                                objProjectExcel = new ProjectExcelFields();
 
                                 if (Name != output)
-                                {
-                                    objProjectExcel = new ProjectExcelFields();
-                                    objProjectExcel.tProjectType = row["Project Type"].ToString();
-                                    objProjectExcel.tStoreNumber = Name;
-                                    objProjectExcel.tAddress = row["Address"].ToString();
-                                    objProjectExcel.tCity = row["City"].ToString();
-                                    objProjectExcel.tState = row["State"].ToString();
-                                    objProjectExcel.nDMAID = Convert.ToInt32(row["DMA ID"]);
-                                    objProjectExcel.tDMA = row["DMA"].ToString();
-                                    objProjectExcel.tRED = row["RED"].ToString();
-                                    objProjectExcel.tCM = row["CM"].ToString();
-                                    objProjectExcel.tANE = row["A&E"].ToString();
-                                    objProjectExcel.tRVP = row["RVP"].ToString();
-                                    objProjectExcel.tPrincipalPartner = row["Principal Partner"].ToString();
-                                    objProjectExcel.dStatus = Convert.ToDateTime(row["Status"]);
-                                    objProjectExcel.dOpenStore = Convert.ToDateTime(row["Open Store"]);
-                                    objProjectExcel.tProjectStatus = row["Project Status"].ToString();
+                                    objProjectExcel.nStoreExistStatus = 0;
+                                else
+                                    objProjectExcel.nStoreExistStatus = 1;
 
 
-                                    fields.Add(objProjectExcel);
+                                objProjectExcel.tProjectType = row["Project Type"] != null ? row["Project Type"].ToString() : "";
+                                objProjectExcel.tStoreNumber = Name;
+                                objProjectExcel.tAddress = row["Address"] != null ? row["Address"].ToString() : "";
+                                objProjectExcel.tCity = row["City"] != null ? row["City"].ToString() : "";
+                                objProjectExcel.tState = row["State"] != null ? row["State"].ToString() : "";
+                                objProjectExcel.nDMAID = row["DMA ID"] != null && row["DMA ID"].ToString() != "" ? Convert.ToInt32(row["DMA ID"]) : 0;
+                                objProjectExcel.tDMA = row["DMA"] != null ? row["DMA"].ToString() : "";
+                                objProjectExcel.tRED = row["RED"] != null ? row["RED"].ToString() : "";
+                                objProjectExcel.tCM = row["CM"] != null ? row["CM"].ToString() : "";
+                                objProjectExcel.tANE = row["A&E"] != null ? row["A&E"].ToString() : "";
+                                objProjectExcel.tRVP = row["RVP"] != null ? row["RVP"].ToString() : "";
+                                objProjectExcel.tPrincipalPartner = row["Principal Partner"] != null ? row["Principal Partner"].ToString() : "";
+                                objProjectExcel.dStatus = row["Status"] != null && row["Status"].ToString() != "" ? Convert.ToDateTime(row["Status"]) : new DateTime(2021, 1, 1); //default value
+                                objProjectExcel.dOpenStore = row["Open Store"] != null && row["Open Store"].ToString() != "" ? Convert.ToDateTime(row["Open Store"]) : new DateTime(2021, 1, 1);//default value
 
-                                }
+                                objProjectExcel.tProjectStatus = row["Project Status"] != null ? row["Project Status"].ToString() : "";
+
+
+                                fields.Add(objProjectExcel);
+
+
                             }
                         }
                     }
@@ -300,7 +298,7 @@ namespace DeploymentTool.Controller
            // return ip;
             // return result;
         }
-
+      
         [HttpPost]
         [Route("api/Attachment/UpdateAttachment")]
         public IHttpActionResult UpdateAttachment()
@@ -336,7 +334,7 @@ namespace DeploymentTool.Controller
                 return BadRequest(ex.Message);
             }
         }
-
+       
 
         [HttpPost]
         [Route("api/Attachment/DeleteAttachment/{attachmentId}")]

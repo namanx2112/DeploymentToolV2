@@ -42,6 +42,7 @@
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+          <Property Name="BrandFile" Type="image" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblBrandBKP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -81,7 +82,7 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
           </Key>
           <Property Name="aDocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DocumentName" Type="nvarchar" MaxLength="500" />
-          <Property Name="DocumentPath" Type="nvarchar(max)" />
+          <Property Name="DocumentFile" Type="image" />
           <Property Name="nCreatedBy" Type="int" />
           <Property Name="nUpdateBy" Type="int" />
           <Property Name="dtCreatedOn" Type="datetime" />
@@ -186,6 +187,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+          <Property Name="ProjectActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectAudio">
           <Key>
@@ -261,8 +263,6 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nStallCount" Type="int" />
           <Property Name="nDriveThru" Type="int" />
           <Property Name="nInsideDining" Type="int" />
-          <Property Name="dGroundBreak" Type="date" />
-          <Property Name="dKitchenInstall" Type="date" />
           <Property Name="cProjectCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="nGroundBreak" Type="int" />
           <Property Name="nKitchenInstall" Type="int" />
@@ -828,6 +828,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
           <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="bDeleted" Type="Boolean" />
+          <Property Name="BrandFile" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -909,6 +910,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
           <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="bDeleted" Type="Boolean" />
+          <Property Name="ProjectActiveStatus" Type="Int32" />
         </EntityType>
         <EntityType Name="tblProjectAudio">
           <Key>
@@ -947,8 +949,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="nStallCount" Type="Int32" />
           <Property Name="nDriveThru" Type="Int32" />
           <Property Name="nInsideDining" Type="Int32" />
-          <Property Name="dGroundBreak" Type="DateTime" Precision="0" />
-          <Property Name="dKitchenInstall" Type="DateTime" Precision="0" />
           <Property Name="cProjectCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="nGroundBreak" Type="Int32" />
           <Property Name="nKitchenInstall" Type="Int32" />
@@ -1342,12 +1342,12 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           </Key>
           <Property Name="aDocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DocumentName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="DocumentPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="nCreatedBy" Type="Int32" />
           <Property Name="nUpdateBy" Type="Int32" />
           <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
           <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="bDeleted" Type="Boolean" />
+          <Property Name="DocumentFile" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1358,6 +1358,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblBrand">
             <EntityTypeMapping TypeName="dtDBModel.tblBrand">
               <MappingFragment StoreEntitySet="tblBrand">
+                <ScalarProperty Name="BrandFile" ColumnName="BrandFile" />
                 <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
                 <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
                 <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
@@ -1444,6 +1445,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblProjects">
             <EntityTypeMapping TypeName="dtDBModel.tblProject">
               <MappingFragment StoreEntitySet="tblProject">
+                <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
                 <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
                 <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
                 <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
@@ -1497,8 +1499,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
                 <ScalarProperty Name="nKitchenInstall" ColumnName="nKitchenInstall" />
                 <ScalarProperty Name="nGroundBreak" ColumnName="nGroundBreak" />
                 <ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
-                <ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
-                <ScalarProperty Name="dGroundBreak" ColumnName="dGroundBreak" />
                 <ScalarProperty Name="nInsideDining" ColumnName="nInsideDining" />
                 <ScalarProperty Name="nDriveThru" ColumnName="nDriveThru" />
                 <ScalarProperty Name="nStallCount" ColumnName="nStallCount" />
@@ -1921,12 +1921,12 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblDocuments">
             <EntityTypeMapping TypeName="dtDBModel.tblDocument">
               <MappingFragment StoreEntitySet="tblDocuments">
+                <ScalarProperty Name="DocumentFile" ColumnName="DocumentFile" />
                 <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
                 <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
                 <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
                 <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
                 <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-                <ScalarProperty Name="DocumentPath" ColumnName="DocumentPath" />
                 <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
                 <ScalarProperty Name="aDocumentID" ColumnName="aDocumentID" />
               </MappingFragment>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, OptionType, TabInstanceType, TabType } from 'src/app/interfaces/home-tab';
@@ -20,6 +20,7 @@ export class NewProjectComponent {
     this.getTabs();
     this.loadCurTab();
   }
+  @Output() ChangeView = new EventEmitter<string>();
   allTabs: HomeTab[];
   curTab: HomeTab;
   tValues: Dictionary<Dictionary<string>>;
@@ -103,31 +104,32 @@ export class NewProjectComponent {
     let cThis = this;
     let callBack = function (respValues: any) {
       cThis.tValues[tab.tab_name] = respValues;
+      if (cThis.curTabIndex + 1 == cThis.allTabs.length) {
+        alert("Created Successfully");
+        cThis.ChangeView.emit("dashboard");
+      }
       cThis.curTabIndex++;
       cThis.loadCurTab();
-    }    
+    }
     switch (tab.tab_type) {
       case TabType.NewStore:
         let nProjectID = parseInt(this.tValues[tab.tab_name]["nProjectID"]);
         if (nProjectID > 0) {
-          this.storeSerice.UpdateStore(fieldValues).subscribe((nProjectID: string) => {            
-            this.tValues[tab.tab_name] = fieldValues;
-            this.setProjectId(nProjectID);
-            this.curTabIndex++;
-            this.loadCurTab();
+          this.storeSerice.UpdateStore(fieldValues).subscribe((nProjectID: string) => {
+            callBack(fieldValues);
           });
         }
         else {
           this.storeSerice.CreateNewStores(fieldValues).subscribe((x: any) => {
             this.tValues[tab.tab_name] = x;
-            this.setProjectId(x.nProjectID);            
+            this.setProjectId(x.nProjectID);
             this.curTabIndex++;
             this.loadCurTab();
           });
         }
         break;
       case TabType.StoreConfiguration:
-        let aProjectConfigID = (this.tValues[tab.tab_name]["aProjectConfigID"])? parseInt(this.tValues[tab.tab_name]["aProjectConfigID"]) : 0;
+        let aProjectConfigID = (this.tValues[tab.tab_name]["aProjectConfigID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectConfigID"]) : 0;
         if (aProjectConfigID > 0) {
           this.techCompService.UpdateStoreConfig(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -140,7 +142,7 @@ export class NewProjectComponent {
         }
         break;
       case TabType.StoreStackHolder:
-        let aProjectStakeHolderID = (this.tValues[tab.tab_name]["aProjectStakeHolderID"])? parseInt(this.tValues[tab.tab_name]["aProjectStakeHolderID"]) : 0;
+        let aProjectStakeHolderID = (this.tValues[tab.tab_name]["aProjectStakeHolderID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectStakeHolderID"]) : 0;
         if (aProjectStakeHolderID > 0) {
           this.techCompService.UpdateStackholders(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -153,7 +155,7 @@ export class NewProjectComponent {
         }
         break;
       case TabType.StoreNetworking:
-        let aProjectNetworkingID = (this.tValues[tab.tab_name]["aProjectNetworkingID"])? parseInt(this.tValues[tab.tab_name]["aProjectNetworkingID"]) : 0;
+        let aProjectNetworkingID = (this.tValues[tab.tab_name]["aProjectNetworkingID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectNetworkingID"]) : 0;
         if (aProjectNetworkingID > 0) {
           this.techCompService.UpdateNetworking(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -166,7 +168,7 @@ export class NewProjectComponent {
         }
         break;
       case TabType.StorePOS:
-        let aProjectPOSID = (this.tValues[tab.tab_name]["aProjectPOSID"])? parseInt(this.tValues[tab.tab_name]["aProjectPOSID"]) : 0;
+        let aProjectPOSID = (this.tValues[tab.tab_name]["aProjectPOSID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectPOSID"]) : 0;
         if (aProjectPOSID > 0) {
           this.techCompService.UpdatePOS(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -179,7 +181,7 @@ export class NewProjectComponent {
         }
         break;
       case TabType.StoreAudio:
-        let aProjectAudioID = (this.tValues[tab.tab_name]["aProjectAudioID"])? parseInt(this.tValues[tab.tab_name]["aProjectAudioID"]) : 0;
+        let aProjectAudioID = (this.tValues[tab.tab_name]["aProjectAudioID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectAudioID"]) : 0;
         if (aProjectAudioID > 0) {
           this.techCompService.UpdateAudio(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -192,7 +194,7 @@ export class NewProjectComponent {
         }
         break;
       case TabType.StoreExteriorMenus:
-        let aProjectExteriorMenuID = (this.tValues[tab.tab_name]["aProjectExteriorMenuID"])? parseInt(this.tValues[tab.tab_name]["aProjectExteriorMenuID"]) : 0;
+        let aProjectExteriorMenuID = (this.tValues[tab.tab_name]["aProjectExteriorMenuID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectExteriorMenuID"]) : 0;
         if (aProjectExteriorMenuID > 0) {
           this.techCompService.UpdateExteriorMenus(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -205,7 +207,7 @@ export class NewProjectComponent {
         }
         break;
       case TabType.StorePaymetSystem:
-        let aProjectPaymentSystemID = (this.tValues[tab.tab_name]["aProjectPaymentSystemID"])? parseInt(this.tValues[tab.tab_name]["aProjectPaymentSystemID"]) : 0;
+        let aProjectPaymentSystemID = (this.tValues[tab.tab_name]["aProjectPaymentSystemID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectPaymentSystemID"]) : 0;
         if (aProjectPaymentSystemID > 0) {
           this.techCompService.UpdatePaymentSystem(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -218,7 +220,7 @@ export class NewProjectComponent {
         }
         break;
       case TabType.StoreInteriorMenus:
-        let aProjectInteriorMenuID = (this.tValues[tab.tab_name]["aProjectInteriorMenuID"])? parseInt(this.tValues[tab.tab_name]["aProjectInteriorMenuID"]) : 0;
+        let aProjectInteriorMenuID = (this.tValues[tab.tab_name]["aProjectInteriorMenuID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectInteriorMenuID"]) : 0;
         if (aProjectInteriorMenuID > 0) {
           this.techCompService.UpdateInteriorMenus(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -231,7 +233,7 @@ export class NewProjectComponent {
         }
         break;
       case TabType.StoreSonicRadio:
-        let aProjectSonicRadioID = (this.tValues[tab.tab_name]["aProjectSonicRadioID"])? parseInt(this.tValues[tab.tab_name]["aProjectSonicRadioID"]) : 0;
+        let aProjectSonicRadioID = (this.tValues[tab.tab_name]["aProjectSonicRadioID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectSonicRadioID"]) : 0;
         if (aProjectSonicRadioID > 0) {
           this.techCompService.UpdateSonicRadio(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -244,7 +246,7 @@ export class NewProjectComponent {
         }
         break;
       case TabType.StoreInstallation:
-        let aProjectInstallationID = (this.tValues[tab.tab_name]["aProjectInstallationID"])? parseInt(this.tValues[tab.tab_name]["aProjectInstallationID"]) : 0;
+        let aProjectInstallationID = (this.tValues[tab.tab_name]["aProjectInstallationID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectInstallationID"]) : 0;
         if (aProjectInstallationID > 0) {
           this.techCompService.UpdateInstallation(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);

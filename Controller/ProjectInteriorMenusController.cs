@@ -21,7 +21,10 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectInteriorMenus
         public IQueryable<tblProjectInteriorMenu> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblProjectInteriorMenus;
+            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+
+            return db.tblProjectInteriorMenus.Where(p => p.nProjectID == nProjectID).AsQueryable();
+
         }
         [Authorize]
         [HttpPost]
@@ -43,12 +46,6 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectInteriorMenu tblProjectInteriorMenu)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-
 
             db.Entry(tblProjectInteriorMenu).State = EntityState.Modified;
 
@@ -76,11 +73,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectInteriorMenu))]
         public async Task<IHttpActionResult> Create(tblProjectInteriorMenu tblProjectInteriorMenu)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            tblProjectInteriorMenu.aProjectInteriorMenuID = 0;
             db.tblProjectInteriorMenus.Add(tblProjectInteriorMenu);
             await db.SaveChangesAsync();
 

@@ -13,7 +13,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblBrand : ModelParent
+    public partial class tblBrand: ModelParent
     {
         public int aBrandId { get; set; }
         public string tBrandName { get; set; }
@@ -30,5 +30,6 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
+        public byte[] BrandFile { get; set; }
     }
 }

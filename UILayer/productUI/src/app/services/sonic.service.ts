@@ -284,7 +284,7 @@ export class SonicService {
       invalid: false,
       field_type: FieldType.number,
       field_placeholder: "Enter nStoreId",      
-      validator: [Validators.required],
+      validator: [],
       mandatory: false,
       hidden: true
     },{
@@ -461,7 +461,7 @@ export class SonicService {
       invalid: false,
       field_type: FieldType.number,
       field_placeholder: "Enter aProjectStoreID",
-      validator: [Validators.required],
+      validator: [],
       mandatory: false,
       hidden: true
     }, {
@@ -472,7 +472,7 @@ export class SonicService {
       invalid: false,
       field_type: FieldType.number,
       field_placeholder: "Enter nProjectID",
-      validator: [Validators.required],
+      validator: [],
       mandatory: false,
       hidden: true
     },{
@@ -522,13 +522,13 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Store State",
-      fieldUniqeName: "nStoreState",
+      fieldUniqeName: "nState",
       defaultVal: "",
       readOnly: readOnly,
       invalid: false,
       field_type: FieldType.dropdown,
       field_placeholder: "Enter Store State",        
-      options: this.commonService.GetDropdown("State"),
+      options: this.commonService.GetDropdown("StoreState"),
       validator: [Validators.required],
       mandatory: false,
       hidden: false
@@ -676,7 +676,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter aProjectConfigID",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       }, {
@@ -690,18 +690,6 @@ export class SonicService {
         validator: [Validators.required],
         mandatory: false,
         hidden: true
-      }, {
-        field_name: "Project Type",
-        fieldUniqeName: "nProjectType",
-        defaultVal: "",
-        readOnly: true,
-        invalid: false,
-        field_type: FieldType.dropdown,
-        field_placeholder: "Enter Project Type",
-        options: this.commonService.GetDropdown("ProjectType"),
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
       }, {
         field_name: "Stall Count",
         fieldUniqeName: "nStallCount",
@@ -741,23 +729,25 @@ export class SonicService {
         hidden: false
       }, {
         field_name: "Ground Break",
-        fieldUniqeName: "dGroundBreak",
+        fieldUniqeName: "nGroundBreak",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.date,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Ground Break",
+        options: this.commonService.GetDropdown("ConfigurationGroundBreak"),
         validator: [Validators.required],
         mandatory: false,
         hidden: false
       }, {
         field_name: "Kitchen Install",
-        fieldUniqeName: "dKitchenInstall",
+        fieldUniqeName: "nKitchenInstall",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.date,
+        field_type: FieldType.dropdown,
         field_placeholder: "Enter Kitchen Install",
+        options: this.commonService.GetDropdown("ConfigurationKitchenInstall"),
         validator: [Validators.required],
         mandatory: false,
         hidden: false
@@ -804,7 +794,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter Franchise",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       }, {
@@ -957,7 +947,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter ProjectNetworkingID",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       }, {
@@ -1140,7 +1130,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter POS ID",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       },
@@ -1274,7 +1264,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter ProjectAudioID",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       }, {
@@ -1342,7 +1332,7 @@ export class SonicService {
       },
       {
         field_name: "Loop Status",
-        fieldUniqeName: "dLoopStatus",
+        fieldUniqeName: "nLoopStatus",
         defaultVal: "",
         readOnly: false,
         invalid: false,
@@ -1409,7 +1399,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter Vendor",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: false
       }],
@@ -1421,7 +1411,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter ProjectExteriorMenuID",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       }, {
@@ -1600,7 +1590,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter ProjectPaymentSystemID",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       }, {
@@ -1811,7 +1801,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter ProjectInteriorMenuID",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       }, {
@@ -1919,7 +1909,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter ProjectSonicRadioID",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       }, {
@@ -2076,7 +2066,7 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter ProjectInstallationID",
-        validator: [Validators.required],
+        validator: [],
         mandatory: false,
         hidden: true
       }, {

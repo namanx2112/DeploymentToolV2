@@ -9,19 +9,18 @@
 
 namespace DeploymentTool
 {
-    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblDocument : ModelParent
+    public partial class tblDocument
     {
         public int aDocumentID { get; set; }
         public string DocumentName { get; set; }
-        public string DocumentPath { get; set; }
         public Nullable<int> nCreatedBy { get; set; }
         public Nullable<int> nUpdateBy { get; set; }
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
+        public byte[] DocumentFile { get; set; }
     }
 }
