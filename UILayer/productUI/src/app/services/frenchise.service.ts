@@ -40,19 +40,6 @@ export class FranchiseService {
   GetSearchFields(): Fields[]{
     let fields = [
       {
-        field_name: "Franchise Id",
-        fieldUniqeName: "aFranchiseId",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Franchise Id",
-        validator: [],
-        mandatory: false,
-        icon: "search",
-        hidden: false
-      },
-      {
         field_name: "Franchise Name",
         fieldUniqeName: "tFranchiseName",
         defaultVal: "",
@@ -64,79 +51,6 @@ export class FranchiseService {
         mandatory: false,
         icon: "search",
         hidden: false
-      },
-      {
-        field_name: "Brand Id",
-        fieldUniqeName: "nBrandID",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Brand Id",
-        validator: [],
-        mandatory: false,
-        icon: "search",
-        hidden: false
-      },
-      {
-        field_name: "Franchise Email",
-        fieldUniqeName: "tFranchiseEmail",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.email,
-        field_placeholder: "Enter Franchise Email",
-        validator: [],
-        mandatory: true,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Owner",
-        fieldUniqeName: "tFranchiseOwner",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Franchise Owner",
-        validator: [],
-        mandatory: true,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Phone",
-        fieldUniqeName: "tFranchisePhone",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Franchise Phone",
-        validator: [],
-        mandatory: true,
-        hidden: false
-      },
-      {
-        field_name: "Page Size",
-        fieldUniqeName: "nPageSize",
-        defaultVal: "10",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Page Size",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      },
-      {
-        field_name: "Page Number",
-        fieldUniqeName: "nPageNumber",
-        defaultVal: "1",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Page Number",
-        validator: [],
-        mandatory: false,
-        hidden: true
       }
     ];
     return fields;

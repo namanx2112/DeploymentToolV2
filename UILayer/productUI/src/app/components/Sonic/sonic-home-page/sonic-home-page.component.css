@@ -1,7 +1,6 @@
 .example-container {
     width: calc(100% - 2px);
     height: calc(100% - 2px);
-    border-top: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .mat-drawer-content{
@@ -51,7 +50,7 @@
 }
 
 .logoPart, .menuPart{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .logoPart div{
     margin-left: 10%;

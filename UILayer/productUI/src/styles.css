@@ -42,7 +42,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #fff;
 }
 .whiteGray .mat-mdc-text-field-wrapper{
-    background-color: gray;
+    background-color: lightgray;
     color: white;
     border-radius: 5px;
 }
@@ -126,4 +126,10 @@ button{
 
 .vChips .mdc-evolution-chip-set__chips{
     flex-direction: column;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled){
+    background-color: gray!important;
+    border-radius: 10px;
+    height: 45px;
 }

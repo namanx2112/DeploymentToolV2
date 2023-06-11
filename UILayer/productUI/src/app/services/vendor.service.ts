@@ -41,19 +41,6 @@ export class VendorService {
   GetSearchFields(): Fields[]{
     let fields = [
       {
-        field_name: "Vendor Id",
-        fieldUniqeName: "aVendorId",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Vendor Id",
-        validator: [],
-        mandatory: false,
-        icon: "search",
-        hidden: false
-      },
-      {
         field_name: "Vendor Name",
         fieldUniqeName: "tVendorName",
         defaultVal: "",
@@ -65,56 +52,6 @@ export class VendorService {
         mandatory: false,
         icon: "search",
         hidden: false
-      },
-      {
-        field_name: "Brand Id",
-        fieldUniqeName: "nBrandID",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Brand Id",
-        validator: [],
-        mandatory: false,
-        icon: "search",
-        hidden: false
-      },
-      {
-        field_name: "Vendor TechComponent ID",
-        fieldUniqeName: "nTechComponentID",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Vendor TechComponent ID",
-        validator: [],
-        mandatory: false,
-        icon: "search",
-        hidden: false
-      },
-      {
-        field_name: "Page Size",
-        fieldUniqeName: "nPageSize",
-        defaultVal: "10",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Page Size",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      },
-      {
-        field_name: "Page Number",
-        fieldUniqeName: "nPageNumber",
-        defaultVal: "1",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Page Number",
-        validator: [],
-        mandatory: false,
-        hidden: true
       }
     ];
     return fields;

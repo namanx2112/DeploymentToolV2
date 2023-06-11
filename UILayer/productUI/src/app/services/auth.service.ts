@@ -33,6 +33,15 @@ export class AuthService {
     return tHeader;
   }
 
+  getUserName(){
+    let authResp = localStorage.getItem('authResponse');
+    let userName = 'NA';
+    if(typeof authResp != 'undefined' && authResp != null && authResp != ''){
+      userName = JSON.parse(authResp).userName;
+    }
+    return userName;
+  }
+
   getToken() {
     let authResp = localStorage.getItem('authResponse');
     let token = '';

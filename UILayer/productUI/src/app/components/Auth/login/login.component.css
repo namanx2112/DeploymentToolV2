@@ -16,7 +16,7 @@
 }
 
 .logo {
-    background-image: url("https://inspirebrands.com/wp-content/uploads/2022/12/Inspire-All-Brands.jpg");
+    background-image: url("../../../.../../../assets/images/Inspire-All-Brands.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-color: #cccccc;
@@ -46,12 +46,13 @@
 }
 
 .loginBox {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.2), 0px 1px 2px rgba(0, 0, 0, 0.5);
     min-width: 80%;
     min-height: 80%;
     display: flex;
     align-items: center;
     margin: auto;
+    border-radius: 15px;
 }
 
 form{

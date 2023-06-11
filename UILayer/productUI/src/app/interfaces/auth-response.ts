@@ -5,10 +5,10 @@ export interface AuthResponse {
     tName: string,
     tEmail: string,
     nRoleType: string,
-    auth :AuthResponse
+    auth :AuthModel
 }
 
-export interface AuthResponse{
+export interface AuthModel{
     IsAuthSuccessful: boolean,
     ErrorMessage: string,
     Token: string,

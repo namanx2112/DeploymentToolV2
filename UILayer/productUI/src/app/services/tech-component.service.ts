@@ -34,57 +34,19 @@ export class TechComponenttService {
   }
 
   GetSearchFields(): Fields[]{
-    let fields = [
-      {
-        field_name: "TechComponent Id",
-        fieldUniqeName: "aTechComponentId",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter TechComponent Id",
-        validator: [],
-        mandatory: false,
-        icon: "search",
-        hidden: false
-      },
-      {
-        field_name: "Brand Id",
-        fieldUniqeName: "nBrandID",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Brand Id",
-        validator: [],
-        mandatory: false,
-        icon: "search",
-        hidden: false
-      },
-      {
-        field_name: "Page Size",
-        fieldUniqeName: "nPageSize",
-        defaultVal: "10",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Page Size",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      },
-      {
-        field_name: "Page Number",
-        fieldUniqeName: "nPageNumber",
-        defaultVal: "1",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Page Number",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      }
+    let fields = [{
+      field_name: "TechComponent Name",
+      fieldUniqeName: "tTechComponentName",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter TechComponent Name",
+      validator: [],
+      mandatory: true,
+      hidden: false,
+      icon: "search"
+    }
     ];
     return fields;
   }

@@ -2,7 +2,7 @@
     <ng-container *ngFor="let curControl of fields; let index = index">
         <h4 *ngIf="showGroupHeader(curControl)" class="fieldGroup">{{groupLabel}}</h4>
         <div [ngClass]="getLabelClass(curControl)">
-            <mat-label class="fleidLabel" [attr.for]="curControl.field_name">{{curControl.field_name}}</mat-label>
+            <mat-label *ngIf="curControl.icon == undefined || curControl.icon == ''" class="fleidLabel" [attr.for]="curControl.field_name">{{curControl.field_name}}</mat-label>
             <span class="readOnlyControl"
                 *ngIf="(readOnlyForm || curControl.readOnly)">{{getReadOnlyVal(curControl, controlValues[curControl.fieldUniqeName])}}</span>
             <mat-form-field appearance="outline" *ngIf="!(curControl.readOnly || readOnlyForm) && (curControl.field_type == 0 || curControl.field_type == 1 || curControl.field_type == 2||

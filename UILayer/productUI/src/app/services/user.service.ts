@@ -77,7 +77,8 @@ export class UserService {
       field_placeholder: "Enter User Name",
       validator: [],
       mandatory: false,
-      hidden: false
+      hidden: false,
+      icon: "search"
     }]
     return fields;
   }

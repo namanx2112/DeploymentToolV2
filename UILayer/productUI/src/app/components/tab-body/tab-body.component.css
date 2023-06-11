@@ -19,7 +19,7 @@
     cursor: pointer;
 }
 .SearchPart{
-    min-height: calc(30% - 40px);
+    min-height: calc(20% - 45px);
     width: 100%;
     float: left;
 }
@@ -29,13 +29,17 @@
     float: left;
 }
 .tablePart{
-    min-height: calc(70% - 40px);
+    min-height: calc(80% - 40px);
     width: 100%;
     float: left;
+    border: 1px solid lightgray;
+    border-radius: 10px;
 }
 .searchButton{
     float: left;
-    margin: 27px 15px;
+    margin: 0px 15px;
+    height: 45px;
+
 }
 .searchControls{
     float: left;

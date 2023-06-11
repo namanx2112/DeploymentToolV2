@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BrandModel } from 'src/app/interfaces/models';
+import { AuthService } from 'src/app/services/auth.service';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { CommonService } from 'src/app/services/common.service';
 import { HomeService } from 'src/app/services/home.service';
@@ -11,8 +12,10 @@ import { HomeService } from 'src/app/services/home.service';
 })
 export class HomeComponent {
   viewName:string;
-  constructor(private homeService: HomeService, private brandService: BrandServiceService, private commonService: CommonService) {
+  userName: string;
+  constructor(private homeService: HomeService, private brandService: BrandServiceService, private commonService: CommonService, private authService: AuthService) {
     this.viewName = "Dashboard";
+    this.userName = this.authService.getUserName();
     this.commonService.getAllDropdowns();
   }
 

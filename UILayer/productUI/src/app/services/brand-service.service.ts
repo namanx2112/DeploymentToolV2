@@ -82,30 +82,6 @@ export class BrandServiceService {
       mandatory: false,
       hidden: false,
       icon: "search"
-    },
-    {
-      field_name: "Page Size",
-      fieldUniqeName: "nPageSize",
-      defaultVal: "10",
-      readOnly: false,
-      invalid: false,
-      field_type: FieldType.number,
-      field_placeholder: "Enter Page Size",
-      validator: [],
-      mandatory: false,
-      hidden: true
-    },
-    {
-      field_name: "Page Number",
-      fieldUniqeName: "nPageNumber",
-      defaultVal: "1",
-      readOnly: false,
-      invalid: false,
-      field_type: FieldType.number,
-      field_placeholder: "Enter Page Number",
-      validator: [],
-      mandatory: false,
-      hidden: true
     }]
     return fields;
   }
