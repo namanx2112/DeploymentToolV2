@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="dtDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblApplicationTrace">
+    <Key>
+      <PropertyRef Name="aTraceId" />
+    </Key>
+    <Property Name="aTraceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dTraceTime" Type="datetime" />
+    <Property Name="tModule" Type="varchar" MaxLength="100" />
+    <Property Name="tTrace" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="tblAttachment">
     <Key>
       <PropertyRef Name="aAttachmentId" />
@@ -582,6 +591,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Parameter Name="tText" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="dtDBModelStoreContainer">
+    <EntitySet Name="tblApplicationTrace" EntityType="Self.tblApplicationTrace" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />

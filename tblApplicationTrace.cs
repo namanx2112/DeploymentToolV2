@@ -9,17 +9,14 @@
 
 namespace DeploymentTool
 {
-    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblDropdown : ModelParent
+    public partial class tblApplicationTrace
     {
-        public int aDropdownId { get; set; }
-        public string tDropdownText { get; set; }
-        public Nullable<int> nUpdateBy { get; set; }
-        public Nullable<System.DateTime> dtCreatedOn { get; set; }
-        public Nullable<System.DateTime> dtUpdatedOn { get; set; }
-        public Nullable<bool> bDeleted { get; set; }
+        public int aTraceId { get; set; }
+        public Nullable<System.DateTime> dTraceTime { get; set; }
+        public string tModule { get; set; }
+        public string tTrace { get; set; }
     }
 }

@@ -578,5 +578,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblApplicationTraces">
+      <EntityTypeMapping TypeName="dtDBModel.tblApplicationTrace">
+        <MappingFragment StoreEntitySet="tblApplicationTrace">
+          <ScalarProperty Name="tTrace" ColumnName="tTrace" />
+          <ScalarProperty Name="tModule" ColumnName="tModule" />
+          <ScalarProperty Name="dTraceTime" ColumnName="dTraceTime" />
+          <ScalarProperty Name="aTraceId" ColumnName="aTraceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

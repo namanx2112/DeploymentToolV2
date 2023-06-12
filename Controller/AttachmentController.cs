@@ -18,6 +18,7 @@ using System.Net.NetworkInformation;
 using System.Net.Http.Formatting;
 using System.Data.OleDb;
 using System.Web.UI.WebControls;
+using DeploymentTool.Misc;
 
 namespace DeploymentTool.Controller
 {
@@ -69,13 +70,15 @@ namespace DeploymentTool.Controller
         {
             try
             {
+                TraceUtility.WriteTrace("AttachmentController", "UploadStore:Start:");
                 HttpRequestMessage request = this.Request;
                 if (!request.Content.IsMimeMultipartContent())
                 {
                     throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
                 }
 
-                
+
+                TraceUtility.WriteTrace("AttachmentController", "UploadStore:Multipart:");
                 try
                 {
                     List<ProjectExcelFields> fields = new List<ProjectExcelFields>();
@@ -91,13 +94,16 @@ namespace DeploymentTool.Controller
                         //string strFilePath = "C:\\Code\\namanx2112\\new\\Attachments\\store.xlsx";
                         string connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strFilePath + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
 
+                        TraceUtility.WriteTrace("AttachmentController", "UploadStore:strFilePath:" + strFilePath);
                         //using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(@"../Attachments/" + FileName, FileMode.Create)))
                         using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
                         {
                             bw.Write(fileBytes);
                             bw.Close();
                         }
-                       ImportExceltoDatabase(fields,strFilePath, connString);
+
+                        TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
+                        ImportExceltoDatabase(fields,strFilePath, connString);
                         /* fields.Add(new ProjectExcelFields() {
                              tProjectType = "RELOCATION",
                              tStoreNumber = "6937",
@@ -206,14 +212,16 @@ namespace DeploymentTool.Controller
                              tProjectStatus = "Under Construction"
                          }); */
                     }
+                    TraceUtility.WriteTrace("AttachmentController", "UploadStore:Returing");
                     return new HttpResponseMessage(HttpStatusCode.OK)
                     {
                         Content = new ObjectContent<List<ProjectExcelFields>>(fields, new JsonMediaTypeFormatter())
                     };
                 }
-                catch (System.Exception e)
+                catch (System.Exception ex)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                    TraceUtility.WriteTrace("AttachmentController", "UploadStore:Exception:" + ex.Message);
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
                 }
             }
             catch (Exception ex)
@@ -221,12 +229,13 @@ namespace DeploymentTool.Controller
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
-        public void ImportExceltoDatabase(List<ProjectExcelFields> fields, string strFilePath, string connString)
+        void ImportExceltoDatabase(List<ProjectExcelFields> fields, string strFilePath, string connString)
         {
           //  
 
             try
             {
+                TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
                 ProjectExcelFields objProjectExcel = new ProjectExcelFields();
 
                 OleDbConnection oledbConn = new OleDbConnection(connString);
@@ -234,6 +243,7 @@ namespace DeploymentTool.Controller
                 try
                 {
                     oledbConn.Open();
+                    TraceUtility.WriteTrace("AttachmentController", "ImportExceltoDatabase:Opened");
                     using (OleDbCommand cmd = new OleDbCommand("SELECT * FROM [Sheet1$]", oledbConn))
                     {
                         OleDbDataAdapter oleda = new OleDbDataAdapter();
@@ -241,42 +251,46 @@ namespace DeploymentTool.Controller
                         DataSet ds = new DataSet();
                         oleda.Fill(ds);
                         dt = ds.Tables[0];
+                        TraceUtility.WriteTrace("AttachmentController", "ImportExceltoDatabase:dt.Rows.Count:" + dt.Rows.Count);
                         if (dt.Rows.Count > 0)
                         {
                             foreach (DataRow row in dt.Rows)
                             {
                                 string Name = row["Store Number"] != null ? row["Store Number"].ToString() : "";
+                                string ProjectType =row["Project Type"] != null ? row["Project Type"].ToString() : "";
+
                                 SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", Name);
                                 var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber", new SqlParameter("@tStoreNumber", Name)).FirstOrDefault();
 
-                                objProjectExcel = new ProjectExcelFields();
+                                if (ProjectType != "")
+                                {
+                                    objProjectExcel = new ProjectExcelFields();
 
-                                if (Name != output)
-                                    objProjectExcel.nStoreExistStatus = 0;
-                                else
-                                    objProjectExcel.nStoreExistStatus = 1;
+                                    if (Name != output)
+                                        objProjectExcel.nStoreExistStatus = 0;
+                                    else
+                                        objProjectExcel.nStoreExistStatus = 1;
+
+                                    objProjectExcel.tProjectType = ProjectType;
+                                    objProjectExcel.tStoreNumber = Name;
+                                    objProjectExcel.tAddress = row["Address"] != null ? row["Address"].ToString() : "";
+                                    objProjectExcel.tCity = row["City"] != null ? row["City"].ToString() : "";
+                                    objProjectExcel.tState = row["State"] != null ? row["State"].ToString() : "";
+                                    objProjectExcel.nDMAID = row["DMA ID"] != null && row["DMA ID"].ToString() != "" ? Convert.ToInt32(row["DMA ID"]) : 0;
+                                    objProjectExcel.tDMA = row["DMA"] != null ? row["DMA"].ToString() : "";
+                                    objProjectExcel.tRED = row["RED"] != null ? row["RED"].ToString() : "";
+                                    objProjectExcel.tCM = row["CM"] != null ? row["CM"].ToString() : "";
+                                    objProjectExcel.tANE = row["A&E"] != null ? row["A&E"].ToString() : "";
+                                    objProjectExcel.tRVP = row["RVP"] != null ? row["RVP"].ToString() : "";
+                                    objProjectExcel.tPrincipalPartner = row["Principal Partner"] != null ? row["Principal Partner"].ToString() : "";
+                                    objProjectExcel.dStatus = row["Status"] != null && row["Status"].ToString() != "" ? Convert.ToDateTime(row["Status"]) : new DateTime(2001, 1, 1); //default value
+                                    objProjectExcel.dOpenStore = row["Open Store"] != null && row["Open Store"].ToString() != "" ? Convert.ToDateTime(row["Open Store"]) : new DateTime(2001, 1, 1);//default value
+
+                                    objProjectExcel.tProjectStatus = row["Project Status"] != null ? row["Project Status"].ToString() : "";
 
 
-                                objProjectExcel.tProjectType = row["Project Type"] != null ? row["Project Type"].ToString() : "";
-                                objProjectExcel.tStoreNumber = Name;
-                                objProjectExcel.tAddress = row["Address"] != null ? row["Address"].ToString() : "";
-                                objProjectExcel.tCity = row["City"] != null ? row["City"].ToString() : "";
-                                objProjectExcel.tState = row["State"] != null ? row["State"].ToString() : "";
-                                objProjectExcel.nDMAID = row["DMA ID"] != null && row["DMA ID"].ToString() != "" ? Convert.ToInt32(row["DMA ID"]) : 0;
-                                objProjectExcel.tDMA = row["DMA"] != null ? row["DMA"].ToString() : "";
-                                objProjectExcel.tRED = row["RED"] != null ? row["RED"].ToString() : "";
-                                objProjectExcel.tCM = row["CM"] != null ? row["CM"].ToString() : "";
-                                objProjectExcel.tANE = row["A&E"] != null ? row["A&E"].ToString() : "";
-                                objProjectExcel.tRVP = row["RVP"] != null ? row["RVP"].ToString() : "";
-                                objProjectExcel.tPrincipalPartner = row["Principal Partner"] != null ? row["Principal Partner"].ToString() : "";
-                                objProjectExcel.dStatus = row["Status"] != null && row["Status"].ToString() != "" ? Convert.ToDateTime(row["Status"]) : new DateTime(2021, 1, 1); //default value
-                                objProjectExcel.dOpenStore = row["Open Store"] != null && row["Open Store"].ToString() != "" ? Convert.ToDateTime(row["Open Store"]) : new DateTime(2021, 1, 1);//default value
-
-                                objProjectExcel.tProjectStatus = row["Project Status"] != null ? row["Project Status"].ToString() : "";
-
-
-                                fields.Add(objProjectExcel);
-
+                                    fields.Add(objProjectExcel);
+                                }
 
                             }
                         }
@@ -284,6 +298,7 @@ namespace DeploymentTool.Controller
                 }
                 catch (Exception ex)
                 {
+                    TraceUtility.WriteTrace("AttachmentController", "ImportExceltoDatabase:Exception:"+ ex.Message);
                     //result = false;
                 }
                 finally

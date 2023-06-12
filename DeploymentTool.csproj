@@ -986,6 +986,7 @@
     <Compile Include="Helpers\TechComponentDAL.cs" />
     <Compile Include="Helpers\VendorDAL.cs" />
     <Compile Include="Misc\ModelParent.cs" />
+    <Compile Include="Misc\TraceUtility.cs" />
     <Compile Include="Misc\Utilities.cs" />
     <Compile Include="ModelDTool.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1025,6 +1026,9 @@
     <Compile Include="Model\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sproc_SearchStore_Result.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblApplicationTrace.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblAttachment.cs">

@@ -59,6 +59,7 @@
       <Parameter Name="tText" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="tblDocuments" EntityType="dtDBModel.tblDocument" />
+    <EntitySet Name="tblApplicationTraces" EntityType="dtDBModel.tblApplicationTrace" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -599,5 +600,14 @@
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
     <Property Name="DocumentFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblApplicationTrace">
+    <Key>
+      <PropertyRef Name="aTraceId" />
+    </Key>
+    <Property Name="aTraceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dTraceTime" Type="DateTime" Precision="3" />
+    <Property Name="tModule" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="tTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

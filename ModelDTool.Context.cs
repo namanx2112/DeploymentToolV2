@@ -62,6 +62,7 @@ namespace DeploymentTool
         public virtual DbSet<tblDropdownMain> tblDropdownMains { get; set; }
         public virtual DbSet<tblDropdown> tblDropdowns { get; set; }
         public virtual DbSet<tblDocument> tblDocuments { get; set; }
+        public virtual DbSet<tblApplicationTrace> tblApplicationTraces { get; set; }
     
         public virtual int sproc_CreateStoreFromExcel(string tStoreName, string tProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
         {

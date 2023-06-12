@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="dtDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblApplicationTrace">
+          <Key>
+            <PropertyRef Name="aTraceId" />
+          </Key>
+          <Property Name="aTraceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dTraceTime" Type="datetime" />
+          <Property Name="tModule" Type="varchar" MaxLength="100" />
+          <Property Name="tTrace" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="tblAttachment">
           <Key>
             <PropertyRef Name="aAttachmentId" />
@@ -587,6 +596,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Parameter Name="tText" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="dtDBModelStoreContainer">
+          <EntitySet Name="tblApplicationTrace" EntityType="Self.tblApplicationTrace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
@@ -808,6 +818,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Parameter Name="tText" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="tblDocuments" EntityType="dtDBModel.tblDocument" />
+          <EntitySet Name="tblApplicationTraces" EntityType="dtDBModel.tblApplicationTrace" />
         </EntityContainer>
         <EntityType Name="tblBrand">
           <Key>
@@ -1348,6 +1359,15 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="bDeleted" Type="Boolean" />
           <Property Name="DocumentFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblApplicationTrace">
+          <Key>
+            <PropertyRef Name="aTraceId" />
+          </Key>
+          <Property Name="aTraceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dTraceTime" Type="DateTime" Precision="3" />
+          <Property Name="tModule" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1929,6 +1949,16 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
                 <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
                 <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
                 <ScalarProperty Name="aDocumentID" ColumnName="aDocumentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblApplicationTraces">
+            <EntityTypeMapping TypeName="dtDBModel.tblApplicationTrace">
+              <MappingFragment StoreEntitySet="tblApplicationTrace">
+                <ScalarProperty Name="tTrace" ColumnName="tTrace" />
+                <ScalarProperty Name="tModule" ColumnName="tModule" />
+                <ScalarProperty Name="dTraceTime" ColumnName="dTraceTime" />
+                <ScalarProperty Name="aTraceId" ColumnName="aTraceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
