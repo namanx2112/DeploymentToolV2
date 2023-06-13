@@ -20,4 +20,8 @@ export class StoreService {
   UpdateStore(request: any) {
     return this.http.post<any>(this.configUrl + "Sonic/UpdateStore", request, { headers: this.authService.getHttpHeaders() });
   }
+
+  CreateAndGetProjectStoreDetails(nProjectId: number) {
+    return this.http.get<any>(this.configUrl + "Sonic/CreateAndGetProjectStoreDetails?nProjectId=" + nProjectId, { headers: this.authService.getHttpHeaders() });
+  }
 }

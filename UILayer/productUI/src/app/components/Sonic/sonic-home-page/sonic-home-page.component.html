@@ -10,15 +10,15 @@
             <button mat-button [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon>New Project</button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="menuClick('newstore', 'all', 'New');">New Store</button>
-                <button mat-menu-item (click)="menuClick('newstore', 'all','Remodel');">Remodel Store</button>
-                <button mat-menu-item (click)="menuClick('newstore', 'all','Rebuild');">Rebuild Store</button>
-                <button mat-menu-item (click)="menuClick('newstore', 'all','Relocation');">Relocation</button>
-                <button mat-menu-item (click)="menuClick('newstore', 'all','Acquisition');">Acquisition</button>
-                <button mat-menu-item (click)="menuClick('newstore', 'pos', 'New');">POS Installation</button>
-                <button mat-menu-item (click)="menuClick('newstore', 'audio', 'New');">Audio Installation</button>
-                <button mat-menu-item  (click)="menuClick('newstore', 'menu', 'New');">Menu Installation</button>
-                <button mat-menu-item (click)="menuClick('newstore', 'payment', 'New');">Payment Terminal Installation</button>
-                <button mat-menu-item (click)="menuClick('newstore', 'all', 'PartsReplacement');">Parts Replacement</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all','Remodel');">Remodel Store</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all','Rebuild');">Rebuild Store</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all','Relocation');">Relocation</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all','Acquisition');">Acquisition</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'pos', 'New');">POS Installation</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'audio', 'New');">Audio Installation</button>
+                <button mat-menu-item  (click)="menuClick('newproject', 'menu', 'New');">Menu Installation</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'payment', 'New');">Payment Terminal Installation</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all', 'PartsReplacement');">Parts Replacement</button>
             </mat-menu>
             <button mat-button [matMenuTriggerFor]="menu"><mat-icon>search</mat-icon>Search Project</button>
             <button mat-button (click)="menuClick('importproject')"><mat-icon>attach_file</mat-icon>Import Project</button>
@@ -35,7 +35,8 @@
             <mat-icon>play_arrow</mat-icon>
         </span>
         <app-sonic-dashboard *ngIf="showMode == 'dashboard'" (SearchedResult)="SearchedResult($event)"></app-sonic-dashboard>
-        <app-new-project *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)" [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-project>
+        <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)" [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-store>
+        <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)" [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-project>
         <app-store-view *ngIf="showMode == 'storeview'" (ChangeView)="ChangeView($event)" [curStore]="curStore"></app-store-view>
         <app-project-table *ngIf="showMode == 'projecttaleview'" (ChangeView)="ChangeView($event)"></app-project-table>
         <app-import-projects *ngIf="showMode == 'importproject'" (ChangeView)="ChangeView($event)"></app-import-projects>
@@ -43,6 +44,6 @@
         <app-payment-terminal-installation *ngIf="showMode == 'paymentterminalinstllation'" (ChangeView)="ChangeView($event)"></app-payment-terminal-installation>     
         <app-menu-installation *ngIf="showMode == 'menuinstallation'" (ChangeView)="ChangeView($event)"></app-menu-installation>
         <app-audio-installation *ngIf="showMode == 'audioinstallation'" (ChangeView)="ChangeView($event)"></app-audio-installation>
-        <app-not-implemented *ngIf="showMode != 'menuinstallation' && showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecttaleview'"></app-not-implemented>
+        <app-not-implemented *ngIf="showMode != 'newproject' && showMode != 'menuinstallation' && showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecttaleview'"></app-not-implemented>
     </div>
 </mat-drawer-container>

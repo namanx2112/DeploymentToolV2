@@ -8,7 +8,7 @@ using System.Web.Http.ModelBinding;
 
 namespace DeploymentTool.Model
 {
-    public class NewProjectStore: ModelParent
+    public class NewProjectStore : ModelParent
     {
         public int nProjectType { get; set; }
 
@@ -48,6 +48,42 @@ namespace DeploymentTool.Model
         public Nullable<bool> bDeleted { get; set; }
         public int nBrandID { get; set; }
 
+        public void SetValues(tblProject tProj, tblProjectStore tProjStore, tblStore tStore)
+        {
+            this.nProjectID = tProj.aProjectID;
+            this.tStoreName = tProj.tProjectName;
+            this.nStoreId = (int)tProj.nStoreID;
+            this.dOpenStore = (DateTime)tProj.dGoLiveDate;
+            this.nProjectType = (int)tProj.nProjectType;
+            if (tProj.nProjectStatus != null)
+                this.nProjectStatus = (int)tProj.nProjectStatus;
+            if (tProj.nDMAID != null)
+                this.nDMAID = (int)tProj.nDMAID;
+            this.tDMA = tProj.tDMA;
+            if (tProj.nBrandID != null)
+                this.nBrandID = (int)tProj.nBrandID;
+
+            this.nStoreId = tStore.aStoreID;
+            this.tStoreNumber = tStore.tStoreNumber;
+
+            this.aProjectStoreID = tProjStore.aProjectStoreID;
+            this.tStoreName = tProjStore.tStoreName;
+            this.tStoreAddressLine1 = tProjStore.tStoreAddressLine1;
+            this.tStoreAddressLine2 = tProjStore.tStoreAddressLine2;
+            if (tProjStore.nCity != null)
+                this.nCity = (int)tProjStore.nCity;
+            if (tProjStore.nStoreState != null)
+                this.nState = (int)tProjStore.nStoreState;
+            this.tStoreZip = tProjStore.tStoreZip;
+            this.tStoreManager = tProjStore.tStoreManager;
+            this.tPOC = tProjStore.tPOC;
+            this.tPOCPhone = tProjStore.tPOCPhone;
+            this.tPOCEmail = tProjStore.tPOCEmail;
+            this.tGC = tProjStore.tGC;
+            this.tGCPhone = tProjStore.tGCPhone;
+            this.tGCEMail = tProjStore.tGCEMail;
+        }
+
         public tblProject GettblProject()
         {
             tblProject tObj = new tblProject()
@@ -72,10 +108,11 @@ namespace DeploymentTool.Model
 
         public tblStore GettblStore()
         {
-            tblStore tObj = new tblStore() {
+            tblStore tObj = new tblStore()
+            {
                 aStoreID = this.nStoreId,
                 tStoreNumber = this.tStoreNumber,
-                dtCreatedOn= this.dtCreatedOn,
+                dtCreatedOn = this.dtCreatedOn,
                 nCreatedBy = this.nCreatedBy
             };
             return tObj;

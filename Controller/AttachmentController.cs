@@ -19,6 +19,8 @@ using System.Net.Http.Formatting;
 using System.Data.OleDb;
 using System.Web.UI.WebControls;
 using DeploymentTool.Misc;
+using ExcelDataReader;
+using System.Reflection;
 
 namespace DeploymentTool.Controller
 {
@@ -238,63 +240,81 @@ namespace DeploymentTool.Controller
                 TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
                 ProjectExcelFields objProjectExcel = new ProjectExcelFields();
 
-                OleDbConnection oledbConn = new OleDbConnection(connString);
+               //OleDbConnection oledbConn = new OleDbConnection(connString);
                 DataTable dt = new DataTable();
                 try
                 {
-                    oledbConn.Open();
-                    TraceUtility.WriteTrace("AttachmentController", "ImportExceltoDatabase:Opened");
-                    using (OleDbCommand cmd = new OleDbCommand("SELECT * FROM [Sheet1$]", oledbConn))
+                    DataTable dtNew = new DataTable();
+                    // oledbConn.Open();
+                    using (var stream = File.Open(strFilePath, FileMode.Open, FileAccess.Read))
                     {
-                        OleDbDataAdapter oleda = new OleDbDataAdapter();
-                        oleda.SelectCommand = cmd;
-                        DataSet ds = new DataSet();
-                        oleda.Fill(ds);
-                        dt = ds.Tables[0];
-                        TraceUtility.WriteTrace("AttachmentController", "ImportExceltoDatabase:dt.Rows.Count:" + dt.Rows.Count);
-                        if (dt.Rows.Count > 0)
+                        // Auto-detect format, supports:
+                        //  - Binary Excel files (2.0-2003 format; *.xls)
+                        //  - OpenXml Excel files (2007 format; *.xlsx, *.xlsb)
+                        using (var reader = ExcelReaderFactory.CreateReader(stream))
                         {
-                            foreach (DataRow row in dt.Rows)
+                            // Choose one of either 1 or 2:
+
+                            // 1. Use the reader methods
+                            do
                             {
-                                string Name = row["Store Number"] != null ? row["Store Number"].ToString() : "";
-                                string ProjectType =row["Project Type"] != null ? row["Project Type"].ToString() : "";
-
-                                SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", Name);
-                                var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber", new SqlParameter("@tStoreNumber", Name)).FirstOrDefault();
-
-                                if (ProjectType != "")
+                                reader.Read();
+                                int ColumnCount = reader.FieldCount;
+                                for (int i = 0; i < ColumnCount; i++)
                                 {
-                                    objProjectExcel = new ProjectExcelFields();
-
-                                    if (Name != output)
-                                        objProjectExcel.nStoreExistStatus = 0;
-                                    else
-                                        objProjectExcel.nStoreExistStatus = 1;
-
-                                    objProjectExcel.tProjectType = ProjectType;
-                                    objProjectExcel.tStoreNumber = Name;
-                                    objProjectExcel.tAddress = row["Address"] != null ? row["Address"].ToString() : "";
-                                    objProjectExcel.tCity = row["City"] != null ? row["City"].ToString() : "";
-                                    objProjectExcel.tState = row["State"] != null ? row["State"].ToString() : "";
-                                    objProjectExcel.nDMAID = row["DMA ID"] != null && row["DMA ID"].ToString() != "" ? Convert.ToInt32(row["DMA ID"]) : 0;
-                                    objProjectExcel.tDMA = row["DMA"] != null ? row["DMA"].ToString() : "";
-                                    objProjectExcel.tRED = row["RED"] != null ? row["RED"].ToString() : "";
-                                    objProjectExcel.tCM = row["CM"] != null ? row["CM"].ToString() : "";
-                                    objProjectExcel.tANE = row["A&E"] != null ? row["A&E"].ToString() : "";
-                                    objProjectExcel.tRVP = row["RVP"] != null ? row["RVP"].ToString() : "";
-                                    objProjectExcel.tPrincipalPartner = row["Principal Partner"] != null ? row["Principal Partner"].ToString() : "";
-                                    objProjectExcel.dStatus = row["Status"] != null && row["Status"].ToString() != "" ? Convert.ToDateTime(row["Status"]) : new DateTime(2001, 1, 1); //default value
-                                    objProjectExcel.dOpenStore = row["Open Store"] != null && row["Open Store"].ToString() != "" ? Convert.ToDateTime(row["Open Store"]) : new DateTime(2001, 1, 1);//default value
-
-                                    objProjectExcel.tProjectStatus = row["Project Status"] != null ? row["Project Status"].ToString() : "";
-
-
-                                    fields.Add(objProjectExcel);
+                                    string ColumnName = reader.GetValue(i).ToString();
+                                    if (!dtNew.Columns.Contains(ColumnName))
+                                    { dtNew.Columns.Add(ColumnName); }
                                 }
+                                while (reader.Read())
+                                {
 
-                            }
+                                    // reader.GetDouble(0);
+                                    string Name = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
+                                    string ProjectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type"))  != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
+
+                                    SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", Name);
+                                    var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber", new SqlParameter("@tStoreNumber", Name)).FirstOrDefault();
+
+                                    if (ProjectType != "")
+                                    {
+                                        objProjectExcel = new ProjectExcelFields();
+
+                                        if (Name != output)
+                                            objProjectExcel.nStoreExistStatus = 0;
+                                        else
+                                            objProjectExcel.nStoreExistStatus = 1;
+
+                                        objProjectExcel.tProjectType = ProjectType;
+                                        objProjectExcel.tStoreNumber = Name;
+                                        objProjectExcel.tAddress = reader.GetValue(dtNew.Columns.IndexOf("Address")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Address")).ToString() : "";
+                                        objProjectExcel.tCity = reader.GetValue(dtNew.Columns.IndexOf("City")) != null ? reader.GetValue(dtNew.Columns.IndexOf("City")).ToString() : "";
+                                        objProjectExcel.tState = reader.GetValue(dtNew.Columns.IndexOf("State")) != null ? reader.GetValue(dtNew.Columns.IndexOf("State")).ToString() : "";
+                                        objProjectExcel.nDMAID = reader.GetValue(dtNew.Columns.IndexOf("DMA ID")) != null && reader.GetValue(dtNew.Columns.IndexOf("DMA ID")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("DMA ID"))) : 0;
+                                        objProjectExcel.tDMA = reader.GetValue(dtNew.Columns.IndexOf("DMA")) != null ? reader.GetValue(dtNew.Columns.IndexOf("DMA")).ToString() : "";
+                                        objProjectExcel.tRED = reader.GetValue(dtNew.Columns.IndexOf("RED")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RED")).ToString() : "";
+                                        objProjectExcel.tCM = reader.GetValue(dtNew.Columns.IndexOf("CM")) != null ? reader.GetValue(dtNew.Columns.IndexOf("CM")).ToString() : "";
+                                        objProjectExcel.tANE = reader.GetValue(dtNew.Columns.IndexOf("A&E")) != null ? reader.GetValue(dtNew.Columns.IndexOf("A&E")).ToString() : "";
+                                        objProjectExcel.tRVP = reader.GetValue(dtNew.Columns.IndexOf("RVP")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RVP")).ToString() : "";
+                                        objProjectExcel.tPrincipalPartner = reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")).ToString() : "";
+                                        objProjectExcel.dStatus = reader.GetValue(dtNew.Columns.IndexOf("Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Status")).ToString() != "" ? Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Status"))) : new DateTime(2001, 1, 1); //default value
+                                        objProjectExcel.dOpenStore = reader.GetValue(dtNew.Columns.IndexOf("Open Store")) != null && reader.GetValue(dtNew.Columns.IndexOf("Open Store")).ToString() != "" ? Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store"))) : new DateTime(2001, 1, 1);//default value
+
+                                        objProjectExcel.tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
+
+
+                                        fields.Add(objProjectExcel);
+                                    }
+                                }
+                            } while (reader.NextResult());
+
+                            // 2. Use the AsDataSet extension method
+                          //  var result = reader.AsDataSet();
+
+                            // The result of each spreadsheet is in result.Tables
                         }
                     }
+                   
                 }
                 catch (Exception ex)
                 {
@@ -303,7 +323,7 @@ namespace DeploymentTool.Controller
                 }
                 finally
                 {
-                    oledbConn.Close();
+                    //oledbConn.Close();
                 }
             }
             catch (Exception ex)

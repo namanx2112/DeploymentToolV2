@@ -274,6 +274,19 @@ export class SonicService {
     return tabs;
   }
 
+  GetSearchStoresTab(instType: TabInstanceType): HomeTab{
+    return {
+      tab_name: "Select Store",
+      tab_header: "Select Store",
+      tab_type: TabType.SearchStore,
+      tab_unique_name: "",
+      instanceType: instType,
+      childTabs: [],
+      search_fields: [],
+      fields: []
+    };
+  }
+
   GetNewStoresTab(instType: TabInstanceType): HomeTab{
     let fields = this.GetStoreContactFields(false);
     fields.push({

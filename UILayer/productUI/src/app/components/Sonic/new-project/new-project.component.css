@@ -62,8 +62,14 @@
 }
 
 
-.tabForm{
+.tabForm, .searchStoreTab{
     float: left;
     width: 100%;
     min-height: 80%;
+}
+
+.nextButton{
+    float: right;
+    margin-right: 10%;
+    margin-top: 10%;
 }

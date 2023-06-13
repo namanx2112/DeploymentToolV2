@@ -88,6 +88,37 @@ namespace DeploymentTool.Controller
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage CreateAndGetProjectStoreDetails(int nProjectId)
+        {
+            NewProjectStore tmpStore = new NewProjectStore();
+            try
+            {
+
+                tblProjectStore tProjStore = db.tblProjectStores.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
+                tblProject tProj = db.tblProjects.Where(p => p.aProjectID == nProjectId).FirstOrDefault();
+                tblStore tStore = db.tblStores.Where(p => p.aStoreID == tProj.nStoreID).FirstOrDefault();
+
+                Utilities.SetHousekeepingFields(true, HttpContext.Current, tProj);
+                db.tblProjects.Add(tProj); db.SaveChanges();
+                Utilities.SetHousekeepingFields(true, HttpContext.Current, tProjStore);
+                db.tblProjectStores.Add(tProjStore); db.SaveChanges();
+
+                tProjStore.nProjectID = tProj.aProjectID;
+
+                tmpStore.SetValues(tProj, tProjStore, tStore);
+                
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<NewProjectStore>(tmpStore, new JsonMediaTypeFormatter())
+            };
+        }
 
         [Authorize]
         [HttpPost]
@@ -115,7 +146,7 @@ namespace DeploymentTool.Controller
                     Content = new ObjectContent<NewProjectStore>(newStore, new JsonMediaTypeFormatter())
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }

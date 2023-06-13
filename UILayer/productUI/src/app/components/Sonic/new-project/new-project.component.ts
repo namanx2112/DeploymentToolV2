@@ -1,7 +1,10 @@
+import { A } from '@angular/cdk/keycodes';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, OptionType, TabInstanceType, TabType } from 'src/app/interfaces/home-tab';
+import { StoreSearchModel } from 'src/app/interfaces/sonic';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { SonicService } from 'src/app/services/sonic.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -26,9 +29,12 @@ export class NewProjectComponent {
   tValues: Dictionary<Dictionary<string>>;
   SubmitLabel: string;
   curTabIndex: number;
+  curStore: StoreSearchModel;
+  loadingData: boolean;
   constructor(private service: SonicService, private storeSerice: StoreService, private techCompService: AllTechnologyComponentsService) {
     this.curTabIndex = 0;
     this.SubmitLabel = "Next";
+    this.loadingData = false;
     this.tValues = {};
   }
 
@@ -36,12 +42,37 @@ export class NewProjectComponent {
     this.curTab = this.allTabs[this.curTabIndex];
   }
 
+  SearchedResult(searchedStore: any) {
+    this.loadingData = true;
+    this.curStore = searchedStore;
+    let pStoreTab = this.allTabs[1];
+    this.storeSerice.CreateAndGetProjectStoreDetails(this.curStore.nProjectId).subscribe((x: any) => {
+      this.tValues[pStoreTab.tab_name] = x;
+      this.setProjectId(x["nProjectID"]);
+      this.moveNext();
+    });
+  }
+
+  getChangedStoreTab(): HomeTab {
+    let tType = this.service.GetNewStoresTab(TabInstanceType.Single);
+    let visibleColumns = "tStoreNumber,tDMA,nDMAID,tStoreAddressLine1,nCity,nState,tPOC,tPOCEmail,tPOCPhone".split(",");
+    for (var indx in tType.fields) {
+      if (visibleColumns.indexOf(tType.fields[indx].fieldUniqeName) > -1) {
+        tType.fields[indx].hidden = false;
+        tType.fields[indx].readOnly = true;
+      }
+      else {
+        tType.fields[indx].hidden = true;
+      }
+    }
+    return tType;
+  }
+
   getTabs() {
     this.allTabs = [];
-    this.allTabs.push(this.service.GetNewStoresTab(TabInstanceType.Single));
+    this.allTabs.push(this.service.GetSearchStoresTab(TabInstanceType.Single));
+    this.allTabs.push(this.getChangedStoreTab());
     this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = { "nProjectType": this._ProjectType.optionIndex };
-    this.allTabs.push(this.service.GetStoreConfigurationTab(TabInstanceType.Single));
-    this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     this.allTabs.push(this.service.GetStoreStackholderTab(TabInstanceType.Single));
     this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     if (this._NeedTechComponent == "all" || this._NeedTechComponent == "networking") {
@@ -87,15 +118,19 @@ export class NewProjectComponent {
   }
 
   setProjectId(nProjectID: string) {
+    let counter = 0;
     for (var indx in this.allTabs) {
-      if (typeof this.tValues[this.allTabs[indx].tab_name] != 'undefined') {
-        this.tValues[this.allTabs[indx].tab_name]["nProjectID"] = nProjectID;
-        this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.optionIndex;
+      if (counter > 1) {
+        if (typeof this.tValues[this.allTabs[indx].tab_name] != 'undefined') {
+          this.tValues[this.allTabs[indx].tab_name]["nProjectID"] = nProjectID;
+          this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.optionIndex;
+        }
+        else {
+          this.tValues[this.allTabs[indx].tab_name] = { "nProjectID": nProjectID };
+          this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.optionIndex;
+        }
       }
-      else {
-        this.tValues[this.allTabs[indx].tab_name] = { "nProjectID": nProjectID };
-        this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.optionIndex;
-      }
+      counter++;
     }
   }
 
@@ -108,8 +143,7 @@ export class NewProjectComponent {
         alert("Created Successfully");
         cThis.ChangeView.emit("dashboard");
       }
-      cThis.curTabIndex++;
-      cThis.loadCurTab();
+      cThis.moveNext();
     }
     switch (tab.tab_type) {
       case TabType.NewStore:
@@ -262,11 +296,19 @@ export class NewProjectComponent {
   }
 
   backClicked(ev: any, tab: HomeTab) {
-    if (this.curTabIndex > 0) {
+    if (this.curTabIndex > 1) {
       this.tValues[tab.tab_name] = ev.value;
       this.curTabIndex--;
       this.loadCurTab();
     }
+  }
+
+  moveNext() {
+    if (this.curTabIndex == 0) {
+
+    }
+    this.curTabIndex++;
+    this.loadCurTab();
   }
 
 }

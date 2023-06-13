@@ -53,6 +53,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoadingInterceptorService } from './services/loading-interceptor.service';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { NewStoreComponent } from './components/Sonic/new-store/new-store.component';
+import { SearchStoreComponent } from './components/Sonic/search-store/search-store.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     POWorkflowTemplateComponent,
     QuoteRequestTemplateListComponent,
     FileStoreSelectionComponent,
-    LoadingComponent
+    LoadingComponent,
+    NewStoreComponent,
+    SearchStoreComponent
   ],
   imports: [
     BrowserModule,

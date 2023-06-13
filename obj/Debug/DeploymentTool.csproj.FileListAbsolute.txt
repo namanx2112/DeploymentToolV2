@@ -548,3 +548,6 @@ D:\Projects\InspireBrand\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.CopyComplete
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.dll
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.pdb
+D:\Projects\InspireBrand\bin\ExcelDataReader.dll
+D:\Projects\InspireBrand\bin\ExcelDataReader.pdb
+D:\Projects\InspireBrand\bin\ExcelDataReader.xml
