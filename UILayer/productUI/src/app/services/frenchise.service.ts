@@ -17,7 +17,7 @@ export class FranchiseService {
   }
 
   Create(request: any) {
-    return this.http.post<FranchiseModel>(this.configUrl + "Franchise/CreateFranchise", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<FranchiseModel>(this.configUrl + "Franchise/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: any) {

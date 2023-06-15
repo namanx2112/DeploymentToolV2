@@ -57,11 +57,6 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Update(tblVendor tblVendor)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
 
             db.Entry(tblVendor).State = EntityState.Modified;
 
@@ -89,10 +84,6 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblVendor tblVendor)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             db.tblVendor.Add(tblVendor);
             await db.SaveChangesAsync();

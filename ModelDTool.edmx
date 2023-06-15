@@ -144,8 +144,6 @@ warning 6002: The table/view 'dtDB.dbo.tblEnumTableField' does not have a primar
           <Property Name="tTableName" Type="nvarchar" MaxLength="255" />
           <Property Name="tColumnName" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'dtDB.dbo.tblFranchise' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblFranchise">
           <Key>
             <PropertyRef Name="aFranchiseId" />
@@ -602,6 +600,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectAudio" EntityType="Self.tblProjectAudio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectBillTo" EntityType="Self.tblProjectBillTo" Schema="dbo" store:Type="Tables" />
@@ -659,28 +658,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     [tblEnumTableField].[tTableName] AS [tTableName], 
     [tblEnumTableField].[tColumnName] AS [tColumnName]
     FROM [dbo].[tblEnumTableField] AS [tblEnumTableField]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tblFranchise].[aFranchiseId] AS [aFranchiseId], 
-    [tblFranchise].[tFranchiseName] AS [tFranchiseName], 
-    [tblFranchise].[nBrandID] AS [nBrandID], 
-    [tblFranchise].[tFranchiseDescription] AS [tFranchiseDescription], 
-    [tblFranchise].[tFranchiseLocation] AS [tFranchiseLocation], 
-    [tblFranchise].[dFranchiseEstablished] AS [dFranchiseEstablished], 
-    [tblFranchise].[tFranchiseContact] AS [tFranchiseContact], 
-    [tblFranchise].[tFranchiseOwner] AS [tFranchiseOwner], 
-    [tblFranchise].[tFranchiseEmail] AS [tFranchiseEmail], 
-    [tblFranchise].[tFranchisePhone] AS [tFranchisePhone], 
-    [tblFranchise].[tFranchiseAddress] AS [tFranchiseAddress], 
-    [tblFranchise].[nFranchiseEmployeeCount] AS [nFranchiseEmployeeCount], 
-    [tblFranchise].[nFranchiseRevenue] AS [nFranchiseRevenue], 
-    [tblFranchise].[nCreatedBy] AS [nCreatedBy], 
-    [tblFranchise].[nUpdateBy] AS [nUpdateBy], 
-    [tblFranchise].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblFranchise].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblFranchise].[bDeleted] AS [bDeleted]
-    FROM [dbo].[tblFranchise] AS [tblFranchise]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="tblFunctions" EntityType="Self.tblFunctions" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
