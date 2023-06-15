@@ -12,9 +12,11 @@ import { HomeService } from 'src/app/services/home.service';
 })
 export class HomeComponent {
   viewName:string;
+  tTabName: string;
   userName: string;
   constructor(private homeService: HomeService, private brandService: BrandServiceService, private commonService: CommonService, private authService: AuthService) {
     this.viewName = "Dashboard";
+    this.tTabName = "Dashboard";
     this.userName = this.authService.getUserName();
     this.commonService.getAllDropdowns();
   }
@@ -27,9 +29,10 @@ export class HomeComponent {
 
   switchView(vName: string){
     this.viewName = vName;
+    this.tTabName = vName;
   }
 
   brandClicked(brand: BrandModel){
-    this.viewName = "Sonic";
+    this.viewName = "Sonic";    
   }
 }

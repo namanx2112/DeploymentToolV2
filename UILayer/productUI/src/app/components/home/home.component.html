@@ -22,13 +22,13 @@
                         transform="translate(-29.82 -12.9)"></path>
                 </svg></div>
             <div class="toolBar floatLeft">
-                <span class="action" title="Dashboard" (click)="switchView('Dashboard')"><mat-icon>home</mat-icon></span>
-                <span class="action" title="Configurations" (click)="switchView('Configurations')"><mat-icon>insert_chart</mat-icon></span>
-                <span class="action" title="Notifications" (click)="switchView('Notifications')"><mat-icon>notifications_none</mat-icon></span>
-                <span class="action" title="Mails" (click)="switchView('Mails')"><mat-icon>email</mat-icon></span>
-                <span class="action" title="Find" (click)="switchView('Find')"><mat-icon>find_in_page</mat-icon></span>                                                
-                <span class="action" title="List" (click)="switchView('List')"><mat-icon>list</mat-icon></span>                
-                <span class="action" title="Settings" (click)="switchView('Settings')"><mat-icon>settings</mat-icon></span>
+                <span [class]="tTabName == 'Dashboard' ? 'action selected' : 'action'" title="Dashboard" (click)="switchView('Dashboard')"><mat-icon>home</mat-icon><span></span></span>
+                <span [class]="tTabName == 'Configurations' ? 'action selected' : 'action'" title="Configurations" (click)="switchView('Configurations')"><mat-icon>insert_chart</mat-icon><span></span></span>
+                <span [class]="tTabName == 'Notifications' ? 'action selected' : 'action'" title="Notifications" (click)="switchView('Notifications')"><mat-icon>notifications_none</mat-icon><span></span></span>
+                <span [class]="tTabName == 'Mails' ? 'action selected' : 'action'" title="Mails" (click)="switchView('Mails')"><mat-icon>email</mat-icon><span></span></span>
+                <span [class]="tTabName == 'Find' ? 'action selected' : 'action'" title="Find" (click)="switchView('Find')"><mat-icon>find_in_page</mat-icon><span></span></span>                                                
+                <span [class]="tTabName == 'List' ? 'action selected' : 'action'" title="List" (click)="switchView('List')"><mat-icon>list</mat-icon><span></span></span>                
+                <span [class]="tTabName == 'Settings' ? 'action selected' : 'action'" title="Settings" (click)="switchView('Settings')"><mat-icon>settings</mat-icon><span></span></span>
             </div>
         </div>
         <div class="right floatLeft">

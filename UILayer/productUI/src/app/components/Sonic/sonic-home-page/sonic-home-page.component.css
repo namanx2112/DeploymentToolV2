@@ -68,7 +68,7 @@
     height: 80px;
 }
 
-.ConfigList span {
+.ConfigList > span {
     display: block;
     margin: 10px 10%;
     background-color: #fff;

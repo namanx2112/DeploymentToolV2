@@ -13,19 +13,21 @@ export class AdminConfigComponent {
   tabs: HomeTab[];
   curTab: HomeTab;
   needNew: boolean;
+  selectedOption: string;
   constructor(private homeService: HomeService) {
     this.getAllTabs();
+    this.selectedOption = "Dashboard";
     this.tabIndex = -1;
-  this.tabItems = ["Dashboard", "Users", "Brands Profile", "Vendors", "Manage Dropdowns", "Technology Areas", "Franchise", "Quote Request Workflow Config", "PO Workflow Config"];
+    this.tabItems = ["Dashboard", "Users", "Brands Profile", "Vendors", "Manage Dropdowns", "Technology Areas", "Franchise", "Quote Request Workflow Config", "PO Workflow Config"];
     this.needNew = false;
     //Users, Brands, Vendors, Tech Components, Franchises, Stores, Tech Component Tools, Analytics
   }
 
-  getAllTabs(){
+  getAllTabs() {
     this.tabs = this.homeService.GetAllTabs();
   }
 
-  clickOption(index: number) {
+  clickOption(index: number, tString: string) {
     this.needNew = false;
     this.tabIndex = index;
     if (index >= 0)
@@ -35,9 +37,10 @@ export class AdminConfigComponent {
 
       }
     }
+    this.selectedOption = tString;
   }
 
-  moveView(tIndex: any){
+  moveView(tIndex: any) {
     this.tabIndex = tIndex;
   }
 

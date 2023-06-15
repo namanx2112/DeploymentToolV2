@@ -14,7 +14,9 @@ export class SonicHomePageComponent {
   ProjectTypes: OptionType[];
   techCompType: string;
   projectType: OptionType;
+  configMenu: string;
   constructor(private commonService: CommonService) {
+    this.configMenu = "dashboard";
     this.showMode = "dashboard";
     this.techCompType = "all";
     this.GetAllProjectTypes();
@@ -22,7 +24,10 @@ export class SonicHomePageComponent {
   GetAllProjectTypes() {
     this.ProjectTypes = this.commonService.GetDropdown("ProjectType");
   }
-  clickOption(val: any) { }
+  clickOption(val: any) {
+    this.showMode = val;
+    this.configMenu = val;
+   }
 
 
   menuClick(tMode: string, techComp?: string, newOption?: string) {

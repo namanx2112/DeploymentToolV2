@@ -140,3 +140,10 @@ button{
     border-radius: 10px;
     height: 45px;
 }
+
+.tabSelectionOption > span{
+    border-bottom: 4px solid #fff;
+}
+.tabSelectionOption .selected{
+    border-bottom: 4px solid darkgrey!important;
+}
