@@ -43,19 +43,16 @@ export class CommonService {
 
   GetDropdown(columnName: string): OptionType[] {
     let ddItems: OptionType[] = [];
-    if (columnName == "Vendor" || columnName == "Franchise" || columnName == "ProjectType") {
-      for (var item in CommonService.allItems) {
-        if (CommonService.allItems[item].tModuleName == columnName) {
-          ddItems.push({
-            optionDisplayName: CommonService.allItems[item].tDropdownText,
-            optionIndex: CommonService.allItems[item].aDropdownId.toString(),
-            optionOrder: 1
-          });
-        }
+    for (var item in CommonService.allItems) {
+      if (CommonService.allItems[item].tModuleName == columnName) {
+        ddItems.push({
+          optionDisplayName: CommonService.allItems[item].tDropdownText,
+          optionIndex: CommonService.allItems[item].aDropdownId.toString(),
+          optionOrder: 1
+        });
       }
     }
-    else //Temp Code
-    {
+    if (ddItems.length == 0) {
       ddItems = [{
         optionDisplayName: "Dummy",
         optionIndex: "1",

@@ -1,116 +1,125 @@
-﻿using DeploymentTool.Helpers;
-using DeploymentTool.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing.Drawing2D;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
+using DeploymentTool;
+using System.Linq.Dynamic.Core;
+using System.Text;
 
 namespace DeploymentTool.Controller
 {
     public class FranchiseController : ApiController
     {
+        private dtDBEntities db = new dtDBEntities();
+
+        // GET: api/Franchise
         [Authorize]
         [HttpPost]
-        [ActionName("GetFranchises")]
-        public HttpResponseMessage GetFranchises([FromBody] Franchise inputFranchise)
+        public IQueryable<tblFranchise> Get(Dictionary<string, string> searchFields)
         {
-            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            var dal = new FranchiseDAL();
-            var result = dal.GetFranchises(inputFranchise, (int)securityContext.nUserID);
-
-            if (result == null)
-            {
-                return new HttpResponseMessage(HttpStatusCode.NoContent);
-            }
+            if (searchFields == null)
+                return db.tblFranchises;
             else
             {
-                return new HttpResponseMessage(HttpStatusCode.OK)
+                StringBuilder sBuilder = new StringBuilder();
+                foreach (KeyValuePair<string, string> keyVal in searchFields)
                 {
-                    Content = new ObjectContent<List<Franchise>>(result, new JsonMediaTypeFormatter())
-                };
+                    if (sBuilder.Length > 0)
+                        sBuilder.Append(" and ");
+                    sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
+                }
+                return db.tblFranchises.Where("x=>" + sBuilder.ToString());
+            }
+        }
+
+        // GET: api/Franchise/5
+        [ResponseType(typeof(tblFranchise))]
+        public async Task<IHttpActionResult> GettblFranchise(int id)
+        {
+            tblFranchise tblFranchise = await db.tblFranchises.FindAsync(id);
+            if (tblFranchise == null)
+            {
+                return NotFound();
             }
 
+            return Ok(tblFranchise);
         }
 
-        // DELETE api/<controller>/5
-
+        // PUT: api/Franchise/5
         [Authorize]
         [HttpPost]
-        [Route("api/Franchise/delete")]
-        public HttpResponseMessage Delete(Franchise franchise)
+        public async Task<IHttpActionResult> Update(tblFranchise tblFranchise)
         {
-            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            if (!ModelState.IsValid)
+
+            db.Entry(tblFranchise).State = EntityState.Modified;
+
+            try
             {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+                await db.SaveChangesAsync();
             }
-            if (securityContext == null)
-                throw new HttpRequestValidationException("Exception while creating Security Context");
-            int nUserid = (int)securityContext.nUserID;
-            var franchiseDAL = new FranchiseDAL();
-            franchiseDAL.Delete(franchise.aFranchiseId, nUserid);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!tblFranchiseExists(tblFranchise.aFranchiseId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return new HttpResponseMessage(HttpStatusCode.OK);
-
-
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // POST: api/Franchise
         [Authorize]
         [HttpPost]
-        [Route("api/Franchise/update")]
-        // PUT api/<controller>/5
-        public HttpResponseMessage Update([FromBody] Franchise franchise)
+        public async Task<IHttpActionResult> Create(tblFranchise tblFranchise)
         {
-            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            //if (!ModelState.IsValid)
-            //{
-            //    return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            //}
-            if (securityContext == null)
-                throw new HttpRequestValidationException("Exception while creating Security Context");
-            var franchiseDAL = new FranchiseDAL();
 
-            franchise.nUpdateBy = (int)securityContext.nUserID;
-            
-            franchiseDAL.Update(franchise,franchise.nUserID);
+            db.tblFranchises.Add(tblFranchise);
+            await db.SaveChangesAsync();
 
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new ObjectContent<Franchise>(franchise, new JsonMediaTypeFormatter())
-            };
-
+            return Json(tblFranchise);
         }
 
+        // DELETE: api/Franchise/5
         [Authorize]
         [HttpPost]
-        [Route("api/Franchise/CreateFranchise")]
-        // POST api/<controller>
-        public HttpResponseMessage CreateFranchise([FromBody] Franchise franchise)
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            //if (!ModelState.IsValid)
-            //{
-            //    return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            //}
-            if (securityContext == null)
-                throw new HttpRequestValidationException("Exception while creating Security Context"); 
-
-
-            var franchiseDAL = new FranchiseDAL();
-            int franchiseID = franchiseDAL.CreateFranchise(franchise, franchise.nUserID);
-            franchise.aFranchiseId= franchiseID;
-
-            return new HttpResponseMessage(HttpStatusCode.OK)
+            tblFranchise tblFranchise = await db.tblFranchises.FindAsync(id);
+            if (tblFranchise == null)
             {
-                Content = new ObjectContent<Franchise>(franchise, new JsonMediaTypeFormatter())
-            };
+                return NotFound();
+            }
+
+            db.tblFranchises.Remove(tblFranchise);
+            await db.SaveChangesAsync();
+
+            return Ok(tblFranchise);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool tblFranchiseExists(int id)
+        {
+            return db.tblFranchises.Count(e => e.aFranchiseId == id) > 0;
         }
     }
 }

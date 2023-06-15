@@ -6,12 +6,14 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
 using DeploymentTool.Misc;
+using System.Linq.Dynamic.Core;
 
 namespace DeploymentTool.Controller
 {
@@ -24,7 +26,19 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public IQueryable<tblBrand> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblBrand;
+            if (searchFields == null)
+                return db.tblBrand;
+            else
+            {
+                StringBuilder sBuilder = new StringBuilder();
+                foreach (KeyValuePair<string, string> keyVal in searchFields)
+                {
+                    if (sBuilder.Length > 0)
+                        sBuilder.Append(" and ");
+                    sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
+                }
+                return db.tblBrand.Where("x=>" + sBuilder.ToString());
+            }
         }
 
         // GET: api/tblBrand/5
@@ -45,10 +59,6 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Update(tblBrand tblBrand)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             Utilities.SetHousekeepingFields(false, HttpContext.Current, tblBrand);
             db.Entry(tblBrand).State = EntityState.Modified;
 
@@ -76,10 +86,6 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblBrand tblBrand)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             Utilities.SetHousekeepingFields(true, HttpContext.Current, tblBrand);
             db.tblBrand.Add(tblBrand);

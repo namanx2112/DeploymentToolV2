@@ -96,12 +96,17 @@ namespace DeploymentTool.Controller
             try
             {
 
+               // SqlParameter tModuleNameParam = new SqlParameter("@aProjectid", nProjectId);                
+
+
                 tblProjectStore tProjStore = db.tblProjectStores.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
                 tblProject tProj = db.tblProjects.Where(p => p.aProjectID == nProjectId).FirstOrDefault();
                 tblStore tStore = db.tblStores.Where(p => p.aStoreID == tProj.nStoreID).FirstOrDefault();
-
+                var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProject set projectActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tStore.aStoreID));
+                tProj.ProjectActiveStatus = 1;
                 Utilities.SetHousekeepingFields(true, HttpContext.Current, tProj);
                 db.tblProjects.Add(tProj); db.SaveChanges();
+                tProjStore.nProjectID = tProj.aProjectID;
                 Utilities.SetHousekeepingFields(true, HttpContext.Current, tProjStore);
                 db.tblProjectStores.Add(tProjStore); db.SaveChanges();
 

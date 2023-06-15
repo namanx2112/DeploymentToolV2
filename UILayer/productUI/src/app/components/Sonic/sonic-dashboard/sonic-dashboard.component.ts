@@ -13,41 +13,17 @@ import { SonicService } from 'src/app/services/sonic.service';
 export class SonicDashboardComponent {
   projects: SonicProjectHighlights[];
   @Output() SearchedResult = new EventEmitter<string>();
-  myControl = new FormControl('');
-  ddOptions: StoreSearchModel[];
-  filteredOptions: Observable<StoreSearchModel[]>;
   constructor(private service: SonicService) {
     this.getProjectHoghlights();
   }
 
   ngOnInit() {
-    this.getAllStores();
   }
 
-  private _filter(value: string): StoreSearchModel[] {
-    if (typeof value == 'string') {
-      const filterValue = value.toLowerCase();
-
-      return this.ddOptions.filter(option => option.tProjectName.toString().toLowerCase().includes(filterValue) || option.tStoreName.toString().toLowerCase().includes(filterValue) ||
-        option.tStoreNumber.toString().toLowerCase().includes(filterValue));
-    }
-    else
-      return [];
-  }
 
   getProjectHoghlights() {
     this.service.GetProjecthighlights().subscribe((resp: SonicProjectHighlights[]) => {
       this.projects = resp;
-    });
-  }
-
-  getAllStores() {
-    this.service.SearchStore('').subscribe((x: StoreSearchModel[]) => {
-      this.ddOptions = x;
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value || '')),
-      );
     });
   }
 

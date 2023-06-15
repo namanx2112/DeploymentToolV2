@@ -25,7 +25,7 @@ export class FranchiseService {
   }
 
   Get(request: FranchiseModel | null){
-    return this.http.post<FranchiseModel[]>(this.configUrl + "Franchise/GetFranchises", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<FranchiseModel[]>(this.configUrl + "Franchise/Get", request, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(){

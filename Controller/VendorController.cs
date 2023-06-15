@@ -6,10 +6,12 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
+using System.Linq.Dynamic.Core;
 
 namespace DeploymentTool.Controller
 {
@@ -22,7 +24,19 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public IQueryable<tblVendor> Get(Dictionary<string, string> searchFields)
         {
-            return db.tblVendor;
+            if (searchFields == null)
+                return db.tblVendor;
+            else
+            {
+                StringBuilder sBuilder = new StringBuilder();
+                foreach (KeyValuePair<string, string> keyVal in searchFields)
+                {
+                    if (sBuilder.Length > 0)
+                        sBuilder.Append(" and ");
+                    sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
+                }
+                return db.tblVendor.Where("x=>" + sBuilder.ToString());
+            }
         }
 
         // GET: api/tblVendor/5
