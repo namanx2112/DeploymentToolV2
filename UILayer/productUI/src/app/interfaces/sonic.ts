@@ -187,7 +187,8 @@ export interface SonicProjectExcel {
     tPrincipalPartner: string,
     dStatus: Date,
     dOpenStore: Date,
-    tProjectStatus: string
+    tProjectStatus: string,
+    nStoreExistStatus: number
 }
 
 export interface StoreSearchModel {

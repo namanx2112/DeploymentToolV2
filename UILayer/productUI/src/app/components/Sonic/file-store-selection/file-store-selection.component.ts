@@ -17,10 +17,10 @@ export class FileStoreSelectionComponent {
   }
   @Output()
   SelectionChange = new EventEmitter<SonicProjectExcel[]>();
-  displayedColumns: string[] = ['select', 'tProjectType', 'tStoreNumber', 'tAddress',
+  displayedColumns: string[] = ['select', 'nStoreExistStatus', 'tProjectType', 'tStoreNumber', 'tAddress',
     'tCity', 'tState', 'nDMAID', 'tDMA', 'tRED', 'tCM', 'tANE', 'tRVP', 'tPrincipalPartner',
     'dStatus', 'dOpenStore', 'tProjectStatus'];
-  displayedColumnTitles: string[] = ['nRowIndex', 'Project Type', 'Store Number', 'Address',
+  displayedColumnTitles: string[] = ['nRowIndex', 'Store Exist', 'Project Type', 'Store Number', 'Address',
     'City', 'State', 'DMA', 'ID', 'DMA', 'RED', 'CM', 'A&E', 'RVP', 'Principal Partner',
     'Status', 'Open Store', 'Project Status'];
   dataSource = new MatTableDataSource<SonicProjectExcel>(this.excelData);

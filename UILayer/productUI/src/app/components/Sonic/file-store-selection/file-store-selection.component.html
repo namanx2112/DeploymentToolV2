@@ -22,6 +22,10 @@
         <th mat-header-cell *matHeaderCellDef> Project Type </th>
         <td mat-cell *matCellDef="let element"> {{element.tProjectType}} </td>
     </ng-container>
+    <ng-container matColumnDef="nStoreExistStatus">
+        <th mat-header-cell *matHeaderCellDef> Store Exists </th>
+        <td mat-cell *matCellDef="let element"> {{(element.nStoreExistStatus == 1) ? 'Update': 'Add'}} </td>
+    </ng-container>
     <ng-container matColumnDef="tStoreNumber">
         <th mat-header-cell *matHeaderCellDef> Store Number </th>
         <td mat-cell *matCellDef="let element"> {{element.tStoreNumber}} </td>
