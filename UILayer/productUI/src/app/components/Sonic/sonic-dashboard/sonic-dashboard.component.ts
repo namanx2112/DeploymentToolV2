@@ -28,6 +28,6 @@ export class SonicDashboardComponent {
   }
 
   projectSelect(evt: any) {
-    this.SearchedResult.emit(evt.option.value);
+    this.SearchedResult.emit(evt);
   }
 }
