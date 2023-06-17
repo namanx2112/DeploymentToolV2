@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Dictionary, checkboxItems } from 'src/app/interfaces/commons';
 import { HomeTab, TabInstanceType } from 'src/app/interfaces/home-tab';
 import { QuoteRequestTemplate } from 'src/app/interfaces/models';
+import { QuoteRequestWorkflowConfigService } from 'src/app/services/quote-request-workflow-config.service';
 import { SonicService } from 'src/app/services/sonic.service';
 
 @Component({
@@ -12,40 +13,27 @@ import { SonicService } from 'src/app/services/sonic.service';
 })
 
 export class QuoteRequestWorkflowTemplateComponent {
-  _needNew: boolean;
-  get NeedNew(): boolean {
-    return this._needNew;
-  }
-  @Input() set NeedNew(val: boolean) {
-    this._needNew = val;
-  }
-  quoteRequestTemplate: QuoteRequestTemplate;
+  
+  @Input() nTemplateId: number;
+  curTemplate: QuoteRequestTemplate;
   techCompTabs: HomeTab[];
   selectedTabs: HomeTab[];
   curTabFields: checkboxItems[];
   techCompControl = new FormControl('');
-  constructor(private sonicService: SonicService) {
+  constructor(private sonicService: SonicService, private quoteService: QuoteRequestWorkflowConfigService) {
     this.techCompTabs = [this.sonicService.GetStoreConfigurationTab(TabInstanceType.Single),
     this.sonicService.GetStoreAudioTab(TabInstanceType.Single), this.sonicService.GetStoreNetworingTab(TabInstanceType.Single), this.sonicService.GetStorePOSTab(TabInstanceType.Single),
     this.sonicService.GetStoreExteriorMenusTab(TabInstanceType.Single), this.sonicService.GetStoreInteriorMenusTab(TabInstanceType.Single),
     this.sonicService.GetStorePaymentSystemTab(TabInstanceType.Single)];
-    this.getNew();
+    this.getTemplate();
     this.curTabFields = [];
   }
 
-  getNew() {
+  getTemplate() {
     let userId = 1;
-    this.quoteRequestTemplate = {
-      aQuoteTemplateID: -1,
-      tName: '',
-      nBrandID: 0,
-      arTechAreas: [],
-      nCreatedBy: userId,
-      nUpdateBy: userId,
-      dtCreatedOn: new Date(),
-      dtUpdatedOn: new Date(),
-      bDeleted: false
-    }
+    this.quoteService.GetTemplate(this.nTemplateId).subscribe((x: QuoteRequestTemplate)=>{
+      this.curTemplate = x;
+    });    
   }
 
   onTechCompChange(ev: any) {

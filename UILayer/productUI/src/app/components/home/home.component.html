@@ -45,8 +45,8 @@
             <div class="mainBody floatLeft">
                 <app-home-dashboard (brandClicked)="brandClicked($event);" *ngIf="viewName=='Dashboard'"></app-home-dashboard>
                 <app-admin-config *ngIf="viewName=='Configurations'"></app-admin-config>
-                <app-not-implemented *ngIf="viewName!='Dashboard' && viewName!='Configurations' && viewName!='Sonic'"></app-not-implemented>
-                <app-sonic-home-page *ngIf="viewName=='Sonic'"></app-sonic-home-page>
+                <app-not-implemented *ngIf="viewName!='Dashboard' && viewName!='Configurations' && viewName.toLowerCase().indexOf('sonic') == -1"></app-not-implemented>
+                <app-sonic-home-page *ngIf="viewName.toLowerCase().indexOf('sonic') > -1"></app-sonic-home-page>
             </div>
         </div>
     </div>

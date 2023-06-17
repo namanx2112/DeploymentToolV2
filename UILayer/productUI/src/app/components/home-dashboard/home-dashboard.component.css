@@ -36,8 +36,7 @@
 }
 .chipsBody {
     width: 100%;    
-    width: 100%;
-    min-height: 10px;
+    min-height: 150px;
 }
 
 .brands{

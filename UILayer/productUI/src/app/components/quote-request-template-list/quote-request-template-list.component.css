@@ -19,7 +19,7 @@
     cursor: pointer;
 }
 .SearchPart{
-    min-height: calc(30% - 40px);
+    min-height: calc(20% - 45px);
     width: 100%;
     float: left;
 }
@@ -29,13 +29,14 @@
     float: left;
 }
 .tablePart{
-    min-height: calc(70% - 40px);
+    min-height: calc(80% - 40px);
     width: 100%;
     float: left;
 }
 .searchButton{
     float: left;
-    margin: 27px 15px;
+    margin: 0px 15px;
+    height: 45px;
 }
 .searchControls{
     float: left;
@@ -44,14 +45,16 @@
 
 .requestTile{
     width: 200px;
-    height: 200px;
+    height: 150px;
     float: left;
     margin: 0px 20px 20px 0px;
     border-radius: 10px;
 }
 
 .requestTile > span{
-    margin: 40% auto;
+    margin: 30% auto;
+    font-weight: bold;
+    font-size: 14px;
     display: block;
     text-align: center;
 }

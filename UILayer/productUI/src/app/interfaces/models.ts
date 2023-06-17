@@ -97,10 +97,10 @@ export interface UserModel {
 }
 
 export interface QuoteRequestTemplate {
-    aQuoteTemplateID: number,
-    tName: string,
-    nBrandID: number,
-    arTechAreas: QuoteRequestTechAreas[],
+    aQuoteRequestTemplateId: number,
+    tTemplateName: string,
+    nBrandId: number,
+    quoteRequestTechComps: QuoteRequestTechAreas[],
     nCreatedBy: number,
     nUpdateBy: number,
     dtCreatedOn: Date
@@ -109,8 +109,10 @@ export interface QuoteRequestTemplate {
 }
 
 export interface QuoteRequestTechAreas {
-    part: HomeTab,
+    nQuoteRequestTemplateId: number,
+    tTechCompName: string,
     fields: QuoteRequestFields[],
+    part: HomeTab,
     nCreatedBy: number,
     nUpdateBy: number,
     dtCreatedOn: Date
@@ -119,6 +121,9 @@ export interface QuoteRequestTechAreas {
 }
 
 export interface QuoteRequestFields {
+    nQuoteRequestTemplateId: number,
+    tTechCompField: string,
+    tTechCompFieldName: string,
     techAreaFieldId: string
 }
 

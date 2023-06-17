@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Fields } from 'src/app/interfaces/home-tab';
+import { Dictionary } from 'src/app/interfaces/commons';
+import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { QuoteRequestTemplate } from 'src/app/interfaces/models';
+import { QuoteRequestWorkflowConfigService } from 'src/app/services/quote-request-workflow-config.service';
 
 @Component({
   selector: 'app-quote-request-template-list',
@@ -12,35 +14,34 @@ export class QuoteRequestTemplateListComponent {
   @Output()
   moveView = new EventEmitter<number>();
   allRequests: QuoteRequestTemplate[];
-  constructor() {
+  searchField: Fields[];
+  allQuotes: {[key: number]: string};
+  nBrandId: number;
+  nTemplateId: number;
+  constructor(private service: QuoteRequestWorkflowConfigService) {
+    this.nTemplateId = -1;
+    this.nBrandId = 1;
     this.searchText = "";
+    this.searchField = [{
+      field_name: "Search",
+      fieldUniqeName: "tSearchText",
+      icon: "search",
+      field_type: FieldType.text,
+      readOnly: false,
+      field_placeholder: "Type a workflow name",
+      invalid: false,
+      validator: [],
+      mandatory: false,
+      defaultVal: "",
+      hidden: false
+    }];
     this.getQuoteRequests();
   }
 
-  getQuoteRequests(){
-    let userId = 1;
-    this.allRequests = [{
-      aQuoteTemplateID: 1,
-      tName: 'Audio',
-      nBrandID: 0,
-      arTechAreas: [],
-      nCreatedBy: userId,
-      nUpdateBy: userId,
-      dtCreatedOn: new Date(),
-      dtUpdatedOn: new Date(),
-      bDeleted: false
-    },
-    {
-      aQuoteTemplateID: 2,
-      tName: 'Networking',
-      nBrandID: 0,
-      arTechAreas: [],
-      nCreatedBy: userId,
-      nUpdateBy: userId,
-      dtCreatedOn: new Date(),
-      dtUpdatedOn: new Date(),
-      bDeleted: false
-    }];
+  getQuoteRequests() {
+    this.service.GetAllTemplate(this.nBrandId).subscribe((x=>{
+      this.allQuotes = x;
+    }));    
   }
 
   onKeydown(event: any) {
@@ -48,8 +49,9 @@ export class QuoteRequestTemplateListComponent {
     }
   }
 
-  OpenNew() {
-    this.moveView.emit(6);
+  OpenView(templateId: any) {
+    this.nTemplateId = templateId;
+    //this.moveView.emit(6);
   }
 
 }

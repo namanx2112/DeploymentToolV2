@@ -191,31 +191,31 @@ export class SonicService {
     return new Observable<SonicProjectHighlights[]>((obj) => {
       let items = [{
         title: "New project opening in next month",
-        count: 111
+        count: 0
       },
       {
         title: "New project opening in next month",
-        count: 231
+        count: 0
       },
       {
         title: "New project opening in next month",
-        count: 443
+        count: 0
       },
       {
         title: "New project opening in next month",
-        count: 332
+        count: 0
       },
       {
         title: "New project opening in next month",
-        count: 432
+        count: 0
       },
       {
         title: "New project opening in next month",
-        count: 111
+        count: 0
       },
       {
         title: "New project opening in next month",
-        count: 111
+        count: 0
       }];
       obj.next(items);
     });

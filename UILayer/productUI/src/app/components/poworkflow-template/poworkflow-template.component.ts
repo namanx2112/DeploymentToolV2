@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-poworkflow-template',
@@ -6,6 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./poworkflow-template.component.css']
 })
 export class POWorkflowTemplateComponent {
+  @Output()
+  moveView = new EventEmitter<number>();
   _needNew: boolean;
   get NeedNew(): boolean {
     return this._needNew;

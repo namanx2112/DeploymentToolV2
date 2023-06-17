@@ -33,6 +33,6 @@ export class HomeComponent {
   }
 
   brandClicked(brand: BrandModel){
-    this.viewName = "Sonic";    
+    this.viewName = brand.tBrandName;    
   }
 }
