@@ -3,7 +3,7 @@
     <div class="SearchPart whiteGrayTheme">
         <app-controls [themeClass]="'whiteGray'"  [numberOfControlsInARow]="1" [needButton]="false" 
         [fields]="searchField" [controlValues]="{}" [SubmitLabel]="'Search'" class="searchControls"></app-controls>
-      <button mat-raised-button class="searchButton" (click)="OpenView(-1)">Create New Workflow</button>
+      <button mat-raised-button class="searchButton" (click)="OpenView(0)">Create New Workflow</button>
     </div>
     <div class="tablePart">
         <div *ngFor="let item of allQuotes| keyvalue" class="lightGray requestTile" (click)="OpenView(item.key)">
@@ -11,4 +11,4 @@
         </div>
     </div>
 </div>
-<app-quote-request-workflow-template *ngIf="nTemplateId > -1" [nTemplateId]="nTemplateId"></app-quote-request-workflow-template>
+<app-quote-request-workflow-template *ngIf="nTemplateId > -1" [nTemplateId]="nTemplateId" (moveBack)="moveBack($event)"></app-quote-request-workflow-template>

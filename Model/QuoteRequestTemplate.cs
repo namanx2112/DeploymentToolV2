@@ -23,7 +23,7 @@ namespace DeploymentTool.Model
     {
         public int nQuoteRequestTemplateId { get; set; }
         public string tTechCompName { get; set; }
-
+        public string tTableName { get; set; }
         public List<QuoteRequestTechCompField> fields { get; set; }
         public int nCreatedBy { get; set; }
         public int nUpdateBy { get; set; }
@@ -31,7 +31,6 @@ namespace DeploymentTool.Model
         public DateTime dtCreatedOn { get; set; }
         public DateTime dtUpdatedOn { get; set; }
         public bool bDeleted { get; set; }
-
     }
 
     public class QuoteRequestTechCompField

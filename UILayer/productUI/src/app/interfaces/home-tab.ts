@@ -3,6 +3,7 @@ import { ValidatorFn } from "@angular/forms"
 export interface HomeTab {
     tab_name: string,
     tab_header: string,
+    tTableName: string,
     tab_unique_name: string,
     tab_type: TabType,
     search_fields: Fields[],

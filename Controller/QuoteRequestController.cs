@@ -16,12 +16,16 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public Dictionary<int, string> Get(int nBrandId)
+        [ActionName("GetAllTemplate")]
+        public HttpResponseMessage GetAllTemplate(int nBrandId)
         {
             Dictionary<int, string> lstQuoteRequest = new Dictionary<int, string>();
             lstQuoteRequest.Add(1, "Audio");
             lstQuoteRequest.Add(2, "Networking");
-            return lstQuoteRequest;
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<Dictionary<int, string>>(lstQuoteRequest, new JsonMediaTypeFormatter())
+            };
         }
 
         [Authorize]
@@ -38,13 +42,14 @@ namespace DeploymentTool.Controller
                 {
                     new QuoteRequestTechComp()
                     {
+                        tTechCompName = "POS",
                         fields = new List<QuoteRequestTechCompField>()
                         {
                             new QuoteRequestTechCompField()
                             {
                                 nQuoteRequestTemplateId= nTemplateId,
-                                tTechCompField = "",
-                                tTechCompFieldName = ""
+                                tTechCompField = "nStatus",
+                                tTechCompFieldName = "nStatus"
                             }
                         }
                     }

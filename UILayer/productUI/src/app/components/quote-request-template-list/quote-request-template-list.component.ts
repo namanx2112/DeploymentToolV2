@@ -15,7 +15,7 @@ export class QuoteRequestTemplateListComponent {
   moveView = new EventEmitter<number>();
   allRequests: QuoteRequestTemplate[];
   searchField: Fields[];
-  allQuotes: {[key: number]: string};
+  allQuotes: { [key: number]: string };
   nBrandId: number;
   nTemplateId: number;
   constructor(private service: QuoteRequestWorkflowConfigService) {
@@ -39,9 +39,9 @@ export class QuoteRequestTemplateListComponent {
   }
 
   getQuoteRequests() {
-    this.service.GetAllTemplate(this.nBrandId).subscribe((x=>{
+    this.service.GetAllTemplate(this.nBrandId).subscribe((x => {
       this.allQuotes = x;
-    }));    
+    }));
   }
 
   onKeydown(event: any) {
@@ -52,6 +52,13 @@ export class QuoteRequestTemplateListComponent {
   OpenView(templateId: any) {
     this.nTemplateId = templateId;
     //this.moveView.emit(6);
+  }
+
+  moveBack(inst: number) {
+    if (inst > 0) {
+      this.getQuoteRequests();
+    }
+    this.nTemplateId = -1;
   }
 
 }

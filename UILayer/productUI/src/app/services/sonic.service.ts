@@ -277,6 +277,7 @@ export class SonicService {
   GetSearchStoresTab(instType: TabInstanceType): HomeTab{
     return {
       tab_name: "Select Store",
+      tTableName: "",
       tab_header: "Select Store",
       tab_type: TabType.SearchStore,
       tab_unique_name: "",
@@ -445,6 +446,7 @@ export class SonicService {
     return {
       tab_name: "New Store",
       tab_header: "New Store",
+      tTableName: "",
       tab_type: TabType.NewStore,
       tab_unique_name: "",
       instanceType: instType,
@@ -641,6 +643,7 @@ export class SonicService {
     return {
       tab_name: "Store Contact",
       tab_header: "Store Contact",
+      tTableName: "tblProjectStores",
       tab_type: TabType.StoreContact,
       tab_unique_name: "",
       instanceType: instType,
@@ -665,6 +668,7 @@ export class SonicService {
     return {
       tab_name: "Store Configuration",
       tab_header: "Store Configuration",
+      tTableName: "tblProjectConfigs",
       tab_type: TabType.StoreConfiguration,
       tab_unique_name: "",
       instanceType: instType,
@@ -783,6 +787,7 @@ export class SonicService {
     return {
       tab_name: "Stake Holders",
       tab_header: "Stake Holders",
+      tTableName: "tblProjectStakeHolders",
       tab_type: TabType.StoreStackHolder,
       tab_unique_name: "",
       instanceType: instType,
@@ -935,6 +940,7 @@ export class SonicService {
     return {
       tab_name: "Networking",
       tab_header: "Networking",
+      tTableName: "tblProjectNetworkings",
       tab_type: TabType.StoreNetworking,
       tab_unique_name: "",
       instanceType: instType,
@@ -1119,6 +1125,7 @@ export class SonicService {
     return {
       tab_name: "POS",
       tab_header: "POS",
+      tTableName: "tblProjectPOS",
       tab_type: TabType.StorePOS,
       tab_unique_name: "",
       instanceType: instType,
@@ -1253,6 +1260,7 @@ export class SonicService {
     return {
       tab_name: "Audio",
       tab_header: "Audio",
+      tTableName: "tblProjectAudios",
       tab_type: TabType.StoreAudio,
       tab_unique_name: "",
       instanceType: instType,
@@ -1400,6 +1408,7 @@ export class SonicService {
     return {
       tab_name: "Exterior Menus",
       tab_header: "Exterior Menus",
+      tTableName: "tblProjectExteriorMenus",
       tab_type: TabType.StoreExteriorMenus,
       tab_unique_name: "",
       instanceType: instType,
@@ -1579,6 +1588,7 @@ export class SonicService {
     return {
       tab_name: "Payment System",
       tab_header: "Payment System",
+      tTableName: "tblProjectPaymentSystems",
       tab_type: TabType.StorePaymetSystem,
       tab_unique_name: "",
       instanceType: instType,
@@ -1790,6 +1800,7 @@ export class SonicService {
     return {
       tab_name: "Interior Menus",
       tab_header: "Interior Menus",
+      tTableName: "tblProjectInteriorMenus",
       tab_type: TabType.StoreInteriorMenus,
       tab_unique_name: "",
       instanceType: instType,
@@ -1898,6 +1909,7 @@ export class SonicService {
     return {
       tab_name: "Sonic Radio",
       tab_header: "Sonic Radio",
+      tTableName: "tblProjectSonicRadios",
       tab_type: TabType.StoreSonicRadio,
       tab_unique_name: "",
       instanceType: instType,
@@ -2055,6 +2067,7 @@ export class SonicService {
     return {
       tab_name: "Installation",
       tab_header: "Installation",
+      tTableName: "tblProjectInstallations",
       tab_type: TabType.StoreInstallation,
       tab_unique_name: "",
       instanceType: instType,
@@ -2212,6 +2225,7 @@ export class SonicService {
     return {
       tab_name: "Projects",
       tab_header: "Projects",
+      tTableName: "tblProject",
       tab_type: TabType.StoreProjects,
       tab_unique_name: "",
       instanceType: instType,
@@ -2331,6 +2345,7 @@ export class SonicService {
     return {
       tab_name: "Notes",
       tab_header: "Notes",
+      tTableName: "tblNotes",
       tab_type: TabType.StoreNotes,
       tab_unique_name: "",
       instanceType: instType,

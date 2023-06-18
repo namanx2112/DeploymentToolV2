@@ -1,11 +1,11 @@
 <div class="tabsBody">
     <div class="header"><mat-icon class="tIcon" (click)="goBack()">arrow_back_ios</mat-icon>Create New Quote Request
         Workflow</div>
-    <div class="controlPart grayWhiteTheme grayWhite">
+    <div class="controlPart grayWhiteTheme grayWhite" *ngIf="curTemplate != undefined">
         <!-- <app-poworkflow-template *ngIf="tabIndex == 7" [NeedNew]="needNew"></app-poworkflow-template> -->
         <mat-label class="fleidLabel" [attr.for]="">Name of the Workflow</mat-label>
         <mat-form-field class="curField" appearance="outline">
-            <input matInput [type]="'text'" [ngModel]="curTemplate.tTemplateName" (keydown)="onKeydown($event)">
+            <input matInput [type]="'text'" [(ngModel)]="curTemplate.tTemplateName" (keydown)="onKeydown($event)">
             <!-- <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon> -->
             <!-- <mat-error>{{getErrorMessage(curControl)}}</mat-error> -->
         </mat-form-field>
@@ -32,8 +32,9 @@
             <div class="checkBoxFields">
                 <div *ngFor="let item of selectedTabs">
                     <h5 class="checkboxTab">{{item.tab_name}}</h5>
-                    <mat-checkbox *ngFor="let fieldItem of item.fields" color="primary"
-                        (ngModelChange)="checkboxFieldChange(fieldItem)" class="fieldCheckbox">
+                    <mat-checkbox *ngFor="let fieldItem of getAllowedFields(item.fields)" color="primary"
+                        [checked]="isChecked(fieldItem.fieldUniqeName, item)"
+                        (change)="checkboxFieldChange($event, item, fieldItem)" class="fieldCheckbox">
                         {{fieldItem.field_name}}
                     </mat-checkbox>
                 </div>
@@ -41,6 +42,7 @@
                 <div class="addButton lightGray"><span>+</span>Add New Item</div>
             </div>
         </div>
-        <button mat-raised-button class="buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">Save</button>
+        <button mat-raised-button
+            class="buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base" [disabled]="canSave()" (click)="submit()">Save</button>
     </div>
 </div>

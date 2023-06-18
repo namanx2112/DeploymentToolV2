@@ -111,20 +111,20 @@ export interface QuoteRequestTemplate {
 export interface QuoteRequestTechAreas {
     nQuoteRequestTemplateId: number,
     tTechCompName: string,
+    tTableName: string,
     fields: QuoteRequestFields[],
     part: HomeTab,
-    nCreatedBy: number,
-    nUpdateBy: number,
-    dtCreatedOn: Date
-    dtUpdatedOn: Date,
-    bDeleted: boolean
+    nCreatedBy?: number,
+    nUpdateBy?: number,
+    dtCreatedOn?: Date
+    dtUpdatedOn?: Date,
+    bDeleted?: boolean
 }
 
 export interface QuoteRequestFields {
     nQuoteRequestTemplateId: number,
     tTechCompField: string,
-    tTechCompFieldName: string,
-    techAreaFieldId: string
+    tTechCompFieldName: string
 }
 
 export interface POConfigTemplate {

@@ -13,18 +13,18 @@ export class QuoteRequestWorkflowConfigService {
   }
 
   GetAllTemplate(nBrandId: number) {
-    return this.http.get<any>(this.configUrl + "Sonic/GetAllTemplate?=nBrandId"+ nBrandId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<any>(this.configUrl + "QuoteRequest/GetAllTemplate?nBrandId="+ nBrandId, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTemplate(nTemplateId: number) {
-    return this.http.get<QuoteRequestTemplate>(this.configUrl + "Sonic/GetTemplate?nTemplateId=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<QuoteRequestTemplate>(this.configUrl + "QuoteRequest/GetTemplate?nTemplateId=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
   }
 
   CreateUpdateTemplate(request: QuoteRequestTemplate) {
-    return this.http.post<QuoteRequestTemplate>(this.configUrl + "Sonic/CreateUpdateTemplate", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<QuoteRequestTemplate>(this.configUrl + "QuoteRequest/CreateUpdateTemplate", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Delete(nTemplateId: number) {
-    return this.http.get<any>(this.configUrl + "Sonic/Delete?nTemplateId=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<any>(this.configUrl + "QuoteRequest/Delete?nTemplateId=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
   }
 }
