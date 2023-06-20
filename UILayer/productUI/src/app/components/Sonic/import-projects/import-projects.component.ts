@@ -19,7 +19,7 @@ export class ImportProjectsComponent {
     this.selectedItems = [];
   }
   goBack() {
-    this.ChangeView.emit("storeview");
+    this.ChangeView.emit("dashboard");
   }
   handleFileInput(files: any) {
     this.fileToUpload = files[0];

@@ -374,7 +374,7 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
-    <Property Name="nCity" Type="Int32" />
+    <Property Name="tCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tblStore">
     <Key>

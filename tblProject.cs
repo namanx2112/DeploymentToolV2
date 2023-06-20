@@ -9,11 +9,10 @@
 
 namespace DeploymentTool
 {
-    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProject : ModelParent
+    public partial class tblProject : Misc.ModelParent
     {
         public int aProjectID { get; set; }
         public string tProjectName { get; set; }

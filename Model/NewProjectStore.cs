@@ -32,7 +32,7 @@ namespace DeploymentTool.Model
         public string tStoreName { get; set; }
         public string tStoreAddressLine1 { get; set; }
         public string tStoreAddressLine2 { get; set; }
-        public int nCity { get; set; }
+        public string tCity { get; set; }
         public string tStoreZip { get; set; }
         public string tStoreManager { get; set; }
         public string tPOC { get; set; }
@@ -70,8 +70,8 @@ namespace DeploymentTool.Model
             this.tStoreName = tProjStore.tStoreName;
             this.tStoreAddressLine1 = tProjStore.tStoreAddressLine1;
             this.tStoreAddressLine2 = tProjStore.tStoreAddressLine2;
-            if (tProjStore.nCity != null)
-                this.nCity = (int)tProjStore.nCity;
+            if (tProjStore.tCity != null)
+                this.tCity = tProjStore.tCity;
             if (tProjStore.nStoreState != null)
                 this.nState = (int)tProjStore.nStoreState;
             this.tStoreZip = tProjStore.tStoreZip;
@@ -127,7 +127,7 @@ namespace DeploymentTool.Model
                 tStoreName = this.tStoreName,
                 tStoreAddressLine1 = this.tStoreAddressLine1,
                 tStoreAddressLine2 = this.tStoreAddressLine2,
-                nCity = this.nCity,
+                tCity = this.tCity,
                 nStoreState = this.nState,
                 tStoreZip = this.tStoreZip,
                 tStoreManager = this.tStoreManager,

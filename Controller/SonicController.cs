@@ -25,10 +25,9 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
-                string storeName = "NA";
                 foreach (var request in requestArr)
                 {
-                    db.sproc_CreateStoreFromExcel(storeName, request.tProjectType, request.tStoreNumber, request.tAddress, request.tCity, request.tState, request.nDMAID, request.tDMA,
+                    db.sproc_CreateStoreFromExcel(request.tStoreNumber, request.tProjectType, request.tStoreNumber, request.tAddress, request.tCity, request.tState, request.nDMAID, request.tDMA,
                         request.tRED, request.tCM, request.tANE, request.tRVP, request.tPrincipalPartner, request.dStatus, request.dOpenStore, request.tProjectStatus, securityContext.nUserID, 6);
 
                     //List<SqlParameter> tPramList = new List<SqlParameter>();

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Web;
 using System.Web.Http;
+using System.Web.Services.Description;
 using DeploymentTool.Jwt.Filters;
+using Newtonsoft.Json.Converters;
 
 namespace DeploymentTool.AppStart
 {
@@ -24,6 +28,8 @@ namespace DeploymentTool.AppStart
                 );
             //Web API Exception Handler
             config.Filters.Add(new globalExceptionHandler());
+            config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(
+             new IsoDateTimeConverter());
         }
     }
 }

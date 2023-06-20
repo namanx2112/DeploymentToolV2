@@ -55,6 +55,7 @@ import { LoadingInterceptorService } from './services/loading-interceptor.servic
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { NewStoreComponent } from './components/Sonic/new-store/new-store.component';
 import { SearchStoreComponent } from './components/Sonic/search-store/search-store.component';
+import {MatDatepickerModule} from '@angular/material/datepicker'
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { SearchStoreComponent } from './components/Sonic/search-store/search-sto
     MatDialogModule,
     MatCheckboxModule,
     MatChipsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDatepickerModule
   ],
   providers: [
     {

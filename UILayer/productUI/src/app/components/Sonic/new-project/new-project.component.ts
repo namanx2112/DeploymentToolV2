@@ -55,7 +55,7 @@ export class NewProjectComponent {
 
   getChangedStoreTab(): HomeTab {
     let tType = this.service.GetNewStoresTab(TabInstanceType.Single);
-    let visibleColumns = "tStoreNumber,tDMA,nDMAID,tStoreAddressLine1,nCity,nState,tPOC,tPOCEmail,tPOCPhone".split(",");
+    let visibleColumns = "tStoreNumber,tDMA,nDMAID,tStoreAddressLine1,tCity,nState,tPOC,tPOCEmail,tPOCPhone".split(",");
     for (var indx in tType.fields) {
       if (visibleColumns.indexOf(tType.fields[indx].fieldUniqeName) > -1) {
         tType.fields[indx].hidden = false;

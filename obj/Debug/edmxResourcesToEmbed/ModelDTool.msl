@@ -311,7 +311,7 @@
     <EntitySetMapping Name="tblProjectStores">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectStore">
         <MappingFragment StoreEntitySet="tblProjectStore">
-          <ScalarProperty Name="nCity" ColumnName="nCity" />
+          <ScalarProperty Name="tCity" ColumnName="tCity" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />

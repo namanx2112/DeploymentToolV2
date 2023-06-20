@@ -429,7 +429,6 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="tStoreName" Type="nvarchar" MaxLength="255" />
           <Property Name="tStoreAddressLine1" Type="nvarchar" MaxLength="255" />
           <Property Name="tStoreAddressLine2" Type="nvarchar" MaxLength="255" />
-          <Property Name="nCity" Type="int" />
           <Property Name="nStoreState" Type="int" />
           <Property Name="tStoreZip" Type="nvarchar" MaxLength="255" />
           <Property Name="tStoreManager" Type="nvarchar" MaxLength="255" />
@@ -444,6 +443,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+          <Property Name="tCity" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1110,7 +1110,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
           <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="bDeleted" Type="Boolean" />
-          <Property Name="nCity" Type="Int32" />
+          <Property Name="tCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblStore">
           <Key>
@@ -1662,7 +1662,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblProjectStores">
             <EntityTypeMapping TypeName="dtDBModel.tblProjectStore">
               <MappingFragment StoreEntitySet="tblProjectStore">
-                <ScalarProperty Name="nCity" ColumnName="nCity" />
+                <ScalarProperty Name="tCity" ColumnName="tCity" />
                 <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
                 <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
                 <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />

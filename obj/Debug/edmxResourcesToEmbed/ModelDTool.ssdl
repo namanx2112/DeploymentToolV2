@@ -424,7 +424,6 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="tStoreName" Type="nvarchar" MaxLength="255" />
     <Property Name="tStoreAddressLine1" Type="nvarchar" MaxLength="255" />
     <Property Name="tStoreAddressLine2" Type="nvarchar" MaxLength="255" />
-    <Property Name="nCity" Type="int" />
     <Property Name="nStoreState" Type="int" />
     <Property Name="tStoreZip" Type="nvarchar" MaxLength="255" />
     <Property Name="tStoreManager" Type="nvarchar" MaxLength="255" />
@@ -439,6 +438,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+    <Property Name="tCity" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->

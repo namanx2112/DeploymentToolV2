@@ -220,7 +220,7 @@ export class StoreViewComponent {
       SubmitLabel: "Save",
       onSubmit: function (data: any) {
         cthis.SaveTechComp(cTab, data, function (val: any) {
-          cthis.tValues[cTab.tab_name] = val;
+          cthis.tValues[cTab.tab_name] = data.value;
           dialogRef.close();
         });
       },

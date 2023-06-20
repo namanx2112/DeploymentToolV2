@@ -9,11 +9,10 @@
 
 namespace DeploymentTool
 {
-    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectStore : ModelParent
+    public partial class tblProjectStore : Misc.ModelParent
     {
         public int aProjectStoreID { get; set; }
         public Nullable<int> nProjectID { get; set; }
@@ -34,6 +33,6 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
-        public Nullable<int> nCity { get; set; }
+        public string tCity { get; set; }
     }
 }
