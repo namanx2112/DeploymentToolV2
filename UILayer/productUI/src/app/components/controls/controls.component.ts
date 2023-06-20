@@ -187,7 +187,7 @@ export class ControlsComponent implements AfterViewChecked {
   getFieldControlValues() {
     var cVal: Dictionary<any> = {};
     Object.keys(this.formGroup.controls).forEach(key => {
-      if (typeof this.formGroup.get(key)?.value == 'object')
+      if (typeof this.formGroup.get(key)?.value == 'object' && this.formGroup.get(key)?.value != null)
         cVal[key] = new Date(this.formGroup.get(key)?.value).toLocaleDateString();
       else
         cVal[key] = this.formGroup.get(key)?.value;
