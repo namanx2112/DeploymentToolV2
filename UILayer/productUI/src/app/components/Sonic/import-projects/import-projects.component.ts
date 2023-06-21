@@ -31,12 +31,16 @@ export class ImportProjectsComponent {
   }
   uploadFileToActivity() {
     if (this.fileToUpload != null) {
-      this.service.UploadStore({ fileToUpload: this.fileToUpload }).subscribe((data: SonicProjectExcel[]) => {
-        this.excelData = data;
-        // do something, if upload success
-      }, error => {
-        console.log(error);
-      });
+      if (this.fileToUpload.name.toLowerCase().endsWith("xlsx")) {
+        this.service.UploadStore({ fileToUpload: this.fileToUpload }).subscribe((data: SonicProjectExcel[]) => {
+          this.excelData = data;
+          // do something, if upload success
+        }, error => {
+          console.log(error);
+        });
+      }
+      else
+      alert("Please upload valid xlsx file only!");
     }
   }
 

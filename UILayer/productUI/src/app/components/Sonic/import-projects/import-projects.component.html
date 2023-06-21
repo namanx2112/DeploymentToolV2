@@ -8,7 +8,7 @@
         <input #file type="file" id="file" (change)="handleOneFile($event)">
         <span class="msg">Drag and drop or <a (click)="file.click()">Choose file</a> to upload</span>
         <span *ngIf="fileToUpload != null" class="fileName">{{fileToUpload.name}}</span>
-        <span class="fileType">CSV format only</span>
+        <span class="fileType">Excel format only</span>
     </div>
     <app-file-store-selection *ngIf="excelData.length > 0"  (SelectionChange)="SelectionChange($event)" [excelData]="excelData"></app-file-store-selection>
 </div>

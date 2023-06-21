@@ -161,7 +161,7 @@ export class ControlsComponent implements AfterViewChecked {
   }
 
   getErrorMessage(cControl: Fields): string {
-    let eMsg = "Error";
+    let eMsg = "Please enter correct value for " + cControl.field_name;
     let control = this.formGroup.get(cControl.fieldUniqeName);
     if (typeof control != 'undefined' && control != null && control.errors != null) {
       if (control.errors['required'])
@@ -227,10 +227,11 @@ export class ControlsComponent implements AfterViewChecked {
 export function dateRegexValidator(
   control: AbstractControl
 ): { [key: string]: boolean } | null {
+  if (control.value.toString() == 'Invalid Date')
+    return null;
   const regexPattern = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/gi;
   let val = control.value;
-  const isValid = regexPattern.test(val);
-
+  const isValid = regexPattern.test(val); 
   if (isValid) {
     return { dateRegex: true };
   }

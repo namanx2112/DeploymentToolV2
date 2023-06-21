@@ -147,3 +147,7 @@ button{
 .tabSelectionOption .selected{
     border-bottom: 4px solid darkgrey!important;
 }
+
+.mat-drawer-content{
+    background-color: #fff;
+}

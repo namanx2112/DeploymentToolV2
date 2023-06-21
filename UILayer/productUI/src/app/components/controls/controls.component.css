@@ -46,6 +46,19 @@
     width: 150px;
 }
 
+.dollarSymbol{
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.dollarSymbolReadOnly{
+    font-size: 14px;
+    float: left;
+    margin-top: -1px;
+    margin-left: 0px;
+    font-weight: bold;
+}
+
 .buttonClass {
     float: right;
     width: 150px;
