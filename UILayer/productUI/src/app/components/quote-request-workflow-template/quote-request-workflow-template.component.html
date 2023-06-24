@@ -15,7 +15,7 @@
             <mat-select [formControl]="techCompControl" multiple [ngModel]="selectedTabs"
                 (valueChange)="onTechCompChange($event)">
                 <mat-select-trigger>
-                    {{techCompControl.value?.[0] || ''}}
+                    {{(selectedTabs.length > 0) ? selectedTabs[0].tab_name : ''}}
                     <span *ngIf="(techCompControl.value?.length || 0) > 1" class="example-additional-selection">
                         (+{{(techCompControl.value?.length || 0) - 1}} {{techCompControl.value?.length === 2 ? 'other' :
                         'others'}})
@@ -43,6 +43,7 @@
             </div>
         </div>
         <button mat-raised-button
-            class="buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base" [disabled]="canSave()" (click)="submit()">Save</button>
+            class="buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base"
+            [disabled]="canSave()" (click)="submit()">Save</button>
     </div>
 </div>

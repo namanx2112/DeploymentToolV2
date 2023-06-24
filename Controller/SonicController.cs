@@ -1,5 +1,6 @@
 ﻿using DeploymentTool.Misc;
 using DeploymentTool.Model;
+using DeploymentTool.Model.Templates;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -95,7 +96,7 @@ namespace DeploymentTool.Controller
             try
             {
 
-               // SqlParameter tModuleNameParam = new SqlParameter("@aProjectid", nProjectId);                
+                // SqlParameter tModuleNameParam = new SqlParameter("@aProjectid", nProjectId);                
 
 
                 tblProjectStore tProjStore = db.tblProjectStores.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
@@ -112,7 +113,7 @@ namespace DeploymentTool.Controller
                 tProjStore.nProjectID = tProj.aProjectID;
 
                 tmpStore.SetValues(tProj, tProjStore, tStore);
-                
+
             }
             catch (Exception ex)
             {
@@ -182,5 +183,57 @@ namespace DeploymentTool.Controller
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
+        #region Template
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetProjectTemplates(int nBrandId)
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            try
+            {
+                List<ProjectTemplates> items = new List<ProjectTemplates>() {
+                    new ProjectTemplates()
+                    {
+                        nTemplateId = 1,
+                        nTemplateType = ProjectTemplateType.Notification,
+                    tTemplateName = "Notification"
+                    },
+                    new ProjectTemplates()
+                    {
+                        nTemplateId = 2,
+                        nTemplateType = ProjectTemplateType.QuoteRequest,
+                        tTemplateName = "Audio"
+                    },
+                    new ProjectTemplates()
+                    {
+                        nTemplateId = 3,
+                        nTemplateType = ProjectTemplateType.QuoteRequest,
+                        tTemplateName = "Networking"
+                    },
+                    new ProjectTemplates()
+                    {
+                        nTemplateId = 4,
+                        nTemplateType = ProjectTemplateType.PurchaseOrder,
+                        tTemplateName = "Exterior Menu-Fabcon"                        
+                    },
+                    new ProjectTemplates()
+                    {
+                        nTemplateId = 6,
+                        nTemplateType = ProjectTemplateType.PurchaseOrder,
+                        tTemplateName = "Interior Menus-TDS"
+                    }
+                };
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<List<ProjectTemplates>>(items, new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+        #endregion
     }
 }

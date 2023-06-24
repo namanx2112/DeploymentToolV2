@@ -17,6 +17,7 @@ import { MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { TableComponent } from './components/table/table.component';
+import { QuillModule } from 'ngx-quill';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NewEditObjectComponent } from './components/new-edit-object/new-edit-object.component';
@@ -55,7 +56,9 @@ import { LoadingInterceptorService } from './services/loading-interceptor.servic
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { NewStoreComponent } from './components/Sonic/new-store/new-store.component';
 import { SearchStoreComponent } from './components/Sonic/search-store/search-store.component';
-import {MatDatepickerModule} from '@angular/material/datepicker'
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ProjectTemplateListComponent } from './components/Sonic/project-template-list/project-template-list.component';
+import { RenderQuoteRequestComponent } from './components/Sonic/render-quote-request/render-quote-request.component'
 
 @NgModule({
   declarations: [
@@ -93,7 +96,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker'
     FileStoreSelectionComponent,
     LoadingComponent,
     NewStoreComponent,
-    SearchStoreComponent
+    SearchStoreComponent,
+    ProjectTemplateListComponent,
+    RenderQuoteRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +122,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker'
     MatCheckboxModule,
     MatChipsModule,
     MatProgressSpinnerModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    QuillModule.forRoot()
   ],
   providers: [
     {

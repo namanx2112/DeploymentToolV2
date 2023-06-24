@@ -23,6 +23,7 @@ export class NotesListComponent {
     let dialogRef: any;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
+    dialogConfig.height = '90%';
 
     dialogConfig.data = {
       numberOfControlsInARow: 1,

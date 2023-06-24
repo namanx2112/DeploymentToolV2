@@ -101,11 +101,11 @@ export interface QuoteRequestTemplate {
     tTemplateName: string,
     nBrandId: number,
     quoteRequestTechComps: QuoteRequestTechAreas[],
-    nCreatedBy: number,
-    nUpdateBy: number,
-    dtCreatedOn: Date
-    dtUpdatedOn: Date,
-    bDeleted: boolean
+    nCreatedBy?: number,
+    nUpdateBy?: number,
+    dtCreatedOn?: Date
+    dtUpdatedOn?: Date,
+    bDeleted?: boolean
 }
 
 export interface QuoteRequestTechAreas {
@@ -175,4 +175,14 @@ export interface DropwDown {
     tModuleName: string,
     tDropdownText: string,
     bDeleted: boolean
+}
+
+export interface ProjectTemplates{
+    nTemplateId: number,
+    tTemplateName: string,
+    nTemplateType: ProjectTemplateType
+}
+
+export enum ProjectTemplateType{
+    Notification, QuoteRequest, PurchaseOrder
 }

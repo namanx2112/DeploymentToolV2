@@ -26,7 +26,7 @@ export class StoreViewComponent {
   tValues: Dictionary<Dictionary<string>>;
   selectedTab: number;
   viewName: string;
-  @Output() ChangeView = new EventEmitter<any>();
+  @Output() ChangeFromStoreView = new EventEmitter<any>();
   constructor(private service: SonicService, private dialog: MatDialog, private techCompService: AllTechnologyComponentsService) {
     this.viewName = "tabview";
   }
@@ -50,7 +50,11 @@ export class StoreViewComponent {
   }
 
   ShowProject(view: string) {
-    this.ChangeView.emit(view);
+    let param = {
+      view: view,
+      curStore: this._curStore
+    };
+    this.ChangeFromStoreView.emit(param);
   }
 
   canShowTab(tTab: HomeTab) {
@@ -376,7 +380,11 @@ export class StoreViewComponent {
     }
   }
 
-  goBack() {
-    this.ChangeView.emit("dashboard");
+  moveView(view: string){
+    let param = {
+      view: view,
+      curStore: this._curStore
+    };
+    this.ChangeFromStoreView.emit(param);
   }
 }

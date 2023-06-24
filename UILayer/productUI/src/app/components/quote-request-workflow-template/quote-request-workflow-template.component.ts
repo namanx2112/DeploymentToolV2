@@ -20,6 +20,7 @@ export class QuoteRequestWorkflowTemplateComponent {
   }
   @Output()
   moveBack = new EventEmitter<number>();
+  nBrandId: number = 1;
   curTemplate: QuoteRequestTemplate;
   techCompTabs: HomeTab[];
   selectedTabs: HomeTab[];
@@ -36,10 +37,21 @@ export class QuoteRequestWorkflowTemplateComponent {
 
   getTemplate() {
     let userId = 1;
-    this.quoteService.GetTemplate(this._nTemplateId).subscribe((x: QuoteRequestTemplate) => {
-      this.curTemplate = x;
+    if (this._nTemplateId > 0) {
+      this.quoteService.GetTemplate(this._nTemplateId).subscribe((x: QuoteRequestTemplate) => {
+        this.curTemplate = x;
+        this.updateSelectedTabs();
+      });
+    }
+    else {
+      this.curTemplate = {
+        aQuoteRequestTemplateId: 0,
+        tTemplateName: "",
+        nBrandId: this.nBrandId,
+        quoteRequestTechComps: []
+      }
       this.updateSelectedTabs();
-    });
+    }
   }
 
   updateSelectedTabs() {

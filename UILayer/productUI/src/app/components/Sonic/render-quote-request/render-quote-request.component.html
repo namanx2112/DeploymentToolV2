@@ -1,0 +1,32 @@
+<h2 mat-dialog-title class="header">Quote Request</h2>
+<div class="quoteRequest">
+    <div class="quoteBody">
+        <div class="mailField">
+            <label>To</label>
+            <input class="lightGray" />
+        </div>
+        <div class="mailField">
+            <label>CC</label>
+            <input class="lightGray" />
+        </div>
+        <div class="mailField">
+            <label>Subject</label>
+            <input class="lightGray" />
+        </div>
+        <div class="mailField">
+            <label>Message</label>
+            <div class="editor lightGray">
+                <form [formGroup]="form">
+                    <quill-editor #editor formControlName="editor" placeholder="Enter Text" format="html">
+                    </quill-editor>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <div class="actions">
+        <button mat-button class="lightGray" (click)="onCancelUserDialog()">Cancel</button>
+        <button mat-button class="lightGray" [mat-dialog-close]="data" cdkFocusInitial (click)="SendRequest()">Send</button>
+    </div>
+</div>

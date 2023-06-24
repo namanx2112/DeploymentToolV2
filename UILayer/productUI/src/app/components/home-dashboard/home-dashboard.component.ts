@@ -51,7 +51,7 @@ export class HomeDashboardComponent {
       else if (this.brands[i].tBrandName?.toLowerCase().indexOf("baskin") > -1) {
         this.brands[i].tIconURL = "https://1000logos.net/wp-content/uploads/2016/10/Baskin-Robbins-Logo-2020.png";
       }
-      else if (this.brands[i].tBrandName?.toLowerCase().indexOf("buffe") > -1) {
+      else if (this.brands[i].tBrandName?.toLowerCase().indexOf("buffa") > -1) {
         this.brands[i].tIconURL = "https://logos-world.net/wp-content/uploads/2022/01/Buffalo-Wild-Wings-Logo.png";
       }
       else if (this.brands[i].tBrandName?.toLowerCase().indexOf("arby") > -1) {

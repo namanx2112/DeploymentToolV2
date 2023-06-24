@@ -27,7 +27,7 @@ export class SonicHomePageComponent {
   clickOption(val: any) {
     this.showMode = val;
     this.configMenu = val;
-   }
+  }
 
 
   menuClick(tMode: string, techComp?: string, newOption?: string) {
@@ -45,5 +45,15 @@ export class SonicHomePageComponent {
 
   ChangeView(view: any) {
     this.showMode = view;
+  }
+
+  ChangeFromStoreView(param: any){    
+    this.curStore = param.curStore;
+    this.showMode = param.view;
+  }
+
+  BackToStoreView(param: any) {
+    this.showMode = "storeview";
+    this.curStore = param;
   }
 }

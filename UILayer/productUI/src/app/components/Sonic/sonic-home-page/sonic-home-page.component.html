@@ -37,13 +37,15 @@
         <app-sonic-dashboard *ngIf="showMode == 'dashboard'" (SearchedResult)="SearchedResult($event)"></app-sonic-dashboard>
         <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)" [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-store>
         <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)" [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-project>
-        <app-store-view *ngIf="showMode == 'storeview'" (ChangeView)="ChangeView($event)" [curStore]="curStore"></app-store-view>
+        <app-store-view *ngIf="showMode == 'storeview'" (ChangeFromStoreView)="ChangeFromStoreView($event)" [curStore]="curStore"></app-store-view>
         <app-project-table *ngIf="showMode == 'projecttaleview'" (ChangeView)="ChangeView($event)"></app-project-table>
         <app-import-projects *ngIf="showMode == 'importproject'" (ChangeView)="ChangeView($event)"></app-import-projects>
         <app-pos-installation *ngIf="showMode == 'posinstallation'" (ChangeView)="ChangeView($event)"></app-pos-installation>   
         <app-payment-terminal-installation *ngIf="showMode == 'paymentterminalinstllation'" (ChangeView)="ChangeView($event)"></app-payment-terminal-installation>     
         <app-menu-installation *ngIf="showMode == 'menuinstallation'" (ChangeView)="ChangeView($event)"></app-menu-installation>
         <app-audio-installation *ngIf="showMode == 'audioinstallation'" (ChangeView)="ChangeView($event)"></app-audio-installation>
-        <app-not-implemented *ngIf="showMode != 'newproject' && showMode != 'menuinstallation' && showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecttaleview'"></app-not-implemented>
+        <app-project-template-list *ngIf="showMode == 'projecttemplatelist'" (BackToStoreView)="BackToStoreView($event)" [curStore]="curStore"></app-project-template-list>
+
+        <app-not-implemented *ngIf="showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'menuinstallation' && showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecttaleview'"></app-not-implemented>
     </div>
 </mat-drawer-container>
