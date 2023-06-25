@@ -230,3 +230,10 @@ export interface NewProjectStore{
     tGCPhone: string,
     tGCEMail: string
 }
+
+export interface MergedQuoteRequest{
+    tContent: string,
+    tTo: string,
+    tCC: string,
+    tSubject: string
+}

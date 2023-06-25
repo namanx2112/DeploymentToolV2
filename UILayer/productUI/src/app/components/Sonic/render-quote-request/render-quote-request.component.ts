@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { QuillEditorComponent } from 'ngx-quill';
 import Quill from 'quill';
+import { MergedQuoteRequest, StoreSearchModel } from 'src/app/interfaces/sonic';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-render-quote-request',
@@ -18,12 +20,14 @@ export class RenderQuoteRequestComponent {
     toolbar: {
       container: [
         ['bold', 'italic', 'underline', 'strike'],
-        ['code-block'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'color': [] }, { 'background': [] }],
         [{ header: 1 }, { header: 2 }],
         [{ list: 'ordered' }, { list: 'bullet' }],
         ['clean'],
-        ['link'],
-        ['source'],
+        [{ 'align': [] }],
+        ['link']
       ],
       handlers: {
         source: () => {
@@ -32,24 +36,66 @@ export class RenderQuoteRequestComponent {
       },
     },
   };
-  constructor(public dialogRef: MatDialogRef<RenderQuoteRequestComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder) {
+  curStore: StoreSearchModel;
+  onSubmit: any;
+  tRequest: MergedQuoteRequest;
+  constructor(public dialogRef: MatDialogRef<RenderQuoteRequestComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private service: StoreService) {
+    this.tRequest = {
+      tContent: "",
+      tTo: "",
+      tCC: "",
+      tSubject: ""
+    };
+    this.curStore = data.curStore;
+    this.onSubmit = data.onSubmit;
+    this.getMergedContent();
+  }
 
+  getMergedContent() {
+    this.service.GetMergedQuoteRequest(this.curStore.nProjectId).subscribe((x: MergedQuoteRequest) => {
+      this.tRequest = x;
+      this.content = x.tContent;
+      this.updateEditorContent();
+    })
+  }
+
+  updateEditorContent() {
+    this.form = this.fb.group({
+      editor: this.content,
+    });
   }
 
   onCancelUserDialog(): void {
     this.dialogRef.close();
   }
 
-  SendRequest(){
-
+  SendRequest() {
+    //this.tRequest.tContent = this.form.controls['editor'].value;
+    this.service.SendQuoteRequest(this.tRequest).subscribe(x => {
+      this.onSubmit();
+    })
   }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      editor: this.content,
-    });
+    this.updateEditorContent();
     let icons = Quill.import('ui/icons');
     icons['source'] = '[source]';
+  }
+
+  isValid(email: string) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  cannotSend() {
+    let cannot = false;
+    if (this.tRequest.tContent == '' || this.tRequest.tTo == '' || this.tRequest.tSubject == '')
+      cannot = true;
+    if (!this.isValid(this.tRequest.tTo))
+      cannot = true;
+    if (this.tRequest.tCC != null && this.tRequest.tCC != '' && !this.isValid(this.tRequest.tCC))
+      cannot = true;
+    return cannot;
   }
 
   formatChange() {

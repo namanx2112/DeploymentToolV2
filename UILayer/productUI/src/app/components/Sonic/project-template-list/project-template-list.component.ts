@@ -46,7 +46,6 @@ export class ProjectTemplateListComponent {
     let dialogRef: any;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
-    dialogConfig.height = "80%";
     dialogConfig.data = {
       curStore: this._curStore,
       onSubmit: function (data: any) {

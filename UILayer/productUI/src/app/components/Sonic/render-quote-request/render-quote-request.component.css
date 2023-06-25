@@ -1,20 +1,27 @@
 .header{
     width: 90%;
     margin: auto;
+    padding: 0px;
 }
 .quoteRequest{
-    height: 100%;
+    height: calc(100% - 112px);
     width: 90%;
     margin: auto;
 }
 .quoteBody{
     width: 100%;
-    min-height: 100%;
+    margin-top: 20px;
     overflow: auto;
 }
 .actions{
     width: calc(100% - 106px);
+    margin: auto;
+}
+.aButton{
     float: right;
+    margin-left: 20px;
+    border: 0px none;
+    border-radius: 10px;
 }
 .mailField{
     float: left;
@@ -36,6 +43,14 @@
 }
 .editor{
     width: calc(100% - 106px);
-    min-height: 200px;
+    height: 300px;
     margin-left: 100px;
+}
+
+.quillEditor{
+    width: 100%;
+}
+
+input{
+    text-indent: 10px;
 }

@@ -16,4 +16,12 @@ namespace DeploymentTool.Model.Templates
     {
         Notification, QuoteRequest, PurchaseOrder
     }
+
+    public class MergedQuoteRequest
+    {
+        public string tContent;
+        public string tTo;
+        public string tCC;
+        public string tSubject;
+    }
 }

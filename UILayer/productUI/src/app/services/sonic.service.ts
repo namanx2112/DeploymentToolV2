@@ -642,7 +642,7 @@ export class SonicService {
     return {
       tab_name: "Store Contact",
       tab_header: "Store Contact",
-      tTableName: "tblProjectStores",
+      tTableName: "tblProjectStore",
       tab_type: TabType.StoreContact,
       tab_unique_name: "",
       instanceType: instType,
@@ -667,7 +667,7 @@ export class SonicService {
     return {
       tab_name: "Store Configuration",
       tab_header: "Store Configuration",
-      tTableName: "tblProjectConfigs",
+      tTableName: "tblProjectConfig",
       tab_type: TabType.StoreConfiguration,
       tab_unique_name: "",
       instanceType: instType,
@@ -939,7 +939,7 @@ export class SonicService {
     return {
       tab_name: "Networking",
       tab_header: "Networking",
-      tTableName: "tblProjectNetworkings",
+      tTableName: "tblProjectNetworking",
       tab_type: TabType.StoreNetworking,
       tab_unique_name: "",
       instanceType: instType,
@@ -1259,7 +1259,7 @@ export class SonicService {
     return {
       tab_name: "Audio",
       tab_header: "Audio",
-      tTableName: "tblProjectAudios",
+      tTableName: "tblProjectAudio",
       tab_type: TabType.StoreAudio,
       tab_unique_name: "",
       instanceType: instType,
@@ -1587,7 +1587,7 @@ export class SonicService {
     return {
       tab_name: "Payment System",
       tab_header: "Payment System",
-      tTableName: "tblProjectPaymentSystems",
+      tTableName: "tblProjectPaymentSystem",
       tab_type: TabType.StorePaymetSystem,
       tab_unique_name: "",
       instanceType: instType,
@@ -1908,7 +1908,7 @@ export class SonicService {
     return {
       tab_name: "Sonic Radio",
       tab_header: "Sonic Radio",
-      tTableName: "tblProjectSonicRadios",
+      tTableName: "tblProjectSonicRadio",
       tab_type: TabType.StoreSonicRadio,
       tab_unique_name: "",
       instanceType: instType,
@@ -2066,7 +2066,7 @@ export class SonicService {
     return {
       tab_name: "Installation",
       tab_header: "Installation",
-      tTableName: "tblProjectInstallations",
+      tTableName: "tblProjectInstallation",
       tab_type: TabType.StoreInstallation,
       tab_unique_name: "",
       instanceType: instType,
