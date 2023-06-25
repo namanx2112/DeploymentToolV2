@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { QuillEditorComponent } from 'ngx-quill';
 import Quill from 'quill';
 import { MergedQuoteRequest, StoreSearchModel } from 'src/app/interfaces/sonic';
+import { QuoteRequestWorkflowConfigService } from 'src/app/services/quote-request-workflow-config.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -39,7 +40,8 @@ export class RenderQuoteRequestComponent {
   curStore: StoreSearchModel;
   onSubmit: any;
   tRequest: MergedQuoteRequest;
-  constructor(public dialogRef: MatDialogRef<RenderQuoteRequestComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private service: StoreService) {
+  constructor(public dialogRef: MatDialogRef<RenderQuoteRequestComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private service: StoreService,
+  private quoteService: QuoteRequestWorkflowConfigService) {
     this.tRequest = {
       tContent: "",
       tTo: "",
@@ -52,7 +54,7 @@ export class RenderQuoteRequestComponent {
   }
 
   getMergedContent() {
-    this.service.GetMergedQuoteRequest(this.curStore.nProjectId).subscribe((x: MergedQuoteRequest) => {
+    this.quoteService.GetMergedQuoteRequest(this.curStore.nProjectId).subscribe((x: MergedQuoteRequest) => {
       this.tRequest = x;
       this.content = x.tContent;
       this.updateEditorContent();
@@ -71,7 +73,7 @@ export class RenderQuoteRequestComponent {
 
   SendRequest() {
     //this.tRequest.tContent = this.form.controls['editor'].value;
-    this.service.SendQuoteRequest(this.tRequest).subscribe(x => {
+    this.quoteService.SendQuoteRequest(this.tRequest).subscribe(x => {
       this.onSubmit();
     })
   }

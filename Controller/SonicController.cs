@@ -234,46 +234,6 @@ namespace DeploymentTool.Controller
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
-
-        [Authorize]
-        [HttpGet]
-        public HttpResponseMessage GetMergedQuoteRequest(int nProjectId)
-        {
-            try
-            {
-                var item = new MergedQuoteRequest()
-                {
-                    tContent = "<div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div><div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div><div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div>",
-                    tSubject = "Store #" + nProjectId + "HME Quote Request",
-                    tTo = "abcd@gmail.com"
-                };
-                return new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new ObjectContent<MergedQuoteRequest>(item, new JsonMediaTypeFormatter())
-                };
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
-            }
-        }
-
-        [Authorize]
-        [HttpPost]
-        public HttpResponseMessage SendQuoteRequest(MergedQuoteRequest request)
-        {
-            try
-            {
-                return new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new ObjectContent<string>("Done", new JsonMediaTypeFormatter())
-                };
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
-            }
-        }
         #endregion
     }
 }

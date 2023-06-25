@@ -22,6 +22,9 @@ namespace DeploymentTool.Model
     public class QuoteRequestTechComp
     {
         public int nQuoteRequestTemplateId { get; set; }
+
+        public int aQuoteRequestTechCompId { get; set; }
+        
         public string tTechCompName { get; set; }
         public string tTableName { get; set; }
         public List<QuoteRequestTechCompField> fields { get; set; }
@@ -36,7 +39,30 @@ namespace DeploymentTool.Model
     public class QuoteRequestTechCompField
     {
         public int nQuoteRequestTemplateId { get; set; }
+
+        public int nQuoteRequestTechCompId { get; set; }
         public string tTechCompField { get; set; }
         public string tTechCompFieldName { get; set; }
     }
+
+    public class QuoteRequestTemplateTemp
+    {
+        public int aQuoteRequestTemplateId { get; set; }
+        public string tTemplateName { get; set; }
+        public int nBrandId { get; set; }
+        public int nCreatedBy { get; set; }
+        public int nUpdateBy { get; set; }
+        
+    }
+    public class QuoteRequestTechCompTemp
+    {
+        public int nQuoteRequestTemplateId { get; set; }
+        public int aQuoteRequestTechCompId { get; set; }
+        public string tTechCompName { get; set; }
+        public string tTableName { get; set; }       
+        public int nCreatedBy { get; set; }
+        public int nUpdateBy { get; set; }
+
+    }
+
 }

@@ -29,12 +29,4 @@ export class StoreService {
   GetProjectTemplates(nBrandId: number){
     return this.http.get<ProjectTemplates[]>(this.configUrl + "Sonic/GetProjectTemplates?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });
   }
-
-  GetMergedQuoteRequest(nProjectId: number){
-    return this.http.get<MergedQuoteRequest>(this.configUrl + "Sonic/GetMergedQuoteRequest?nProjectId=" + nProjectId, { headers: this.authService.getHttpHeaders() });
-  }
-
-  SendQuoteRequest(request: MergedQuoteRequest){
-    return this.http.post<any>(this.configUrl + "Sonic/SendQuoteRequest", request, { headers: this.authService.getHttpHeaders() });
-  }
 }
