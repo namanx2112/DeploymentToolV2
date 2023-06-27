@@ -60,6 +60,10 @@
     </FunctionImport>
     <EntitySet Name="tblDocuments" EntityType="dtDBModel.tblDocument" />
     <EntitySet Name="tblApplicationTraces" EntityType="dtDBModel.tblApplicationTrace" />
+    <EntitySet Name="tblQuoteRequestMains" EntityType="dtDBModel.tblQuoteRequestMain" />
+    <EntitySet Name="tblQuoteRequestTechComps" EntityType="dtDBModel.tblQuoteRequestTechComp" />
+    <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="dtDBModel.tblQuoteRequestTechCompField" />
+    <EntitySet Name="tblTraces" EntityType="dtDBModel.tblTrace" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -178,6 +182,7 @@
     <Property Name="nLoopType" Type="Int32" />
     <Property Name="dLoopDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectBillTo">
     <Key>
@@ -191,6 +196,7 @@
     <Property Name="tBillToState" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tBillToZipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tBillToEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectConfig">
     <Key>
@@ -204,6 +210,7 @@
     <Property Name="cProjectCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nGroundBreak" Type="Int32" />
     <Property Name="nKitchenInstall" Type="Int32" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectExteriorMenu">
     <Key>
@@ -222,6 +229,7 @@
     <Property Name="cFabConCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="cIDTechCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="cTotalCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectInstallation">
     <Key>
@@ -238,6 +246,7 @@
     <Property Name="nTestTransactions" Type="Int32" />
     <Property Name="nProjectStatus" Type="Int32" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenu">
     <Key>
@@ -250,6 +259,7 @@
     <Property Name="nStatus" Type="Int32" />
     <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectNetworking">
     <Key>
@@ -267,6 +277,7 @@
     <Property Name="nTempStatus" Type="Int32" />
     <Property Name="dTempDate" Type="DateTime" Precision="0" />
     <Property Name="nTempType" Type="Int32" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectNote">
     <Key>
@@ -304,6 +315,7 @@
     <Property Name="nShelf" Type="Int32" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nType" Type="Int32" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectPOS">
     <Key>
@@ -318,6 +330,7 @@
     <Property Name="nStatus" Type="Int32" />
     <Property Name="nPaperworkStatus" Type="Int32" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">
     <Key>
@@ -334,6 +347,7 @@
     <Property Name="nStatus" Type="Int32" />
     <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectStakeHolder">
     <Key>
@@ -609,5 +623,66 @@
     <Property Name="dTraceTime" Type="DateTime" Precision="3" />
     <Property Name="tModule" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="tTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblQuoteRequestMain">
+    <Key>
+      <PropertyRef Name="aQuoteRequestTemplateId" />
+    </Key>
+    <Property Name="aQuoteRequestTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tTemplateName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nBrandId" Type="Int32" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblQuoteRequestTechComp">
+    <Key>
+      <PropertyRef Name="aQuoteRequestTechCompId" />
+    </Key>
+    <Property Name="aQuoteRequestTechCompId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nQuoteRequestTemplateId" Type="Int32" />
+    <Property Name="tTechCompName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="tTableName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblQuoteRequestTechCompField">
+    <Key>
+      <PropertyRef Name="aQuoteRequestTechCompFieldId" />
+    </Key>
+    <Property Name="aQuoteRequestTechCompFieldId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nQuoteRequestTemplateId" Type="Int32" />
+    <Property Name="tTechCompField" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tTechCompFieldName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nQuoteRequestTechCompId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblTrace">
+    <Key>
+      <PropertyRef Name="aTraceID" />
+    </Key>
+    <Property Name="aTraceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StoreNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DMAID" Type="Int32" />
+    <Property Name="DMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RED" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ANE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RVP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PrincipalPartner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ProjectStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="BrandId" Type="Int32" />
   </EntityType>
 </Schema>

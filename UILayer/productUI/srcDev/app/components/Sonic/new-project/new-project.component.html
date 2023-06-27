@@ -1,0 +1,29 @@
+<div class="projectHeader">
+    <mat-icon class="backIcon">arrow_back_ios</mat-icon>
+    <h4 class="projHeader" *ngIf="_ProjectType != undefined">Project - {{_ProjectType.optionDisplayName}} Store</h4>
+</div>
+<div class="tabs">
+    <div class="tabHeader" *ngFor="let tmpTab of allTabs;let index = index">
+        <div>{{tmpTab.tab_name}} <mat-icon class="activeTabIcon"
+                *ngIf="tmpTab.tab_type == curTab.tab_type">play_arrow</mat-icon></div>
+    </div>
+</div>
+<div class="tabBody">
+    <div *ngFor="let tTab of allTabs;let index = index">
+        <h3 *ngIf="tTab.tab_type == curTab.tab_type" class="tabName">{{tTab.tab_header}}</h3>
+        <div *ngIf="index == 0 && curTabIndex == 0" class="searchStoreTab">
+            <app-search-store *ngIf="loadingData == false" (SearchedResult)="SearchedResult($event)"></app-search-store>
+            <span *ngIf="loadingData == true">Loading Store Details Please wait!</span>
+        </div>
+        <app-controls class="tabForm" *ngIf="index > 1 && tTab.tab_type == curTab.tab_type"  [numberOfControlsInARow]="1" [fields]="tTab.fields" [needButton]="true"
+            [controlValues]="tValues[tTab.tab_name]" [SubmitLabel]="SubmitLabel" (onSubmit)="onSubmit($event, tTab)" 
+            [CloseLabel]="'Back'" (onClose)="backClicked($event, tTab)"
+            [themeClass]="'grayWhite'"></app-controls>
+
+        <app-controls class="tabForm" *ngIf="index == 1 && tTab.tab_type == curTab.tab_type"
+            [numberOfControlsInARow]="1" [fields]="tTab.fields" [needButton]="false" [readOnlyForm]="true"
+            [controlValues]="tValues[tTab.tab_name]" [themeClass]="'grayWhite'"></app-controls>        
+    </div>
+    <button *ngIf="curTabIndex == 1" type="button" mat-raised-button [disabled]="curStore == undefined" (click)="moveNext()"
+            class="nextButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">Next</button>
+</div>

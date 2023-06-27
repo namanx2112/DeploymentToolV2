@@ -1,0 +1,32 @@
+.tBody{
+    width: calc(100% - 80px);
+    padding: 20px;
+    border-radius: 10px;
+    min-height: calc(100% - 100px);
+    float: left;    
+    border-radius: 10px;
+}
+.tables{
+    width: 100%;
+    height: calc(40% - 20px);
+    margin: 10px 0px;
+    border-radius: 10px;
+}
+.details{
+    width: calc(100% - 40px);
+    height: calc(60% -  60px);
+    padding: 20px;
+    overflow: auto;
+    border-radius: 10px;
+}
+.tButton{
+    width: calc(100% - 80px);
+    float: left;
+    margin-top: 10px;
+    padding: 0px 20px;
+}
+
+.searchButton{
+    float: right;
+    margin-left: 15px;
+}

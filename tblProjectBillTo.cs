@@ -22,5 +22,6 @@ namespace DeploymentTool
         public string tBillToState { get; set; }
         public string tBillToZipCode { get; set; }
         public string tBillToEmail { get; set; }
+        public Nullable<int> ProjectActiveStatus { get; set; }
     }
 }

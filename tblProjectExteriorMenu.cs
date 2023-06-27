@@ -27,5 +27,6 @@ namespace DeploymentTool
         public Nullable<decimal> cFabConCost { get; set; }
         public Nullable<decimal> cIDTechCost { get; set; }
         public Nullable<decimal> cTotalCost { get; set; }
+        public Nullable<int> ProjectActiveStatus { get; set; }
     }
 }

@@ -22,5 +22,6 @@ namespace DeploymentTool
         public Nullable<decimal> cProjectCost { get; set; }
         public Nullable<int> nGroundBreak { get; set; }
         public Nullable<int> nKitchenInstall { get; set; }
+        public Nullable<int> ProjectActiveStatus { get; set; }
     }
 }

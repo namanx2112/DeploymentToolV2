@@ -23,5 +23,6 @@ namespace DeploymentTool
         public Nullable<int> nStatus { get; set; }
         public Nullable<int> nPaperworkStatus { get; set; }
         public Nullable<decimal> cCost { get; set; }
+        public Nullable<int> ProjectActiveStatus { get; set; }
     }
 }

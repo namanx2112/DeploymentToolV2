@@ -24,5 +24,6 @@ namespace DeploymentTool
         public Nullable<int> nLoopType { get; set; }
         public Nullable<System.DateTime> dLoopDeliveryDate { get; set; }
         public Nullable<decimal> cCost { get; set; }
+        public Nullable<int> ProjectActiveStatus { get; set; }
     }
 }

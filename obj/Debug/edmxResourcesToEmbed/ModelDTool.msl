@@ -112,6 +112,7 @@
     <EntitySetMapping Name="tblProjectAudios">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectAudio">
         <MappingFragment StoreEntitySet="tblProjectAudio">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="cCost" ColumnName="cCost" />
           <ScalarProperty Name="dLoopDeliveryDate" ColumnName="dLoopDeliveryDate" />
           <ScalarProperty Name="nLoopType" ColumnName="nLoopType" />
@@ -128,6 +129,7 @@
     <EntitySetMapping Name="tblProjectBillToes">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectBillTo">
         <MappingFragment StoreEntitySet="tblProjectBillTo">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="tBillToEmail" ColumnName="tBillToEmail" />
           <ScalarProperty Name="tBillToZipCode" ColumnName="tBillToZipCode" />
           <ScalarProperty Name="tBillToState" ColumnName="tBillToState" />
@@ -142,6 +144,7 @@
     <EntitySetMapping Name="tblProjectConfigs">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectConfig">
         <MappingFragment StoreEntitySet="tblProjectConfig">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="nKitchenInstall" ColumnName="nKitchenInstall" />
           <ScalarProperty Name="nGroundBreak" ColumnName="nGroundBreak" />
           <ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
@@ -156,6 +159,7 @@
     <EntitySetMapping Name="tblProjectExteriorMenus">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectExteriorMenu">
         <MappingFragment StoreEntitySet="tblProjectExteriorMenus">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="cTotalCost" ColumnName="cTotalCost" />
           <ScalarProperty Name="cIDTechCost" ColumnName="cIDTechCost" />
           <ScalarProperty Name="cFabConCost" ColumnName="cFabConCost" />
@@ -175,6 +179,7 @@
     <EntitySetMapping Name="tblProjectInstallations">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectInstallation">
         <MappingFragment StoreEntitySet="tblProjectInstallation">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="cCost" ColumnName="cCost" />
           <ScalarProperty Name="nProjectStatus" ColumnName="nProjectStatus" />
           <ScalarProperty Name="nTestTransactions" ColumnName="nTestTransactions" />
@@ -192,6 +197,7 @@
     <EntitySetMapping Name="tblProjectInteriorMenus">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectInteriorMenu">
         <MappingFragment StoreEntitySet="tblProjectInteriorMenus">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="cCost" ColumnName="cCost" />
           <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
           <ScalarProperty Name="nStatus" ColumnName="nStatus" />
@@ -205,6 +211,7 @@
     <EntitySetMapping Name="tblProjectNetworkings">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectNetworking">
         <MappingFragment StoreEntitySet="tblProjectNetworking">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="nTempType" ColumnName="nTempType" />
           <ScalarProperty Name="dTempDate" ColumnName="dTempDate" />
           <ScalarProperty Name="nTempStatus" ColumnName="nTempStatus" />
@@ -240,6 +247,7 @@
     <EntitySetMapping Name="tblProjectPaymentSystems">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectPaymentSystem">
         <MappingFragment StoreEntitySet="tblProjectPaymentSystem">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="nType" ColumnName="nType" />
           <ScalarProperty Name="cCost" ColumnName="cCost" />
           <ScalarProperty Name="nShelf" ColumnName="nShelf" />
@@ -262,6 +270,7 @@
     <EntitySetMapping Name="tblProjectPOS">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectPOS">
         <MappingFragment StoreEntitySet="tblProjectPOS">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="cCost" ColumnName="cCost" />
           <ScalarProperty Name="nPaperworkStatus" ColumnName="nPaperworkStatus" />
           <ScalarProperty Name="nStatus" ColumnName="nStatus" />
@@ -277,6 +286,7 @@
     <EntitySetMapping Name="tblProjectSonicRadios">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectSonicRadio">
         <MappingFragment StoreEntitySet="tblProjectSonicRadio">
+          <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
           <ScalarProperty Name="cCost" ColumnName="cCost" />
           <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
           <ScalarProperty Name="nStatus" ColumnName="nStatus" />
@@ -585,6 +595,71 @@
           <ScalarProperty Name="tModule" ColumnName="tModule" />
           <ScalarProperty Name="dTraceTime" ColumnName="dTraceTime" />
           <ScalarProperty Name="aTraceId" ColumnName="aTraceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblQuoteRequestMains">
+      <EntityTypeMapping TypeName="dtDBModel.tblQuoteRequestMain">
+        <MappingFragment StoreEntitySet="tblQuoteRequestMain">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
+          <ScalarProperty Name="tTemplateName" ColumnName="tTemplateName" />
+          <ScalarProperty Name="aQuoteRequestTemplateId" ColumnName="aQuoteRequestTemplateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblQuoteRequestTechComps">
+      <EntityTypeMapping TypeName="dtDBModel.tblQuoteRequestTechComp">
+        <MappingFragment StoreEntitySet="tblQuoteRequestTechComp">
+          <ScalarProperty Name="tTableName" ColumnName="tTableName" />
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tTechCompName" ColumnName="tTechCompName" />
+          <ScalarProperty Name="nQuoteRequestTemplateId" ColumnName="nQuoteRequestTemplateId" />
+          <ScalarProperty Name="aQuoteRequestTechCompId" ColumnName="aQuoteRequestTechCompId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblQuoteRequestTechCompFields">
+      <EntityTypeMapping TypeName="dtDBModel.tblQuoteRequestTechCompField">
+        <MappingFragment StoreEntitySet="tblQuoteRequestTechCompFields">
+          <ScalarProperty Name="nQuoteRequestTechCompId" ColumnName="nQuoteRequestTechCompId" />
+          <ScalarProperty Name="tTechCompFieldName" ColumnName="tTechCompFieldName" />
+          <ScalarProperty Name="tTechCompField" ColumnName="tTechCompField" />
+          <ScalarProperty Name="nQuoteRequestTemplateId" ColumnName="nQuoteRequestTemplateId" />
+          <ScalarProperty Name="aQuoteRequestTechCompFieldId" ColumnName="aQuoteRequestTechCompFieldId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTraces">
+      <EntityTypeMapping TypeName="dtDBModel.tblTrace">
+        <MappingFragment StoreEntitySet="tblTrace">
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ProjectStatus" ColumnName="ProjectStatus" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="PrincipalPartner" ColumnName="PrincipalPartner" />
+          <ScalarProperty Name="RVP" ColumnName="RVP" />
+          <ScalarProperty Name="ANE" ColumnName="ANE" />
+          <ScalarProperty Name="CM" ColumnName="CM" />
+          <ScalarProperty Name="RED" ColumnName="RED" />
+          <ScalarProperty Name="DMA" ColumnName="DMA" />
+          <ScalarProperty Name="DMAID" ColumnName="DMAID" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="StoreNumber" ColumnName="StoreNumber" />
+          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+          <ScalarProperty Name="aTraceID" ColumnName="aTraceID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

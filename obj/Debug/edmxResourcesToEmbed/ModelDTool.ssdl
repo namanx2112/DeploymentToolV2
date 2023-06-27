@@ -205,6 +205,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nLoopType" Type="int" />
     <Property Name="dLoopDeliveryDate" Type="date" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectBillTo">
     <Key>
@@ -218,6 +219,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="tBillToState" Type="nvarchar" MaxLength="255" />
     <Property Name="tBillToZipCode" Type="nvarchar" MaxLength="255" />
     <Property Name="tBillToEmail" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblProjectComponent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -268,6 +270,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="cProjectCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nGroundBreak" Type="int" />
     <Property Name="nKitchenInstall" Type="int" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectExteriorMenus">
     <Key>
@@ -286,6 +289,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="cFabConCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="cIDTechCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="cTotalCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectInstallation">
     <Key>
@@ -302,6 +306,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="nTestTransactions" Type="int" />
     <Property Name="nProjectStatus" Type="int" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenus">
     <Key>
@@ -314,6 +319,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="nStatus" Type="int" />
     <Property Name="dDeliveryDate" Type="date" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectNetworking">
     <Key>
@@ -331,6 +337,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="nTempStatus" Type="int" />
     <Property Name="dTempDate" Type="date" />
     <Property Name="nTempType" Type="int" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectNotes">
     <Key>
@@ -368,6 +375,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="nShelf" Type="int" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nType" Type="int" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectPOS">
     <Key>
@@ -382,6 +390,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="nStatus" Type="int" />
     <Property Name="nPaperworkStatus" Type="int" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">
     <Key>
@@ -398,6 +407,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="nStatus" Type="int" />
     <Property Name="dDeliveryDate" Type="date" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProjectActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectStakeHolders">
     <Key>
@@ -440,6 +450,43 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="bDeleted" Type="bit" />
     <Property Name="tCity" Type="nvarchar" MaxLength="500" />
   </EntityType>
+  <EntityType Name="tblQuoteRequestMain">
+    <Key>
+      <PropertyRef Name="aQuoteRequestTemplateId" />
+    </Key>
+    <Property Name="aQuoteRequestTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tTemplateName" Type="varchar" MaxLength="500" />
+    <Property Name="nBrandId" Type="int" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblQuoteRequestTechComp">
+    <Key>
+      <PropertyRef Name="aQuoteRequestTechCompId" />
+    </Key>
+    <Property Name="aQuoteRequestTechCompId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nQuoteRequestTemplateId" Type="int" />
+    <Property Name="tTechCompName" Type="varchar" MaxLength="500" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
+    <Property Name="tTableName" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblQuoteRequestTechCompFields">
+    <Key>
+      <PropertyRef Name="aQuoteRequestTechCompFieldId" />
+    </Key>
+    <Property Name="aQuoteRequestTechCompFieldId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nQuoteRequestTemplateId" Type="int" />
+    <Property Name="tTechCompField" Type="varchar" MaxLength="500" />
+    <Property Name="tTechCompFieldName" Type="varchar" MaxLength="500" />
+    <Property Name="nQuoteRequestTechCompId" Type="int" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="tblState">
@@ -480,6 +527,32 @@ warning 6002: The table/view 'dtDB.dbo.tblTechComponent' does not have a primary
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'dtDB.dbo.tblTrace' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblTrace">
+    <Key>
+      <PropertyRef Name="aTraceID" />
+    </Key>
+    <Property Name="aTraceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StoreName" Type="nvarchar(max)" />
+    <Property Name="ProjectType" Type="nvarchar(max)" />
+    <Property Name="StoreNumber" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="City" Type="nvarchar(max)" />
+    <Property Name="State" Type="nvarchar(max)" />
+    <Property Name="DMAID" Type="int" />
+    <Property Name="DMA" Type="nvarchar(max)" />
+    <Property Name="RED" Type="nvarchar(max)" />
+    <Property Name="CM" Type="nvarchar(max)" />
+    <Property Name="ANE" Type="nvarchar(max)" />
+    <Property Name="RVP" Type="nvarchar(max)" />
+    <Property Name="PrincipalPartner" Type="nvarchar(max)" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="ProjectStatus" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="BrandId" Type="int" />
   </EntityType>
   <EntityType Name="tblUser">
     <Key>
@@ -610,6 +683,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectStore" EntityType="Self.tblProjectStore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblQuoteRequestMain" EntityType="Self.tblQuoteRequestMain" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblQuoteRequestTechComp" EntityType="Self.tblQuoteRequestTechComp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="Self.tblQuoteRequestTechCompFields" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStore" EntityType="Self.tblStore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
@@ -711,6 +787,29 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     [tblTechComponent].[dtUpdatedOn] AS [dtUpdatedOn], 
     [tblTechComponent].[bDeleted] AS [bDeleted]
     FROM [dbo].[tblTechComponent] AS [tblTechComponent]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tblTrace" EntityType="Self.tblTrace" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblTrace].[aTraceID] AS [aTraceID], 
+    [tblTrace].[StoreName] AS [StoreName], 
+    [tblTrace].[ProjectType] AS [ProjectType], 
+    [tblTrace].[StoreNumber] AS [StoreNumber], 
+    [tblTrace].[Address] AS [Address], 
+    [tblTrace].[City] AS [City], 
+    [tblTrace].[State] AS [State], 
+    [tblTrace].[DMAID] AS [DMAID], 
+    [tblTrace].[DMA] AS [DMA], 
+    [tblTrace].[RED] AS [RED], 
+    [tblTrace].[CM] AS [CM], 
+    [tblTrace].[ANE] AS [ANE], 
+    [tblTrace].[RVP] AS [RVP], 
+    [tblTrace].[PrincipalPartner] AS [PrincipalPartner], 
+    [tblTrace].[dtCreatedOn] AS [dtCreatedOn], 
+    [tblTrace].[dtUpdatedOn] AS [dtUpdatedOn], 
+    [tblTrace].[ProjectStatus] AS [ProjectStatus], 
+    [tblTrace].[CreatedBy] AS [CreatedBy], 
+    [tblTrace].[BrandId] AS [BrandId]
+    FROM [dbo].[tblTrace] AS [tblTrace]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblUserBrandRel" EntityType="Self.tblUserBrandRel" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

@@ -41,6 +41,10 @@
         <EntityTypeShape EntityType="dtDBModel.tblDropdown" Width="1.5" PointX="17.375" PointY="16.75" />
         <EntityTypeShape EntityType="dtDBModel.tblDocument" Width="1.5" PointX="5.375" PointY="18.75" />
         <EntityTypeShape EntityType="dtDBModel.tblApplicationTrace" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblQuoteRequestMain" Width="1.5" PointX="0.75" PointY="19.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblQuoteRequestTechComp" Width="1.5" PointX="2.75" PointY="19.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblQuoteRequestTechCompField" Width="1.5" PointX="19.75" PointY="3.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblTrace" Width="1.5" PointX="19.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

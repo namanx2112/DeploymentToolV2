@@ -1,0 +1,29 @@
+<div class="projectHeader">
+    <mat-icon class="backIcon" (click)="goBack()">arrow_back_ios</mat-icon>
+    <h4 class="projHeader">Project - POS Installation</h4>
+</div>
+<div class="tabs">
+    <div class="tabHeader">
+        <div (click)="clickTab('searchstore');">Select Store<mat-icon class="activeTabIcon"
+                *ngIf="activeTabName == 'searchstore'">play_arrow</mat-icon></div>
+    </div>
+    <div class="tabHeader" *ngFor="let tmpTab of allTabs">
+        <div (click)="clickTab(tmpTab.tab_name);">{{tmpTab.tab_name}} <mat-icon class="activeTabIcon"
+                *ngIf="activeTabName == tmpTab.tab_name">play_arrow</mat-icon></div>
+    </div>
+</div>
+<div class="tabBody">
+    <div *ngIf="activeTabName == 'searchstore'">
+        <h3 class="tabName">Select Store</h3>
+        <app-controls class="tabForm" [numberOfControlsInARow]="1" [fields]="searchFields" [needButton]="true"
+            [controlValues]="searchValue" [SubmitLabel]="'Next'" (onSubmit)="onSearch($event)"
+            [themeClass]="'grayWhite'"></app-controls>
+    </div>
+    <div *ngFor="let tTab of allTabs">
+        <h3 *ngIf="activeTabName == tTab.tab_name" class="tabName">{{tTab.tab_header}}</h3>
+        <app-controls class="tabForm" *ngIf="activeTabName == tTab.tab_name"
+            [readOnlyForm]="tTab.tab_name == 'Store Details'" [numberOfControlsInARow]="1" [fields]="tTab.fields"
+            [needButton]="true" [controlValues]="fieldValues[tTab.tab_name]" [SubmitLabel]="'Next'"
+            (onSubmit)="onNext($event, tTab)" [themeClass]="'grayWhite'"></app-controls>
+    </div>
+</div>
