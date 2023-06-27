@@ -8,7 +8,6 @@ import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.c
 import { NotesListComponent } from '../notes-list/notes-list.component';
 import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/sonic';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
-import { NotImplementedComponent } from '../../not-implemented/not-implemented.component';
 
 @Component({
   selector: 'app-store-view',
@@ -204,7 +203,7 @@ export class StoreViewComponent {
       themeClass: "grayWhite",
       dialogTheme: "lightGrayWhiteTheme"
     };
-    dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
+    dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
   }
 
   editTab(cTab: HomeTab) {

@@ -35,4 +35,8 @@ export class HomeComponent {
   brandClicked(brand: BrandModel){
     this.viewName = brand.tBrandName;    
   }
+
+  LogOut() {
+    this.authService.loggedOut();
+  }
 }

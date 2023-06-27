@@ -52,6 +52,8 @@
     float: left;
     padding: 10px;
     border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 
@@ -112,6 +114,8 @@
 
 .tileGroup button {
     width: 40%;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .TechAreaTitleBar {

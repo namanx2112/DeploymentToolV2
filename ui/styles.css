@@ -156,3 +156,21 @@ button{
     height: 235px;
     overflow: auto;
 }
+
+.toggleIcon {
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    top: 13px;
+    left: 0px;
+    cursor: pointer;
+    background-color: gray;
+    color: #ffff;
+    z-index: 1;
+    line-height: 5px;
+    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+}
+
+.toggleIcon.opened {
+    transform: rotate(180deg);
+}

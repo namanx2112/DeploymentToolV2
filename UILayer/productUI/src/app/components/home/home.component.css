@@ -86,7 +86,7 @@
     border-radius: 5px;   
     background-color: #696969;
     padding: 10px;
-    margin: 10px 15px;
+    margin: 0px 0px 20px 15px;
     cursor: pointer;
 }
 
@@ -106,4 +106,9 @@
 	border-top: 10px solid transparent;
 	border-right: 10px solid lightgray;
 	border-bottom: 10px solid transparent;
+}
+
+.logout{
+    position: absolute;
+    bottom: 10px;
 }

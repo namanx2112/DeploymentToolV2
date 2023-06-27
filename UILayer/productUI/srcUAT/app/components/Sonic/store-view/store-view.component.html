@@ -1,8 +1,8 @@
 <div class="storeView">
     <div class="projectHeader">
         <mat-icon class="backIcon" (click)="moveView('dashboard')">arrow_back_ios</mat-icon>
-        <h4 class="projHeader">Project - {{_curStore.tStoreName}}</h4>
-        <button class="noBorderButton lightGray" (click)="moveView('projecttemplatelist')">Workflows</button>
+        <h4 class="projHeader">Store - {{_curStore.tStoreName}}</h4>
+        <button class="noBorderButton lightGray" (click)="ShowNotes()">Workflows</button>
     </div>
     <div class="storeTitle"><span class="storeStatus">{{_curStore.tProjectType}} Store
             {{_curStore.dGoLiveDate.toString().split('T')[0]}}</span></div>
@@ -36,12 +36,12 @@
                     (onSubmit)="onSubmit($event, allTabs[2])" [themeClass]="'grayWhite'"></app-controls>
             </div>
             <div class="tileGroup tileButtonGroup">
-                <button class="noBorderButton lightGray" mat-raised-button><mat-icon>event_note</mat-icon>Tasks</button>
+                <button class="noBorderButton lightGray" mat-raised-button (click)="ShowNotes();"><mat-icon>event_note</mat-icon>Tasks</button>
                 <button class="noBorderButton lightGray" mat-raised-button (click)="ShowNotes();"><mat-icon>
                         notes</mat-icon>Notes</button>
-                <button class="noBorderButton lightGray" (click)="ShowProject('projecttaleview')">Active
+                <button class="noBorderButton lightGray" (click)="ShowNotes();">Active
                     Projects</button>
-                <button class="noBorderButton lightGray" (click)="ShowProject('projecttaleview')">Historical
+                <button class="noBorderButton lightGray" (click)="ShowNotes();">Historical
                     Projects</button>
             </div>
         </div>

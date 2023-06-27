@@ -98,7 +98,7 @@ export class QuoteRequestWorkflowTemplateComponent {
     let found = false;
     let sTab = this.curTemplate.quoteRequestTechComps.filter(x => x.tTechCompName == tTab.tab_name);
     if (sTab.length > 0) {
-      let field = sTab[0].fields.filter(x => x.tTechCompFieldName == fieldName);
+      let field = sTab[0].fields.filter(x => x.tTechCompField == fieldName);
       if (field.length > 0)
         found = true;
     }

@@ -29,6 +29,7 @@
                 <span [class]="tTabName == 'Find' ? 'action selected' : 'action'" title="Find" (click)="switchView('Find')"><mat-icon>find_in_page</mat-icon><span></span></span>                                                
                 <span [class]="tTabName == 'List' ? 'action selected' : 'action'" title="List" (click)="switchView('List')"><mat-icon>list</mat-icon><span></span></span>                
                 <span [class]="tTabName == 'Settings' ? 'action selected' : 'action'" title="Settings" (click)="switchView('Settings')"><mat-icon>settings</mat-icon><span></span></span>
+                <span class="action logout" title="LogOut" (click)="LogOut()"><mat-icon>power_settings_new</mat-icon></span>
             </div>
         </div>
         <div class="right floatLeft">
