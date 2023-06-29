@@ -19,11 +19,11 @@ namespace DeploymentTool
         public Nullable<int> nFranchisee { get; set; }
         public string tRVP { get; set; }
         public string tFBC { get; set; }
-        public Nullable<int> nCD { get; set; }
-        public Nullable<int> nITPM { get; set; }
         public string tRED { get; set; }
         public string tCM { get; set; }
         public string tAandE { get; set; }
         public string tPrincipalPartner { get; set; }
+        public string tCD { get; set; }
+        public string tITPM { get; set; }
     }
 }

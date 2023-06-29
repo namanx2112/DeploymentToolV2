@@ -46,8 +46,10 @@ export class NewProjectComponent {
     this.loadingData = true;
     this.curStore = searchedStore;
     let pStoreTab = this.allTabs[1];
+    let pStakeHolerTab = this.allTabs[2];
     this.storeSerice.CreateAndGetProjectStoreDetails(this.curStore.nProjectId).subscribe((x: any) => {
       this.tValues[pStoreTab.tab_name] = x;
+      this.tValues[pStakeHolerTab.tab_name] = x.tStakeHolder;
       this.setProjectId(x["nProjectID"]);
       this.moveNext();
     });

@@ -45,6 +45,7 @@
         <EntityTypeShape EntityType="dtDBModel.tblQuoteRequestTechComp" Width="1.5" PointX="2.75" PointY="19.75" />
         <EntityTypeShape EntityType="dtDBModel.tblQuoteRequestTechCompField" Width="1.5" PointX="19.75" PointY="3.75" />
         <EntityTypeShape EntityType="dtDBModel.tblTrace" Width="1.5" PointX="19.75" PointY="6.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblPurchaseOrderTemplate" Width="1.5" PointX="11.375" PointY="19.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

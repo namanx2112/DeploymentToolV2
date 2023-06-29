@@ -17,13 +17,14 @@
             <mat-icon>play_arrow</mat-icon>
         </span>
         <app-tab-body *ngIf="tabIndex == 0" [curTab]="tabs[0]" [NeedNew]="needNew"></app-tab-body>        
-        <app-tab-body *ngIf="tabIndex == 1" [curTab]="tabs[1]" [NeedNew]="needNew"></app-tab-body>
+        <!-- <app-tab-body *ngIf="tabIndex == 1" [curTab]="tabs[1]" [NeedNew]="needNew"></app-tab-body> -->
         <app-tab-body *ngIf="tabIndex == 2" [curTab]="tabs[2]" [NeedNew]="needNew"></app-tab-body>
-        <app-tab-body *ngIf="tabIndex == 3" [curTab]="tabs[3]" [NeedNew]="needNew"></app-tab-body>
-        <app-tab-body *ngIf="tabIndex == 4" [curTab]="tabs[4]" [NeedNew]="needNew"></app-tab-body>
-        <app-quote-request-template-list *ngIf="tabIndex == 5" (moveView)="moveView($event)"></app-quote-request-template-list>
+        <!-- <app-tab-body *ngIf="tabIndex == 3" [curTab]="tabs[3]" [NeedNew]="needNew"></app-tab-body> -->
+        <app-tab-body *ngIf="tabIndex == 4" [curTab]="tabs[4]" [NeedNew]="needNew"></app-tab-body>        
+        <app-not-implemented *ngIf="tabIndex == 3 || tabIndex == 1 || tabIndex == 5 || tabIndex == 7"></app-not-implemented>
+        <!-- <app-quote-request-template-list *ngIf="tabIndex == 5" (moveView)="moveView($event)"></app-quote-request-template-list> -->
         <!-- <app-quote-request-workflow-template *ngIf="tabIndex == 6"></app-quote-request-workflow-template>         -->
-        <app-poworkflow-template *ngIf="tabIndex == 7" (moveView)="moveView($event)"></app-poworkflow-template>
+        <!-- <app-poworkflow-template *ngIf="tabIndex == 7" (moveView)="moveView($event)"></app-poworkflow-template> -->
         <app-admin-dashboard-shortcuts *ngIf="tabIndex == -1" (ShortcutSelection)="ShortcutSelection($event);"></app-admin-dashboard-shortcuts>
         <app-manage-dropdowns *ngIf="tabIndex == -2"></app-manage-dropdowns>
     </div>

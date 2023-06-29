@@ -3,12 +3,15 @@ using DeploymentTool.Model.Templates;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Net.Mail;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Web.Http;
 using System.Xml.Linq;
@@ -17,6 +20,7 @@ namespace DeploymentTool.Controller
 {
     public class QuoteRequestController : ApiController
     {
+        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
         private dtDBEntities db = new dtDBEntities();
 
         [Authorize]
@@ -183,19 +187,70 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public HttpResponseMessage GetMergedQuoteRequest(int nProjectId)
+        public HttpResponseMessage GetMergedQuoteRequest(int nProjectID)
         {
             try
             {
-                var item = new MergedQuoteRequest()
+                //int nProjectID = 7;
+                int nTemplateId = 3;
+                string strBody = "";
+                string strSubject = "";
+                var strSub = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where aStoreID= @aStoreID", new SqlParameter("@aStoreID", nProjectID)).FirstOrDefault();
+                //strSubject = "Store #" + strSub + " Quote Request";
+
+                SqlParameter tModuleNameP = new SqlParameter("@nQuoteRequestTemplateId", nTemplateId);
+                List<QuoteRequestTechCompTemp> item = db.Database.SqlQuery<QuoteRequestTechCompTemp>("exec sproc_GetQuoteRequestTechComp @nQuoteRequestTemplateId", tModuleNameP).ToList();
+                foreach (var RequestTechComp in item)
                 {
-                    tContent = "<div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div><div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div><div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div>",
-                    tSubject = "Store #" + nProjectId + "HME Quote Request",
-                    tTo = "abcd@gmail.com"
+                    strBody += "<div><h1> " + RequestTechComp.tTechCompName + " </h1></div>";
+                   // strBody += "</br> " + RequestTechComp.tTechCompName + ":</br>";
+                    string strData = "";
+                    using (var conn = new SqlConnection(_connectionString))
+                    {
+
+                        using (var cmd = new SqlCommand("sproc_getDynamicDataFromCompID", conn))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            cmd.Parameters.AddWithValue("@nQuoteRequestTechCompId", RequestTechComp.aQuoteRequestTechCompId);
+                            cmd.Parameters.AddWithValue("@nProjectID", nProjectID);
+
+                            conn.Open();
+
+                            using (var reader = cmd.ExecuteReader())
+                            {
+
+                                do
+                                {
+                                    while (reader.Read())
+                                    {
+                                        for (int i = 0; i < reader.FieldCount; i++)
+                                        {
+                                            //strData += reader.GetName(i).ToString() + ":" + reader.GetValue(i).ToString() + "</br>";
+                                            strData += "<div><b> "+ reader.GetName(i).ToString() + " </b> "+ reader.GetValue(i).ToString() + "</div>";
+                                        }
+
+                                    }
+                                } while (reader.NextResult());
+                            }
+                        }
+                    }
+                    strBody += strData ;
+                }
+
+               string tContentdata = "<div>Please provide a quote for this store based on the information below. Please be sure to reply to all so our entire team receives it. Thanks!</br></div>";
+                tContentdata += strBody;// "<div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div><div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div>",
+                   
+                var itemMerge = new MergedQuoteRequest()
+                {
+                    tContent = tContentdata,
+                    tSubject = "Store #" + nProjectID + "- HME Quote Request",
+                    tTo = "pp.santosh@gmail.com"
+
                 };
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new ObjectContent<MergedQuoteRequest>(item, new JsonMediaTypeFormatter())
+                    Content = new ObjectContent<MergedQuoteRequest>(itemMerge, new JsonMediaTypeFormatter())
                 };
             }
             catch (Exception ex)
@@ -210,6 +265,40 @@ namespace DeploymentTool.Controller
         {
             try
             {
+                //  string smtpServer = "smtp.sendgrid.net"; // Replace with your SMTP server
+                string smtpServer = "smtp.office365.com"; // Replace with your SMTP server
+                int smtpPort = 587; // Replace with your SMTP port
+                string smtpUsername = "santoshpp@santoshpp.onmicrosoft.com"; // Replace with your SMTP username
+                string smtpPassword = "Tali$ma123"; // Replace with your SMTP password
+
+                string fromAddress = "santoshpp@santoshpp.onmicrosoft.com"; // Replace with the sender's email address
+                string toAddress = request.tTo; // Replace with the recipient's email address
+                string subject = request.tSubject;
+                string body = request.tContent;
+
+                // Create an instance of the SmtpClient class
+                using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
+                {
+                    // Set the SMTP credentials
+                    smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                    smtpClient.EnableSsl = true; // Enable SSL encryption, if required by your SMTP server
+
+                    try
+                    {
+                        // Create a MailMessage object
+                        using (MailMessage mailMessage = new MailMessage(fromAddress, toAddress, subject, body))
+                        {
+                            // Send the email
+                            smtpClient.Send(mailMessage);
+                            
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //Console.WriteLine("An error occurred while sending the email: " + ex.Message);
+                        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while sending the email: "+ex);
+                    }
+                }
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<string>("Done", new JsonMediaTypeFormatter())

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,7 +24,7 @@ namespace DeploymentTool.Controller
         {
             int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
 
-            return db.tblProjectInstallations.Where(p => p.nProjectID == nProjectID).AsQueryable();
+            return db.tblProjectInstallations.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
             
         }
         [Authorize]
@@ -73,6 +74,9 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectInstallation))]
         public async Task<IHttpActionResult> Create(tblProjectInstallation tblProjectInstallation)
         {
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInstallation set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectInstallation.nProjectID));
+            tblProjectInstallation.ProjectActiveStatus = 1;
+
             tblProjectInstallation.aProjectInstallationID = 0;
             db.tblProjectInstallations.Add(tblProjectInstallation);
             await db.SaveChangesAsync();

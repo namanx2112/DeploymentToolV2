@@ -268,9 +268,9 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="nDriveThru" Type="int" />
     <Property Name="nInsideDining" Type="int" />
     <Property Name="cProjectCost" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="nGroundBreak" Type="int" />
-    <Property Name="nKitchenInstall" Type="int" />
     <Property Name="ProjectActiveStatus" Type="int" />
+    <Property Name="dGroundBreak" Type="datetime" />
+    <Property Name="dKitchenInstall" Type="datetime" />
   </EntityType>
   <EntityType Name="tblProjectExteriorMenus">
     <Key>
@@ -418,12 +418,12 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="nFranchisee" Type="int" />
     <Property Name="tRVP" Type="nvarchar" MaxLength="255" />
     <Property Name="tFBC" Type="nvarchar" MaxLength="255" />
-    <Property Name="nCD" Type="int" />
-    <Property Name="nITPM" Type="int" />
     <Property Name="tRED" Type="nvarchar" MaxLength="255" />
     <Property Name="tCM" Type="nvarchar" MaxLength="255" />
     <Property Name="tAandE" Type="nvarchar" MaxLength="255" />
     <Property Name="tPrincipalPartner" Type="nvarchar" MaxLength="255" />
+    <Property Name="tCD" Type="nvarchar" MaxLength="500" />
+    <Property Name="tITPM" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="tblProjectStore">
     <Key>
@@ -449,6 +449,20 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
     <Property Name="tCity" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblPurchaseOrderTemplate">
+    <Key>
+      <PropertyRef Name="aPurchaseOrderTemplateId" />
+    </Key>
+    <Property Name="aPurchaseOrderTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tTemplateName" Type="varchar" MaxLength="500" />
+    <Property Name="nBrandId" Type="int" />
+    <Property Name="nVenderId" Type="int" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="tblQuoteRequestMain">
     <Key>
@@ -683,6 +697,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectStore" EntityType="Self.tblProjectStore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPurchaseOrderTemplate" EntityType="Self.tblPurchaseOrderTemplate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestMain" EntityType="Self.tblQuoteRequestMain" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestTechComp" EntityType="Self.tblQuoteRequestTechComp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="Self.tblQuoteRequestTechCompFields" Schema="dbo" store:Type="Tables" />

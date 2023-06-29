@@ -86,26 +86,26 @@ export class VendorService {
       {
         field_name: "Vendor TechComponent ID",
         fieldUniqeName: "nTechComponentID",
-        defaultVal: "",
+        defaultVal: "1",
         readOnly: false,
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter Vendor TechComponent ID",
         validator: [],
         mandatory: true,
-        hidden: false
+        hidden: true
       },
       {
         field_name: "Brand Id",
         fieldUniqeName: "nBrandID",
-        defaultVal: "",
+        defaultVal: "1",
         readOnly: false,
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter Brand Id",
         validator: [],
         mandatory: true,
-        hidden: false
+        hidden: true
       },
       {
         field_name: "Vendor Description",

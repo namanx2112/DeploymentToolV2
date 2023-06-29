@@ -11,6 +11,7 @@ namespace DeploymentTool.Model
     public class NewProjectStore : ModelParent
     {
         public int nProjectType { get; set; }
+        public tblProjectStakeHolder tStakeHolder { get; set; }
 
         public int nStoreId { get; set; }
         public string tStoreNumber { get; set; }

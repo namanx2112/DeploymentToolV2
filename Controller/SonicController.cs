@@ -28,7 +28,7 @@ namespace DeploymentTool.Controller
             {
                 foreach (var request in requestArr)
                 {
-                    db.sproc_CreateStoreFromExcel(request.tStoreNumber, request.tProjectType, request.tStoreNumber, request.tAddress, request.tCity, request.tState, request.nDMAID, request.tDMA,
+                    db.sproc_CreateStoreFromExcel(string.Empty, request.tProjectType, request.tStoreNumber, request.tAddress, request.tCity, request.tState, request.nDMAID, request.tDMA,
                         request.tRED, request.tCM, request.tANE, request.tRVP, request.tPrincipalPartner, request.dStatus, request.dOpenStore, request.tProjectStatus, securityContext.nUserID, 6);
 
                     //List<SqlParameter> tPramList = new List<SqlParameter>();
@@ -102,15 +102,16 @@ namespace DeploymentTool.Controller
                 tblProjectStore tProjStore = db.tblProjectStores.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
                 tblProject tProj = db.tblProjects.Where(p => p.aProjectID == nProjectId).FirstOrDefault();
                 tblStore tStore = db.tblStores.Where(p => p.aStoreID == tProj.nStoreID).FirstOrDefault();
-                var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProject set projectActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tStore.aStoreID));
-                tProj.ProjectActiveStatus = 1;
-                Utilities.SetHousekeepingFields(true, HttpContext.Current, tProj);
-                db.tblProjects.Add(tProj); db.SaveChanges();
-                tProjStore.nProjectID = tProj.aProjectID;
-                Utilities.SetHousekeepingFields(true, HttpContext.Current, tProjStore);
-                db.tblProjectStores.Add(tProjStore); db.SaveChanges();
+                tmpStore.tStakeHolder = db.tblProjectStakeHolders.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
+               // var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProject set projectActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tStore.aStoreID));
+                //tProj.ProjectActiveStatus = 1;
+                //Utilities.SetHousekeepingFields(true, HttpContext.Current, tProj);
+                //db.tblProjects.Add(tProj); db.SaveChanges();
+                //tProjStore.nProjectID = tProj.aProjectID;
+                //Utilities.SetHousekeepingFields(true, HttpContext.Current, tProjStore);
+                //db.tblProjectStores.Add(tProjStore); db.SaveChanges();
 
-                tProjStore.nProjectID = tProj.aProjectID;
+                //tProjStore.nProjectID = tProj.aProjectID;
 
                 tmpStore.SetValues(tProj, tProjStore, tStore);
 
@@ -192,38 +193,56 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
-                List<ProjectTemplates> items = new List<ProjectTemplates>() {
+                List<ProjectTemplates> items = new List<ProjectTemplates>();
+                
+                {
+                    items.Add(
                     new ProjectTemplates()
                     {
                         nTemplateId = 1,
                         nTemplateType = ProjectTemplateType.Notification,
-                    tTemplateName = "Notification"
-                    },
-                    new ProjectTemplates()
-                    {
-                        nTemplateId = 2,
-                        nTemplateType = ProjectTemplateType.QuoteRequest,
-                        tTemplateName = "Audio"
-                    },
-                    new ProjectTemplates()
-                    {
-                        nTemplateId = 3,
-                        nTemplateType = ProjectTemplateType.QuoteRequest,
-                        tTemplateName = "Networking"
-                    },
+                        tTemplateName = "Notification"
+                    });
+                   
+                    //items.Add(
+                    //new ProjectTemplates()
+                    //{
+                    //    nTemplateId = 3,
+                    //    nTemplateType = ProjectTemplateType.QuoteRequest,
+                    //    tTemplateName = "Networking"
+                    //});
+                    items.Add(
                     new ProjectTemplates()
                     {
                         nTemplateId = 4,
                         nTemplateType = ProjectTemplateType.PurchaseOrder,
                         tTemplateName = "Exterior Menu-Fabcon"
-                    },
+                    });
+                    items.Add(
                     new ProjectTemplates()
                     {
                         nTemplateId = 6,
                         nTemplateType = ProjectTemplateType.PurchaseOrder,
                         tTemplateName = "Interior Menus-TDS"
-                    }
+                    });
                 };
+                Dictionary<int, string> lstQuoteRequest = new Dictionary<int, string>();
+                SqlParameter tModuleNameParam = new SqlParameter("@nBrandId", nBrandId);
+                List<QuoteRequestTemplateTemp> itemsQoute = db.Database.SqlQuery<QuoteRequestTemplateTemp>("exec sproc_GetAllQuoteRequestTemplate @nBrandId", tModuleNameParam).ToList();
+                
+                foreach (var RequestTechComps in itemsQoute)
+                {
+
+                    lstQuoteRequest.Add(RequestTechComps.aQuoteRequestTemplateId, RequestTechComps.tTemplateName);
+                    //lstQuoteRequest.Add(2, "Networking");
+                    items.Add(
+                   new ProjectTemplates()
+                   {
+                       nTemplateId = RequestTechComps.aQuoteRequestTemplateId,
+                       nTemplateType = ProjectTemplateType.QuoteRequest,
+                       tTemplateName = RequestTechComps.tTemplateName
+                   });
+                }
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<List<ProjectTemplates>>(items, new JsonMediaTypeFormatter())

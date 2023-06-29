@@ -144,9 +144,9 @@
     <EntitySetMapping Name="tblProjectConfigs">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectConfig">
         <MappingFragment StoreEntitySet="tblProjectConfig">
+          <ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
+          <ScalarProperty Name="dGroundBreak" ColumnName="dGroundBreak" />
           <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
-          <ScalarProperty Name="nKitchenInstall" ColumnName="nKitchenInstall" />
-          <ScalarProperty Name="nGroundBreak" ColumnName="nGroundBreak" />
           <ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
           <ScalarProperty Name="nInsideDining" ColumnName="nInsideDining" />
           <ScalarProperty Name="nDriveThru" ColumnName="nDriveThru" />
@@ -304,12 +304,12 @@
     <EntitySetMapping Name="tblProjectStakeHolders">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectStakeHolder">
         <MappingFragment StoreEntitySet="tblProjectStakeHolders">
+          <ScalarProperty Name="tITPM" ColumnName="tITPM" />
+          <ScalarProperty Name="tCD" ColumnName="tCD" />
           <ScalarProperty Name="tPrincipalPartner" ColumnName="tPrincipalPartner" />
           <ScalarProperty Name="tAandE" ColumnName="tAandE" />
           <ScalarProperty Name="tCM" ColumnName="tCM" />
           <ScalarProperty Name="tRED" ColumnName="tRED" />
-          <ScalarProperty Name="nITPM" ColumnName="nITPM" />
-          <ScalarProperty Name="nCD" ColumnName="nCD" />
           <ScalarProperty Name="tFBC" ColumnName="tFBC" />
           <ScalarProperty Name="tRVP" ColumnName="tRVP" />
           <ScalarProperty Name="nFranchisee" ColumnName="nFranchisee" />
@@ -660,6 +660,21 @@
           <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />
           <ScalarProperty Name="aTraceID" ColumnName="aTraceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPurchaseOrderTemplates">
+      <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplate">
+        <MappingFragment StoreEntitySet="tblPurchaseOrderTemplate">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nVenderId" ColumnName="nVenderId" />
+          <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
+          <ScalarProperty Name="tTemplateName" ColumnName="tTemplateName" />
+          <ScalarProperty Name="aPurchaseOrderTemplateId" ColumnName="aPurchaseOrderTemplateId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

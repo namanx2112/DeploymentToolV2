@@ -12,12 +12,12 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblDropdownMain: Misc.ModelParent
+    public partial class tblPurchaseOrderTemplate
     {
-        public int aMainId { get; set; }
+        public int aPurchaseOrderTemplateId { get; set; }
+        public string tTemplateName { get; set; }
         public Nullable<int> nBrandId { get; set; }
-        public string tModuleName { get; set; }
-        public Nullable<int> nDropdownId { get; set; }
+        public Nullable<int> nVenderId { get; set; }
         public Nullable<int> nCreatedBy { get; set; }
         public Nullable<int> nUpdateBy { get; set; }
         public Nullable<System.DateTime> dtCreatedOn { get; set; }

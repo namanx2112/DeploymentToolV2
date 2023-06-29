@@ -1122,6 +1122,9 @@
     <Compile Include="tblProjectStore.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblPurchaseOrderTemplate.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblQuoteRequestMain.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>

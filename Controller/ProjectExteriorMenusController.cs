@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,7 +24,7 @@ namespace DeploymentTool.Model
         {
             int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
 
-            return db.tblProjectExteriorMenus.Where(p => p.nProjectID == nProjectID).AsQueryable();
+            return db.tblProjectExteriorMenus.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
 
           
         }
@@ -74,10 +75,18 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectExteriorMenu tblProjectExteriorMenu)
         {
-            tblProjectExteriorMenu.aProjectExteriorMenuID = 0;
+            try
+            {
+                var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectExteriorMenus set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectExteriorMenu.nProjectID));
+                tblProjectExteriorMenu.ProjectActiveStatus = 1;
 
-            db.tblProjectExteriorMenus.Add(tblProjectExteriorMenu);
-            await db.SaveChangesAsync();
+                tblProjectExteriorMenu.aProjectExteriorMenuID = 0;
+
+                db.tblProjectExteriorMenus.Add(tblProjectExteriorMenu);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            { }
 
             return Json(tblProjectExteriorMenu);
         }

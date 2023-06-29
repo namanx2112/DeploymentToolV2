@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,7 +24,7 @@ namespace DeploymentTool.Controller
         {
             int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
 
-            return db.tblProjectSonicRadios.Where(p => p.nProjectID == nProjectID).AsQueryable();
+            return db.tblProjectSonicRadios.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
 
         }
         [Authorize]
@@ -77,6 +78,9 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectSonicRadio))]
         public async Task<IHttpActionResult> Create(tblProjectSonicRadio tblProjectSonicRadio)
         {
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectSonicRadio set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectSonicRadio.nProjectID));
+            tblProjectSonicRadio.ProjectActiveStatus = 1;
+
             tblProjectSonicRadio.aProjectSonicRadioID = 0;
 
             db.tblProjectSonicRadios.Add(tblProjectSonicRadio);

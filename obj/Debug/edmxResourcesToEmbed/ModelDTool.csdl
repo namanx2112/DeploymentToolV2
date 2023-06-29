@@ -64,6 +64,7 @@
     <EntitySet Name="tblQuoteRequestTechComps" EntityType="dtDBModel.tblQuoteRequestTechComp" />
     <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="dtDBModel.tblQuoteRequestTechCompField" />
     <EntitySet Name="tblTraces" EntityType="dtDBModel.tblTrace" />
+    <EntitySet Name="tblPurchaseOrderTemplates" EntityType="dtDBModel.tblPurchaseOrderTemplate" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -208,9 +209,9 @@
     <Property Name="nDriveThru" Type="Int32" />
     <Property Name="nInsideDining" Type="Int32" />
     <Property Name="cProjectCost" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="nGroundBreak" Type="Int32" />
-    <Property Name="nKitchenInstall" Type="Int32" />
     <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="dGroundBreak" Type="DateTime" Precision="3" />
+    <Property Name="dKitchenInstall" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="tblProjectExteriorMenu">
     <Key>
@@ -358,12 +359,12 @@
     <Property Name="nFranchisee" Type="Int32" />
     <Property Name="tRVP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tFBC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="nCD" Type="Int32" />
-    <Property Name="nITPM" Type="Int32" />
     <Property Name="tRED" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tCM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tAandE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tPrincipalPartner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tCD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="tITPM" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tblProjectStore">
     <Key>
@@ -684,5 +685,19 @@
     <Property Name="ProjectStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CreatedBy" Type="Int32" />
     <Property Name="BrandId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblPurchaseOrderTemplate">
+    <Key>
+      <PropertyRef Name="aPurchaseOrderTemplateId" />
+    </Key>
+    <Property Name="aPurchaseOrderTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tTemplateName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nBrandId" Type="Int32" />
+    <Property Name="nVenderId" Type="Int32" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
   </EntityType>
 </Schema>

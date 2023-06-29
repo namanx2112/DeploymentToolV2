@@ -273,9 +273,9 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nDriveThru" Type="int" />
           <Property Name="nInsideDining" Type="int" />
           <Property Name="cProjectCost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="nGroundBreak" Type="int" />
-          <Property Name="nKitchenInstall" Type="int" />
           <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="dGroundBreak" Type="datetime" />
+          <Property Name="dKitchenInstall" Type="datetime" />
         </EntityType>
         <EntityType Name="tblProjectExteriorMenus">
           <Key>
@@ -423,12 +423,12 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nFranchisee" Type="int" />
           <Property Name="tRVP" Type="nvarchar" MaxLength="255" />
           <Property Name="tFBC" Type="nvarchar" MaxLength="255" />
-          <Property Name="nCD" Type="int" />
-          <Property Name="nITPM" Type="int" />
           <Property Name="tRED" Type="nvarchar" MaxLength="255" />
           <Property Name="tCM" Type="nvarchar" MaxLength="255" />
           <Property Name="tAandE" Type="nvarchar" MaxLength="255" />
           <Property Name="tPrincipalPartner" Type="nvarchar" MaxLength="255" />
+          <Property Name="tCD" Type="nvarchar" MaxLength="500" />
+          <Property Name="tITPM" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tblProjectStore">
           <Key>
@@ -454,6 +454,20 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
           <Property Name="tCity" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrderTemplate">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderTemplateId" />
+          </Key>
+          <Property Name="aPurchaseOrderTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tTemplateName" Type="varchar" MaxLength="500" />
+          <Property Name="nBrandId" Type="int" />
+          <Property Name="nVenderId" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="tblQuoteRequestMain">
           <Key>
@@ -688,6 +702,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectStore" EntityType="Self.tblProjectStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPurchaseOrderTemplate" EntityType="Self.tblPurchaseOrderTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblQuoteRequestMain" EntityType="Self.tblQuoteRequestMain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblQuoteRequestTechComp" EntityType="Self.tblQuoteRequestTechComp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="Self.tblQuoteRequestTechCompFields" Schema="dbo" store:Type="Tables" />
@@ -899,6 +914,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblQuoteRequestTechComps" EntityType="dtDBModel.tblQuoteRequestTechComp" />
           <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="dtDBModel.tblQuoteRequestTechCompField" />
           <EntitySet Name="tblTraces" EntityType="dtDBModel.tblTrace" />
+          <EntitySet Name="tblPurchaseOrderTemplates" EntityType="dtDBModel.tblPurchaseOrderTemplate" />
         </EntityContainer>
         <EntityType Name="tblBrand">
           <Key>
@@ -1043,9 +1059,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="nDriveThru" Type="Int32" />
           <Property Name="nInsideDining" Type="Int32" />
           <Property Name="cProjectCost" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="nGroundBreak" Type="Int32" />
-          <Property Name="nKitchenInstall" Type="Int32" />
           <Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="dGroundBreak" Type="DateTime" Precision="3" />
+          <Property Name="dKitchenInstall" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tblProjectExteriorMenu">
           <Key>
@@ -1193,12 +1209,12 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="nFranchisee" Type="Int32" />
           <Property Name="tRVP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="tFBC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="nCD" Type="Int32" />
-          <Property Name="nITPM" Type="Int32" />
           <Property Name="tRED" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="tCM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="tAandE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="tPrincipalPartner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tCD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="tITPM" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblProjectStore">
           <Key>
@@ -1520,6 +1536,20 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="BrandId" Type="Int32" />
         </EntityType>
+        <EntityType Name="tblPurchaseOrderTemplate">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderTemplateId" />
+          </Key>
+          <Property Name="aPurchaseOrderTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tTemplateName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="nBrandId" Type="Int32" />
+          <Property Name="nVenderId" Type="Int32" />
+          <Property Name="nCreatedBy" Type="Int32" />
+          <Property Name="nUpdateBy" Type="Int32" />
+          <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="bDeleted" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1669,9 +1699,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblProjectConfigs">
             <EntityTypeMapping TypeName="dtDBModel.tblProjectConfig">
               <MappingFragment StoreEntitySet="tblProjectConfig">
+                <ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
+                <ScalarProperty Name="dGroundBreak" ColumnName="dGroundBreak" />
                 <ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
-                <ScalarProperty Name="nKitchenInstall" ColumnName="nKitchenInstall" />
-                <ScalarProperty Name="nGroundBreak" ColumnName="nGroundBreak" />
                 <ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
                 <ScalarProperty Name="nInsideDining" ColumnName="nInsideDining" />
                 <ScalarProperty Name="nDriveThru" ColumnName="nDriveThru" />
@@ -1829,12 +1859,12 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblProjectStakeHolders">
             <EntityTypeMapping TypeName="dtDBModel.tblProjectStakeHolder">
               <MappingFragment StoreEntitySet="tblProjectStakeHolders">
+                <ScalarProperty Name="tITPM" ColumnName="tITPM" />
+                <ScalarProperty Name="tCD" ColumnName="tCD" />
                 <ScalarProperty Name="tPrincipalPartner" ColumnName="tPrincipalPartner" />
                 <ScalarProperty Name="tAandE" ColumnName="tAandE" />
                 <ScalarProperty Name="tCM" ColumnName="tCM" />
                 <ScalarProperty Name="tRED" ColumnName="tRED" />
-                <ScalarProperty Name="nITPM" ColumnName="nITPM" />
-                <ScalarProperty Name="nCD" ColumnName="nCD" />
                 <ScalarProperty Name="tFBC" ColumnName="tFBC" />
                 <ScalarProperty Name="tRVP" ColumnName="tRVP" />
                 <ScalarProperty Name="nFranchisee" ColumnName="nFranchisee" />
@@ -2185,6 +2215,21 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
                 <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
                 <ScalarProperty Name="StoreName" ColumnName="StoreName" />
                 <ScalarProperty Name="aTraceID" ColumnName="aTraceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPurchaseOrderTemplates">
+            <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplate">
+              <MappingFragment StoreEntitySet="tblPurchaseOrderTemplate">
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+                <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+                <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+                <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+                <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+                <ScalarProperty Name="nVenderId" ColumnName="nVenderId" />
+                <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
+                <ScalarProperty Name="tTemplateName" ColumnName="tTemplateName" />
+                <ScalarProperty Name="aPurchaseOrderTemplateId" ColumnName="aPurchaseOrderTemplateId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -34,9 +34,8 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .logoPart div{
-    margin-left: 10%;
-    width: 130px;
-    float: left;
+    margin: auto;
+    width: 80px;
 }
 .logoPart span {
     line-height: 82px;
