@@ -1,5 +1,5 @@
 <div class="projectHeader">
-    <mat-icon class="backIcon">arrow_back_ios</mat-icon>
+    <mat-icon class="backIcon" (click)="goBack()">arrow_back_ios</mat-icon>
     <h4 class="projHeader" *ngIf="_ProjectType != undefined">Project - {{_ProjectType.optionDisplayName}} Store</h4>
 </div>
 <div class="tabs">

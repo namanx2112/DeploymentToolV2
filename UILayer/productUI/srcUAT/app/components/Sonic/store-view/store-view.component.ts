@@ -121,7 +121,8 @@ export class StoreViewComponent {
         break;
       case TabType.StoreNetworking:
         this.techCompService.GetNetworking(searchField).subscribe((x: StoreNetworkings[]) => {
-          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);          
+          this.selectedTab = 0;
         });
         break;
       case TabType.StorePOS:
@@ -137,7 +138,6 @@ export class StoreViewComponent {
       case TabType.StoreExteriorMenus:
         this.techCompService.GetExteriorMenus(searchField).subscribe((x: StoreExteriorMenus[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
-          this.selectedTab = 3;
         });
         break;
       case TabType.StorePaymetSystem:
@@ -212,7 +212,7 @@ export class StoreViewComponent {
     const dialogConfig = new MatDialogConfig();
     let dialogRef: any;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '80%';
+    dialogConfig.maxHeight = '90vh';
     dialogConfig.width = '60%';
 
     dialogConfig.data = {

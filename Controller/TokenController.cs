@@ -22,7 +22,6 @@ namespace DeploymentTool.Controller
 
             if (user.nUserID != -1)
             {
-
                 user.auth = JwtManager.GenerateToken(user);
                 return Request.CreateResponse(HttpStatusCode.OK, user);
             }

@@ -68,6 +68,13 @@ namespace DeploymentTool
         public virtual DbSet<tblQuoteRequestTechCompField> tblQuoteRequestTechCompFields { get; set; }
         public virtual DbSet<tblTrace> tblTraces { get; set; }
         public virtual DbSet<tblPurchaseOrderTemplate> tblPurchaseOrderTemplates { get; set; }
+        public virtual DbSet<tblOutgoingEmail> tblOutgoingEmails { get; set; }
+        public virtual DbSet<tblOutgoingEmailAttachment> tblOutgoingEmailAttachments { get; set; }
+        public virtual DbSet<tblPart> tblParts { get; set; }
+        public virtual DbSet<tblPurchaseOrder> tblPurchaseOrders { get; set; }
+        public virtual DbSet<tblPurchaseOrderPart> tblPurchaseOrderParts { get; set; }
+        public virtual DbSet<tblPurchaseOrderTemplatePart> tblPurchaseOrderTemplateParts { get; set; }
+        public virtual DbSet<tblVendorPartRel> tblVendorPartRels { get; set; }
     
         public virtual int sproc_CreateStoreFromExcel(string tStoreName, string tProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
         {

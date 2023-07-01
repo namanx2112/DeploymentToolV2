@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -15,6 +16,13 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Web.Http;
 using System.Xml.Linq;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Runtime.InteropServices;
+using System.Security.Policy;
+using System.Web;
+using iTextSharp.text.html.simpleparser;
+using System.Runtime.Remoting.Messaging;
 
 namespace DeploymentTool.Controller
 {
@@ -77,6 +85,7 @@ namespace DeploymentTool.Controller
                 }
                 else
                 {
+                    /*
                     SqlParameter tModuleNameParam = new SqlParameter("@aQuoteRequestTemplateId", nTemplateId);
                     List<QuoteRequestTemplateTemp> items = db.Database.SqlQuery<QuoteRequestTemplateTemp>("exec sproc_GetQuoteRequestTemplate @aQuoteRequestTemplateId", tModuleNameParam).ToList();
 
@@ -110,7 +119,42 @@ namespace DeploymentTool.Controller
 
                     }
                     templateObj.quoteRequestTechComps = quoteRequestTechComps;
+                    */
+                    PurchaseOrderTeamplate templatePOobj = new PurchaseOrderTeamplate();
+                    SqlParameter tModuleNameParam = new SqlParameter("@aPurchaseOrderTemplateID", nTemplateId);
+                    List<tblPurchaseOrderTemplateTemp> items = db.Database.SqlQuery<tblPurchaseOrderTemplateTemp>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID", tModuleNameParam).ToList();
+
+                    templatePOobj.aPurchaseOrderTemplateID = items[0].aPurchaseOrderTemplateID;
+                    templatePOobj.tTemplateName = items[0].tTemplateName;
+                    templatePOobj.nBrandId = items[0].nBrandId;
+                    templatePOobj.nCreatedBy = items[0].nCreatedBy;
+                    templatePOobj.nUpdateBy = items[0].nUpdateBy;
+                    SqlParameter tModuleparmParts = new SqlParameter("@aPurchaseOrderTemplateID", nTemplateId);
+
+                    List<PurchaseOrderPartDetails> itemParts = db.Database.SqlQuery<PurchaseOrderPartDetails>("exec sproc_GetPurchaseOrderPartsDetails @aPurchaseOrderTemplateID", tModuleparmParts).ToList();
+                    List<PurchaseOrderParts> obj=new List<PurchaseOrderParts>();
+                    foreach (var RequestTechComp in itemParts)
+                    {
+
+                        obj.Add(new PurchaseOrderParts()
+                        {
+                            aPurchaseOrderTemplatePartsID = RequestTechComp.nPurchaseOrderPartDetailsID,
+                            aPurchaseOrderTemplateID = RequestTechComp.aPurchaseOrderTemplateID,
+                            nPartID = RequestTechComp.nPartID,
+                            nConfigProjectFieldID = RequestTechComp.nQuantity,
+                            tPartDesc = RequestTechComp.tPartDesc,
+                            tPartNumber = RequestTechComp.tPartNumber,
+                            cPrice = RequestTechComp.cPrice,
+                            nQuantity = RequestTechComp.nQuantity,
+                            cTotal = RequestTechComp.cTotal
+
+
+                        });
+
+                    }
+                    templatePOobj.purchaseOrderParts = obj;
                 }
+
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<QuoteRequestTemplate>(templateObj, new JsonMediaTypeFormatter())
@@ -191,63 +235,185 @@ namespace DeploymentTool.Controller
         {
             try
             {
-                //int nProjectID = 7;
-                int nTemplateId = 3;
+                //PO Start
+                int aPurchaseOrderTemplateID = 1;//nProjectID;
+               
                 string strBody = "";
                 string strSubject = "";
-                var strSub = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where aStoreID= @aStoreID", new SqlParameter("@aStoreID", nProjectID)).FirstOrDefault();
-                //strSubject = "Store #" + strSub + " Quote Request";
+                var strNumber = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where aStoreID= (Select nStoreID from tblProject  with (nolock) where aProjectID= @nProjectID)", new SqlParameter("@nProjectID", nProjectID)).FirstOrDefault();
+                var tSubject = "Store #" + strNumber + "- FabCon Purchase Order";
 
-                SqlParameter tModuleNameP = new SqlParameter("@nQuoteRequestTemplateId", nTemplateId);
-                List<QuoteRequestTechCompTemp> item = db.Database.SqlQuery<QuoteRequestTechCompTemp>("exec sproc_GetQuoteRequestTechComp @nQuoteRequestTemplateId", tModuleNameP).ToList();
-                foreach (var RequestTechComp in item)
+                SqlParameter tModuleparm = new SqlParameter("@aPurchaseOrderTemplateID", aPurchaseOrderTemplateID);
+
+                List<tblPurchaseOrderTemplateTemp> itemFields = db.Database.SqlQuery<tblPurchaseOrderTemplateTemp>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID", tModuleparm).ToList();
+
+                strBody +="<div><h1> " + itemFields[0].tTemplateName + " </h1></div>";
+
+                nProjectID = 7;
+                SqlParameter tModuleparmAdress = new SqlParameter("@nProjectID", nProjectID);
+
+                List<PurchaseOrderBillingAndShippingDetails> itemAdress = db.Database.SqlQuery<PurchaseOrderBillingAndShippingDetails>("exec sproc_GetPurchaseOrderBillingAndShippingDetails @nProjectID", tModuleparmAdress).ToList();
+                strBody += "<div><b> " + itemFields[0].tTemplateName + " </b></div><div>\r\n    &nbsp;\r\n</div>";
+                strBody += "<div><b> Store No </b> " + strNumber + "</div>";
+                //strBody += "<figure class='table' style='width:100%;'>";
+                strBody += " <table><tbody><tr>";
+                bool btemp = true;              
+                foreach (var PurchaseOrderAdress in itemAdress)
                 {
-                    strBody += "<div><h1> " + RequestTechComp.tTechCompName + " </h1></div>";
-                   // strBody += "</br> " + RequestTechComp.tTechCompName + ":</br>";
-                    string strData = "";
-                    using (var conn = new SqlConnection(_connectionString))
+                
+                    //if (PurchaseOrderAdress.nPurchaseOrderAddressType == PurchaseOrderAddressType.Billing)
+                    if (btemp)
                     {
+                        strBody += "<td></br><div><b> Billing </b></div></br>";
 
-                        using (var cmd = new SqlCommand("sproc_getDynamicDataFromCompID", conn))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
+                        strBody += "<div><b> Name </b> " + PurchaseOrderAdress.tName + "</div>";
 
-                            cmd.Parameters.AddWithValue("@nQuoteRequestTechCompId", RequestTechComp.aQuoteRequestTechCompId);
-                            cmd.Parameters.AddWithValue("@nProjectID", nProjectID);
+                        strBody += "<div><b> Phone </b> " + PurchaseOrderAdress.tPhone + "</div>";
 
-                            conn.Open();
+                        strBody += "<div><b> Email </b> " + PurchaseOrderAdress.tEmail + "</div>";
 
-                            using (var reader = cmd.ExecuteReader())
-                            {
+                        strBody += "<div><b> Address </b> " + PurchaseOrderAdress.tAddress + "</div></td>";
+                        btemp = false;
 
-                                do
-                                {
-                                    while (reader.Read())
-                                    {
-                                        for (int i = 0; i < reader.FieldCount; i++)
-                                        {
-                                            //strData += reader.GetName(i).ToString() + ":" + reader.GetValue(i).ToString() + "</br>";
-                                            strData += "<div><b> "+ reader.GetName(i).ToString() + " </b> "+ reader.GetValue(i).ToString() + "</div>";
-                                        }
-
-                                    }
-                                } while (reader.NextResult());
-                            }
-                        }
                     }
-                    strBody += strData ;
-                }
+                    //else if (PurchaseOrderAdress.nPurchaseOrderAddressType == PurchaseOrderAddressType.Shipping)
+                    else
+                    {
+                        strBody += "<td></br><div><b> Shipping </b></div></br>";
 
-               string tContentdata = "<div>Please provide a quote for this store based on the information below. Please be sure to reply to all so our entire team receives it. Thanks!</br></div>";
-                tContentdata += strBody;// "<div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div><div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div>",
-                   
+                        strBody += "<div><b> Name </b> " + PurchaseOrderAdress.tName + "</div>";
+
+                        strBody += "<div><b> Phone </b> " + PurchaseOrderAdress.tPhone + "</div>";
+
+                        strBody += "<div><b> Email </b> " + PurchaseOrderAdress.tEmail + "</div>";
+
+                        strBody += "<div><b> Address </b> " + PurchaseOrderAdress.tAddress + "</div></td>";
+                    }
+                    
+                }
+                strBody += "</tr></tbody></table></br><div><b> Notes </b> &nbsp;</div>";
+                strBody += "<div><table><thead><tr><th style='width:35%;'>Description</th><th style='width:35%;'>Parts Number</th><th style='width:10%;'>Price</th><th style='width:10%;'> Quantity</th><th style='width:10%;'>Total</th></tr></thead>";
+
+                nProjectID = 1;
+                SqlParameter tModuleparmParts = new SqlParameter("@nProjectID", nProjectID);
+
+                List<PurchaseOrderPartDetails> itemParts = db.Database.SqlQuery<PurchaseOrderPartDetails>("exec sproc_GetPurchaseOrderPartsDetails @nProjectID", tModuleparmParts).ToList();
+                decimal cTotal = 0;
+                strBody += "<tbody>";
+                foreach (var parts in itemParts)
+                {
+                    parts.cTotal = parts.cPrice * parts.nQuantity;
+                    strBody += "<tr><td>" + parts.tPartDesc + "</td><td>" + parts.tPartNumber + "</td><td>" + parts.cPrice + "</td><td>" + parts.nQuantity + "</td><td>" + parts.cTotal + "</td></tr>";
+                    cTotal = cTotal+ parts.cTotal;
+                }
+                strBody += "</tbody>";
+                strBody += "</table></div>";
+                strBody += "<div style='text-align:right;'><b> Total:</b> " + cTotal.ToString() + "</div>";
+                strBody += "<div style='text-align:right;'><b> PO#: </b> " + aPurchaseOrderTemplateID.ToString() + "</div>";
+                strBody += "<div style='text-align:right;'><b> Deliver#: </b> " + DateTime.Now.ToString() + "</div>";
+
+                string URL = HttpRuntime.AppDomainAppPath;
+                string strFilePath = URL + @"Attachments\PurachaaseOrder.pdf";
+                //// Create a new PDF writer
+                //PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(strFilePath, FileMode.Create));
+
+                //// Open the PDF document
+                //document.Open();
+                //request.tContent = "Please provide a quote for this store based on the information below. Please be sure to reply to all so our entire team receives it. Thanks!\r\nPOS\r\nnStatus\r\nVendor 4\r\nDelivery Date\r\nConfig Date\r\nSupport Date\r\nStore Information\r\nStore Name 1223\r\nAddress1 1108 W. JACKSON\r\nStore City OZARK\r\nStore Name 1223\r\nAddress1 1108 W. JACKSON\r\nStore City OZARK\r\nStore Zip\r\nGeneral Contractor Phone\r\nGeneral ContractorEmail\r\nStore Name 1223\r\nAddress1 1108 W. JACKSON\r\nStore Address2\r\nStore City OZARK\r\nStore Configuration\r\nAudio\r\nVendor 2\r\nConfiguration\r\nCost 452.00\r\nVendor 2\r\nStatus 1\r\nConfiguration\r\nDelivery Date\r\nVendor 2\r\nStatus 1\r\nConfiguration\r\nDelivery Date";
+                //// Add content to the PDF document
+                //document.Add(new Paragraph(request.tContent));
+                //document.Close();
+                StringReader sr = new StringReader(strBody);
+                Document pdfDoc = new Document();// PageSize.A4, 10f, 10f, 10f, 0f);
+                HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+                // using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(strFilePath, FileMode.Create));
+                    pdfDoc.Open();
+
+                    htmlparser.Parse(sr);
+                    pdfDoc.Close();
+
+                    //byte[] bytes = memoryStream.ToArray();
+                    //memoryStream.Close();
+                }
+                //Start
                 var itemMerge = new MergedQuoteRequest()
                 {
-                    tContent = tContentdata,
-                    tSubject = "Store #" + nProjectID + "- HME Quote Request",
-                    tTo = "pp.santosh@gmail.com"
+                    tContent = strBody,
+                    tSubject = "Store #" + strNumber + "- HME Quote Request",
+                    tTo = "abcd@gmail.com"
 
                 };
+                //                         
+                //PO End
+
+                // //Quote Start
+                // //int nProjectID = 7;
+                // int nTemplateId = 3;
+                // string strBody = "";
+                // string strSubject = "";
+                // var strNumber = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where aStoreID= (Select nStoreID from tblProject  with (nolock) where aProjectID= @nProjectID)", new SqlParameter("@nProjectID", nProjectID)).FirstOrDefault();
+                // //strSubject = "Store #" + strNumber + " Quote Request";
+
+                // SqlParameter tModuleNameP = new SqlParameter("@nQuoteRequestTemplateId", nTemplateId);
+                // List<QuoteRequestTechCompTemp> item = db.Database.SqlQuery<QuoteRequestTechCompTemp>("exec sproc_GetQuoteRequestTechComp @nQuoteRequestTemplateId", tModuleNameP).ToList();
+                // foreach (var RequestTechComp in item)
+                // {
+                //     strBody += "<div><h1> " + RequestTechComp.tTechCompName + " </h1></div>";
+                //    // strBody += "</br> " + RequestTechComp.tTechCompName + ":</br>";
+                //     string strData = "";
+                //     using (var conn = new SqlConnection(_connectionString))
+                //     {
+
+                //         using (var cmd = new SqlCommand("sproc_getDynamicDataFromCompID", conn))
+                //         {
+                //             cmd.CommandType = CommandType.StoredProcedure;
+
+                //             cmd.Parameters.AddWithValue("@nQuoteRequestTechCompId", RequestTechComp.aQuoteRequestTechCompId);
+                //             cmd.Parameters.AddWithValue("@nProjectID", nProjectID);
+
+                //             conn.Open();
+
+                //             using (var reader = cmd.ExecuteReader())
+                //             {
+                //                 bool RowExist = false;
+                //                 do
+                //                 {
+                //                     while (reader.Read())
+                //                     {
+                //                         for (int i = 0; i < reader.FieldCount; i++)
+                //                         {
+                //                             //strData += reader.GetName(i).ToString() + ":" + reader.GetValue(i).ToString() + "</br>";
+                //                             strData += "<div><b> "+ reader.GetName(i).ToString() + " </b> "+ reader.GetValue(i).ToString() + "</div>";
+                //                             RowExist = true;
+                //                         }
+
+                //                     }
+                //                     if (!RowExist)
+                //                     {
+                //                         for (int i = 0; i < reader.FieldCount; i++)
+                //                             strData += "<div><b> " + reader.GetName(i).ToString() + " </b></div> ";
+                //                     }
+                //                 } while (reader.NextResult());
+                //             }
+                //         }
+                //     }
+                //     strBody += strData ;
+                // }
+
+                //string tContentdata = "<div>Please provide a quote for this store based on the information below. Please be sure to reply to all so our entire team receives it. Thanks!</br></div>";
+                // tContentdata += strBody;// "<div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div><div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div>",
+
+                // var itemMerge = new MergedQuoteRequest()
+                // {
+                //     tContent = tContentdata,
+                //     tSubject = "Store #" + strNumber + "- HME Quote Request",
+                //     tTo = "abcd@gmail.com"
+
+                // };
+
+                // // Quote End
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<MergedQuoteRequest>(itemMerge, new JsonMediaTypeFormatter())
@@ -265,6 +431,33 @@ namespace DeploymentTool.Controller
         {
             try
             {
+                //Document document = new Document();
+                // string URL = HttpRuntime.AppDomainAppPath;
+                // string strFilePath = URL + @"Attachments\PurachaaseOrder.pdf";
+                // //// Create a new PDF writer
+                // //PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(strFilePath, FileMode.Create));
+
+                // //// Open the PDF document
+                // //document.Open();
+                // //request.tContent = "Please provide a quote for this store based on the information below. Please be sure to reply to all so our entire team receives it. Thanks!\r\nPOS\r\nnStatus\r\nVendor 4\r\nDelivery Date\r\nConfig Date\r\nSupport Date\r\nStore Information\r\nStore Name 1223\r\nAddress1 1108 W. JACKSON\r\nStore City OZARK\r\nStore Name 1223\r\nAddress1 1108 W. JACKSON\r\nStore City OZARK\r\nStore Zip\r\nGeneral Contractor Phone\r\nGeneral ContractorEmail\r\nStore Name 1223\r\nAddress1 1108 W. JACKSON\r\nStore Address2\r\nStore City OZARK\r\nStore Configuration\r\nAudio\r\nVendor 2\r\nConfiguration\r\nCost 452.00\r\nVendor 2\r\nStatus 1\r\nConfiguration\r\nDelivery Date\r\nVendor 2\r\nStatus 1\r\nConfiguration\r\nDelivery Date";
+                // //// Add content to the PDF document
+                // //document.Add(new Paragraph(request.tContent));
+                // //document.Close();
+                // StringReader sr = new StringReader(request.tContent);
+                // Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+                // HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+                //// using (MemoryStream memoryStream = new MemoryStream())
+                // {
+                //     PdfWriter writer = PdfWriter.GetInstance(pdfDoc,  new FileStream(strFilePath, FileMode.Create));
+                //     pdfDoc.Open();
+
+                //     htmlparser.Parse(sr);
+                //     pdfDoc.Close();
+
+                //     //byte[] bytes = memoryStream.ToArray();
+                //     //memoryStream.Close();
+                // }
+                ////Start
                 //  string smtpServer = "smtp.sendgrid.net"; // Replace with your SMTP server
                 string smtpServer = "smtp.office365.com"; // Replace with your SMTP server
                 int smtpPort = 587; // Replace with your SMTP port
@@ -290,15 +483,16 @@ namespace DeploymentTool.Controller
                         {
                             // Send the email
                             smtpClient.Send(mailMessage);
-                            
+
                         }
                     }
                     catch (Exception ex)
                     {
                         //Console.WriteLine("An error occurred while sending the email: " + ex.Message);
-                        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while sending the email: "+ex);
+                        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while sending the email: " + ex);
                     }
                 }
+                //start END
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<string>("Done", new JsonMediaTypeFormatter())

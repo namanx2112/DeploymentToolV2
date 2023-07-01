@@ -666,15 +666,110 @@
     <EntitySetMapping Name="tblPurchaseOrderTemplates">
       <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplate">
         <MappingFragment StoreEntitySet="tblPurchaseOrderTemplate">
+          <ScalarProperty Name="nVenderID" ColumnName="nVenderID" />
+          <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
+          <ScalarProperty Name="aPurchaseOrderTemplateID" ColumnName="aPurchaseOrderTemplateID" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
           <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
           <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-          <ScalarProperty Name="nVenderId" ColumnName="nVenderId" />
-          <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
           <ScalarProperty Name="tTemplateName" ColumnName="tTemplateName" />
-          <ScalarProperty Name="aPurchaseOrderTemplateId" ColumnName="aPurchaseOrderTemplateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOutgoingEmails">
+      <EntityTypeMapping TypeName="dtDBModel.tblOutgoingEmail">
+        <MappingFragment StoreEntitySet="tblOutgoingEmail">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tPlainContent" ColumnName="tPlainContent" />
+          <ScalarProperty Name="tHTMLContent" ColumnName="tHTMLContent" />
+          <ScalarProperty Name="tSubject" ColumnName="tSubject" />
+          <ScalarProperty Name="tCC" ColumnName="tCC" />
+          <ScalarProperty Name="tTo" ColumnName="tTo" />
+          <ScalarProperty Name="aOutgoingEmailID" ColumnName="aOutgoingEmailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOutgoingEmailAttachments">
+      <EntityTypeMapping TypeName="dtDBModel.tblOutgoingEmailAttachment">
+        <MappingFragment StoreEntitySet="tblOutgoingEmailAttachment">
+          <ScalarProperty Name="ifile" ColumnName="ifile" />
+          <ScalarProperty Name="tContentID" ColumnName="tContentID" />
+          <ScalarProperty Name="tFileName" ColumnName="tFileName" />
+          <ScalarProperty Name="nOutgoingEmailID" ColumnName="nOutgoingEmailID" />
+          <ScalarProperty Name="aOutgoingEmailAttachmentID" ColumnName="aOutgoingEmailAttachmentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblParts">
+      <EntityTypeMapping TypeName="dtDBModel.tblPart">
+        <MappingFragment StoreEntitySet="tblParts">
+          <ScalarProperty Name="cPrice" ColumnName="cPrice" />
+          <ScalarProperty Name="tPartNumber" ColumnName="tPartNumber" />
+          <ScalarProperty Name="tPartDesc" ColumnName="tPartDesc" />
+          <ScalarProperty Name="aPartID" ColumnName="aPartID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPurchaseOrders">
+      <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrder">
+        <MappingFragment StoreEntitySet="tblPurchaseOrder">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nOutgoingEmailID" ColumnName="nOutgoingEmailID" />
+          <ScalarProperty Name="cTotal" ColumnName="cTotal" />
+          <ScalarProperty Name="dDeliver" ColumnName="dDeliver" />
+          <ScalarProperty Name="tNotes" ColumnName="tNotes" />
+          <ScalarProperty Name="tShippingAddress" ColumnName="tShippingAddress" />
+          <ScalarProperty Name="tShippingEmail" ColumnName="tShippingEmail" />
+          <ScalarProperty Name="tShippingPhone" ColumnName="tShippingPhone" />
+          <ScalarProperty Name="tShippingName" ColumnName="tShippingName" />
+          <ScalarProperty Name="tBillingAddress" ColumnName="tBillingAddress" />
+          <ScalarProperty Name="tBillingEmail" ColumnName="tBillingEmail" />
+          <ScalarProperty Name="tBillingPhone" ColumnName="tBillingPhone" />
+          <ScalarProperty Name="tBillingName" ColumnName="tBillingName" />
+          <ScalarProperty Name="nStoreID" ColumnName="nStoreID" />
+          <ScalarProperty Name="tPurchaseOrderNumber" ColumnName="tPurchaseOrderNumber" />
+          <ScalarProperty Name="aPurchaseOrderID" ColumnName="aPurchaseOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPurchaseOrderParts">
+      <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderPart">
+        <MappingFragment StoreEntitySet="tblPurchaseOrderParts">
+          <ScalarProperty Name="cTotal" ColumnName="cTotal" />
+          <ScalarProperty Name="nQuantity" ColumnName="nQuantity" />
+          <ScalarProperty Name="cPrice" ColumnName="cPrice" />
+          <ScalarProperty Name="tPartNumber" ColumnName="tPartNumber" />
+          <ScalarProperty Name="tDescription" ColumnName="tDescription" />
+          <ScalarProperty Name="aPurchaseOrderPartsID" ColumnName="aPurchaseOrderPartsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPurchaseOrderTemplateParts">
+      <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplatePart">
+        <MappingFragment StoreEntitySet="tblPurchaseOrderTemplateParts">
+          <ScalarProperty Name="nPurchaseOrderTemplateID" ColumnName="nPurchaseOrderTemplateID" />
+          <ScalarProperty Name="nConfigProjectFieldID" ColumnName="nConfigProjectFieldID" />
+          <ScalarProperty Name="nPartID" ColumnName="nPartID" />
+          <ScalarProperty Name="aPurchaseOrderTemplatePartsID" ColumnName="aPurchaseOrderTemplatePartsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblVendorPartRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblVendorPartRel">
+        <MappingFragment StoreEntitySet="tblVendorPartRel">
+          <ScalarProperty Name="nPartID" ColumnName="nPartID" />
+          <ScalarProperty Name="nVendorID" ColumnName="nVendorID" />
+          <ScalarProperty Name="aVendorPartRelID" ColumnName="aVendorPartRelID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

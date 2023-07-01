@@ -176,6 +176,41 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="aFunctionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tFunctionName" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="tblOutgoingEmail">
+          <Key>
+            <PropertyRef Name="aOutgoingEmailID" />
+          </Key>
+          <Property Name="aOutgoingEmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tTo" Type="nvarchar(max)" />
+          <Property Name="tCC" Type="nvarchar(max)" />
+          <Property Name="tSubject" Type="nvarchar(max)" />
+          <Property Name="tHTMLContent" Type="nvarchar(max)" />
+          <Property Name="tPlainContent" Type="nvarchar(max)" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblOutgoingEmailAttachment">
+          <Key>
+            <PropertyRef Name="aOutgoingEmailAttachmentID" />
+          </Key>
+          <Property Name="aOutgoingEmailAttachmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nOutgoingEmailID" Type="int" />
+          <Property Name="tFileName" Type="nvarchar(max)" />
+          <Property Name="tContentID" Type="nvarchar(max)" />
+          <Property Name="ifile" Type="image" />
+        </EntityType>
+        <EntityType Name="tblParts">
+          <Key>
+            <PropertyRef Name="aPartID" />
+          </Key>
+          <Property Name="aPartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tPartDesc" Type="nvarchar(max)" />
+          <Property Name="tPartNumber" Type="nvarchar(max)" />
+          <Property Name="cPrice" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="tblProject">
           <Key>
             <PropertyRef Name="aProjectID" />
@@ -455,19 +490,64 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="bDeleted" Type="bit" />
           <Property Name="tCity" Type="nvarchar" MaxLength="500" />
         </EntityType>
-        <EntityType Name="tblPurchaseOrderTemplate">
+        <EntityType Name="tblPurchaseOrder">
           <Key>
-            <PropertyRef Name="aPurchaseOrderTemplateId" />
+            <PropertyRef Name="aPurchaseOrderID" />
           </Key>
-          <Property Name="aPurchaseOrderTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tTemplateName" Type="varchar" MaxLength="500" />
-          <Property Name="nBrandId" Type="int" />
-          <Property Name="nVenderId" Type="int" />
+          <Property Name="aPurchaseOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tPurchaseOrderNumber" Type="nvarchar(max)" />
+          <Property Name="nStoreID" Type="int" />
+          <Property Name="tBillingName" Type="nvarchar(max)" />
+          <Property Name="tBillingPhone" Type="nvarchar(max)" />
+          <Property Name="tBillingEmail" Type="nvarchar(max)" />
+          <Property Name="tBillingAddress" Type="nvarchar(max)" />
+          <Property Name="tShippingName" Type="nvarchar(max)" />
+          <Property Name="tShippingPhone" Type="nvarchar(max)" />
+          <Property Name="tShippingEmail" Type="nvarchar(max)" />
+          <Property Name="tShippingAddress" Type="nvarchar(max)" />
+          <Property Name="tNotes" Type="nvarchar(max)" />
+          <Property Name="dDeliver" Type="datetime" />
+          <Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="nOutgoingEmailID" Type="int" />
           <Property Name="nCreatedBy" Type="int" />
           <Property Name="nUpdateBy" Type="int" />
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrderParts">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderPartsID" />
+          </Key>
+          <Property Name="aPurchaseOrderPartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tDescription" Type="nvarchar(max)" />
+          <Property Name="tPartNumber" Type="nvarchar(max)" />
+          <Property Name="cPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="nQuantity" Type="int" />
+          <Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrderTemplate">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderTemplateID" />
+          </Key>
+          <Property Name="aPurchaseOrderTemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tTemplateName" Type="varchar" MaxLength="500" />
+          <Property Name="nBrandID" Type="int" />
+          <Property Name="nVenderID" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrderTemplateParts">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderTemplatePartsID" />
+          </Key>
+          <Property Name="aPurchaseOrderTemplatePartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nPurchaseOrderTemplateID" Type="int" />
+          <Property Name="nPartID" Type="int" />
+          <Property Name="nConfigProjectFieldID" Type="int" />
         </EntityType>
         <EntityType Name="tblQuoteRequestMain">
           <Key>
@@ -657,6 +737,14 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="bDeleted" Type="bit" />
           <Property Name="nBrand" Type="int" />
         </EntityType>
+        <EntityType Name="tblVendorPartRel">
+          <Key>
+            <PropertyRef Name="aVendorPartRelID" />
+          </Key>
+          <Property Name="aVendorPartRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nVendorID" Type="int" />
+          <Property Name="nPartID" Type="int" />
+        </EntityType>
         <Function Name="sproc_CreateStoreFromExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tStoreName" Type="varchar" Mode="In" />
           <Parameter Name="tProjectType" Type="varchar" Mode="In" />
@@ -688,6 +776,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOutgoingEmail" EntityType="Self.tblOutgoingEmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOutgoingEmailAttachment" EntityType="Self.tblOutgoingEmailAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblParts" EntityType="Self.tblParts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectAudio" EntityType="Self.tblProjectAudio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectBillTo" EntityType="Self.tblProjectBillTo" Schema="dbo" store:Type="Tables" />
@@ -702,7 +793,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectStore" EntityType="Self.tblProjectStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPurchaseOrder" EntityType="Self.tblPurchaseOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPurchaseOrderParts" EntityType="Self.tblPurchaseOrderParts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPurchaseOrderTemplate" EntityType="Self.tblPurchaseOrderTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPurchaseOrderTemplateParts" EntityType="Self.tblPurchaseOrderTemplateParts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblQuoteRequestMain" EntityType="Self.tblQuoteRequestMain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblQuoteRequestTechComp" EntityType="Self.tblQuoteRequestTechComp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="Self.tblQuoteRequestTechCompFields" Schema="dbo" store:Type="Tables" />
@@ -710,6 +804,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblVendorPartRel" EntityType="Self.tblVendorPartRel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBrandBKP" EntityType="Self.tblBrandBKP" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [tblBrandBKP].[aBrandId] AS [aBrandId], 
@@ -915,6 +1010,13 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="dtDBModel.tblQuoteRequestTechCompField" />
           <EntitySet Name="tblTraces" EntityType="dtDBModel.tblTrace" />
           <EntitySet Name="tblPurchaseOrderTemplates" EntityType="dtDBModel.tblPurchaseOrderTemplate" />
+          <EntitySet Name="tblOutgoingEmails" EntityType="dtDBModel.tblOutgoingEmail" />
+          <EntitySet Name="tblOutgoingEmailAttachments" EntityType="dtDBModel.tblOutgoingEmailAttachment" />
+          <EntitySet Name="tblParts" EntityType="dtDBModel.tblPart" />
+          <EntitySet Name="tblPurchaseOrders" EntityType="dtDBModel.tblPurchaseOrder" />
+          <EntitySet Name="tblPurchaseOrderParts" EntityType="dtDBModel.tblPurchaseOrderPart" />
+          <EntitySet Name="tblPurchaseOrderTemplateParts" EntityType="dtDBModel.tblPurchaseOrderTemplatePart" />
+          <EntitySet Name="tblVendorPartRels" EntityType="dtDBModel.tblVendorPartRel" />
         </EntityContainer>
         <EntityType Name="tblBrand">
           <Key>
@@ -1538,17 +1640,105 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
         </EntityType>
         <EntityType Name="tblPurchaseOrderTemplate">
           <Key>
-            <PropertyRef Name="aPurchaseOrderTemplateId" />
+            <PropertyRef Name="aPurchaseOrderTemplateID" />
           </Key>
-          <Property Name="aPurchaseOrderTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aPurchaseOrderTemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tTemplateName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="nBrandId" Type="Int32" />
-          <Property Name="nVenderId" Type="Int32" />
           <Property Name="nCreatedBy" Type="Int32" />
           <Property Name="nUpdateBy" Type="Int32" />
           <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
           <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="bDeleted" Type="Boolean" />
+          <Property Name="nBrandID" Type="Int32" />
+          <Property Name="nVenderID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblOutgoingEmail">
+          <Key>
+            <PropertyRef Name="aOutgoingEmailID" />
+          </Key>
+          <Property Name="aOutgoingEmailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tTo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tCC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tSubject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tHTMLContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tPlainContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="nCreatedBy" Type="Int32" />
+          <Property Name="nUpdateBy" Type="Int32" />
+          <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="bDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tblOutgoingEmailAttachment">
+          <Key>
+            <PropertyRef Name="aOutgoingEmailAttachmentID" />
+          </Key>
+          <Property Name="aOutgoingEmailAttachmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nOutgoingEmailID" Type="Int32" />
+          <Property Name="tFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tContentID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ifile" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblPart">
+          <Key>
+            <PropertyRef Name="aPartID" />
+          </Key>
+          <Property Name="aPartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tPartDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tPartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="cPrice" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrder">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderID" />
+          </Key>
+          <Property Name="aPurchaseOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tPurchaseOrderNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="nStoreID" Type="Int32" />
+          <Property Name="tBillingName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tBillingPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tBillingEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tBillingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tShippingName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tShippingPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tShippingEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dDeliver" Type="DateTime" Precision="3" />
+          <Property Name="cTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="nOutgoingEmailID" Type="Int32" />
+          <Property Name="nCreatedBy" Type="Int32" />
+          <Property Name="nUpdateBy" Type="Int32" />
+          <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="bDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrderPart">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderPartsID" />
+          </Key>
+          <Property Name="aPurchaseOrderPartsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tPartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="cPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="nQuantity" Type="Int32" />
+          <Property Name="cTotal" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrderTemplatePart">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderTemplatePartsID" />
+          </Key>
+          <Property Name="aPurchaseOrderTemplatePartsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nPartID" Type="Int32" />
+          <Property Name="nConfigProjectFieldID" Type="Int32" />
+          <Property Name="nPurchaseOrderTemplateID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblVendorPartRel">
+          <Key>
+            <PropertyRef Name="aVendorPartRelID" />
+          </Key>
+          <Property Name="aVendorPartRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nVendorID" Type="Int32" />
+          <Property Name="nPartID" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2221,15 +2411,110 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblPurchaseOrderTemplates">
             <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplate">
               <MappingFragment StoreEntitySet="tblPurchaseOrderTemplate">
+                <ScalarProperty Name="nVenderID" ColumnName="nVenderID" />
+                <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
+                <ScalarProperty Name="aPurchaseOrderTemplateID" ColumnName="aPurchaseOrderTemplateID" />
                 <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
                 <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
                 <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
                 <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
                 <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-                <ScalarProperty Name="nVenderId" ColumnName="nVenderId" />
-                <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
                 <ScalarProperty Name="tTemplateName" ColumnName="tTemplateName" />
-                <ScalarProperty Name="aPurchaseOrderTemplateId" ColumnName="aPurchaseOrderTemplateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOutgoingEmails">
+            <EntityTypeMapping TypeName="dtDBModel.tblOutgoingEmail">
+              <MappingFragment StoreEntitySet="tblOutgoingEmail">
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+                <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+                <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+                <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+                <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+                <ScalarProperty Name="tPlainContent" ColumnName="tPlainContent" />
+                <ScalarProperty Name="tHTMLContent" ColumnName="tHTMLContent" />
+                <ScalarProperty Name="tSubject" ColumnName="tSubject" />
+                <ScalarProperty Name="tCC" ColumnName="tCC" />
+                <ScalarProperty Name="tTo" ColumnName="tTo" />
+                <ScalarProperty Name="aOutgoingEmailID" ColumnName="aOutgoingEmailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOutgoingEmailAttachments">
+            <EntityTypeMapping TypeName="dtDBModel.tblOutgoingEmailAttachment">
+              <MappingFragment StoreEntitySet="tblOutgoingEmailAttachment">
+                <ScalarProperty Name="ifile" ColumnName="ifile" />
+                <ScalarProperty Name="tContentID" ColumnName="tContentID" />
+                <ScalarProperty Name="tFileName" ColumnName="tFileName" />
+                <ScalarProperty Name="nOutgoingEmailID" ColumnName="nOutgoingEmailID" />
+                <ScalarProperty Name="aOutgoingEmailAttachmentID" ColumnName="aOutgoingEmailAttachmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblParts">
+            <EntityTypeMapping TypeName="dtDBModel.tblPart">
+              <MappingFragment StoreEntitySet="tblParts">
+                <ScalarProperty Name="cPrice" ColumnName="cPrice" />
+                <ScalarProperty Name="tPartNumber" ColumnName="tPartNumber" />
+                <ScalarProperty Name="tPartDesc" ColumnName="tPartDesc" />
+                <ScalarProperty Name="aPartID" ColumnName="aPartID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPurchaseOrders">
+            <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrder">
+              <MappingFragment StoreEntitySet="tblPurchaseOrder">
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+                <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+                <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+                <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+                <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+                <ScalarProperty Name="nOutgoingEmailID" ColumnName="nOutgoingEmailID" />
+                <ScalarProperty Name="cTotal" ColumnName="cTotal" />
+                <ScalarProperty Name="dDeliver" ColumnName="dDeliver" />
+                <ScalarProperty Name="tNotes" ColumnName="tNotes" />
+                <ScalarProperty Name="tShippingAddress" ColumnName="tShippingAddress" />
+                <ScalarProperty Name="tShippingEmail" ColumnName="tShippingEmail" />
+                <ScalarProperty Name="tShippingPhone" ColumnName="tShippingPhone" />
+                <ScalarProperty Name="tShippingName" ColumnName="tShippingName" />
+                <ScalarProperty Name="tBillingAddress" ColumnName="tBillingAddress" />
+                <ScalarProperty Name="tBillingEmail" ColumnName="tBillingEmail" />
+                <ScalarProperty Name="tBillingPhone" ColumnName="tBillingPhone" />
+                <ScalarProperty Name="tBillingName" ColumnName="tBillingName" />
+                <ScalarProperty Name="nStoreID" ColumnName="nStoreID" />
+                <ScalarProperty Name="tPurchaseOrderNumber" ColumnName="tPurchaseOrderNumber" />
+                <ScalarProperty Name="aPurchaseOrderID" ColumnName="aPurchaseOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPurchaseOrderParts">
+            <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderPart">
+              <MappingFragment StoreEntitySet="tblPurchaseOrderParts">
+                <ScalarProperty Name="cTotal" ColumnName="cTotal" />
+                <ScalarProperty Name="nQuantity" ColumnName="nQuantity" />
+                <ScalarProperty Name="cPrice" ColumnName="cPrice" />
+                <ScalarProperty Name="tPartNumber" ColumnName="tPartNumber" />
+                <ScalarProperty Name="tDescription" ColumnName="tDescription" />
+                <ScalarProperty Name="aPurchaseOrderPartsID" ColumnName="aPurchaseOrderPartsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPurchaseOrderTemplateParts">
+            <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplatePart">
+              <MappingFragment StoreEntitySet="tblPurchaseOrderTemplateParts">
+                <ScalarProperty Name="nPurchaseOrderTemplateID" ColumnName="nPurchaseOrderTemplateID" />
+                <ScalarProperty Name="nConfigProjectFieldID" ColumnName="nConfigProjectFieldID" />
+                <ScalarProperty Name="nPartID" ColumnName="nPartID" />
+                <ScalarProperty Name="aPurchaseOrderTemplatePartsID" ColumnName="aPurchaseOrderTemplatePartsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblVendorPartRels">
+            <EntityTypeMapping TypeName="dtDBModel.tblVendorPartRel">
+              <MappingFragment StoreEntitySet="tblVendorPartRel">
+                <ScalarProperty Name="nPartID" ColumnName="nPartID" />
+                <ScalarProperty Name="nVendorID" ColumnName="nVendorID" />
+                <ScalarProperty Name="aVendorPartRelID" ColumnName="aVendorPartRelID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

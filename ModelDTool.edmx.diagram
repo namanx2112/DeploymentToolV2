@@ -46,6 +46,13 @@
         <EntityTypeShape EntityType="dtDBModel.tblQuoteRequestTechCompField" Width="1.5" PointX="19.75" PointY="3.75" />
         <EntityTypeShape EntityType="dtDBModel.tblTrace" Width="1.5" PointX="19.75" PointY="6.75" />
         <EntityTypeShape EntityType="dtDBModel.tblPurchaseOrderTemplate" Width="1.5" PointX="11.375" PointY="19.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblOutgoingEmail" Width="1.5" PointX="19.375" PointY="12.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblOutgoingEmailAttachment" Width="1.5" PointX="13.375" PointY="19.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblPart" Width="1.5" PointX="15.375" PointY="19.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblPurchaseOrder" Width="1.5" PointX="19.375" PointY="16.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblPurchaseOrderPart" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblPurchaseOrderTemplatePart" Width="1.5" PointX="7.375" PointY="21.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblVendorPartRel" Width="1.5" PointX="21.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

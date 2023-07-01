@@ -47,7 +47,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectInteriorMenu tblProjectInteriorMenu)
         {
-
+            tblProjectInteriorMenu.ProjectActiveStatus = 1;
             db.Entry(tblProjectInteriorMenu).State = EntityState.Modified;
 
             try

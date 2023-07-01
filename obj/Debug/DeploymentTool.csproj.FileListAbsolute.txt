@@ -436,8 +436,6 @@ C:\Repos\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
 C:\Repos\obj\Debug\DeploymentTool.csproj.CopyComplete
 C:\Repos\obj\Debug\DeploymentTool.dll
 C:\Repos\obj\Debug\DeploymentTool.pdb
-D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
-D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
 D:\Projects\InspireBrand\bin\DeploymentTool.dll.config
 D:\Projects\InspireBrand\bin\DeploymentTool.dll
 D:\Projects\InspireBrand\bin\DeploymentTool.pdb
@@ -492,6 +490,7 @@ D:\Projects\InspireBrand\bin\roslyn\VBCSCompiler.exe
 D:\Projects\InspireBrand\bin\roslyn\VBCSCompiler.exe.config
 D:\Projects\InspireBrand\bin\EntityFramework.dll
 D:\Projects\InspireBrand\bin\EntityFramework.SqlServer.dll
+D:\Projects\InspireBrand\bin\ExcelDataReader.dll
 D:\Projects\InspireBrand\bin\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Projects\InspireBrand\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Projects\InspireBrand\bin\Microsoft.IdentityModel.Abstractions.dll
@@ -502,6 +501,7 @@ D:\Projects\InspireBrand\bin\Microsoft.Web.Infrastructure.dll
 D:\Projects\InspireBrand\bin\Newtonsoft.Json.dll
 D:\Projects\InspireBrand\bin\System.Buffers.dll
 D:\Projects\InspireBrand\bin\System.IdentityModel.Tokens.Jwt.dll
+D:\Projects\InspireBrand\bin\System.Linq.Dynamic.Core.dll
 D:\Projects\InspireBrand\bin\System.Memory.dll
 D:\Projects\InspireBrand\bin\System.Net.Http.Formatting.dll
 D:\Projects\InspireBrand\bin\System.Numerics.Vectors.dll
@@ -520,6 +520,8 @@ D:\Projects\InspireBrand\bin\System.Web.WebPages.dll
 D:\Projects\InspireBrand\bin\System.Web.WebPages.Razor.dll
 D:\Projects\InspireBrand\bin\EntityFramework.xml
 D:\Projects\InspireBrand\bin\EntityFramework.SqlServer.xml
+D:\Projects\InspireBrand\bin\ExcelDataReader.pdb
+D:\Projects\InspireBrand\bin\ExcelDataReader.xml
 D:\Projects\InspireBrand\bin\Microsoft.Bcl.AsyncInterfaces.xml
 D:\Projects\InspireBrand\bin\Microsoft.IdentityModel.Abstractions.xml
 D:\Projects\InspireBrand\bin\Microsoft.IdentityModel.JsonWebTokens.xml
@@ -528,6 +530,8 @@ D:\Projects\InspireBrand\bin\Microsoft.IdentityModel.Tokens.xml
 D:\Projects\InspireBrand\bin\Newtonsoft.Json.xml
 D:\Projects\InspireBrand\bin\System.Buffers.xml
 D:\Projects\InspireBrand\bin\System.IdentityModel.Tokens.Jwt.xml
+D:\Projects\InspireBrand\bin\System.Linq.Dynamic.Core.pdb
+D:\Projects\InspireBrand\bin\System.Linq.Dynamic.Core.xml
 D:\Projects\InspireBrand\bin\System.Memory.xml
 D:\Projects\InspireBrand\bin\System.Net.Http.Formatting.xml
 D:\Projects\InspireBrand\bin\System.Numerics.Vectors.xml
@@ -545,12 +549,11 @@ D:\Projects\InspireBrand\bin\System.Web.WebPages.xml
 D:\Projects\InspireBrand\bin\System.Web.WebPages.Deployment.xml
 D:\Projects\InspireBrand\bin\System.Web.WebPages.Razor.xml
 D:\Projects\InspireBrand\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
+D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.csproj.CopyComplete
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.dll
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.pdb
-D:\Projects\InspireBrand\bin\ExcelDataReader.dll
-D:\Projects\InspireBrand\bin\ExcelDataReader.pdb
-D:\Projects\InspireBrand\bin\ExcelDataReader.xml
-D:\Projects\InspireBrand\bin\System.Linq.Dynamic.Core.dll
-D:\Projects\InspireBrand\bin\System.Linq.Dynamic.Core.pdb
-D:\Projects\InspireBrand\bin\System.Linq.Dynamic.Core.xml
+D:\Projects\InspireBrand\bin\BouncyCastle.Crypto.dll
+D:\Projects\InspireBrand\bin\itextsharp.dll
+D:\Projects\InspireBrand\bin\itextsharp.xml

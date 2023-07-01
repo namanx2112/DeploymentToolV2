@@ -36,6 +36,10 @@ export class NewStoreComponent {
     this.curTab = this.allTabs[this.curTabIndex];
   }
 
+  goBack() {
+    this.ChangeView.emit("dashboard");
+  }
+
   getTabs() {
     this.allTabs = [];
     this.allTabs.push(this.service.GetNewStoresTab(TabInstanceType.Single));

@@ -47,8 +47,8 @@ namespace DeploymentTool.Model
         [Authorize]
         [HttpPost]
         public async Task<IHttpActionResult> Update(tblProjectExteriorMenu tblProjectExteriorMenu)
-        {          
-
+        {
+            tblProjectExteriorMenu.ProjectActiveStatus = 1;
             db.Entry(tblProjectExteriorMenu).State = EntityState.Modified;
 
             try

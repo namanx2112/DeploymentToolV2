@@ -47,8 +47,8 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Update(tblProjectAudio tblProjectAudio)
         {
-          
 
+            tblProjectAudio.ProjectActiveStatus = 1;
             db.Entry(tblProjectAudio).State = EntityState.Modified;
 
             try

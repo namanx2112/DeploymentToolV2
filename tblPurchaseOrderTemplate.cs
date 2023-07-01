@@ -14,14 +14,14 @@ namespace DeploymentTool
     
     public partial class tblPurchaseOrderTemplate
     {
-        public int aPurchaseOrderTemplateId { get; set; }
+        public int aPurchaseOrderTemplateID { get; set; }
         public string tTemplateName { get; set; }
-        public Nullable<int> nBrandId { get; set; }
-        public Nullable<int> nVenderId { get; set; }
         public Nullable<int> nCreatedBy { get; set; }
         public Nullable<int> nUpdateBy { get; set; }
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
+        public Nullable<int> nBrandID { get; set; }
+        public Nullable<int> nVenderID { get; set; }
     }
 }

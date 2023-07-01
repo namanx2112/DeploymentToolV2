@@ -46,8 +46,8 @@ namespace DeploymentTool.Controller
         // PUT: api/ProjectPaymentSystems/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectPaymentSystem tblProjectPaymentSystem)
-        {          
-
+        {
+            tblProjectPaymentSystem.ProjectActiveStatus = 1;
             db.Entry(tblProjectPaymentSystem).State = EntityState.Modified;
 
             try

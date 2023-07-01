@@ -47,11 +47,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectSonicRadio tblProjectSonicRadio)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            tblProjectSonicRadio.ProjectActiveStatus = 1;
             db.Entry(tblProjectSonicRadio).State = EntityState.Modified;
 
             try

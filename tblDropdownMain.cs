@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblDropdownMain: Misc.ModelParent
+    public partial class tblDropdownMain : Misc.ModelParent
     {
         public int aMainId { get; set; }
         public Nullable<int> nBrandId { get; set; }

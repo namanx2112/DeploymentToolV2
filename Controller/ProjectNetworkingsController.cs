@@ -47,7 +47,7 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> update(tblProjectNetworking tblProjectNetworking)
         {
-
+            tblProjectNetworking.ProjectActiveStatus = 1;
             db.Entry(tblProjectNetworking).State = EntityState.Modified;
 
             try

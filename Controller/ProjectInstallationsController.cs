@@ -47,7 +47,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectInstallation tblProjectInstallation)
         {
-           
+            tblProjectInstallation.ProjectActiveStatus = 1;
             db.Entry(tblProjectInstallation).State = EntityState.Modified;
 
             try

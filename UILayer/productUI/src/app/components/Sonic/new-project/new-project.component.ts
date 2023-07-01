@@ -42,6 +42,10 @@ export class NewProjectComponent {
     this.curTab = this.allTabs[this.curTabIndex];
   }
 
+  goBack() {
+    this.ChangeView.emit("dashboard");
+  }
+
   SearchedResult(searchedStore: any) {
     this.loadingData = true;
     this.curStore = searchedStore;

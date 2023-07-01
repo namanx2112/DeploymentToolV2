@@ -47,11 +47,7 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Update( tblProjectPOS tblProjectPOS)
         {
-            //if (id != tblProjectPOS.aProjectPOSID)
-            //{
-            //    return BadRequest();
-            //}
-
+            tblProjectPOS.ProjectActiveStatus = 1;
             db.Entry(tblProjectPOS).State = EntityState.Modified;
 
             try

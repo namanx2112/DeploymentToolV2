@@ -11,7 +11,7 @@ import { HomeService } from 'src/app/services/home.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  viewName: string;
+  viewName:string;
   tTabName: string;
   userName: string;
   constructor(private homeService: HomeService, private brandService: BrandServiceService, private commonService: CommonService, private authService: AuthService) {
@@ -25,15 +25,15 @@ export class HomeComponent {
     this.homeService.loginGet().subscribe((res: string) => {
       alert(res);
     });
-  }
+  }  
 
-  switchView(vName: string) {
+  switchView(vName: string){
     this.viewName = vName;
     this.tTabName = vName;
   }
 
-  brandClicked(brand: BrandModel) {
-    this.viewName = brand.tBrandName;
+  brandClicked(brand: BrandModel){
+    this.viewName = brand.tBrandName;    
   }
 
   LogOut() {

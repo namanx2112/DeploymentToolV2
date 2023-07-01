@@ -171,6 +171,41 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="aFunctionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tFunctionName" Type="nvarchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="tblOutgoingEmail">
+    <Key>
+      <PropertyRef Name="aOutgoingEmailID" />
+    </Key>
+    <Property Name="aOutgoingEmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tTo" Type="nvarchar(max)" />
+    <Property Name="tCC" Type="nvarchar(max)" />
+    <Property Name="tSubject" Type="nvarchar(max)" />
+    <Property Name="tHTMLContent" Type="nvarchar(max)" />
+    <Property Name="tPlainContent" Type="nvarchar(max)" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblOutgoingEmailAttachment">
+    <Key>
+      <PropertyRef Name="aOutgoingEmailAttachmentID" />
+    </Key>
+    <Property Name="aOutgoingEmailAttachmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nOutgoingEmailID" Type="int" />
+    <Property Name="tFileName" Type="nvarchar(max)" />
+    <Property Name="tContentID" Type="nvarchar(max)" />
+    <Property Name="ifile" Type="image" />
+  </EntityType>
+  <EntityType Name="tblParts">
+    <Key>
+      <PropertyRef Name="aPartID" />
+    </Key>
+    <Property Name="aPartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tPartDesc" Type="nvarchar(max)" />
+    <Property Name="tPartNumber" Type="nvarchar(max)" />
+    <Property Name="cPrice" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
   <EntityType Name="tblProject">
     <Key>
       <PropertyRef Name="aProjectID" />
@@ -450,19 +485,64 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="bDeleted" Type="bit" />
     <Property Name="tCity" Type="nvarchar" MaxLength="500" />
   </EntityType>
-  <EntityType Name="tblPurchaseOrderTemplate">
+  <EntityType Name="tblPurchaseOrder">
     <Key>
-      <PropertyRef Name="aPurchaseOrderTemplateId" />
+      <PropertyRef Name="aPurchaseOrderID" />
     </Key>
-    <Property Name="aPurchaseOrderTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="tTemplateName" Type="varchar" MaxLength="500" />
-    <Property Name="nBrandId" Type="int" />
-    <Property Name="nVenderId" Type="int" />
+    <Property Name="aPurchaseOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tPurchaseOrderNumber" Type="nvarchar(max)" />
+    <Property Name="nStoreID" Type="int" />
+    <Property Name="tBillingName" Type="nvarchar(max)" />
+    <Property Name="tBillingPhone" Type="nvarchar(max)" />
+    <Property Name="tBillingEmail" Type="nvarchar(max)" />
+    <Property Name="tBillingAddress" Type="nvarchar(max)" />
+    <Property Name="tShippingName" Type="nvarchar(max)" />
+    <Property Name="tShippingPhone" Type="nvarchar(max)" />
+    <Property Name="tShippingEmail" Type="nvarchar(max)" />
+    <Property Name="tShippingAddress" Type="nvarchar(max)" />
+    <Property Name="tNotes" Type="nvarchar(max)" />
+    <Property Name="dDeliver" Type="datetime" />
+    <Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="nOutgoingEmailID" Type="int" />
     <Property Name="nCreatedBy" Type="int" />
     <Property Name="nUpdateBy" Type="int" />
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblPurchaseOrderParts">
+    <Key>
+      <PropertyRef Name="aPurchaseOrderPartsID" />
+    </Key>
+    <Property Name="aPurchaseOrderPartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tDescription" Type="nvarchar(max)" />
+    <Property Name="tPartNumber" Type="nvarchar(max)" />
+    <Property Name="cPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="nQuantity" Type="int" />
+    <Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblPurchaseOrderTemplate">
+    <Key>
+      <PropertyRef Name="aPurchaseOrderTemplateID" />
+    </Key>
+    <Property Name="aPurchaseOrderTemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tTemplateName" Type="varchar" MaxLength="500" />
+    <Property Name="nBrandID" Type="int" />
+    <Property Name="nVenderID" Type="int" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblPurchaseOrderTemplateParts">
+    <Key>
+      <PropertyRef Name="aPurchaseOrderTemplatePartsID" />
+    </Key>
+    <Property Name="aPurchaseOrderTemplatePartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nPurchaseOrderTemplateID" Type="int" />
+    <Property Name="nPartID" Type="int" />
+    <Property Name="nConfigProjectFieldID" Type="int" />
   </EntityType>
   <EntityType Name="tblQuoteRequestMain">
     <Key>
@@ -652,6 +732,14 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Property Name="bDeleted" Type="bit" />
     <Property Name="nBrand" Type="int" />
   </EntityType>
+  <EntityType Name="tblVendorPartRel">
+    <Key>
+      <PropertyRef Name="aVendorPartRelID" />
+    </Key>
+    <Property Name="aVendorPartRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nVendorID" Type="int" />
+    <Property Name="nPartID" Type="int" />
+  </EntityType>
   <Function Name="sproc_CreateStoreFromExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tStoreName" Type="varchar" Mode="In" />
     <Parameter Name="tProjectType" Type="varchar" Mode="In" />
@@ -683,6 +771,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOutgoingEmail" EntityType="Self.tblOutgoingEmail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOutgoingEmailAttachment" EntityType="Self.tblOutgoingEmailAttachment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblParts" EntityType="Self.tblParts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectAudio" EntityType="Self.tblProjectAudio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectBillTo" EntityType="Self.tblProjectBillTo" Schema="dbo" store:Type="Tables" />
@@ -697,7 +788,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectStore" EntityType="Self.tblProjectStore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPurchaseOrder" EntityType="Self.tblPurchaseOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPurchaseOrderParts" EntityType="Self.tblPurchaseOrderParts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPurchaseOrderTemplate" EntityType="Self.tblPurchaseOrderTemplate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPurchaseOrderTemplateParts" EntityType="Self.tblPurchaseOrderTemplateParts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestMain" EntityType="Self.tblQuoteRequestMain" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestTechComp" EntityType="Self.tblQuoteRequestTechComp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="Self.tblQuoteRequestTechCompFields" Schema="dbo" store:Type="Tables" />
@@ -705,6 +799,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblVendorPartRel" EntityType="Self.tblVendorPartRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBrandBKP" EntityType="Self.tblBrandBKP" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [tblBrandBKP].[aBrandId] AS [aBrandId], 

@@ -23,7 +23,10 @@
 
 .menuPart button{
     width: 180px;
-    float: left;
+    margin: 0px 10%;
+    display: block;
+    text-align: left;
+    padding: 0px;
 }
 .logoPart, .menuPart ,.ConfigList{
     float: left;
