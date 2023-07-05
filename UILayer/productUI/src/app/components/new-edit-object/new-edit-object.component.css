@@ -1,32 +1,64 @@
-.tBody{
+.tBody {
     width: calc(100% - 80px);
     padding: 20px;
     border-radius: 10px;
     min-height: calc(100% - 100px);
-    float: left;    
+    float: left;
     border-radius: 10px;
 }
-.tables{
+
+.tables {
     width: 100%;
-    height: calc(40% - 20px);
+    max-height: 300px;
+    overflow: auto;
     margin: 10px 0px;
     border-radius: 10px;
 }
-.details{
+
+.details {
     width: calc(100% - 40px);
-    height: calc(60% -  60px);
+    height: calc(60% - 60px);
     padding: 20px;
     overflow: auto;
     border-radius: 10px;
 }
-.tButton{
+
+.tButton {
     width: calc(100% - 80px);
     float: left;
     margin-top: 10px;
     padding: 0px 20px;
 }
 
-.searchButton{
+.searchButton {
     float: right;
     margin-left: 15px;
+}
+
+.childItems {
+    float: left;
+}
+
+.childItems .tBody {
+    margin-top: 20px;
+}
+
+.tableHeader {
+    float: left;
+    width: 100%;
+    height: 40px;
+    padding: 0px 20px;
+}
+
+.tableHeader h4 {
+    float: left;
+}
+
+.tableHeader button {
+    float: right;
+    background-color: transparent;
+    border: 0px none !important;
+    text-decoration: underline;
+    color: #fff;
+    font-weight: bold;
 }

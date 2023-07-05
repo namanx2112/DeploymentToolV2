@@ -16,33 +16,33 @@ export class PartsService {
 
   GetTableVisibleColumns(){
     return [
-      "tPartsName",
-      "nPartsNumber",
-      "nPartsPrice"
+      "tPartDesc",
+      "tPartNumber",
+      "cPrice"
     ];
   }
 
   Create(request: any) {
-    return this.http.post<PartsModel>(this.configUrl + "Parts/CreateParts", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<PartsModel>(this.configUrl + "VendorParts/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<PartsModel>(this.configUrl + "Parts/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<PartsModel>(this.configUrl + "VendorParts/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Get(request: PartsModel | null) {
-    return this.http.post<PartsModel[]>(this.configUrl + "Parts/GetPartss", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<PartsModel[]>(this.configUrl + "VendorParts/Get", request, { headers: this.authService.getHttpHeaders() });
   }
 
   GetSearchFields(): Fields[] {
     let fields = [{
-      field_name: "Parts Number",
-      fieldUniqeName: "nPartsNumber",
+      field_name: "Parts Description",
+      fieldUniqeName: "tPartDesc",
       defaultVal: "",
       readOnly: false,
       invalid: false,
       field_type: FieldType.number,
-      field_placeholder: "Enter Parts Id",
+      field_placeholder: "Enter Parts Description",
       validator: [],
       mandatory: false,
       hidden: false
@@ -52,7 +52,7 @@ export class PartsService {
   GetFields(): Fields[] {
     let fields = [{
       field_name: "Parts Id",
-      fieldUniqeName: "aPartsId",
+      fieldUniqeName: "aPartID",
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -61,21 +61,32 @@ export class PartsService {
       validator: [],
       mandatory: false,
       hidden: true
+    },{
+      field_name: "Vendor Id",
+      fieldUniqeName: "nVendorId",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter Vendor Id",
+      validator: [],
+      mandatory: false,
+      hidden: true
     },
     {
-      field_name: "Parts Name",
-      fieldUniqeName: "tPartsName",
+      field_name: "Parts Description",
+      fieldUniqeName: "tPartDesc",
       defaultVal: "",
       readOnly: false,
       invalid: false,
       field_type: FieldType.text,
-      field_placeholder: "Enter Parts Name",
+      field_placeholder: "Enter Parts Description",
       validator: [],
       mandatory: false,
       hidden: false
     }, {
       field_name: "Parts Number",
-      fieldUniqeName: "nPartsNumber",
+      fieldUniqeName: "tPartNumber",
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -87,7 +98,7 @@ export class PartsService {
     },
     {
       field_name: "Parts Price",
-      fieldUniqeName: "nPartsPrice",
+      fieldUniqeName: "cPrice",
       defaultVal: "",
       readOnly: false,
       invalid: false,

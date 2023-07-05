@@ -11,10 +11,6 @@ export class ControlsErrorMessages {
     public static Range = "Range is not proper";
 }
 
-export enum FormsModes {
-    None, New, Edit
-}
-
 export interface SonicProjectHighlights {
     title: string,
     count: number

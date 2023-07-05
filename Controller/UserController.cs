@@ -12,6 +12,9 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
 using System.Linq.Dynamic.Core;
+using DeploymentTool.Model;
+using System.Data.SqlClient;
+using System.Net.Http.Formatting;
 
 namespace DeploymentTool.Controller
 {
@@ -22,10 +25,13 @@ namespace DeploymentTool.Controller
         // GET: api/tblUser
         [Authorize]
         [HttpPost]
-        public IQueryable<tblUser> Get(Dictionary<string, string> searchFields)
+        public IQueryable<UserModel> Get(Dictionary<string, string> searchFields)
         {
+            IQueryable<UserModel> items = db.Database.SqlQuery<UserModel>("exec sproc_getUserModel").AsQueryable();
             if (searchFields == null)
-                return db.tblUser;
+            {
+                return items;
+            }
             else
             {
                 StringBuilder sBuilder = new StringBuilder();
@@ -35,7 +41,7 @@ namespace DeploymentTool.Controller
                         sBuilder.Append(" and ");
                     sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
                 }
-                return db.tblUser.Where("x=>" + sBuilder.ToString());
+                return items.Where("x=>" + sBuilder.ToString());
             }
         }
 
@@ -55,23 +61,18 @@ namespace DeploymentTool.Controller
         // PUT: api/tblUser/5
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Update(tblUser tblUser)
+        public async Task<IHttpActionResult> Update(UserModel userRequest)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-
-            db.Entry(tblUser).State = EntityState.Modified;
-
+            db.Entry(userRequest.GetTblUser()).State = EntityState.Modified;
+            // Update into tblUserVendorRelation
             try
             {
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tblUserExists(tblUser.aUserID))
+                if (!tblUserExists(userRequest.aUserID))
                 {
                     return NotFound();
                 }
@@ -87,17 +88,16 @@ namespace DeploymentTool.Controller
         // POST: api/tblUser
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Create(tblUser tblUser)
+        public async Task<IHttpActionResult> Create(UserModel userRequest)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.tblUser.Add(tblUser);
+            var tmpUser = userRequest.GetTblUser();
+            db.tblUser.Add(tmpUser);
             await db.SaveChangesAsync();
 
-            return Json(tblUser);
+            userRequest.aUserID = tmpUser.aUserID;
+            // Add into tblUserVendorRelation
+
+            return Json(userRequest);
         }
 
         // DELETE: api/tblUser/5

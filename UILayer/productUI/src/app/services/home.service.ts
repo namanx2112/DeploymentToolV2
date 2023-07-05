@@ -28,10 +28,10 @@ export class HomeService {
 
   GetPartsTab(instType: TabInstanceType):HomeTab{
     return {
-      tab_name: "PartsService",
+      tab_name: "Parts",
       tab_header: "Parts search",
       tTableName: "tblParts",
-      tab_type: TabType.Users,
+      tab_type: TabType.VendorParts,
       tab_unique_name: "",
       search_fields: this.partsService.GetSearchFields(),
       fields: this.partsService.GetFields(),

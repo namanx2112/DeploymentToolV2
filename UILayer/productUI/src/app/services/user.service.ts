@@ -96,6 +96,18 @@ export class UserService {
       hidden: true
     },
     {
+      field_name: "Vendor Id",
+      fieldUniqeName: "nVendorId",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter Vendor Id",
+      validator: [],
+      mandatory: false,
+      hidden: true
+    },
+    {
       field_name: "User Name",
       fieldUniqeName: "tName",
       defaultVal: "",

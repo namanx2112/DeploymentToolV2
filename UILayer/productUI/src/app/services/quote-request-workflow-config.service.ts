@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { QuoteRequestTemplate } from '../interfaces/models';
-import { MergedQuoteRequest } from '../interfaces/sonic';
+import { MergedQuoteRequest } from '../interfaces/models';
 
 @Injectable({
   providedIn: 'root'

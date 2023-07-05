@@ -24,7 +24,7 @@ export class VendorService {
     return this.http.post<VendorModel>(this.configUrl + "Vendor/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  Get(request: VendorModel | null){
+  Get(request: any | null){
     return this.http.post<VendorModel[]>(this.configUrl + "Vendor/Get", request, { headers: this.authService.getHttpHeaders() });
   }
 

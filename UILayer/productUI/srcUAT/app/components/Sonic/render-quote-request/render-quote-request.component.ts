@@ -3,7 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { QuillEditorComponent } from 'ngx-quill';
 import Quill from 'quill';
-import { MergedQuoteRequest, StoreSearchModel } from 'src/app/interfaces/sonic';
+import { MergedQuoteRequest } from 'src/app/interfaces/models';
+import { StoreSearchModel } from 'src/app/interfaces/sonic';
 import { QuoteRequestWorkflowConfigService } from 'src/app/services/quote-request-workflow-config.service';
 import { StoreService } from 'src/app/services/store.service';
 

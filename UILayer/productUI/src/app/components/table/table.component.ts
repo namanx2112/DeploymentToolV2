@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatRow, MatTableDataSource } from '@angular/material/table';
@@ -6,6 +6,7 @@ import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
 import { BrandModel, FranchiseModel, TechComponentModel, VendorModel, UserModel } from 'src/app/interfaces/models';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { FranchiseService } from 'src/app/services/frenchise.service';
+import { PartsService } from 'src/app/services/parts.service';
 import { SonicService } from 'src/app/services/sonic.service';
 import { TechComponenttService } from 'src/app/services/tech-component.service';
 import { UserService } from 'src/app/services/user.service';
@@ -23,11 +24,15 @@ export interface TableColumnDef {
   styleUrls: ['./table.component.css']
 })
 
-export class TableComponent {
+export class TableComponent implements OnChanges {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @Input() curTab: HomeTab;
   @Input() searchFields: any;
   @Input() clickCol: string = "";
+  @Input() set refreshMe(val: boolean) {
+    if (val == true)
+      this.initTable();
+  }
   @Output() rowClicked = new EventEmitter<MatRow>();
   displayedColumns: string[] = [];
   columns: TableColumnDef[] = [];
@@ -38,13 +43,18 @@ export class TableComponent {
   cService: any;
 
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
-    private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService) {
-  }
-
+    private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService) {
+  }  
 
   cellClick(row: MatRow) {
     this.rowClicked.emit(row);
   }
+
+  
+  // ngOnChanges() {
+  //   // changes.prop contains the old and the new value...
+  // }
+
 
   rowClick(row: MatRow) {
     if (this.clickCol == 'all')
@@ -72,9 +82,12 @@ export class TableComponent {
       }
       else if (this.curTab.tab_type == TabType.StoreProjects) {
         this.cService = this.sonicService;
-      } 
+      }
       else if (this.curTab.tab_type == TabType.StoreNotes) {
         this.cService = this.sonicService;
+      }
+      else if (this.curTab.tab_type == TabType.VendorParts) {
+        this.cService = this.partsService;
       }
     }
 

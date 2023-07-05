@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommonService } from './common.service';
 import { AuthService } from './auth.service';
-import { MergedQuoteRequest, NewProjectStore } from '../interfaces/sonic';
+import { NewProjectStore } from '../interfaces/sonic';
 import { ProjectTemplates } from '../interfaces/models';
 
 @Injectable({

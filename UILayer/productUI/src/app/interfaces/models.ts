@@ -78,10 +78,11 @@ export interface FranchiseModel {
 }
 
 export interface PartsModel {
-    aPartsId: number,
-    tPartsName: string,
-    nPartsNumber: number,
-    nPartsPrice: number
+    aPartID: number,
+    nVendorId: number,
+    tPartDesc: string,
+    tPartNumber: number,
+    cPrice: number
 }
 
 export interface UserModel {
@@ -93,7 +94,8 @@ export interface UserModel {
     nRole: number,
     tEmpID: string,
     tMobile: string,
-    nBrandId: number
+    nBrandId: number,
+    nVendorId: number
 }
 
 export interface QuoteRequestTemplate {
@@ -127,16 +129,26 @@ export interface QuoteRequestFields {
     tTechCompFieldName: string
 }
 
+
+
+export interface MergedQuoteRequest{
+    tContent: string,
+    tTo: string,
+    tCC: string,
+    tSubject: string
+}
+
 export interface POConfigTemplate {
     aPOConfigID: number,
+    tPOConfigName: string;
     nBrandID: number,
     nVendorID: number,
     parts: POConfigPart[],
-    nCreatedBy: number,
-    nUpdateBy: number,
-    dtCreatedOn: Date
-    dtUpdatedOn: Date,
-    bDeleted: boolean
+    nCreatedBy?: number,
+    nUpdateBy?: number,
+    dtCreatedOn?: Date
+    dtUpdatedOn?: Date,
+    bDeleted?: boolean
 }
 
 export interface POConfigPart {
@@ -146,7 +158,7 @@ export interface POConfigPart {
     arTechAreas: HomeTab[]
 }
 
-export interface POSection {
+export interface MergedPO {
     aPOID: number,
     tPONumber: number,
     nStoreID: number,

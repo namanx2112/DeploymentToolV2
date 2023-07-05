@@ -1,0 +1,46 @@
+<div class="tabsBody">
+    <div class="header"><mat-icon class="tIcon" (click)="goBack()">arrow_back_ios</mat-icon>Create New PO Workflow</div>
+    <div class="controlPart grayWhiteTheme grayWhite" *ngIf="curTemplate != undefined">
+        <mat-label class="fleidLabel" [attr.for]="">Name of the Workflow</mat-label>
+        <mat-form-field class="curField" appearance="outline">
+            <input matInput [type]="'text'" [(ngModel)]="curTemplate.tPOConfigName" (keydown)="onKeydown($event)">
+            <!-- <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon> -->
+            <!-- <mat-error>{{getErrorMessage(curControl)}}</mat-error> -->
+        </mat-form-field>
+
+        <mat-label class="fleidLabel" [attr.for]="">Select Vendor</mat-label>
+        <mat-form-field class="curField" appearance="outline">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='onVendorChange($event)'>
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.optionDisplayName}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+
+        <mat-label class="fleidLabel" [attr.for]="">Select Component Fields</mat-label>
+        <div class="compFields">
+            <span class="headerLabel">Fields</span>
+            <div class="checkBoxFields">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Parts Number</th>
+                            <th>Price</th>
+                            <th>Quantity Fields</th>
+                            <th>Selected</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <div class="addButton lightGray"><span>+</span>Add New Item</div>
+            </div>
+        </div>
+        <button mat-raised-button
+            class="buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base"
+            [disabled]="canSave()" (click)="submit()">Save</button>
+    </div>
+</div>

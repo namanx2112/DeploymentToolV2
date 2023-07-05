@@ -45,7 +45,6 @@ import { MenuInstallationComponent } from './components/Sonic/menu-installation/
 import { PaymentTerminalInstallationComponent } from './components/Sonic/payment-terminal-installation/payment-terminal-installation.component';
 import { WorkflowsComponent } from './components/Sonic/workflows/workflows.component';
 import { QuoteRequestWorkflowTemplateComponent } from './components/quote-request-workflow-template/quote-request-workflow-template.component';
-import { POWorkflowTemplateComponent } from './components/poworkflow-template/poworkflow-template.component'
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { QuoteRequestTemplateListComponent } from './components/quote-request-template-list/quote-request-template-list.component';
 import { FileStoreSelectionComponent } from './components/Sonic/file-store-selection/file-store-selection.component';
@@ -58,7 +57,10 @@ import { NewStoreComponent } from './components/Sonic/new-store/new-store.compon
 import { SearchStoreComponent } from './components/Sonic/search-store/search-store.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ProjectTemplateListComponent } from './components/Sonic/project-template-list/project-template-list.component';
-import { RenderQuoteRequestComponent } from './components/Sonic/render-quote-request/render-quote-request.component'
+import { RenderQuoteRequestComponent } from './components/Sonic/render-quote-request/render-quote-request.component';
+import { PurchaseOrderTemplateListComponent } from './components/purchase-order-template-list/purchase-order-template-list.component';
+import { PurchaseOrderWorkflowTemplateComponent } from './components/purchase-order-workflow-template/purchase-order-workflow-template.component';
+import { POConfigQuantityFieldsComponent } from './components/poconfig-quantity-fields/poconfig-quantity-fields.component';
 
 @NgModule({
   declarations: [
@@ -91,14 +93,16 @@ import { RenderQuoteRequestComponent } from './components/Sonic/render-quote-req
     PaymentTerminalInstallationComponent,
     WorkflowsComponent,
     QuoteRequestWorkflowTemplateComponent,
-    POWorkflowTemplateComponent,
     QuoteRequestTemplateListComponent,
     FileStoreSelectionComponent,
     LoadingComponent,
     NewStoreComponent,
     SearchStoreComponent,
     ProjectTemplateListComponent,
-    RenderQuoteRequestComponent
+    RenderQuoteRequestComponent,
+    PurchaseOrderTemplateListComponent,
+    PurchaseOrderWorkflowTemplateComponent,
+    POConfigQuantityFieldsComponent
   ],
   imports: [
     BrowserModule,

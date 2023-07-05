@@ -23,7 +23,7 @@
         <app-tab-body *ngIf="tabIndex == 4" [curTab]="tabs[4]" [NeedNew]="needNew"></app-tab-body>
         <app-quote-request-template-list *ngIf="tabIndex == 5" (moveView)="moveView($event)"></app-quote-request-template-list>
         <!-- <app-quote-request-workflow-template *ngIf="tabIndex == 6"></app-quote-request-workflow-template>         -->
-        <app-poworkflow-template *ngIf="tabIndex == 7" (moveView)="moveView($event)"></app-poworkflow-template>
+        <app-purchase-order-template-list *ngIf="tabIndex == 7" (moveView)="moveView($event)"></app-purchase-order-template-list>
         <app-admin-dashboard-shortcuts *ngIf="tabIndex == -1" (ShortcutSelection)="ShortcutSelection($event);"></app-admin-dashboard-shortcuts>
         <app-manage-dropdowns *ngIf="tabIndex == -2"></app-manage-dropdowns>
     </div>
