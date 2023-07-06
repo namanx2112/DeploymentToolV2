@@ -29,10 +29,7 @@ export class TableComponent implements OnChanges {
   @Input() curTab: HomeTab;
   @Input() searchFields: any;
   @Input() clickCol: string = "";
-  @Input() set refreshMe(val: boolean) {
-    if (val == true)
-      this.initTable();
-  }
+  @Input() refreshMe: boolean;
   @Output() rowClicked = new EventEmitter<MatRow>();
   displayedColumns: string[] = [];
   columns: TableColumnDef[] = [];
@@ -49,12 +46,6 @@ export class TableComponent implements OnChanges {
   cellClick(row: MatRow) {
     this.rowClicked.emit(row);
   }
-
-  
-  // ngOnChanges() {
-  //   // changes.prop contains the old and the new value...
-  // }
-
 
   rowClick(row: MatRow) {
     if (this.clickCol == 'all')

@@ -975,6 +975,7 @@
     <Compile Include="Controller\ProjectSonicRadiosController.cs" />
     <Compile Include="Controller\ProjectStakeHoldersController.cs" />
     <Compile Include="Controller\ProjectStoreContactsController.cs" />
+    <Compile Include="Controller\PurchaseOrderController.cs" />
     <Compile Include="Controller\QuoteRequestController.cs" />
     <Compile Include="Controller\SonicController.cs" />
     <Compile Include="Controller\StoreScreenConfigController.cs" />
@@ -1183,6 +1184,9 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUserFunctionRel.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblUserVendorRel.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblVendor.cs">

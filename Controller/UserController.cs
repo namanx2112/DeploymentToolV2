@@ -27,22 +27,10 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public IQueryable<UserModel> Get(Dictionary<string, string> searchFields)
         {
-            IQueryable<UserModel> items = db.Database.SqlQuery<UserModel>("exec sproc_getUserModel").AsQueryable();
-            if (searchFields == null)
-            {
-                return items;
-            }
-            else
-            {
-                StringBuilder sBuilder = new StringBuilder();
-                foreach (KeyValuePair<string, string> keyVal in searchFields)
-                {
-                    if (sBuilder.Length > 0)
-                        sBuilder.Append(" and ");
-                    sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
-                }
-                return items.Where("x=>" + sBuilder.ToString());
-            }
+            int nVendorId = (searchFields != null && searchFields.ContainsKey("nVendorId")) ? Convert.ToInt32(searchFields["nVendorId"]) : 0;
+            SqlParameter tModuleNameParam = new SqlParameter("@nVendorId", nVendorId);
+            IQueryable<UserModel> items = db.Database.SqlQuery<UserModel>("exec sproc_getUserModel @nVendorId", tModuleNameParam).AsQueryable();
+            return items;
         }
 
         // GET: api/tblUser/5

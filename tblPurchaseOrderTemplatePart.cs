@@ -15,7 +15,6 @@ namespace DeploymentTool
     public partial class tblPurchaseOrderTemplatePart
     {
         public int aPurchaseOrderTemplatePartsID { get; set; }
-        public Nullable<int> aPurchaseOrderTemplateID { get; set; }
         public Nullable<int> nPartID { get; set; }
         public Nullable<int> nConfigProjectFieldID { get; set; }
         public Nullable<int> nPurchaseOrderTemplateID { get; set; }

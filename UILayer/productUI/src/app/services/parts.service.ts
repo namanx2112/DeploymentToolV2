@@ -90,7 +90,7 @@ export class PartsService {
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.number,
+      field_type: FieldType.text,
       field_placeholder: "Enter Parts Number",
       validator: [],
       mandatory: false,

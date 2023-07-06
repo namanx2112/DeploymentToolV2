@@ -53,6 +53,7 @@
         <EntityTypeShape EntityType="dtDBModel.tblPurchaseOrderPart" Width="1.5" PointX="21.375" PointY="0.75" />
         <EntityTypeShape EntityType="dtDBModel.tblPurchaseOrderTemplatePart" Width="1.5" PointX="7.375" PointY="21.75" />
         <EntityTypeShape EntityType="dtDBModel.tblVendorPartRel" Width="1.5" PointX="21.375" PointY="12.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblUserVendorRel" Width="1.5" PointX="21.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -708,6 +708,14 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
   </EntityType>
+  <EntityType Name="tblUserVendorRel">
+    <Key>
+      <PropertyRef Name="aUserVendorRelID" />
+    </Key>
+    <Property Name="aUserVendorRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nVendorID" Type="int" />
+    <Property Name="nUserID" Type="int" />
+  </EntityType>
   <EntityType Name="tblVendor">
     <Key>
       <PropertyRef Name="aVendorId" />
@@ -798,6 +806,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblStore" EntityType="Self.tblStore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserVendorRel" EntityType="Self.tblUserVendorRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblVendorPartRel" EntityType="Self.tblVendorPartRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBrandBKP" EntityType="Self.tblBrandBKP" store:Type="Tables" store:Schema="dbo">

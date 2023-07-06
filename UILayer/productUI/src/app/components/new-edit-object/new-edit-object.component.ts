@@ -55,7 +55,7 @@ export class NewEditObjectComponent {
     if (this.childCount > 0) {
       for (var indx in this._curTab.childTabs) {
         let tTab = this._curTab.childTabs[indx];
-        this.childSearchFields[tTab.tab_name] = null;
+        this.childSearchFields[tTab.tab_name] = this.updateChildProperties(tTab, {});
       }
     }
   }

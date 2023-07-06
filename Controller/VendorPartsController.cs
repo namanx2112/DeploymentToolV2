@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Data.SqlClient;
 
 namespace DeploymentTool.Controller
 {
@@ -21,22 +22,10 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public IQueryable<VendorParts> Get(Dictionary<string, string> searchFields)
         {
-            IQueryable<VendorParts> items = db.Database.SqlQuery<VendorParts>("exec sproc_getVendorPartsModel").AsQueryable();
-            if (searchFields == null)
-            {
-                return items;
-            }
-            else
-            {
-                StringBuilder sBuilder = new StringBuilder();
-                foreach (KeyValuePair<string, string> keyVal in searchFields)
-                {
-                    if (sBuilder.Length > 0)
-                        sBuilder.Append(" and ");
-                    sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
-                }
-                return items.Where("x=>" + sBuilder.ToString());
-            }
+            int nVendorId = (searchFields != null && searchFields.ContainsKey("nVendorId")) ? Convert.ToInt32(searchFields["nVendorId"]) : 0;
+            SqlParameter tModuleNameParam = new SqlParameter("@nVendorId", nVendorId);
+            IQueryable<VendorParts> items = db.Database.SqlQuery<VendorParts>("exec sproc_getVendorPartsModel @nVendorId", tModuleNameParam).AsQueryable();
+            return items;
         }
 
         [Authorize]
