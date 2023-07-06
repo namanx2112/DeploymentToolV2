@@ -128,7 +128,7 @@ export interface QuoteRequestFields {
 }
 
 export interface POConfigTemplate {
-    aPOConfigID: number,
+    aPurchaseOrderTemplateID: number,
     nBrandID: number,
     nVendorID: number,
     parts: POConfigPart[],

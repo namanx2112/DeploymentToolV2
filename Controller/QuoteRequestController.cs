@@ -138,15 +138,15 @@ namespace DeploymentTool.Controller
 
                         obj.Add(new PurchaseOrderParts()
                         {
-                            aPurchaseOrderTemplatePartsID = RequestTechComp.nPurchaseOrderPartDetailsID,
-                            aPurchaseOrderTemplateID = RequestTechComp.aPurchaseOrderTemplateID,
-                            nPartID = RequestTechComp.nPartID,
-                            nConfigProjectFieldID = RequestTechComp.nQuantity,
-                            tPartDesc = RequestTechComp.tPartDesc,
-                            tPartNumber = RequestTechComp.tPartNumber,
-                            cPrice = RequestTechComp.cPrice,
-                            nQuantity = RequestTechComp.nQuantity,
-                            cTotal = RequestTechComp.cTotal
+                            //aPurchaseOrderTemplatePartsID = RequestTechComp.nPurchaseOrderPartDetailsID,
+                            //aPurchaseOrderTemplateID = RequestTechComp.aPurchaseOrderTemplateID,
+                            //nPartID = RequestTechComp.nPartID,
+                            //nConfigProjectFieldID = RequestTechComp.nQuantity,
+                            //tPartDesc = RequestTechComp.tPartDesc,
+                            //tPartNumber = RequestTechComp.tPartNumber,
+                            //cPrice = RequestTechComp.cPrice,
+                            //nQuantity = RequestTechComp.nQuantity,
+                            //cTotal = RequestTechComp.cTotal
 
 
                         });

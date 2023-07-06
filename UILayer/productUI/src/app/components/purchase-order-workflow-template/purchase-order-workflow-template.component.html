@@ -3,7 +3,7 @@
     <div class="controlPart grayWhiteTheme grayWhite" *ngIf="curTemplate != undefined">
         <mat-label class="fleidLabel" [attr.for]="">Name of the Workflow</mat-label>
         <mat-form-field class="curField" appearance="outline">
-            <input matInput [type]="'text'" [(ngModel)]="curTemplate.tPOConfigName" (keydown)="onKeydown($event)">
+            <input matInput [type]="'text'" [(ngModel)]="curTemplate.tTemplateName" (keydown)="onKeydown($event)">
             <!-- <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon> -->
             <!-- <mat-error>{{getErrorMessage(curControl)}}</mat-error> -->
         </mat-form-field>

@@ -16,32 +16,34 @@ namespace DeploymentTool.Controller
     {
         private dtDBEntities db = new dtDBEntities();
 
-        //[Authorize]
-        //[HttpPost]
-        //public IQueryable<PurchaseOrderTeamplate> Get(Dictionary<string, string> searchFields)
-        //{
-        //    List<PurchaseOrderTeamplate> tList = new List<PurchaseOrderTeamplate> {
-        //        new PurchaseOrderTeamplate()
-        //        {
-        //            aPurchaseOrderTemplateID= 1,
-        //            nBrandId= 1,
-        //            nCreatedBy= 1,
-        //            nUpdateBy= 1,
-        //            nVenderID= 1,
-        //            tTemplateName = "First PO",
-        //            purchaseOrderParts = new List<PurchaseOrderParts>()
-        //            {
-        //                new PurchaseOrderParts()
-        //                {
-        //                    aPurchaseOrderTemplateID= 1,
-        //                    aPurchaseOrderTemplatePartsID= 1,
-        //                    cPrice= 1,
-        //                    cTotal= 1,
-                            
-        //                }
-        //            }
-        //        }
-        //    };
+        [Authorize]
+        [HttpPost]
+        public IQueryable<PurchaseOrderTeamplate> Get(Dictionary<string, string> searchFields)
+        {
+            List<PurchaseOrderTeamplate> tList = new List<PurchaseOrderTeamplate> {
+                new PurchaseOrderTeamplate()
+                {
+                    aPurchaseOrderTemplateID= 1,
+                    nBrandId= 1,
+                    nCreatedBy= 1,
+                    nUpdateBy= 1,
+                    nVenderID= 1,
+                    tTemplateName = "First PO",
+                    purchaseOrderParts = new List<PurchaseOrderParts>()
+                    {
+                        new PurchaseOrderParts()
+                        {
+                            aPartID= 1,
+                            nVendorId= 1,
+                            tPartDesc= "sss",
+                            tPartNumber = "11",
+                            cPrice = 200,
+                            tTableName = "tblProjectAudio",
+                            tTechCompField = ""
+                        }
+                    }
+                }
+            };
             //IQueryable<VendorParts> items = db.Database.SqlQuery<VendorParts>("exec sproc_getVendorPartsModel").AsQueryable();
             //if (searchFields == null)
             //{
@@ -58,68 +60,70 @@ namespace DeploymentTool.Controller
             //    }
             //    return items.Where("x=>" + sBuilder.ToString());
             //}
+            return tList.AsQueryable();
         }
 
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IHttpActionResult> Update(VendorParts partsRequest)
-        //{
+        [Authorize]
+        [HttpPost]
+        public async Task<IHttpActionResult> Update(PurchaseOrderTeamplate poRequest)
+        {
 
-        //    db.Entry(partsRequest.GetTblParts()).State = EntityState.Modified;
-        //    // Update into tblVendorPartRel
-        //    try
-        //    {
-        //        await db.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!tblUserExists(partsRequest.aPartID))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            //db.Entry(partsRequest.GetTblParts()).State = EntityState.Modified;
+            //// Update into tblVendorPartRel
+            //try
+            //{
+            //    await db.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!tblUserExists(partsRequest.aPartID))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
 
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
-        //// POST: api/tblUser
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IHttpActionResult> Create(VendorParts partsRequest)
-        //{
-        //    db.tblParts.Add(partsRequest.GetTblParts());
-        //    await db.SaveChangesAsync();
+        // POST: api/tblUser
+        [Authorize]
+        [HttpPost]
+        public async Task<IHttpActionResult> Create(PurchaseOrderTeamplate poRequest)
+        {
+            //db.tblParts.Add(partsRequest.GetTblParts());
+            //await db.SaveChangesAsync();
 
-        //    // Add into tblVendorPartRel
+            // Add into tblVendorPartRel
+            poRequest.aPurchaseOrderTemplateID = 10;
+            return Json(poRequest);
+        }
 
-        //    return Json(partsRequest);
-        //}
+        // DELETE: api/tblUser/5
+        [Authorize]
+        [HttpPost]
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            PurchaseOrderTeamplate poRequest = new PurchaseOrderTeamplate();
+            //tblPart tblPart = await db.tblParts.FindAsync(id);
+            //if (tblPart == null)
+            //{
+            //    return NotFound();
+            //}
 
-        //// DELETE: api/tblUser/5
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IHttpActionResult> Delete(int id)
-        //{
-        //    tblPart tblPart = await db.tblParts.FindAsync(id);
-        //    if (tblPart == null)
-        //    {
-        //        return NotFound();
-        //    }
+            //db.tblParts.Remove(tblPart);
+            //await db.SaveChangesAsync();
 
-        //    db.tblParts.Remove(tblPart);
-        //    await db.SaveChangesAsync();
-
-        //    return Ok(tblPart);
-        //}
+            return Ok(poRequest);
+        }
 
 
-        //private bool tblUserExists(int id)
-        //{
-        //    return db.tblParts.Count(e => e.aPartID == id) > 0;
-        //}
-    //}
+        private bool tblUserExists(int id)
+        {
+            return db.tblParts.Count(e => e.aPartID == id) > 0;
+        }
+    }
 }

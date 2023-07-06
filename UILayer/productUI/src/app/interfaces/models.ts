@@ -139,11 +139,11 @@ export interface MergedQuoteRequest{
 }
 
 export interface POConfigTemplate {
-    aPOConfigID: number,
-    tPOConfigName: string;
+    aPurchaseOrderTemplateID: number,
+    tTemplateName: string;
     nBrandID: number,
     nVendorID: number,
-    parts: POConfigPart[],
+    purchaseOrderParts: POConfigPart[],
     nCreatedBy?: number,
     nUpdateBy?: number,
     dtCreatedOn?: Date
@@ -152,10 +152,14 @@ export interface POConfigTemplate {
 }
 
 export interface POConfigPart {
-    aPOConfigPart: number,
+    aPurchaseOrderTemplatePartsID: number,
     nPartID: number,
-    nConfigProjectFieldID: number,
-    arTechAreas: HomeTab[]
+    nVendorId: number,
+    tPartDesc: string,
+    tPartNumber: number,
+    cPrice: number,
+    tTableName: string,
+    tTechCompField: string
 }
 
 export interface MergedPO {

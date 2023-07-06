@@ -24,7 +24,7 @@ namespace DeploymentTool.Model
         public string tPhone { get; set; }
         public string tEmail { get; set; }
         public string tAddress { get; set; }
-        public  PurchaseOrderAddressType nPurchaseOrderAddressType { get; set; }
+        public PurchaseOrderAddressType nPurchaseOrderAddressType { get; set; }
     }
     public enum PurchaseOrderAddressType
     {
@@ -64,18 +64,13 @@ namespace DeploymentTool.Model
     }
     public class PurchaseOrderParts
     {
-        public int aPurchaseOrderTemplatePartsID { get; set; }
-
-        public int aPurchaseOrderTemplateID { get; set; }
-
-        public int nPartID { get; set; }
-
-        public int nConfigProjectFieldID { get; set; }
+        public int aPartID { get; set; }
+        public int nVendorId { get; set; }
         public string tPartDesc { get; set; }
         public string tPartNumber { get; set; }
-        public decimal cPrice { get; set; }
-        public int nQuantity { get; set; }
-        public decimal cTotal { get; set; }
+        public int cPrice { get; set; }
+        public string tTableName { get; set; }
+        public string tTechCompField { get; set; }
     }
 
 }

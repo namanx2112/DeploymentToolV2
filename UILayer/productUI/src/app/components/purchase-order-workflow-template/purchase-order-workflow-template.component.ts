@@ -74,8 +74,8 @@ export class PurchaseOrderWorkflowTemplateComponent {
     }
     else {
       this.curTemplate = {
-        aPOConfigID: 0,
-        tPOConfigName: "",
+        aPurchaseOrderTemplateID: 0,
+        tTemplateName: "",
         nVendorID: parseInt(this.selectedVendor.optionIndex),
         nBrandID: this.nBrandId,
         parts: []
@@ -98,7 +98,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
 
   canSave() {
     let can = true;
-    if (this.curTemplate.parts.length > 0 && this.curTemplate.tPOConfigName.length > 0) {
+    if (this.curTemplate.parts.length > 0 && this.curTemplate.tTemplateName.length > 0) {
       can = false;
     }
     return can;
