@@ -10,6 +10,8 @@
 
         <mat-label class="fleidLabel" [attr.for]="">Select Vendor</mat-label>
         <mat-form-field class="curField" appearance="outline">
+            <input type="text" placeholder="Search Vendor" aria-label="Number" matInput [formControl]="myControl"
+                [matAutocomplete]="auto">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='onVendorChange($event)'>
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                     {{option.optionDisplayName}}

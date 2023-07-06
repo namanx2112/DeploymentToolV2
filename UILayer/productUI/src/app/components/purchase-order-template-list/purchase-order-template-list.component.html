@@ -6,8 +6,8 @@
         <button mat-raised-button class="searchButton" (click)="OpenView(0)">Create New Workflow</button>
     </div>
     <div class="tablePart">
-        <div *ngFor="let item of allQuotes| keyvalue" class="lightGray requestTile" (click)="OpenView(item.key)">
-            <span>{{item.value}}</span>
+        <div *ngFor="let item of allPO" class="lightGray requestTile" (click)="OpenView(item.aPurchaseOrderTemplateID)">
+            <span>{{item.tTemplateName}}</span>
         </div>
     </div>
 </div>

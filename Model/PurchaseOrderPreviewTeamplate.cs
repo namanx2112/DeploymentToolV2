@@ -43,12 +43,12 @@ namespace DeploymentTool.Model
         public decimal cTotal { get; set; }
     }
 
-    public class tblPurchaseOrderTemplateTemp
+    public class PurchaseOrderTemplateTemp
     {
         public int aPurchaseOrderTemplateID { get; set; }
         public string tTemplateName { get; set; }
         public int nBrandId { get; set; }
-        public int nVenderID { get; set; }
+        public int nVenderId { get; set; }
         public int nCreatedBy { get; set; }
         public int nUpdateBy { get; set; }
     }

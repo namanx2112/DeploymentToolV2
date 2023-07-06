@@ -16,7 +16,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
   _nTemplateId: number;
   @Input() set nTemplateId(val: number) {
     this._nTemplateId = val;
-    //this.getTemplate();
+    this.getTemplate();
   }
   @Output()
   moveBack = new EventEmitter<number>();
@@ -78,7 +78,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
         tTemplateName: "",
         nVendorID: parseInt(this.selectedVendor.optionIndex),
         nBrandID: this.nBrandId,
-        parts: []
+        purchaseOrderParts: []
       }
     }
   }
@@ -98,7 +98,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
 
   canSave() {
     let can = true;
-    if (this.curTemplate.parts.length > 0 && this.curTemplate.tTemplateName.length > 0) {
+    if (this.curTemplate.purchaseOrderParts.length > 0 && this.curTemplate.tTemplateName.length > 0) {
       can = false;
     }
     return can;

@@ -13,7 +13,7 @@ export class POWorklowConfigService {
   }
 
   GetAllTemplate(nBrandId: number) {
-    return this.http.get<any>(this.configUrl + "PurchaseOrder/GetAllTemplate?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<any>(this.configUrl + "PurchaseOrder/GetAllTemplate?nBrandId="+ nBrandId, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTemplate(nTemplateId: number) {

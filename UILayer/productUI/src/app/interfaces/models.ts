@@ -138,6 +138,13 @@ export interface MergedQuoteRequest{
     tSubject: string
 }
 
+export interface POConfigTemplateTemp {
+    aPurchaseOrderTemplateID: number,
+    tTemplateName: string;
+    nBrandId: number,
+    nVenderId: number,
+}
+
 export interface POConfigTemplate {
     aPurchaseOrderTemplateID: number,
     tTemplateName: string;

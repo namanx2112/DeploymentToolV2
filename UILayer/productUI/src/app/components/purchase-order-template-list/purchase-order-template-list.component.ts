@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
-import { POConfigTemplate } from 'src/app/interfaces/models';
+import { POConfigTemplateTemp } from 'src/app/interfaces/models';
 import { POWorklowConfigService } from 'src/app/services/poworklow-config.service';
 
 @Component({
@@ -12,9 +12,8 @@ export class PurchaseOrderTemplateListComponent {
   searchText: string;
   @Output()
   moveView = new EventEmitter<number>();
-  allRequests: POConfigTemplate[];
   searchField: Fields[];
-  allQuotes: { [key: number]: string };
+  allPO: POConfigTemplateTemp[];
   nBrandId: number;
   nTemplateId: number;
   constructor(private service: POWorklowConfigService) {
@@ -38,8 +37,8 @@ export class PurchaseOrderTemplateListComponent {
   }
 
   getQuoteRequests() {
-    this.service.GetAllTemplate(this.nBrandId).subscribe((x => {
-      this.allQuotes = x;
+    this.service.GetAllTemplate(this.nTemplateId).subscribe((x => {
+      this.allPO = x;
     }));
   }
 

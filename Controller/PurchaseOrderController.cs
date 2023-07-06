@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Net.Http.Formatting;
 
 namespace DeploymentTool.Controller
 {
@@ -17,19 +18,55 @@ namespace DeploymentTool.Controller
         private dtDBEntities db = new dtDBEntities();
 
         [Authorize]
-        [HttpPost]
-        public IQueryable<PurchaseOrderTeamplate> Get(Dictionary<string, string> searchFields)
+        [HttpGet]
+        [ActionName("GetAllTemplate")]
+        public HttpResponseMessage GetAllTemplate(int nBrandId)
         {
-            List<PurchaseOrderTeamplate> tList = new List<PurchaseOrderTeamplate> {
-                new PurchaseOrderTeamplate()
+            List<PurchaseOrderTemplateTemp> tList = new List<PurchaseOrderTemplateTemp> {
+                new PurchaseOrderTemplateTemp()
                 {
                     aPurchaseOrderTemplateID= 1,
                     nBrandId= 1,
                     nCreatedBy= 1,
                     nUpdateBy= 1,
-                    nVenderID= 1,
-                    tTemplateName = "First PO",
-                    purchaseOrderParts = new List<PurchaseOrderParts>()
+                    tTemplateName = "First PO"
+                },
+                new PurchaseOrderTemplateTemp()
+                {
+                    aPurchaseOrderTemplateID= 2,
+                    nBrandId= 1,
+                    nCreatedBy= 1,
+                    nUpdateBy= 1,
+                    tTemplateName = "Second PO"
+                },
+                new PurchaseOrderTemplateTemp()
+                {
+                    aPurchaseOrderTemplateID= 3,
+                    nBrandId= 1,
+                    nCreatedBy= 1,
+                    nUpdateBy= 1,
+                    tTemplateName = "Third PO"
+                }
+            };
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<PurchaseOrderTemplateTemp>>(tList, new JsonMediaTypeFormatter())
+            };
+        }
+
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetTemplate(int nTemplateId)
+        {
+            PurchaseOrderTeamplate tItem = new PurchaseOrderTeamplate()
+            {
+                aPurchaseOrderTemplateID = nTemplateId,
+                nBrandId = 1,
+                nCreatedBy = 1,
+                nUpdateBy = 1,
+                nVenderID = 1,
+                tTemplateName = "First PO",
+                purchaseOrderParts = new List<PurchaseOrderParts>()
                     {
                         new PurchaseOrderParts()
                         {
@@ -42,7 +79,6 @@ namespace DeploymentTool.Controller
                             tTechCompField = ""
                         }
                     }
-                }
             };
             //IQueryable<VendorParts> items = db.Database.SqlQuery<VendorParts>("exec sproc_getVendorPartsModel").AsQueryable();
             //if (searchFields == null)
@@ -60,7 +96,10 @@ namespace DeploymentTool.Controller
             //    }
             //    return items.Where("x=>" + sBuilder.ToString());
             //}
-            return tList.AsQueryable();
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<PurchaseOrderTeamplate>(tItem, new JsonMediaTypeFormatter())
+            };
         }
 
         [Authorize]
