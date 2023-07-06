@@ -29,7 +29,10 @@ export class TableComponent implements OnChanges {
   @Input() curTab: HomeTab;
   @Input() searchFields: any;
   @Input() clickCol: string = "";
-  @Input() refreshMe: boolean;
+  @Input() _refreshMe: Date;
+  @Input() set refreshMe(val: Date) {
+    this._refreshMe = val;
+  }
   @Output() rowClicked = new EventEmitter<MatRow>();
   displayedColumns: string[] = [];
   columns: TableColumnDef[] = [];

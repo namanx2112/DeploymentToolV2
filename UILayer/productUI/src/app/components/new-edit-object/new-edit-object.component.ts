@@ -30,7 +30,7 @@ export class NewEditObjectComponent {
   @Output() returnBack = new EventEmitter<any>()
   _controlValues: Dictionary<string>;
   childCount: number;
-  refreshChildTable: boolean;
+  refreshChildTable: Date;
   @Input() set controlValues(value: Dictionary<string>) {
     this._controlValues = value;
     this.valueChanged();
@@ -154,8 +154,7 @@ export class NewEditObjectComponent {
       onSubmit: function (data: any) {
         cthis.saveThisTab(data, cTab, function (val: any) {
           delete cthis._controlValues[cTab.tab_name];
-          cthis.refreshChildTable = true;
-          cthis.refreshChildTable = false;
+          cthis.refreshChildTable = new Date();
           dialogRef.close();
         });
       },
