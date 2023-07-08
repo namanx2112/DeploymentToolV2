@@ -30,7 +30,7 @@ export class PartsService {
     return this.http.post<PartsModel>(this.configUrl + "VendorParts/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  Get(request: PartsModel | null) {
+  Get(request: any | null) {
     return this.http.post<PartsModel[]>(this.configUrl + "VendorParts/Get", request, { headers: this.authService.getHttpHeaders() });
   }
 

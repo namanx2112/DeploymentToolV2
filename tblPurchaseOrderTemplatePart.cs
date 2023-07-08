@@ -18,5 +18,7 @@ namespace DeploymentTool
         public Nullable<int> nPartID { get; set; }
         public Nullable<int> nConfigProjectFieldID { get; set; }
         public Nullable<int> nPurchaseOrderTemplateID { get; set; }
+        public string tTechCompField { get; set; }
+        public string tTableName { get; set; }
     }
 }

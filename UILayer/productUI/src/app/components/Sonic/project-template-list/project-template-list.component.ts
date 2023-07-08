@@ -48,6 +48,7 @@ export class ProjectTemplateListComponent {
     dialogConfig.width = '60%';
     dialogConfig.data = {
       curStore: this._curStore,
+      curTemplate: item,
       onSubmit: function (data: any) {
         dialogRef.close();
       }

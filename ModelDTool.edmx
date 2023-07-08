@@ -539,6 +539,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+          <Property Name="tTechnologyComponent" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tblPurchaseOrderTemplateParts">
           <Key>
@@ -547,7 +548,8 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="aPurchaseOrderTemplatePartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nPurchaseOrderTemplateID" Type="int" />
           <Property Name="nPartID" Type="int" />
-          <Property Name="nConfigProjectFieldID" Type="int" />
+          <Property Name="tTechCompField" Type="nvarchar" MaxLength="500" />
+          <Property Name="tTableName" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tblQuoteRequestMain">
           <Key>
@@ -1661,6 +1663,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="bDeleted" Type="Boolean" />
           <Property Name="nBrandID" Type="Int32" />
           <Property Name="nVenderID" Type="Int32" />
+          <Property Name="tTechnologyComponent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblOutgoingEmail">
           <Key>
@@ -1739,8 +1742,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           </Key>
           <Property Name="aPurchaseOrderTemplatePartsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nPartID" Type="Int32" />
-          <Property Name="nConfigProjectFieldID" Type="Int32" />
           <Property Name="nPurchaseOrderTemplateID" Type="Int32" />
+          <Property Name="tTechCompField" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="tTableName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblVendorPartRel">
           <Key>
@@ -2429,6 +2433,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblPurchaseOrderTemplates">
             <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplate">
               <MappingFragment StoreEntitySet="tblPurchaseOrderTemplate">
+                <ScalarProperty Name="tTechnologyComponent" ColumnName="tTechnologyComponent" />
                 <ScalarProperty Name="nVenderID" ColumnName="nVenderID" />
                 <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
                 <ScalarProperty Name="aPurchaseOrderTemplateID" ColumnName="aPurchaseOrderTemplateID" />
@@ -2520,8 +2525,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblPurchaseOrderTemplateParts">
             <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplatePart">
               <MappingFragment StoreEntitySet="tblPurchaseOrderTemplateParts">
+                <ScalarProperty Name="tTableName" ColumnName="tTableName" />
+                <ScalarProperty Name="tTechCompField" ColumnName="tTechCompField" />
                 <ScalarProperty Name="nPurchaseOrderTemplateID" ColumnName="nPurchaseOrderTemplateID" />
-                <ScalarProperty Name="nConfigProjectFieldID" ColumnName="nConfigProjectFieldID" />
                 <ScalarProperty Name="nPartID" ColumnName="nPartID" />
                 <ScalarProperty Name="aPurchaseOrderTemplatePartsID" ColumnName="aPurchaseOrderTemplatePartsID" />
               </MappingFragment>

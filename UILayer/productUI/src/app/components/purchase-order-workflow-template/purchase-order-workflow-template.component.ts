@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { OptionType, TabInstanceType } from 'src/app/interfaces/home-tab';
-import { POConfigPart, POConfigTemplate, VendorModel } from 'src/app/interfaces/models';
+import { POConfigPart, POConfigTemplate, PartsModel, VendorModel } from 'src/app/interfaces/models';
+import { PartsService } from 'src/app/services/parts.service';
 import { POWorklowConfigService } from 'src/app/services/poworklow-config.service';
 import { SonicService } from 'src/app/services/sonic.service';
 import { VendorService } from 'src/app/services/vendor.service';
@@ -26,10 +27,24 @@ export class PurchaseOrderWorkflowTemplateComponent {
   myControl = new FormControl('');
   filteredOptions: Observable<OptionType[]>;
   allVendors: VendorModel[] = [];
-  selectedVendor: OptionType;
-  selectedParts: POConfigPart[];
-  constructor(private poService: POWorklowConfigService, private vendorService: VendorService) {
-    
+  selectedVendor: VendorModel;
+  vendorParts: POConfigPart[];
+  allCompAndFields: any[];
+  curQuantityFields: any[];
+  constructor(private poService: POWorklowConfigService, private vendorService: VendorService, private partsService: PartsService, private sonicService: SonicService) {
+
+  }
+
+  fieldChanged(ev: any, item: POConfigPart, indx: number) {
+    let tItem = this.curTemplate.purchaseOrderParts.find(x => x.nPartID == item.nPartID);
+    if (tItem) {
+      tItem.tTableName = ev.value.tableName;
+      tItem.tTechCompField = ev.value.field;
+    }
+    if (this.vendorParts[indx]) {
+      this.vendorParts[indx].tTableName = ev.value.tableName;
+      this.vendorParts[indx].tTechCompField = ev.value.field;
+    }
   }
 
   private _filter(value: string): OptionType[] {
@@ -40,6 +55,10 @@ export class PurchaseOrderWorkflowTemplateComponent {
     }
     else
       return [];
+  }
+
+  getQuantityFields() {
+    this.allCompAndFields = this.sonicService.GetPOQuantityFields();
   }
 
   getOptionsFromVendors(vendors: VendorModel[]): OptionType[] {
@@ -55,41 +74,125 @@ export class PurchaseOrderWorkflowTemplateComponent {
     return oArr;
   }
 
-  getVendors() {
-    this.vendorService.Get({ nBrandID: 1 }).subscribe((x: VendorModel[]) => {
+  getVendorParts(callBack: any, selectedParts: POConfigPart[]) {
+    this.partsService.Get({ nVendorId: this.selectedVendor.aVendorId }).subscribe((x: PartsModel[]) => {
+      this.vendorParts = [];
+      this.curQuantityFields = [];
+      var notFoundParts = [];
+      for (var indx in x) {
+        let tPart = x[indx];
+        let selectedPart: POConfigPart = {
+          nPartID: 0,
+          tPartDesc: "",
+          tPartNumber: "",
+          cPrice: 0,
+          aPurchaseOrderTemplatePartsID: 0, selected: false, tTableName: "", tTechCompField: ""
+        };
+        if (typeof selectedParts.find(x => x.nPartID == tPart.aPartID) != 'undefined') {
+          let tmp = selectedParts.find(x => x.nPartID == tPart.aPartID);
+          if (tmp) {
+            selectedPart = tmp;
+            selectedPart.selected = true;
+          }
+        }
+        this.vendorParts.push({
+          aPurchaseOrderTemplatePartsID: selectedPart.aPurchaseOrderTemplatePartsID,
+          nPartID: tPart.aPartID,
+          tPartDesc: tPart.tPartDesc,
+          tPartNumber: tPart.tPartNumber,
+          cPrice: tPart.cPrice,
+          tTableName: selectedPart.tTableName,
+          tTechCompField: selectedPart.tTechCompField,
+          selected: selectedPart.selected
+        });
+        this.curQuantityFields.push({ title: "", field: "", tableName: "" });
+      }
+      if (selectedParts.length > 0) {
+        for (var indx in selectedParts) {
+          if (typeof x.find(y => y.aPartID == selectedParts[indx].nPartID) == 'undefined')
+            notFoundParts.push(selectedParts[indx].nPartID);
+        }
+      }
+      callBack(notFoundParts);
+    });
+  }
+
+  updateItemFromCheckbox() {
+    this.curTemplate.purchaseOrderParts = [];
+    for (var indx in this.vendorParts) {
+      if (this.vendorParts[indx].selected)
+        this.curTemplate.purchaseOrderParts.push(this.vendorParts[indx]);
+    }
+  }
+
+  getVendors(callBack: any) {
+    this.vendorService.Get({ nBrand: 1 }).subscribe((x: VendorModel[]) => {
       this.allVendors = x;
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
         map(value => this._filter(value || '')),
       );
+      callBack();
     });
   }
 
   getTemplate() {
+    let cThis = this;
     let userId = 1;
-    if (this._nTemplateId > 0) {
-      this.poService.GetTemplate(this._nTemplateId).subscribe((x: POConfigTemplate) => {
-        this.curTemplate = x;
-      });
-    }
-    else {
-      this.curTemplate = {
-        aPurchaseOrderTemplateID: 0,
-        tTemplateName: "",
-        nVendorID: parseInt(this.selectedVendor.optionIndex),
-        nBrandID: this.nBrandId,
-        purchaseOrderParts: []
+    this.getQuantityFields();
+    this.getVendors(function () {
+      if (cThis._nTemplateId > 0) {
+        cThis.poService.GetTemplate(cThis._nTemplateId).subscribe((x: POConfigTemplate) => {
+          cThis.curTemplate = x;
+          let cVendor = cThis.allVendors.find(y => y.aVendorId == x.nVendorId);
+          if (cVendor) {
+            cThis.myControl.setValue(cVendor.tVendorName);
+            cThis.selectedVendor = cVendor;
+            cThis.getVendorParts(function (notFoundIndex: []) {
+              cThis.curQuantityFields = [];
+              for (var indx in cThis.curTemplate.purchaseOrderParts) {
+                cThis.curQuantityFields.push({ field: cThis.curTemplate.purchaseOrderParts[indx].tTechCompField, tableName: cThis.curTemplate.purchaseOrderParts[indx].tTableName });
+                cThis.curTemplate.purchaseOrderParts[indx].selected = true;
+              }
+              if (notFoundIndex.length > 0) {
+                alert("Some of the selected parts are not available in this Vendor!");
+                for (var indx in notFoundIndex) {
+                  let tIndx = cThis.curTemplate.purchaseOrderParts.findIndex(x => x.nPartID == notFoundIndex[indx]);
+                  if (tIndx > -1) {
+                    cThis.curTemplate.purchaseOrderParts.splice(tIndx, 1);
+                  }
+                }
+              }
+            }, cThis.curTemplate.purchaseOrderParts);
+          }
+        });
       }
-    }
+      else {
+        cThis.curTemplate = {
+          aPurchaseOrderTemplateID: 0,
+          tTemplateName: "",
+          tCompName: "",
+          nVendorId: (cThis.selectedVendor) ? cThis.selectedVendor.aVendorId : 0,
+          nBrandID: cThis.nBrandId,
+          purchaseOrderParts: []
+        }
+      }
+    });
   }
 
   onVendorChange(ev: any) {
-    this.selectedVendor = ev;
+    let tVendor = this.allVendors.find(x => x.tVendorName == ev.option.value);
+    if (tVendor) {
+      this.selectedVendor = tVendor;
+      this.curTemplate.purchaseOrderParts = [];
+      this.curTemplate.nVendorId = this.selectedVendor.aVendorId;
+      this.getVendorParts(function () { }, []);
+    }
   }
 
   goBack() {
     this.moveBack.emit(0);
-  }  
+  }
 
   onKeydown(event: any) {
     if (event.key === "Enter") {
@@ -97,10 +200,14 @@ export class PurchaseOrderWorkflowTemplateComponent {
   }
 
   canSave() {
-    let can = true;
+    let can = false;
     if (this.curTemplate.purchaseOrderParts.length > 0 && this.curTemplate.tTemplateName.length > 0) {
-      can = false;
+      let emptyItems = this.curTemplate.purchaseOrderParts.find(x => x.tTableName == "" || x.tTechCompField == "");
+      if (typeof emptyItems == 'undefined' || emptyItems == null)
+        can = true;
     }
+    else if (this.curTemplate.nVendorId > 0 && this.curTemplate.tCompName != "")
+      can = false;
     return can;
   }
 
@@ -109,5 +216,13 @@ export class PurchaseOrderWorkflowTemplateComponent {
       alert("Saved succesfully");
       this.moveBack.emit(1);
     });
+  }
+
+  customQuantityCompare(v1: any, v2: any) {
+    return (v1.tTableName == v2.tTableName && v1.tTechCompField == v2.tTechCompField)
+  }
+
+  customComponentCompare(v1: any, v2: any) {
+    return (v1 == v2)
   }
 }

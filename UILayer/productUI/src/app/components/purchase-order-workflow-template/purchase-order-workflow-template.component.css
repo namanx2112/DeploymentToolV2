@@ -32,20 +32,9 @@
     width: 90%;
 }
 
-.controlPart > *:not(button){
+.controlPart > *:not(button):not(.compFields){
     width: 70%;
 }
-
-.headerLabel {
-    display: block;
-    height: 30px;
-    text-indent: 5px;
-    padding: 5px;
-    border-bottom: 1px solid;
-    line-height: 24px;
-}
-
-.fleidLabel {}
 
 .curField,
 .compFields {
@@ -74,15 +63,17 @@
     display: block;
 }
 
-.addButton{
-    cursor: pointer;
-    width: 150px;
-    padding: 5px;
-    margin: 10px;
-    border: 1px solid;
-}
-
 .buttonClass{
     margin-top: 10px;
     float: right;
+}
+
+th, td{
+    border-width: 0px 1px 1px 0px;
+    border-style: solid;
+    border-color: lightgray;
+    text-align: left;
+    height: 30px;
+    padding: 0px 16px;
+    font-size: 14px;
 }

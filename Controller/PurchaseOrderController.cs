@@ -63,20 +63,39 @@ namespace DeploymentTool.Controller
                 aPurchaseOrderTemplateID = nTemplateId,
                 nBrandId = 1,
                 nCreatedBy = 1,
+                tCompName = "Installation",
                 nUpdateBy = 1,
-                nVenderID = 1,
+                nVendorId = 2,
                 tTemplateName = "First PO",
                 purchaseOrderParts = new List<PurchaseOrderParts>()
                     {
                         new PurchaseOrderParts()
                         {
-                            aPartID= 1,
-                            nVendorId= 1,
-                            tPartDesc= "sss",
-                            tPartNumber = "11",
-                            cPrice = 200,
-                            tTableName = "tblProjectAudio",
-                            tTechCompField = ""
+                            aPurchaseOrderTemplatePartsID = 1,
+                            nPartID= 1,
+                            tPartDesc= "Yellow Paint Marker",
+                            tPartNumber = "SONIC_MARKER_YEL",
+                            cPrice = 88.56F,
+                            tTableName = "tblProjectConfig",
+                            tTechCompField = "nStallCount"
+                        },new PurchaseOrderParts()
+                        {
+                            aPurchaseOrderTemplatePartsID = 2,
+                            nPartID= 2,
+                            tPartDesc= "Black Paint Marker",
+                            tPartNumber = "SONIC_MARKER_BLK",
+                            cPrice = 17.95F,
+                            tTableName = "tblProjectExteriorMenus",
+                            tTechCompField = "nStalls"
+                        },new PurchaseOrderParts()
+                        {
+                            aPurchaseOrderTemplatePartsID = 3,
+                            nPartID= 3,
+                            tPartDesc= "New Parts Marker",
+                            tPartNumber = "776",
+                            cPrice = 1500F,
+                            tTableName = "tblProjectExteriorMenus",
+                            tTechCompField = "nPatio"
                         }
                     }
             };

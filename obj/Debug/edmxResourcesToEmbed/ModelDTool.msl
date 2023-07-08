@@ -666,6 +666,7 @@
     <EntitySetMapping Name="tblPurchaseOrderTemplates">
       <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplate">
         <MappingFragment StoreEntitySet="tblPurchaseOrderTemplate">
+          <ScalarProperty Name="tTechnologyComponent" ColumnName="tTechnologyComponent" />
           <ScalarProperty Name="nVenderID" ColumnName="nVenderID" />
           <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
           <ScalarProperty Name="aPurchaseOrderTemplateID" ColumnName="aPurchaseOrderTemplateID" />
@@ -757,8 +758,9 @@
     <EntitySetMapping Name="tblPurchaseOrderTemplateParts">
       <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplatePart">
         <MappingFragment StoreEntitySet="tblPurchaseOrderTemplateParts">
+          <ScalarProperty Name="tTableName" ColumnName="tTableName" />
+          <ScalarProperty Name="tTechCompField" ColumnName="tTechCompField" />
           <ScalarProperty Name="nPurchaseOrderTemplateID" ColumnName="nPurchaseOrderTemplateID" />
-          <ScalarProperty Name="nConfigProjectFieldID" ColumnName="nConfigProjectFieldID" />
           <ScalarProperty Name="nPartID" ColumnName="nPartID" />
           <ScalarProperty Name="aPurchaseOrderTemplatePartsID" ColumnName="aPurchaseOrderTemplatePartsID" />
         </MappingFragment>

@@ -81,7 +81,7 @@ export interface PartsModel {
     aPartID: number,
     nVendorId: number,
     tPartDesc: string,
-    tPartNumber: number,
+    tPartNumber: string,
     cPrice: number
 }
 
@@ -149,7 +149,8 @@ export interface POConfigTemplate {
     aPurchaseOrderTemplateID: number,
     tTemplateName: string;
     nBrandID: number,
-    nVendorID: number,
+    nVendorId: number,
+    tCompName: string,
     purchaseOrderParts: POConfigPart[],
     nCreatedBy?: number,
     nUpdateBy?: number,
@@ -161,12 +162,12 @@ export interface POConfigTemplate {
 export interface POConfigPart {
     aPurchaseOrderTemplatePartsID: number,
     nPartID: number,
-    nVendorId: number,
     tPartDesc: string,
-    tPartNumber: number,
+    tPartNumber: string,
     cPrice: number,
     tTableName: string,
-    tTechCompField: string
+    tTechCompField: string,
+    selected: boolean
 }
 
 export interface MergedPO {

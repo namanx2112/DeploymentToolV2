@@ -534,6 +534,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+    <Property Name="tTechnologyComponent" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="tblPurchaseOrderTemplateParts">
     <Key>
@@ -542,7 +543,8 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="aPurchaseOrderTemplatePartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nPurchaseOrderTemplateID" Type="int" />
     <Property Name="nPartID" Type="int" />
-    <Property Name="nConfigProjectFieldID" Type="int" />
+    <Property Name="tTechCompField" Type="nvarchar" MaxLength="500" />
+    <Property Name="tTableName" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="tblQuoteRequestMain">
     <Key>

@@ -34,6 +34,28 @@ export class SonicService {
     return this.http.get<StoreSearchModel[]>(this.configUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
+  GetPOQuantityFields() {
+    let items = [
+      { name: "Store Configuration", fields: [{ title: "Stall Count", field: "nStallCount", tableName: "tblProjectConfig" }] },
+      {
+        name: "Exterior Menus", fields: [{ title: "Stalls", field: "nStalls", tableName: "tblProjectExteriorMenus" }, { title: "Patio", field: "nPatio" , tableName: "tblProjectExteriorMenus"}, { title: "Flat", field: "nFlat", tableName: "tblProjectExteriorMenus"},
+        { title: "DT POPS", field: "nDTPops", tableName: "tblProjectExteriorMenus" }, { title: "DT Menu", field: "nDTMenu", tableName: "tblProjectExteriorMenus" }]
+      },
+      { name: "Interior Menus", fields: [{ title: "DMB Quantity", field: "nDMBQuantity", tableName: "tblProjectInteriorMenus" }] },
+      {
+        name: "Payment Systems", field: [{ title: "PAYS Units", field: "nPAYSUnits", tableName: "tblProjectPaymentSystem" }, { title: "45 Enclosures", field: "n45Enclosures", tableName: "tblProjectPaymentSystem" },
+        { title: "90 Enclosures", field: "n90Enclosures", tableName: "tblProjectPaymentSystem" }, { title: "DT Enclosures", field: "nDTEnclosures", tableName: "tblProjectPaymentSystem" }, { title: "15 Sun Shields", field: "n15SunShields", tableName: "tblProjectPaymentSystem" },
+        { title: "UPS", field: "nUPS", tableName: "tblProjectPaymentSystem" }, { title: "Shelf", field: "nShelf", tableName: "tblProjectPaymentSystem" }]
+      },
+      {
+        name: "Sonic Radio", fields: [{ title: "Outdoor Speakers", field: "nOutdoorSpeakers", tableName: "tblProjectSonicRadio" }, { title: "Indoor Speakers", field: "nIndoorSpeakers", tableName: "tblProjectSonicRadio" },
+        { title: "Zones", field: "nZones", tableName: "tblProjectSonicRadio" }, { title: "Server Racks", field: "nServerRacks", tableName: "tblProjectSonicRadio" }]
+      },
+      { name: "Installation", fields: [{ title: "Lead Tech", field: "tLeadTech", tableName: "tblProjectInstallation" }] },
+    ];
+    return items;
+  }
+
   GetTableVisibleColumns(tab: HomeTab) {
     if (tab.tab_type == TabType.StoreProjects) {
       if (tab.tab_header == "Historical Projects") {

@@ -23,5 +23,6 @@ namespace DeploymentTool
         public Nullable<bool> bDeleted { get; set; }
         public Nullable<int> nBrandID { get; set; }
         public Nullable<int> nVenderID { get; set; }
+        public string tTechnologyComponent { get; set; }
     }
 }

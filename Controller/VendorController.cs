@@ -33,7 +33,10 @@ namespace DeploymentTool.Controller
                 {
                     if (sBuilder.Length > 0)
                         sBuilder.Append(" and ");
-                    sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
+                    if (keyVal.Key.StartsWith("t"))
+                        sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
+                    else
+                        sBuilder.AppendFormat("x.{0}={1}", keyVal.Key, keyVal.Value);
                 }
                 return db.tblVendor.Where("x=>" + sBuilder.ToString());
             }

@@ -7,42 +7,61 @@
             <!-- <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon> -->
             <!-- <mat-error>{{getErrorMessage(curControl)}}</mat-error> -->
         </mat-form-field>
-
+        <mat-label class="fleidLabel" [attr.for]="">For</mat-label>
+        <mat-form-field class="curField" appearance="outline">
+            <mat-select [(ngModel)]="this.curTemplate.tCompName" [compareWith]="customComponentCompare">
+                <mat-option *ngFor="let comp of allCompAndFields" [value]="comp.name">
+                    {{comp.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
         <mat-label class="fleidLabel" [attr.for]="">Select Vendor</mat-label>
         <mat-form-field class="curField" appearance="outline">
             <input type="text" placeholder="Search Vendor" aria-label="Number" matInput [formControl]="myControl"
                 [matAutocomplete]="auto">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='onVendorChange($event)'>
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.optionDisplayName">
                     {{option.optionDisplayName}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
 
 
-        <mat-label class="fleidLabel" [attr.for]="">Select Component Fields</mat-label>
+        <mat-label class="fleidLabel" [attr.for]="">Select Items</mat-label>
         <div class="compFields">
-            <span class="headerLabel">Fields</span>
             <div class="checkBoxFields">
                 <table>
                     <thead>
                         <tr>
                             <th>Description</th>
                             <th>Parts Number</th>
-                            <th>Price</th>
-                            <th>Quantity Fields</th>
-                            <th>Selected</th>
+                            <th style="width: 60px;">Price</th>
+                            <th style="width: 350px;">Quantity Fields</th>
+                            <th style="width: 30px;"></th>
                         </tr>
                     </thead>
                     <tbody>
-
+                        <tr *ngFor="let item of vendorParts;let index = index">
+                            <td>{{item.tPartDesc}}</td>
+                            <td>{{item.tPartNumber}}</td>
+                            <td>{{item.cPrice}}</td>
+                            <td> <mat-select (selectionChange)="fieldChanged($event, item, index)" [(ngModel)]="curQuantityFields[index]" [compareWith]="customQuantityCompare">
+                                    <mat-optgroup *ngFor="let comp of allCompAndFields" [label]="comp.name">
+                                        <mat-option *ngFor="let field of comp.fields" [value]="field">
+                                            {{comp.name + "-" + field.title}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </td>
+                            <td><mat-checkbox [(ngModel)]="item.selected"
+                                    (ngModelChange)="updateItemFromCheckbox()"></mat-checkbox></td>
+                        </tr>
                     </tbody>
                 </table>
-                <div class="addButton lightGray"><span>+</span>Add New Item</div>
             </div>
         </div>
         <button mat-raised-button
             class="buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base"
-            [disabled]="canSave()" (click)="submit()">Save</button>
+            [disabled]="!canSave()" (click)="submit()">Save</button>
     </div>
 </div>

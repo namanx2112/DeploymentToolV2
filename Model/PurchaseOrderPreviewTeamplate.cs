@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 
 namespace DeploymentTool.Model
@@ -48,7 +49,7 @@ namespace DeploymentTool.Model
         public int aPurchaseOrderTemplateID { get; set; }
         public string tTemplateName { get; set; }
         public int nBrandId { get; set; }
-        public int nVenderId { get; set; }
+        public int nVendorId { get; set; }
         public int nCreatedBy { get; set; }
         public int nUpdateBy { get; set; }
     }
@@ -57,18 +58,19 @@ namespace DeploymentTool.Model
         public int aPurchaseOrderTemplateID { get; set; }
         public string tTemplateName { get; set; }
         public int nBrandId { get; set; }
-        public int nVenderID { get; set; }
+        public int nVendorId { get; set; }
+        public string tCompName { get; set; }
         public int nCreatedBy { get; set; }
         public int nUpdateBy { get; set; }
         public List<PurchaseOrderParts> purchaseOrderParts { get; set; }
     }
     public class PurchaseOrderParts
     {
-        public int aPartID { get; set; }
-        public int nVendorId { get; set; }
+        public int aPurchaseOrderTemplatePartsID { get; set; }
+        public int nPartID { get; set; }
         public string tPartDesc { get; set; }
         public string tPartNumber { get; set; }
-        public int cPrice { get; set; }
+        public float cPrice { get; set; }
         public string tTableName { get; set; }
         public string tTechCompField { get; set; }
     }

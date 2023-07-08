@@ -707,6 +707,7 @@
     <Property Name="bDeleted" Type="Boolean" />
     <Property Name="nBrandID" Type="Int32" />
     <Property Name="nVenderID" Type="Int32" />
+    <Property Name="tTechnologyComponent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tblOutgoingEmail">
     <Key>
@@ -785,8 +786,9 @@
     </Key>
     <Property Name="aPurchaseOrderTemplatePartsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nPartID" Type="Int32" />
-    <Property Name="nConfigProjectFieldID" Type="Int32" />
     <Property Name="nPurchaseOrderTemplateID" Type="Int32" />
+    <Property Name="tTechCompField" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="tTableName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tblVendorPartRel">
     <Key>
