@@ -16,7 +16,13 @@ export interface StoreContact {
     tPOCEmail: string,
     tGC: string,
     tGCPhone: string,
-    tGCEMail: string
+    tGCEMail: string,
+    tBillToCompany: string,
+    tBillToAddress: string,
+    tBillToCity: string,
+    nBillToState: number,
+    tBillToZip: string,
+    tBillToEmail: string
 }
 export interface StoreConfiguration {
     aProjectConfigID: number,

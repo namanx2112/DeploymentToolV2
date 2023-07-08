@@ -321,6 +321,12 @@
     <EntitySetMapping Name="tblProjectStores">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectStore">
         <MappingFragment StoreEntitySet="tblProjectStore">
+          <ScalarProperty Name="tBillToEmail" ColumnName="tBillToEmail" />
+          <ScalarProperty Name="tBillToZip" ColumnName="tBillToZip" />
+          <ScalarProperty Name="tBillToAddress" ColumnName="tBillToAddress" />
+          <ScalarProperty Name="tBillToCompany" ColumnName="tBillToCompany" />
+          <ScalarProperty Name="tBillToCity" ColumnName="tBillToCity" />
+          <ScalarProperty Name="nBillToState" ColumnName="nBillToState" />
           <ScalarProperty Name="tCity" ColumnName="tCity" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />

@@ -484,6 +484,12 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
     <Property Name="tCity" Type="nvarchar" MaxLength="500" />
+    <Property Name="tBillToCompany" Type="nvarchar" MaxLength="1000" />
+    <Property Name="tBillToAddress" Type="nvarchar" MaxLength="1000" />
+    <Property Name="tBillToCity" Type="nvarchar" MaxLength="1000" />
+    <Property Name="nBillToState" Type="int" />
+    <Property Name="tBillToZip" Type="nvarchar" MaxLength="1000" />
+    <Property Name="tBillToEmail" Type="nvarchar" MaxLength="1000" />
   </EntityType>
   <EntityType Name="tblPurchaseOrder">
     <Key>
@@ -812,139 +818,163 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblVendorPartRel" EntityType="Self.tblVendorPartRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBrandBKP" EntityType="Self.tblBrandBKP" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblBrandBKP].[aBrandId] AS [aBrandId], 
-    [tblBrandBKP].[tBrandName] AS [tBrandName], 
-    [tblBrandBKP].[tBrandDomain] AS [tBrandDomain], 
-    [tblBrandBKP].[tBrandAddressLine1] AS [tBrandAddressLine1], 
-    [tblBrandBKP].[tBrandAddressLine2] AS [tBrandAddressLine2], 
-    [tblBrandBKP].[tBrandCity] AS [tBrandCity], 
-    [tblBrandBKP].[nBrandState] AS [nBrandState], 
-    [tblBrandBKP].[nBrandCountry] AS [nBrandCountry], 
-    [tblBrandBKP].[tBrandZipCode] AS [tBrandZipCode], 
-    [tblBrandBKP].[nBrandLogoAttachmentID] AS [nBrandLogoAttachmentID], 
-    [tblBrandBKP].[nCreatedBy] AS [nCreatedBy], 
-    [tblBrandBKP].[nUpdateBy] AS [nUpdateBy], 
-    [tblBrandBKP].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblBrandBKP].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblBrandBKP].[bDeleted] AS [bDeleted]
-    FROM [dbo].[tblBrandBKP] AS [tblBrandBKP]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblBrandBKP].[aBrandId] AS [aBrandId],
+							[tblBrandBKP].[tBrandName] AS [tBrandName],
+							[tblBrandBKP].[tBrandDomain] AS [tBrandDomain],
+							[tblBrandBKP].[tBrandAddressLine1] AS [tBrandAddressLine1],
+							[tblBrandBKP].[tBrandAddressLine2] AS [tBrandAddressLine2],
+							[tblBrandBKP].[tBrandCity] AS [tBrandCity],
+							[tblBrandBKP].[nBrandState] AS [nBrandState],
+							[tblBrandBKP].[nBrandCountry] AS [nBrandCountry],
+							[tblBrandBKP].[tBrandZipCode] AS [tBrandZipCode],
+							[tblBrandBKP].[nBrandLogoAttachmentID] AS [nBrandLogoAttachmentID],
+							[tblBrandBKP].[nCreatedBy] AS [nCreatedBy],
+							[tblBrandBKP].[nUpdateBy] AS [nUpdateBy],
+							[tblBrandBKP].[dtCreatedOn] AS [dtCreatedOn],
+							[tblBrandBKP].[dtUpdatedOn] AS [dtUpdatedOn],
+							[tblBrandBKP].[bDeleted] AS [bDeleted]
+							FROM [dbo].[tblBrandBKP] AS [tblBrandBKP]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblCountry" EntityType="Self.tblCountry" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblCountry].[aCountryId] AS [aCountryId], 
-    [tblCountry].[tCountryName] AS [tCountryName]
-    FROM [dbo].[tblCountry] AS [tblCountry]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblCountry].[aCountryId] AS [aCountryId],
+							[tblCountry].[tCountryName] AS [tCountryName]
+							FROM [dbo].[tblCountry] AS [tblCountry]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblEnum" EntityType="Self.tblEnum" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblEnum].[aEnumID] AS [aEnumID], 
-    [tblEnum].[nConstraintID] AS [nConstraintID], 
-    [tblEnum].[nIndexID] AS [nIndexID], 
-    [tblEnum].[tDisplayName] AS [tDisplayName]
-    FROM [dbo].[tblEnum] AS [tblEnum]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblEnum].[aEnumID] AS [aEnumID],
+							[tblEnum].[nConstraintID] AS [nConstraintID],
+							[tblEnum].[nIndexID] AS [nIndexID],
+							[tblEnum].[tDisplayName] AS [tDisplayName]
+							FROM [dbo].[tblEnum] AS [tblEnum]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblEnumTableField" EntityType="Self.tblEnumTableField" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblEnumTableField].[aConstraintID] AS [aConstraintID], 
-    [tblEnumTableField].[tTableName] AS [tTableName], 
-    [tblEnumTableField].[tColumnName] AS [tColumnName]
-    FROM [dbo].[tblEnumTableField] AS [tblEnumTableField]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblEnumTableField].[aConstraintID] AS [aConstraintID],
+							[tblEnumTableField].[tTableName] AS [tTableName],
+							[tblEnumTableField].[tColumnName] AS [tColumnName]
+							FROM [dbo].[tblEnumTableField] AS [tblEnumTableField]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblFunctions" EntityType="Self.tblFunctions" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblFunctions].[aFunctionID] AS [aFunctionID], 
-    [tblFunctions].[tFunctionName] AS [tFunctionName]
-    FROM [dbo].[tblFunctions] AS [tblFunctions]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblFunctions].[aFunctionID] AS [aFunctionID],
+							[tblFunctions].[tFunctionName] AS [tFunctionName]
+							FROM [dbo].[tblFunctions] AS [tblFunctions]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblProjectComponent" EntityType="Self.tblProjectComponent" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblProjectComponent].[aProjectComponentId] AS [aProjectComponentId], 
-    [tblProjectComponent].[nProjectId] AS [nProjectId], 
-    [tblProjectComponent].[nTechComponentId] AS [nTechComponentId], 
-    [tblProjectComponent].[nVendorId] AS [nVendorId], 
-    [tblProjectComponent].[tStatus] AS [tStatus], 
-    [tblProjectComponent].[dStartDate] AS [dStartDate], 
-    [tblProjectComponent].[dEndDate] AS [dEndDate], 
-    [tblProjectComponent].[dEndExpectedDate] AS [dEndExpectedDate], 
-    [tblProjectComponent].[tSignOffStatus] AS [tSignOffStatus], 
-    [tblProjectComponent].[tComments] AS [tComments], 
-    [tblProjectComponent].[nCreatedBy] AS [nCreatedBy], 
-    [tblProjectComponent].[nUpdateBy] AS [nUpdateBy], 
-    [tblProjectComponent].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblProjectComponent].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblProjectComponent].[bDeleted] AS [bDeleted]
-    FROM [dbo].[tblProjectComponent] AS [tblProjectComponent]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblProjectComponent].[aProjectComponentId] AS [aProjectComponentId],
+							[tblProjectComponent].[nProjectId] AS [nProjectId],
+							[tblProjectComponent].[nTechComponentId] AS [nTechComponentId],
+							[tblProjectComponent].[nVendorId] AS [nVendorId],
+							[tblProjectComponent].[tStatus] AS [tStatus],
+							[tblProjectComponent].[dStartDate] AS [dStartDate],
+							[tblProjectComponent].[dEndDate] AS [dEndDate],
+							[tblProjectComponent].[dEndExpectedDate] AS [dEndExpectedDate],
+							[tblProjectComponent].[tSignOffStatus] AS [tSignOffStatus],
+							[tblProjectComponent].[tComments] AS [tComments],
+							[tblProjectComponent].[nCreatedBy] AS [nCreatedBy],
+							[tblProjectComponent].[nUpdateBy] AS [nUpdateBy],
+							[tblProjectComponent].[dtCreatedOn] AS [dtCreatedOn],
+							[tblProjectComponent].[dtUpdatedOn] AS [dtUpdatedOn],
+							[tblProjectComponent].[bDeleted] AS [bDeleted]
+							FROM [dbo].[tblProjectComponent] AS [tblProjectComponent]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblProjectComponentUpload" EntityType="Self.tblProjectComponentUpload" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblProjectComponentUpload].[aProjectComponentUploadId] AS [aProjectComponentUploadId], 
-    [tblProjectComponentUpload].[nProjectComponentId] AS [nProjectComponentId], 
-    [tblProjectComponentUpload].[nAttachmentId] AS [nAttachmentId], 
-    [tblProjectComponentUpload].[nCreatedBy] AS [nCreatedBy], 
-    [tblProjectComponentUpload].[nUpdateBy] AS [nUpdateBy], 
-    [tblProjectComponentUpload].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblProjectComponentUpload].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblProjectComponentUpload].[bDeleted] AS [bDeleted]
-    FROM [dbo].[tblProjectComponentUpload] AS [tblProjectComponentUpload]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblProjectComponentUpload].[aProjectComponentUploadId] AS [aProjectComponentUploadId],
+							[tblProjectComponentUpload].[nProjectComponentId] AS [nProjectComponentId],
+							[tblProjectComponentUpload].[nAttachmentId] AS [nAttachmentId],
+							[tblProjectComponentUpload].[nCreatedBy] AS [nCreatedBy],
+							[tblProjectComponentUpload].[nUpdateBy] AS [nUpdateBy],
+							[tblProjectComponentUpload].[dtCreatedOn] AS [dtCreatedOn],
+							[tblProjectComponentUpload].[dtUpdatedOn] AS [dtUpdatedOn],
+							[tblProjectComponentUpload].[bDeleted] AS [bDeleted]
+							FROM [dbo].[tblProjectComponentUpload] AS [tblProjectComponentUpload]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblState" EntityType="Self.tblState" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblState].[aStateId] AS [aStateId], 
-    [tblState].[tStateName] AS [tStateName], 
-    [tblState].[nCountryId] AS [nCountryId]
-    FROM [dbo].[tblState] AS [tblState]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblState].[aStateId] AS [aStateId],
+							[tblState].[tStateName] AS [tStateName],
+							[tblState].[nCountryId] AS [nCountryId]
+							FROM [dbo].[tblState] AS [tblState]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblTechComponent" EntityType="Self.tblTechComponent" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblTechComponent].[aTechComponentId] AS [aTechComponentId], 
-    [tblTechComponent].[tTechComponentName] AS [tTechComponentName], 
-    [tblTechComponent].[nBrandID] AS [nBrandID], 
-    [tblTechComponent].[tTechComponentDescription] AS [tTechComponentDescription], 
-    [tblTechComponent].[tComponentType] AS [tComponentType], 
-    [tblTechComponent].[nCreatedBy] AS [nCreatedBy], 
-    [tblTechComponent].[nUpdateBy] AS [nUpdateBy], 
-    [tblTechComponent].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblTechComponent].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblTechComponent].[bDeleted] AS [bDeleted]
-    FROM [dbo].[tblTechComponent] AS [tblTechComponent]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblTechComponent].[aTechComponentId] AS [aTechComponentId],
+							[tblTechComponent].[tTechComponentName] AS [tTechComponentName],
+							[tblTechComponent].[nBrandID] AS [nBrandID],
+							[tblTechComponent].[tTechComponentDescription] AS [tTechComponentDescription],
+							[tblTechComponent].[tComponentType] AS [tComponentType],
+							[tblTechComponent].[nCreatedBy] AS [nCreatedBy],
+							[tblTechComponent].[nUpdateBy] AS [nUpdateBy],
+							[tblTechComponent].[dtCreatedOn] AS [dtCreatedOn],
+							[tblTechComponent].[dtUpdatedOn] AS [dtUpdatedOn],
+							[tblTechComponent].[bDeleted] AS [bDeleted]
+							FROM [dbo].[tblTechComponent] AS [tblTechComponent]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblTrace" EntityType="Self.tblTrace" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblTrace].[aTraceID] AS [aTraceID], 
-    [tblTrace].[StoreName] AS [StoreName], 
-    [tblTrace].[ProjectType] AS [ProjectType], 
-    [tblTrace].[StoreNumber] AS [StoreNumber], 
-    [tblTrace].[Address] AS [Address], 
-    [tblTrace].[City] AS [City], 
-    [tblTrace].[State] AS [State], 
-    [tblTrace].[DMAID] AS [DMAID], 
-    [tblTrace].[DMA] AS [DMA], 
-    [tblTrace].[RED] AS [RED], 
-    [tblTrace].[CM] AS [CM], 
-    [tblTrace].[ANE] AS [ANE], 
-    [tblTrace].[RVP] AS [RVP], 
-    [tblTrace].[PrincipalPartner] AS [PrincipalPartner], 
-    [tblTrace].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblTrace].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblTrace].[ProjectStatus] AS [ProjectStatus], 
-    [tblTrace].[CreatedBy] AS [CreatedBy], 
-    [tblTrace].[BrandId] AS [BrandId]
-    FROM [dbo].[tblTrace] AS [tblTrace]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblTrace].[aTraceID] AS [aTraceID],
+							[tblTrace].[StoreName] AS [StoreName],
+							[tblTrace].[ProjectType] AS [ProjectType],
+							[tblTrace].[StoreNumber] AS [StoreNumber],
+							[tblTrace].[Address] AS [Address],
+							[tblTrace].[City] AS [City],
+							[tblTrace].[State] AS [State],
+							[tblTrace].[DMAID] AS [DMAID],
+							[tblTrace].[DMA] AS [DMA],
+							[tblTrace].[RED] AS [RED],
+							[tblTrace].[CM] AS [CM],
+							[tblTrace].[ANE] AS [ANE],
+							[tblTrace].[RVP] AS [RVP],
+							[tblTrace].[PrincipalPartner] AS [PrincipalPartner],
+							[tblTrace].[dtCreatedOn] AS [dtCreatedOn],
+							[tblTrace].[dtUpdatedOn] AS [dtUpdatedOn],
+							[tblTrace].[ProjectStatus] AS [ProjectStatus],
+							[tblTrace].[CreatedBy] AS [CreatedBy],
+							[tblTrace].[BrandId] AS [BrandId]
+							FROM [dbo].[tblTrace] AS [tblTrace]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblUserBrandRel" EntityType="Self.tblUserBrandRel" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblUserBrandRel].[aUserBrandRelID] AS [aUserBrandRelID], 
-    [tblUserBrandRel].[nUserID] AS [nUserID], 
-    [tblUserBrandRel].[nBrandID] AS [nBrandID]
-    FROM [dbo].[tblUserBrandRel] AS [tblUserBrandRel]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblUserBrandRel].[aUserBrandRelID] AS [aUserBrandRelID],
+							[tblUserBrandRel].[nUserID] AS [nUserID],
+							[tblUserBrandRel].[nBrandID] AS [nBrandID]
+							FROM [dbo].[tblUserBrandRel] AS [tblUserBrandRel]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblUserFunctionRel" EntityType="Self.tblUserFunctionRel" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblUserFunctionRel].[aUserFunctionRelID] AS [aUserFunctionRelID], 
-    [tblUserFunctionRel].[nUserID] AS [nUserID], 
-    [tblUserFunctionRel].[nFunctionID] AS [nFunctionID]
-    FROM [dbo].[tblUserFunctionRel] AS [tblUserFunctionRel]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblUserFunctionRel].[aUserFunctionRelID] AS [aUserFunctionRelID],
+							[tblUserFunctionRel].[nUserID] AS [nUserID],
+							[tblUserFunctionRel].[nFunctionID] AS [nFunctionID]
+							FROM [dbo].[tblUserFunctionRel] AS [tblUserFunctionRel]
+						</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

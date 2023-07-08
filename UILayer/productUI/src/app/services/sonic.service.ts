@@ -492,6 +492,7 @@ export class SonicService {
   GetStoreContactFields(readOnly: boolean): Fields[] {
     let fArray = [{
       field_name: "aProjectStoreID",
+      field_group: "Store Contact",
       fieldUniqeName: "aProjectStoreID",
       defaultVal: "0",
       readOnly: false,
@@ -503,6 +504,7 @@ export class SonicService {
       hidden: true
     }, {
       field_name: "ProjectID",
+      field_group: "Store Contact",
       fieldUniqeName: "nProjectID",
       defaultVal: "0",
       readOnly: false,
@@ -514,6 +516,7 @@ export class SonicService {
       hidden: true
     }, {
       field_name: "Store Name",
+      field_group: "Store Contact",
       fieldUniqeName: "tStoreName",
       defaultVal: "",
       readOnly: readOnly,
@@ -525,6 +528,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Address1",
+      field_group: "Store Contact",
       fieldUniqeName: "tStoreAddressLine1",
       defaultVal: "",
       readOnly: readOnly,
@@ -536,6 +540,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Store Address2",
+      field_group: "Store Contact",
       fieldUniqeName: "tStoreAddressLine2",
       defaultVal: "",
       readOnly: readOnly,
@@ -547,6 +552,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Store City",
+      field_group: "Store Contact",
       fieldUniqeName: "tCity",
       defaultVal: "",
       readOnly: readOnly,
@@ -558,6 +564,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Store State",
+      field_group: "Store Contact",
       fieldUniqeName: "nStoreState",
       defaultVal: "",
       readOnly: readOnly,
@@ -570,6 +577,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Store Zip",
+      field_group: "Store Contact",
       fieldUniqeName: "tStoreZip",
       defaultVal: "",
       readOnly: readOnly,
@@ -581,6 +589,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Store Manager",
+      field_group: "Store Contact",
       fieldUniqeName: "tStoreManager",
       defaultVal: "",
       readOnly: readOnly,
@@ -592,6 +601,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Store POC",
+      field_group: "Store Contact",
       fieldUniqeName: "tPOC",
       defaultVal: "",
       readOnly: false,
@@ -603,6 +613,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Store POC Phone",
+      field_group: "Store Contact",
       fieldUniqeName: "tPOCPhone",
       defaultVal: "",
       readOnly: false,
@@ -614,6 +625,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "Store POC Email",
+      field_group: "Store Contact",
       fieldUniqeName: "tPOCEmail",
       defaultVal: "",
       readOnly: false,
@@ -625,6 +637,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "General Contractor",
+      field_group: "Store Contact",
       fieldUniqeName: "tGC",
       defaultVal: "",
       readOnly: false,
@@ -636,6 +649,7 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "General Contractor Phone",
+      field_group: "Store Contact",
       fieldUniqeName: "tGCPhone",
       defaultVal: "",
       readOnly: false,
@@ -647,12 +661,86 @@ export class SonicService {
       hidden: false
     }, {
       field_name: "General ContractorEmail",
+      field_group: "Store Contact",
       fieldUniqeName: "tGCEMail",
       defaultVal: "",
       readOnly: false,
       invalid: false,
       field_type: FieldType.email,
       field_placeholder: "Enter GC Email",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Company",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToCompany",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Company",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Address",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToAddress",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter GC Email",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "City",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToCity",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter City",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "State",
+      field_group: "Bill to",
+      fieldUniqeName: "nBillToState",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.dropdown,      
+      options: this.commonService.GetDropdown("State"),
+      field_placeholder: "Enter State",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Zip",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToZip",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Zip",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Email",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToEmail",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Email",
       validator: [],
       mandatory: false,
       hidden: false
