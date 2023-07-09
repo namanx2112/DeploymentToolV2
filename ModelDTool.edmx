@@ -4,986 +4,974 @@
 	<edmx:Runtime>
 		<!-- SSDL content -->
 		<edmx:StorageModels>
-			<Schema Namespace="dtDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-				<EntityType Name="tblApplicationTrace">
-					<Key>
-						<PropertyRef Name="aTraceId" />
-					</Key>
-					<Property Name="aTraceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="dTraceTime" Type="datetime" />
-					<Property Name="tModule" Type="varchar" MaxLength="100" />
-					<Property Name="tTrace" Type="nvarchar(max)" />
-				</EntityType>
-				<EntityType Name="tblAttachment">
-					<Key>
-						<PropertyRef Name="aAttachmentId" />
-					</Key>
-					<Property Name="aAttachmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tfileName" Type="nvarchar" MaxLength="255" />
-					<Property Name="tFileExt" Type="nvarchar" MaxLength="255" />
-					<Property Name="tfileType" Type="nvarchar" MaxLength="255" />
-					<Property Name="tAttachmentType" Type="nvarchar" MaxLength="255" />
-					<Property Name="tAttachmentComments" Type="nvarchar" MaxLength="255" />
-					<Property Name="tAttachmentBlob" Type="image" />
-					<Property Name="tAttachmentURL" Type="nvarchar" MaxLength="255" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<EntityType Name="tblBrand">
-					<Key>
-						<PropertyRef Name="aBrandId" />
-					</Key>
-					<Property Name="aBrandId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tBrandName" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBrandDomain" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBrandAddressLine1" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBrandAddressLine2" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBrandCity" Type="nvarchar" MaxLength="255" />
-					<Property Name="nBrandState" Type="int" />
-					<Property Name="nBrandCountry" Type="int" />
-					<Property Name="tBrandZipCode" Type="nvarchar" MaxLength="255" />
-					<Property Name="nBrandLogoAttachmentID" Type="int" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-					<Property Name="BrandFile" Type="image" />
-				</EntityType>
-				<!--Errors Found During Generation:
+		<Schema Namespace="dtDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblApplicationTrace">
+          <Key>
+            <PropertyRef Name="aTraceId" />
+          </Key>
+          <Property Name="aTraceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dTraceTime" Type="datetime" />
+          <Property Name="tModule" Type="varchar" MaxLength="100" />
+          <Property Name="tTrace" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tblAttachment">
+          <Key>
+            <PropertyRef Name="aAttachmentId" />
+          </Key>
+          <Property Name="aAttachmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tfileName" Type="nvarchar" MaxLength="255" />
+          <Property Name="tFileExt" Type="nvarchar" MaxLength="255" />
+          <Property Name="tfileType" Type="nvarchar" MaxLength="255" />
+          <Property Name="tAttachmentType" Type="nvarchar" MaxLength="255" />
+          <Property Name="tAttachmentComments" Type="nvarchar" MaxLength="255" />
+          <Property Name="tAttachmentBlob" Type="image" />
+          <Property Name="tAttachmentURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblBrand">
+          <Key>
+            <PropertyRef Name="aBrandId" />
+          </Key>
+          <Property Name="aBrandId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tBrandName" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBrandDomain" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBrandAddressLine1" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBrandAddressLine2" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBrandCity" Type="nvarchar" MaxLength="255" />
+          <Property Name="nBrandState" Type="int" />
+          <Property Name="nBrandCountry" Type="int" />
+          <Property Name="tBrandZipCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="nBrandLogoAttachmentID" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+          <Property Name="BrandFile" Type="image" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblBrandBKP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblBrandBKP">
-					<Key>
-						<PropertyRef Name="aBrandId" />
-					</Key>
-					<Property Name="aBrandId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tBrandName" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBrandDomain" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBrandAddressLine1" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBrandAddressLine2" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBrandCity" Type="nvarchar" MaxLength="255" />
-					<Property Name="nBrandState" Type="int" />
-					<Property Name="nBrandCountry" Type="int" />
-					<Property Name="tBrandZipCode" Type="nvarchar" MaxLength="255" />
-					<Property Name="nBrandLogoAttachmentID" Type="int" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblBrandBKP">
+          <Key>
+            <PropertyRef Name="aBrandId" />
+          </Key>
+          <Property Name="aBrandId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tBrandName" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBrandDomain" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBrandAddressLine1" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBrandAddressLine2" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBrandCity" Type="nvarchar" MaxLength="255" />
+          <Property Name="nBrandState" Type="int" />
+          <Property Name="nBrandCountry" Type="int" />
+          <Property Name="tBrandZipCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="nBrandLogoAttachmentID" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblCountry">
-					<Key>
-						<PropertyRef Name="aCountryId" />
-						<PropertyRef Name="tCountryName" />
-					</Key>
-					<Property Name="aCountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tCountryName" Type="nvarchar" MaxLength="255" Nullable="false" />
-				</EntityType>
-				<EntityType Name="tblDocuments">
-					<Key>
-						<PropertyRef Name="aDocumentID" />
-					</Key>
-					<Property Name="aDocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="DocumentName" Type="nvarchar" MaxLength="500" />
-					<Property Name="DocumentFile" Type="image" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<EntityType Name="tblDropdownMain">
-					<Key>
-						<PropertyRef Name="aMainId" />
-					</Key>
-					<Property Name="aMainId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nBrandId" Type="int" />
-					<Property Name="tModuleName" Type="varchar" MaxLength="500" />
-					<Property Name="nDropdownId" Type="int" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<EntityType Name="tblDropdowns">
-					<Key>
-						<PropertyRef Name="aDropdownId" />
-					</Key>
-					<Property Name="aDropdownId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tDropdownText" Type="varchar" MaxLength="500" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblCountry">
+          <Key>
+            <PropertyRef Name="aCountryId" />
+            <PropertyRef Name="tCountryName" />
+          </Key>
+          <Property Name="aCountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tCountryName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDocuments">
+          <Key>
+            <PropertyRef Name="aDocumentID" />
+          </Key>
+          <Property Name="aDocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentName" Type="nvarchar" MaxLength="500" />
+          <Property Name="DocumentFile" Type="image" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblDropdownMain">
+          <Key>
+            <PropertyRef Name="aMainId" />
+          </Key>
+          <Property Name="aMainId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nBrandId" Type="int" />
+          <Property Name="tModuleName" Type="varchar" MaxLength="500" />
+          <Property Name="nDropdownId" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblDropdowns">
+          <Key>
+            <PropertyRef Name="aDropdownId" />
+          </Key>
+          <Property Name="aDropdownId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tDropdownText" Type="varchar" MaxLength="500" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblEnum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblEnum">
-					<Key>
-						<PropertyRef Name="aEnumID" />
-					</Key>
-					<Property Name="aEnumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nConstraintID" Type="int" />
-					<Property Name="nIndexID" Type="int" />
-					<Property Name="tDisplayName" Type="nvarchar" MaxLength="255" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblEnum">
+          <Key>
+            <PropertyRef Name="aEnumID" />
+          </Key>
+          <Property Name="aEnumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nConstraintID" Type="int" />
+          <Property Name="nIndexID" Type="int" />
+          <Property Name="tDisplayName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblEnumTableField' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblEnumTableField">
-					<Key>
-						<PropertyRef Name="aConstraintID" />
-					</Key>
-					<Property Name="aConstraintID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tTableName" Type="nvarchar" MaxLength="255" />
-					<Property Name="tColumnName" Type="nvarchar" MaxLength="255" />
-				</EntityType>
-				<EntityType Name="tblFranchise">
-					<Key>
-						<PropertyRef Name="aFranchiseId" />
-					</Key>
-					<Property Name="aFranchiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tFranchiseName" Type="nvarchar" MaxLength="255" />
-					<Property Name="nBrandID" Type="int" />
-					<Property Name="tFranchiseDescription" Type="nvarchar" MaxLength="255" />
-					<Property Name="tFranchiseLocation" Type="nvarchar" MaxLength="255" />
-					<Property Name="dFranchiseEstablished" Type="datetime" />
-					<Property Name="tFranchiseContact" Type="nvarchar" MaxLength="255" />
-					<Property Name="tFranchiseOwner" Type="nvarchar" MaxLength="255" />
-					<Property Name="tFranchiseEmail" Type="nvarchar" MaxLength="255" />
-					<Property Name="tFranchisePhone" Type="nvarchar" MaxLength="255" />
-					<Property Name="tFranchiseAddress" Type="nvarchar" MaxLength="255" />
-					<Property Name="nFranchiseEmployeeCount" Type="int" />
-					<Property Name="nFranchiseRevenue" Type="int" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblEnumTableField">
+          <Key>
+            <PropertyRef Name="aConstraintID" />
+          </Key>
+          <Property Name="aConstraintID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tTableName" Type="nvarchar" MaxLength="255" />
+          <Property Name="tColumnName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tblFranchise">
+          <Key>
+            <PropertyRef Name="aFranchiseId" />
+          </Key>
+          <Property Name="aFranchiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tFranchiseName" Type="nvarchar" MaxLength="255" />
+          <Property Name="nBrandID" Type="int" />
+          <Property Name="tFranchiseDescription" Type="nvarchar" MaxLength="255" />
+          <Property Name="tFranchiseLocation" Type="nvarchar" MaxLength="255" />
+          <Property Name="dFranchiseEstablished" Type="datetime" />
+          <Property Name="tFranchiseContact" Type="nvarchar" MaxLength="255" />
+          <Property Name="tFranchiseOwner" Type="nvarchar" MaxLength="255" />
+          <Property Name="tFranchiseEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="tFranchisePhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="tFranchiseAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="nFranchiseEmployeeCount" Type="int" />
+          <Property Name="nFranchiseRevenue" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblFunctions">
-					<Key>
-						<PropertyRef Name="aFunctionID" />
-					</Key>
-					<Property Name="aFunctionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tFunctionName" Type="nvarchar" MaxLength="255" />
-				</EntityType>
-				<EntityType Name="tblOutgoingEmail">
-					<Key>
-						<PropertyRef Name="aOutgoingEmailID" />
-					</Key>
-					<Property Name="aOutgoingEmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tTo" Type="nvarchar(max)" />
-					<Property Name="tCC" Type="nvarchar(max)" />
-					<Property Name="tSubject" Type="nvarchar(max)" />
-					<Property Name="tHTMLContent" Type="nvarchar(max)" />
-					<Property Name="tPlainContent" Type="nvarchar(max)" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<EntityType Name="tblOutgoingEmailAttachment">
-					<Key>
-						<PropertyRef Name="aOutgoingEmailAttachmentID" />
-					</Key>
-					<Property Name="aOutgoingEmailAttachmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nOutgoingEmailID" Type="int" />
-					<Property Name="tFileName" Type="nvarchar(max)" />
-					<Property Name="tContentID" Type="nvarchar(max)" />
-					<Property Name="ifile" Type="image" />
-				</EntityType>
-				<EntityType Name="tblParts">
-					<Key>
-						<PropertyRef Name="aPartID" />
-					</Key>
-					<Property Name="aPartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tPartDesc" Type="nvarchar(max)" />
-					<Property Name="tPartNumber" Type="nvarchar(max)" />
-					<Property Name="cPrice" Type="decimal" Precision="18" Scale="2" />
-				</EntityType>
-				<EntityType Name="tblProject">
-					<Key>
-						<PropertyRef Name="aProjectID" />
-					</Key>
-					<Property Name="aProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tProjectName" Type="nvarchar" MaxLength="255" />
-					<Property Name="nStoreID" Type="int" />
-					<Property Name="dGoLiveDate" Type="date" />
-					<Property Name="nProjectType" Type="int" />
-					<Property Name="nProjectStatus" Type="int" />
-					<Property Name="nDMAID" Type="int" />
-					<Property Name="tDMA" Type="nvarchar" MaxLength="255" />
-					<Property Name="nBrandID" Type="int" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<EntityType Name="tblProjectAudio">
-					<Key>
-						<PropertyRef Name="aProjectAudioID" />
-					</Key>
-					<Property Name="aProjectAudioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nVendor" Type="int" />
-					<Property Name="nStatus" Type="int" />
-					<Property Name="nConfiguration" Type="int" />
-					<Property Name="dDeliveryDate" Type="date" />
-					<Property Name="nLoopStatus" Type="int" />
-					<Property Name="nLoopType" Type="int" />
-					<Property Name="dLoopDeliveryDate" Type="date" />
-					<Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<EntityType Name="tblProjectBillTo">
-					<Key>
-						<PropertyRef Name="aProjectBillToID" />
-					</Key>
-					<Property Name="aProjectBillToID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="tCompany" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBillToAddressLine1" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBillToAddressLine2" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBillToState" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBillToZipCode" Type="nvarchar" MaxLength="255" />
-					<Property Name="tBillToEmail" Type="nvarchar" MaxLength="255" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblFunctions">
+          <Key>
+            <PropertyRef Name="aFunctionID" />
+          </Key>
+          <Property Name="aFunctionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tFunctionName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tblOutgoingEmail">
+          <Key>
+            <PropertyRef Name="aOutgoingEmailID" />
+          </Key>
+          <Property Name="aOutgoingEmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tTo" Type="nvarchar(max)" />
+          <Property Name="tCC" Type="nvarchar(max)" />
+          <Property Name="tSubject" Type="nvarchar(max)" />
+          <Property Name="tHTMLContent" Type="nvarchar(max)" />
+          <Property Name="tPlainContent" Type="nvarchar(max)" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblOutgoingEmailAttachment">
+          <Key>
+            <PropertyRef Name="aOutgoingEmailAttachmentID" />
+          </Key>
+          <Property Name="aOutgoingEmailAttachmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nOutgoingEmailID" Type="int" />
+          <Property Name="tFileName" Type="nvarchar(max)" />
+          <Property Name="tContentID" Type="nvarchar(max)" />
+          <Property Name="ifile" Type="image" />
+        </EntityType>
+        <EntityType Name="tblParts">
+          <Key>
+            <PropertyRef Name="aPartID" />
+          </Key>
+          <Property Name="aPartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tPartDesc" Type="nvarchar(max)" />
+          <Property Name="tPartNumber" Type="nvarchar(max)" />
+          <Property Name="cPrice" Type="decimal" Precision="22" Scale="4" />
+        </EntityType>
+        <EntityType Name="tblProject">
+          <Key>
+            <PropertyRef Name="aProjectID" />
+          </Key>
+          <Property Name="aProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tProjectName" Type="nvarchar" MaxLength="255" />
+          <Property Name="nStoreID" Type="int" />
+          <Property Name="dGoLiveDate" Type="date" />
+          <Property Name="nProjectType" Type="int" />
+          <Property Name="nProjectStatus" Type="int" />
+          <Property Name="nDMAID" Type="int" />
+          <Property Name="tDMA" Type="nvarchar" MaxLength="255" />
+          <Property Name="nBrandID" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectAudio">
+          <Key>
+            <PropertyRef Name="aProjectAudioID" />
+          </Key>
+          <Property Name="aProjectAudioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nVendor" Type="int" />
+          <Property Name="nStatus" Type="int" />
+          <Property Name="nConfiguration" Type="int" />
+          <Property Name="dDeliveryDate" Type="date" />
+          <Property Name="nLoopStatus" Type="int" />
+          <Property Name="nLoopType" Type="int" />
+          <Property Name="dLoopDeliveryDate" Type="date" />
+          <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectBillTo">
+          <Key>
+            <PropertyRef Name="aProjectBillToID" />
+          </Key>
+          <Property Name="aProjectBillToID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="tCompany" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBillToAddressLine1" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBillToAddressLine2" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBillToState" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBillToZipCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="tBillToEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblProjectComponent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblProjectComponent">
-					<Key>
-						<PropertyRef Name="aProjectComponentId" />
-					</Key>
-					<Property Name="aProjectComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectId" Type="int" />
-					<Property Name="nTechComponentId" Type="int" />
-					<Property Name="nVendorId" Type="nvarchar" MaxLength="255" />
-					<Property Name="tStatus" Type="int" />
-					<Property Name="dStartDate" Type="nvarchar" MaxLength="255" />
-					<Property Name="dEndDate" Type="datetime" />
-					<Property Name="dEndExpectedDate" Type="datetime" />
-					<Property Name="tSignOffStatus" Type="datetime" />
-					<Property Name="tComments" Type="nvarchar(max)" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblProjectComponent">
+          <Key>
+            <PropertyRef Name="aProjectComponentId" />
+          </Key>
+          <Property Name="aProjectComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectId" Type="int" />
+          <Property Name="nTechComponentId" Type="int" />
+          <Property Name="nVendorId" Type="nvarchar" MaxLength="255" />
+          <Property Name="tStatus" Type="int" />
+          <Property Name="dStartDate" Type="nvarchar" MaxLength="255" />
+          <Property Name="dEndDate" Type="datetime" />
+          <Property Name="dEndExpectedDate" Type="datetime" />
+          <Property Name="tSignOffStatus" Type="datetime" />
+          <Property Name="tComments" Type="nvarchar(max)" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblProjectComponentUpload">
-					<Key>
-						<PropertyRef Name="aProjectComponentUploadId" />
-					</Key>
-					<Property Name="aProjectComponentUploadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectComponentId" Type="int" />
-					<Property Name="nAttachmentId" Type="int" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<EntityType Name="tblProjectConfig">
-					<Key>
-						<PropertyRef Name="aProjectConfigID" />
-					</Key>
-					<Property Name="aProjectConfigID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nStallCount" Type="int" />
-					<Property Name="nDriveThru" Type="int" />
-					<Property Name="nInsideDining" Type="int" />
-					<Property Name="cProjectCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-					<Property Name="dGroundBreak" Type="datetime" />
-					<Property Name="dKitchenInstall" Type="datetime" />
-				</EntityType>
-				<EntityType Name="tblProjectExteriorMenus">
-					<Key>
-						<PropertyRef Name="aProjectExteriorMenuID" />
-					</Key>
-					<Property Name="aProjectExteriorMenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nVendor" Type="int" />
-					<Property Name="nStalls" Type="int" />
-					<Property Name="nPatio" Type="int" />
-					<Property Name="nFlat" Type="int" />
-					<Property Name="nDTPops" Type="int" />
-					<Property Name="nDTMenu" Type="int" />
-					<Property Name="nStatus" Type="int" />
-					<Property Name="dDeliveryDate" Type="date" />
-					<Property Name="cFabConCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="cIDTechCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="cTotalCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<EntityType Name="tblProjectInstallation">
-					<Key>
-						<PropertyRef Name="aProjectInstallationID" />
-					</Key>
-					<Property Name="aProjectInstallationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nVendor" Type="int" />
-					<Property Name="tLeadTech" Type="nvarchar" MaxLength="255" />
-					<Property Name="dInstallDate" Type="date" />
-					<Property Name="dInstallEnd" Type="date" />
-					<Property Name="nStatus" Type="int" />
-					<Property Name="nSignoffs" Type="int" />
-					<Property Name="nTestTransactions" Type="int" />
-					<Property Name="nProjectStatus" Type="int" />
-					<Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<EntityType Name="tblProjectInteriorMenus">
-					<Key>
-						<PropertyRef Name="aProjectInteriorMenuID" />
-					</Key>
-					<Property Name="aProjectInteriorMenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nVendor" Type="int" />
-					<Property Name="nDMBQuantity" Type="int" />
-					<Property Name="nStatus" Type="int" />
-					<Property Name="dDeliveryDate" Type="date" />
-					<Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<EntityType Name="tblProjectNetworking">
-					<Key>
-						<PropertyRef Name="aProjectNetworkingID" />
-					</Key>
-					<Property Name="aProjectNetworkingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nVendor" Type="int" />
-					<Property Name="nPrimaryStatus" Type="int" />
-					<Property Name="dPrimaryDate" Type="date" />
-					<Property Name="nPrimaryType" Type="int" />
-					<Property Name="nBackupStatus" Type="int" />
-					<Property Name="dBackupDate" Type="date" />
-					<Property Name="nBackupType" Type="int" />
-					<Property Name="nTempStatus" Type="int" />
-					<Property Name="dTempDate" Type="date" />
-					<Property Name="nTempType" Type="int" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<EntityType Name="tblProjectNotes">
-					<Key>
-						<PropertyRef Name="aNoteID" />
-					</Key>
-					<Property Name="aNoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nStoreID" Type="int" />
-					<Property Name="nNoteType" Type="int" />
-					<Property Name="tSource" Type="nvarchar" MaxLength="255" />
-					<Property Name="tNoteDesc" Type="nvarchar" MaxLength="255" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<EntityType Name="tblProjectPaymentSystem">
-					<Key>
-						<PropertyRef Name="aProjectPaymentSystemID" />
-					</Key>
-					<Property Name="aProjectPaymentSystemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nVendor" Type="int" />
-					<Property Name="nBuyPassID" Type="int" />
-					<Property Name="nServerEPS" Type="int" />
-					<Property Name="nStatus" Type="int" />
-					<Property Name="dDeliveryDate" Type="date" />
-					<Property Name="nPAYSUnits" Type="int" />
-					<Property Name="n45Enclosures" Type="int" />
-					<Property Name="n90Enclosures" Type="int" />
-					<Property Name="nDTEnclosures" Type="int" />
-					<Property Name="n15SunShields" Type="int" />
-					<Property Name="nUPS" Type="int" />
-					<Property Name="nShelf" Type="int" />
-					<Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="nType" Type="int" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<EntityType Name="tblProjectPOS">
-					<Key>
-						<PropertyRef Name="aProjectPOSID" />
-					</Key>
-					<Property Name="aProjectPOSID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nVendor" Type="int" />
-					<Property Name="dDeliveryDate" Type="date" />
-					<Property Name="dConfigDate" Type="date" />
-					<Property Name="dSupportDate" Type="date" />
-					<Property Name="nStatus" Type="int" />
-					<Property Name="nPaperworkStatus" Type="int" />
-					<Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<EntityType Name="tblProjectSonicRadio">
-					<Key>
-						<PropertyRef Name="aProjectSonicRadioID" />
-					</Key>
-					<Property Name="aProjectSonicRadioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nVendor" Type="int" />
-					<Property Name="nOutdoorSpeakers" Type="int" />
-					<Property Name="nColors" Type="int" />
-					<Property Name="nIndoorSpeakers" Type="int" />
-					<Property Name="nZones" Type="int" />
-					<Property Name="nServerRacks" Type="int" />
-					<Property Name="nStatus" Type="int" />
-					<Property Name="dDeliveryDate" Type="date" />
-					<Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="int" />
-				</EntityType>
-				<EntityType Name="tblProjectStakeHolders">
-					<Key>
-						<PropertyRef Name="aProjectStakeHolderID" />
-					</Key>
-					<Property Name="aProjectStakeHolderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="nFranchisee" Type="int" />
-					<Property Name="tRVP" Type="nvarchar" MaxLength="255" />
-					<Property Name="tFBC" Type="nvarchar" MaxLength="255" />
-					<Property Name="tRED" Type="nvarchar" MaxLength="255" />
-					<Property Name="tCM" Type="nvarchar" MaxLength="255" />
-					<Property Name="tAandE" Type="nvarchar" MaxLength="255" />
-					<Property Name="tPrincipalPartner" Type="nvarchar" MaxLength="255" />
-					<Property Name="tCD" Type="nvarchar" MaxLength="500" />
-					<Property Name="tITPM" Type="nvarchar" MaxLength="500" />
-				</EntityType>
-				<EntityType Name="tblProjectStore">
-					<Key>
-						<PropertyRef Name="aProjectStoreID" />
-					</Key>
-					<Property Name="aProjectStoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nProjectID" Type="int" />
-					<Property Name="tStoreName" Type="nvarchar" MaxLength="255" />
-					<Property Name="tStoreAddressLine1" Type="nvarchar" MaxLength="255" />
-					<Property Name="tStoreAddressLine2" Type="nvarchar" MaxLength="255" />
-					<Property Name="nStoreState" Type="int" />
-					<Property Name="tStoreZip" Type="nvarchar" MaxLength="255" />
-					<Property Name="tStoreManager" Type="nvarchar" MaxLength="255" />
-					<Property Name="tPOC" Type="nvarchar" MaxLength="255" />
-					<Property Name="tPOCPhone" Type="nvarchar" MaxLength="255" />
-					<Property Name="tPOCEmail" Type="nvarchar" MaxLength="255" />
-					<Property Name="tGC" Type="nvarchar" MaxLength="255" />
-					<Property Name="tGCPhone" Type="nvarchar" MaxLength="255" />
-					<Property Name="tGCEMail" Type="nvarchar" MaxLength="255" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-					<Property Name="tCity" Type="nvarchar" MaxLength="500" />
-					<Property Name="tBillToCompany" Type="nvarchar" MaxLength="1000" />
-					<Property Name="tBillToAddress" Type="nvarchar" MaxLength="1000" />
-					<Property Name="tBillToCity" Type="nvarchar" MaxLength="1000" />
-					<Property Name="nBillToState" Type="int" />
-					<Property Name="tBillToZip" Type="nvarchar" MaxLength="1000" />
-					<Property Name="tBillToEmail" Type="nvarchar" MaxLength="1000" />
-				</EntityType>
-				<EntityType Name="tblPurchaseOrder">
-					<Key>
-						<PropertyRef Name="aPurchaseOrderID" />
-					</Key>
-					<Property Name="aPurchaseOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tPurchaseOrderNumber" Type="nvarchar(max)" />
-					<Property Name="nStoreID" Type="int" />
-					<Property Name="tBillingName" Type="nvarchar(max)" />
-					<Property Name="tBillingPhone" Type="nvarchar(max)" />
-					<Property Name="tBillingEmail" Type="nvarchar(max)" />
-					<Property Name="tBillingAddress" Type="nvarchar(max)" />
-					<Property Name="tShippingName" Type="nvarchar(max)" />
-					<Property Name="tShippingPhone" Type="nvarchar(max)" />
-					<Property Name="tShippingEmail" Type="nvarchar(max)" />
-					<Property Name="tShippingAddress" Type="nvarchar(max)" />
-					<Property Name="tNotes" Type="nvarchar(max)" />
-					<Property Name="dDeliver" Type="datetime" />
-					<Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="nOutgoingEmailID" Type="int" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<EntityType Name="tblPurchaseOrderParts">
-					<Key>
-						<PropertyRef Name="aPurchaseOrderPartsID" />
-					</Key>
-					<Property Name="aPurchaseOrderPartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tDescription" Type="nvarchar(max)" />
-					<Property Name="tPartNumber" Type="nvarchar(max)" />
-					<Property Name="cPrice" Type="decimal" Precision="18" Scale="2" />
-					<Property Name="nQuantity" Type="int" />
-					<Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
-				</EntityType>
-				<EntityType Name="tblPurchaseOrderTemplate">
-					<Key>
-						<PropertyRef Name="aPurchaseOrderTemplateID" />
-					</Key>
-					<Property Name="aPurchaseOrderTemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tTemplateName" Type="varchar" MaxLength="500" />
-					<Property Name="nBrandID" Type="int" />
-					<Property Name="nVenderID" Type="int" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-					<Property Name="tTechnologyComponent" Type="nvarchar" MaxLength="500" />
-				</EntityType>
-				<EntityType Name="tblPurchaseOrderTemplateParts">
-					<Key>
-						<PropertyRef Name="aPurchaseOrderTemplatePartsID" />
-					</Key>
-					<Property Name="aPurchaseOrderTemplatePartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nPurchaseOrderTemplateID" Type="int" />
-					<Property Name="nPartID" Type="int" />
-					<Property Name="tTechCompField" Type="nvarchar" MaxLength="500" />
-					<Property Name="tTableName" Type="nvarchar" MaxLength="500" />
-				</EntityType>
-				<EntityType Name="tblQuoteRequestMain">
-					<Key>
-						<PropertyRef Name="aQuoteRequestTemplateId" />
-					</Key>
-					<Property Name="aQuoteRequestTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tTemplateName" Type="varchar" MaxLength="500" />
-					<Property Name="nBrandId" Type="int" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<EntityType Name="tblQuoteRequestTechComp">
-					<Key>
-						<PropertyRef Name="aQuoteRequestTechCompId" />
-					</Key>
-					<Property Name="aQuoteRequestTechCompId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nQuoteRequestTemplateId" Type="int" />
-					<Property Name="tTechCompName" Type="varchar" MaxLength="500" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-					<Property Name="tTableName" Type="nvarchar" MaxLength="500" />
-				</EntityType>
-				<EntityType Name="tblQuoteRequestTechCompFields">
-					<Key>
-						<PropertyRef Name="aQuoteRequestTechCompFieldId" />
-					</Key>
-					<Property Name="aQuoteRequestTechCompFieldId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nQuoteRequestTemplateId" Type="int" />
-					<Property Name="tTechCompField" Type="varchar" MaxLength="500" />
-					<Property Name="tTechCompFieldName" Type="varchar" MaxLength="500" />
-					<Property Name="nQuoteRequestTechCompId" Type="int" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblProjectComponentUpload">
+          <Key>
+            <PropertyRef Name="aProjectComponentUploadId" />
+          </Key>
+          <Property Name="aProjectComponentUploadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectComponentId" Type="int" />
+          <Property Name="nAttachmentId" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblProjectConfig">
+          <Key>
+            <PropertyRef Name="aProjectConfigID" />
+          </Key>
+          <Property Name="aProjectConfigID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nStallCount" Type="int" />
+          <Property Name="nDriveThru" Type="int" />
+          <Property Name="nInsideDining" Type="int" />
+          <Property Name="cProjectCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="dGroundBreak" Type="datetime" />
+          <Property Name="dKitchenInstall" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblProjectExteriorMenus">
+          <Key>
+            <PropertyRef Name="aProjectExteriorMenuID" />
+          </Key>
+          <Property Name="aProjectExteriorMenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nVendor" Type="int" />
+          <Property Name="nStalls" Type="int" />
+          <Property Name="nPatio" Type="int" />
+          <Property Name="nFlat" Type="int" />
+          <Property Name="nDTPops" Type="int" />
+          <Property Name="nDTMenu" Type="int" />
+          <Property Name="nStatus" Type="int" />
+          <Property Name="dDeliveryDate" Type="date" />
+          <Property Name="cFabConCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cIDTechCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cTotalCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectInstallation">
+          <Key>
+            <PropertyRef Name="aProjectInstallationID" />
+          </Key>
+          <Property Name="aProjectInstallationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nVendor" Type="int" />
+          <Property Name="tLeadTech" Type="nvarchar" MaxLength="255" />
+          <Property Name="dInstallDate" Type="date" />
+          <Property Name="dInstallEnd" Type="date" />
+          <Property Name="nStatus" Type="int" />
+          <Property Name="nSignoffs" Type="int" />
+          <Property Name="nTestTransactions" Type="int" />
+          <Property Name="nProjectStatus" Type="int" />
+          <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectInteriorMenus">
+          <Key>
+            <PropertyRef Name="aProjectInteriorMenuID" />
+          </Key>
+          <Property Name="aProjectInteriorMenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nVendor" Type="int" />
+          <Property Name="nDMBQuantity" Type="int" />
+          <Property Name="nStatus" Type="int" />
+          <Property Name="dDeliveryDate" Type="date" />
+          <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectNetworking">
+          <Key>
+            <PropertyRef Name="aProjectNetworkingID" />
+          </Key>
+          <Property Name="aProjectNetworkingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nVendor" Type="int" />
+          <Property Name="nPrimaryStatus" Type="int" />
+          <Property Name="dPrimaryDate" Type="date" />
+          <Property Name="nPrimaryType" Type="int" />
+          <Property Name="nBackupStatus" Type="int" />
+          <Property Name="dBackupDate" Type="date" />
+          <Property Name="nBackupType" Type="int" />
+          <Property Name="nTempStatus" Type="int" />
+          <Property Name="dTempDate" Type="date" />
+          <Property Name="nTempType" Type="int" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectNotes">
+          <Key>
+            <PropertyRef Name="aNoteID" />
+          </Key>
+          <Property Name="aNoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nStoreID" Type="int" />
+          <Property Name="nNoteType" Type="int" />
+          <Property Name="tSource" Type="nvarchar" MaxLength="255" />
+          <Property Name="tNoteDesc" Type="nvarchar" MaxLength="255" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblProjectPaymentSystem">
+          <Key>
+            <PropertyRef Name="aProjectPaymentSystemID" />
+          </Key>
+          <Property Name="aProjectPaymentSystemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nVendor" Type="int" />
+          <Property Name="nBuyPassID" Type="int" />
+          <Property Name="nServerEPS" Type="int" />
+          <Property Name="nStatus" Type="int" />
+          <Property Name="dDeliveryDate" Type="date" />
+          <Property Name="nPAYSUnits" Type="int" />
+          <Property Name="n45Enclosures" Type="int" />
+          <Property Name="n90Enclosures" Type="int" />
+          <Property Name="nDTEnclosures" Type="int" />
+          <Property Name="n15SunShields" Type="int" />
+          <Property Name="nUPS" Type="int" />
+          <Property Name="nShelf" Type="int" />
+          <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="nType" Type="int" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectPOS">
+          <Key>
+            <PropertyRef Name="aProjectPOSID" />
+          </Key>
+          <Property Name="aProjectPOSID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nVendor" Type="int" />
+          <Property Name="dDeliveryDate" Type="date" />
+          <Property Name="dConfigDate" Type="date" />
+          <Property Name="dSupportDate" Type="date" />
+          <Property Name="nStatus" Type="int" />
+          <Property Name="nPaperworkStatus" Type="int" />
+          <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectSonicRadio">
+          <Key>
+            <PropertyRef Name="aProjectSonicRadioID" />
+          </Key>
+          <Property Name="aProjectSonicRadioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nVendor" Type="int" />
+          <Property Name="nOutdoorSpeakers" Type="int" />
+          <Property Name="nColors" Type="int" />
+          <Property Name="nIndoorSpeakers" Type="int" />
+          <Property Name="nZones" Type="int" />
+          <Property Name="nServerRacks" Type="int" />
+          <Property Name="nStatus" Type="int" />
+          <Property Name="dDeliveryDate" Type="date" />
+          <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProjectActiveStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectStakeHolders">
+          <Key>
+            <PropertyRef Name="aProjectStakeHolderID" />
+          </Key>
+          <Property Name="aProjectStakeHolderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nFranchisee" Type="int" />
+          <Property Name="tRVP" Type="nvarchar" MaxLength="255" />
+          <Property Name="tFBC" Type="nvarchar" MaxLength="255" />
+          <Property Name="tRED" Type="nvarchar" MaxLength="255" />
+          <Property Name="tCM" Type="nvarchar" MaxLength="255" />
+          <Property Name="tAandE" Type="nvarchar" MaxLength="255" />
+          <Property Name="tPrincipalPartner" Type="nvarchar" MaxLength="255" />
+          <Property Name="tCD" Type="nvarchar" MaxLength="500" />
+          <Property Name="tITPM" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblProjectStore">
+          <Key>
+            <PropertyRef Name="aProjectStoreID" />
+          </Key>
+          <Property Name="aProjectStoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="tStoreName" Type="nvarchar" MaxLength="255" />
+          <Property Name="tStoreAddressLine1" Type="nvarchar" MaxLength="255" />
+          <Property Name="tStoreAddressLine2" Type="nvarchar" MaxLength="255" />
+          <Property Name="nStoreState" Type="int" />
+          <Property Name="tStoreZip" Type="nvarchar" MaxLength="255" />
+          <Property Name="tStoreManager" Type="nvarchar" MaxLength="255" />
+          <Property Name="tPOC" Type="nvarchar" MaxLength="255" />
+          <Property Name="tPOCPhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="tPOCEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="tGC" Type="nvarchar" MaxLength="255" />
+          <Property Name="tGCPhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="tGCEMail" Type="nvarchar" MaxLength="255" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+          <Property Name="tCity" Type="nvarchar" MaxLength="500" />
+          <Property Name="tBillToCompany" Type="nvarchar" MaxLength="500" />
+          <Property Name="tBillToAddress" Type="nvarchar" MaxLength="500" />
+          <Property Name="tBillToCity" Type="nvarchar" MaxLength="500" />
+          <Property Name="nBillToState" Type="int" />
+          <Property Name="tBillToZip" Type="nvarchar" MaxLength="500" />
+          <Property Name="tBillToEmail" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrder">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderID" />
+          </Key>
+          <Property Name="aPurchaseOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tPurchaseOrderNumber" Type="nvarchar(max)" />
+          <Property Name="nStoreID" Type="int" />
+          <Property Name="tBillingName" Type="nvarchar(max)" />
+          <Property Name="tBillingPhone" Type="nvarchar(max)" />
+          <Property Name="tBillingEmail" Type="nvarchar(max)" />
+          <Property Name="tBillingAddress" Type="nvarchar(max)" />
+          <Property Name="tShippingName" Type="nvarchar(max)" />
+          <Property Name="tShippingPhone" Type="nvarchar(max)" />
+          <Property Name="tShippingEmail" Type="nvarchar(max)" />
+          <Property Name="tShippingAddress" Type="nvarchar(max)" />
+          <Property Name="tNotes" Type="nvarchar(max)" />
+          <Property Name="dDeliver" Type="datetime" />
+          <Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="nOutgoingEmailID" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrderParts">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderPartsID" />
+          </Key>
+          <Property Name="aPurchaseOrderPartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tDescription" Type="nvarchar(max)" />
+          <Property Name="tPartNumber" Type="nvarchar(max)" />
+          <Property Name="cPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="nQuantity" Type="int" />
+          <Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrderTemplate">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderTemplateID" />
+          </Key>
+          <Property Name="aPurchaseOrderTemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tTemplateName" Type="varchar" MaxLength="500" />
+          <Property Name="nBrandID" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+          <Property Name="tTechnologyComponent" Type="nvarchar" MaxLength="500" />
+          <Property Name="nVendorID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblPurchaseOrderTemplateParts">
+          <Key>
+            <PropertyRef Name="aPurchaseOrderTemplatePartsID" />
+          </Key>
+          <Property Name="aPurchaseOrderTemplatePartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nPurchaseOrderTemplateID" Type="int" />
+          <Property Name="nPartID" Type="int" />
+          <Property Name="tTechCompField" Type="nvarchar" MaxLength="500" />
+          <Property Name="tTableName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblQuoteRequestMain">
+          <Key>
+            <PropertyRef Name="aQuoteRequestTemplateId" />
+          </Key>
+          <Property Name="aQuoteRequestTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tTemplateName" Type="varchar" MaxLength="500" />
+          <Property Name="nBrandId" Type="int" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblQuoteRequestTechComp">
+          <Key>
+            <PropertyRef Name="aQuoteRequestTechCompId" />
+          </Key>
+          <Property Name="aQuoteRequestTechCompId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nQuoteRequestTemplateId" Type="int" />
+          <Property Name="tTechCompName" Type="varchar" MaxLength="500" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+          <Property Name="tTableName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblQuoteRequestTechCompFields">
+          <Key>
+            <PropertyRef Name="aQuoteRequestTechCompFieldId" />
+          </Key>
+          <Property Name="aQuoteRequestTechCompFieldId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nQuoteRequestTemplateId" Type="int" />
+          <Property Name="tTechCompField" Type="varchar" MaxLength="500" />
+          <Property Name="tTechCompFieldName" Type="varchar" MaxLength="500" />
+          <Property Name="nQuoteRequestTechCompId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblState">
-					<Key>
-						<PropertyRef Name="aStateId" />
-						<PropertyRef Name="tStateName" />
-						<PropertyRef Name="nCountryId" />
-					</Key>
-					<Property Name="aStateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tStateName" Type="nvarchar" MaxLength="255" Nullable="false" />
-					<Property Name="nCountryId" Type="int" Nullable="false" />
-				</EntityType>
-				<EntityType Name="tblStore">
-					<Key>
-						<PropertyRef Name="aStoreID" />
-					</Key>
-					<Property Name="aStoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tStoreNumber" Type="nvarchar" MaxLength="255" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblState">
+          <Key>
+            <PropertyRef Name="aStateId" />
+            <PropertyRef Name="tStateName" />
+            <PropertyRef Name="nCountryId" />
+          </Key>
+          <Property Name="aStateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tStateName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="nCountryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblStore">
+          <Key>
+            <PropertyRef Name="aStoreID" />
+          </Key>
+          <Property Name="aStoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tStoreNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblSupportTicket">
+          <Key>
+            <PropertyRef Name="aTicketId" />
+          </Key>
+          <Property Name="aTicketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nPriority" Type="int" />
+          <Property Name="tContent" Type="nvarchar(max)" />
+          <Property Name="nFileSie" Type="int" />
+          <Property Name="fBase64" Type="nvarchar(max)" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblTechComponent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblTechComponent">
-					<Key>
-						<PropertyRef Name="aTechComponentId" />
-					</Key>
-					<Property Name="aTechComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tTechComponentName" Type="nvarchar" MaxLength="255" />
-					<Property Name="nBrandID" Type="int" />
-					<Property Name="tTechComponentDescription" Type="nvarchar" MaxLength="255" />
-					<Property Name="tComponentType" Type="nvarchar" MaxLength="255" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblTechComponent">
+          <Key>
+            <PropertyRef Name="aTechComponentId" />
+          </Key>
+          <Property Name="aTechComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tTechComponentName" Type="nvarchar" MaxLength="255" />
+          <Property Name="nBrandID" Type="int" />
+          <Property Name="tTechComponentDescription" Type="nvarchar" MaxLength="255" />
+          <Property Name="tComponentType" Type="nvarchar" MaxLength="255" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblTrace' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblTrace">
-					<Key>
-						<PropertyRef Name="aTraceID" />
-					</Key>
-					<Property Name="aTraceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="StoreName" Type="nvarchar(max)" />
-					<Property Name="ProjectType" Type="nvarchar(max)" />
-					<Property Name="StoreNumber" Type="nvarchar(max)" />
-					<Property Name="Address" Type="nvarchar(max)" />
-					<Property Name="City" Type="nvarchar(max)" />
-					<Property Name="State" Type="nvarchar(max)" />
-					<Property Name="DMAID" Type="int" />
-					<Property Name="DMA" Type="nvarchar(max)" />
-					<Property Name="RED" Type="nvarchar(max)" />
-					<Property Name="CM" Type="nvarchar(max)" />
-					<Property Name="ANE" Type="nvarchar(max)" />
-					<Property Name="RVP" Type="nvarchar(max)" />
-					<Property Name="PrincipalPartner" Type="nvarchar(max)" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="ProjectStatus" Type="nvarchar(max)" />
-					<Property Name="CreatedBy" Type="int" />
-					<Property Name="BrandId" Type="int" />
-				</EntityType>
-				<EntityType Name="tblUser">
-					<Key>
-						<PropertyRef Name="aUserID" />
-					</Key>
-					<Property Name="aUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tName" Type="nvarchar" MaxLength="255" />
-					<Property Name="tUserName" Type="nvarchar" MaxLength="255" />
-					<Property Name="tPassword" Type="nvarchar" MaxLength="255" />
-					<Property Name="tEmail" Type="nvarchar" MaxLength="255" />
-					<Property Name="nDepartment" Type="int" />
-					<Property Name="nRole" Type="int" />
-					<Property Name="tEmpID" Type="nvarchar" MaxLength="255" />
-					<Property Name="tMobile" Type="nvarchar" MaxLength="255" />
-					<Property Name="dLastLoggedInTime" Type="datetime" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblTrace">
+          <Key>
+            <PropertyRef Name="aTraceID" />
+          </Key>
+          <Property Name="aTraceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreName" Type="nvarchar(max)" />
+          <Property Name="ProjectType" Type="nvarchar(max)" />
+          <Property Name="StoreNumber" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="DMAID" Type="int" />
+          <Property Name="DMA" Type="nvarchar(max)" />
+          <Property Name="RED" Type="nvarchar(max)" />
+          <Property Name="CM" Type="nvarchar(max)" />
+          <Property Name="ANE" Type="nvarchar(max)" />
+          <Property Name="RVP" Type="nvarchar(max)" />
+          <Property Name="PrincipalPartner" Type="nvarchar(max)" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="ProjectStatus" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="BrandId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="aUserID" />
+          </Key>
+          <Property Name="aUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tName" Type="nvarchar" MaxLength="255" />
+          <Property Name="tUserName" Type="nvarchar" MaxLength="255" />
+          <Property Name="tPassword" Type="nvarchar" MaxLength="255" />
+          <Property Name="tEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="nDepartment" Type="int" />
+          <Property Name="nRole" Type="int" />
+          <Property Name="tEmpID" Type="nvarchar" MaxLength="255" />
+          <Property Name="tMobile" Type="nvarchar" MaxLength="255" />
+          <Property Name="dLastLoggedInTime" Type="datetime" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblUserBrandRel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblUserBrandRel">
-					<Key>
-						<PropertyRef Name="aUserBrandRelID" />
-					</Key>
-					<Property Name="aUserBrandRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nUserID" Type="int" />
-					<Property Name="nBrandID" Type="int" />
-				</EntityType>
-				<!--Errors Found During Generation:
+        <EntityType Name="tblUserBrandRel">
+          <Key>
+            <PropertyRef Name="aUserBrandRelID" />
+          </Key>
+          <Property Name="aUserBrandRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nUserID" Type="int" />
+          <Property Name="nBrandID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-				<EntityType Name="tblUserFunctionRel">
-					<Key>
-						<PropertyRef Name="aUserFunctionRelID" />
-					</Key>
-					<Property Name="aUserFunctionRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nUserID" Type="int" />
-					<Property Name="nFunctionID" Type="int" />
-				</EntityType>
-				<EntityType Name="tblUsers">
-					<Key>
-						<PropertyRef Name="aUserID" />
-					</Key>
-					<Property Name="aUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tName" Type="nvarchar(max)" />
-					<Property Name="tUserName" Type="nvarchar(max)" />
-					<Property Name="tPassword" Type="nvarchar(max)" />
-					<Property Name="tEmail" Type="nvarchar(max)" />
-					<Property Name="nDepartment" Type="int" />
-					<Property Name="nRole" Type="int" />
-					<Property Name="tEmpID" Type="nvarchar(max)" />
-					<Property Name="tMobile" Type="nvarchar(max)" />
-					<Property Name="dLastLoggedInTime" Type="datetime" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdateBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-				</EntityType>
-				<EntityType Name="tblUserVendorRel">
-					<Key>
-						<PropertyRef Name="aUserVendorRelID" />
-					</Key>
-					<Property Name="aUserVendorRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nVendorID" Type="int" />
-					<Property Name="nUserID" Type="int" />
-				</EntityType>
-				<EntityType Name="tblVendor">
-					<Key>
-						<PropertyRef Name="aVendorId" />
-					</Key>
-					<Property Name="aVendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="tVendorName" Type="nvarchar" MaxLength="255" />
-					<Property Name="nTechComponentID" Type="int" />
-					<Property Name="tVendorDescription" Type="nvarchar" MaxLength="255" />
-					<Property Name="tVendorEmail" Type="nvarchar" MaxLength="255" />
-					<Property Name="tVendorAddress" Type="nvarchar" MaxLength="255" />
-					<Property Name="tVendorPhone" Type="nvarchar" MaxLength="255" />
-					<Property Name="tVendorContactPerson" Type="nvarchar" MaxLength="255" />
-					<Property Name="tVendorWebsite" Type="nvarchar" MaxLength="255" />
-					<Property Name="tVendorCountry" Type="nvarchar" MaxLength="255" />
-					<Property Name="tVendorEstablished" Type="datetime" />
-					<Property Name="tVendorCategory" Type="nvarchar" MaxLength="255" />
-					<Property Name="tVendorContact" Type="nvarchar" MaxLength="255" />
-					<Property Name="nCreatedBy" Type="int" />
-					<Property Name="nUpdatedBy" Type="int" />
-					<Property Name="dtCreatedOn" Type="datetime" />
-					<Property Name="dtUpdatedOn" Type="datetime" />
-					<Property Name="bDeleted" Type="bit" />
-					<Property Name="nBrand" Type="int" />
-				</EntityType>
-				<EntityType Name="tblVendorPartRel">
-					<Key>
-						<PropertyRef Name="aVendorPartRelID" />
-					</Key>
-					<Property Name="aVendorPartRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-					<Property Name="nVendorID" Type="int" />
-					<Property Name="nPartID" Type="int" />
-				</EntityType>
-				<Function Name="sproc_CreateStoreFromExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-					<Parameter Name="tStoreName" Type="varchar" Mode="In" />
-					<Parameter Name="tProjectType" Type="varchar" Mode="In" />
-					<Parameter Name="tStoreNumber" Type="varchar" Mode="In" />
-					<Parameter Name="tAddress" Type="varchar" Mode="In" />
-					<Parameter Name="tCity" Type="varchar" Mode="In" />
-					<Parameter Name="tState" Type="varchar" Mode="In" />
-					<Parameter Name="nDMAID" Type="int" Mode="In" />
-					<Parameter Name="tDMA" Type="varchar" Mode="In" />
-					<Parameter Name="tRED" Type="varchar" Mode="In" />
-					<Parameter Name="tCM" Type="varchar" Mode="In" />
-					<Parameter Name="tANE" Type="varchar" Mode="In" />
-					<Parameter Name="tRVP" Type="varchar" Mode="In" />
-					<Parameter Name="tPrincipalPartner" Type="varchar" Mode="In" />
-					<Parameter Name="dStatus" Type="datetime" Mode="In" />
-					<Parameter Name="dOpenStore" Type="datetime" Mode="In" />
-					<Parameter Name="tProjectStatus" Type="varchar" Mode="In" />
-					<Parameter Name="nCreatedBy" Type="int" Mode="In" />
-					<Parameter Name="nBrandId" Type="int" Mode="In" />
-				</Function>
-				<Function Name="sproc_SearchStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-					<Parameter Name="tText" Type="varchar" Mode="In" />
-				</Function>
-				<EntityContainer Name="dtDBModelStoreContainer">
-					<EntitySet Name="tblApplicationTrace" EntityType="Self.tblApplicationTrace" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblOutgoingEmail" EntityType="Self.tblOutgoingEmail" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblOutgoingEmailAttachment" EntityType="Self.tblOutgoingEmailAttachment" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblParts" EntityType="Self.tblParts" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectAudio" EntityType="Self.tblProjectAudio" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectBillTo" EntityType="Self.tblProjectBillTo" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectConfig" EntityType="Self.tblProjectConfig" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectExteriorMenus" EntityType="Self.tblProjectExteriorMenus" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectInstallation" EntityType="Self.tblProjectInstallation" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectInteriorMenus" EntityType="Self.tblProjectInteriorMenus" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectNetworking" EntityType="Self.tblProjectNetworking" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectNotes" EntityType="Self.tblProjectNotes" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectPaymentSystem" EntityType="Self.tblProjectPaymentSystem" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectPOS" EntityType="Self.tblProjectPOS" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblProjectStore" EntityType="Self.tblProjectStore" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblPurchaseOrder" EntityType="Self.tblPurchaseOrder" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblPurchaseOrderParts" EntityType="Self.tblPurchaseOrderParts" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblPurchaseOrderTemplate" EntityType="Self.tblPurchaseOrderTemplate" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblPurchaseOrderTemplateParts" EntityType="Self.tblPurchaseOrderTemplateParts" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblQuoteRequestMain" EntityType="Self.tblQuoteRequestMain" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblQuoteRequestTechComp" EntityType="Self.tblQuoteRequestTechComp" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblQuoteRequestTechCompFields" EntityType="Self.tblQuoteRequestTechCompFields" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblStore" EntityType="Self.tblStore" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblUserVendorRel" EntityType="Self.tblUserVendorRel" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblVendorPartRel" EntityType="Self.tblVendorPartRel" Schema="dbo" store:Type="Tables" />
-					<EntitySet Name="tblBrandBKP" EntityType="Self.tblBrandBKP" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblBrandBKP].[aBrandId] AS [aBrandId],
-							[tblBrandBKP].[tBrandName] AS [tBrandName],
-							[tblBrandBKP].[tBrandDomain] AS [tBrandDomain],
-							[tblBrandBKP].[tBrandAddressLine1] AS [tBrandAddressLine1],
-							[tblBrandBKP].[tBrandAddressLine2] AS [tBrandAddressLine2],
-							[tblBrandBKP].[tBrandCity] AS [tBrandCity],
-							[tblBrandBKP].[nBrandState] AS [nBrandState],
-							[tblBrandBKP].[nBrandCountry] AS [nBrandCountry],
-							[tblBrandBKP].[tBrandZipCode] AS [tBrandZipCode],
-							[tblBrandBKP].[nBrandLogoAttachmentID] AS [nBrandLogoAttachmentID],
-							[tblBrandBKP].[nCreatedBy] AS [nCreatedBy],
-							[tblBrandBKP].[nUpdateBy] AS [nUpdateBy],
-							[tblBrandBKP].[dtCreatedOn] AS [dtCreatedOn],
-							[tblBrandBKP].[dtUpdatedOn] AS [dtUpdatedOn],
-							[tblBrandBKP].[bDeleted] AS [bDeleted]
-							FROM [dbo].[tblBrandBKP] AS [tblBrandBKP]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblCountry" EntityType="Self.tblCountry" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblCountry].[aCountryId] AS [aCountryId],
-							[tblCountry].[tCountryName] AS [tCountryName]
-							FROM [dbo].[tblCountry] AS [tblCountry]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblEnum" EntityType="Self.tblEnum" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblEnum].[aEnumID] AS [aEnumID],
-							[tblEnum].[nConstraintID] AS [nConstraintID],
-							[tblEnum].[nIndexID] AS [nIndexID],
-							[tblEnum].[tDisplayName] AS [tDisplayName]
-							FROM [dbo].[tblEnum] AS [tblEnum]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblEnumTableField" EntityType="Self.tblEnumTableField" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblEnumTableField].[aConstraintID] AS [aConstraintID],
-							[tblEnumTableField].[tTableName] AS [tTableName],
-							[tblEnumTableField].[tColumnName] AS [tColumnName]
-							FROM [dbo].[tblEnumTableField] AS [tblEnumTableField]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblFunctions" EntityType="Self.tblFunctions" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblFunctions].[aFunctionID] AS [aFunctionID],
-							[tblFunctions].[tFunctionName] AS [tFunctionName]
-							FROM [dbo].[tblFunctions] AS [tblFunctions]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblProjectComponent" EntityType="Self.tblProjectComponent" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblProjectComponent].[aProjectComponentId] AS [aProjectComponentId],
-							[tblProjectComponent].[nProjectId] AS [nProjectId],
-							[tblProjectComponent].[nTechComponentId] AS [nTechComponentId],
-							[tblProjectComponent].[nVendorId] AS [nVendorId],
-							[tblProjectComponent].[tStatus] AS [tStatus],
-							[tblProjectComponent].[dStartDate] AS [dStartDate],
-							[tblProjectComponent].[dEndDate] AS [dEndDate],
-							[tblProjectComponent].[dEndExpectedDate] AS [dEndExpectedDate],
-							[tblProjectComponent].[tSignOffStatus] AS [tSignOffStatus],
-							[tblProjectComponent].[tComments] AS [tComments],
-							[tblProjectComponent].[nCreatedBy] AS [nCreatedBy],
-							[tblProjectComponent].[nUpdateBy] AS [nUpdateBy],
-							[tblProjectComponent].[dtCreatedOn] AS [dtCreatedOn],
-							[tblProjectComponent].[dtUpdatedOn] AS [dtUpdatedOn],
-							[tblProjectComponent].[bDeleted] AS [bDeleted]
-							FROM [dbo].[tblProjectComponent] AS [tblProjectComponent]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblProjectComponentUpload" EntityType="Self.tblProjectComponentUpload" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblProjectComponentUpload].[aProjectComponentUploadId] AS [aProjectComponentUploadId],
-							[tblProjectComponentUpload].[nProjectComponentId] AS [nProjectComponentId],
-							[tblProjectComponentUpload].[nAttachmentId] AS [nAttachmentId],
-							[tblProjectComponentUpload].[nCreatedBy] AS [nCreatedBy],
-							[tblProjectComponentUpload].[nUpdateBy] AS [nUpdateBy],
-							[tblProjectComponentUpload].[dtCreatedOn] AS [dtCreatedOn],
-							[tblProjectComponentUpload].[dtUpdatedOn] AS [dtUpdatedOn],
-							[tblProjectComponentUpload].[bDeleted] AS [bDeleted]
-							FROM [dbo].[tblProjectComponentUpload] AS [tblProjectComponentUpload]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblState" EntityType="Self.tblState" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblState].[aStateId] AS [aStateId],
-							[tblState].[tStateName] AS [tStateName],
-							[tblState].[nCountryId] AS [nCountryId]
-							FROM [dbo].[tblState] AS [tblState]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblTechComponent" EntityType="Self.tblTechComponent" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblTechComponent].[aTechComponentId] AS [aTechComponentId],
-							[tblTechComponent].[tTechComponentName] AS [tTechComponentName],
-							[tblTechComponent].[nBrandID] AS [nBrandID],
-							[tblTechComponent].[tTechComponentDescription] AS [tTechComponentDescription],
-							[tblTechComponent].[tComponentType] AS [tComponentType],
-							[tblTechComponent].[nCreatedBy] AS [nCreatedBy],
-							[tblTechComponent].[nUpdateBy] AS [nUpdateBy],
-							[tblTechComponent].[dtCreatedOn] AS [dtCreatedOn],
-							[tblTechComponent].[dtUpdatedOn] AS [dtUpdatedOn],
-							[tblTechComponent].[bDeleted] AS [bDeleted]
-							FROM [dbo].[tblTechComponent] AS [tblTechComponent]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblTrace" EntityType="Self.tblTrace" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblTrace].[aTraceID] AS [aTraceID],
-							[tblTrace].[StoreName] AS [StoreName],
-							[tblTrace].[ProjectType] AS [ProjectType],
-							[tblTrace].[StoreNumber] AS [StoreNumber],
-							[tblTrace].[Address] AS [Address],
-							[tblTrace].[City] AS [City],
-							[tblTrace].[State] AS [State],
-							[tblTrace].[DMAID] AS [DMAID],
-							[tblTrace].[DMA] AS [DMA],
-							[tblTrace].[RED] AS [RED],
-							[tblTrace].[CM] AS [CM],
-							[tblTrace].[ANE] AS [ANE],
-							[tblTrace].[RVP] AS [RVP],
-							[tblTrace].[PrincipalPartner] AS [PrincipalPartner],
-							[tblTrace].[dtCreatedOn] AS [dtCreatedOn],
-							[tblTrace].[dtUpdatedOn] AS [dtUpdatedOn],
-							[tblTrace].[ProjectStatus] AS [ProjectStatus],
-							[tblTrace].[CreatedBy] AS [CreatedBy],
-							[tblTrace].[BrandId] AS [BrandId]
-							FROM [dbo].[tblTrace] AS [tblTrace]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblUserBrandRel" EntityType="Self.tblUserBrandRel" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblUserBrandRel].[aUserBrandRelID] AS [aUserBrandRelID],
-							[tblUserBrandRel].[nUserID] AS [nUserID],
-							[tblUserBrandRel].[nBrandID] AS [nBrandID]
-							FROM [dbo].[tblUserBrandRel] AS [tblUserBrandRel]
-						</DefiningQuery>
-					</EntitySet>
-					<EntitySet Name="tblUserFunctionRel" EntityType="Self.tblUserFunctionRel" store:Type="Tables" store:Schema="dbo">
-						<DefiningQuery>
-							SELECT
-							[tblUserFunctionRel].[aUserFunctionRelID] AS [aUserFunctionRelID],
-							[tblUserFunctionRel].[nUserID] AS [nUserID],
-							[tblUserFunctionRel].[nFunctionID] AS [nFunctionID]
-							FROM [dbo].[tblUserFunctionRel] AS [tblUserFunctionRel]
-						</DefiningQuery>
-					</EntitySet>
-				</EntityContainer>
-			</Schema>
-		</edmx:StorageModels>
+        <EntityType Name="tblUserFunctionRel">
+          <Key>
+            <PropertyRef Name="aUserFunctionRelID" />
+          </Key>
+          <Property Name="aUserFunctionRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nUserID" Type="int" />
+          <Property Name="nFunctionID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblUsers">
+          <Key>
+            <PropertyRef Name="aUserID" />
+          </Key>
+          <Property Name="aUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tName" Type="nvarchar(max)" />
+          <Property Name="tUserName" Type="nvarchar(max)" />
+          <Property Name="tPassword" Type="nvarchar(max)" />
+          <Property Name="tEmail" Type="nvarchar(max)" />
+          <Property Name="nDepartment" Type="int" />
+          <Property Name="nRole" Type="int" />
+          <Property Name="tEmpID" Type="nvarchar(max)" />
+          <Property Name="tMobile" Type="nvarchar(max)" />
+          <Property Name="dLastLoggedInTime" Type="datetime" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblUserVendorRel">
+          <Key>
+            <PropertyRef Name="aUserVendorRelID" />
+          </Key>
+          <Property Name="aUserVendorRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nVendorID" Type="int" />
+          <Property Name="nUserID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblVendor">
+          <Key>
+            <PropertyRef Name="aVendorId" />
+          </Key>
+          <Property Name="aVendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tVendorName" Type="nvarchar" MaxLength="255" />
+          <Property Name="nTechComponentID" Type="int" />
+          <Property Name="tVendorDescription" Type="nvarchar" MaxLength="255" />
+          <Property Name="tVendorEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="tVendorAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="tVendorPhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="tVendorContactPerson" Type="nvarchar" MaxLength="255" />
+          <Property Name="tVendorWebsite" Type="nvarchar" MaxLength="255" />
+          <Property Name="tVendorCountry" Type="nvarchar" MaxLength="255" />
+          <Property Name="tVendorEstablished" Type="datetime" />
+          <Property Name="tVendorCategory" Type="nvarchar" MaxLength="255" />
+          <Property Name="tVendorContact" Type="nvarchar" MaxLength="255" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdatedBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+          <Property Name="nBrand" Type="int" />
+        </EntityType>
+        <EntityType Name="tblVendorPartRel">
+          <Key>
+            <PropertyRef Name="aVendorPartRelID" />
+          </Key>
+          <Property Name="aVendorPartRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nVendorID" Type="int" />
+          <Property Name="nPartID" Type="int" />
+        </EntityType>
+        <Function Name="sproc_CreateStoreFromExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tStoreName" Type="varchar" Mode="In" />
+          <Parameter Name="tProjectType" Type="varchar" Mode="In" />
+          <Parameter Name="tStoreNumber" Type="varchar" Mode="In" />
+          <Parameter Name="tAddress" Type="varchar" Mode="In" />
+          <Parameter Name="tCity" Type="varchar" Mode="In" />
+          <Parameter Name="tState" Type="varchar" Mode="In" />
+          <Parameter Name="nDMAID" Type="int" Mode="In" />
+          <Parameter Name="tDMA" Type="varchar" Mode="In" />
+          <Parameter Name="tRED" Type="varchar" Mode="In" />
+          <Parameter Name="tCM" Type="varchar" Mode="In" />
+          <Parameter Name="tANE" Type="varchar" Mode="In" />
+          <Parameter Name="tRVP" Type="varchar" Mode="In" />
+          <Parameter Name="tPrincipalPartner" Type="varchar" Mode="In" />
+          <Parameter Name="dStatus" Type="datetime" Mode="In" />
+          <Parameter Name="dOpenStore" Type="datetime" Mode="In" />
+          <Parameter Name="tProjectStatus" Type="varchar" Mode="In" />
+          <Parameter Name="nCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="nBrandId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sproc_SearchStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tText" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="dtDBModelStoreContainer">
+          <EntitySet Name="tblApplicationTrace" EntityType="Self.tblApplicationTrace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOutgoingEmail" EntityType="Self.tblOutgoingEmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOutgoingEmailAttachment" EntityType="Self.tblOutgoingEmailAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblParts" EntityType="Self.tblParts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectAudio" EntityType="Self.tblProjectAudio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectBillTo" EntityType="Self.tblProjectBillTo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectConfig" EntityType="Self.tblProjectConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectExteriorMenus" EntityType="Self.tblProjectExteriorMenus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectInstallation" EntityType="Self.tblProjectInstallation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectInteriorMenus" EntityType="Self.tblProjectInteriorMenus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectNetworking" EntityType="Self.tblProjectNetworking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectNotes" EntityType="Self.tblProjectNotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectPaymentSystem" EntityType="Self.tblProjectPaymentSystem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectPOS" EntityType="Self.tblProjectPOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectStore" EntityType="Self.tblProjectStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPurchaseOrder" EntityType="Self.tblPurchaseOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPurchaseOrderParts" EntityType="Self.tblPurchaseOrderParts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPurchaseOrderTemplate" EntityType="Self.tblPurchaseOrderTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPurchaseOrderTemplateParts" EntityType="Self.tblPurchaseOrderTemplateParts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuoteRequestMain" EntityType="Self.tblQuoteRequestMain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuoteRequestTechComp" EntityType="Self.tblQuoteRequestTechComp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="Self.tblQuoteRequestTechCompFields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStore" EntityType="Self.tblStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSupportTicket" EntityType="Self.tblSupportTicket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserVendorRel" EntityType="Self.tblUserVendorRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblVendorPartRel" EntityType="Self.tblVendorPartRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBrandBKP" EntityType="Self.tblBrandBKP" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblBrandBKP].[aBrandId] AS [aBrandId], 
+    [tblBrandBKP].[tBrandName] AS [tBrandName], 
+    [tblBrandBKP].[tBrandDomain] AS [tBrandDomain], 
+    [tblBrandBKP].[tBrandAddressLine1] AS [tBrandAddressLine1], 
+    [tblBrandBKP].[tBrandAddressLine2] AS [tBrandAddressLine2], 
+    [tblBrandBKP].[tBrandCity] AS [tBrandCity], 
+    [tblBrandBKP].[nBrandState] AS [nBrandState], 
+    [tblBrandBKP].[nBrandCountry] AS [nBrandCountry], 
+    [tblBrandBKP].[tBrandZipCode] AS [tBrandZipCode], 
+    [tblBrandBKP].[nBrandLogoAttachmentID] AS [nBrandLogoAttachmentID], 
+    [tblBrandBKP].[nCreatedBy] AS [nCreatedBy], 
+    [tblBrandBKP].[nUpdateBy] AS [nUpdateBy], 
+    [tblBrandBKP].[dtCreatedOn] AS [dtCreatedOn], 
+    [tblBrandBKP].[dtUpdatedOn] AS [dtUpdatedOn], 
+    [tblBrandBKP].[bDeleted] AS [bDeleted]
+    FROM [dbo].[tblBrandBKP] AS [tblBrandBKP]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblCountry" EntityType="Self.tblCountry" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblCountry].[aCountryId] AS [aCountryId], 
+    [tblCountry].[tCountryName] AS [tCountryName]
+    FROM [dbo].[tblCountry] AS [tblCountry]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblEnum" EntityType="Self.tblEnum" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblEnum].[aEnumID] AS [aEnumID], 
+    [tblEnum].[nConstraintID] AS [nConstraintID], 
+    [tblEnum].[nIndexID] AS [nIndexID], 
+    [tblEnum].[tDisplayName] AS [tDisplayName]
+    FROM [dbo].[tblEnum] AS [tblEnum]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblEnumTableField" EntityType="Self.tblEnumTableField" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblEnumTableField].[aConstraintID] AS [aConstraintID], 
+    [tblEnumTableField].[tTableName] AS [tTableName], 
+    [tblEnumTableField].[tColumnName] AS [tColumnName]
+    FROM [dbo].[tblEnumTableField] AS [tblEnumTableField]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblFunctions" EntityType="Self.tblFunctions" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblFunctions].[aFunctionID] AS [aFunctionID], 
+    [tblFunctions].[tFunctionName] AS [tFunctionName]
+    FROM [dbo].[tblFunctions] AS [tblFunctions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblProjectComponent" EntityType="Self.tblProjectComponent" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblProjectComponent].[aProjectComponentId] AS [aProjectComponentId], 
+    [tblProjectComponent].[nProjectId] AS [nProjectId], 
+    [tblProjectComponent].[nTechComponentId] AS [nTechComponentId], 
+    [tblProjectComponent].[nVendorId] AS [nVendorId], 
+    [tblProjectComponent].[tStatus] AS [tStatus], 
+    [tblProjectComponent].[dStartDate] AS [dStartDate], 
+    [tblProjectComponent].[dEndDate] AS [dEndDate], 
+    [tblProjectComponent].[dEndExpectedDate] AS [dEndExpectedDate], 
+    [tblProjectComponent].[tSignOffStatus] AS [tSignOffStatus], 
+    [tblProjectComponent].[tComments] AS [tComments], 
+    [tblProjectComponent].[nCreatedBy] AS [nCreatedBy], 
+    [tblProjectComponent].[nUpdateBy] AS [nUpdateBy], 
+    [tblProjectComponent].[dtCreatedOn] AS [dtCreatedOn], 
+    [tblProjectComponent].[dtUpdatedOn] AS [dtUpdatedOn], 
+    [tblProjectComponent].[bDeleted] AS [bDeleted]
+    FROM [dbo].[tblProjectComponent] AS [tblProjectComponent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblProjectComponentUpload" EntityType="Self.tblProjectComponentUpload" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblProjectComponentUpload].[aProjectComponentUploadId] AS [aProjectComponentUploadId], 
+    [tblProjectComponentUpload].[nProjectComponentId] AS [nProjectComponentId], 
+    [tblProjectComponentUpload].[nAttachmentId] AS [nAttachmentId], 
+    [tblProjectComponentUpload].[nCreatedBy] AS [nCreatedBy], 
+    [tblProjectComponentUpload].[nUpdateBy] AS [nUpdateBy], 
+    [tblProjectComponentUpload].[dtCreatedOn] AS [dtCreatedOn], 
+    [tblProjectComponentUpload].[dtUpdatedOn] AS [dtUpdatedOn], 
+    [tblProjectComponentUpload].[bDeleted] AS [bDeleted]
+    FROM [dbo].[tblProjectComponentUpload] AS [tblProjectComponentUpload]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblState" EntityType="Self.tblState" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblState].[aStateId] AS [aStateId], 
+    [tblState].[tStateName] AS [tStateName], 
+    [tblState].[nCountryId] AS [nCountryId]
+    FROM [dbo].[tblState] AS [tblState]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblTechComponent" EntityType="Self.tblTechComponent" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblTechComponent].[aTechComponentId] AS [aTechComponentId], 
+    [tblTechComponent].[tTechComponentName] AS [tTechComponentName], 
+    [tblTechComponent].[nBrandID] AS [nBrandID], 
+    [tblTechComponent].[tTechComponentDescription] AS [tTechComponentDescription], 
+    [tblTechComponent].[tComponentType] AS [tComponentType], 
+    [tblTechComponent].[nCreatedBy] AS [nCreatedBy], 
+    [tblTechComponent].[nUpdateBy] AS [nUpdateBy], 
+    [tblTechComponent].[dtCreatedOn] AS [dtCreatedOn], 
+    [tblTechComponent].[dtUpdatedOn] AS [dtUpdatedOn], 
+    [tblTechComponent].[bDeleted] AS [bDeleted]
+    FROM [dbo].[tblTechComponent] AS [tblTechComponent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblTrace" EntityType="Self.tblTrace" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblTrace].[aTraceID] AS [aTraceID], 
+    [tblTrace].[StoreName] AS [StoreName], 
+    [tblTrace].[ProjectType] AS [ProjectType], 
+    [tblTrace].[StoreNumber] AS [StoreNumber], 
+    [tblTrace].[Address] AS [Address], 
+    [tblTrace].[City] AS [City], 
+    [tblTrace].[State] AS [State], 
+    [tblTrace].[DMAID] AS [DMAID], 
+    [tblTrace].[DMA] AS [DMA], 
+    [tblTrace].[RED] AS [RED], 
+    [tblTrace].[CM] AS [CM], 
+    [tblTrace].[ANE] AS [ANE], 
+    [tblTrace].[RVP] AS [RVP], 
+    [tblTrace].[PrincipalPartner] AS [PrincipalPartner], 
+    [tblTrace].[dtCreatedOn] AS [dtCreatedOn], 
+    [tblTrace].[dtUpdatedOn] AS [dtUpdatedOn], 
+    [tblTrace].[ProjectStatus] AS [ProjectStatus], 
+    [tblTrace].[CreatedBy] AS [CreatedBy], 
+    [tblTrace].[BrandId] AS [BrandId]
+    FROM [dbo].[tblTrace] AS [tblTrace]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblUserBrandRel" EntityType="Self.tblUserBrandRel" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblUserBrandRel].[aUserBrandRelID] AS [aUserBrandRelID], 
+    [tblUserBrandRel].[nUserID] AS [nUserID], 
+    [tblUserBrandRel].[nBrandID] AS [nBrandID]
+    FROM [dbo].[tblUserBrandRel] AS [tblUserBrandRel]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblUserFunctionRel" EntityType="Self.tblUserFunctionRel" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblUserFunctionRel].[aUserFunctionRelID] AS [aUserFunctionRelID], 
+    [tblUserFunctionRel].[nUserID] AS [nUserID], 
+    [tblUserFunctionRel].[nFunctionID] AS [nFunctionID]
+    FROM [dbo].[tblUserFunctionRel] AS [tblUserFunctionRel]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
 		<!-- CSDL content -->
 		<edmx:ConceptualModels>
 			<Schema Namespace="dtDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1024,27 +1012,27 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySet Name="tblDropdowns" EntityType="dtDBModel.tblDropdown" />
 					<FunctionImport Name="sproc_CreateStoreFromExcel">
 						<Parameter Name="tStoreName" Mode="In" Type="String" />
-						<Parameter Name="tProjectType" Mode="In" Type="String" />
-						<Parameter Name="tStoreNumber" Mode="In" Type="String" />
-						<Parameter Name="tAddress" Mode="In" Type="String" />
-						<Parameter Name="tCity" Mode="In" Type="String" />
-						<Parameter Name="tState" Mode="In" Type="String" />
-						<Parameter Name="nDMAID" Mode="In" Type="Int32" />
-						<Parameter Name="tDMA" Mode="In" Type="String" />
-						<Parameter Name="tRED" Mode="In" Type="String" />
-						<Parameter Name="tCM" Mode="In" Type="String" />
-						<Parameter Name="tANE" Mode="In" Type="String" />
-						<Parameter Name="tRVP" Mode="In" Type="String" />
-						<Parameter Name="tPrincipalPartner" Mode="In" Type="String" />
-						<Parameter Name="dStatus" Mode="In" Type="DateTime" />
-						<Parameter Name="dOpenStore" Mode="In" Type="DateTime" />
-						<Parameter Name="tProjectStatus" Mode="In" Type="String" />
-						<Parameter Name="nCreatedBy" Mode="In" Type="Int32" />
-						<Parameter Name="nBrandId" Mode="In" Type="Int32" />
-					</FunctionImport>
+            <Parameter Name="tProjectType" Mode="In" Type="String" />
+            <Parameter Name="tStoreNumber" Mode="In" Type="String" />
+            <Parameter Name="tAddress" Mode="In" Type="String" />
+            <Parameter Name="tCity" Mode="In" Type="String" />
+            <Parameter Name="tState" Mode="In" Type="String" />
+            <Parameter Name="nDMAID" Mode="In" Type="Int32" />
+            <Parameter Name="tDMA" Mode="In" Type="String" />
+            <Parameter Name="tRED" Mode="In" Type="String" />
+            <Parameter Name="tCM" Mode="In" Type="String" />
+            <Parameter Name="tANE" Mode="In" Type="String" />
+            <Parameter Name="tRVP" Mode="In" Type="String" />
+            <Parameter Name="tPrincipalPartner" Mode="In" Type="String" />
+            <Parameter Name="dStatus" Mode="In" Type="DateTime" />
+            <Parameter Name="dOpenStore" Mode="In" Type="DateTime" />
+            <Parameter Name="tProjectStatus" Mode="In" Type="String" />
+            <Parameter Name="nCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="nBrandId" Mode="In" Type="Int32" />
+          </FunctionImport>
 					<FunctionImport Name="sproc_SearchStore" ReturnType="Collection(dtDBModel.sproc_SearchStore_Result)">
-						<Parameter Name="tText" Mode="In" Type="String" />
-					</FunctionImport>
+					<Parameter Name="tText" Mode="In" Type="String" />
+          </FunctionImport>
 					<EntitySet Name="tblDocuments" EntityType="dtDBModel.tblDocument" />
 					<EntitySet Name="tblApplicationTraces" EntityType="dtDBModel.tblApplicationTrace" />
 					<EntitySet Name="tblQuoteRequestMains" EntityType="dtDBModel.tblQuoteRequestMain" />
@@ -1060,6 +1048,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySet Name="tblPurchaseOrderTemplateParts" EntityType="dtDBModel.tblPurchaseOrderTemplatePart" />
 					<EntitySet Name="tblVendorPartRels" EntityType="dtDBModel.tblVendorPartRel" />
 					<EntitySet Name="tblUserVendorRels" EntityType="dtDBModel.tblUserVendorRel" />
+          <EntitySet Name="tblSupportTickets" EntityType="dtDBModel.tblSupportTicket" />
 				</EntityContainer>
 				<EntityType Name="tblBrand">
 					<Key>
@@ -1384,13 +1373,13 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
-					<Property Name="tCity" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToCompany" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+					<Property Name="tCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+					<Property Name="tBillToCompany" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
 					<Property Name="nBillToState" Type="Int32" />
-					<Property Name="tBillToCity" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToAddress" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToZip" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToEmail" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+					<Property Name="tBillToCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+					<Property Name="tBillToAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+					<Property Name="tBillToZip" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+					<Property Name="tBillToEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
 				</EntityType>
 				<EntityType Name="tblStore">
 					<Key>
@@ -1699,8 +1688,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
 					<Property Name="nBrandID" Type="Int32" />
-					<Property Name="nVenderID" Type="Int32" />
 					<Property Name="tTechnologyComponent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nVendorID" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblOutgoingEmail">
 					<Key>
@@ -1735,7 +1724,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="aPartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
 					<Property Name="tPartDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="tPartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-					<Property Name="cPrice" Type="Decimal" Precision="18" Scale="2" />
+					<Property Name="cPrice" Type="Decimal" Precision="22" Scale="4" />
 				</EntityType>
 				<EntityType Name="tblPurchaseOrder">
 					<Key>
@@ -1799,6 +1788,18 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nVendorID" Type="Int32" />
 					<Property Name="nUserID" Type="Int32" />
 				</EntityType>
+        <EntityType Name="tblSupportTicket">
+          <Key>
+            <PropertyRef Name="aTicketId" />
+          </Key>
+          <Property Name="aTicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nPriority" Type="Int32" />
+          <Property Name="tContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="nFileSie" Type="Int32" />
+          <Property Name="fBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="nCreatedBy" Type="Int32" />
+          <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
 			</Schema>
 		</edmx:ConceptualModels>
 		<!-- C-S mapping content -->
@@ -2476,8 +2477,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblPurchaseOrderTemplates">
 						<EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplate">
 							<MappingFragment StoreEntitySet="tblPurchaseOrderTemplate">
-								<ScalarProperty Name="tTechnologyComponent" ColumnName="tTechnologyComponent" />
-								<ScalarProperty Name="nVenderID" ColumnName="nVenderID" />
+								<ScalarProperty Name="nVendorID" ColumnName="nVendorID" />
+                <ScalarProperty Name="tTechnologyComponent" ColumnName="tTechnologyComponent" />
 								<ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
 								<ScalarProperty Name="aPurchaseOrderTemplateID" ColumnName="aPurchaseOrderTemplateID" />
 								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
@@ -2594,6 +2595,19 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 							</MappingFragment>
 						</EntityTypeMapping>
 					</EntitySetMapping>
+          <EntitySetMapping Name="tblSupportTickets">
+            <EntityTypeMapping TypeName="dtDBModel.tblSupportTicket">
+              <MappingFragment StoreEntitySet="tblSupportTicket">
+                <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+                <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+                <ScalarProperty Name="fBase64" ColumnName="fBase64" />
+                <ScalarProperty Name="nFileSie" ColumnName="nFileSie" />
+                <ScalarProperty Name="tContent" ColumnName="tContent" />
+                <ScalarProperty Name="nPriority" ColumnName="nPriority" />
+                <ScalarProperty Name="aTicketId" ColumnName="aTicketId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
 				</EntityContainerMapping>
 			</Mapping>
 		</edmx:Mappings>

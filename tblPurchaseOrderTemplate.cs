@@ -22,7 +22,7 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
         public Nullable<int> nBrandID { get; set; }
-        public Nullable<int> nVenderID { get; set; }
         public string tTechnologyComponent { get; set; }
+        public Nullable<int> nVendorID { get; set; }
     }
 }

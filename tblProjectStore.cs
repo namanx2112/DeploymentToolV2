@@ -35,9 +35,9 @@ namespace DeploymentTool
         public Nullable<bool> bDeleted { get; set; }
         public string tCity { get; set; }
         public string tBillToCompany { get; set; }
-        public string tBillToAddress { get; set; }
-        public string tBillToCity { get; set; }
         public Nullable<int> nBillToState { get; set; }
+        public string tBillToCity { get; set; }
+        public string tBillToAddress { get; set; }
         public string tBillToZip { get; set; }
         public string tBillToEmail { get; set; }
     }

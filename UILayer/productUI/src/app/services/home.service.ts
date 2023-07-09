@@ -9,6 +9,7 @@ import { TechComponenttService } from './tech-component.service';
 import { UserService } from './user.service';
 import { FranchiseService } from './frenchise.service';
 import { PartsService } from './parts.service';
+import { SupportContent } from '../interfaces/models';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class HomeService {
    public loginGet = () => {
     return this.http.get<string>(this.configUrl + "login/get?username=cuong&password=1", { headers: this.authService.getHttpHeaders() });
   }
+
 
   GetPartsTab(instType: TabInstanceType):HomeTab{
     return {

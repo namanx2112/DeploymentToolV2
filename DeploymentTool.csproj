@@ -979,6 +979,7 @@
     <Compile Include="Controller\QuoteRequestController.cs" />
     <Compile Include="Controller\SonicController.cs" />
     <Compile Include="Controller\StoreScreenConfigController.cs" />
+    <Compile Include="Controller\SupportController.cs" />
     <Compile Include="Controller\TableController.cs" />
     <Compile Include="Controller\BrandController.cs" />
     <Compile Include="Controller\UserController.cs" />
@@ -1038,6 +1039,7 @@
     <Compile Include="Model\StoreFieldConfig.cs" />
     <Compile Include="Model\StoreScreenConfiguration.cs" />
     <Compile Include="Model\StoreSearchModel.cs" />
+    <Compile Include="Model\SupportContent.cs" />
     <Compile Include="Model\TableFields.cs" />
     <Compile Include="Model\TechComponent.cs" />
     <Compile Include="Model\Templates\ProjectTemplates.cs" />
@@ -1166,6 +1168,9 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblStore.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSupportTicket.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblTechComponent.cs">

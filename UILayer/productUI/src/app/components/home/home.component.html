@@ -10,7 +10,7 @@
 <body>
     <div class="outerLayout floatLeft">
         <div class="left floatLeft">
-            <div class="logo floatLeft"><svg id="header_logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+            <div class="logo floatLeft" (dblclick)="OpenTicketWatcher()"><svg id="header_logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 514.83 129.74">
                     <defs></defs>
                     <title>Inspire - Logo</title>
@@ -40,7 +40,7 @@
                     </span>
                 </div>
                 <div class="rightHeader">
-                    <button class="tButton">Support</button>
+                    <button class="tButton" (click)="supportPage()">Support</button>
                 </div>
             </div>
             <div class="mainBody floatLeft">

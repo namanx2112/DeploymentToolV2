@@ -63,6 +63,7 @@ import { PurchaseOrderWorkflowTemplateComponent } from './components/purchase-or
 import { POConfigQuantityFieldsComponent } from './components/poconfig-quantity-fields/poconfig-quantity-fields.component';
 import { RenderPurchaseOrderComponent } from './components/Sonic/render-purchase-order/render-purchase-order.component';
 import { ForFilterPipe } from './pipes/for-filter.pipe';
+import { SupportPageComponent } from './components/support-page/support-page.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { ForFilterPipe } from './pipes/for-filter.pipe';
     PurchaseOrderWorkflowTemplateComponent,
     POConfigQuantityFieldsComponent,
     RenderPurchaseOrderComponent,
-    ForFilterPipe
+    ForFilterPipe,
+    SupportPageComponent
   ],
   imports: [
     BrowserModule,

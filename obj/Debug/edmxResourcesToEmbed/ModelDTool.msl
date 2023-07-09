@@ -672,8 +672,8 @@
     <EntitySetMapping Name="tblPurchaseOrderTemplates">
       <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrderTemplate">
         <MappingFragment StoreEntitySet="tblPurchaseOrderTemplate">
+          <ScalarProperty Name="nVendorID" ColumnName="nVendorID" />
           <ScalarProperty Name="tTechnologyComponent" ColumnName="tTechnologyComponent" />
-          <ScalarProperty Name="nVenderID" ColumnName="nVenderID" />
           <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
           <ScalarProperty Name="aPurchaseOrderTemplateID" ColumnName="aPurchaseOrderTemplateID" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
@@ -787,6 +787,19 @@
           <ScalarProperty Name="nUserID" ColumnName="nUserID" />
           <ScalarProperty Name="nVendorID" ColumnName="nVendorID" />
           <ScalarProperty Name="aUserVendorRelID" ColumnName="aUserVendorRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSupportTickets">
+      <EntityTypeMapping TypeName="dtDBModel.tblSupportTicket">
+        <MappingFragment StoreEntitySet="tblSupportTicket">
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="fBase64" ColumnName="fBase64" />
+          <ScalarProperty Name="nFileSie" ColumnName="nFileSie" />
+          <ScalarProperty Name="tContent" ColumnName="tContent" />
+          <ScalarProperty Name="nPriority" ColumnName="nPriority" />
+          <ScalarProperty Name="aTicketId" ColumnName="aTicketId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

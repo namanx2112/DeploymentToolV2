@@ -225,3 +225,14 @@ export interface ProjectTemplates {
 export enum ProjectTemplateType {
     Notification, QuoteRequest, PurchaseOrder
 }
+
+export enum SuportPriorities{
+    High, Medium, Low
+}
+
+export interface SupportContent {
+    nPriority: number,
+    tContent: string,
+    nFileSie: number,
+    fBase64: string
+}
