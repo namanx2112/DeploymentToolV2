@@ -7,41 +7,36 @@ using System.Web;
 
 namespace DeploymentTool.Model
 {
-    public class PurchaseOrderPreviewTeamplate
+    public class PurchaseOrderPreviewTeamplate: Misc.ModelParent
     {
+        public int nProjectId { get; set; }
         public int aPurchaseOrderPreviewTeamplateID { get; set; }
-        public int nStore { get; set; }
-        public PurchaseOrderBillingAndShippingDetails PurchaseOrderBillingAndShippingDetails { get; set; }
+        public int nVendorId { get; set; }
+        public string tStore { get; set; }
+        public string tStoreNumber { get; set; }
         public string tNotes { get; set; }
-        public List<PurchaseOrderPartDetails> PurchaseOrderPartDetails { get; set; }
-        public decimal cTotal { get; set; }
-        public string tPurchaseOrderNumber { get; set; }
-        public DateTime dDeliver { get; set; }
-        public int nOutgoingEmailID { get; set; }
-    }
-    public class PurchaseOrderBillingAndShippingDetails
-    {
         public string tName { get; set; }
         public string tPhone { get; set; }
         public string tEmail { get; set; }
         public string tAddress { get; set; }
-        public PurchaseOrderAddressType nPurchaseOrderAddressType { get; set; }
-    }
-    public enum PurchaseOrderAddressType
-    {
-        Billing, Shipping
-    }
-
-    public class PurchaseOrderPartDetails
-    {
-        public int aPurchaseOrderTemplateID { get; set; }
-        public int nPartID { get; set; }
-        public int nPurchaseOrderPartDetailsID { get; set; }
-        public string tPartDesc { get; set; }
-        public string tPartNumber { get; set; }
-        public decimal cPrice { get; set; }
-        public int nQuantity { get; set; }
+        public string tCity { get; set; }
+        public string tStoreState { get; set; }
+        public string tBillToCompany { get; set; }
+        public string tStoreZip { get; set; }
+        public string tBillToEmail { get; set; }
+        public string tBillToAddress { get; set; }
+        public string tBillToCity { get; set; }
+        public string tBillToState { get; set; }
+        public List<PurchaseOrderParts> purchaseOrderParts { get; set; }
         public decimal cTotal { get; set; }
+        public string tPurchaseOrderNumber { get; set; }
+        public DateTime dDeliver { get; set; }
+        public int nOutgoingEmailID { get; set; }
+        public int CreatedBy { get; set; }
+        public int UpdateBy { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
+        public bool IsDeleted { get; set; }
     }
 
     public class PurchaseOrderTemplateTemp
@@ -70,9 +65,20 @@ namespace DeploymentTool.Model
         public int nPartID { get; set; }
         public string tPartDesc { get; set; }
         public string tPartNumber { get; set; }
-        public float cPrice { get; set; }
+        public decimal cPrice { get; set; }
         public string tTableName { get; set; }
         public string tTechCompField { get; set; }
+        public int nQuantity { get; set; }
+        public decimal cTotal { get; set; }
     }
 
+    public class PurchaseOrderMailMessage
+    {
+        public int nProjectId { get; set; }
+        public string tTo { get; set; }
+        public string tCC { get; set; }
+        public string tSubject { get; set; }
+        public string tContent { get; set; }
+        public string tFileName { get; set; }
+    }
 }

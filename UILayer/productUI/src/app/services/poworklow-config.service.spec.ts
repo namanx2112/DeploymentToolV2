@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { POWorklowConfigService } from './poworklow-config.service';
+import { POWorkflowConfigService } from './poworklow-config.service';
 
 describe('POWorklowConfigService', () => {
-  let service: POWorklowConfigService;
+  let service: POWorkflowConfigService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(POWorklowConfigService);
+    service = TestBed.inject(POWorkflowConfigService);
   });
 
   it('should be created', () => {

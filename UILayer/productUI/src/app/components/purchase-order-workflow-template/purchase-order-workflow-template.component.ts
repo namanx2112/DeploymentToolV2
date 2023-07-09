@@ -4,7 +4,7 @@ import { Observable, map, startWith } from 'rxjs';
 import { OptionType, TabInstanceType } from 'src/app/interfaces/home-tab';
 import { POConfigPart, POConfigTemplate, PartsModel, VendorModel } from 'src/app/interfaces/models';
 import { PartsService } from 'src/app/services/parts.service';
-import { POWorklowConfigService } from 'src/app/services/poworklow-config.service';
+import { POWorkflowConfigService } from 'src/app/services/poworklow-config.service';
 import { SonicService } from 'src/app/services/sonic.service';
 import { VendorService } from 'src/app/services/vendor.service';
 
@@ -31,7 +31,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
   vendorParts: POConfigPart[];
   allCompAndFields: any[];
   curQuantityFields: any[];
-  constructor(private poService: POWorklowConfigService, private vendorService: VendorService, private partsService: PartsService, private sonicService: SonicService) {
+  constructor(private poService: POWorkflowConfigService, private vendorService: VendorService, private partsService: PartsService, private sonicService: SonicService) {
 
   }
 
@@ -86,7 +86,9 @@ export class PurchaseOrderWorkflowTemplateComponent {
           tPartDesc: "",
           tPartNumber: "",
           cPrice: 0,
-          aPurchaseOrderTemplatePartsID: 0, selected: false, tTableName: "", tTechCompField: ""
+          aPurchaseOrderTemplatePartsID: 0, selected: false, tTableName: "", tTechCompField: "",
+          cTotal: 0,
+          nQuantity: 0
         };
         if (typeof selectedParts.find(x => x.nPartID == tPart.aPartID) != 'undefined') {
           let tmp = selectedParts.find(x => x.nPartID == tPart.aPartID);
@@ -103,7 +105,9 @@ export class PurchaseOrderWorkflowTemplateComponent {
           cPrice: tPart.cPrice,
           tTableName: selectedPart.tTableName,
           tTechCompField: selectedPart.tTechCompField,
-          selected: selectedPart.selected
+          selected: selectedPart.selected,
+          cTotal: 0,
+          nQuantity: 0
         });
         this.curQuantityFields.push({ title: "", field: "", tableName: "" });
       }
@@ -219,7 +223,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
   }
 
   customQuantityCompare(v1: any, v2: any) {
-    return (v1.tTableName == v2.tTableName && v1.tTechCompField == v2.tTechCompField)
+    return (v1.tableName == v2.tableName && v1.field == v2.field)
   }
 
   customComponentCompare(v1: any, v2: any) {

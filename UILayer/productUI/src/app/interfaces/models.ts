@@ -82,7 +82,17 @@ export interface PartsModel {
     nVendorId: number,
     tPartDesc: string,
     tPartNumber: string,
-    cPrice: number
+    cPrice: number,
+    show: boolean | true
+}
+
+export interface POMailMessage {
+    nProjectId: number,
+    tTo: string,
+    tCC: string,
+    tSubject: string,
+    tContent: string,
+    tFileName: string
 }
 
 export interface UserModel {
@@ -131,7 +141,7 @@ export interface QuoteRequestFields {
 
 
 
-export interface MergedQuoteRequest{
+export interface MergedQuoteRequest {
     tContent: string,
     tTo: string,
     tCC: string,
@@ -167,30 +177,35 @@ export interface POConfigPart {
     cPrice: number,
     tTableName: string,
     tTechCompField: string,
+    nQuantity: number,
+    cTotal: number,
     selected: boolean
 }
 
 export interface MergedPO {
-    aPOID: number,
-    tPONumber: number,
-    nStoreID: number,
-    tBillingName: string,
-    tBillingPhone: string,
-    tBillingEmail: string,
-    tBillingAddress: string,
-    tShippingName: string,
-    tShippingPhone: string,
-    tShippingEmail: string,
-    tShippingAddress: string,
+    aPurchaseOrderPreviewTeamplateID: number,
+    nProjectId: number,
+    nVendorId: number,
+    tStore: string,
+    tStoreNumber: string,
     tNotes: string,
-    dDeliver: Date,
+    tName: string,
+    tPhone: string,
+    tEmail: string,
+    tAddress: string,
+    tCity: string,
+    tStoreState: string,
+    tStoreZip: string,
+    tBillToCompany: string,
+    tBillToEmail: string,
+    tBillToAddress: string,
+    tBillToCity: string,
+    tBillToState: string,
     cTotal: number,
-    nOutgoingEmailID: string,
-    nCreatedBy: number,
-    nUpdateBy: number,
-    dtCreatedOn: Date
-    dtUpdatedOn: Date,
-    bDeleted: boolean
+    tPurchaseOrderNumber: string,
+    dDeliver: Date,
+    nOutgoingEmailID: number
+    purchaseOrderParts: POConfigPart[]
 }
 
 export interface DropwDown {
@@ -201,12 +216,12 @@ export interface DropwDown {
     bDeleted: boolean
 }
 
-export interface ProjectTemplates{
+export interface ProjectTemplates {
     nTemplateId: number,
     tTemplateName: string,
     nTemplateType: ProjectTemplateType
 }
 
-export enum ProjectTemplateType{
+export enum ProjectTemplateType {
     Notification, QuoteRequest, PurchaseOrder
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { POConfigTemplateTemp } from 'src/app/interfaces/models';
-import { POWorklowConfigService } from 'src/app/services/poworklow-config.service';
+import { POWorkflowConfigService } from 'src/app/services/poworklow-config.service';
 
 @Component({
   selector: 'app-purchase-order-template-list',
@@ -16,7 +16,7 @@ export class PurchaseOrderTemplateListComponent {
   allPO: POConfigTemplateTemp[];
   nBrandId: number;
   nTemplateId: number;
-  constructor(private service: POWorklowConfigService) {
+  constructor(private service: POWorkflowConfigService) {
     this.nTemplateId = -1;
     this.nBrandId = 1;
     this.searchText = "";
@@ -37,7 +37,7 @@ export class PurchaseOrderTemplateListComponent {
   }
 
   getQuoteRequests() {
-    this.service.GetAllTemplate(this.nTemplateId).subscribe((x => {
+    this.service.GetAllTemplate(this.nBrandId).subscribe((x => {
       this.allPO = x;
     }));
   }

@@ -61,7 +61,8 @@ import { RenderQuoteRequestComponent } from './components/Sonic/render-quote-req
 import { PurchaseOrderTemplateListComponent } from './components/purchase-order-template-list/purchase-order-template-list.component';
 import { PurchaseOrderWorkflowTemplateComponent } from './components/purchase-order-workflow-template/purchase-order-workflow-template.component';
 import { POConfigQuantityFieldsComponent } from './components/poconfig-quantity-fields/poconfig-quantity-fields.component';
-import { RenderPurchaseOrderComponent } from './components/sonic/render-purchase-order/render-purchase-order.component';
+import { RenderPurchaseOrderComponent } from './components/Sonic/render-purchase-order/render-purchase-order.component';
+import { ForFilterPipe } from './pipes/for-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { RenderPurchaseOrderComponent } from './components/sonic/render-purchase
     PurchaseOrderTemplateListComponent,
     PurchaseOrderWorkflowTemplateComponent,
     POConfigQuantityFieldsComponent,
-    RenderPurchaseOrderComponent
+    RenderPurchaseOrderComponent,
+    ForFilterPipe
   ],
   imports: [
     BrowserModule,

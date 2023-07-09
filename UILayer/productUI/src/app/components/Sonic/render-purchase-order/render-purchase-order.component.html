@@ -1,6 +1,95 @@
-<h2 mat-dialog-title class="header">Quote Request</h2>
-<div class="quoteRequest">
-    <div class="quoteBody">
+<h2 mat-dialog-title class="header" *ngIf="curTemplate != undefined">{{ curTemplate.tName }} Purchase Order</h2>
+<div class="poRequest" *ngIf="partNumber == 1 && curTemplate != undefined">
+    <label>Store No</label><span>{{curTemplate.tStoreNumber}}</span>
+    <div class="poBody">
+        <div class="half">
+            <h3>Billing</h3>
+            <div class="mailField">
+                <label>Name</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tName" />
+            </div>
+            <div class="mailField">
+                <label>Phone</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tPhone" />
+            </div>
+            <div class="mailField">
+                <label>Email</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tEmail" />
+            </div>
+            <div class="mailField">
+                <label>Address</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tAddress" />
+            </div>
+        </div>
+        <div class="half shipping">
+            <h3>Shipping</h3>
+            <div class="mailField">
+                <label>Name</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tBillToCompany" />
+            </div>
+            <div class="mailField">
+                <label>Phone</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tPhone" />
+            </div>
+            <div class="mailField">
+                <label>Email</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tBillToEmail" />
+            </div>
+            <div class="mailField">
+                <label>Address</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tBillToAddress" />
+            </div>
+        </div>
+        <div class="mailField">
+            <label>Notes</label>
+            <input class="lightGray" [(ngModel)]="curTemplate.tNotes" />
+        </div>
+        <div class="mailField lightGray partsTable">
+            <table>
+                <thead>
+                    <th>Description</th>
+                    <th>Parts Number</th>
+                    <th style="width: 50px;">Price</th>
+                    <th style="width: 50px;">Quantity</th>
+                    <th style="width: 50px;">Total</th>
+                    <th style="width: 30px;"></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of curTemplate.purchaseOrderParts;let index=index">
+                        <td><input class="lightGray" (input)="validate(this)" [(ngModel)]="item.tPartDesc" /></td>
+                        <td><input class="lightGray" (input)="validate(this)" [(ngModel)]="item.tPartNumber" /></td>
+                        <td><input class="lightGray" min="0" (keypress)="onNumber($event)" (input)="numberChanged(this)"
+                                type="text" [(ngModel)]="item.cPrice" /></td>
+                        <td><input class="lightGray" min="1" (keypress)="onNumber($event)" (input)="numberChanged(this)"
+                                type="number" [(ngModel)]="item.nQuantity" /></td>
+                        <td>{{item.cTotal}}</td>
+                        <td><mat-icon (click)=" removePart(item, index)">cancel</mat-icon></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border-right-style:none ;">
+                            <select class="tableField lightGray" (change)="addPart($event)">
+                                <option>Add New Item</option>
+                                <option *ngFor="let item of allParts | forFilter:filterParts" [value]="item.aPartID">
+                                    {{item.tPartDesc + "-" + item.tPartNumber}}
+                                </option>
+                            </select>
+                        </td>
+                        <td colspan="4"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"></td>
+                        <td><b>Total</b>&nbsp;:${{curTemplate.cTotal}}<br />
+                            <b>PO#</b>&nbsp;:{{curTemplate.tPurchaseOrderNumber}}<br />
+                            <b>Deliver#</b>&nbsp;:{{curTemplate.dDeliver}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="poRequest" *ngIf="partNumber == 2">
+    <div class="poBody">
         <div class="mailField">
             <label>To</label>
             <input class="lightGray" [(ngModel)]="tRequest.tTo" />
@@ -13,7 +102,7 @@
             <label>Subject</label>
             <input class="lightGray" [(ngModel)]="tRequest.tSubject" />
         </div>
-        <div class="mailField">
+        <div class="mailField editorField">
             <label>Message</label>
             <div class="editor lightGray">
                 <form [formGroup]="form">
@@ -25,9 +114,11 @@
         </div>
     </div>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions style="padding: 0px;">
     <div class="actions">
-        <button class="lightGray aButton" [disabled]="cannotSend()" [mat-dialog-close]="data" cdkFocusInitial
+        <button class="lightGray aButton" *ngIf="partNumber == 1" [disabled]="cannotNext()" cdkFocusInitial
+            (click)="GenerateMail()">Next</button>
+        <button class="lightGray aButton" *ngIf="partNumber == 2" [disabled]="cannotSend()" cdkFocusInitial
             (click)="SendRequest()">Send</button>
         <button class="lightGray aButton" (click)="onCancelUserDialog()">Cancel</button>
     </div>

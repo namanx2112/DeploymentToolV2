@@ -4,6 +4,7 @@ import { ProjectTemplateType, ProjectTemplates } from 'src/app/interfaces/models
 import { StoreSearchModel } from 'src/app/interfaces/sonic';
 import { StoreService } from 'src/app/services/store.service';
 import { RenderQuoteRequestComponent } from '../render-quote-request/render-quote-request.component';
+import { RenderPurchaseOrderComponent } from '../render-purchase-order/render-purchase-order.component';
 
 @Component({
   selector: 'app-project-template-list',
@@ -57,6 +58,18 @@ export class ProjectTemplateListComponent {
   }
 
   OpenPurchaseOrder(item: ProjectTemplates) {
-
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+    dialogConfig.height = '90vh';
+    dialogConfig.data = {
+      nProjectId: this._curStore.nProjectId,
+      nTemplateId: item.nTemplateId,
+      onSubmit: function (data: any) {
+        dialogRef.close();
+      }
+    };
+    dialogRef = this.dialog.open(RenderPurchaseOrderComponent, dialogConfig);    
   }
 }
