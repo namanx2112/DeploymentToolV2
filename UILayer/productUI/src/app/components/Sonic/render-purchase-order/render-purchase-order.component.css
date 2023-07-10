@@ -72,6 +72,7 @@ label {
     width: calc(100% - 106px);
     height: 100%;
     margin-left: 100px;
+    position: relative;
 }
 
 .quillEditor {
@@ -110,4 +111,20 @@ td input {
     height: 24px;
     float: left;
     border: 0px none;
+}
+
+form{
+    height: calc(100% - 50px);
+}
+
+.pdfLink{
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+    cursor: pointer;
+}
+
+.pdfLink > span{
+    float: right;
+    margin-top: 2px;
 }

@@ -46,5 +46,16 @@ namespace DeploymentTool.Model
                 tMobile = this.tMobile
             };
         }
+        public tblUserVendorRel GetTblUserVendorRel(UserModel userRequest)
+        {
+            return new tblUserVendorRel()
+            {
+
+                aUserVendorRelID = 0,
+                nVendorID = userRequest.nVendorId,
+                nUserID = userRequest.aUserID
+            };
+        }
+
     }
 }

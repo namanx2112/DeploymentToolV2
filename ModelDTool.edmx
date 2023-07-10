@@ -528,9 +528,9 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="aPurchaseOrderPartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tDescription" Type="nvarchar(max)" />
           <Property Name="tPartNumber" Type="nvarchar(max)" />
-          <Property Name="cPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cPrice" Type="decimal" Precision="22" Scale="4" />
           <Property Name="nQuantity" Type="int" />
-          <Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cTotal" Type="decimal" Precision="22" Scale="4" />
         </EntityType>
         <EntityType Name="tblPurchaseOrderTemplate">
           <Key>

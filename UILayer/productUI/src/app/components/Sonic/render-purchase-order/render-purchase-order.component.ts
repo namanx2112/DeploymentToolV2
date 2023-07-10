@@ -62,6 +62,7 @@ export class RenderPurchaseOrderComponent {
   getMergedContent() {
     this.poService.GetMergedPO(this.nProjectId, this.nTemplateId).subscribe(x => {
       this.curTemplate = x;
+      this.reCalculateTotal();
       this.getAllParts();
     });
   }
@@ -86,6 +87,30 @@ export class RenderPurchaseOrderComponent {
     return (part.show);
   }
 
+  downloadPDF(tFieName: string) {
+    this.poService.downloadPO(tFieName, this.nProjectId).subscribe(tdata => {
+      var newBlob = new Blob([tdata], { type: "application/pdf" });
+
+      // For other browsers: 
+      // Create a link pointing to the ObjectURL containing the blob.
+      const data = window.URL.createObjectURL(newBlob);
+
+      var link = document.createElement('a');
+      link.href = data;
+      link.download = tFieName;
+      // this is necessary as link.click() does not work on the latest firefox
+      link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+
+      setTimeout(function () {
+        // For Firefox it is necessary to delay revoking the ObjectURL
+        window.URL.revokeObjectURL(data);
+        link.remove();
+      }, 100);
+    }, async (error) => {
+      console.log("Error occured:" + error);
+    });
+  }
+
 
   GenerateMail() {
     this.poService.SenMergedPO(this.curTemplate).subscribe(x => {
@@ -98,15 +123,17 @@ export class RenderPurchaseOrderComponent {
 
   cannotNext() {
     let cant = false;
-    if (this.curTemplate.tName == "" || this.curTemplate.tAddress == "" || this.curTemplate.tBillToAddress == "" || this.curTemplate.tBillToCity == "" || this.curTemplate.tBillToCompany == ""
-      || this.curTemplate.tBillToEmail == "" || this.curTemplate.tBillToState == "" || this.curTemplate.tCity == "" || this.curTemplate.tEmail == "" ||
-      this.curTemplate.tPhone == "")
-      cant = true;
-    else if (this.curTemplate.purchaseOrderParts.length == 0)
-      cant = true;
-    else {
-      if (this.curTemplate.purchaseOrderParts.find(x => x.cPrice < 0 || x.nQuantity < 0 || x.tPartDesc == "" || x.tPartNumber == ""))
+    if (typeof this.curTemplate != 'undefined') {
+      if (this.curTemplate.tName == "" || this.curTemplate.tAddress == "" || this.curTemplate.tBillToAddress == "" || this.curTemplate.tBillToCity == "" || this.curTemplate.tBillToCompany == ""
+        || this.curTemplate.tBillToEmail == "" || this.curTemplate.tBillToState == "" || this.curTemplate.tCity == "" || this.curTemplate.tEmail == "" ||
+        this.curTemplate.tPhone == "")
         cant = true;
+      else if (this.curTemplate.purchaseOrderParts.length == 0)
+        cant = true;
+      else {
+        if (this.curTemplate.purchaseOrderParts.find(x => x.cPrice < 0 || x.nQuantity < 0 || x.tPartDesc == "" || x.tPartNumber == ""))
+          cant = true;
+      }
     }
     return cant;
   }
@@ -169,6 +196,10 @@ export class RenderPurchaseOrderComponent {
     this.curTemplate.purchaseOrderParts.splice(indx, 1);
     this.filterVendorParts();
     this.reCalculateTotal();
+  }
+
+  getFormatedDate(dt: Date) {
+    return new Date(dt).toDateString();
   }
   // First Part End
   //Second Part Start

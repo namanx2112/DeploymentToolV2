@@ -193,56 +193,58 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
-                List<ProjectTemplates> items = new List<ProjectTemplates>();
-                
-                {
-                    items.Add(
-                    new ProjectTemplates()
-                    {
-                        nTemplateId = 1,
-                        nTemplateType = ProjectTemplateType.Notification,
-                        tTemplateName = "Notification"
-                    });
-                   
-                    //items.Add(
-                    //new ProjectTemplates()
-                    //{
-                    //    nTemplateId = 3,
-                    //    nTemplateType = ProjectTemplateType.QuoteRequest,
-                    //    tTemplateName = "Networking"
-                    //});
-                    items.Add(
-                    new ProjectTemplates()
-                    {
-                        nTemplateId = 4,
-                        nTemplateType = ProjectTemplateType.PurchaseOrder,
-                        tTemplateName = "Exterior Menu-Fabcon"
-                    });
-                    items.Add(
-                    new ProjectTemplates()
-                    {
-                        nTemplateId = 6,
-                        nTemplateType = ProjectTemplateType.PurchaseOrder,
-                        tTemplateName = "Interior Menus-TDS"
-                    });
-                };
-                Dictionary<int, string> lstQuoteRequest = new Dictionary<int, string>();
+               // List<ProjectTemplates> items = new List<ProjectTemplates>();
                 SqlParameter tModuleNameParam = new SqlParameter("@nBrandId", nBrandId);
-                List<QuoteRequestTemplateTemp> itemsQoute = db.Database.SqlQuery<QuoteRequestTemplateTemp>("exec sproc_GetAllQuoteRequestTemplate @nBrandId", tModuleNameParam).ToList();
-                
-                foreach (var RequestTechComps in itemsQoute)
-                {
+                List<ProjectTemplates> items = db.Database.SqlQuery<ProjectTemplates>("exec sproc_GetAllTemplate @nBrandId", tModuleNameParam).ToList();
 
-                    lstQuoteRequest.Add(RequestTechComps.aQuoteRequestTemplateId, RequestTechComps.tTemplateName);
-                    //lstQuoteRequest.Add(2, "Networking");
-                    items.Add(
-                   new ProjectTemplates()
-                   {
-                       nTemplateId = RequestTechComps.aQuoteRequestTemplateId,
-                       nTemplateType = ProjectTemplateType.QuoteRequest,
-                       tTemplateName = RequestTechComps.tTemplateName
-                   });
-                }
+                //{
+                //    items.Add(
+                //    new ProjectTemplates()
+                //    {
+                //        nTemplateId = 1,
+                //        nTemplateType = ProjectTemplateType.Notification,
+                //        tTemplateName = "Notification"
+                //    });
+                   
+                //    //items.Add(
+                //    //new ProjectTemplates()
+                //    //{
+                //    //    nTemplateId = 3,
+                //    //    nTemplateType = ProjectTemplateType.QuoteRequest,
+                //    //    tTemplateName = "Networking"
+                //    //});
+                //    //items.Add(
+                //    //new ProjectTemplates()
+                //    //{
+                //    //    nTemplateId = 4,
+                //    //    nTemplateType = ProjectTemplateType.PurchaseOrder,
+                //    //    tTemplateName = "Exterior Menu-Fabcon"
+                //    //});
+                //    //items.Add(
+                //    //new ProjectTemplates()
+                //    //{
+                //    //    nTemplateId = 6,
+                //    //    nTemplateType = ProjectTemplateType.PurchaseOrder,
+                //    //    tTemplateName = "Interior Menus-TDS"
+                //    //});
+                //};
+                //Dictionary<int, string> lstQuoteRequest = new Dictionary<int, string>();
+                //SqlParameter tModuleNameParam = new SqlParameter("@nBrandId", nBrandId);
+                //List<QuoteRequestTemplateTemp> itemsQoute = db.Database.SqlQuery<QuoteRequestTemplateTemp>("exec sproc_GetAllQuoteRequestTemplate @nBrandId", tModuleNameParam).ToList();
+                
+                //foreach (var RequestTechComps in itemsQoute)
+                //{
+
+                //    lstQuoteRequest.Add(RequestTechComps.aQuoteRequestTemplateId, RequestTechComps.tTemplateName);
+                //    //lstQuoteRequest.Add(2, "Networking");
+                //    items.Add(
+                //   new ProjectTemplates()
+                //   {
+                //       nTemplateId = RequestTechComps.aQuoteRequestTemplateId,
+                //       nTemplateType = ProjectTemplateType.QuoteRequest,
+                //       tTemplateName = RequestTechComps.tTemplateName
+                //   });
+                //}
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<List<ProjectTemplates>>(items, new JsonMediaTypeFormatter())

@@ -85,6 +85,9 @@ namespace DeploymentTool.Controller
             userRequest.aUserID = tmpUser.aUserID;
             // Add into tblUserVendorRelation
 
+            db.tblUserVendorRels.Add(userRequest.GetTblUserVendorRel(userRequest));
+            await db.SaveChangesAsync();
+
             return Json(userRequest);
         }
 

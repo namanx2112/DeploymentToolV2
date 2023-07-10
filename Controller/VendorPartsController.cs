@@ -59,10 +59,14 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(VendorParts partsRequest)
         {
-            db.tblParts.Add(partsRequest.GetTblParts());
+            tblPart tParts = partsRequest.GetTblParts();
+            db.tblParts.Add(tParts);
             await db.SaveChangesAsync();
-
             // Add into tblVendorPartRel
+            partsRequest.aPartID=tParts.aPartID;
+            db.tblVendorPartRels.Add(partsRequest.GetTblVendorPartRel(partsRequest));
+            await db.SaveChangesAsync();
+           
 
             return Json(partsRequest);
         }

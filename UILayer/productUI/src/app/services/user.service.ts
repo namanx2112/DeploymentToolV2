@@ -27,7 +27,6 @@ export class UserService {
   
   GetTableVisibleColumns(){
     return [
-      "tEmail",
       "tUserName",
       "tEmail",
       "nDepartment",

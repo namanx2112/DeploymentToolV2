@@ -37,6 +37,8 @@ namespace DeploymentTool.Model
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public bool IsDeleted { get; set; }
+
+        public string tTemplateName { get; set; }
     }
 
     public class PurchaseOrderTemplateTemp
@@ -58,10 +60,24 @@ namespace DeploymentTool.Model
         public int nCreatedBy { get; set; }
         public int nUpdateBy { get; set; }
         public List<PurchaseOrderParts> purchaseOrderParts { get; set; }
+        public tblPurchaseOrderTemplate GetTblPurchaseOrder()
+        {
+            return new tblPurchaseOrderTemplate()
+            {
+                aPurchaseOrderTemplateID = this.aPurchaseOrderTemplateID,
+                tTemplateName = this.tTemplateName,
+                tTechnologyComponent = this.tCompName,
+                nBrandID = this.nBrandId,
+                nVendorID=this.nVendorId,
+                nCreatedBy = this.nCreatedBy
+            };
+        }
     }
     public class PurchaseOrderParts
     {
         public int aPurchaseOrderTemplatePartsID { get; set; }
+        public int aPurchaseOrderTemplateID { get; set; }
+        
         public int nPartID { get; set; }
         public string tPartDesc { get; set; }
         public string tPartNumber { get; set; }
@@ -80,5 +96,25 @@ namespace DeploymentTool.Model
         public string tSubject { get; set; }
         public string tContent { get; set; }
         public string tFileName { get; set; }
+
+        public List<FileAttachment> FileAttachments { get; set; }
     }
+	 public class PurchaseOrderPartDetails
+    {
+        public int aPurchaseOrderTemplateID { get; set; }
+        public int nPartID { get; set; }
+
+        public int nVenderId { get; set; }
+        public int nPurchaseOrderPartDetailsID { get; set; }
+
+        public string tTechCompField { get; set; }
+
+        public string tTableName { get; set; }
+        public string tPartDesc { get; set; }
+        public string tPartNumber { get; set; }
+        public decimal cPrice { get; set; }
+        public int nQuantity { get; set; }
+        public decimal cTotal { get; set; }
+    }
+
 }

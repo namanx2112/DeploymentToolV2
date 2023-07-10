@@ -41,9 +41,10 @@ export class TableComponent implements OnChanges {
 
   @ViewChild(MatSort) sort: MatSort;
   cService: any;
-
+  initVal: Date;
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService) {
+      this.initVal = new Date();
   }  
 
   cellClick(row: MatRow) {
@@ -108,7 +109,10 @@ export class TableComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    this.initTable();
+    if(this.initVal != this._refreshMe){
+      this._refreshMe = this.initVal;
+      this.initTable();
+    }
   }
   ngAfterViewInit2() {
     //this.getTable();

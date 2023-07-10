@@ -30,7 +30,6 @@ export class NewEditObjectComponent {
   @Output() returnBack = new EventEmitter<any>()
   _controlValues: Dictionary<string>;
   childCount: number;
-  refreshChildTable: Date;
   @Input() set controlValues(value: Dictionary<string>) {
     this._controlValues = value;
     this.valueChanged();
@@ -41,6 +40,7 @@ export class NewEditObjectComponent {
   SubmitLabel: string;
   cService: any;
   childSearchFields: any = {};
+  refreshChildTable: any = {};
   constructor(private dialog: MatDialog, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseService: FranchiseService, private userSerice: UserService, private partsService: PartsService) {
     this.SubmitLabel = "Submit";
@@ -55,6 +55,7 @@ export class NewEditObjectComponent {
     if (this.childCount > 0) {
       for (var indx in this._curTab.childTabs) {
         let tTab = this._curTab.childTabs[indx];
+        this.refreshChildTable[tTab.tab_name] = {};
         this.childSearchFields[tTab.tab_name] = this.updateChildProperties(tTab, {});
       }
     }
@@ -122,7 +123,7 @@ export class NewEditObjectComponent {
 
   rowClicked(row: any, cTab: HomeTab) {
     this._controlValues[cTab.tab_name] = row;
-    this.editChildTab(cTab);
+    this.editChildTab(cTab, false);
   }
 
   updateChildProperties(tTab: HomeTab, vals: any) {
@@ -135,13 +136,20 @@ export class NewEditObjectComponent {
     return vals;
   }
 
-  editChildTab(cTab: HomeTab) {
+  getChildRefreshFlag(tabName: string) {
+    if (this.refreshChildTable[tabName])
+      return this.refreshChildTable[tabName];
+  }
+
+  editChildTab(cTab: HomeTab, isNew: boolean) {
     let cthis = this;
     const dialogConfig = new MatDialogConfig();
     let dialogRef: any;
     dialogConfig.autoFocus = true;
     dialogConfig.maxHeight = '90vh';
     dialogConfig.width = '60%';
+    if (isNew)
+      delete this._controlValues[cTab.tab_name];
     let tVals = this.updateChildProperties(cTab, (typeof this._controlValues[cTab.tab_name] != 'undefined') ? this._controlValues[cTab.tab_name] : {});
     dialogConfig.data = {
       numberOfControlsInARow: 1,
@@ -154,7 +162,7 @@ export class NewEditObjectComponent {
       onSubmit: function (data: any) {
         cthis.saveThisTab(data, cTab, function (val: any) {
           delete cthis._controlValues[cTab.tab_name];
-          cthis.refreshChildTable = new Date();
+          cthis.refreshChildTable[cTab.tab_name] = new Date();
           dialogRef.close();
         });
       },

@@ -24,5 +24,14 @@ namespace DeploymentTool.Model
                 cPrice = this.cPrice
             };
         }
+        public tblVendorPartRel GetTblVendorPartRel(VendorParts partsRequest)
+        {
+            return new tblVendorPartRel()
+            {
+                aVendorPartRelID = 0,
+                nVendorID = partsRequest.nVendorId,
+                nPartID = partsRequest.aPartID
+            };
+        }
     }
 }
