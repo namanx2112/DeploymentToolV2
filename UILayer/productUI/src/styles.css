@@ -150,6 +150,10 @@ button{
     overflow: auto;
 }
 
+.poEditor .ql-container{
+    height: calc(100% - 50px)!important;
+}
+
 .toggleIcon {
     display: block;
     position: absolute;

@@ -114,8 +114,8 @@
             <label>Message</label>
             <div class="editor lightGray">
                 <form [formGroup]="form">
-                    <quill-editor #editor [modules]="quillConfig" class="quillEditor" formControlName="editor"
-                        placeholder="Enter Text" format="html" [styles]="{height: '100%'}" [(ngModel)]="tRequest.tContent">
+                    <quill-editor #editor [modules]="quillConfig" class="quillEditor poEditor" formControlName="editor"
+                        placeholder="Enter Text" format="html" [(ngModel)]="tRequest.tContent">
                     </quill-editor>
                 </form>
                 <a class="pdfLink"
