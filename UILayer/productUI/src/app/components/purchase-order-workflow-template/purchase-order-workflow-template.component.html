@@ -10,8 +10,8 @@
         <mat-label class="fleidLabel" [attr.for]="">For</mat-label>
         <mat-form-field class="curField" appearance="outline">
             <mat-select [(ngModel)]="this.curTemplate.tCompName" [compareWith]="customComponentCompare">
-                <mat-option *ngFor="let comp of allCompAndFields" [value]="comp.name">
-                    {{comp.name}}
+                <mat-option *ngFor="let comp of allCompNames" [value]="comp">
+                    {{comp}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

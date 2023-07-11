@@ -1,6 +1,8 @@
 <h2 mat-dialog-title class="header" *ngIf="curTemplate != undefined">{{ curTemplate.tName }} Purchase Order</h2>
+<div class="pageStep"><span [className]="(partNumber == 1) ? 'firstPg active': 'firstPg'" title="Step One">1</span><span
+        [className]="(partNumber == 2) ? 'lastPg active': 'lastPg'" title="Last Step">2</span></div>
 <div class="poRequest" *ngIf="partNumber == 1 && curTemplate != undefined">
-    <label>Store No</label><span>{{curTemplate.tStoreNumber}}</span>
+    <div class="pLabel"><label>Store No</label><span>{{curTemplate.tStoreNumber}}</span></div>
     <div class="poBody">
         <div class="half">
             <h3>Billing</h3>
@@ -47,27 +49,29 @@
         <div class="mailField lightGray partsTable">
             <table>
                 <thead>
-                    <th>Description</th>
-                    <th>Parts Number</th>
-                    <th style="width: 50px;">Price</th>
-                    <th style="width: 50px;">Quantity</th>
-                    <th style="width: 50px;">Total</th>
-                    <th style="width: 30px;"></th>
+                    <tr>
+                        <th>Description</th>
+                        <th>Parts Number</th>
+                        <th style="width: 50px;">Price</th>
+                        <th style="width: 50px;">Quantity</th>
+                        <th style="width: 50px;">Total</th>
+                        <th style="width: 30px;"></th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of curTemplate.purchaseOrderParts;let index=index">
-                        <td><input class="lightGray" (input)="validate(this)" [(ngModel)]="item.tPartDesc" /></td>
-                        <td><input class="lightGray" (input)="validate(this)" [(ngModel)]="item.tPartNumber" /></td>
-                        <td><input class="lightGray" min="0" (keypress)="onNumber($event)" (input)="numberChanged(this)"
-                                type="text" [(ngModel)]="item.cPrice" /></td>
-                        <td><input class="lightGray" min="1" (keypress)="onNumber($event)" (input)="numberChanged(this)"
-                                type="number" [(ngModel)]="item.nQuantity" /></td>
+                        <td><input class="tableInput" (input)="validate(this)" [(ngModel)]="item.tPartDesc" /></td>
+                        <td><input class="tableInput" (input)="validate(this)" [(ngModel)]="item.tPartNumber" /></td>
+                        <td><input class="tableInput" min="0" (keypress)="onNumber($event)"
+                                (input)="numberChanged(this)" type="text" [(ngModel)]="item.cPrice" /></td>
+                        <td><input class="tableInput" min="1" (keypress)="onNumber($event)"
+                                (input)="numberChanged(this)" type="number" [(ngModel)]="item.nQuantity" /></td>
                         <td>{{item.cTotal}}</td>
                         <td><mat-icon (click)=" removePart(item, index)">cancel</mat-icon></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="border-right-style:none ;">
-                            <select class="tableField lightGray" (change)="addPart($event)">
+                            <select class="tableField tableInput" (change)="addPart($event)">
                                 <option>Add New Item</option>
                                 <option *ngFor="let item of allParts | forFilter:filterParts" [value]="item.aPartID">
                                     {{item.tPartDesc + "-" + item.tPartNumber}}
@@ -77,10 +81,14 @@
                         <td colspan="4"></td>
                     </tr>
                     <tr>
-                        <td colspan="4"></td>
-                        <td colspan="2"><b>Total</b>&nbsp;:${{curTemplate.cTotal}}<br />
-                            <b>PO#</b>&nbsp;:{{curTemplate.tPurchaseOrderNumber}}<br />
-                            <b>Deliver#</b>&nbsp;:{{getFormatedDate(curTemplate.dDeliver)}}
+                        <td colspan="2"></td>
+                        <td colspan="2"><b>Total:</b><br />
+                            <b>PO#:</b><br />
+                            <b>Deliver#:</b>
+                        </td>
+                        <td colspan="2">${{curTemplate.cTotal}}<br />
+                            {{curTemplate.tPurchaseOrderNumber}}<br />
+                            {{getFormatedDate(curTemplate.dDeliver)}}
                         </td>
                     </tr>
                 </tbody>
@@ -107,7 +115,7 @@
             <div class="editor lightGray">
                 <form [formGroup]="form">
                     <quill-editor #editor [modules]="quillConfig" class="quillEditor" formControlName="editor"
-                        placeholder="Enter Text" format="html" [(ngModel)]="tRequest.tContent">
+                        placeholder="Enter Text" format="html" [styles]="{height: '100%'}" [(ngModel)]="tRequest.tContent">
                     </quill-editor>
                 </form>
                 <a class="pdfLink"

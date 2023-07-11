@@ -199,7 +199,7 @@ export class RenderPurchaseOrderComponent {
   }
 
   getFormatedDate(dt: Date) {
-    return new Date(dt).toDateString();
+    return new Date(dt).toLocaleDateString();
   }
   // First Part End
   //Second Part Start

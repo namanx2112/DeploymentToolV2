@@ -38,7 +38,7 @@ export class SonicService {
     let items = [
       { name: "Store Configuration", fields: [{ title: "Stall Count", field: "nStallCount", tableName: "tblProjectConfig" }] },
       {
-        name: "Exterior Menus", fields: [{ title: "Stalls", field: "nStalls", tableName: "tblProjectExteriorMenus" }, { title: "Patio", field: "nPatio" , tableName: "tblProjectExteriorMenus"}, { title: "Flat", field: "nFlat", tableName: "tblProjectExteriorMenus"},
+        name: "Exterior Menus", fields: [{ title: "Stalls", field: "nStalls", tableName: "tblProjectExteriorMenus" }, { title: "Patio", field: "nPatio", tableName: "tblProjectExteriorMenus" }, { title: "Flat", field: "nFlat", tableName: "tblProjectExteriorMenus" },
         { title: "DT POPS", field: "nDTPops", tableName: "tblProjectExteriorMenus" }, { title: "DT Menu", field: "nDTMenu", tableName: "tblProjectExteriorMenus" }]
       },
       { name: "Interior Menus", fields: [{ title: "DMB Quantity", field: "nDMBQuantity", tableName: "tblProjectInteriorMenus" }] },
@@ -54,6 +54,10 @@ export class SonicService {
       { name: "Installation", fields: [{ title: "Lead Tech", field: "tLeadTech", tableName: "tblProjectInstallation" }] },
     ];
     return items;
+  }
+
+  getPOTechConfigs() {
+    return ["Audio", "Exterior Menus", "Installation", "Interior Menus", "Payment Systems", "Sonic Radio"];
   }
 
   GetTableVisibleColumns(tab: HomeTab) {
@@ -714,7 +718,7 @@ export class SonicService {
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.dropdown,      
+      field_type: FieldType.dropdown,
       options: this.commonService.GetDropdown("State"),
       field_placeholder: "Enter State",
       validator: [],

@@ -30,6 +30,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
   selectedVendor: VendorModel;
   vendorParts: POConfigPart[];
   allCompAndFields: any[];
+  allCompNames: any[];
   curQuantityFields: any[];
   constructor(private poService: POWorkflowConfigService, private vendorService: VendorService, private partsService: PartsService, private sonicService: SonicService) {
 
@@ -59,6 +60,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
 
   getQuantityFields() {
     this.allCompAndFields = this.sonicService.GetPOQuantityFields();
+    this.allCompNames = this.sonicService.getPOTechConfigs();
   }
 
   getOptionsFromVendors(vendors: VendorModel[]): OptionType[] {
