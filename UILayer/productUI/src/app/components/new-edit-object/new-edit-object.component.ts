@@ -192,9 +192,14 @@ export class NewEditObjectComponent {
 
   onSubmit(controlVals: FormGroup, tab: HomeTab) {
     let cThis = this;
+    let newMode = (!this.isEditMode(controlVals.value, tab) && this._curTab.childTabs.length > 0);
     this.saveThisTab(controlVals, tab, function (resp: any) {
-      console.log(resp);
-      cThis.returnBack.emit(resp);
+      if (newMode){
+        cThis.controlValues = resp;
+        cThis.initControlValues();
+      }
+      else
+        cThis.returnBack.emit(resp);
     });
   }
 

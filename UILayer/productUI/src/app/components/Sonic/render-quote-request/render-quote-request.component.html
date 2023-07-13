@@ -16,10 +16,7 @@
         <div class="mailField">
             <label>Message</label>
             <div class="editor lightGray">
-                <form [formGroup]="form">
-                    <quill-editor #editor [modules]="quillConfig" class="quillEditor" formControlName="editor" placeholder="Enter Text" format="html" [(ngModel)]="tRequest.tContent">
-                    </quill-editor>
-                </form>
+                <ckeditor #editor name="fieldName" [config]="ckConfig" ngDefaultControl  [(ngModel)]="tRequest.tContent"></ckeditor>
             </div>
         </div>
     </div>

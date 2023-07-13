@@ -62,7 +62,6 @@ export class ProjectTemplateListComponent {
     let dialogRef: any;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
-    dialogConfig.height = '90vh';
     dialogConfig.data = {
       nProjectId: this._curStore.nProjectId,
       nTemplateId: item.nTemplateId,

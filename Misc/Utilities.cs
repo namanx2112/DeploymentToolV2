@@ -58,10 +58,15 @@ namespace DeploymentTool.Misc
             }
         }
 
-        public static String WriteHTMLToPDF(String strBody)
+        public static String WriteHTMLToPDF(String strBody, String fileName)
         {
-            string URL = HttpRuntime.AppDomainAppPath;
-            string strFilePath = URL + @"Attachments\PurachaaseOrder.pdf";
+            string URL = HttpRuntime.AppDomainAppPath+ "Attachments\\" + Guid.NewGuid();
+
+            bool exists = System.IO.Directory.Exists(URL);
+
+            if (!exists)
+                System.IO.Directory.CreateDirectory(URL);
+            string strFilePath = URL + "\\"+fileName;
             //// Create a new PDF writer
             //PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(strFilePath, FileMode.Create));
 
@@ -90,33 +95,30 @@ namespace DeploymentTool.Misc
 
         public static void SendMail(EMailRequest request)
         {
-            //string smtpServer = "smtp.gmail.com"; // Replace with your SMTP server
-            //int smtpPort = 587; // Replace with your SMTP port
-            //string smtpUsername = "spatil@bostondatapro.com"; // Replace with your SMTP username
-            //string smtpPassword = "Santosh@123"; // Replace with your SMTP password
-
-            //string fromAddress = "spatil@bostondatapro.com"; // Replace with the sender's email address
-            //string toAddress = request.tTo; // Replace with the recipient's email address
-            //string subject = request.tSubject;
-            //string body = request.tContent;
-
-            // Create an instance of the SmtpClient class
+           
             System.Net.Mail.MailMessage mailMessage = new System.Net.Mail.MailMessage();
             using (SmtpClient smtpClient = new SmtpClient())
             {
                 // Create a MailMessage object
 
                 mailMessage.To.Add(request.tTo);
-                if (request.tCC.Length > 0)
+                if (request.tCC !=null && request.tCC.Length > 0)
                     mailMessage.CC.Add(request.tCC);
                 mailMessage.Subject = request.tSubject;
                 mailMessage.IsBodyHtml = true;
                 mailMessage.Body = request.tContent;
-                if(request.FileAttachments!=null)
-                foreach (var RequestFile in request.FileAttachments)
+
+                //if(request.FileAttachments!=null)
+                //foreach (var RequestFile in request.FileAttachments)
+                //{
+                //    System.Net.Mail.Attachment objAtt = new System.Net.Mail.Attachment(RequestFile.tFileName);
+                //    objAtt.ContentId = RequestFile.tContentID;
+                //    mailMessage.Attachments.Add(objAtt);
+                //}
+                if (!string.IsNullOrEmpty(request.tFilePath))
                 {
-                    System.Net.Mail.Attachment objAtt = new System.Net.Mail.Attachment(RequestFile.tFileName);
-                    objAtt.ContentId = RequestFile.tContentID;
+                    System.Net.Mail.Attachment objAtt = new System.Net.Mail.Attachment(request.tFilePath);
+                    //objAtt.ContentId = RequestFile.tContentID;
                     mailMessage.Attachments.Add(objAtt);
                 }
                 // Send the email

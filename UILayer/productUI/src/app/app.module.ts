@@ -17,7 +17,6 @@ import { MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { TableComponent } from './components/table/table.component';
-import { QuillModule } from 'ngx-quill';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NewEditObjectComponent } from './components/new-edit-object/new-edit-object.component';
@@ -64,6 +63,7 @@ import { POConfigQuantityFieldsComponent } from './components/poconfig-quantity-
 import { RenderPurchaseOrderComponent } from './components/Sonic/render-purchase-order/render-purchase-order.component';
 import { ForFilterPipe } from './pipes/for-filter.pipe';
 import { SupportPageComponent } from './components/support-page/support-page.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 @NgModule({
   declarations: [
@@ -111,6 +111,7 @@ import { SupportPageComponent } from './components/support-page/support-page.com
     SupportPageComponent
   ],
   imports: [
+    CKEditorModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -132,8 +133,7 @@ import { SupportPageComponent } from './components/support-page/support-page.com
     MatCheckboxModule,
     MatChipsModule,
     MatProgressSpinnerModule,
-    MatDatepickerModule,
-    QuillModule.forRoot()
+    MatDatepickerModule
   ],
   providers: [
     {

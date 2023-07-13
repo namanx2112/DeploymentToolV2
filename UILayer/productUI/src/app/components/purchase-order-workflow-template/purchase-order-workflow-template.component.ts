@@ -150,7 +150,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
       if (cThis._nTemplateId > 0) {
         cThis.poService.GetTemplate(cThis._nTemplateId).subscribe((x: POConfigTemplate) => {
           cThis.curTemplate = x;
-          let cVendor = cThis.allVendors.find(y => y.aVendorId == x.nVendorId);
+          let cVendor = cThis.allVendors.find(y => y.aVendorId == x.nVendorID);
           if (cVendor) {
             cThis.myControl.setValue(cVendor.tVendorName);
             cThis.selectedVendor = cVendor;
@@ -178,7 +178,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
           aPurchaseOrderTemplateID: 0,
           tTemplateName: "",
           tCompName: "",
-          nVendorId: (cThis.selectedVendor) ? cThis.selectedVendor.aVendorId : 0,
+          nVendorID: (cThis.selectedVendor) ? cThis.selectedVendor.aVendorId : 0,
           nBrandID: cThis.nBrandId,
           purchaseOrderParts: []
         }
@@ -191,7 +191,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
     if (tVendor) {
       this.selectedVendor = tVendor;
       this.curTemplate.purchaseOrderParts = [];
-      this.curTemplate.nVendorId = this.selectedVendor.aVendorId;
+      this.curTemplate.nVendorID = this.selectedVendor.aVendorId;
       this.getVendorParts(function () { }, []);
     }
   }
@@ -212,7 +212,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
       if (typeof emptyItems == 'undefined' || emptyItems == null)
         can = true;
     }
-    else if (this.curTemplate.nVendorId > 0 && this.curTemplate.tCompName != "")
+    else if (this.curTemplate.nVendorID > 0 && this.curTemplate.tCompName != "")
       can = false;
     return can;
   }

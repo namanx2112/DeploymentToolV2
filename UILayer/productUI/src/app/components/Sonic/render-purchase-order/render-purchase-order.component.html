@@ -1,5 +1,6 @@
 <h2 mat-dialog-title class="header" *ngIf="curTemplate != undefined">{{ curTemplate.tName }} Purchase Order</h2>
-<div class="pageStep"><span [className]="(partNumber == 1) ? 'firstPg active': 'firstPg'" title="Step One">1</span><span
+<div class="pageStep" *ngIf="curTemplate != undefined"><span
+        [className]="(partNumber == 1) ? 'firstPg active': 'firstPg'" title="Step One">1</span><span
         [className]="(partNumber == 2) ? 'lastPg active': 'lastPg'" title="Last Step">2</span></div>
 <div class="poRequest" *ngIf="partNumber == 1 && curTemplate != undefined">
     <div class="pLabel"><label>Store No</label><span>{{curTemplate.tStoreNumber}}</span></div>
@@ -112,19 +113,18 @@
         </div>
         <div class="mailField editorField">
             <label>Message</label>
-            <div class="editor lightGray">
-                <form [formGroup]="form">
-                    <quill-editor #editor [modules]="quillConfig" class="quillEditor poEditor" formControlName="editor"
-                        placeholder="Enter Text" format="html" [(ngModel)]="tRequest.tContent">
-                    </quill-editor>
-                </form>
-                <a class="pdfLink"
-                    (click)="downloadPDF(tRequest.tFileName)"><mat-icon>attach_file</mat-icon><span>{{tRequest.tFileName}}</span></a>
+            <div class="editor">
+                <ckeditor #editor name="fieldName" [config]="ckConfig" ngDefaultControl [(ngModel)]="tRequest.tContent">
+                </ckeditor>
+                <div style="padding: 8px 0px;">
+                    <a class="pdfLink"
+                        (click)="downloadPDF(tRequest.tMyFolderId, tRequest.tFileName)"><mat-icon>attach_file</mat-icon><span>{{tRequest.tFileName}}</span></a>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div mat-dialog-actions style="padding: 0px;" *ngIf="curTemplate != undefined">
+<div mat-dialog-actions style="padding: 0px;height: 70px;" *ngIf="curTemplate != undefined">
     <div class="actions">
         <button class="lightGray aButton" *ngIf="partNumber == 1" [disabled]="cannotNext()" cdkFocusInitial
             (click)="GenerateMail()">Next</button>

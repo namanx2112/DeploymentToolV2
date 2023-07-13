@@ -28,9 +28,9 @@ export class QuoteRequestWorkflowTemplateComponent {
   techCompControl = new FormControl('');
   constructor(private sonicService: SonicService, private quoteService: QuoteRequestWorkflowConfigService) {
     this.techCompTabs = [this.sonicService.GetStoreContactTab(TabInstanceType.Single), this.sonicService.GetStoreConfigurationTab(TabInstanceType.Single),
-    this.sonicService.GetStoreAudioTab(TabInstanceType.Single), this.sonicService.GetStoreNetworingTab(TabInstanceType.Single), this.sonicService.GetStorePOSTab(TabInstanceType.Single),
-    this.sonicService.GetStoreExteriorMenusTab(TabInstanceType.Single), this.sonicService.GetStoreInteriorMenusTab(TabInstanceType.Single),
-    this.sonicService.GetStorePaymentSystemTab(TabInstanceType.Single)];
+    this.sonicService.GetStoreAudioTab(TabInstanceType.TechComponent), this.sonicService.GetStoreNetworingTab(TabInstanceType.TechComponent), this.sonicService.GetStorePOSTab(TabInstanceType.TechComponent),
+    this.sonicService.GetStoreExteriorMenusTab(TabInstanceType.TechComponent), this.sonicService.GetStoreInteriorMenusTab(TabInstanceType.TechComponent),
+    this.sonicService.GetStorePaymentSystemTab(TabInstanceType.TechComponent)];
     this.techCompTabs[0].tab_name = "Store Information";
     this.curTabFields = [];
   }
@@ -81,7 +81,7 @@ export class QuoteRequestWorkflowTemplateComponent {
     if (this.selectedTabs.length < this.curTemplate.quoteRequestTechComps.length) {
       for (var indx in this.curTemplate.quoteRequestTechComps) {
         let tmpTab = this.curTemplate.quoteRequestTechComps[indx];
-        if (this.selectedTabs.findIndex(x => x.tab_name) == -1) {
+        if (this.selectedTabs.findIndex(x => x.tab_name == tmpTab.tTechCompName) == -1) {
           deletedTabs.push(tmpTab);
         }
       }

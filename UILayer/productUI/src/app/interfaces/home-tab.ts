@@ -13,7 +13,7 @@ export interface HomeTab {
 }
 
 export enum TabInstanceType {
-    Single, Table
+    Single, Table, TechComponent
 }
 
 export enum TabType {

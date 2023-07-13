@@ -33,37 +33,37 @@ namespace DeploymentTool.Controller
         [ActionName("GetAllTemplate")]
         public HttpResponseMessage GetAllTemplate(int nBrandId)
         {
-           // nBrandId = 1;
+            // nBrandId = 1;
             SqlParameter tModuleNameParam = new SqlParameter("@nBrandId", nBrandId);
             List<PurchaseOrderTemplateTemp> tList = db.Database.SqlQuery<PurchaseOrderTemplateTemp>("exec sproc_GetAllPurchaseOrderTemplate @nBrandId", tModuleNameParam).ToList();
-            
-          /*  List<PurchaseOrderTemplateTemp> tList = new List<PurchaseOrderTemplateTemp> {
-                new PurchaseOrderTemplateTemp()
-                {
-                    aPurchaseOrderTemplateID= 1,
-                    nBrandId= 1,
-                    nCreatedBy= 1,
-                    nUpdateBy= 1,
-                    tTemplateName = "First PO"
-                },
-                new PurchaseOrderTemplateTemp()
-                {
-                    aPurchaseOrderTemplateID= 2,
-                    nBrandId= 1,
-                    nCreatedBy= 1,
-                    nUpdateBy= 1,
-                    tTemplateName = "Second PO"
-                },
-                new PurchaseOrderTemplateTemp()
-                {
-                    aPurchaseOrderTemplateID= 3,
-                    nBrandId= 1,
-                    nCreatedBy= 1,
-                    nUpdateBy= 1,
-                    tTemplateName = "Third PO"
-                }
-            };
-			*/
+
+            /*  List<PurchaseOrderTemplateTemp> tList = new List<PurchaseOrderTemplateTemp> {
+                  new PurchaseOrderTemplateTemp()
+                  {
+                      aPurchaseOrderTemplateID= 1,
+                      nBrandId= 1,
+                      nCreatedBy= 1,
+                      nUpdateBy= 1,
+                      tTemplateName = "First PO"
+                  },
+                  new PurchaseOrderTemplateTemp()
+                  {
+                      aPurchaseOrderTemplateID= 2,
+                      nBrandId= 1,
+                      nCreatedBy= 1,
+                      nUpdateBy= 1,
+                      tTemplateName = "Second PO"
+                  },
+                  new PurchaseOrderTemplateTemp()
+                  {
+                      aPurchaseOrderTemplateID= 3,
+                      nBrandId= 1,
+                      nCreatedBy= 1,
+                      nUpdateBy= 1,
+                      tTemplateName = "Third PO"
+                  }
+              };
+              */
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<List<PurchaseOrderTemplateTemp>>(tList, new JsonMediaTypeFormatter())
@@ -74,43 +74,43 @@ namespace DeploymentTool.Controller
         [HttpGet]
         public HttpResponseMessage GetTemplate(int nTemplateId)
         {
-          /*  PurchaseOrderTeamplate tItem = new PurchaseOrderTeamplate()
-            {
-                aPurchaseOrderTemplateID = nTemplateId,
-                nBrandId = 1,
-                nCreatedBy = 1,
-                tCompName = "Installation",
-                nUpdateBy = 1,
-                nVendorId = 2,
-                tTemplateName = "First PO",
-                purchaseOrderParts = new List<PurchaseOrderParts>()
-                    {
-                        new PurchaseOrderParts()
-                        {
-                            aPurchaseOrderTemplatePartsID = 1,
-                            nPartID= 1,
-                            tPartDesc= "Yellow Paint Marker",
-                            tPartNumber = "SONIC_MARKER_YEL",
-                            cPrice = 88.56M,
-                            tTableName = "tblProjectConfig",
-                            tTechCompField = "nStallCount"
-                        }
-                    }
-            };
-			*/
-			PurchaseOrderTeamplate tItem = new PurchaseOrderTeamplate();
+            /*  PurchaseOrderTemplate tItem = new PurchaseOrderTemplate()
+              {
+                  aPurchaseOrderTemplateID = nTemplateId,
+                  nBrandId = 1,
+                  nCreatedBy = 1,
+                  tCompName = "Installation",
+                  nUpdateBy = 1,
+                  nVendorId = 2,
+                  tTemplateName = "First PO",
+                  purchaseOrderParts = new List<PurchaseOrderParts>()
+                      {
+                          new PurchaseOrderParts()
+                          {
+                              aPurchaseOrderTemplatePartsID = 1,
+                              nPartID= 1,
+                              tPartDesc= "Yellow Paint Marker",
+                              tPartNumber = "SONIC_MARKER_YEL",
+                              cPrice = 88.56M,
+                              tTableName = "tblProjectConfig",
+                              tTechCompField = "nStallCount"
+                          }
+                      }
+              };
+              */
+            PurchaseOrderTemplate tItem = new PurchaseOrderTemplate();
             SqlParameter tModuleNameParam = new SqlParameter("@aPurchaseOrderTemplateID", nTemplateId);
-            List<PurchaseOrderTeamplate> items = db.Database.SqlQuery<PurchaseOrderTeamplate>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID", tModuleNameParam).ToList();
+            List<PurchaseOrderTemplate> items = db.Database.SqlQuery<PurchaseOrderTemplate>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID", tModuleNameParam).ToList();
 
             tItem.aPurchaseOrderTemplateID = items[0].aPurchaseOrderTemplateID;
             tItem.tTemplateName = items[0].tTemplateName;
-            tItem.tCompName =  items[0].tCompName;            
-            tItem.nBrandId = items[0].nBrandId;
-            tItem.nVendorId = items[0].nVendorId;
+            tItem.tCompName = items[0].tCompName;
+            tItem.nBrandID = items[0].nBrandID;
+            tItem.nVendorID = items[0].nVendorID;
             tItem.nCreatedBy = items[0].nCreatedBy;
             tItem.nUpdateBy = items[0].nUpdateBy;
 
-          
+
             SqlParameter tModuleparmParts = new SqlParameter("@aPurchaseOrderTemplateID", nTemplateId);
 
             List<PurchaseOrderParts> itemParts = db.Database.SqlQuery<PurchaseOrderParts>("exec sproc_GetPurchaseOrderPartsDetails @aPurchaseOrderTemplateID", tModuleparmParts).ToList();
@@ -120,7 +120,7 @@ namespace DeploymentTool.Controller
 
                 obj.Add(new PurchaseOrderParts()
                 {
-                    
+
                     aPurchaseOrderTemplatePartsID = RequestTechComp.aPurchaseOrderTemplatePartsID,
                     aPurchaseOrderTemplateID = RequestTechComp.aPurchaseOrderTemplateID,
                     nPartID = RequestTechComp.nPartID,
@@ -129,7 +129,7 @@ namespace DeploymentTool.Controller
                     tPartDesc = RequestTechComp.tPartDesc,
                     tPartNumber = RequestTechComp.tPartNumber,
                     cPrice = RequestTechComp.cPrice,
-                    tTableName=RequestTechComp.tTableName
+                    tTableName = RequestTechComp.tTableName
                     //nQuantity = RequestTechComp.nQuantity,
                     //cTotal = RequestTechComp.cTotal
 
@@ -156,14 +156,14 @@ namespace DeploymentTool.Controller
             //}
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<PurchaseOrderTeamplate>(tItem, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<PurchaseOrderTemplate>(tItem, new JsonMediaTypeFormatter())
             };
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> CreateUpdateTemplate(PurchaseOrderTeamplate poRequest)
-        {           
+        public async Task<IHttpActionResult> CreateUpdateTemplate(PurchaseOrderTemplate poRequest)
+        {
             try
             {
                 //GetMergedPORequest(poRequest.aPurchaseOrderTemplateID);
@@ -242,7 +242,7 @@ namespace DeploymentTool.Controller
         // POST: api/tblUser
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Create(PurchaseOrderTeamplate poRequest)
+        public async Task<IHttpActionResult> Create(PurchaseOrderTemplate poRequest)
         {
             tblPurchaseOrderTemplate tPurchaseOrder = poRequest.GetTblPurchaseOrder();
             db.tblPurchaseOrderTemplates.Add(tPurchaseOrder);
@@ -306,7 +306,7 @@ namespace DeploymentTool.Controller
                 var npo = db.Database.ExecuteSqlCommand("delete from tblPurchaseOrderTemplate where aPurchaseOrderTemplateID =@nPurchaseOrderTemplateID ", new SqlParameter("@nPurchaseOrderTemplateID", id));
 
             }
-            PurchaseOrderTeamplate poRequest = new PurchaseOrderTeamplate();
+            PurchaseOrderTemplate poRequest = new PurchaseOrderTemplate();
 
 
             return Ok(poRequest);
@@ -316,47 +316,52 @@ namespace DeploymentTool.Controller
         [HttpGet]
         public IHttpActionResult GetMergedPO(int nTemplateId, int nProjectId)
         {
-            PurchaseOrderPreviewTeamplate poRequest = new PurchaseOrderPreviewTeamplate();
-            
+            PurchaseOrderPreviewTemplate poRequest = new PurchaseOrderPreviewTemplate();
+
 
             try
             {
                 //PO Start
-               // int aPurchaseOrderTemplateID = 4;
+                // int aPurchaseOrderTemplateID = 4;
                 SqlParameter tModuleparmAdress = new SqlParameter("@nProjectID", nProjectId);
 
-                List<PurchaseOrderPreviewTeamplate> itemPOStore= db.Database.SqlQuery<PurchaseOrderPreviewTeamplate>("exec sproc_GetPurchaseOrdeStorerDetails @nProjectID", tModuleparmAdress).ToList();
+                List<PurchaseOrderPreviewTemplate> itemPOStore = db.Database.SqlQuery<PurchaseOrderPreviewTemplate>("exec sproc_GetPurchaseOrdeStorerDetails @nProjectID", tModuleparmAdress).ToList();
                 SqlParameter tModuleparm = new SqlParameter("@aPurchaseOrderTemplateID", nTemplateId);
-                List<tblPurchaseOrderTemplate> itemPOTemplate = db.Database.SqlQuery<tblPurchaseOrderTemplate>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID", tModuleparm).ToList();
+                List<PurchaseOrderTemplate> itemPOTemplate = db.Database.SqlQuery<PurchaseOrderTemplate>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID,@nProjectID", tModuleparm, new SqlParameter("@nProjectID", nProjectId)).ToList();
 
                 SqlParameter tModuleparmTempID = new SqlParameter("@nPurchaseOrderTemplateID", nTemplateId);
                 SqlParameter tModuleparmParts = new SqlParameter("@nProjectID", nProjectId);
 
                 List<PurchaseOrderPartDetails> itemPOParts = db.Database.SqlQuery<PurchaseOrderPartDetails>("exec sproc_GetPurchaseOrderPartsDetails @nPurchaseOrderTemplateID,@nProjectID", tModuleparmTempID, tModuleparmParts).ToList();
-
+                poRequest.nProjectId = nProjectId;
                 poRequest.nVendorId = (int)itemPOTemplate[0].nVendorID;// 1;
+                poRequest.tVendorName = itemPOTemplate[0].tVendorName;
                 poRequest.tStore = itemPOStore[0].tStore;// "111";
                 poRequest.tStoreNumber = itemPOStore[0].tStoreNumber;// "10101";
                 poRequest.tNotes = "";// "Hello";
                 poRequest.tName = itemPOStore[0].tName;// "Name";
                 poRequest.tPhone = itemPOStore[0].tPhone;// "33982823498423";
                 poRequest.tEmail = itemPOStore[0].tEmail;// "heell@ggmail.com";
-                poRequest.tAddress = itemPOStore[0].tAddress;// "1st streat, scond block";
+                poRequest.tAddress = itemPOStore[0].tAddress + " " + itemPOStore[0].tCity + ", " + itemPOStore[0].tStoreState + " " + itemPOStore[0].tStoreZip;// "1st streat, scond block";
                 poRequest.tCity = itemPOStore[0].tCity;// "Atlaanta";
                 poRequest.tStoreState = itemPOStore[0].tStoreState;// "NewYork";
                 poRequest.tStoreZip = itemPOStore[0].tStoreZip;// "45449";
                 poRequest.tBillToCompany = itemPOStore[0].tBillToCompany;// "Test";
                 poRequest.tBillToEmail = itemPOStore[0].tBillToEmail;// "bill@gmal.com";
-                poRequest.tBillToAddress = itemPOStore[0].tBillToAddress;// "second streat, 1st main";
+                poRequest.tBillToAddress = itemPOStore[0].tBillToAddress + " " + itemPOStore[0].tBillToCity + ", " + itemPOStore[0].tBillToState + " " + itemPOStore[0].tBillToZip;// "1st streat, scond block";
                 poRequest.tBillToCity = itemPOStore[0].tBillToCity;// "Atlantta";
                 poRequest.tBillToState = itemPOStore[0].tBillToState;// "Newjurcy";
-                poRequest.tTemplateName= itemPOTemplate[0].tTemplateName;
-               // poRequest.cTotal = 1000.55M;
+                poRequest.tBillToZip = itemPOStore[0].tBillToZip;// "Newjurcy";
+                poRequest.tTemplateName = itemPOTemplate[0].tTemplateName;
                 poRequest.tPurchaseOrderNumber = nTemplateId.ToString();
-                poRequest.dDeliver = DateTime.Now;
+                poRequest.dDeliver = itemPOTemplate[0].dDeliveryDate != null ? Convert.ToDateTime(itemPOTemplate[0].dDeliveryDate) : DateTime.Now;
+                poRequest.tTo = itemPOTemplate[0].tTo;
+                poRequest.tCC = itemPOTemplate[0].tCC;
+                poRequest.tProjectManager = itemPOStore[0].tProjectManager;
+
                 poRequest.nOutgoingEmailID = 0;
                 decimal cTotal = 0;
-                List<PurchaseOrderParts> obj =new List<PurchaseOrderParts>();
+                List<PurchaseOrderParts> obj = new List<PurchaseOrderParts>();
                 foreach (var parts in itemPOParts)
                 {
                     PurchaseOrderParts objParts = new PurchaseOrderParts();
@@ -375,21 +380,21 @@ namespace DeploymentTool.Controller
                 }
                 poRequest.cTotal = cTotal;
                 poRequest.purchaseOrderParts = obj;
-               
 
 
 
-            //PO End
+
+                //PO End
 
 
 
-        }
+            }
             catch (Exception ex)
             {
                 //return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
 
-           
+
             //tblPart tblPart = await db.tblParts.FindAsync(id);
             //if (tblPart == null)
             //{
@@ -404,135 +409,168 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpPost]
-        public IHttpActionResult SenMergedPO(PurchaseOrderPreviewTeamplate request)
+        public async System.Threading.Tasks.Task<IHttpActionResult> SenMergedPO(PurchaseOrderPreviewTemplate request)
         {
             string strBody = "";
-            string strSubject = "";
+            // string strSubject = "";
             //var strNumber = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where aStoreID= (Select nStoreID from tblProject  with (nolock) where aProjectID= @nProjectID)", new SqlParameter("@nProjectID", nProjectID)).FirstOrDefault();
-            var tSubject = "Store #" + request.tStoreNumber + " - " + request.tTemplateName + " Purchase Order";
+            // var tSubject = request.tCity+", "+ request.tStoreState+ " #" + request.tStoreNumber + " - "+ request.tVendorName +" "+ request.tTemplateName + " Purchase Order";
 
-            strBody += "<div><h1> " + request.tTemplateName + " </h1></div>";
+            strBody += "<div><h1> " + request.tTemplateName + "Purchase Order </h1></div></br>";
 
-           // strBody += "<div><b> " + request.tTemplateName + " </b></div><div>\r\n    &nbsp;\r\n</div>";
+            // strBody += "<div><b> " + request.tTemplateName + " </b></div><div>\r\n    &nbsp;\r\n</div>";
             strBody += "<div><b> Store No </b> " + request.tStoreNumber + "</div>";
             //strBody += "<figure class='table' style='width:100%;'>";
             strBody += " <table><tbody><tr>";
-            bool btemp = true;
-            //foreach (var PurchaseOrderAdress in itemAdress)
-            {
 
-                //if (PurchaseOrderAdress.nPurchaseOrderAddressType == PurchaseOrderAddressType.Billing)
-                //if (btemp)
-                // {
-                strBody += "<td></br><div><b> Billing </b></div></br>";
+            strBody += "<td></br><div><b> Billing </b></div></br>";
 
-                strBody += "<div><b> Name </b> " + request.tName + "</div>";
+            strBody += "<div><b> Name </b> " + request.tName + "</div>";
 
-                strBody += "<div><b> Phone </b> " + request.tPhone + "</div>";
+            strBody += "<div><b> Phone </b> " + request.tPhone + "</div>";
 
-                strBody += "<div><b> Email </b> " + request.tEmail + "</div>";
+            strBody += "<div><b> Email </b> " + request.tBillToEmail + "</div>";
 
-                strBody += "<div><b> Address </b> " + request.tAddress + "</div></br>";
-                strBody += "<div> " + request.tCity + " " + request.tStoreState + " " + request.tStoreZip + "</div></td>";
+            strBody += "<div><b> Address </b> " + request.tBillToAddress + "</div></br>";
+            //strBody += "<div> " + request.tCity + " " + request.tStoreState + " " + request.tStoreZip + "</div></td>";
 
-                //btemp = false;
+            strBody += "<td></br><div><b> Shipping </b></div></br>";
 
-                //}
-                //else if (PurchaseOrderAdress.nPurchaseOrderAddressType == PurchaseOrderAddressType.Shipping)
+            //  strBody += "<div><b> Store </b> " + request.tStore + "</div>";
 
-                strBody += "<td></br><div><b> Shipping </b></div></br>";
+            strBody += "<div><b> Name </b> " + request.tName + "</div>";
 
-                strBody += "<div><b> Store </b> " + request.tStore + "</div>";
+            strBody += "<div><b> Email </b> " + request.tEmail + "</div>";
 
-                strBody += "<div><b> Name </b> " + request.tName + "</div>";
-
-                //strBody += "<div><b> Email </b> " + itemAdress[0].tEmail + "</div>";
-
-                strBody += "<div><b> Address </b> " + request.tBillToAddress + "</div>";
-                strBody += "<div> " + request.tBillToCity + " " + request.tBillToState + " " + request.tStoreZip + "</div></td>";
+            strBody += "<div><b> Address </b> " + request.tAddress + "</div>";
+            //  strBody += "<div> " + request.tBillToCity + " " + request.tBillToState + " " + request.tBillToZip + "</div></td>";
 
 
-            }
-            strBody += "</tr></tbody></table></br><div><b> Notes </b> &nbsp;</div>";
+
+            strBody += "</tr></tbody></table></br><div><b> Notes </b> " + request.tNotes + "</div>";
             strBody += "<div><table><thead><tr><th style='width:35%;'>Description</th><th style='width:35%;'>Parts Number</th><th style='width:10%;'>Price</th><th style='width:10%;'> Quantity</th><th style='width:10%;'>Total</th></tr></thead>";
 
-           
+
             strBody += "<tbody>";
             foreach (var parts in request.purchaseOrderParts)
             {
-               // parts.cTotal = parts.cPrice * parts.nQuantity;
+                // parts.cTotal = parts.cPrice * parts.nQuantity;
                 strBody += "<tr><td>" + parts.tPartDesc + "</td><td>" + parts.tPartNumber + "</td><td>" + parts.cPrice + "</td><td>" + parts.nQuantity + "</td><td>" + parts.cTotal + "</td></tr>";
                 //cTotal = cTotal + parts.cTotal;
             }
             strBody += "</tbody>";
             strBody += "</table></div>";
             strBody += "<div style='text-align:right;'><b> Total:</b> " + request.cTotal.ToString() + "</div>";
-            strBody += "<div style='text-align:right;'><b> PO#: </b> " + request.aPurchaseOrderPreviewTeamplateID.ToString() + "</div>";
+            strBody += "<div style='text-align:right;'><b> PO#: </b> " + request.tPurchaseOrderNumber.ToString() + "</div>";
             strBody += "<div style='text-align:right;'><b> Deliver#: </b> " + request.dDeliver.ToShortDateString() + "</div>";
-            String strFilePath= DeploymentTool.Misc.Utilities.WriteHTMLToPDF(strBody);
-
+            string fileName = "PurachaaseOrder.pdf";
+			String strFilePath = DeploymentTool.Misc.Utilities.WriteHTMLToPDF(strBody, fileName);
+            string strStyle = "<style>td{ border: 0px none!important;} " +
+                    "table{ width: 60%!important;border: 1px solid lightgray!important;border-radius: 5px!important;}</style>";
             PurchaseOrderMailMessage message = new PurchaseOrderMailMessage()
             {
                 nProjectId = request.nProjectId,
-                tTo = "abcd@gmail.com",
-                tCC = "ccabcd@gmail.com",
-                tContent = "<div style='background-color:gray'>All Febcon attachment with content for this PO</div>" +
-                "<div><span>PO#:</span>" + request.tPurchaseOrderNumber + "<br/>" +
-                "<span>Revision/Filename:</span>"+ strFilePath + "<br/>" +
-                "<span>Type:</span>HME<br/>" +
-                "<span>Store:</span>" + request.tStoreNumber + "<br/>" +
-                "<span>Delivery:</span>" + request.dDeliver.ToShortDateString() + "<br/>" +
-                "<span>Project Manager:</span>Santosh PP<br/>" +
-                "</div>",
-                tFileName = strFilePath,
-                tSubject = "Hello HME"
+                tTo = request.tTo,
+                tCC = request.tCC,
+                tContent = strStyle + "<div>All,</br></br>See attached purchase order, Please verify that you can meet the delivery date listed.</div>Thanks!" +
+                "<table>" +
+                "<tr><td>PO#:</td><td>" + request.tPurchaseOrderNumber + "</td></tr>" +
+                "<tr><td>Revision/Filename:</td><td>" + fileName + "</td></tr>" +
+                "<tr><td>Type:</td><td>" + request.tVendorName + "</td></tr>" +
+                "<tr><td>Store:</td><td>" + request.tStoreNumber + "</td></tr>" +
+                "<tr><td>Delivery:</td><td>" + request.dDeliver.ToShortDateString() + "</td></tr>" +
+                "<tr><td>Project Manager:</td><td>" + request.tProjectManager + "</td></tr>" +
+                "<table>",
+                tFileName = fileName,
+                tSubject = request.tCity + ", " + request.tStoreState + " #" + request.tStoreNumber + " - " + request.tVendorName + " " + request.tTemplateName + " Purchase Order",
+                tMyFolderId= strFilePath
+
             };
-            
-            
+
+            tblPurchaseOrder tblPO = new tblPurchaseOrder()
+            {
+                tPurchaseOrderNumber = request.tPurchaseOrderNumber,
+                nStoreID = Convert.ToInt32(request.tStoreNumber),
+                tBillingName = request.tName,
+                tBillingPhone = request.tPhone,
+                tBillingEmail = request.tBillToEmail,
+                tBillingAddress = request.tBillToAddress,
+                tShippingName = request.tName,
+                tShippingPhone = request.tPhone,
+                tShippingEmail = request.tEmail,
+                tShippingAddress = request.tAddress,
+                tNotes = request.tNotes,
+                dDeliver = request.dDeliver,
+                cTotal = request.cTotal
+
+            };
+
+            db.tblPurchaseOrders.Add(tblPO);
+            await db.SaveChangesAsync();
+            var aPurchaseOrderID = tblPO.aPurchaseOrderID;
+
             return Ok(message);
         }
 
         [Authorize]
         [HttpPost]
-        public async System.Threading.Tasks.Task<IHttpActionResult>  SendPO(PurchaseOrderMailMessage request)
+        public async System.Threading.Tasks.Task<IHttpActionResult> SendPO(PurchaseOrderMailMessage request)
         {
+            //string fileName = "PurachaaseOrder.pdf";
+
+            //string URL = HttpRuntime.AppDomainAppPath;
+            //string strFilePath = URL + @"Attachments\" + fileName;
+
             EMailRequest MailObj = new EMailRequest();
             MailObj.tSubject = request.tSubject;
             MailObj.tTo = request.tTo;
             MailObj.tCC = request.tCC;
             MailObj.tContent = request.tContent;
-            MailObj.FileAttachments = request.FileAttachments;
+            MailObj.tFilePath = request.tMyFolderId;// strFilePath;
+            //FileAttachment ifile = new FileAttachment();
+            //ifile.tFileName= strFilePath;
+            //List< FileAttachment> ifiles = new List<FileAttachment>();
+            //ifiles.Add(ifile);
+            //MailObj.FileAttachments= ifiles;
             DeploymentTool.Misc.Utilities.SendMail(MailObj);
             tblOutgoingEmail tblQuoteEmail = MailObj.GettblOutgoingEmail();
             db.tblOutgoingEmails.Add(tblQuoteEmail);
             await db.SaveChangesAsync();
             var aOutgoingEmailID = tblQuoteEmail.aOutgoingEmailID;
+            //if (MailObj.FileAttachments != null)
+            //{
+            //    foreach (var RequestFile in MailObj.FileAttachments)
+            //    {
 
-            foreach (var RequestFile in request.FileAttachments)
-            {
-
-                tblOutgoingEmailAttachment tblQuoteEmailAtt = MailObj.GettblOutgoingEmailAttachment(RequestFile);
-                db.tblOutgoingEmailAttachments.Add(tblQuoteEmailAtt);
-                await db.SaveChangesAsync();
-            }            
+            //        tblOutgoingEmailAttachment tblQuoteEmailAtt = MailObj.GettblOutgoingEmailAttachment(RequestFile);
+            //        db.tblOutgoingEmailAttachments.Add(tblQuoteEmailAtt);
+            //        await db.SaveChangesAsync();
+            //    }
+            //}
+            tblOutgoingEmailAttachment tblQuoteEmailAtt = new tblOutgoingEmailAttachment();
+            tblQuoteEmailAtt.nOutgoingEmailID = aOutgoingEmailID;
+            tblQuoteEmailAtt.tFileName = request.tFileName;
+            tblQuoteEmailAtt.ifile = File.ReadAllBytes(request.tMyFolderId);
+            db.tblOutgoingEmailAttachments.Add(tblQuoteEmailAtt);
+            await db.SaveChangesAsync();
             // request.
             // Send PO
             return Ok(1);
         }
 
         [Authorize]
-        [HttpGet]
-        public HttpResponseMessage downloadPO(string tFileName, int nProjectId)
+        [HttpPost]
+        public HttpResponseMessage downloadPO(PurchaseOrderFile request)
         {
-            string fileName = "PurachaaseOrder.pdf";
+            //string fileName = "PurachaaseOrder.pdf";
 
-            string URL = HttpRuntime.AppDomainAppPath;
-            string strFilePath = URL + @"Attachments\" + fileName;
+           // string URL = HttpRuntime.AppDomainAppPath;
+            string strFilePath = request.tMyFolderId;
 
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new StreamContent(new FileStream(strFilePath, FileMode.Open, FileAccess.Read));
             response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-            response.Content.Headers.ContentDisposition.FileName = fileName;
+            response.Content.Headers.ContentDisposition.FileName = request.tFileName;
             response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
 
             return response;

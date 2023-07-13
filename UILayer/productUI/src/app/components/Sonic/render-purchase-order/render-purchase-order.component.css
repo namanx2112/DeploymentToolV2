@@ -9,6 +9,7 @@
     width: 90%;
     margin: auto;
     overflow: auto;
+    padding-top: 6px;
 }
 
 .pLabel {
@@ -127,10 +128,9 @@ form {
 }
 
 .pdfLink {
-    position: absolute;
-    bottom: 15px;
-    left: 10px;
     cursor: pointer;
+    float: left;
+    margin-left: 10px;
 }
 
 .pdfLink>span {

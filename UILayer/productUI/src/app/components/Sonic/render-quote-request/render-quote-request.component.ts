@@ -1,10 +1,8 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { QuillEditorComponent } from 'ngx-quill';
-import Quill from 'quill';
 import { MergedQuoteRequest, ProjectTemplates } from 'src/app/interfaces/models';
 import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { CommonService } from 'src/app/services/common.service';
 import { QuoteRequestWorkflowConfigService } from 'src/app/services/quote-request-workflow-config.service';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -14,36 +12,14 @@ import { StoreService } from 'src/app/services/store.service';
   styleUrls: ['./render-quote-request.component.css']
 })
 export class RenderQuoteRequestComponent {
-  @ViewChild('editor') editor: QuillEditorComponent | undefined;
-  content = '<p>Rich Text Editor Example </p>';
-  format = 'html';
-  form: any;
-  quillConfig = {
-    toolbar: {
-      container: [
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'size': ['small', false, 'large', 'huge'] }],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ header: 1 }, { header: 2 }],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['clean'],
-        [{ 'align': [] }],
-        ['link']
-      ],
-      handlers: {
-        source: () => {
-          this.formatChange();
-        },
-      },
-    },
-  };
   curStore: StoreSearchModel;
   onSubmit: any;
   tRequest: MergedQuoteRequest;
   curTemplate: ProjectTemplates;
-  constructor(public dialogRef: MatDialogRef<RenderQuoteRequestComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private service: StoreService,
-  private quoteService: QuoteRequestWorkflowConfigService) {
+  ckConfig: any;
+  constructor(public dialogRef: MatDialogRef<RenderQuoteRequestComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private service: StoreService,
+    private quoteService: QuoteRequestWorkflowConfigService, private commonService: CommonService) {
+    this.ckConfig = this.commonService.GetCKEditorConfig("256px");
     this.tRequest = {
       tContent: "",
       tTo: "",
@@ -59,32 +35,19 @@ export class RenderQuoteRequestComponent {
   getMergedContent() {
     this.quoteService.GetMergedQuoteRequest(this.curStore.nProjectId, this.curTemplate.nTemplateId).subscribe((x: MergedQuoteRequest) => {
       this.tRequest = x;
-      this.content = x.tContent;
-      this.updateEditorContent();
     })
   }
-
-  updateEditorContent() {
-    this.form = this.fb.group({
-      editor: this.content,
-    });
-  }
-
   onCancelUserDialog(): void {
     this.dialogRef.close();
   }
 
   SendRequest() {
-    //this.tRequest.tContent = this.form.controls['editor'].value;
     this.quoteService.SendQuoteRequest(this.tRequest).subscribe(x => {
       this.onSubmit();
     })
   }
 
   ngOnInit() {
-    this.updateEditorContent();
-    let icons = Quill.import('ui/icons');
-    icons['source'] = '[source]';
   }
 
   isValid(email: string) {
@@ -102,23 +65,4 @@ export class RenderQuoteRequestComponent {
       cannot = true;
     return cannot;
   }
-
-  formatChange() {
-    this.format = this.format === 'html' ? 'text' : 'html';
-
-    if (this.format === 'text' && this.editor) {
-      const htmlText = this.form.get('editor').value;
-      this.editor.quillEditor.setText(htmlText);
-    } else if (this.format === 'html' && this.editor) {
-      const htmlText = this.form.get('editor').value;
-      this.editor.quillEditor.setText('');
-      // this.editor.quillEditor.pasteHTML(0, htmlText);
-    }
-  }
-  onFocus = () => {
-    console.log('On Focus');
-  };
-  onBlur = () => {
-    console.log('Blurred');
-  };
 }

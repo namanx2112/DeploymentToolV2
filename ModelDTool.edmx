@@ -513,7 +513,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="tShippingAddress" Type="nvarchar(max)" />
           <Property Name="tNotes" Type="nvarchar(max)" />
           <Property Name="dDeliver" Type="datetime" />
-          <Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cTotal" Type="decimal" Precision="22" Scale="4" />
           <Property Name="nOutgoingEmailID" Type="int" />
           <Property Name="nCreatedBy" Type="int" />
           <Property Name="nUpdateBy" Type="int" />
@@ -764,6 +764,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
           <Property Name="nBrand" Type="int" />
+          <Property Name="nType" Type="int" />
+          <Property Name="nStatus" Type="int" />
+          <Property Name="nInstallation" Type="int" />
+          <Property Name="nEquipment" Type="int" />
         </EntityType>
         <EntityType Name="tblVendorPartRel">
           <Key>
@@ -1011,7 +1015,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySet Name="tblDropdownMains" EntityType="dtDBModel.tblDropdownMain" />
 					<EntitySet Name="tblDropdowns" EntityType="dtDBModel.tblDropdown" />
 					<FunctionImport Name="sproc_CreateStoreFromExcel">
-						<Parameter Name="tStoreName" Mode="In" Type="String" />
+            <Parameter Name="tStoreName" Mode="In" Type="String" />
             <Parameter Name="tProjectType" Mode="In" Type="String" />
             <Parameter Name="tStoreNumber" Mode="In" Type="String" />
             <Parameter Name="tAddress" Mode="In" Type="String" />
@@ -1031,7 +1035,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
             <Parameter Name="nBrandId" Mode="In" Type="Int32" />
           </FunctionImport>
 					<FunctionImport Name="sproc_SearchStore" ReturnType="Collection(dtDBModel.sproc_SearchStore_Result)">
-					<Parameter Name="tText" Mode="In" Type="String" />
+          <Parameter Name="tText" Mode="In" Type="String" />
           </FunctionImport>
 					<EntitySet Name="tblDocuments" EntityType="dtDBModel.tblDocument" />
 					<EntitySet Name="tblApplicationTraces" EntityType="dtDBModel.tblApplicationTrace" />
@@ -1114,6 +1118,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
 					<Property Name="nBrand" Type="Int32" />
+          <Property Name="nType" Type="Int32" />
+          <Property Name="nStatus" Type="Int32" />
+          <Property Name="nInstallation" Type="Int32" />
+          <Property Name="nEquipment" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblAttachment">
 					<Key>
@@ -1743,7 +1751,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="tShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="tNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="dDeliver" Type="DateTime" Precision="3" />
-					<Property Name="cTotal" Type="Decimal" Precision="18" Scale="2" />
+					<Property Name="cTotal" Type="Decimal" Precision="22" Scale="4" />
 					<Property Name="nOutgoingEmailID" Type="Int32" />
 					<Property Name="nCreatedBy" Type="Int32" />
 					<Property Name="nUpdateBy" Type="Int32" />
@@ -1758,9 +1766,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="aPurchaseOrderPartsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
 					<Property Name="tDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="tPartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-					<Property Name="cPrice" Type="Decimal" Precision="18" Scale="2" />
+					<Property Name="cPrice" Type="Decimal" Precision="22" Scale="4" />
 					<Property Name="nQuantity" Type="Int32" />
-					<Property Name="cTotal" Type="Decimal" Precision="18" Scale="2" />
+					<Property Name="cTotal" Type="Decimal" Precision="22" Scale="4" />
 				</EntityType>
 				<EntityType Name="tblPurchaseOrderTemplatePart">
 					<Key>
@@ -1852,7 +1860,11 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblVendor">
 						<EntityTypeMapping TypeName="dtDBModel.tblVendor">
 							<MappingFragment StoreEntitySet="tblVendor">
-								<ScalarProperty Name="nBrand" ColumnName="nBrand" />
+								<ScalarProperty Name="nEquipment" ColumnName="nEquipment" />
+                <ScalarProperty Name="nInstallation" ColumnName="nInstallation" />
+                <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+                <ScalarProperty Name="nType" ColumnName="nType" />
+                <ScalarProperty Name="nBrand" ColumnName="nBrand" />
 								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
 								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
 								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />

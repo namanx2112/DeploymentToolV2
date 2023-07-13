@@ -33,7 +33,7 @@ namespace DeploymentTool.Model.Templates
         public string tTo { get; set; }
         public string tCC { get; set; }
         public string tSubject { get; set; }
-
+        public string tFilePath { get; set; }
         public List<FileAttachment> FileAttachments { get; set; }
 
         public tblOutgoingEmail GettblOutgoingEmail()
@@ -46,18 +46,18 @@ namespace DeploymentTool.Model.Templates
                 tHTMLContent = this.tContent
             };
         }
-        public tblOutgoingEmailAttachment GettblOutgoingEmailAttachment(FileAttachment att)
-        {
-            return new tblOutgoingEmailAttachment()
-            {
-                aOutgoingEmailAttachmentID = att.aOutgoingEmailAttachmentID,
-                nOutgoingEmailID = att.nOutgoingEmailID,
-                tFileName = att.tFileName,
-                tContentID = att.tContentID,
-                ifile = att.ifile
+        //public tblOutgoingEmailAttachment GettblOutgoingEmailAttachment(FileAttachment att)
+        //{
+        //    return new tblOutgoingEmailAttachment()
+        //    {
+        //        aOutgoingEmailAttachmentID = att.aOutgoingEmailAttachmentID,
+        //        nOutgoingEmailID = att.nOutgoingEmailID,
+        //        tFileName = att.tFileName,
+        //        tContentID = att.tContentID,
+        //        ifile = File.ReadAllBytes(att.tFilePath)
 
-            };
-        }
+        //};
+        //}
 
     }
     public class FileAttachment
@@ -65,8 +65,9 @@ namespace DeploymentTool.Model.Templates
         public int aOutgoingEmailAttachmentID { get; set; }
         public int nOutgoingEmailID { get; set; }
         public string tFileName { get; set; }
-        public string tContentID { get; set; }
 
+        public string tFilePath { get; set; }
+        public string tContentID { get; set; }
         public byte[] ifile { get; set; }
     }
 }

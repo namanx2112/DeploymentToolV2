@@ -48,7 +48,7 @@ export class DropdownServiceService {
       , "NetworkingBackupStatus", "NetworkingBackupType", "NetworkingTempStatus", "NetworkingTempType", "POSStatus", "POSPaperworkStatus", "AudioStatus", "AudioConfiguration", "AudioLoopStatus  ", "AudioLoopType",
       "ExteriorMenuStatus", "PaymentSystemType", "PaymentSystemBuyPassID", "PaymentSystemServerEPS", "PaymentSystemStatus", "InteriorMenuStatus",
       "SonicRaidoColors", "SonicRadioStatus", "InstallationStatus", "InstallationSignOffs", "InstallationTestTransactions", "SonicNoteType", "ProjectStatus",
-      "UserDepartment", "UserRole", "City", "State", "Country"];
+      "UserDepartment", "UserRole", "City", "State", "Country", "VendorType", "VendorStatus"];
     return modules;
   }
 

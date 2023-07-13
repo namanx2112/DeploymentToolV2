@@ -92,7 +92,8 @@ export interface POMailMessage {
     tCC: string,
     tSubject: string,
     tContent: string,
-    tFileName: string
+    tFileName: string,
+    tMyFolderId: string
 }
 
 export interface UserModel {
@@ -159,7 +160,7 @@ export interface POConfigTemplate {
     aPurchaseOrderTemplateID: number,
     tTemplateName: string;
     nBrandID: number,
-    nVendorId: number,
+    nVendorID: number,
     tCompName: string,
     purchaseOrderParts: POConfigPart[],
     nCreatedBy?: number,

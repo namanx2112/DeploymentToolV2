@@ -30,8 +30,8 @@ export class HomeService {
 
   GetPartsTab(instType: TabInstanceType):HomeTab{
     return {
-      tab_name: "Parts",
-      tab_header: "Parts search",
+      tab_name: "Items",
+      tab_header: "Parts",
       tTableName: "tblParts",
       tab_type: TabType.VendorParts,
       tab_unique_name: "",
@@ -45,7 +45,7 @@ export class HomeService {
   GetUsersTab(instType: TabInstanceType):HomeTab{
     return {
       tab_name: "Users",
-      tab_header: "Users search",
+      tab_header: "Users",
       tTableName:"tblUser",
       tab_type: TabType.Users,
       tab_unique_name: "",
@@ -59,7 +59,7 @@ export class HomeService {
   GetBrandsTab(instType: TabInstanceType):HomeTab{
     return {
       tab_name: "Brands",
-      tab_header: "Brands search",
+      tab_header: "Brands",
       tTableName: "tblBrand",
       tab_type: TabType.Brands,
       tab_unique_name: "",
@@ -73,7 +73,7 @@ export class HomeService {
   GetVendorsTab(instType: TabInstanceType):HomeTab{
     return {
       tab_name: "Vendors",
-      tab_header: "Vendors search",
+      tab_header: "Vendors",
       tTableName: "tblVendor",
       tab_type: TabType.Vendor,
       tab_unique_name: "",
@@ -90,7 +90,7 @@ this.GetPartsTab(TabInstanceType.Table)
   GetTechComponentsTab(instType: TabInstanceType):HomeTab{
     return {
       tab_name: "Tech Components",
-      tab_header: "Tech Components search",
+      tab_header: "Tech Components",
       tTableName: "tblTechComp",
       tab_type: TabType.TechComponent,
       tab_unique_name: "",
@@ -104,7 +104,7 @@ this.GetPartsTab(TabInstanceType.Table)
   GetFrenchiseTab(instType: TabInstanceType):HomeTab{
     return {
       tab_name: "Franchises",
-      tab_header: "Franchises search",
+      tab_header: "Franchises",
       tTableName: "tblFranchise",
       tab_type: TabType.Franchise,
       tab_unique_name: "",
@@ -118,7 +118,7 @@ this.GetPartsTab(TabInstanceType.Table)
   GetStoreTab(instType: TabInstanceType):HomeTab{
     return {
       tab_name: "Stores",
-      tab_header: "Stores search",
+      tab_header: "Stores",
       tTableName: "tblStore",
       tab_type: TabType.Store,
       tab_unique_name: "",
@@ -154,7 +154,7 @@ this.GetPartsTab(TabInstanceType.Table)
   GetTechToolsTab(instType: TabInstanceType):HomeTab{
     return {
       tab_name: "Tech Component Tools",
-      tab_header: "Tech Component Tools search",
+      tab_header: "Tech Component Tools",
       tTableName: "tblTechTool",
       tab_type: TabType.TechComponentTools,
       tab_unique_name: "",

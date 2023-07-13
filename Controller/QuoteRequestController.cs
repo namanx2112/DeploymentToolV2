@@ -120,7 +120,7 @@ namespace DeploymentTool.Controller
                     }
                     templateObj.quoteRequestTechComps = quoteRequestTechComps;
                     
-                    //PurchaseOrderTeamplate templatePOobj = new PurchaseOrderTeamplate();
+                    //PurchaseOrderTemplate templatePOobj = new PurchaseOrderTemplate();
                     //SqlParameter tModuleNameParam = new SqlParameter("@aPurchaseOrderTemplateID", nTemplateId);
                     //List<tblPurchaseOrderTemplateTemp> items = db.Database.SqlQuery<tblPurchaseOrderTemplateTemp>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID", tModuleNameParam).ToList();
 
@@ -231,7 +231,7 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public HttpResponseMessage GetMergedQuoteRequest(int nProjectID)
+        public HttpResponseMessage GetMergedQuoteRequest(int nProjectID, int nTemplateId)
         {
             try
             {
@@ -350,17 +350,19 @@ namespace DeploymentTool.Controller
 
                 //Quote Start
                 //int nProjectID = 7;
-                int nTemplateId = 3;
+                //int nTemplateId = 3;
                 string strBody = "";
-                string strSubject = "";
-                var strNumber = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where aStoreID= (Select nStoreID from tblProject  with (nolock) where aProjectID= @nProjectID)", new SqlParameter("@nProjectID", nProjectID)).FirstOrDefault();
+             //   string strSubject = "";
+               // var strNumber = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where aStoreID= (Select nStoreID from tblProject  with (nolock) where aProjectID= @nProjectID)", new SqlParameter("@nProjectID", nProjectID)).FirstOrDefault();
                 //strSubject = "Store #" + strNumber + " Quote Request";
 
                 SqlParameter tModuleNameP = new SqlParameter("@nQuoteRequestTemplateId", nTemplateId);
                 List<QuoteRequestTechCompTemp> item = db.Database.SqlQuery<QuoteRequestTechCompTemp>("exec sproc_GetQuoteRequestTechComp @nQuoteRequestTemplateId", tModuleNameP).ToList();
+                string strStyle = "<style>td{ border: 0px none!important;} " +
+                    "table{ width: 60%!important;border: 1px solid lightgray!important;border-radius: 5px!important;}</style>";
                 foreach (var RequestTechComp in item)
                 {
-                    strBody += "<div><h1> " + RequestTechComp.tTechCompName + " </h1></div>";
+                    strBody += "<h2> " + RequestTechComp.tTechCompName + " </h2>";
                     // strBody += "</br> " + RequestTechComp.tTechCompName + ":</br>";
                     string strData = "";
                     using (var conn = new SqlConnection(_connectionString))
@@ -384,32 +386,40 @@ namespace DeploymentTool.Controller
                                     {
                                         for (int i = 0; i < reader.FieldCount; i++)
                                         {
+                                            strData += "<tr>";
                                             //strData += reader.GetName(i).ToString() + ":" + reader.GetValue(i).ToString() + "</br>";
-                                            strData += "<div><b> " + reader.GetName(i).ToString() + " </b> " + reader.GetValue(i).ToString() + "</div>";
+                                            strData += "<td><b> " + reader.GetName(i).ToString() + " </b></td><td>" + reader.GetValue(i).ToString() + "</td>";
                                             RowExist = true;
+                                            strData += "</tr>";
                                         }
-
                                     }
                                     if (!RowExist)
                                     {
                                         for (int i = 0; i < reader.FieldCount; i++)
-                                            strData += "<div><b> " + reader.GetName(i).ToString() + " </b></div> ";
+                                        {
+                                            strData += "<tr>";
+                                            strData += "<td><b> " + reader.GetName(i).ToString() + " </b></td><td></td>";
+                                            strData += "</tr>";
+                                        }
                                     }
                                 } while (reader.NextResult());
                             }
                         }
                     }
-                    strBody += strData;
+                    strBody += "<div><table>" + strData + "</table></div>";
                 }
+                SqlParameter tModuleparmAdress = new SqlParameter("@nProjectID", nProjectID);
+
+                List<PurchaseOrderPreviewTemplate> itemPOStore = db.Database.SqlQuery<PurchaseOrderPreviewTemplate>("exec sproc_GetPurchaseOrdeStorerDetails @nProjectID", tModuleparmAdress).ToList();
 
                 string tContentdata = "<div>Please provide a quote for this store based on the information below. Please be sure to reply to all so our entire team receives it. Thanks!</br></div>";
                 tContentdata += strBody;// "<div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div><div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div>",
 
                 var itemMerge = new MergedQuoteRequest()
                 {
-                    tContent = tContentdata,
-                    tSubject = "Store #" + strNumber + "- HME Quote Request",
-                    tTo = "abcd@gmail.com"
+                    tContent = strStyle + tContentdata,
+                    tSubject = "Store #" + itemPOStore[0].tStoreNumber + "  - "+ itemPOStore[0].tCity+", "+ itemPOStore[0].tStoreState + " Quote Request",
+                    tTo = ""
 
                 };
 
@@ -442,14 +452,14 @@ namespace DeploymentTool.Controller
                 db.tblOutgoingEmails.Add(tblQuoteEmail);
                 await db.SaveChangesAsync();
                 var aOutgoingEmailID = tblQuoteEmail.aOutgoingEmailID;
+                //if(request.FileAttachments !=null)
+                //foreach (var RequestFile in request.FileAttachments)
+                //{
 
-                foreach (var RequestFile in request.FileAttachments)
-                {
-
-                    tblOutgoingEmailAttachment tblQuoteEmailAtt = MailObj.GettblOutgoingEmailAttachment(RequestFile);
-                    db.tblOutgoingEmailAttachments.Add(tblQuoteEmailAtt);
-                    await db.SaveChangesAsync();
-                }
+                //    tblOutgoingEmailAttachment tblQuoteEmailAtt = MailObj.GettblOutgoingEmailAttachment(RequestFile);
+                //    db.tblOutgoingEmailAttachments.Add(tblQuoteEmailAtt);
+                //    await db.SaveChangesAsync();
+                //}
                 //start END
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {

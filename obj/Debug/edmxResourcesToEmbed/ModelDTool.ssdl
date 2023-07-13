@@ -508,7 +508,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="tShippingAddress" Type="nvarchar(max)" />
     <Property Name="tNotes" Type="nvarchar(max)" />
     <Property Name="dDeliver" Type="datetime" />
-    <Property Name="cTotal" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="cTotal" Type="decimal" Precision="22" Scale="4" />
     <Property Name="nOutgoingEmailID" Type="int" />
     <Property Name="nCreatedBy" Type="int" />
     <Property Name="nUpdateBy" Type="int" />
@@ -759,6 +759,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
     <Property Name="nBrand" Type="int" />
+    <Property Name="nType" Type="int" />
+    <Property Name="nStatus" Type="int" />
+    <Property Name="nInstallation" Type="int" />
+    <Property Name="nEquipment" Type="int" />
   </EntityType>
   <EntityType Name="tblVendorPartRel">
     <Key>

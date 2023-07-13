@@ -1,8 +1,7 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { QuillEditorComponent } from 'ngx-quill';
 import { MergedPO, POConfigPart, POMailMessage, PartsModel } from 'src/app/interfaces/models';
+import { CommonService } from 'src/app/services/common.service';
 import { PartsService } from 'src/app/services/parts.service';
 import { POWorkflowConfigService } from 'src/app/services/poworklow-config.service';
 
@@ -20,34 +19,10 @@ export class RenderPurchaseOrderComponent {
   allParts: PartsModel[];
   partNumber: number;
   tRequest: POMailMessage;
-
-  @ViewChild('editor') editor: QuillEditorComponent | undefined;
-  content = '<p>Rich Text Editor Example </p>';
-  format = 'html';
-  form: any;
-  quillConfig = {
-    toolbar: {
-      container: [
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-        [{ 'size': ['small', false, 'large', 'huge'] }],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ header: 1 }, { header: 2 }],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['clean'],
-        [{ 'align': [] }],
-        ['link']
-      ],
-      handlers: {
-        source: () => {
-          this.formatChange();
-        },
-      },
-    },
-  };
-
-  constructor(public dialogRef: MatDialogRef<RenderPurchaseOrderComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder,
-    private poService: POWorkflowConfigService, private partService: PartsService) {
+  ckConfig: any;
+  constructor(public dialogRef: MatDialogRef<RenderPurchaseOrderComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+    private poService: POWorkflowConfigService, private partService: PartsService, private commonService: CommonService) {
+    this.ckConfig = this.commonService.GetCKEditorConfig("250px");
     this.partNumber = 1;
     this.nTemplateId = data.nTemplateId;
     this.nProjectId = data.nProjectId;
@@ -87,8 +62,8 @@ export class RenderPurchaseOrderComponent {
     return (part.show);
   }
 
-  downloadPDF(tFieName: string) {
-    this.poService.downloadPO(tFieName, this.nProjectId).subscribe(tdata => {
+  downloadPDF(tMyFolderId: string, tFieName: string) {
+    this.poService.downloadPO(tMyFolderId, tFieName, this.nProjectId).subscribe(tdata => {
       var newBlob = new Blob([tdata], { type: "application/pdf" });
 
       // For other browsers: 
@@ -115,8 +90,6 @@ export class RenderPurchaseOrderComponent {
   GenerateMail() {
     this.poService.SenMergedPO(this.curTemplate).subscribe(x => {
       this.tRequest = x;
-      this.content = x.tContent;
-      this.updateEditorContent();
       this.partNumber = 2;
     });
   }
@@ -214,31 +187,5 @@ export class RenderPurchaseOrderComponent {
       this.dialogRef.close();
     });
   }
-
-
-  updateEditorContent() {
-    this.form = this.fb.group({
-      editor: this.content,
-    });
-  }
-
-  formatChange() {
-    this.format = this.format === 'html' ? 'text' : 'html';
-
-    if (this.format === 'text' && this.editor) {
-      const htmlText = this.form.get('editor').value;
-      this.editor.quillEditor.setText(htmlText);
-    } else if (this.format === 'html' && this.editor) {
-      const htmlText = this.form.get('editor').value;
-      this.editor.quillEditor.setText('');
-      // this.editor.quillEditor.pasteHTML(0, htmlText);
-    }
-  }
-  onFocus = () => {
-    console.log('On Focus');
-  };
-  onBlur = () => {
-    console.log('Blurred');
-  };
   //Second Part End
 }

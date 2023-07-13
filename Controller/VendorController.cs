@@ -60,6 +60,8 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Update(tblVendor tblVendor)
         {
+            if (tblVendor.nBrand == null)
+                tblVendor.nBrand = 1;
 
             db.Entry(tblVendor).State = EntityState.Modified;
 
@@ -87,7 +89,8 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblVendor tblVendor)
         {
-
+            if (tblVendor.nBrand == null)
+                tblVendor.nBrand = 1;
             db.tblVendor.Add(tblVendor);
             await db.SaveChangesAsync();
 

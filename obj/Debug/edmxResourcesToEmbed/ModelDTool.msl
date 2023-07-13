@@ -47,6 +47,10 @@
     <EntitySetMapping Name="tblVendor">
       <EntityTypeMapping TypeName="dtDBModel.tblVendor">
         <MappingFragment StoreEntitySet="tblVendor">
+          <ScalarProperty Name="nEquipment" ColumnName="nEquipment" />
+          <ScalarProperty Name="nInstallation" ColumnName="nInstallation" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nType" ColumnName="nType" />
           <ScalarProperty Name="nBrand" ColumnName="nBrand" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />

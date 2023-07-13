@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblSupportTicket: Misc.ModelParent
+    public partial class tblSupportTicket : Misc.ModelParent
     {
         public int aTicketId { get; set; }
         public Nullable<int> nPriority { get; set; }

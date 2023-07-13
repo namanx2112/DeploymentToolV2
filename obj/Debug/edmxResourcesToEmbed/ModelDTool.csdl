@@ -139,6 +139,10 @@
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
     <Property Name="nBrand" Type="Int32" />
+    <Property Name="nType" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="nInstallation" Type="Int32" />
+    <Property Name="nEquipment" Type="Int32" />
   </EntityType>
   <EntityType Name="tblAttachment">
     <Key>
@@ -768,7 +772,7 @@
     <Property Name="tShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="tNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="dDeliver" Type="DateTime" Precision="3" />
-    <Property Name="cTotal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="cTotal" Type="Decimal" Precision="22" Scale="4" />
     <Property Name="nOutgoingEmailID" Type="Int32" />
     <Property Name="nCreatedBy" Type="Int32" />
     <Property Name="nUpdateBy" Type="Int32" />
@@ -783,9 +787,9 @@
     <Property Name="aPurchaseOrderPartsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="tPartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="cPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="cPrice" Type="Decimal" Precision="22" Scale="4" />
     <Property Name="nQuantity" Type="Int32" />
-    <Property Name="cTotal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="cTotal" Type="Decimal" Precision="22" Scale="4" />
   </EntityType>
   <EntityType Name="tblPurchaseOrderTemplatePart">
     <Key>

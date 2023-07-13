@@ -1,0 +1,173 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mdc-data-table__cell{
+    position: relative;
+}
+.form .mdc-text-field--filled:not(.mdc-text-field--disabled){
+    background-color: #fff!important;
+}
+
+.whiteDropdown .mdc-text-field--filled{
+    background-color: #fff!important;
+}
+
+.roundedCorner .mdc-text-field--filled{
+    border-radius: 10px!important;
+}
+
+.grayBackground{
+    background-color: gray;
+}
+
+.grayWhiteTheme .mdc-text-field--filled{
+    background-color: gray!important;
+}
+
+/* .fullTile, .halfTile,.tabHeader > div, .tabBody, .lightGray{
+    background-color: lightgray;
+} */
+.fullTile, .halfTile, .tabBody, .lightGray{
+    background-color: lightgray;
+}
+.backIcon{
+    cursor: pointer;
+}
+.whiteGrayTheme{
+    background-color: white;
+}
+.whiteGray input{
+    color: #fff;
+}
+.whiteGray .mat-mdc-text-field-wrapper{
+    background-color: lightgray;
+    color: white;
+    border-radius: 5px;
+}
+.whiteGray .mdc-floating-label--float-above{
+    background-color: white;
+    color: gray;
+    padding: 5px;
+}
+.white{
+    background-color: #fff;
+}
+.blackBorder{
+    border-color: black;
+}
+.grayWhiteTheme{
+    background-color: gray;
+}
+.lightGrayWhiteTheme{
+    background-color: lightgrey;
+}
+.grayWhiteTheme .details,.grayWhiteTheme .tables,.grayWhiteTheme .tBody{
+    background-color: #fff;
+}
+.grayWhite .mat-mdc-text-field-wrapper{
+    background-color: white;
+    color: gray;
+    border-radius: 5px;
+}
+.grayWhite .mdc-floating-label--float-above{
+    background-color: gray;
+    color: #fff;
+    padding: 5px;
+}
+.grayWhite .fleidLabel,.grayWhite  .fieldGroup{
+    color:  black;
+}
+.buttonPart {
+    background-color: #fff;
+}
+.storeStatus{
+    background-color: chartreuse;
+}
+button{
+    width: 120px;
+    height: 50px;
+}
+
+.table-container{
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.mat-mdc-paginator{
+    border-radius: 0px 0px 10px 10px;
+}
+
+.fleidLabel{
+    font-weight: 900;
+    word-wrap: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.mat-mdc-table{
+    white-space: nowrap!important;
+}
+
+.mdc-data-table__header-cell{
+    overflow: visibles!important;
+}
+
+.form .mat-mdc-form-field-infix{
+    min-height: 40px!important;
+    height: 40px!important;
+    padding: 12px 0px!important;
+}
+.noBorderButton{
+    border: 0px none;
+}
+
+.vChips .mdc-evolution-chip-set__chips{
+    flex-direction: column;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled){
+    background-color: gray!important;
+    border-radius: 10px;
+    height: 45px;
+}
+
+.tabSelectionOption > span{
+    border-bottom: 4px solid #fff;
+}
+.tabSelectionOption .selected{
+    border-bottom: 4px solid darkgrey!important;
+}
+
+.mat-drawer-content{
+    background-color: #fff;
+}
+
+.ql-container{
+    height: 235px;
+    overflow: auto;
+}
+
+.poEditor .ql-container{
+    height: calc(100% - 50px)!important;
+}
+
+.toggleIcon {
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    top: 13px;
+    left: 0px;
+    cursor: pointer;
+    background-color: gray;
+    color: #ffff;
+    z-index: 1;
+    line-height: 5px;
+    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+}
+
+.toggleIcon.opened {
+    transform: rotate(180deg);
+}

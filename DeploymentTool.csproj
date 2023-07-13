@@ -1031,7 +1031,7 @@
     <Compile Include="Model\ProjectComponent.cs" />
     <Compile Include="Model\ProjectComponentUpload.cs" />
     <Compile Include="Model\ProjectExcelFields.cs" />
-    <Compile Include="Model\PurchaseOrderPreviewTeamplate.cs" />
+    <Compile Include="Model\PurchaseOrderPreviewTemplate.cs" />
     <Compile Include="Model\QuoteRequestTemplate.cs" />
     <Compile Include="Model\SearchField.cs" />
     <Compile Include="Model\SecurityContext.cs" />

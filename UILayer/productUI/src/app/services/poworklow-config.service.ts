@@ -40,11 +40,11 @@ export class POWorkflowConfigService {
     return this.http.post<any>(this.configUrl + "PurchaseOrder/SendPO", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  downloadPO(tFileName: string, nProjectId: number) {
+  downloadPO(tMyFolderId: string, tFileName: string, nProjectId: number) {
     let httpHeader = new HttpHeaders({
       "Authorization": "Bearer " + this.authService.getToken(),
       "Accept": "application/pdf"
     });
-    return this.http.get(this.configUrl + "PurchaseOrder/downloadPO?tFileName=" + tFileName + "&nProjectId=" + nProjectId, { responseType: "blob", headers: httpHeader });
+    return this.http.post(this.configUrl + "PurchaseOrder/downloadPO", { tMyFolderId: tMyFolderId, tFileName: tFileName, nProjectId: nProjectId }, { responseType: "blob", headers: httpHeader });
   }
 }

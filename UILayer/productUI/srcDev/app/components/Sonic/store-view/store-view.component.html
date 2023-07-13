@@ -1,0 +1,90 @@
+<div class="storeView">
+    <div class="projectHeader">
+        <mat-icon class="backIcon" (click)="moveView('dashboard')">arrow_back_ios</mat-icon>
+        <h4 class="projHeader">Store - {{_curStore.tStoreNumber}}</h4>
+        <button class="noBorderButton lightGray" (click)="moveView('projecttemplatelist')">Workflows</button>
+    </div>
+    <div class="storeTitle"><span class="storeStatus">{{_curStore.tProjectType}} Store
+            {{_curStore.dGoLiveDate.toString().split('T')[0]}}</span></div>
+    <div class="storeTiles" *ngIf="allTabs.length > 0">
+        <div class="fullTile">
+            <h4>{{allTabs[0].tab_header}}
+                <div class="right"><a (click)="editTab(allTabs[0])">Edit</a></div>
+            </h4>
+            <app-controls *ngIf="tValues[allTabs[0].tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"
+                [fields]="allTabs[0].fields" [readOnlyForm]="true" [needButton]="false"
+                [controlValues]="tValues[allTabs[0].tab_name]" [SubmitLabel]="'None'"
+                (onSubmit)="onSubmit($event, allTabs[0])" [themeClass]="'grayWhite'"></app-controls>
+        </div>
+        <div class="fullTile">
+            <h4>{{allTabs[1].tab_header}}
+                <div class="right"><a (click)="editTab(allTabs[1])">Edit</a></div>
+            </h4>
+            <app-controls *ngIf="tValues[allTabs[1].tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"
+                [fields]="allTabs[1].fields" [readOnlyForm]="true" [needButton]="false"
+                [controlValues]="tValues[allTabs[1].tab_name]" [SubmitLabel]="'None'"
+                (onSubmit)="onSubmit($event, allTabs[1])" [themeClass]="'grayWhite'"></app-controls>
+        </div>
+        <div class="tileGroup">
+            <div class="halfTile">
+                <h4>{{allTabs[2].tab_header}}
+                    <div class="right"><a (click)="editTab(allTabs[2])">Edit</a></div>
+                </h4>
+                <app-controls *ngIf="tValues[allTabs[2].tab_name] != undefined" class="tabForm"
+                    [numberOfControlsInARow]="1" [fields]="allTabs[2].fields" [readOnlyForm]="true" [needButton]="false"
+                    [controlValues]="tValues[allTabs[2].tab_name]" [SubmitLabel]="'None'"
+                    (onSubmit)="onSubmit($event, allTabs[2])" [themeClass]="'grayWhite'"></app-controls>
+            </div>
+            <div class="tileGroup tileButtonGroup">
+                <button class="noBorderButton lightGray" mat-raised-button><mat-icon>event_note</mat-icon>Tasks</button>
+                <button class="noBorderButton lightGray" mat-raised-button (click)="ShowNotes();"><mat-icon>
+                        notes</mat-icon>Notes</button>
+                <button class="noBorderButton lightGray" (click)="ShowProject('projecttaleview')">Active
+                    Projects</button>
+                <button class="noBorderButton lightGray" (click)="ShowProject('projecttaleview')">Historical
+                    Projects</button>
+            </div>
+        </div>
+    </div>
+    <div class="TechAreaTitleBar">
+        <h3>Technology Areas</h3>
+        <div class="right">
+            <a (click)="changeTileView('tabview')" [ngClass]="(viewName == 'tabview')? 'selected' : ''">Tab View</a>
+            <a (click)="changeTileView('fullview')" [ngClass]="(viewName == 'fullview')? 'selected' : ''">Full Page
+                View</a>
+        </div>
+    </div>
+    <div class="TechAreaTabBar" *ngIf="tabForUI.length > 0 && viewName == 'tabview'">
+        <div class="tabHeader">
+            <div *ngFor="let tTab of tabForUI;let index = index"
+                [ngClass]="(selectedTab == index) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(index);">
+                {{tTab.tab_header}}
+            </div>
+        </div>
+        <div class="tabBody">
+            <div class="tHeader" *ngIf="tabForUI[selectedTab] != undefined">
+                <h4>{{tabForUI[selectedTab].tab_header}}</h4>
+                <div class="right"><button class="noBorderButton white"
+                        (click)="editTab(tabForUI[selectedTab])">Edit</button></div>
+            </div>
+            <app-controls *ngIf="canShowTab(allTabs[selectedTab])" class="tabForm white" [numberOfControlsInARow]="1"
+                [fields]="tabForUI[selectedTab].fields" [readOnlyForm]="true" [needButton]="false"
+                [controlValues]="tValues[tabForUI[selectedTab].tab_name]" [SubmitLabel]="'None'"
+                (onSubmit)="onSubmit($event, tabForUI[selectedTab])" [themeClass]="'whiteGray'"></app-controls>
+        </div>
+    </div>
+    <div class="fullView" *ngIf="tabForUI.length > 0 && viewName == 'fullview'">
+        <div class="fullTab lightGray" *ngFor="let tTab of tabForUI;let index = index">
+            <div class="tHeader white blackBorder">
+                <h4>{{tTab.tab_header}}</h4>
+                <div class="right"><button class="noBorderButton white" (click)="editTab(tTab)">Edit</button></div>
+            </div>
+            <div class="tBody">
+                <app-controls *ngIf="tValues[tTab.tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"
+                    [fields]="tTab.fields" [readOnlyForm]="true" [needButton]="false"
+                    [controlValues]="tValues[tTab.tab_name]" [SubmitLabel]="'None'" (onSubmit)="onSubmit($event, tTab)"
+                    [themeClass]="'grayWhite'"></app-controls>
+            </div>
+        </div>
+    </div>
+</div>
