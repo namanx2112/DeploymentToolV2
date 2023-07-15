@@ -12,10 +12,10 @@ import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
 })
 export class TabBodyComponent {
   _curTab: HomeTab;
-  get curTab(): HomeTab{
-     return this._curTab;
+  get curTab(): HomeTab {
+    return this._curTab;
   }
-  @Input() set curTab(val: HomeTab){
+  @Input() set curTab(val: HomeTab) {
     this._curTab = val;
     this.NewInstanceName = "New " + TabType[val.tab_type];
   }
@@ -34,16 +34,19 @@ export class TabBodyComponent {
   SubmitLabel: string;
   searchFields: any | null;
   NewInstanceName: string;
+  isNew: boolean;
   constructor(private route: ActivatedRoute, public router: Router) {
     this.searchControlVals = {};
     this.curControlVals = {};
     this.secondPart = "table";
     this.SubmitLabel = "Search";
+    this.isNew = true;
   }
 
   OpenNew() {
     this.curControlVals = {};
     this.secondPart = "newEdit";
+    this.isNew = true;
   }
 
   onSubmit(controlVals: FormGroup) {
@@ -55,10 +58,12 @@ export class TabBodyComponent {
       this.curControlVals[i] = row[i];
     }
     this.secondPart = "newEdit";
+    this.isNew = false;
   }
 
   returnBack(resp: any) {
-    alert("Saved");
+    if (typeof resp == 'undefined' || resp == null || typeof resp.closed == 'undefined')
+      alert("Saved Successfully!");
     this.secondPart = "table";
   }
 }

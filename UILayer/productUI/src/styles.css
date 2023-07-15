@@ -1,105 +1,135 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
 
-.mdc-data-table__cell{
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mdc-data-table__cell {
     position: relative;
 }
-.form .mdc-text-field--filled:not(.mdc-text-field--disabled){
-    background-color: #fff!important;
+
+.form .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #fff !important;
 }
 
-.whiteDropdown .mdc-text-field--filled{
-    background-color: #fff!important;
+.whiteDropdown .mdc-text-field--filled {
+    background-color: #fff !important;
 }
 
-.roundedCorner .mdc-text-field--filled{
-    border-radius: 10px!important;
+.roundedCorner .mdc-text-field--filled {
+    border-radius: 10px !important;
 }
 
-.grayBackground{
+.grayBackground {
     background-color: gray;
 }
 
-.grayWhiteTheme .mdc-text-field--filled{
-    background-color: gray!important;
+.grayWhiteTheme .mdc-text-field--filled {
+    background-color: gray !important;
 }
 
 /* .fullTile, .halfTile,.tabHeader > div, .tabBody, .lightGray{
     background-color: lightgray;
 } */
-.fullTile, .halfTile, .tabBody, .lightGray{
+.fullTile,
+.halfTile,
+.tabBody,
+.lightGray {
     background-color: lightgray;
 }
-.backIcon{
+
+.backIcon {
     cursor: pointer;
 }
-.whiteGrayTheme{
+
+.whiteGrayTheme {
     background-color: white;
 }
-.whiteGray input{
+
+.whiteGray input {
     color: #fff;
 }
-.whiteGray .mat-mdc-text-field-wrapper{
+
+.whiteGray .mat-mdc-text-field-wrapper {
     background-color: lightgray;
     color: white;
     border-radius: 5px;
 }
-.whiteGray .mdc-floating-label--float-above{
+
+.whiteGray .mdc-floating-label--float-above {
     background-color: white;
     color: gray;
     padding: 5px;
 }
-.white{
+
+.white {
     background-color: #fff;
 }
-.blackBorder{
+
+.blackBorder {
     border-color: black;
 }
-.grayWhiteTheme{
+
+.grayWhiteTheme {
     background-color: gray;
 }
-.lightGrayWhiteTheme{
+
+.lightGrayWhiteTheme {
     background-color: lightgrey;
 }
-.grayWhiteTheme .details,.grayWhiteTheme .tables,.grayWhiteTheme .tBody{
+
+.grayWhiteTheme .details,
+.grayWhiteTheme .tables,
+.grayWhiteTheme .tBody {
     background-color: #fff;
 }
-.grayWhite .mat-mdc-text-field-wrapper{
+
+.grayWhite .mat-mdc-text-field-wrapper {
     background-color: white;
     color: gray;
     border-radius: 5px;
 }
-.grayWhite .mdc-floating-label--float-above{
+
+.grayWhite .mdc-floating-label--float-above {
     background-color: gray;
     color: #fff;
     padding: 5px;
 }
-.grayWhite .fleidLabel,.grayWhite  .fieldGroup{
-    color:  black;
+
+.grayWhite .fleidLabel,
+.grayWhite .fieldGroup {
+    color: black;
 }
+
 .buttonPart {
     background-color: #fff;
 }
-.storeStatus{
+
+.storeStatus {
     background-color: chartreuse;
 }
-button{
+
+button {
     width: 120px;
     height: 50px;
 }
 
-.table-container{
+.table-container {
     border-radius: 10px;
     box-shadow: none;
 }
 
-.mat-mdc-paginator{
+.mat-mdc-paginator {
     border-radius: 0px 0px 10px 10px;
 }
 
-.fleidLabel{
+.fleidLabel {
     font-weight: 900;
     word-wrap: break-word;
     white-space: nowrap;
@@ -107,51 +137,53 @@ button{
     overflow: hidden;
 }
 
-.mat-mdc-table{
-    white-space: nowrap!important;
+.mat-mdc-table {
+    white-space: nowrap !important;
 }
 
-.mdc-data-table__header-cell{
-    overflow: visibles!important;
+.mdc-data-table__header-cell {
+    overflow: visibles !important;
 }
 
-.form .mat-mdc-form-field-infix{
-    min-height: 40px!important;
-    height: 40px!important;
-    padding: 12px 0px!important;
+.form .mat-mdc-form-field-infix {
+    min-height: 40px !important;
+    height: 40px !important;
+    padding: 12px 0px !important;
 }
-.noBorderButton{
+
+.noBorderButton {
     border: 0px none;
 }
 
-.vChips .mdc-evolution-chip-set__chips{
+.vChips .mdc-evolution-chip-set__chips {
     flex-direction: column;
 }
 
-.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled){
-    background-color: gray!important;
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+    background-color: gray !important;
     border-radius: 10px;
     height: 45px;
 }
 
-.tabSelectionOption > span{
+.tabSelectionOption>span {
     border-bottom: 4px solid #fff;
 }
-.tabSelectionOption .selected{
-    border-bottom: 4px solid darkgrey!important;
+
+.tabSelectionOption .selected {
+    border-bottom: 4px solid darkgrey !important;
 }
 
-.mat-drawer-content{
+.mat-drawer-content {
     background-color: #fff;
 }
 
-.ql-container{
+.ql-container {
     height: 235px;
     overflow: auto;
 }
 
-.poEditor .ql-container{
-    height: calc(100% - 50px)!important;
+.poEditor .ql-container {
+    height: calc(100% - 50px) !important;
 }
 
 .toggleIcon {
@@ -170,4 +202,8 @@ button{
 
 .toggleIcon.opened {
     transform: rotate(180deg);
+}
+
+.mat-mdc-progress-spinner {
+    stroke: #6495ED;
 }

@@ -44,7 +44,9 @@ export class AdminConfigComponent {
     this.tabIndex = tIndex;
   }
 
-  ShortcutSelection(tName: string) {
+  ShortcutSelection(ev: any) {
+    this.selectedOption = ev.tabName;
+    let tName = ev.action;
     switch (tName) {
       case "NewUser":
         this.tabIndex = 0;
@@ -69,6 +71,12 @@ export class AdminConfigComponent {
         break;
       case "NewFrenchise":
         this.tabIndex = 4;
+        break;
+      case "NewQuoteRequest":
+        this.tabIndex = 5;
+        break;
+      case "NewPO":
+        this.tabIndex = 7;
         break;
       case "Dummy":
         this.tabIndex = -1;

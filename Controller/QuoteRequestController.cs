@@ -23,6 +23,8 @@ using System.Security.Policy;
 using System.Web;
 using iTextSharp.text.html.simpleparser;
 using System.Runtime.Remoting.Messaging;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace DeploymentTool.Controller
 {
@@ -36,20 +38,11 @@ namespace DeploymentTool.Controller
         [ActionName("GetAllTemplate")]
         public HttpResponseMessage GetAllTemplate(int nBrandId)
         {
-            Dictionary<int, string> lstQuoteRequest = new Dictionary<int, string>();
             SqlParameter tModuleNameParam = new SqlParameter("@nBrandId", nBrandId);
-            List<QuoteRequestTemplateTemp> items = db.Database.SqlQuery<QuoteRequestTemplateTemp>("exec sproc_GetAllQuoteRequestTemplate @nBrandId", tModuleNameParam).ToList();
-            foreach (var RequestTechComps in items)
-            {
-
-                lstQuoteRequest.Add(RequestTechComps.aQuoteRequestTemplateId, RequestTechComps.tTemplateName);
-                //lstQuoteRequest.Add(2, "Networking");
-            }
-            //lstQuoteRequest.Add(1, "Audio");
-           // lstQuoteRequest.Add(2, "Networking");
+            List<QuoteRequestTemplateTemp> items = db.Database.SqlQuery<QuoteRequestTemplateTemp>("exec sproc_GetAllQuoteRequestTemplate @nBrandId", tModuleNameParam).ToList();           
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<Dictionary<int, string>>(lstQuoteRequest, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<List<QuoteRequestTemplateTemp>>(items, new JsonMediaTypeFormatter())
             };
         }
 
@@ -414,11 +407,15 @@ namespace DeploymentTool.Controller
 
                 string tContentdata = "<div>Please provide a quote for this store based on the information below. Please be sure to reply to all so our entire team receives it. Thanks!</br></div>";
                 tContentdata += strBody;// "<div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div><div><h1>Audio</h1></div><div><b>Address</b>C333 IUO Naaf, USA</div>",
+                SqlParameter tModuleNameParam = new SqlParameter("@aQuoteRequestTemplateId", nTemplateId);
+                List<QuoteRequestTemplateTemp> items = db.Database.SqlQuery<QuoteRequestTemplateTemp>("exec sproc_GetQuoteRequestTemplate @aQuoteRequestTemplateId", tModuleNameParam).ToList();
+
+                
 
                 var itemMerge = new MergedQuoteRequest()
                 {
                     tContent = strStyle + tContentdata,
-                    tSubject = "Store #" + itemPOStore[0].tStoreNumber + "  - "+ itemPOStore[0].tCity+", "+ itemPOStore[0].tStoreState + " Quote Request",
+                    tSubject = "Store #" + itemPOStore[0].tStoreNumber + "  - "+ itemPOStore[0].tCity+", "+ itemPOStore[0].tStoreState + items[0].tTemplateName,//" Quote Request",
                     tTo = ""
 
                 };
@@ -474,9 +471,19 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public string Delete(int nTemplateId)
-        {            
-            return "";
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            tblQuoteRequestMain tblQuoteRequest = await db.tblQuoteRequestMains.FindAsync(id);
+            if (tblQuoteRequest == null)
+            {
+                return NotFound();
+            }
+
+            tblQuoteRequest.bDeleted = true;
+            db.Entry(tblQuoteRequest).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return Ok(tblQuoteRequest);
         }
     }
 }

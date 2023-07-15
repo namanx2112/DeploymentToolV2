@@ -209,7 +209,8 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="aPartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tPartDesc" Type="nvarchar(max)" />
           <Property Name="tPartNumber" Type="nvarchar(max)" />
-          <Property Name="cPrice" Type="decimal" Precision="22" Scale="4" />
+          <Property Name="cPrice" Type="decimal" Precision="22" Scale="2" />
+          <Property Name="bDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="tblProject">
           <Key>
@@ -513,13 +514,14 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="tShippingAddress" Type="nvarchar(max)" />
           <Property Name="tNotes" Type="nvarchar(max)" />
           <Property Name="dDeliver" Type="datetime" />
-          <Property Name="cTotal" Type="decimal" Precision="22" Scale="4" />
+          <Property Name="cTotal" Type="decimal" Precision="22" Scale="2" />
           <Property Name="nOutgoingEmailID" Type="int" />
           <Property Name="nCreatedBy" Type="int" />
           <Property Name="nUpdateBy" Type="int" />
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+          <Property Name="nTemplateId" Type="int" />
         </EntityType>
         <EntityType Name="tblPurchaseOrderParts">
           <Key>
@@ -528,9 +530,9 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="aPurchaseOrderPartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tDescription" Type="nvarchar(max)" />
           <Property Name="tPartNumber" Type="nvarchar(max)" />
-          <Property Name="cPrice" Type="decimal" Precision="22" Scale="4" />
+          <Property Name="cPrice" Type="decimal" Precision="22" Scale="2" />
           <Property Name="nQuantity" Type="int" />
-          <Property Name="cTotal" Type="decimal" Precision="22" Scale="4" />
+          <Property Name="cTotal" Type="decimal" Precision="22" Scale="2" />
         </EntityType>
         <EntityType Name="tblPurchaseOrderTemplate">
           <Key>
@@ -1732,7 +1734,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="aPartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
 					<Property Name="tPartDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="tPartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-					<Property Name="cPrice" Type="Decimal" Precision="22" Scale="4" />
+					<Property Name="cPrice" Type="Decimal" Precision="22" Scale="2" />
+          <Property Name="bDeleted" Type="Boolean" />
 				</EntityType>
 				<EntityType Name="tblPurchaseOrder">
 					<Key>
@@ -1751,13 +1754,14 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="tShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="tNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="dDeliver" Type="DateTime" Precision="3" />
-					<Property Name="cTotal" Type="Decimal" Precision="22" Scale="4" />
+					<Property Name="cTotal" Type="Decimal" Precision="22" Scale="2" />
 					<Property Name="nOutgoingEmailID" Type="Int32" />
 					<Property Name="nCreatedBy" Type="Int32" />
 					<Property Name="nUpdateBy" Type="Int32" />
 					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
+          <Property Name="nTemplateId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblPurchaseOrderPart">
 					<Key>
@@ -1766,9 +1770,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="aPurchaseOrderPartsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
 					<Property Name="tDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="tPartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-					<Property Name="cPrice" Type="Decimal" Precision="22" Scale="4" />
+					<Property Name="cPrice" Type="Decimal" Precision="22" Scale="2" />
 					<Property Name="nQuantity" Type="Int32" />
-					<Property Name="cTotal" Type="Decimal" Precision="22" Scale="4" />
+					<Property Name="cTotal" Type="Decimal" Precision="22" Scale="2" />
 				</EntityType>
 				<EntityType Name="tblPurchaseOrderTemplatePart">
 					<Key>
@@ -2533,7 +2537,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblParts">
 						<EntityTypeMapping TypeName="dtDBModel.tblPart">
 							<MappingFragment StoreEntitySet="tblParts">
-								<ScalarProperty Name="cPrice" ColumnName="cPrice" />
+								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+                <ScalarProperty Name="cPrice" ColumnName="cPrice" />
 								<ScalarProperty Name="tPartNumber" ColumnName="tPartNumber" />
 								<ScalarProperty Name="tPartDesc" ColumnName="tPartDesc" />
 								<ScalarProperty Name="aPartID" ColumnName="aPartID" />
@@ -2543,7 +2548,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblPurchaseOrders">
 						<EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrder">
 							<MappingFragment StoreEntitySet="tblPurchaseOrder">
-								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+								<ScalarProperty Name="nTemplateId" ColumnName="nTemplateId" />
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
 								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
 								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
 								<ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />

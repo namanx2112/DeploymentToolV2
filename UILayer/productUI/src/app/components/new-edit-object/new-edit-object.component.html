@@ -1,7 +1,7 @@
 <div class="tBody grayWhiteTheme">
     <app-controls [fields]="curTab.fields" [needButton]="true" [numberOfControlsInARow]="1"
         [controlValues]="controlValues" [SubmitLabel]="SubmitLabel" (onSubmit)="onSubmit($event, curTab)"
-        [themeClass]="'grayWhite'"></app-controls>
+        [themeClass]="'grayWhite'" [CloseLabel]="'Cancel'" (onClose)="onCloseClicked($event)"></app-controls>
 </div>
 <div *ngIf="isEditMode(curTab, controlValues)" class="childItems">
     <ng-container *ngFor="let tTab of curTab.childTabs; let index = index">

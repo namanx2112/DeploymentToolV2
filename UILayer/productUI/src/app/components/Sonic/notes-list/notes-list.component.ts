@@ -37,6 +37,9 @@ export class NotesListComponent {
         let clickedVal = data.values;
         dialogRef.close();
       },
+      onClose: function(ev: any){
+        dialogRef.close();
+      },
       themeClass: "grayWhite",
       dialogTheme: "lightGrayWhiteTheme"
     };

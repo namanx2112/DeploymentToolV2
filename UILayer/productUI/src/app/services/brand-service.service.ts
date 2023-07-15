@@ -33,6 +33,10 @@ export class BrandServiceService {
     return this.http.post<BrandModel>(this.configUrl + "Brand/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
+  Delete(request: BrandModel) {
+    return this.http.get<BrandModel>(this.configUrl + "Brand/Delete?id=" + request.aBrandId, { headers: this.authService.getHttpHeaders() });
+  }
+
   Get(searchFields: Dictionary<string> | null) {
     // return new Observable<BrandModel[]>((obj) => {
     //   let items: BrandModel[] = [

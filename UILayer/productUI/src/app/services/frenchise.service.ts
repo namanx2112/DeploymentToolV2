@@ -28,6 +28,10 @@ export class FranchiseService {
     return this.http.post<FranchiseModel[]>(this.configUrl + "Franchise/Get", request, { headers: this.authService.getHttpHeaders() });
   }
 
+  Delete(request: FranchiseModel) {
+    return this.http.get<FranchiseModel>(this.configUrl + "Franchise/Delete?id=" + request.aFranchiseId, { headers: this.authService.getHttpHeaders() });
+  }
+
   GetTableVisibleColumns(){
     return [
       "tFranchiseName",

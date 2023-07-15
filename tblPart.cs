@@ -18,5 +18,6 @@ namespace DeploymentTool
         public string tPartDesc { get; set; }
         public string tPartNumber { get; set; }
         public Nullable<decimal> cPrice { get; set; }
+        public Nullable<bool> bDeleted { get; set; }
     }
 }

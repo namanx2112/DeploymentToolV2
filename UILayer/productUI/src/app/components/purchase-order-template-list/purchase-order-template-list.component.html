@@ -6,8 +6,12 @@
         <button mat-raised-button class="searchButton" (click)="OpenView(0)">Create New Workflow</button>
     </div>
     <div class="tablePart">
-        <div *ngFor="let item of allPO" class="lightGray requestTile" (click)="OpenView(item.aPurchaseOrderTemplateID)">
-            <span>{{item.tTemplateName}}</span>
+        <div *ngFor="let item of allPO" class="lightGray requestTile">
+            <div class="tileHeader">
+                <span class="titleTime" title="Cretaed on" (click)="OpenView(item.aPurchaseOrderTemplateID)">{{getFormatedDate(item.dtCreatedOn)}}</span>
+                <span (click)="deleteMe(item.aPurchaseOrderTemplateID)" class="cellDeleteButton" title="Click to Remove"><mat-icon class="icon">delete</mat-icon></span>
+            </div>
+            <span class="tName" title="Click to Open" (click)="OpenView(item.aPurchaseOrderTemplateID)">{{item.tTemplateName}}</span>
         </div>
     </div>
 </div>

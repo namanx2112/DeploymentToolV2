@@ -73,7 +73,7 @@ namespace DeploymentTool.Controller
 
         // DELETE: api/tblUser/5
         [Authorize]
-        [HttpPost]
+        [HttpGet]
         public async Task<IHttpActionResult> Delete(int id)
         {
             tblPart tblPart = await db.tblParts.FindAsync(id);
@@ -82,7 +82,8 @@ namespace DeploymentTool.Controller
                 return NotFound();
             }
 
-            db.tblParts.Remove(tblPart);
+            tblPart.bDeleted = true;
+            db.Entry(tblPart).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
             return Ok(tblPart);

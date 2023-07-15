@@ -25,14 +25,14 @@ namespace DeploymentTool.Controller
         public IQueryable<tblFranchise> Get(Dictionary<string, string> searchFields)
         {
             if (searchFields == null)
-                return db.tblFranchises;
+                return db.tblFranchises.Where(x => x.bDeleted != true);
             else
             {
                 StringBuilder sBuilder = new StringBuilder();
+                sBuilder.AppendFormat("x.bDeleted != true");
                 foreach (KeyValuePair<string, string> keyVal in searchFields)
                 {
-                    if (sBuilder.Length > 0)
-                        sBuilder.Append(" and ");
+                    sBuilder.Append(" and ");
                     sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
                 }
                 return db.tblFranchises.Where("x=>" + sBuilder.ToString());
@@ -93,7 +93,7 @@ namespace DeploymentTool.Controller
 
         // DELETE: api/Franchise/5
         [Authorize]
-        [HttpPost]
+        [HttpGet]
         public async Task<IHttpActionResult> Delete(int id)
         {
             tblFranchise tblFranchise = await db.tblFranchises.FindAsync(id);
@@ -102,7 +102,8 @@ namespace DeploymentTool.Controller
                 return NotFound();
             }
 
-            db.tblFranchises.Remove(tblFranchise);
+            tblFranchise.bDeleted = true;
+            db.Entry(tblFranchise).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
             return Ok(tblFranchise);

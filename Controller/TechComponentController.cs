@@ -92,7 +92,7 @@ namespace DeploymentTool.Controller
         // DELETE api/<controller>/5
 
         [Authorize]
-        [HttpPost]
+        [HttpGet]
         [Route("api/TechComponent/delete")]
         public HttpResponseMessage Delete(TechComponent techcomponent)
         {

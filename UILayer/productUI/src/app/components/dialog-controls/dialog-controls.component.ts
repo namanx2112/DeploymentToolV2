@@ -17,6 +17,7 @@ export class DialogControlsComponent {
   SubmitLabel: string;
   readOnlyForm: boolean;
   onSubmit: any;
+  onClose: any;
   title: string;
   dialogTheme: string;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
@@ -29,6 +30,7 @@ export class DialogControlsComponent {
       this.SubmitLabel = data.SubmitLabel;
       this.themeClass = data.themeClass;
       this.onSubmit = data.onSubmit;
+      this.onClose = data.onClose;
       this.title = data.title;
       this.dialogTheme = data.dialogTheme;
     }
@@ -36,5 +38,9 @@ export class DialogControlsComponent {
 
   onSubmitClicked(tVal: any) {
     this.onSubmit(tVal);
+  }
+
+  onCloseClicked(ev: any){
+    this.onClose(ev);
   }
 }

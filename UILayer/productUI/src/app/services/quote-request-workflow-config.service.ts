@@ -26,7 +26,7 @@ export class QuoteRequestWorkflowConfigService {
   }
 
   Delete(nTemplateId: number) {
-    return this.http.get<any>(this.configUrl + "QuoteRequest/Delete?nTemplateId=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<any>(this.configUrl + "QuoteRequest/Delete?id=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
   }  
 
   GetMergedQuoteRequest(nProjectId: number,nTemplateId: number){

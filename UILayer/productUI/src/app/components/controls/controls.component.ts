@@ -203,8 +203,8 @@ export class ControlsComponent implements AfterViewChecked {
 
   onKeydown(event: any) {
     if (event.key === "Enter") {
-      if (this.formGroup.valid)
-        this.onSubmit.emit({ value: this.getFieldControlValues() });
+      // if (this.formGroup.valid)
+      //   this.onSubmit.emit({ value: this.getFieldControlValues() });
     }
   }
 

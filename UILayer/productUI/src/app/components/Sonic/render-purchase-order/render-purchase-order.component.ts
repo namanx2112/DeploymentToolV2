@@ -136,10 +136,10 @@ export class RenderPurchaseOrderComponent {
     let aTotal = 0;
     for (var indx in this.curTemplate.purchaseOrderParts) {
       let tItem = this.curTemplate.purchaseOrderParts[indx];
-      tItem.cTotal = (tItem.cPrice * tItem.nQuantity);
+      tItem.cTotal = parseFloat((tItem.cPrice * tItem.nQuantity).toFixed(2));
       aTotal += tItem.cTotal;
     }
-    this.curTemplate.cTotal = aTotal;
+    this.curTemplate.cTotal = parseFloat(aTotal.toFixed(2));
   }
 
   addPart(ev: any) {

@@ -44,11 +44,19 @@ export class TableComponent implements OnChanges {
   initVal: Date;
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService) {
-      this.initVal = new Date();
-  }  
+    this.initVal = new Date();
+  }
 
   cellClick(row: MatRow) {
     this.rowClicked.emit(row);
+  }
+
+  cellDelete(row: MatRow) {
+    if (confirm("Are you sure you want to delete this item?")) {
+      this.cService.Delete(row).subscribe((x: any) => {
+        this.initTable();
+      });
+    }
   }
 
   rowClick(row: MatRow) {
@@ -85,7 +93,6 @@ export class TableComponent implements OnChanges {
         this.cService = this.partsService;
       }
     }
-
     this.getTable();
   }
 
@@ -109,7 +116,7 @@ export class TableComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    if(this.initVal != this._refreshMe){
+    if (this.initVal != this._refreshMe) {
       this._refreshMe = this.initVal;
       this.initTable();
     }

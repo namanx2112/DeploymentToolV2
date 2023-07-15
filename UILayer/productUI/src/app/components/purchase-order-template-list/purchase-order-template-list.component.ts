@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { POConfigTemplateTemp } from 'src/app/interfaces/models';
 import { POWorkflowConfigService } from 'src/app/services/poworklow-config.service';
@@ -12,6 +12,11 @@ export class PurchaseOrderTemplateListComponent {
   searchText: string;
   @Output()
   moveView = new EventEmitter<number>();
+  @Input()
+  set NeedNew(val: boolean) {
+    if (val == true)
+      this.OpenView(0);
+  }
   searchField: Fields[];
   allPO: POConfigTemplateTemp[];
   nBrandId: number;
@@ -42,6 +47,14 @@ export class PurchaseOrderTemplateListComponent {
     }));
   }
 
+  deleteMe(templateId: any) {
+    if (confirm("Are you sure you want to delete this Item?")) {
+      this.service.Delete(templateId).subscribe((x: any) => {
+        this.getQuoteRequests();
+      });
+    }
+  }
+
   onKeydown(event: any) {
     if (event.key === "Enter") {
     }
@@ -57,5 +70,9 @@ export class PurchaseOrderTemplateListComponent {
       this.getQuoteRequests();
     }
     this.nTemplateId = -1;
+  }
+
+  getFormatedDate(dt: Date) {
+    return (dt) ? new Date(dt).toLocaleDateString() : "";
   }
 }

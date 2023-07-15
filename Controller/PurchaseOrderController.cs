@@ -179,7 +179,10 @@ namespace DeploymentTool.Controller
                     db.Entry(tPurchaseOrder).State = EntityState.Modified;
                 }
                 else
+                {
+
                     db.tblPurchaseOrderTemplates.Add(tPurchaseOrder);
+                }
 
                 await db.SaveChangesAsync();
                 // Add into tblVendorPartRel
@@ -297,7 +300,7 @@ namespace DeploymentTool.Controller
 
         // DELETE: api/tblUser/5
         [Authorize]
-        [HttpPost]
+        [HttpGet]
         public async Task<IHttpActionResult> Delete(int id)
         {
             if (id > 0)
@@ -314,7 +317,7 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public IHttpActionResult GetMergedPO(int nTemplateId, int nProjectId)
+        public async System.Threading.Tasks.Task<IHttpActionResult> GetMergedPO(int nTemplateId, int nProjectId)
         {
             PurchaseOrderPreviewTemplate poRequest = new PurchaseOrderPreviewTemplate();
 
@@ -336,7 +339,7 @@ namespace DeploymentTool.Controller
                 poRequest.nProjectId = nProjectId;
                 poRequest.nVendorId = (int)itemPOTemplate[0].nVendorID;// 1;
                 poRequest.tVendorName = itemPOTemplate[0].tVendorName;
-                poRequest.tStore = itemPOStore[0].tStore;// "111";
+                poRequest.tStore = itemPOStore[0].tStore + " #" + itemPOStore[0].tStoreNumber;
                 poRequest.tStoreNumber = itemPOStore[0].tStoreNumber;// "10101";
                 poRequest.tNotes = "";// "Hello";
                 poRequest.tName = itemPOStore[0].tName;// "Name";
@@ -353,7 +356,7 @@ namespace DeploymentTool.Controller
                 poRequest.tBillToState = itemPOStore[0].tBillToState;// "Newjurcy";
                 poRequest.tBillToZip = itemPOStore[0].tBillToZip;// "Newjurcy";
                 poRequest.tTemplateName = itemPOTemplate[0].tTemplateName;
-                poRequest.tPurchaseOrderNumber = nTemplateId.ToString();
+                poRequest.nTemplateId = nTemplateId;
                 poRequest.dDeliver = itemPOTemplate[0].dDeliveryDate != null ? Convert.ToDateTime(itemPOTemplate[0].dDeliveryDate) : DateTime.Now;
                 poRequest.tTo = itemPOTemplate[0].tTo;
                 poRequest.tCC = itemPOTemplate[0].tCC;
@@ -381,6 +384,28 @@ namespace DeploymentTool.Controller
                 poRequest.cTotal = cTotal;
                 poRequest.purchaseOrderParts = obj;
 
+                tblPurchaseOrder tblPO = new tblPurchaseOrder()
+                {
+                    nTemplateId = poRequest.nTemplateId,
+                    nStoreID = Convert.ToInt32(poRequest.tStoreNumber),
+                    tBillingName = poRequest.tName,
+                    tBillingPhone = poRequest.tPhone,
+                    tBillingEmail = poRequest.tBillToEmail,
+                    tBillingAddress = poRequest.tBillToAddress,
+                    tShippingName = poRequest.tName,
+                    tShippingPhone = poRequest.tPhone,
+                    tShippingEmail = poRequest.tEmail,
+                    tShippingAddress = poRequest.tAddress,
+                    tNotes = poRequest.tNotes,
+                    dDeliver = poRequest.dDeliver,
+                    cTotal = poRequest.cTotal
+
+                };
+
+                db.tblPurchaseOrders.Add(tblPO);
+                await db.SaveChangesAsync();
+                var aPurchaseOrderID = tblPO.aPurchaseOrderID;
+                poRequest.aPurchaseOrderPreviewTeamplateID = aPurchaseOrderID;
 
 
 
@@ -461,7 +486,7 @@ namespace DeploymentTool.Controller
             strBody += "</tbody>";
             strBody += "</table></div>";
             strBody += "<div style='text-align:right;'><b> Total:</b> " + request.cTotal.ToString() + "</div>";
-            strBody += "<div style='text-align:right;'><b> PO#: </b> " + request.tPurchaseOrderNumber.ToString() + "</div>";
+            strBody += "<div style='text-align:right;'><b> PO#: </b> " + request.aPurchaseOrderPreviewTeamplateID.ToString() + "</div>";
             strBody += "<div style='text-align:right;'><b> Deliver#: </b> " + request.dDeliver.ToShortDateString() + "</div>";
             string fileName = "PurachaaseOrder.pdf";
 			String strFilePath = DeploymentTool.Misc.Utilities.WriteHTMLToPDF(strBody, fileName);
@@ -469,12 +494,13 @@ namespace DeploymentTool.Controller
                     "table{ width: 60%!important;border: 1px solid lightgray!important;border-radius: 5px!important;}</style>";
             PurchaseOrderMailMessage message = new PurchaseOrderMailMessage()
             {
+                aPurchaseOrderID = request.aPurchaseOrderPreviewTeamplateID,
                 nProjectId = request.nProjectId,
                 tTo = request.tTo,
                 tCC = request.tCC,
                 tContent = strStyle + "<div>All,</br></br>See attached purchase order, Please verify that you can meet the delivery date listed.</div>Thanks!" +
                 "<table>" +
-                "<tr><td>PO#:</td><td>" + request.tPurchaseOrderNumber + "</td></tr>" +
+                "<tr><td>PO#:</td><td>" + request.aPurchaseOrderPreviewTeamplateID + "</td></tr>" +
                 "<tr><td>Revision/Filename:</td><td>" + fileName + "</td></tr>" +
                 "<tr><td>Type:</td><td>" + request.tVendorName + "</td></tr>" +
                 "<tr><td>Store:</td><td>" + request.tStoreNumber + "</td></tr>" +
@@ -489,7 +515,8 @@ namespace DeploymentTool.Controller
 
             tblPurchaseOrder tblPO = new tblPurchaseOrder()
             {
-                tPurchaseOrderNumber = request.tPurchaseOrderNumber,
+                aPurchaseOrderID= request.aPurchaseOrderPreviewTeamplateID,
+                nTemplateId = request.nTemplateId,
                 nStoreID = Convert.ToInt32(request.tStoreNumber),
                 tBillingName = request.tName,
                 tBillingPhone = request.tPhone,
@@ -505,8 +532,12 @@ namespace DeploymentTool.Controller
 
             };
 
-            db.tblPurchaseOrders.Add(tblPO);
-            await db.SaveChangesAsync();
+            //db.tblPurchaseOrders.Add(tblPO);
+            db.Entry(tblPO).State = EntityState.Modified;
+            // Update into tblVendorPartRel
+            
+                
+                await db.SaveChangesAsync();
             var aPurchaseOrderID = tblPO.aPurchaseOrderID;
 
             return Ok(message);
@@ -537,6 +568,8 @@ namespace DeploymentTool.Controller
             db.tblOutgoingEmails.Add(tblQuoteEmail);
             await db.SaveChangesAsync();
             var aOutgoingEmailID = tblQuoteEmail.aOutgoingEmailID;
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblPurchaseOrder set nOutgoingEmailID=@nOutgoingEmailID  where aPurchaseOrderID =@aPurchaseOrderID", new SqlParameter("@nOutgoingEmailID", aOutgoingEmailID), new SqlParameter("@aPurchaseOrderID", request.aPurchaseOrderID));
+
             //if (MailObj.FileAttachments != null)
             //{
             //    foreach (var RequestFile in MailObj.FileAttachments)
@@ -581,5 +614,6 @@ namespace DeploymentTool.Controller
         {
             return db.tblParts.Count(e => e.aPartID == id) > 0;
         }
+
     }
 }

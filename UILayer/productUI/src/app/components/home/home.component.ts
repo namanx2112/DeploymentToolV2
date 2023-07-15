@@ -22,13 +22,17 @@ export class HomeComponent {
     this.viewName = "Dashboard";
     this.tTabName = "Dashboard";
     this.userName = this.authService.getUserName();
-    this.commonService.getAllDropdowns();
+    this.loadDropdown();
   }
 
   getValue() {
     this.homeService.loginGet().subscribe((res: string) => {
       alert(res);
     });
+  }
+
+  async loadDropdown(){    
+    this.commonService.getAllDropdowns();
   }
 
   switchView(vName: string) {
@@ -95,5 +99,9 @@ export class HomeComponent {
         dialogRef = cThis.dialog.open(SupportPageComponent, dialogConfig);
       })
     }
+  }
+
+  actionChanged(ev: any){
+    this.tTabName = ev;
   }
 }

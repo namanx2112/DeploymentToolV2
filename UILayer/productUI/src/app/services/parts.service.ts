@@ -14,7 +14,7 @@ export class PartsService {
     this.configUrl = authService.getConfigUrl();
   }
 
-  GetTableVisibleColumns(){
+  GetTableVisibleColumns() {
     return [
       "tPartDesc",
       "tPartNumber",
@@ -32,6 +32,10 @@ export class PartsService {
 
   Get(request: any | null) {
     return this.http.post<PartsModel[]>(this.configUrl + "VendorParts/Get", request, { headers: this.authService.getHttpHeaders() });
+  }
+
+  Delete(request: PartsModel) {
+    return this.http.get<PartsModel>(this.configUrl + "VendorParts/Delete?id=" + request.aPartID, { headers: this.authService.getHttpHeaders() });
   }
 
   GetSearchFields(): Fields[] {
@@ -61,7 +65,7 @@ export class PartsService {
       validator: [],
       mandatory: false,
       hidden: true
-    },{
+    }, {
       field_name: "Vendor Id",
       fieldUniqeName: "nVendorId",
       defaultVal: "",

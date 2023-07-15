@@ -28,9 +28,12 @@ export class VendorService {
     return this.http.post<VendorModel[]>(this.configUrl + "Vendor/Get", request, { headers: this.authService.getHttpHeaders() });
   }
 
+  Delete(request: VendorModel) {
+    return this.http.get<VendorModel>(this.configUrl + "Vendor/Delete?id=" + request.aVendorId, { headers: this.authService.getHttpHeaders() });
+  }
+
   GetTableVisibleColumns(){
     return [
-      "aVendorId",
       "tVendorName",
       "tVendorEmail",
       "tVendorPhone",
@@ -72,7 +75,7 @@ export class VendorService {
         hidden: true
       },
       {
-        field_name: "Vendor Name",
+        field_name: "Name",
         fieldUniqeName: "tVendorName",
         defaultVal: "",
         readOnly: false,
@@ -144,7 +147,7 @@ export class VendorService {
         hidden: true
       },
       {
-        field_name: "Contact Number",
+        field_name: "Contact No",
         fieldUniqeName: "tVendorPhone",
         defaultVal: "",
         readOnly: false,
@@ -205,7 +208,7 @@ export class VendorService {
         hidden: true
       },
       {
-        field_name: "Vendor Type",
+        field_name: "Type",
         fieldUniqeName: "nType",
         defaultVal: "",
         readOnly: false,

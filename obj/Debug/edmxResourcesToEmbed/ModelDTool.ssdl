@@ -204,7 +204,8 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="aPartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tPartDesc" Type="nvarchar(max)" />
     <Property Name="tPartNumber" Type="nvarchar(max)" />
-    <Property Name="cPrice" Type="decimal" Precision="22" Scale="4" />
+    <Property Name="cPrice" Type="decimal" Precision="22" Scale="2" />
+    <Property Name="bDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="tblProject">
     <Key>
@@ -508,13 +509,14 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="tShippingAddress" Type="nvarchar(max)" />
     <Property Name="tNotes" Type="nvarchar(max)" />
     <Property Name="dDeliver" Type="datetime" />
-    <Property Name="cTotal" Type="decimal" Precision="22" Scale="4" />
+    <Property Name="cTotal" Type="decimal" Precision="22" Scale="2" />
     <Property Name="nOutgoingEmailID" Type="int" />
     <Property Name="nCreatedBy" Type="int" />
     <Property Name="nUpdateBy" Type="int" />
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+    <Property Name="nTemplateId" Type="int" />
   </EntityType>
   <EntityType Name="tblPurchaseOrderParts">
     <Key>
@@ -523,9 +525,9 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
     <Property Name="aPurchaseOrderPartsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tDescription" Type="nvarchar(max)" />
     <Property Name="tPartNumber" Type="nvarchar(max)" />
-    <Property Name="cPrice" Type="decimal" Precision="22" Scale="4" />
+    <Property Name="cPrice" Type="decimal" Precision="22" Scale="2" />
     <Property Name="nQuantity" Type="int" />
-    <Property Name="cTotal" Type="decimal" Precision="22" Scale="4" />
+    <Property Name="cTotal" Type="decimal" Precision="22" Scale="2" />
   </EntityType>
   <EntityType Name="tblPurchaseOrderTemplate">
     <Key>

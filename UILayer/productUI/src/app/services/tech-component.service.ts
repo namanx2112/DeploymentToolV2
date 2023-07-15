@@ -33,6 +33,10 @@ export class TechComponenttService {
     return this.http.post<TechComponentModel[]>(this.configUrl + "TechComponent/GetTechComponents", request, { headers: this.authService.getHttpHeaders() });
   }
 
+  Delete(request: TechComponentModel) {
+    return this.http.get<TechComponentModel>(this.configUrl + "TechComponent/Delete?id=" + request.aTechComponentId, { headers: this.authService.getHttpHeaders() });
+  }
+
   GetSearchFields(): Fields[]{
     let fields = [{
       field_name: "TechComponent Name",

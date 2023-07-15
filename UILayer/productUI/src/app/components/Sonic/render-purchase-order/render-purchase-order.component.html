@@ -17,30 +17,26 @@
             </div>
             <div class="mailField">
                 <label>Email</label>
-                <input class="lightGray" [(ngModel)]="curTemplate.tEmail" />
-            </div>
-            <div class="mailField">
-                <label>Address</label>
-                <input class="lightGray" [(ngModel)]="curTemplate.tAddress" />
-            </div>
-        </div>
-        <div class="half shipping">
-            <h3>Shipping</h3>
-            <div class="mailField">
-                <label>Name</label>
-                <input class="lightGray" [(ngModel)]="curTemplate.tBillToCompany" />
-            </div>
-            <div class="mailField">
-                <label>Phone</label>
-                <input class="lightGray" [(ngModel)]="curTemplate.tPhone" />
-            </div>
-            <div class="mailField">
-                <label>Email</label>
                 <input class="lightGray" [(ngModel)]="curTemplate.tBillToEmail" />
             </div>
             <div class="mailField">
                 <label>Address</label>
                 <input class="lightGray" [(ngModel)]="curTemplate.tBillToAddress" />
+            </div>
+        </div>
+        <div class="half shipping">
+            <h3>Shipping</h3>
+            <div class="mailField">
+                <label>Store</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tStore" />
+            </div>
+            <div class="mailField">
+                <label>Name</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tName" />
+            </div>           
+            <div class="mailField">
+                <label>Address</label>
+                <input class="lightGray" [(ngModel)]="curTemplate.tAddress" />
             </div>
         </div>
         <div class="mailField">
@@ -88,7 +84,7 @@
                             <b>Deliver#:</b>
                         </td>
                         <td colspan="2">${{curTemplate.cTotal}}<br />
-                            {{curTemplate.tPurchaseOrderNumber}}<br />
+                            {{curTemplate.aPurchaseOrderPreviewTeamplateID}}<br />
                             {{getFormatedDate(curTemplate.dDeliver)}}
                         </td>
                     </tr>

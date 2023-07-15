@@ -6,7 +6,8 @@
             <mat-header-cell *matHeaderCellDef class="headerClass" mat-sort-header>{{ column.header }}</mat-header-cell>
             <mat-cell *matCellDef="let row">                
                 {{ row[column.columnDef] }}
-                <span *ngIf="clickCol == '' && index == 0" (click)="cellClick(row)" class="cellEditButton"><mat-icon>edit</mat-icon></span>
+                <span *ngIf="clickCol == '' && index == 0" (click)="cellClick(row)" title="Click to Edit" class="cellEditButton"><mat-icon>edit</mat-icon></span>
+                <span *ngIf="clickCol == '' && index == 0" (click)="cellDelete(row)"  title="Click to Remove" class="cellDeleteButton"><mat-icon>delete</mat-icon></span>
             </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true;"></mat-header-row>

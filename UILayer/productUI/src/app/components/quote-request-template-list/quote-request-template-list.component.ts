@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { QuoteRequestTemplate } from 'src/app/interfaces/models';
@@ -13,9 +13,14 @@ export class QuoteRequestTemplateListComponent {
   searchText: string;
   @Output()
   moveView = new EventEmitter<number>();
+  @Input()
+  set NeedNew(val: boolean) {
+    if (val == true)
+      this.OpenView(0);
+  }
   allRequests: QuoteRequestTemplate[];
   searchField: Fields[];
-  allQuotes: { [key: number]: string };
+  allQuotes: any[];
   nBrandId: number;
   nTemplateId: number;
   constructor(private service: QuoteRequestWorkflowConfigService) {
@@ -54,11 +59,23 @@ export class QuoteRequestTemplateListComponent {
     //this.moveView.emit(6);
   }
 
+  deleteMe(templateId: any) {
+    if (confirm("Are you sure you want to delete this Item?")) {
+      this.service.Delete(templateId).subscribe((x: any) => {
+        this.getQuoteRequests();
+      });
+    }
+  }
+
   moveBack(inst: number) {
     if (inst > 0) {
       this.getQuoteRequests();
     }
     this.nTemplateId = -1;
+  }
+
+  getFormatedDate(dt: Date) {
+    return (dt) ? new Date(dt).toLocaleDateString() : "";
   }
 
 }

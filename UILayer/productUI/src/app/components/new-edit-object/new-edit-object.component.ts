@@ -32,6 +32,8 @@ export class NewEditObjectComponent {
   childCount: number;
   @Input() set controlValues(value: Dictionary<string>) {
     this._controlValues = value;
+    if (this.childCount > 0 && !this.isEditMode(this._curTab, this._controlValues))
+      this.SubmitLabel = "Next";
     this.valueChanged();
   };
   get controlValues(): Dictionary<string> {
@@ -43,7 +45,7 @@ export class NewEditObjectComponent {
   refreshChildTable: any = {};
   constructor(private dialog: MatDialog, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseService: FranchiseService, private userSerice: UserService, private partsService: PartsService) {
-    this.SubmitLabel = "Submit";
+    this.SubmitLabel = "Save";
     this.controlValues = {};
   }
 
@@ -166,6 +168,9 @@ export class NewEditObjectComponent {
           dialogRef.close();
         });
       },
+      onClose: function (ev: any) {
+        dialogRef.close();
+      },
       themeClass: "grayWhite",
       dialogTheme: "lightGrayWhiteTheme"
     };
@@ -189,14 +194,20 @@ export class NewEditObjectComponent {
     return aField;
   }
 
+  onCloseClicked(ev: any){
+    ev.closed = true;
+    this.returnBack.emit(ev);
+  }
+
 
   onSubmit(controlVals: FormGroup, tab: HomeTab) {
     let cThis = this;
     let newMode = (!this.isEditMode(controlVals.value, tab) && this._curTab.childTabs.length > 0);
     this.saveThisTab(controlVals, tab, function (resp: any) {
-      if (newMode){
+      if (newMode) {
         cThis.controlValues = resp;
         cThis.initControlValues();
+        cThis.SubmitLabel = "Save";
       }
       else
         cThis.returnBack.emit(resp);

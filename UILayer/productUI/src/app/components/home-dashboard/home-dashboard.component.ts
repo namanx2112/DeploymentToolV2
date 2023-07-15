@@ -15,7 +15,7 @@ export class HomeDashboardComponent {
     this.getBrands();
   }
 
-  getBrands() {
+  async getBrands() {
     // this.brands = this.brandService.GetAllBrands();
     //  {
     //   aBrandId: 0,

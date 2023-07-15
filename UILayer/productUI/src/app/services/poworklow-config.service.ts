@@ -25,7 +25,7 @@ export class POWorkflowConfigService {
   }
 
   Delete(nTemplateId: number) {
-    return this.http.get<any>(this.configUrl + "PurchaseOrder/Delete?nTemplateId=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<any>(this.configUrl + "PurchaseOrder/Delete?id=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
   }
 
   GetMergedPO(nProjectId: number, nTemplateId: number) {

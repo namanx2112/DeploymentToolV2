@@ -88,6 +88,7 @@ export interface PartsModel {
 
 export interface POMailMessage {
     nProjectId: number,
+    aPurchaseOrderID: number,
     tTo: string,
     tCC: string,
     tSubject: string,
@@ -154,6 +155,7 @@ export interface POConfigTemplateTemp {
     tTemplateName: string;
     nBrandId: number,
     nVenderId: number,
+    dtCreatedOn: Date
 }
 
 export interface POConfigTemplate {
@@ -186,6 +188,7 @@ export interface POConfigPart {
 export interface MergedPO {
     aPurchaseOrderPreviewTeamplateID: number,
     nProjectId: number,
+    nTemplateId: number,
     nVendorId: number,
     tStore: string,
     tStoreNumber: string,
@@ -203,7 +206,6 @@ export interface MergedPO {
     tBillToCity: string,
     tBillToState: string,
     cTotal: number,
-    tPurchaseOrderNumber: string,
     dDeliver: Date,
     nOutgoingEmailID: number
     purchaseOrderParts: POConfigPart[]

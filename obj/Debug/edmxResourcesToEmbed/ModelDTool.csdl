@@ -753,7 +753,8 @@
     <Property Name="aPartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tPartDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="tPartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="cPrice" Type="Decimal" Precision="22" Scale="4" />
+    <Property Name="cPrice" Type="Decimal" Precision="22" Scale="2" />
+    <Property Name="bDeleted" Type="Boolean" />
   </EntityType>
   <EntityType Name="tblPurchaseOrder">
     <Key>
@@ -772,13 +773,14 @@
     <Property Name="tShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="tNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="dDeliver" Type="DateTime" Precision="3" />
-    <Property Name="cTotal" Type="Decimal" Precision="22" Scale="4" />
+    <Property Name="cTotal" Type="Decimal" Precision="22" Scale="2" />
     <Property Name="nOutgoingEmailID" Type="Int32" />
     <Property Name="nCreatedBy" Type="Int32" />
     <Property Name="nUpdateBy" Type="Int32" />
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="nTemplateId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblPurchaseOrderPart">
     <Key>
@@ -787,9 +789,9 @@
     <Property Name="aPurchaseOrderPartsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="tPartNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="cPrice" Type="Decimal" Precision="22" Scale="4" />
+    <Property Name="cPrice" Type="Decimal" Precision="22" Scale="2" />
     <Property Name="nQuantity" Type="Int32" />
-    <Property Name="cTotal" Type="Decimal" Precision="22" Scale="4" />
+    <Property Name="cTotal" Type="Decimal" Precision="22" Scale="2" />
   </EntityType>
   <EntityType Name="tblPurchaseOrderTemplatePart">
     <Key>

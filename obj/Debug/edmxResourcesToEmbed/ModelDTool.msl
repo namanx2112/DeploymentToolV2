@@ -720,6 +720,7 @@
     <EntitySetMapping Name="tblParts">
       <EntityTypeMapping TypeName="dtDBModel.tblPart">
         <MappingFragment StoreEntitySet="tblParts">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="cPrice" ColumnName="cPrice" />
           <ScalarProperty Name="tPartNumber" ColumnName="tPartNumber" />
           <ScalarProperty Name="tPartDesc" ColumnName="tPartDesc" />
@@ -730,6 +731,7 @@
     <EntitySetMapping Name="tblPurchaseOrders">
       <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrder">
         <MappingFragment StoreEntitySet="tblPurchaseOrder">
+          <ScalarProperty Name="nTemplateId" ColumnName="nTemplateId" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />

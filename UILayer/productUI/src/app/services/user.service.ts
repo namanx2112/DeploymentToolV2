@@ -24,13 +24,18 @@ export class UserService {
   Update(request: any) {
     return this.http.post<number>(this.configUrl + "User/Update", request, { headers: this.authService.getHttpHeaders() });
   }
+
+  Delete(request: UserModel) {
+    return this.http.get<UserModel>(this.configUrl + "User/Delete?id=" + request.aUserID, { headers: this.authService.getHttpHeaders() });
+  }
+
   
   GetTableVisibleColumns(){
     return [
+      "tName",
       "tUserName",
       "tEmail",
-      "nDepartment",
-      "nRole"
+      "tEmpID"
     ];
   }
 
@@ -107,7 +112,7 @@ export class UserService {
       hidden: true
     },
     {
-      field_name: "User Name",
+      field_name: "Name",
       fieldUniqeName: "tName",
       defaultVal: "",
       readOnly: false,
@@ -119,7 +124,7 @@ export class UserService {
       hidden: false
     },
     {
-      field_name: "User Login Name",
+      field_name: "Login Name",
       fieldUniqeName: "tUserName",
       defaultVal: "",
       readOnly: false,
@@ -131,7 +136,7 @@ export class UserService {
       hidden: false
     },
     {
-      field_name: "User Email",
+      field_name: "Email",
       fieldUniqeName: "tEmail",
       defaultVal: "",
       readOnly: false,
@@ -142,7 +147,7 @@ export class UserService {
       mandatory: false,
       hidden: false
     },{
-      field_name: "User Department",
+      field_name: "Department",
       fieldUniqeName: "nDepartment",
       defaultVal: "",
       readOnly: false,
@@ -154,7 +159,7 @@ export class UserService {
       mandatory: false,
       hidden: false
     },{
-      field_name: "User Role",
+      field_name: "Role",
       fieldUniqeName: "nRole",
       defaultVal: "",
       readOnly: false,
@@ -167,7 +172,7 @@ export class UserService {
       hidden: false
     },
     {
-      field_name: "User Emp Id",
+      field_name: "Emp Id",
       fieldUniqeName: "tEmpID",
       defaultVal: "",
       readOnly: false,
@@ -179,7 +184,7 @@ export class UserService {
       hidden: false
     },
     {
-      field_name: "User Mobile Number",
+      field_name: "Mobile Number",
       fieldUniqeName: "tMobile",
       defaultVal: "",
       readOnly: false,

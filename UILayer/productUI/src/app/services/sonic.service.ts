@@ -34,6 +34,11 @@ export class SonicService {
     return this.http.get<StoreSearchModel[]>(this.configUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
+  // Delete(request: UserModel) {
+  //   return this.http.delete<UserModel>(this.configUrl + "User/Delete?id=" + request.aUserID, { headers: this.authService.getHttpHeaders() });
+  // }
+
+
   GetPOQuantityFields() {
     let items = [
       { name: "Store Configuration", fields: [{ title: "Stall Count", field: "nStallCount", tableName: "tblProjectConfig" }] },

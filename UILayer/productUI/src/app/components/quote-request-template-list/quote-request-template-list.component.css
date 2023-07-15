@@ -1,61 +1,92 @@
-.tabsBody{
+.tabsBody {
     width: 90%;
     height: 100%;
     margin: 0px auto;
     background-color: #fff;
 }
-.header{
+
+.header {
     height: 40px;
     width: 100%;
     line-height: 35px;
     float: left;
-    font-size: 15px;    
+    font-size: 15px;
     color: #444;
     font-weight: bold;
 }
-.mat-icon{
+
+.mat-icon {
     height: auto;
     line-height: 16px;
     cursor: pointer;
 }
-.SearchPart{
+
+.SearchPart {
     min-height: calc(20% - 45px);
     width: 100%;
     float: left;
 }
-.newEditPart{
+
+.newEditPart {
     height: calc(100% - 40px);
     width: 100%;
     float: left;
 }
-.tablePart{
+
+.tablePart {
     min-height: calc(80% - 40px);
     width: 100%;
     float: left;
 }
-.searchButton{
+
+.searchButton {
     float: left;
     margin: 0px 15px;
     height: 45px;
 }
-.searchControls{
+
+.searchControls {
     float: left;
     width: calc(100% - 250px);
 }
 
-.requestTile{
+.requestTile {
     width: 200px;
     height: 150px;
     float: left;
     margin: 0px 20px 20px 0px;
     border-radius: 10px;
-    cursor: pointer;
 }
 
-.requestTile > span{
-    margin: 30% auto;
+.requestTile>.tName {
+    margin-top: 35px;
     font-weight: bold;
     font-size: 14px;
     display: block;
-    text-align: center;
+    text-align: center;    
+    cursor: pointer;
+}
+
+.requestTile .tileHeader {
+    height: 20px;
+    padding: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.requestTile .titleTime {
+    float: left;
+    font-size: 8px;
+    color: gray;
+    line-height: 18px;
+}
+
+.requestTile .cellDeleteButton {
+    float: right;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.requestTile .cellDeleteButton .icon{
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 20px;
 }

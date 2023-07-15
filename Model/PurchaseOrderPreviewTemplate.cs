@@ -7,7 +7,7 @@ using System.Web;
 
 namespace DeploymentTool.Model
 {
-    public class PurchaseOrderPreviewTemplate: Misc.ModelParent
+    public class PurchaseOrderPreviewTemplate : Misc.ModelParent
     {
         public int nProjectId { get; set; }
         public int aPurchaseOrderPreviewTeamplateID { get; set; }
@@ -33,11 +33,11 @@ namespace DeploymentTool.Model
 
         public string tTo { get; set; }
         public string tProjectManager { get; set; }
-        
+
         public string tCC { get; set; }
         public List<PurchaseOrderParts> purchaseOrderParts { get; set; }
         public decimal cTotal { get; set; }
-        public string tPurchaseOrderNumber { get; set; }
+        public int nTemplateId { get; set; }
         public DateTime dDeliver { get; set; }
         public int nOutgoingEmailID { get; set; }
         public int CreatedBy { get; set; }
@@ -57,6 +57,7 @@ namespace DeploymentTool.Model
         public int nVendorId { get; set; }
         public int nCreatedBy { get; set; }
         public int nUpdateBy { get; set; }
+        public DateTime dtCreatedOn { get; set; }
     }
     public class PurchaseOrderTemplate
     {
@@ -76,26 +77,40 @@ namespace DeploymentTool.Model
         public string tTo { get; set; }
 
         public string tCC { get; set; }
-        
+
         public List<PurchaseOrderParts> purchaseOrderParts { get; set; }
         public tblPurchaseOrderTemplate GetTblPurchaseOrder()
         {
-            return new tblPurchaseOrderTemplate()
-            {
-                aPurchaseOrderTemplateID = this.aPurchaseOrderTemplateID,
-                tTemplateName = this.tTemplateName,
-                tTechnologyComponent = this.tCompName,
-                nBrandID = this.nBrandID,
-                nVendorID=this.nVendorID,
-                nCreatedBy = this.nCreatedBy
-            };
+            if (this.aPurchaseOrderTemplateID <= 0)
+                return new tblPurchaseOrderTemplate()
+                {
+                    aPurchaseOrderTemplateID = this.aPurchaseOrderTemplateID,
+                    tTemplateName = this.tTemplateName,
+                    tTechnologyComponent = this.tCompName,
+                    nBrandID = this.nBrandID,
+                    nVendorID = this.nVendorID,
+                    nCreatedBy = this.nCreatedBy,
+                    dtCreatedOn = DateTime.Now,
+                    nUpdateBy = 0
+                };
+            else
+                return new tblPurchaseOrderTemplate()
+                {
+                    aPurchaseOrderTemplateID = this.aPurchaseOrderTemplateID,
+                    tTemplateName = this.tTemplateName,
+                    tTechnologyComponent = this.tCompName,
+                    nBrandID = this.nBrandID,
+                    nVendorID = this.nVendorID,
+                    nUpdateBy = this.nCreatedBy,
+                    dtUpdatedOn = DateTime.Now
+                };
         }
     }
     public class PurchaseOrderParts
     {
         public int aPurchaseOrderTemplatePartsID { get; set; }
         public int aPurchaseOrderTemplateID { get; set; }
-        
+
         public int nPartID { get; set; }
         public string tPartDesc { get; set; }
         public string tPartNumber { get; set; }
@@ -109,6 +124,9 @@ namespace DeploymentTool.Model
     public class PurchaseOrderMailMessage
     {
         public int nProjectId { get; set; }
+
+        public int aPurchaseOrderID { get; set; }
+
         public string tTo { get; set; }
         public string tCC { get; set; }
         public string tSubject { get; set; }
@@ -118,7 +136,7 @@ namespace DeploymentTool.Model
         public List<FileAttachment> FileAttachments { get; set; }
         public string tMyFolderId { get; set; }
     }
-	 public class PurchaseOrderPartDetails
+    public class PurchaseOrderPartDetails
     {
         public int aPurchaseOrderTemplateID { get; set; }
         public int nPartID { get; set; }

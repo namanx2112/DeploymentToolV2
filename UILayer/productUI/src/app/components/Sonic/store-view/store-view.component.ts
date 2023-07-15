@@ -229,6 +229,9 @@ export class StoreViewComponent {
           dialogRef.close();
         });
       },
+      onClose: function(ev: any){
+        dialogRef.close();
+      },
       themeClass: "grayWhite",
       dialogTheme: "lightGrayWhiteTheme"
     };
