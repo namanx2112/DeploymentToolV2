@@ -79,8 +79,10 @@ namespace DeploymentTool.Model
         public string tCC { get; set; }
 
         public List<PurchaseOrderParts> purchaseOrderParts { get; set; }
-        public tblPurchaseOrderTemplate GetTblPurchaseOrder()
+        public tblPurchaseOrderTemplate GetTblPurchaseOrder(HttpContext context)
         {
+            var securityContext = (User)context.Items["SecurityContext"];
+            int lUserId = securityContext.nUserID;
             if (this.aPurchaseOrderTemplateID <= 0)
                 return new tblPurchaseOrderTemplate()
                 {
@@ -89,7 +91,7 @@ namespace DeploymentTool.Model
                     tTechnologyComponent = this.tCompName,
                     nBrandID = this.nBrandID,
                     nVendorID = this.nVendorID,
-                    nCreatedBy = this.nCreatedBy,
+                    nCreatedBy = lUserId,
                     dtCreatedOn = DateTime.Now,
                     nUpdateBy = 0
                 };
@@ -101,7 +103,7 @@ namespace DeploymentTool.Model
                     tTechnologyComponent = this.tCompName,
                     nBrandID = this.nBrandID,
                     nVendorID = this.nVendorID,
-                    nUpdateBy = this.nCreatedBy,
+                    nUpdateBy = lUserId,
                     dtUpdatedOn = DateTime.Now
                 };
         }

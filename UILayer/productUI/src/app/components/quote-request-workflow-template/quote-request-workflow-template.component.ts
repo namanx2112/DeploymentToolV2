@@ -54,8 +54,17 @@ export class QuoteRequestWorkflowTemplateComponent {
     }
   }
 
+  // someComplete(items: any[]){
+  //   if (items == null) {
+  //     return false;
+  //   }
+  //   return items.filter(t => t.completed).length > 0 && !this.allComplete;
+  // }
+
+  setAll(check: boolean, items: any[]){}
+
   updateSelectedTabs() {
-    this.selectedTabs = [];
+    this.selectedTabs = [this.techCompTabs[0], this.techCompTabs[1]];
     for (var indx in this.curTemplate.quoteRequestTechComps) {
       let tTab = this.curTemplate.quoteRequestTechComps[indx];
       let sTab = this.techCompTabs.filter(x => x.tab_name == tTab.tTechCompName);

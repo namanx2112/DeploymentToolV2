@@ -130,7 +130,7 @@ export class FranchiseService {
         invalid: false,
         field_type: FieldType.email,
         field_placeholder: "Enter Franchise Email",
-        validator: [],
+        validator: [Validators.email],
         mandatory: true,
         hidden: false
       },

@@ -13,14 +13,8 @@ using System.Net.Http.Formatting;
 using System.Data.SqlClient;
 using System.Data;
 using DeploymentTool.Model.Templates;
-using System.Net.Mail;
-using iTextSharp.text;
-using System.Web;
-using System.Web.Helpers;
 using System.IO;
-using Org.BouncyCastle.Utilities.Net;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.pdf;
+using System.Web;
 
 namespace DeploymentTool.Controller
 {
@@ -168,7 +162,7 @@ namespace DeploymentTool.Controller
             {
                 //GetMergedPORequest(poRequest.aPurchaseOrderTemplateID);
                 ////Start 
-                tblPurchaseOrderTemplate tPurchaseOrder = poRequest.GetTblPurchaseOrder();
+                tblPurchaseOrderTemplate tPurchaseOrder = poRequest.GetTblPurchaseOrder(HttpContext.Current);
 
                 // Add into tblVendorPartRel
                 //tPurchaseOrder.aPurchaseOrderTemplateID = poRequest.aPurchaseOrderTemplateID;
@@ -247,7 +241,7 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(PurchaseOrderTemplate poRequest)
         {
-            tblPurchaseOrderTemplate tPurchaseOrder = poRequest.GetTblPurchaseOrder();
+            tblPurchaseOrderTemplate tPurchaseOrder = poRequest.GetTblPurchaseOrder(HttpContext.Current);
             db.tblPurchaseOrderTemplates.Add(tPurchaseOrder);
             await db.SaveChangesAsync();
             // Add into tblVendorPartRel
@@ -437,45 +431,28 @@ namespace DeploymentTool.Controller
         public async System.Threading.Tasks.Task<IHttpActionResult> SenMergedPO(PurchaseOrderPreviewTemplate request)
         {
             string strBody = "";
-            // string strSubject = "";
-            //var strNumber = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where aStoreID= (Select nStoreID from tblProject  with (nolock) where aProjectID= @nProjectID)", new SqlParameter("@nProjectID", nProjectID)).FirstOrDefault();
-            // var tSubject = request.tCity+", "+ request.tStoreState+ " #" + request.tStoreNumber + " - "+ request.tVendorName +" "+ request.tTemplateName + " Purchase Order";
-
-            strBody += "<div><h1> " + request.tTemplateName + "Purchase Order </h1></div></br>";
-
-            // strBody += "<div><b> " + request.tTemplateName + " </b></div><div>\r\n    &nbsp;\r\n</div>";
-            strBody += "<div><b> Store No </b> " + request.tStoreNumber + "</div>";
-            //strBody += "<figure class='table' style='width:100%;'>";
-            strBody += " <table><tbody><tr>";
-
-            strBody += "<td></br><div><b> Billing </b></div></br>";
-
+            strBody = "<htm><head></head><body><div  style='text-align:center;'><h1> " + request.tTemplateName + " Purchase Order </h1></div>";
+            strBody += "<div style='width:100%;line-height:25px;float:left' ><b> Store No </b> " + request.tStoreNumber + "</div>";
+            strBody += "</br><div style='line-height:25px;float:left' ><p> </p> </div>";
+            strBody += "<div> <table  style='border: 1px solid black;'><tbody><tr>";
+            strBody += "<td> </br><div><b> Billing </b></div></br>";
             strBody += "<div><b> Name </b> " + request.tName + "</div>";
-
-            strBody += "<div><b> Phone </b> " + request.tPhone + "</div>";
-
-            strBody += "<div><b> Email </b> " + request.tBillToEmail + "</div>";
-
-            strBody += "<div><b> Address </b> " + request.tBillToAddress + "</div></br>";
+            strBody += "<div><b>Phone </b> " + request.tPhone + "</div>";
+            strBody += "<div><b>Email </b> " + request.tBillToEmail + "</div>";
+            strBody += "<div><b>Address </b> " + request.tBillToAddress + "</div></br></td>";
             //strBody += "<div> " + request.tCity + " " + request.tStoreState + " " + request.tStoreZip + "</div></td>";
-
-            strBody += "<td></br><div><b> Shipping </b></div></br>";
-
-            //  strBody += "<div><b> Store </b> " + request.tStore + "</div>";
-
-            strBody += "<div><b> Name </b> " + request.tName + "</div>";
-
-            strBody += "<div><b> Email </b> " + request.tEmail + "</div>";
-
-            strBody += "<div><b> Address </b> " + request.tAddress + "</div>";
+            strBody += "<td></br><div><b>Shipping </b></div></br>";
+            strBody += "<div><b>Store </b> " + request.tStore + "</div>";
+            strBody += "<div><b>Name </b> " + request.tName + "</div>";
+            // strBody += "<div  style='text-align:left;'><b> Email </b> " + request.tEmail + "</div>";
+            strBody += "<div><b>Address </b> " + request.tAddress + "</div>";
+            strBody += "<div> </div></td>";
             //  strBody += "<div> " + request.tBillToCity + " " + request.tBillToState + " " + request.tBillToZip + "</div></td>";
 
-
-
-            strBody += "</tr></tbody></table></br><div><b> Notes </b> " + request.tNotes + "</div>";
-            strBody += "<div><table><thead><tr><th style='width:35%;'>Description</th><th style='width:35%;'>Parts Number</th><th style='width:10%;'>Price</th><th style='width:10%;'> Quantity</th><th style='width:10%;'>Total</th></tr></thead>";
-
-
+            strBody += "</tr></tbody></table></br>";
+            strBody += "<div style='width:100%;line-height:25px;float:left'><b> Notes </b> " + request.tNotes + " </div>";
+            strBody += "<br></br><div style='line-height:25px;float:left'><p></p></div>";
+            strBody += "</br></br><div><table style='border: 1px solid black;'><thead style='border: 1px solid black;'><tr><b><th style='width:35%;'>Description</th><th style='width:35%;'>Parts Number</th><th style='width:10%;'>Price</th><th style='width:10%;'> Quantity</th><th style='width:10%;'>Total</th></b></tr></thead>";
             strBody += "<tbody>";
             foreach (var parts in request.purchaseOrderParts)
             {
@@ -488,13 +465,13 @@ namespace DeploymentTool.Controller
             strBody += "<div style='text-align:right;'><b> Total:</b> " + request.cTotal.ToString() + "</div>";
             strBody += "<div style='text-align:right;'><b> PO#: </b> " + request.aPurchaseOrderPreviewTeamplateID.ToString() + "</div>";
             strBody += "<div style='text-align:right;'><b> Deliver#: </b> " + request.dDeliver.ToShortDateString() + "</div>";
-            string fileName = "PurachaaseOrder.pdf";
-			String strFilePath = DeploymentTool.Misc.Utilities.WriteHTMLToPDF(strBody, fileName);
+            strBody += "</body></html>";
+            string fileName = "PurachaseOrder.pdf";
+            String strFilePath = DeploymentTool.Misc.Utilities.WriteHTMLToPDF(strBody, fileName);
             string strStyle = "<style>td{ border: 0px none!important;} " +
                     "table{ width: 60%!important;border: 1px solid lightgray!important;border-radius: 5px!important;}</style>";
             PurchaseOrderMailMessage message = new PurchaseOrderMailMessage()
             {
-                aPurchaseOrderID = request.aPurchaseOrderPreviewTeamplateID,
                 nProjectId = request.nProjectId,
                 tTo = request.tTo,
                 tCC = request.tCC,
@@ -509,13 +486,14 @@ namespace DeploymentTool.Controller
                 "<table>",
                 tFileName = fileName,
                 tSubject = request.tCity + ", " + request.tStoreState + " #" + request.tStoreNumber + " - " + request.tVendorName + " " + request.tTemplateName + " Purchase Order",
-                tMyFolderId= strFilePath
+                tMyFolderId = strFilePath,
+                aPurchaseOrderID = request.aPurchaseOrderPreviewTeamplateID,
 
             };
 
             tblPurchaseOrder tblPO = new tblPurchaseOrder()
             {
-                aPurchaseOrderID= request.aPurchaseOrderPreviewTeamplateID,
+                aPurchaseOrderID = request.aPurchaseOrderPreviewTeamplateID,
                 nTemplateId = request.nTemplateId,
                 nStoreID = Convert.ToInt32(request.tStoreNumber),
                 tBillingName = request.tName,
@@ -535,9 +513,9 @@ namespace DeploymentTool.Controller
             //db.tblPurchaseOrders.Add(tblPO);
             db.Entry(tblPO).State = EntityState.Modified;
             // Update into tblVendorPartRel
-            
-                
-                await db.SaveChangesAsync();
+
+
+            await db.SaveChangesAsync();
             var aPurchaseOrderID = tblPO.aPurchaseOrderID;
 
             return Ok(message);
@@ -547,45 +525,62 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async System.Threading.Tasks.Task<IHttpActionResult> SendPO(PurchaseOrderMailMessage request)
         {
-            //string fileName = "PurachaaseOrder.pdf";
+            try
+            {
+                //string fileName = "PurachaaseOrder.pdf";
 
-            //string URL = HttpRuntime.AppDomainAppPath;
-            //string strFilePath = URL + @"Attachments\" + fileName;
+                //string URL = HttpRuntime.AppDomainAppPath;
+                //string strFilePath = URL + @"Attachments\" + fileName;
 
-            EMailRequest MailObj = new EMailRequest();
-            MailObj.tSubject = request.tSubject;
-            MailObj.tTo = request.tTo;
-            MailObj.tCC = request.tCC;
-            MailObj.tContent = request.tContent;
-            MailObj.tFilePath = request.tMyFolderId;// strFilePath;
-            //FileAttachment ifile = new FileAttachment();
-            //ifile.tFileName= strFilePath;
-            //List< FileAttachment> ifiles = new List<FileAttachment>();
-            //ifiles.Add(ifile);
-            //MailObj.FileAttachments= ifiles;
-            DeploymentTool.Misc.Utilities.SendMail(MailObj);
-            tblOutgoingEmail tblQuoteEmail = MailObj.GettblOutgoingEmail();
-            db.tblOutgoingEmails.Add(tblQuoteEmail);
-            await db.SaveChangesAsync();
-            var aOutgoingEmailID = tblQuoteEmail.aOutgoingEmailID;
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblPurchaseOrder set nOutgoingEmailID=@nOutgoingEmailID  where aPurchaseOrderID =@aPurchaseOrderID", new SqlParameter("@nOutgoingEmailID", aOutgoingEmailID), new SqlParameter("@aPurchaseOrderID", request.aPurchaseOrderID));
+                EMailRequest MailObj = new EMailRequest();
+                MailObj.tSubject = request.tSubject;
+                MailObj.tTo = request.tTo;
+                MailObj.tCC = request.tCC;
+                MailObj.tContent = request.tContent;
+                MailObj.tFilePath = request.tMyFolderId;// strFilePath;
+                                                        //FileAttachment ifile = new FileAttachment();
+                                                        //ifile.tFileName= strFilePath;
+                                                        //List< FileAttachment> ifiles = new List<FileAttachment>();
+                                                        //ifiles.Add(ifile);
+                                                        //MailObj.FileAttachments= ifiles;
+                DeploymentTool.Misc.Utilities.SendMail(MailObj);
+                tblOutgoingEmail tblQuoteEmail = MailObj.GettblOutgoingEmail();
+                db.tblOutgoingEmails.Add(tblQuoteEmail);
+                await db.SaveChangesAsync();
+                var aOutgoingEmailID = tblQuoteEmail.aOutgoingEmailID;
+                var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblPurchaseOrder set nOutgoingEmailID=@nOutgoingEmailID  where aPurchaseOrderID =@aPurchaseOrderID", new SqlParameter("@nOutgoingEmailID", aOutgoingEmailID), new SqlParameter("@aPurchaseOrderID", request.aPurchaseOrderID));
 
-            //if (MailObj.FileAttachments != null)
-            //{
-            //    foreach (var RequestFile in MailObj.FileAttachments)
-            //    {
+                //if (MailObj.FileAttachments != null)
+                //{
+                //    foreach (var RequestFile in MailObj.FileAttachments)
+                //    {
 
-            //        tblOutgoingEmailAttachment tblQuoteEmailAtt = MailObj.GettblOutgoingEmailAttachment(RequestFile);
-            //        db.tblOutgoingEmailAttachments.Add(tblQuoteEmailAtt);
-            //        await db.SaveChangesAsync();
-            //    }
-            //}
-            tblOutgoingEmailAttachment tblQuoteEmailAtt = new tblOutgoingEmailAttachment();
-            tblQuoteEmailAtt.nOutgoingEmailID = aOutgoingEmailID;
-            tblQuoteEmailAtt.tFileName = request.tFileName;
-            tblQuoteEmailAtt.ifile = File.ReadAllBytes(request.tMyFolderId);
-            db.tblOutgoingEmailAttachments.Add(tblQuoteEmailAtt);
-            await db.SaveChangesAsync();
+                //        tblOutgoingEmailAttachment tblQuoteEmailAtt = MailObj.GettblOutgoingEmailAttachment(RequestFile);
+                //        db.tblOutgoingEmailAttachments.Add(tblQuoteEmailAtt);
+                //        await db.SaveChangesAsync();
+                //    }
+                //}
+                tblOutgoingEmailAttachment tblQuoteEmailAtt = new tblOutgoingEmailAttachment();
+                tblQuoteEmailAtt.nOutgoingEmailID = aOutgoingEmailID;
+                tblQuoteEmailAtt.tFileName = request.tFileName;
+                tblQuoteEmailAtt.ifile = File.ReadAllBytes(request.tMyFolderId);
+                db.tblOutgoingEmailAttachments.Add(tblQuoteEmailAtt);
+                await db.SaveChangesAsync();
+
+                if (File.Exists(request.tMyFolderId))
+                {
+                    System.GC.Collect();
+                    System.GC.WaitForPendingFinalizers();
+                    File.Delete(request.tMyFolderId);
+                    bool exists = System.IO.Directory.Exists(request.tMyFolderId.Replace("\\"+ request.tFileName,""));
+
+                    if (exists)
+                        System.IO.Directory.Delete(request.tMyFolderId.Replace("\\" + request.tFileName, ""));
+                }
+            }
+            catch (Exception ex)
+            { 
+            }
             // request.
             // Send PO
             return Ok(1);

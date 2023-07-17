@@ -1,4 +1,4 @@
-<h2 mat-dialog-title class="header" *ngIf="curTemplate != undefined">{{ curTemplate.tName }} Purchase Order</h2>
+<h2 mat-dialog-title class="header" *ngIf="curTemplate != undefined">{{ (partNumber == 1) ? curTemplate.tTemplateName : "" }} Purchase Order {{ (partNumber == 1) ? " Preview" : "" }}</h2>
 <div class="pageStep" *ngIf="curTemplate != undefined"><span
         [className]="(partNumber == 1) ? 'firstPg active': 'firstPg'" title="Step One">1</span><span
         [className]="(partNumber == 2) ? 'lastPg active': 'lastPg'" title="Last Step">2</span></div>
@@ -33,7 +33,7 @@
             <div class="mailField">
                 <label>Name</label>
                 <input class="lightGray" [(ngModel)]="curTemplate.tName" />
-            </div>           
+            </div>
             <div class="mailField">
                 <label>Address</label>
                 <input class="lightGray" [(ngModel)]="curTemplate.tAddress" />
@@ -49,9 +49,9 @@
                     <tr>
                         <th>Description</th>
                         <th>Parts Number</th>
-                        <th style="width: 50px;">Price</th>
+                        <th style="width: 50px;">$Price</th>
                         <th style="width: 50px;">Quantity</th>
-                        <th style="width: 50px;">Total</th>
+                        <th style="width: 50px;">$Total</th>
                         <th style="width: 30px;"></th>
                     </tr>
                 </thead>
@@ -63,7 +63,7 @@
                                 (input)="numberChanged(this)" type="text" [(ngModel)]="item.cPrice" /></td>
                         <td><input class="tableInput" min="1" (keypress)="onNumber($event)"
                                 (input)="numberChanged(this)" type="number" [(ngModel)]="item.nQuantity" /></td>
-                        <td>{{item.cTotal}}</td>
+                        <td>${{item.cTotal}}</td>
                         <td><mat-icon (click)=" removePart(item, index)">cancel</mat-icon></td>
                     </tr>
                     <tr>
@@ -126,6 +126,8 @@
             (click)="GenerateMail()">Next</button>
         <button class="lightGray aButton" *ngIf="partNumber == 2" [disabled]="cannotSend()" cdkFocusInitial
             (click)="SendRequest()">Send</button>
+        <button class="lightGray aButton" *ngIf="partNumber == 2" cdkFocusInitial
+            (click)="MoveBack()">Back</button>
         <button class="lightGray aButton" mat-dialog-close (click)="onCancelUserDialog()">Cancel</button>
     </div>
 </div>

@@ -8,10 +8,22 @@
     <div class="tablePart">
         <div *ngFor="let item of allPO" class="lightGray requestTile">
             <div class="tileHeader">
-                <span class="titleTime" title="Cretaed on" (click)="OpenView(item.aPurchaseOrderTemplateID)">{{getFormatedDate(item.dtCreatedOn)}}</span>
-                <span (click)="deleteMe(item.aPurchaseOrderTemplateID)" class="cellDeleteButton" title="Click to Remove"><mat-icon class="icon">delete</mat-icon></span>
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButton">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="OpenView(item.aPurchaseOrderTemplateID)">
+                        <mat-icon>open_in_new</mat-icon>
+                        <span>Open</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteMe(item.aPurchaseOrderTemplateID)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                    </button>
+                </mat-menu>
             </div>
-            <span class="tName" title="Click to Open" (click)="OpenView(item.aPurchaseOrderTemplateID)">{{item.tTemplateName}}</span>
+            <span class="tName" title="Click to Open"
+                (click)="OpenView(item.aPurchaseOrderTemplateID)">{{item.tTemplateName}}</span>
         </div>
     </div>
 </div>

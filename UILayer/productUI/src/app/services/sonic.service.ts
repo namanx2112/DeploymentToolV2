@@ -641,7 +641,7 @@ export class SonicService {
       invalid: false,
       field_type: FieldType.email,
       field_placeholder: "Enter Store POC Email",
-      validator: [],
+      validator: [Validators.email],
       mandatory: false,
       hidden: false
     }, {
@@ -669,7 +669,7 @@ export class SonicService {
       mandatory: false,
       hidden: false
     }, {
-      field_name: "General ContractorEmail",
+      field_name: "General Contractor Email",
       field_group: "Store Contact",
       fieldUniqeName: "tGCEMail",
       defaultVal: "",
@@ -677,7 +677,7 @@ export class SonicService {
       invalid: false,
       field_type: FieldType.email,
       field_placeholder: "Enter GC Email",
-      validator: [],
+      validator: [Validators.email],
       mandatory: false,
       hidden: false
     }, {

@@ -6,6 +6,7 @@ import { UserModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
 import { Dictionary } from '../interfaces/commons';
+import { Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -143,7 +144,7 @@ export class UserService {
       invalid: false,
       field_type: FieldType.email,
       field_placeholder: "Enter User Email",
-      validator: [],
+      validator: [Validators.email],
       mandatory: false,
       hidden: false
     },{

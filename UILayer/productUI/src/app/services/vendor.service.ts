@@ -130,7 +130,7 @@ export class VendorService {
         invalid: false,
         field_type: FieldType.email,
         field_placeholder: "Enter Email",
-        validator: [],
+        validator: [Validators.email],
         mandatory: true,
         hidden: false
       },

@@ -8,7 +8,7 @@
             <!-- <mat-error>{{getErrorMessage(curControl)}}</mat-error> -->
         </mat-form-field>
 
-        <mat-label class="fleidLabel" [attr.for]="">Select Tech Areas</mat-label>
+        <mat-label class="fleidLabel" [attr.for]="">Select Sections</mat-label>
         <mat-form-field class="curField" appearance="outline">
             <mat-select [formControl]="techCompControl" multiple [ngModel]="selectedTabs"
                 (valueChange)="onTechCompChange($event)">
@@ -24,7 +24,7 @@
         </mat-form-field>
 
 
-        <mat-label class="fleidLabel" [attr.for]="">Select Component Fields</mat-label>
+        <mat-label class="fleidLabel" [attr.for]="">Select Fields</mat-label>
         <div class="compFields">
             <span class="headerLabel">Fields</span>
             <div class="checkBoxFields">

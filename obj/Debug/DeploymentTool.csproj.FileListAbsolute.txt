@@ -556,4 +556,3 @@ D:\Projects\InspireBrand\obj\Debug\DeploymentTool.dll
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.pdb
 D:\Projects\InspireBrand\bin\BouncyCastle.Crypto.dll
 D:\Projects\InspireBrand\bin\itextsharp.dll
-D:\Projects\InspireBrand\bin\itextsharp.xml

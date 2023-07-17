@@ -47,6 +47,7 @@ export class ProjectTemplateListComponent {
     let dialogRef: any;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
+    //dialogConfig.height = '100%';
     dialogConfig.data = {
       curStore: this._curStore,
       curTemplate: item,
@@ -61,6 +62,7 @@ export class ProjectTemplateListComponent {
     const dialogConfig = new MatDialogConfig();
     let dialogRef: any;
     dialogConfig.autoFocus = true;
+    dialogConfig.height = '100%';
     dialogConfig.width = '60%';
     dialogConfig.data = {
       nProjectId: this._curStore.nProjectId,

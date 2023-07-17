@@ -22,7 +22,7 @@ export class RenderPurchaseOrderComponent {
   ckConfig: any;
   constructor(public dialogRef: MatDialogRef<RenderPurchaseOrderComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private poService: POWorkflowConfigService, private partService: PartsService, private commonService: CommonService) {
-    this.ckConfig = this.commonService.GetCKEditorConfig("250px");
+    this.ckConfig = this.commonService.GetCKEditorConfig("320px");
     this.partNumber = 1;
     this.nTemplateId = data.nTemplateId;
     this.nProjectId = data.nProjectId;
@@ -92,6 +92,10 @@ export class RenderPurchaseOrderComponent {
       this.tRequest = x;
       this.partNumber = 2;
     });
+  }
+
+  MoveBack() {
+    this.partNumber = 1;
   }
 
   cannotNext() {
@@ -177,8 +181,33 @@ export class RenderPurchaseOrderComponent {
   // First Part End
   //Second Part Start
   cannotSend() {
-    let cant = false;
-    return cant;
+    let cannot = false;
+    if (this.tRequest.tSubject == "")
+      cannot = true;
+    if (!cannot) {
+      let eIds = this.tRequest.tTo.split(";");
+      for (var indx in eIds) {
+        if (!this.isValidEmail(eIds[indx].trim())) {
+          cannot = true;
+          break;
+        }
+      }
+      if (!cannot && this.tRequest.tCC != null && this.tRequest.tCC != '') {
+        let eIds = this.tRequest.tCC.split(";");
+        for (var indx in eIds) {
+          if (!this.isValidEmail(eIds[indx].trim())) {
+            cannot = true;
+            break;
+          }
+        }
+      }
+    }
+    return cannot;
+  }
+
+  isValidEmail(email: string) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 
   SendRequest() {

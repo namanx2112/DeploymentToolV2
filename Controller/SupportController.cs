@@ -28,6 +28,16 @@ namespace DeploymentTool.Controller
         }
 
         [HttpGet]
+        public async Task<HttpResponseMessage> GetAll(int nTicketId)
+        {
+            var request = db.tblSupportTickets;
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<IEnumerable<tblSupportTicket>>(request, new JsonMediaTypeFormatter())
+            };
+        }
+
+        [HttpGet]
         public async Task<HttpResponseMessage> Get(int nTicketId)
         {
             var request = db.tblSupportTickets.Where(p => p.aTicketId == nTicketId).FirstOrDefault();

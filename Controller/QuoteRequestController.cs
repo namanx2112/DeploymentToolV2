@@ -16,15 +16,13 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Web.Http;
 using System.Xml.Linq;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Web;
-using iTextSharp.text.html.simpleparser;
 using System.Runtime.Remoting.Messaging;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using System.Runtime.Remoting.Contexts;
 
 namespace DeploymentTool.Controller
 {
@@ -171,11 +169,13 @@ namespace DeploymentTool.Controller
                     var nTechCompFields = db.Database.ExecuteSqlCommand("delete from tblQuoteRequestTechCompFields where nQuoteRequestTemplateId =@nQuoteRequestTemplateId ", new SqlParameter("@nQuoteRequestTemplateId", quoteRequest.aQuoteRequestTemplateId));
 
                 }
+                var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+                int lUserId = securityContext.nUserID;
                 List<SqlParameter> tPramList = new List<SqlParameter>();
                 tPramList.Add(new SqlParameter("@tTemplateName", quoteRequest.tTemplateName));
                 tPramList.Add(new SqlParameter("@nBrandId", quoteRequest.nBrandId));
-                tPramList.Add(new SqlParameter("@nCreatedBy", quoteRequest.nCreatedBy));
-                tPramList.Add(new SqlParameter("@nUpdateBy", quoteRequest.nUpdateBy));
+                tPramList.Add(new SqlParameter("@nCreatedBy", lUserId));
+                tPramList.Add(new SqlParameter("@nUpdateBy", lUserId));
                 tPramList.Add(new SqlParameter("@QuoteRequestTemplateId", quoteRequest.aQuoteRequestTemplateId) {Direction = ParameterDirection.InputOutput});                
                 db.Database.ExecuteSqlCommand("exec sproc_CreateAndUpdateQouteRequestMain @tTemplateName,@nBrandId,@nCreatedBy,@nUpdateBy,@QuoteRequestTemplateId out", tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4]);
                 quoteRequest.aQuoteRequestTemplateId = ((SqlParameter)tPramList[4]).Value == DBNull.Value ? 0 : Convert.ToInt32(((SqlParameter)tPramList[4]).Value);
@@ -415,7 +415,7 @@ namespace DeploymentTool.Controller
                 var itemMerge = new MergedQuoteRequest()
                 {
                     tContent = strStyle + tContentdata,
-                    tSubject = "Store #" + itemPOStore[0].tStoreNumber + "  - "+ itemPOStore[0].tCity+", "+ itemPOStore[0].tStoreState + items[0].tTemplateName,//" Quote Request",
+                    tSubject = "Store #" + itemPOStore[0].tStoreNumber + "  - "+ itemPOStore[0].tCity+" "+ itemPOStore[0].tStoreState +" -"+ items[0].tTemplateName,//" Quote Request",
                     tTo = ""
 
                 };

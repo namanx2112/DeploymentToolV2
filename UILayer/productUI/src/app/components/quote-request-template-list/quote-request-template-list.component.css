@@ -73,20 +73,10 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.requestTile .titleTime {
-    float: left;
-    font-size: 8px;
-    color: gray;
-    line-height: 18px;
-}
-
-.requestTile .cellDeleteButton {
+.requestTile .exButton {
     float: right;
-    margin-top: 2px;
-    cursor: pointer;
-}
-
-.requestTile .cellDeleteButton .icon{
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 20px;
+    width: 25px;
+    height: 25px;
+    padding: 0px;
+    margin-top: -2px;
 }

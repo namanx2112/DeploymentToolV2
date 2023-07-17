@@ -8,11 +8,23 @@
     <div class="tablePart">
         <div *ngFor="let item of allQuotes" class="lightGray requestTile">
             <div class="tileHeader">
-                <span class="titleTime" title="Cretaed on">{{getFormatedDate(item.dtCreatedOn)}}</span>
-                <span (click)="deleteMe(item.aQuoteRequestTemplateId)" class="cellDeleteButton"
-                    title="Click to Remove"><mat-icon class="icon">delete</mat-icon></span>
+                <!-- <span class="titleTime" title="Cretaed on">{{getFormatedDate(item.dtCreatedOn)}}</span> -->
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButton">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="OpenView(item.aQuoteRequestTemplateId)">
+                        <mat-icon>open_in_new</mat-icon>
+                        <span>Open</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteMe(item.aQuoteRequestTemplateId)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                    </button>                    
+                </mat-menu>
             </div>
-            <span class="tName" title="Click to Open" (click)="OpenView(item.aQuoteRequestTemplateId)">{{item.tTemplateName}}</span>
+            <span class="tName" title="Click to Open"
+                (click)="OpenView(item.aQuoteRequestTemplateId)">{{item.tTemplateName}}</span>
         </div>
     </div>
 </div>

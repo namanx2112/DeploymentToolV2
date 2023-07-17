@@ -207,6 +207,7 @@ export interface MergedPO {
     tBillToState: string,
     cTotal: number,
     dDeliver: Date,
+    tTemplateName: string,
     nOutgoingEmailID: number
     purchaseOrderParts: POConfigPart[]
 }

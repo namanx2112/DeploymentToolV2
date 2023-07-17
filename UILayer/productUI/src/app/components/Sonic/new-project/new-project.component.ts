@@ -113,9 +113,9 @@ export class NewProjectComponent {
     if (this._NeedTechComponent == "all") {
       this.allTabs.push(this.service.GetStoreSonicRadioTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
-      this.allTabs.push(this.service.GetStoreInsallationTab(TabInstanceType.Single));
-      this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
-    }
+    }    
+    this.allTabs.push(this.service.GetStoreInsallationTab(TabInstanceType.Single));
+    this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
   }
 
   clickTab(indx: number) {

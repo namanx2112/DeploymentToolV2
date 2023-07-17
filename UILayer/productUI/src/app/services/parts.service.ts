@@ -106,7 +106,7 @@ export class PartsService {
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.number,
+      field_type: FieldType.currency,
       field_placeholder: "Enter Parts Price",
       validator: [],
       mandatory: false,
