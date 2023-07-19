@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
-import { SonicNotes, SonicProjectExcel, StoreProjects, StoreSearchModel } from '../interfaces/sonic';
+import { ActiveProject, HistoricalProjects, SonicNotes, SonicProjectExcel, StoreSearchModel } from '../interfaces/sonic';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -79,7 +79,7 @@ export class SonicService {
       }
       else {
         return [
-          "nStoreNo",
+          "tStoreNo",
           "dProjectGoliveDate",
           "tProjectType",
           "tStatus",
@@ -105,7 +105,7 @@ export class SonicService {
 
   Get(fields: Fields, tab: HomeTab) {
     if (tab.tab_type == TabType.StoreProjects)
-      return this.getProjects(fields);
+      return this.getActiveProjects(1);
     else
       return this.getNotes();
 
@@ -154,68 +154,12 @@ export class SonicService {
     });
   }
 
-  getProjects(request: any) {
-    //return this.http.post<StoreProjects>(this.configUrl + "User/CreateUser", request, { headers: this.authService.getHttpHeaders() });
-    return new Observable<StoreProjects[]>((obj) => {
-      let items: StoreProjects[] = [
-        {
-          nStoreNo: 1005,
-          tProjectType: "Audio Installation",
-          tStatus: "On Track",
-          tPrevProjManager: "Clark Kent",
-          tProjManager: "Berry Alien",
-          dProjectGoliveDate: new Date(),
-          dProjEndDate: new Date(),
-          tOldVendor: "ABC Inc",
-          tNewVendor: "HME"
-        },
-        {
-          nStoreNo: 1005,
-          tProjectType: "POS Installation",
-          tStatus: "Action Required",
-          tPrevProjManager: "Tony Kent",
-          tProjManager: "Ben Alien",
-          dProjectGoliveDate: new Date(),
-          dProjEndDate: new Date(),
-          tOldVendor: "ABC Inc",
-          tNewVendor: "HME"
-        },
-        {
-          nStoreNo: 1005,
-          tProjectType: "Parts Replacement",
-          tStatus: "At Risk",
-          tPrevProjManager: "Berry Kent",
-          tProjManager: "Kent Alien",
-          dProjectGoliveDate: new Date(),
-          dProjEndDate: new Date(),
-          tOldVendor: "XYZ Inc",
-          tNewVendor: "HXX"
-        },
-        {
-          nStoreNo: 1005,
-          tProjectType: "Audio Installation",
-          tStatus: "On Track",
-          tPrevProjManager: "Clark Kent",
-          tProjManager: "Berry Alien",
-          dProjectGoliveDate: new Date(),
-          dProjEndDate: new Date(),
-          tOldVendor: "ABC Inc",
-          tNewVendor: "HME"
-        },
-        {
-          nStoreNo: 1005,
-          tProjectType: "Display Installation",
-          tStatus: "On Track",
-          tPrevProjManager: "Clark Kent",
-          tProjManager: "Berry Alien",
-          dProjectGoliveDate: new Date(),
-          dProjEndDate: new Date(),
-          tOldVendor: "ABC Inc",
-          tNewVendor: "HME"
-        }
-      ];
-      obj.next(items);
-    });
+  getActiveProjects(nBrandId: number) {
+    return this.http.get<ActiveProject>(this.configUrl + "Sonic/GetActiveProjects?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });    
+  }
+
+  getHistoricalProjects(nBrandId: number) {
+    return this.http.get<HistoricalProjects>(this.configUrl + "Sonic/GetHistoricalProjects?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });    
   }
 
   GetProjecthighlights() {

@@ -1020,10 +1020,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDTool.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ActiveProjectModel.cs" />
     <Compile Include="Model\Attachment.cs" />
     <Compile Include="Model\Brand.cs" />
     <Compile Include="Model\Dropdown.cs" />
     <Compile Include="Model\Franchise.cs" />
+    <Compile Include="Model\HistoricalProjectModel.cs" />
     <Compile Include="Model\MyApiContext.cs" />
     <Compile Include="Model\NewProjectStore.cs" />
     <Compile Include="Model\Params.cs" />

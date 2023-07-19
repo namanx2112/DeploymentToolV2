@@ -103,7 +103,7 @@ namespace DeploymentTool.Controller
                 tblProject tProj = db.tblProjects.Where(p => p.aProjectID == nProjectId).FirstOrDefault();
                 tblStore tStore = db.tblStores.Where(p => p.aStoreID == tProj.nStoreID).FirstOrDefault();
                 tmpStore.tStakeHolder = db.tblProjectStakeHolders.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
-               // var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProject set projectActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tStore.aStoreID));
+                // var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProject set projectActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tStore.aStoreID));
                 //tProj.ProjectActiveStatus = 1;
                 //Utilities.SetHousekeepingFields(true, HttpContext.Current, tProj);
                 //db.tblProjects.Add(tProj); db.SaveChanges();
@@ -193,7 +193,7 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
-               // List<ProjectTemplates> items = new List<ProjectTemplates>();
+                // List<ProjectTemplates> items = new List<ProjectTemplates>();
                 SqlParameter tModuleNameParam = new SqlParameter("@nBrandId", nBrandId);
                 List<ProjectTemplates> items = db.Database.SqlQuery<ProjectTemplates>("exec sproc_GetAllTemplate @nBrandId", tModuleNameParam).ToList();
 
@@ -205,7 +205,7 @@ namespace DeploymentTool.Controller
                 //        nTemplateType = ProjectTemplateType.Notification,
                 //        tTemplateName = "Notification"
                 //    });
-                   
+
                 //    //items.Add(
                 //    //new ProjectTemplates()
                 //    //{
@@ -231,7 +231,7 @@ namespace DeploymentTool.Controller
                 //Dictionary<int, string> lstQuoteRequest = new Dictionary<int, string>();
                 //SqlParameter tModuleNameParam = new SqlParameter("@nBrandId", nBrandId);
                 //List<QuoteRequestTemplateTemp> itemsQoute = db.Database.SqlQuery<QuoteRequestTemplateTemp>("exec sproc_GetAllQuoteRequestTemplate @nBrandId", tModuleNameParam).ToList();
-                
+
                 //foreach (var RequestTechComps in itemsQoute)
                 //{
 
@@ -248,6 +248,138 @@ namespace DeploymentTool.Controller
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<List<ProjectTemplates>>(items, new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+        #endregion
+
+        #region Active/Historical Project
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetActiveProjects(int nBrandId)
+        {
+            try
+            {
+                List<ActiveProjectModel> items = new List<ActiveProjectModel>() {
+                    new ActiveProjectModel()
+                    {
+                        nProjectId = 72,
+                        tStoreNo = "1000",
+                        dProjectGoliveDate = DateTime.Now,
+                        dProjEndDate = DateTime.Now,
+                        tNewVendor = "ABCD Vendor",
+                        tOldVendor = "XYZ Vendor",
+                        tPrevProjManager = "Harry Gartner",
+                        tProjectType = "Audio",
+                        tProjManager = "Garry Gram",
+                        tStatus = "On Track"
+                    },
+                    new ActiveProjectModel()
+                    {
+                        nProjectId = 16,
+                        tStoreNo = "1030",
+                        dProjectGoliveDate = DateTime.Now,
+                        dProjEndDate = DateTime.Now,
+                        tNewVendor = "OOPP Vendor",
+                        tOldVendor = "GGG Vendor",
+                        tPrevProjManager = "Harry Gartner",
+                        tProjectType = "Audio",
+                        tProjManager = "Garry Gram",
+                        tStatus = "On Track"
+                    },
+                    new ActiveProjectModel()
+                    {
+                        nProjectId = 62,
+                        tStoreNo = "8500",
+                        dProjectGoliveDate = DateTime.Now,
+                        dProjEndDate = DateTime.Now,
+                        tNewVendor = "SDSD Vendor",
+                        tOldVendor = "XDSZ Vendor",
+                        tPrevProjManager = "Harry Gartner",
+                        tProjectType = "Audio",
+                        tProjManager = "Garry Gram",
+                        tStatus = "Delay Track"
+                    },
+                    new ActiveProjectModel()
+                    {
+                        nProjectId = 12,
+                        tStoreNo = "5000",
+                        dProjectGoliveDate = DateTime.Now,
+                        dProjEndDate = DateTime.Now,
+                        tNewVendor = "A54dfg Vendor",
+                        tOldVendor = "FDSDS Vendor",
+                        tPrevProjManager = "DSSDDD Gartner",
+                        tProjectType = "Audio",
+                        tProjManager = "GaDD Gram",
+                        tStatus = "On Track"
+                    }
+                };
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<List<ActiveProjectModel>>(items, new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetHistoricalProjects(int nBrandId)
+        {
+            try
+            {
+                List<HistoricalProjectModel> items = new List<HistoricalProjectModel>() {
+                    new HistoricalProjectModel()
+                    {
+                        nProjectId = 11,
+                        tStoreNo = "1000",
+                        dProjectGoliveDate = DateTime.Now,
+                        dProjEndDate = DateTime.Now,
+                        tVendor = "ABCD Vendor",
+                        tProjectType = "Audio",
+                        tProjManager = "Garry Gram"
+                    },
+                    new HistoricalProjectModel()
+                    {
+                        nProjectId = 12,
+                        tStoreNo = "1030",
+                        dProjectGoliveDate = DateTime.Now,
+                        dProjEndDate = DateTime.Now,
+                        tVendor = "OOPP Vendor",
+                        tProjectType = "Audio",
+                        tProjManager = "Garry Gram"
+                    },
+                    new HistoricalProjectModel()
+                    {
+                        nProjectId = 52,
+                        tStoreNo = "8500",
+                        dProjectGoliveDate = DateTime.Now,
+                        dProjEndDate = DateTime.Now,
+                        tVendor = "XDSZ Vendor",
+                        tProjectType = "Audio",
+                        tProjManager = "Garry Gram"
+                    },
+                    new HistoricalProjectModel()
+                    {
+                        nProjectId = 72,
+                        tStoreNo = "5000",
+                        dProjectGoliveDate = DateTime.Now,
+                        dProjEndDate = DateTime.Now,
+                        tVendor = "A54dfg Vendor",
+                        tProjectType = "Audio",
+                        tProjManager = "GaDD Gram"
+                    }
+                };
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<List<HistoricalProjectModel>>(items, new JsonMediaTypeFormatter())
                 };
             }
             catch (Exception ex)

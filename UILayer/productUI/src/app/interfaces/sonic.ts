@@ -153,7 +153,17 @@ export interface StoreInstallation {
     cCost: number
 }
 
-export interface StoreProjects {
+export interface HistoricalProjects {
+    nProjectId: number,
+    nStoreNo: number,
+    dProjectGoliveDate: Date,
+    tProjectType: string,
+    tProjManager: string,
+    tVendor: string
+}
+
+export interface ActiveProject{
+    nProjectId: number,
     nStoreNo: number,
     dProjectGoliveDate: Date,
     dProjEndDate: Date,
