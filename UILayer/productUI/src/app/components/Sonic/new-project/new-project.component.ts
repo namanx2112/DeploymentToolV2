@@ -54,6 +54,7 @@ export class NewProjectComponent {
     let pStoreTab = this.allTabs[1];
     let pStakeHolerTab = this.allTabs[2];
     this.storeSerice.getStoreDetails(this.curStore.nStoreId, this.nProjectType).subscribe((x: any) => {
+      x.nProjectType = this.nProjectType.toString();
       this.tValues[pStoreTab.tab_name] = x;
       this.tValues[pStakeHolerTab.tab_name] = x.tStakeHolder;
       this.setProjectId(x["aStoreId"]);
@@ -156,7 +157,7 @@ export class NewProjectComponent {
             case ProjectTypes.POSInstallation:
             case ProjectTypes.MenuInstallation:
             case ProjectTypes.PartsReplacement:
-              cThis.tValues[cThis.allTabs[3].tab_name]["nProjectID"] = resp.aProjectID;
+              cThis.tValues[cThis.allTabs[3].tab_name]["nProjectID"] = resp.nProjectID;
               break;
           }
         }
