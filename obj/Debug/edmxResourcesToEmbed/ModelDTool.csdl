@@ -7,7 +7,6 @@
     <EntitySet Name="tblAttachments" EntityType="dtDBModel.tblAttachment" />
     <EntitySet Name="tblProjects" EntityType="dtDBModel.tblProject" />
     <EntitySet Name="tblProjectAudios" EntityType="dtDBModel.tblProjectAudio" />
-    <EntitySet Name="tblProjectBillToes" EntityType="dtDBModel.tblProjectBillTo" />
     <EntitySet Name="tblProjectConfigs" EntityType="dtDBModel.tblProjectConfig" />
     <EntitySet Name="tblProjectExteriorMenus" EntityType="dtDBModel.tblProjectExteriorMenu" />
     <EntitySet Name="tblProjectInstallations" EntityType="dtDBModel.tblProjectInstallation" />
@@ -18,7 +17,6 @@
     <EntitySet Name="tblProjectPOS" EntityType="dtDBModel.tblProjectPOS" />
     <EntitySet Name="tblProjectSonicRadios" EntityType="dtDBModel.tblProjectSonicRadio" />
     <EntitySet Name="tblProjectStakeHolders" EntityType="dtDBModel.tblProjectStakeHolder" />
-    <EntitySet Name="tblProjectStores" EntityType="dtDBModel.tblProjectStore" />
     <EntitySet Name="tblStores" EntityType="dtDBModel.tblStore" />
     <EntitySet Name="tblUsers1" EntityType="dtDBModel.tblUser1" />
     <EntitySet Name="tblBrandBKPs" EntityType="dtDBModel.tblBrandBKP" />
@@ -27,8 +25,6 @@
     <EntitySet Name="tblEnumTableFields" EntityType="dtDBModel.tblEnumTableField" />
     <EntitySet Name="tblFranchises" EntityType="dtDBModel.tblFranchise" />
     <EntitySet Name="tblFunctions" EntityType="dtDBModel.tblFunction" />
-    <EntitySet Name="tblProjectComponents" EntityType="dtDBModel.tblProjectComponent" />
-    <EntitySet Name="tblProjectComponentUploads" EntityType="dtDBModel.tblProjectComponentUpload" />
     <EntitySet Name="tblStates" EntityType="dtDBModel.tblState" />
     <EntitySet Name="tblTechComponents" EntityType="dtDBModel.tblTechComponent" />
     <EntitySet Name="tblUserBrandRels" EntityType="dtDBModel.tblUserBrandRel" />
@@ -180,7 +176,7 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="nProjectActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectAudio">
     <Key>
@@ -196,21 +192,7 @@
     <Property Name="nLoopType" Type="Int32" />
     <Property Name="dLoopDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
-  </EntityType>
-  <EntityType Name="tblProjectBillTo">
-    <Key>
-      <PropertyRef Name="aProjectBillToID" />
-    </Key>
-    <Property Name="aProjectBillToID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nProjectID" Type="Int32" />
-    <Property Name="tCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tBillToAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tBillToAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tBillToState" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tBillToZipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tBillToEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectConfig">
     <Key>
@@ -222,9 +204,9 @@
     <Property Name="nDriveThru" Type="Int32" />
     <Property Name="nInsideDining" Type="Int32" />
     <Property Name="cProjectCost" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
     <Property Name="dGroundBreak" Type="DateTime" Precision="3" />
     <Property Name="dKitchenInstall" Type="DateTime" Precision="3" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectExteriorMenu">
     <Key>
@@ -243,7 +225,7 @@
     <Property Name="cFabConCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="cIDTechCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="cTotalCost" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectInstallation">
     <Key>
@@ -260,7 +242,7 @@
     <Property Name="nTestTransactions" Type="Int32" />
     <Property Name="nProjectStatus" Type="Int32" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenu">
     <Key>
@@ -273,7 +255,7 @@
     <Property Name="nStatus" Type="Int32" />
     <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectNetworking">
     <Key>
@@ -291,7 +273,7 @@
     <Property Name="nTempStatus" Type="Int32" />
     <Property Name="dTempDate" Type="DateTime" Precision="0" />
     <Property Name="nTempType" Type="Int32" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectNote">
     <Key>
@@ -329,7 +311,7 @@
     <Property Name="nShelf" Type="Int32" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nType" Type="Int32" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectPOS">
     <Key>
@@ -344,7 +326,7 @@
     <Property Name="nStatus" Type="Int32" />
     <Property Name="nPaperworkStatus" Type="Int32" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">
     <Key>
@@ -361,7 +343,7 @@
     <Property Name="nStatus" Type="Int32" />
     <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ProjectActiveStatus" Type="Int32" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectStakeHolder">
     <Key>
@@ -378,37 +360,7 @@
     <Property Name="tPrincipalPartner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tCD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="tITPM" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="tblProjectStore">
-    <Key>
-      <PropertyRef Name="aProjectStoreID" />
-    </Key>
-    <Property Name="aProjectStoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nProjectID" Type="Int32" />
-    <Property Name="tStoreName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tStoreAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tStoreAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="nStoreState" Type="Int32" />
-    <Property Name="tStoreZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tStoreManager" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tPOC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tPOCPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tPOCEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tGC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tGCPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tGCEMail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="nCreatedBy" Type="Int32" />
-    <Property Name="nUpdateBy" Type="Int32" />
-    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
-    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
-    <Property Name="bDeleted" Type="Boolean" />
-    <Property Name="tCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="tBillToCompany" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="nBillToState" Type="Int32" />
-    <Property Name="tBillToCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="tBillToAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="tBillToZip" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="tBillToEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="nStoreId" Type="Int32" />
   </EntityType>
   <EntityType Name="tblStore">
     <Key>
@@ -421,6 +373,25 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="tStoreName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tStoreAddressLine1" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tStoreAddressLine2" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="nStoreState" Type="Int32" />
+    <Property Name="tCity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tStoreZip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="tStoreManager" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tPOC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tPOCPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="tPOCEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tGC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tGCPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="tGCEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tBillToCompany" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tBillToAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tBillToCity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nBillToState" Type="Int32" />
+    <Property Name="tBillToZip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="tBillToEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tblUser1">
     <Key>
@@ -516,39 +487,6 @@
     </Key>
     <Property Name="aFunctionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tFunctionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="tblProjectComponent">
-    <Key>
-      <PropertyRef Name="aProjectComponentId" />
-    </Key>
-    <Property Name="aProjectComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nProjectId" Type="Int32" />
-    <Property Name="nTechComponentId" Type="Int32" />
-    <Property Name="nVendorId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tStatus" Type="Int32" />
-    <Property Name="dStartDate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="dEndDate" Type="DateTime" Precision="3" />
-    <Property Name="dEndExpectedDate" Type="DateTime" Precision="3" />
-    <Property Name="tSignOffStatus" Type="DateTime" Precision="3" />
-    <Property Name="tComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="nCreatedBy" Type="Int32" />
-    <Property Name="nUpdateBy" Type="Int32" />
-    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
-    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
-    <Property Name="bDeleted" Type="Boolean" />
-  </EntityType>
-  <EntityType Name="tblProjectComponentUpload">
-    <Key>
-      <PropertyRef Name="aProjectComponentUploadId" />
-    </Key>
-    <Property Name="aProjectComponentUploadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nProjectComponentId" Type="Int32" />
-    <Property Name="nAttachmentId" Type="Int32" />
-    <Property Name="nCreatedBy" Type="Int32" />
-    <Property Name="nUpdateBy" Type="Int32" />
-    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
-    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
-    <Property Name="bDeleted" Type="Boolean" />
   </EntityType>
   <EntityType Name="tblState">
     <Key>

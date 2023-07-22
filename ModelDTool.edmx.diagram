@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="dtDBModel.tblProjectPOS" Width="1.5" PointX="11.75" PointY="0.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectSonicRadio" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectStakeHolder" Width="1.5" PointX="12.75" PointY="4.75" />
-        <EntityTypeShape EntityType="dtDBModel.tblProjectStore" Width="1.5" PointX="12.75" PointY="8.75" />
         <EntityTypeShape EntityType="dtDBModel.tblStore" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="dtDBModel.tblUser1" Width="1.5" PointX="6.75" PointY="13.75" />
         <EntityTypeShape EntityType="dtDBModel.tblBrandBKP" Width="1.5" PointX="2.75" PointY="14.75" />
@@ -31,8 +30,6 @@
         <EntityTypeShape EntityType="dtDBModel.tblEnumTableField" Width="1.5" PointX="8.75" PointY="14.75" />
         <EntityTypeShape EntityType="dtDBModel.tblFranchise" Width="1.5" PointX="14.75" PointY="10.75" />
         <EntityTypeShape EntityType="dtDBModel.tblFunction" Width="1.5" PointX="10.75" PointY="14.75" />
-        <EntityTypeShape EntityType="dtDBModel.tblProjectComponent" Width="1.5" PointX="16.75" PointY="0.75" />
-        <EntityTypeShape EntityType="dtDBModel.tblProjectComponentUpload" Width="1.5" PointX="16.75" PointY="5.75" />
         <EntityTypeShape EntityType="dtDBModel.tblState" Width="1.5" PointX="16.75" PointY="9.75" />
         <EntityTypeShape EntityType="dtDBModel.tblTechComponent" Width="1.5" PointX="16.75" PointY="12.75" />
         <EntityTypeShape EntityType="dtDBModel.tblUserBrandRel" Width="1.5" PointX="12.75" PointY="16.75" />

@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectStakeHolder
+    public partial class tblProjectStakeHolder: Misc.ModelParent
     {
         public int aProjectStakeHolderID { get; set; }
         public Nullable<int> nProjectID { get; set; }
@@ -25,5 +25,6 @@ namespace DeploymentTool
         public string tPrincipalPartner { get; set; }
         public string tCD { get; set; }
         public string tITPM { get; set; }
+        public Nullable<int> nStoreId { get; set; }
     }
 }

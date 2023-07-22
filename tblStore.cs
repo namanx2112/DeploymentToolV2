@@ -21,5 +21,24 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
+        public string tStoreName { get; set; }
+        public string tStoreAddressLine1 { get; set; }
+        public string tStoreAddressLine2 { get; set; }
+        public Nullable<int> nStoreState { get; set; }
+        public string tCity { get; set; }
+        public string tStoreZip { get; set; }
+        public string tStoreManager { get; set; }
+        public string tPOC { get; set; }
+        public string tPOCPhone { get; set; }
+        public string tPOCEmail { get; set; }
+        public string tGC { get; set; }
+        public string tGCPhone { get; set; }
+        public string tGCEmail { get; set; }
+        public string tBillToCompany { get; set; }
+        public string tBillToAddress { get; set; }
+        public string tBillToCity { get; set; }
+        public Nullable<int> nBillToState { get; set; }
+        public string tBillToZip { get; set; }
+        public string tBillToEmail { get; set; }
     }
 }

@@ -15,13 +15,13 @@ export class AllTechnologyComponentsService {
   }
 
   GetStoreContact(request: Dictionary<string>){
-    return this.http.post<StoreContact[]>(this.configUrl + "ProjectStoreContacts/Get", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<StoreContact[]>(this.configUrl + "StoreContacts/Get", request, { headers: this.authService.getHttpHeaders() });
   }
   CreateStoreContact(request: StoreContact){
-    return this.http.post<StoreContact>(this.configUrl + "ProjectStoreContacts/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<StoreContact>(this.configUrl + "StoreContacts/Create", request, { headers: this.authService.getHttpHeaders() });
   }
   UpdateStoreContact(request: StoreContact){
-    return this.http.post<StoreContact>(this.configUrl + "ProjectStoreContacts/update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<StoreContact>(this.configUrl + "StoreContacts/update", request, { headers: this.authService.getHttpHeaders() });
   }
 
   GetStoreConfig(request: Dictionary<string>){

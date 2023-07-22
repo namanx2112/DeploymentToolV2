@@ -22,9 +22,9 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectPOS
         public IQueryable<tblProjectPOS> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectPOS.Where(p => p.nProjectID == nProjectID &&  p.ProjectActiveStatus == 1 ).AsQueryable();
+            return db.tblProjectPOS.Where(p => p.nStoreId == nStoreId).AsQueryable();
 
         }
 
@@ -47,7 +47,8 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Update( tblProjectPOS tblProjectPOS)
         {
-            tblProjectPOS.ProjectActiveStatus = 1;
+            //tblProjectPOS.ProjectActiveStatus = 1;Santosh
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.POSInstallation, tblProjectPOS.nStoreId, tblProjectPOS);
             db.Entry(tblProjectPOS).State = EntityState.Modified;
 
             try
@@ -74,9 +75,10 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectPOS tblProjectPOS)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectPOS set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectPOS.nProjectID));
-            tblProjectPOS.ProjectActiveStatus = 1;
+            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectPOS set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectPOS.nProjectID));
+            //tblProjectPOS.ProjectActiveStatus = 1; Santosh
             tblProjectPOS.aProjectPOSID = 0;
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.POSInstallation, tblProjectPOS.nStoreId, tblProjectPOS);
             db.tblProjectPOS.Add(tblProjectPOS);
             await db.SaveChangesAsync();
 

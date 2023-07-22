@@ -22,9 +22,9 @@ namespace DeploymentTool.Model
         // GET: api/ProjectNetworkings
         public IQueryable<tblProjectNetworking> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectNetworkings.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
+            return db.tblProjectNetworkings.Where(p => p.nStoreId == nStoreId).AsQueryable();
 
            
         }
@@ -47,7 +47,8 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> update(tblProjectNetworking tblProjectNetworking)
         {
-            tblProjectNetworking.ProjectActiveStatus = 1;
+            //tblProjectNetworking.ProjectActiveStatus = 1;Santosh
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectNetworking.nStoreId, tblProjectNetworking);
             db.Entry(tblProjectNetworking).State = EntityState.Modified;
 
             try
@@ -74,10 +75,10 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectNetworking tblProjectNetworking)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectNetworking set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectNetworking.nProjectID));
-            tblProjectNetworking.ProjectActiveStatus = 1;
+            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectNetworking set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectNetworking.nProjectID));
+            //tblProjectNetworking.ProjectActiveStatus = 1;Santosh
             tblProjectNetworking.aProjectNetworkingID = 0;
-
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectNetworking.nStoreId, tblProjectNetworking);
             db.tblProjectNetworkings.Add(tblProjectNetworking);
             await db.SaveChangesAsync();
 

@@ -1,14 +1,17 @@
+import { Dictionary } from "./commons"
+
 export interface Sonic {
 }
 
 
 export interface StoreContact {
-    aStoreId: number,
+    aStoreID: number,
+    tStoreNumber: string,
     tStoreName: string,
     tStoreAddressLine1: string,
     tStoreAddressLine2: string,
+    nStoreState: string,
     tCity: string,
-    nStoreState: string
     tStoreZip: string,
     tStoreManager: string,
     tPOC: string,
@@ -26,6 +29,7 @@ export interface StoreContact {
 }
 export interface StoreConfiguration {
     aProjectConfigID: number,
+    nStoreId: number,
     nProjectID: number,
     nStallCount: number,
     nDriveThru: number,
@@ -36,6 +40,7 @@ export interface StoreConfiguration {
 }
 export interface StoreStackholders {
     aProjectStakeHolderID: number,
+    nStoreId: number,
     nProjectID: number,
     nFranchisee: number,
     tRVP: string,
@@ -49,6 +54,7 @@ export interface StoreStackholders {
 }
 export interface StoreNetworkings {
     aProjectNetworkingID: number,
+    nStoreId: number,
     nProjectID: number,
     nVendor: number,
     nPrimaryStatus: number,
@@ -63,6 +69,7 @@ export interface StoreNetworkings {
 }
 export interface StorePOS {
     aProjectPOSID: number,
+    nStoreId: number,
     nProjectID: number,
     nVendor: number,
     dDeliveryDate: Date,
@@ -74,6 +81,7 @@ export interface StorePOS {
 }
 export interface StoreAudio {
     aProjectAudioID: number,
+    nStoreId: number,
     nProjectID: number,
     nVendor: number,
     nStatus: number,
@@ -86,6 +94,7 @@ export interface StoreAudio {
 }
 export interface StoreExteriorMenus {
     aProjectExteriorMenuID: number,
+    nStoreId: number,
     nProjectID: number,
     nVendor: number,
     nStalls: number,
@@ -101,6 +110,7 @@ export interface StoreExteriorMenus {
 }
 export interface StorePaymentSystem {
     aProjectPaymentSystemID: number,
+    nStoreId: number,
     nProjectID: number,
     nVendor: number,
     nBuyPassID: number,
@@ -119,6 +129,7 @@ export interface StorePaymentSystem {
 }
 export interface StoreInteriorMenus {
     aProjectInteriorMenuID: number,
+    nStoreId: number,
     nProjectID: number,
     nVendor: number,
     nDMBQuantity: number,
@@ -127,7 +138,8 @@ export interface StoreInteriorMenus {
     cCost: number
 }
 export interface StoreSonicRadio {
-    aProjectSonicRadioID:number,
+    aProjectSonicRadioID: number,
+    nStoreId: number,
     nProjectID: number,
     nVendor: number,
     nOutdoorSpeakers: number,
@@ -141,6 +153,7 @@ export interface StoreSonicRadio {
 }
 export interface StoreInstallation {
     aProjectInstallationID: number,
+    nStoreId: number,
     nProjectID: number,
     nVendor: number,
     tLeadTech: string,
@@ -162,7 +175,7 @@ export interface HistoricalProjects {
     tVendor: string
 }
 
-export interface ActiveProject{
+export interface ActiveProject {
     nProjectId: number,
     nStoreNo: number,
     dProjectGoliveDate: Date,
@@ -208,16 +221,24 @@ export interface SonicProjectExcel {
 }
 
 export interface StoreSearchModel {
-    nProjectId: number,
+    nStoreId: number,
     tStoreName: string,
-    tProjectName: string,
     tStoreNumber: string,
-    tProjectType: string,
+    lstProjectsInfo: ProjectInfo[]
+}
+
+export interface ProjectInfo {
+    nProjectId: number,
+    nProjectType: number,
     dGoLiveDate: Date
 }
 
-export interface NewProjectStore{
-    nProjectType:number,
+export enum ProjectTypes {
+    New, Rebuild, Remodel, Relocation, Acquisition, POSInstallation, AudioInstallation, MenuInstallation, PaymentTerminalInstallation, PartsReplacement
+}
+
+export interface NewProjectStore {
+    nProjectType: number,
     tStoreNumber: string,
     tAddress: string,
     tCity: string,

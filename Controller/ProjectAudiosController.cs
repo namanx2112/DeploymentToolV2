@@ -22,9 +22,9 @@ namespace DeploymentTool.Model
         // GET: api/ProjectAudios
         public IQueryable<tblProjectAudio> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectAudios.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
+            return db.tblProjectAudios.Where(p => p.nStoreId == nStoreId).AsQueryable();
            
         }
 
@@ -48,7 +48,8 @@ namespace DeploymentTool.Model
         public async Task<IHttpActionResult> Update(tblProjectAudio tblProjectAudio)
         {
 
-            tblProjectAudio.ProjectActiveStatus = 1;
+            //tblProjectAudio.ProjectActiveStatus = 1;//SantoshPP\
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.AudioInstallation, tblProjectAudio.nStoreId, tblProjectAudio);
             db.Entry(tblProjectAudio).State = EntityState.Modified;
 
             try
@@ -75,10 +76,10 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectAudio tblProjectAudio)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectAudio set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectAudio.nProjectID));
-            tblProjectAudio.ProjectActiveStatus = 1;
+            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectAudio set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectAudio.nProjectID));
+            //tblProjectAudio.ProjectActiveStatus = 1; SantoshPP
             tblProjectAudio.aProjectAudioID = 0;
-
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.AudioInstallation, tblProjectAudio.nStoreId, tblProjectAudio);
             db.tblProjectAudios.Add(tblProjectAudio);
             await db.SaveChangesAsync();
 

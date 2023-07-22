@@ -90,19 +90,20 @@ namespace DeploymentTool.Controller
         }
         [Authorize]
         [HttpGet]
-        public HttpResponseMessage CreateAndGetProjectStoreDetails(int nProjectId)
+        public HttpResponseMessage getStoreDetails(int nStoreId)
         {
             NewProjectStore tmpStore = new NewProjectStore();
             try
             {
+                //  int nProjectId = nStoreId;
 
                 // SqlParameter tModuleNameParam = new SqlParameter("@aProjectid", nProjectId);                
 
 
-                tblProjectStore tProjStore = db.tblProjectStores.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
-                tblProject tProj = db.tblProjects.Where(p => p.aProjectID == nProjectId).FirstOrDefault();
-                tblStore tStore = db.tblStores.Where(p => p.aStoreID == tProj.nStoreID).FirstOrDefault();
-                tmpStore.tStakeHolder = db.tblProjectStakeHolders.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
+                //tblProjectStore tProjStore = db.tblProjectStores.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
+                tblProject tProj = db.tblProjects.Where(p => p.nStoreID == nStoreId && p.nProjectActiveStatus == 1).FirstOrDefault();
+                tblStore tStore = db.tblStores.Where(p => p.aStoreID == nStoreId).FirstOrDefault();
+                tmpStore.tStakeHolder = db.tblProjectStakeHolders.Where(p => p.nStoreId == nStoreId && p.nProjectID == tProj.aProjectID).FirstOrDefault();
                 // var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProject set projectActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tStore.aStoreID));
                 //tProj.ProjectActiveStatus = 1;
                 //Utilities.SetHousekeepingFields(true, HttpContext.Current, tProj);
@@ -113,7 +114,7 @@ namespace DeploymentTool.Controller
 
                 //tProjStore.nProjectID = tProj.aProjectID;
 
-                tmpStore.SetValues(tProj, tProjStore, tStore);
+                tmpStore.SetValues(tProj, tStore);
 
             }
             catch (Exception ex)
@@ -132,21 +133,32 @@ namespace DeploymentTool.Controller
         {
             try
             {
-                newStore.nProjectID = 0;
+                ProjectType pType = (ProjectType)newStore.nProjectType;
                 Utilities.SetHousekeepingFields(true, HttpContext.Current, newStore);
-                tblStore ttboStore = newStore.GettblStore();
-                db.tblStores.Add(ttboStore);
-                db.SaveChanges();
+                var noOfRowUpdated = db.Database.ExecuteSqlCommand("exec sproc_MoveProjectToHistory @nStoreId, @nProjectType", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType));
+                tblStore ttboStore = newStore.GettblStores();
+                switch (pType)
+                {
+                    case ProjectType.AudioInstallation:
+                    case ProjectType.POSInstallation:
+                    case ProjectType.MenuInstallation:
+                    case ProjectType.PaymentTerminalInstallation:
+                        db.Entry(ttboStore).State = EntityState.Modified;
+                        db.SaveChanges();
+                        break;
+                    default:
+                        newStore.nProjectID = 0;
+                        db.tblStores.Add(ttboStore);
+                        db.SaveChanges();
+                        break;
+                }
                 tblProject tProjectModel = newStore.GettblProject();
+                tProjectModel.nProjectActiveStatus = 1;
                 tProjectModel.nStoreID = ttboStore.aStoreID;
-                newStore.nStoreId = ttboStore.aStoreID;
+                newStore.aStoreId = ttboStore.aStoreID;
                 db.tblProjects.Add(tProjectModel);
                 db.SaveChanges();
                 newStore.nProjectID = tProjectModel.aProjectID;
-                tblProjectStore tblProjectStoreModel = newStore.GettblProjectStores();
-                db.tblProjectStores.Add(tblProjectStoreModel);
-                db.SaveChanges();
-                newStore.aProjectStoreID = tblProjectStoreModel.aProjectStoreID;
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<NewProjectStore>(newStore, new JsonMediaTypeFormatter())
@@ -165,14 +177,11 @@ namespace DeploymentTool.Controller
             try
             {
                 Utilities.SetHousekeepingFields(false, HttpContext.Current, newStore);
-                tblStore ttboStore = newStore.GettblStore();
+                tblStore ttboStore = newStore.GettblStores();
                 db.Entry(ttboStore).State = EntityState.Modified;
                 db.SaveChanges();
                 tblProject tProjectModel = newStore.GettblProject();
                 db.Entry(tProjectModel).State = EntityState.Modified;
-                db.SaveChanges();
-                tblProjectStore tblProjectStoreModel = newStore.GettblProjectStores();
-                db.Entry(tblProjectStoreModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {

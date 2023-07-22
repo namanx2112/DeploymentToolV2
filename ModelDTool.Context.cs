@@ -33,7 +33,6 @@ namespace DeploymentTool
         public virtual DbSet<tblAttachment> tblAttachments { get; set; }
         public virtual DbSet<tblProject> tblProjects { get; set; }
         public virtual DbSet<tblProjectAudio> tblProjectAudios { get; set; }
-        public virtual DbSet<tblProjectBillTo> tblProjectBillToes { get; set; }
         public virtual DbSet<tblProjectConfig> tblProjectConfigs { get; set; }
         public virtual DbSet<tblProjectExteriorMenu> tblProjectExteriorMenus { get; set; }
         public virtual DbSet<tblProjectInstallation> tblProjectInstallations { get; set; }
@@ -44,7 +43,6 @@ namespace DeploymentTool
         public virtual DbSet<tblProjectPOS> tblProjectPOS { get; set; }
         public virtual DbSet<tblProjectSonicRadio> tblProjectSonicRadios { get; set; }
         public virtual DbSet<tblProjectStakeHolder> tblProjectStakeHolders { get; set; }
-        public virtual DbSet<tblProjectStore> tblProjectStores { get; set; }
         public virtual DbSet<tblStore> tblStores { get; set; }
         public virtual DbSet<tblUser1> tblUsers1 { get; set; }
         public virtual DbSet<tblBrandBKP> tblBrandBKPs { get; set; }
@@ -53,8 +51,6 @@ namespace DeploymentTool
         public virtual DbSet<tblEnumTableField> tblEnumTableFields { get; set; }
         public virtual DbSet<tblFranchise> tblFranchises { get; set; }
         public virtual DbSet<tblFunction> tblFunctions { get; set; }
-        public virtual DbSet<tblProjectComponent> tblProjectComponents { get; set; }
-        public virtual DbSet<tblProjectComponentUpload> tblProjectComponentUploads { get; set; }
         public virtual DbSet<tblState> tblStates { get; set; }
         public virtual DbSet<tblTechComponent> tblTechComponents { get; set; }
         public virtual DbSet<tblUserBrandRel> tblUserBrandRels { get; set; }

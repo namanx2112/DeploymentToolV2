@@ -230,7 +230,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
-          <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="nProjectActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectAudio">
           <Key>
@@ -246,58 +246,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="nLoopType" Type="int" />
           <Property Name="dLoopDeliveryDate" Type="date" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="ProjectActiveStatus" Type="int" />
-        </EntityType>
-        <EntityType Name="tblProjectBillTo">
-          <Key>
-            <PropertyRef Name="aProjectBillToID" />
-          </Key>
-          <Property Name="aProjectBillToID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nProjectID" Type="int" />
-          <Property Name="tCompany" Type="nvarchar" MaxLength="255" />
-          <Property Name="tBillToAddressLine1" Type="nvarchar" MaxLength="255" />
-          <Property Name="tBillToAddressLine2" Type="nvarchar" MaxLength="255" />
-          <Property Name="tBillToState" Type="nvarchar" MaxLength="255" />
-          <Property Name="tBillToZipCode" Type="nvarchar" MaxLength="255" />
-          <Property Name="tBillToEmail" Type="nvarchar" MaxLength="255" />
-          <Property Name="ProjectActiveStatus" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'dtDB.dbo.tblProjectComponent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tblProjectComponent">
-          <Key>
-            <PropertyRef Name="aProjectComponentId" />
-          </Key>
-          <Property Name="aProjectComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nProjectId" Type="int" />
-          <Property Name="nTechComponentId" Type="int" />
-          <Property Name="nVendorId" Type="nvarchar" MaxLength="255" />
-          <Property Name="tStatus" Type="int" />
-          <Property Name="dStartDate" Type="nvarchar" MaxLength="255" />
-          <Property Name="dEndDate" Type="datetime" />
-          <Property Name="dEndExpectedDate" Type="datetime" />
-          <Property Name="tSignOffStatus" Type="datetime" />
-          <Property Name="tComments" Type="nvarchar(max)" />
-          <Property Name="nCreatedBy" Type="int" />
-          <Property Name="nUpdateBy" Type="int" />
-          <Property Name="dtCreatedOn" Type="datetime" />
-          <Property Name="dtUpdatedOn" Type="datetime" />
-          <Property Name="bDeleted" Type="bit" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tblProjectComponentUpload">
-          <Key>
-            <PropertyRef Name="aProjectComponentUploadId" />
-          </Key>
-          <Property Name="aProjectComponentUploadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nProjectComponentId" Type="int" />
-          <Property Name="nAttachmentId" Type="int" />
-          <Property Name="nCreatedBy" Type="int" />
-          <Property Name="nUpdateBy" Type="int" />
-          <Property Name="dtCreatedOn" Type="datetime" />
-          <Property Name="dtUpdatedOn" Type="datetime" />
-          <Property Name="bDeleted" Type="bit" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectConfig">
           <Key>
@@ -309,9 +258,9 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nDriveThru" Type="int" />
           <Property Name="nInsideDining" Type="int" />
           <Property Name="cProjectCost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="ProjectActiveStatus" Type="int" />
           <Property Name="dGroundBreak" Type="datetime" />
           <Property Name="dKitchenInstall" Type="datetime" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectExteriorMenus">
           <Key>
@@ -330,7 +279,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="cFabConCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="cIDTechCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="cTotalCost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectInstallation">
           <Key>
@@ -347,7 +296,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nTestTransactions" Type="int" />
           <Property Name="nProjectStatus" Type="int" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectInteriorMenus">
           <Key>
@@ -360,7 +309,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nStatus" Type="int" />
           <Property Name="dDeliveryDate" Type="date" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectNetworking">
           <Key>
@@ -378,7 +327,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nTempStatus" Type="int" />
           <Property Name="dTempDate" Type="date" />
           <Property Name="nTempType" Type="int" />
-          <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectNotes">
           <Key>
@@ -416,7 +365,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nShelf" Type="int" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="nType" Type="int" />
-          <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectPOS">
           <Key>
@@ -431,7 +380,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nStatus" Type="int" />
           <Property Name="nPaperworkStatus" Type="int" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectSonicRadio">
           <Key>
@@ -448,7 +397,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="nStatus" Type="int" />
           <Property Name="dDeliveryDate" Type="date" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="ProjectActiveStatus" Type="int" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectStakeHolders">
           <Key>
@@ -465,37 +414,7 @@ warning 6002: The table/view 'dtDB.dbo.tblProjectComponentUpload' does not have 
           <Property Name="tPrincipalPartner" Type="nvarchar" MaxLength="255" />
           <Property Name="tCD" Type="nvarchar" MaxLength="500" />
           <Property Name="tITPM" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="tblProjectStore">
-          <Key>
-            <PropertyRef Name="aProjectStoreID" />
-          </Key>
-          <Property Name="aProjectStoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nProjectID" Type="int" />
-          <Property Name="tStoreName" Type="nvarchar" MaxLength="255" />
-          <Property Name="tStoreAddressLine1" Type="nvarchar" MaxLength="255" />
-          <Property Name="tStoreAddressLine2" Type="nvarchar" MaxLength="255" />
-          <Property Name="nStoreState" Type="int" />
-          <Property Name="tStoreZip" Type="nvarchar" MaxLength="255" />
-          <Property Name="tStoreManager" Type="nvarchar" MaxLength="255" />
-          <Property Name="tPOC" Type="nvarchar" MaxLength="255" />
-          <Property Name="tPOCPhone" Type="nvarchar" MaxLength="255" />
-          <Property Name="tPOCEmail" Type="nvarchar" MaxLength="255" />
-          <Property Name="tGC" Type="nvarchar" MaxLength="255" />
-          <Property Name="tGCPhone" Type="nvarchar" MaxLength="255" />
-          <Property Name="tGCEMail" Type="nvarchar" MaxLength="255" />
-          <Property Name="nCreatedBy" Type="int" />
-          <Property Name="nUpdateBy" Type="int" />
-          <Property Name="dtCreatedOn" Type="datetime" />
-          <Property Name="dtUpdatedOn" Type="datetime" />
-          <Property Name="bDeleted" Type="bit" />
-          <Property Name="tCity" Type="nvarchar" MaxLength="500" />
-          <Property Name="tBillToCompany" Type="nvarchar" MaxLength="500" />
-          <Property Name="tBillToAddress" Type="nvarchar" MaxLength="500" />
-          <Property Name="tBillToCity" Type="nvarchar" MaxLength="500" />
-          <Property Name="nBillToState" Type="int" />
-          <Property Name="tBillToZip" Type="nvarchar" MaxLength="500" />
-          <Property Name="tBillToEmail" Type="nvarchar" MaxLength="500" />
+          <Property Name="nStoreId" Type="int" />
         </EntityType>
         <EntityType Name="tblPurchaseOrder">
           <Key>
@@ -619,6 +538,25 @@ warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key def
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+          <Property Name="tStoreName" Type="varchar" MaxLength="1000" />
+          <Property Name="tStoreAddressLine1" Type="varchar" MaxLength="1000" />
+          <Property Name="tStoreAddressLine2" Type="varchar" MaxLength="1000" />
+          <Property Name="nStoreState" Type="int" />
+          <Property Name="tCity" Type="varchar" MaxLength="500" />
+          <Property Name="tStoreZip" Type="varchar" MaxLength="100" />
+          <Property Name="tStoreManager" Type="varchar" MaxLength="500" />
+          <Property Name="tPOC" Type="varchar" MaxLength="500" />
+          <Property Name="tPOCPhone" Type="varchar" MaxLength="20" />
+          <Property Name="tPOCEmail" Type="varchar" MaxLength="500" />
+          <Property Name="tGC" Type="varchar" MaxLength="500" />
+          <Property Name="tGCPhone" Type="varchar" MaxLength="20" />
+          <Property Name="tGCEmail" Type="varchar" MaxLength="500" />
+          <Property Name="tBillToCompany" Type="varchar" MaxLength="500" />
+          <Property Name="tBillToAddress" Type="varchar" MaxLength="500" />
+          <Property Name="tBillToCity" Type="varchar" MaxLength="500" />
+          <Property Name="nBillToState" Type="int" />
+          <Property Name="tBillToZip" Type="varchar" MaxLength="100" />
+          <Property Name="tBillToEmail" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tblSupportTicket">
           <Key>
@@ -815,7 +753,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblParts" EntityType="Self.tblParts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectAudio" EntityType="Self.tblProjectAudio" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblProjectBillTo" EntityType="Self.tblProjectBillTo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectConfig" EntityType="Self.tblProjectConfig" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectExteriorMenus" EntityType="Self.tblProjectExteriorMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectInstallation" EntityType="Self.tblProjectInstallation" Schema="dbo" store:Type="Tables" />
@@ -826,7 +763,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblProjectPOS" EntityType="Self.tblProjectPOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblProjectStore" EntityType="Self.tblProjectStore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPurchaseOrder" EntityType="Self.tblPurchaseOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPurchaseOrderParts" EntityType="Self.tblPurchaseOrderParts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPurchaseOrderTemplate" EntityType="Self.tblPurchaseOrderTemplate" Schema="dbo" store:Type="Tables" />
@@ -886,37 +822,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     [tblFunctions].[aFunctionID] AS [aFunctionID], 
     [tblFunctions].[tFunctionName] AS [tFunctionName]
     FROM [dbo].[tblFunctions] AS [tblFunctions]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="tblProjectComponent" EntityType="Self.tblProjectComponent" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tblProjectComponent].[aProjectComponentId] AS [aProjectComponentId], 
-    [tblProjectComponent].[nProjectId] AS [nProjectId], 
-    [tblProjectComponent].[nTechComponentId] AS [nTechComponentId], 
-    [tblProjectComponent].[nVendorId] AS [nVendorId], 
-    [tblProjectComponent].[tStatus] AS [tStatus], 
-    [tblProjectComponent].[dStartDate] AS [dStartDate], 
-    [tblProjectComponent].[dEndDate] AS [dEndDate], 
-    [tblProjectComponent].[dEndExpectedDate] AS [dEndExpectedDate], 
-    [tblProjectComponent].[tSignOffStatus] AS [tSignOffStatus], 
-    [tblProjectComponent].[tComments] AS [tComments], 
-    [tblProjectComponent].[nCreatedBy] AS [nCreatedBy], 
-    [tblProjectComponent].[nUpdateBy] AS [nUpdateBy], 
-    [tblProjectComponent].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblProjectComponent].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblProjectComponent].[bDeleted] AS [bDeleted]
-    FROM [dbo].[tblProjectComponent] AS [tblProjectComponent]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="tblProjectComponentUpload" EntityType="Self.tblProjectComponentUpload" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tblProjectComponentUpload].[aProjectComponentUploadId] AS [aProjectComponentUploadId], 
-    [tblProjectComponentUpload].[nProjectComponentId] AS [nProjectComponentId], 
-    [tblProjectComponentUpload].[nAttachmentId] AS [nAttachmentId], 
-    [tblProjectComponentUpload].[nCreatedBy] AS [nCreatedBy], 
-    [tblProjectComponentUpload].[nUpdateBy] AS [nUpdateBy], 
-    [tblProjectComponentUpload].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblProjectComponentUpload].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblProjectComponentUpload].[bDeleted] AS [bDeleted]
-    FROM [dbo].[tblProjectComponentUpload] AS [tblProjectComponentUpload]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="tblState" EntityType="Self.tblState" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -988,7 +893,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySet Name="tblAttachments" EntityType="dtDBModel.tblAttachment" />
 					<EntitySet Name="tblProjects" EntityType="dtDBModel.tblProject" />
 					<EntitySet Name="tblProjectAudios" EntityType="dtDBModel.tblProjectAudio" />
-					<EntitySet Name="tblProjectBillToes" EntityType="dtDBModel.tblProjectBillTo" />
 					<EntitySet Name="tblProjectConfigs" EntityType="dtDBModel.tblProjectConfig" />
 					<EntitySet Name="tblProjectExteriorMenus" EntityType="dtDBModel.tblProjectExteriorMenu" />
 					<EntitySet Name="tblProjectInstallations" EntityType="dtDBModel.tblProjectInstallation" />
@@ -999,7 +903,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySet Name="tblProjectPOS" EntityType="dtDBModel.tblProjectPOS" />
 					<EntitySet Name="tblProjectSonicRadios" EntityType="dtDBModel.tblProjectSonicRadio" />
 					<EntitySet Name="tblProjectStakeHolders" EntityType="dtDBModel.tblProjectStakeHolder" />
-					<EntitySet Name="tblProjectStores" EntityType="dtDBModel.tblProjectStore" />
 					<EntitySet Name="tblStores" EntityType="dtDBModel.tblStore" />
 					<EntitySet Name="tblUsers1" EntityType="dtDBModel.tblUser1" />
 					<EntitySet Name="tblBrandBKPs" EntityType="dtDBModel.tblBrandBKP" />
@@ -1008,8 +911,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySet Name="tblEnumTableFields" EntityType="dtDBModel.tblEnumTableField" />
 					<EntitySet Name="tblFranchises" EntityType="dtDBModel.tblFranchise" />
 					<EntitySet Name="tblFunctions" EntityType="dtDBModel.tblFunction" />
-					<EntitySet Name="tblProjectComponents" EntityType="dtDBModel.tblProjectComponent" />
-					<EntitySet Name="tblProjectComponentUploads" EntityType="dtDBModel.tblProjectComponentUpload" />
 					<EntitySet Name="tblStates" EntityType="dtDBModel.tblState" />
 					<EntitySet Name="tblTechComponents" EntityType="dtDBModel.tblTechComponent" />
 					<EntitySet Name="tblUserBrandRels" EntityType="dtDBModel.tblUserBrandRel" />
@@ -1161,7 +1062,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="nProjectActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectAudio">
 					<Key>
@@ -1177,21 +1078,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nLoopType" Type="Int32" />
 					<Property Name="dLoopDeliveryDate" Type="DateTime" Precision="0" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
-				</EntityType>
-				<EntityType Name="tblProjectBillTo">
-					<Key>
-						<PropertyRef Name="aProjectBillToID" />
-					</Key>
-					<Property Name="aProjectBillToID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-					<Property Name="nProjectID" Type="Int32" />
-					<Property Name="tCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToState" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToZipCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectConfig">
 					<Key>
@@ -1203,9 +1090,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nDriveThru" Type="Int32" />
 					<Property Name="nInsideDining" Type="Int32" />
 					<Property Name="cProjectCost" Type="Decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
 					<Property Name="dGroundBreak" Type="DateTime" Precision="3" />
 					<Property Name="dKitchenInstall" Type="DateTime" Precision="3" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectExteriorMenu">
 					<Key>
@@ -1224,7 +1111,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="cFabConCost" Type="Decimal" Precision="18" Scale="2" />
 					<Property Name="cIDTechCost" Type="Decimal" Precision="18" Scale="2" />
 					<Property Name="cTotalCost" Type="Decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectInstallation">
 					<Key>
@@ -1241,7 +1128,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nTestTransactions" Type="Int32" />
 					<Property Name="nProjectStatus" Type="Int32" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectInteriorMenu">
 					<Key>
@@ -1254,7 +1141,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nStatus" Type="Int32" />
 					<Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectNetworking">
 					<Key>
@@ -1272,7 +1159,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nTempStatus" Type="Int32" />
 					<Property Name="dTempDate" Type="DateTime" Precision="0" />
 					<Property Name="nTempType" Type="Int32" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectNote">
 					<Key>
@@ -1310,7 +1197,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nShelf" Type="Int32" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
 					<Property Name="nType" Type="Int32" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectPOS">
 					<Key>
@@ -1325,7 +1212,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nStatus" Type="Int32" />
 					<Property Name="nPaperworkStatus" Type="Int32" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectSonicRadio">
 					<Key>
@@ -1342,7 +1229,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nStatus" Type="Int32" />
 					<Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
-					<Property Name="ProjectActiveStatus" Type="Int32" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectStakeHolder">
 					<Key>
@@ -1359,37 +1246,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="tPrincipalPartner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tCD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
 					<Property Name="tITPM" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-				</EntityType>
-				<EntityType Name="tblProjectStore">
-					<Key>
-						<PropertyRef Name="aProjectStoreID" />
-					</Key>
-					<Property Name="aProjectStoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-					<Property Name="nProjectID" Type="Int32" />
-					<Property Name="tStoreName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tStoreAddressLine1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tStoreAddressLine2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="nStoreState" Type="Int32" />
-					<Property Name="tStoreZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tStoreManager" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tPOC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tPOCPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tPOCEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tGC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tGCPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tGCEMail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="nCreatedBy" Type="Int32" />
-					<Property Name="nUpdateBy" Type="Int32" />
-					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
-					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
-					<Property Name="bDeleted" Type="Boolean" />
-					<Property Name="tCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToCompany" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-					<Property Name="nBillToState" Type="Int32" />
-					<Property Name="tBillToCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToZip" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-					<Property Name="tBillToEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nStoreId" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblStore">
 					<Key>
@@ -1402,6 +1259,25 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
+          <Property Name="tStoreName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="tStoreAddressLine1" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="tStoreAddressLine2" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="nStoreState" Type="Int32" />
+          <Property Name="tCity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tStoreZip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tStoreManager" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tPOC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tPOCPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tPOCEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tGC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tGCPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tGCEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tBillToCompany" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tBillToAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="tBillToCity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="nBillToState" Type="Int32" />
+          <Property Name="tBillToZip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tBillToEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
 				</EntityType>
 				<EntityType Name="tblUser1">
 					<Key>
@@ -1497,39 +1373,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					</Key>
 					<Property Name="aFunctionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
 					<Property Name="tFunctionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-				</EntityType>
-				<EntityType Name="tblProjectComponent">
-					<Key>
-						<PropertyRef Name="aProjectComponentId" />
-					</Key>
-					<Property Name="aProjectComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-					<Property Name="nProjectId" Type="Int32" />
-					<Property Name="nTechComponentId" Type="Int32" />
-					<Property Name="nVendorId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tStatus" Type="Int32" />
-					<Property Name="dStartDate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="dEndDate" Type="DateTime" Precision="3" />
-					<Property Name="dEndExpectedDate" Type="DateTime" Precision="3" />
-					<Property Name="tSignOffStatus" Type="DateTime" Precision="3" />
-					<Property Name="tComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-					<Property Name="nCreatedBy" Type="Int32" />
-					<Property Name="nUpdateBy" Type="Int32" />
-					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
-					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
-					<Property Name="bDeleted" Type="Boolean" />
-				</EntityType>
-				<EntityType Name="tblProjectComponentUpload">
-					<Key>
-						<PropertyRef Name="aProjectComponentUploadId" />
-					</Key>
-					<Property Name="aProjectComponentUploadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-					<Property Name="nProjectComponentId" Type="Int32" />
-					<Property Name="nAttachmentId" Type="Int32" />
-					<Property Name="nCreatedBy" Type="Int32" />
-					<Property Name="nUpdateBy" Type="Int32" />
-					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
-					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
-					<Property Name="bDeleted" Type="Boolean" />
 				</EntityType>
 				<EntityType Name="tblState">
 					<Key>
@@ -1912,8 +1755,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjects">
 						<EntityTypeMapping TypeName="dtDBModel.tblProject">
 							<MappingFragment StoreEntitySet="tblProject">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
-								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+								<ScalarProperty Name="nProjectActiveStatus" ColumnName="nProjectActiveStatus" />
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
 								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
 								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
 								<ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
@@ -1933,8 +1776,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectAudios">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectAudio">
 							<MappingFragment StoreEntitySet="tblProjectAudio">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
-								<ScalarProperty Name="cCost" ColumnName="cCost" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+                <ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="dLoopDeliveryDate" ColumnName="dLoopDeliveryDate" />
 								<ScalarProperty Name="nLoopType" ColumnName="nLoopType" />
 								<ScalarProperty Name="nLoopStatus" ColumnName="nLoopStatus" />
@@ -1947,27 +1790,12 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 							</MappingFragment>
 						</EntityTypeMapping>
 					</EntitySetMapping>
-					<EntitySetMapping Name="tblProjectBillToes">
-						<EntityTypeMapping TypeName="dtDBModel.tblProjectBillTo">
-							<MappingFragment StoreEntitySet="tblProjectBillTo">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
-								<ScalarProperty Name="tBillToEmail" ColumnName="tBillToEmail" />
-								<ScalarProperty Name="tBillToZipCode" ColumnName="tBillToZipCode" />
-								<ScalarProperty Name="tBillToState" ColumnName="tBillToState" />
-								<ScalarProperty Name="tBillToAddressLine2" ColumnName="tBillToAddressLine2" />
-								<ScalarProperty Name="tBillToAddressLine1" ColumnName="tBillToAddressLine1" />
-								<ScalarProperty Name="tCompany" ColumnName="tCompany" />
-								<ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
-								<ScalarProperty Name="aProjectBillToID" ColumnName="aProjectBillToID" />
-							</MappingFragment>
-						</EntityTypeMapping>
-					</EntitySetMapping>
 					<EntitySetMapping Name="tblProjectConfigs">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectConfig">
 							<MappingFragment StoreEntitySet="tblProjectConfig">
-								<ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+                <ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
 								<ScalarProperty Name="dGroundBreak" ColumnName="dGroundBreak" />
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
 								<ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
 								<ScalarProperty Name="nInsideDining" ColumnName="nInsideDining" />
 								<ScalarProperty Name="nDriveThru" ColumnName="nDriveThru" />
@@ -1980,8 +1808,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectExteriorMenus">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectExteriorMenu">
 							<MappingFragment StoreEntitySet="tblProjectExteriorMenus">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
-								<ScalarProperty Name="cTotalCost" ColumnName="cTotalCost" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+                <ScalarProperty Name="cTotalCost" ColumnName="cTotalCost" />
 								<ScalarProperty Name="cIDTechCost" ColumnName="cIDTechCost" />
 								<ScalarProperty Name="cFabConCost" ColumnName="cFabConCost" />
 								<ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
@@ -2000,8 +1828,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectInstallations">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectInstallation">
 							<MappingFragment StoreEntitySet="tblProjectInstallation">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
-								<ScalarProperty Name="cCost" ColumnName="cCost" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+                <ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="nProjectStatus" ColumnName="nProjectStatus" />
 								<ScalarProperty Name="nTestTransactions" ColumnName="nTestTransactions" />
 								<ScalarProperty Name="nSignoffs" ColumnName="nSignoffs" />
@@ -2018,8 +1846,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectInteriorMenus">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectInteriorMenu">
 							<MappingFragment StoreEntitySet="tblProjectInteriorMenus">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
-								<ScalarProperty Name="cCost" ColumnName="cCost" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+                <ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
 								<ScalarProperty Name="nStatus" ColumnName="nStatus" />
 								<ScalarProperty Name="nDMBQuantity" ColumnName="nDMBQuantity" />
@@ -2032,8 +1860,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectNetworkings">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectNetworking">
 							<MappingFragment StoreEntitySet="tblProjectNetworking">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
-								<ScalarProperty Name="nTempType" ColumnName="nTempType" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+                <ScalarProperty Name="nTempType" ColumnName="nTempType" />
 								<ScalarProperty Name="dTempDate" ColumnName="dTempDate" />
 								<ScalarProperty Name="nTempStatus" ColumnName="nTempStatus" />
 								<ScalarProperty Name="nBackupType" ColumnName="nBackupType" />
@@ -2068,7 +1896,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectPaymentSystems">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectPaymentSystem">
 							<MappingFragment StoreEntitySet="tblProjectPaymentSystem">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
 								<ScalarProperty Name="nType" ColumnName="nType" />
 								<ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="nShelf" ColumnName="nShelf" />
@@ -2091,7 +1919,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectPOS">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectPOS">
 							<MappingFragment StoreEntitySet="tblProjectPOS">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
 								<ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="nPaperworkStatus" ColumnName="nPaperworkStatus" />
 								<ScalarProperty Name="nStatus" ColumnName="nStatus" />
@@ -2107,7 +1935,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectSonicRadios">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectSonicRadio">
 							<MappingFragment StoreEntitySet="tblProjectSonicRadio">
-								<ScalarProperty Name="ProjectActiveStatus" ColumnName="ProjectActiveStatus" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
 								<ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
 								<ScalarProperty Name="nStatus" ColumnName="nStatus" />
@@ -2125,7 +1953,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectStakeHolders">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectStakeHolder">
 							<MappingFragment StoreEntitySet="tblProjectStakeHolders">
-								<ScalarProperty Name="tITPM" ColumnName="tITPM" />
+								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+                <ScalarProperty Name="tITPM" ColumnName="tITPM" />
 								<ScalarProperty Name="tCD" ColumnName="tCD" />
 								<ScalarProperty Name="tPrincipalPartner" ColumnName="tPrincipalPartner" />
 								<ScalarProperty Name="tAandE" ColumnName="tAandE" />
@@ -2139,42 +1968,29 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 							</MappingFragment>
 						</EntityTypeMapping>
 					</EntitySetMapping>
-					<EntitySetMapping Name="tblProjectStores">
-						<EntityTypeMapping TypeName="dtDBModel.tblProjectStore">
-							<MappingFragment StoreEntitySet="tblProjectStore">
-								<ScalarProperty Name="tBillToEmail" ColumnName="tBillToEmail" />
-								<ScalarProperty Name="tBillToZip" ColumnName="tBillToZip" />
-								<ScalarProperty Name="tBillToAddress" ColumnName="tBillToAddress" />
-								<ScalarProperty Name="tBillToCompany" ColumnName="tBillToCompany" />
-								<ScalarProperty Name="tBillToCity" ColumnName="tBillToCity" />
-								<ScalarProperty Name="nBillToState" ColumnName="nBillToState" />
-								<ScalarProperty Name="tCity" ColumnName="tCity" />
-								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
-								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
-								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
-								<ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
-								<ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-								<ScalarProperty Name="tGCEMail" ColumnName="tGCEMail" />
-								<ScalarProperty Name="tGCPhone" ColumnName="tGCPhone" />
-								<ScalarProperty Name="tGC" ColumnName="tGC" />
-								<ScalarProperty Name="tPOCEmail" ColumnName="tPOCEmail" />
-								<ScalarProperty Name="tPOCPhone" ColumnName="tPOCPhone" />
-								<ScalarProperty Name="tPOC" ColumnName="tPOC" />
-								<ScalarProperty Name="tStoreManager" ColumnName="tStoreManager" />
-								<ScalarProperty Name="tStoreZip" ColumnName="tStoreZip" />
-								<ScalarProperty Name="nStoreState" ColumnName="nStoreState" />
-								<ScalarProperty Name="tStoreAddressLine2" ColumnName="tStoreAddressLine2" />
-								<ScalarProperty Name="tStoreAddressLine1" ColumnName="tStoreAddressLine1" />
-								<ScalarProperty Name="tStoreName" ColumnName="tStoreName" />
-								<ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
-								<ScalarProperty Name="aProjectStoreID" ColumnName="aProjectStoreID" />
-							</MappingFragment>
-						</EntityTypeMapping>
-					</EntitySetMapping>
 					<EntitySetMapping Name="tblStores">
 						<EntityTypeMapping TypeName="dtDBModel.tblStore">
 							<MappingFragment StoreEntitySet="tblStore">
-								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+								<ScalarProperty Name="tBillToEmail" ColumnName="tBillToEmail" />
+                <ScalarProperty Name="tBillToZip" ColumnName="tBillToZip" />
+                <ScalarProperty Name="nBillToState" ColumnName="nBillToState" />
+                <ScalarProperty Name="tBillToCity" ColumnName="tBillToCity" />
+                <ScalarProperty Name="tBillToAddress" ColumnName="tBillToAddress" />
+                <ScalarProperty Name="tBillToCompany" ColumnName="tBillToCompany" />
+                <ScalarProperty Name="tGCEmail" ColumnName="tGCEmail" />
+                <ScalarProperty Name="tGCPhone" ColumnName="tGCPhone" />
+                <ScalarProperty Name="tGC" ColumnName="tGC" />
+                <ScalarProperty Name="tPOCEmail" ColumnName="tPOCEmail" />
+                <ScalarProperty Name="tPOCPhone" ColumnName="tPOCPhone" />
+                <ScalarProperty Name="tPOC" ColumnName="tPOC" />
+                <ScalarProperty Name="tStoreManager" ColumnName="tStoreManager" />
+                <ScalarProperty Name="tStoreZip" ColumnName="tStoreZip" />
+                <ScalarProperty Name="tCity" ColumnName="tCity" />
+                <ScalarProperty Name="nStoreState" ColumnName="nStoreState" />
+                <ScalarProperty Name="tStoreAddressLine2" ColumnName="tStoreAddressLine2" />
+                <ScalarProperty Name="tStoreAddressLine1" ColumnName="tStoreAddressLine1" />
+                <ScalarProperty Name="tStoreName" ColumnName="tStoreName" />
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
 								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
 								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
 								<ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
@@ -2282,41 +2098,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 							<MappingFragment StoreEntitySet="tblFunctions">
 								<ScalarProperty Name="tFunctionName" ColumnName="tFunctionName" />
 								<ScalarProperty Name="aFunctionID" ColumnName="aFunctionID" />
-							</MappingFragment>
-						</EntityTypeMapping>
-					</EntitySetMapping>
-					<EntitySetMapping Name="tblProjectComponents">
-						<EntityTypeMapping TypeName="dtDBModel.tblProjectComponent">
-							<MappingFragment StoreEntitySet="tblProjectComponent">
-								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
-								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
-								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
-								<ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
-								<ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-								<ScalarProperty Name="tComments" ColumnName="tComments" />
-								<ScalarProperty Name="tSignOffStatus" ColumnName="tSignOffStatus" />
-								<ScalarProperty Name="dEndExpectedDate" ColumnName="dEndExpectedDate" />
-								<ScalarProperty Name="dEndDate" ColumnName="dEndDate" />
-								<ScalarProperty Name="dStartDate" ColumnName="dStartDate" />
-								<ScalarProperty Name="tStatus" ColumnName="tStatus" />
-								<ScalarProperty Name="nVendorId" ColumnName="nVendorId" />
-								<ScalarProperty Name="nTechComponentId" ColumnName="nTechComponentId" />
-								<ScalarProperty Name="nProjectId" ColumnName="nProjectId" />
-								<ScalarProperty Name="aProjectComponentId" ColumnName="aProjectComponentId" />
-							</MappingFragment>
-						</EntityTypeMapping>
-					</EntitySetMapping>
-					<EntitySetMapping Name="tblProjectComponentUploads">
-						<EntityTypeMapping TypeName="dtDBModel.tblProjectComponentUpload">
-							<MappingFragment StoreEntitySet="tblProjectComponentUpload">
-								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
-								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
-								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
-								<ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
-								<ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-								<ScalarProperty Name="nAttachmentId" ColumnName="nAttachmentId" />
-								<ScalarProperty Name="nProjectComponentId" ColumnName="nProjectComponentId" />
-								<ScalarProperty Name="aProjectComponentUploadId" ColumnName="aProjectComponentUploadId" />
 							</MappingFragment>
 						</EntityTypeMapping>
 					</EntitySetMapping>

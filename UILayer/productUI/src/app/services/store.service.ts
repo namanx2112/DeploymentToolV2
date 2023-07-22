@@ -22,11 +22,11 @@ export class StoreService {
     return this.http.post<any>(this.configUrl + "Sonic/UpdateStore", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  CreateAndGetProjectStoreDetails(nProjectId: number) {
-    return this.http.get<any>(this.configUrl + "Sonic/CreateAndGetProjectStoreDetails?nProjectId=" + nProjectId, { headers: this.authService.getHttpHeaders() });
+  getStoreDetails(nStoreId: number, nProjectType: number) {
+    return this.http.get<any>(this.configUrl + "Sonic/getStoreDetails?nStoreId=" + nStoreId, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetProjectTemplates(nBrandId: number){
+  GetProjectTemplates(nBrandId: number) {
     return this.http.get<ProjectTemplates[]>(this.configUrl + "Sonic/GetProjectTemplates?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });
   }
 }

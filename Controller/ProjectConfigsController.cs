@@ -22,9 +22,9 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectConfigs
         public IQueryable<tblProjectConfig> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectConfigs.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
+            return db.tblProjectConfigs.Where(p => p.nStoreId == nStoreId).AsQueryable();
 
             
         }
@@ -51,7 +51,7 @@ namespace DeploymentTool.Controller
            
 
             db.Entry(tblProjectConfig).State = EntityState.Modified;
-
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectConfig.nStoreId, tblProjectConfig);
             try
             {
                 await db.SaveChangesAsync();
@@ -76,11 +76,11 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectConfig))]
         public async Task<IHttpActionResult> Create(tblProjectConfig tblProjectConfig)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectConfig set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectConfig.nProjectID));
-            tblProjectConfig.ProjectActiveStatus = 1;
+            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectConfig set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectConfig.nProjectID));
+            //tblProjectConfig.ProjectActiveStatus = 1;SantoshPP
 
             tblProjectConfig.aProjectConfigID = 0;
-
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectConfig.nStoreId, tblProjectConfig);
             db.tblProjectConfigs.Add(tblProjectConfig);
             await db.SaveChangesAsync();
             return Json(tblProjectConfig);

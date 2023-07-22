@@ -65,7 +65,7 @@ export class ProjectTemplateListComponent {
     dialogConfig.height = '100%';
     dialogConfig.width = '60%';
     dialogConfig.data = {
-      nProjectId: this._curStore.nProjectId,
+      nStoreId: this._curStore.nStoreId,
       nTemplateId: item.nTemplateId,
       onSubmit: function (data: any) {
         dialogRef.close();

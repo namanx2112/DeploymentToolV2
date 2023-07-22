@@ -311,13 +311,14 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public async System.Threading.Tasks.Task<IHttpActionResult> GetMergedPO(int nTemplateId, int nProjectId)
+        public async System.Threading.Tasks.Task<IHttpActionResult> GetMergedPO(int nTemplateId, int nStoreId)//SantoshPP 
         {
             PurchaseOrderPreviewTemplate poRequest = new PurchaseOrderPreviewTemplate();
 
 
             try
             {
+                int nProjectId = nStoreId;//SantoshPP getActive Projects for This Store and then process
                 //PO Start
                 // int aPurchaseOrderTemplateID = 4;
                 SqlParameter tModuleparmAdress = new SqlParameter("@nProjectID", nProjectId);
@@ -588,7 +589,7 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpPost]
-        public HttpResponseMessage downloadPO(PurchaseOrderFile request)
+        public HttpResponseMessage downloadPO(PurchaseOrderFile request)// SantoshPP
         {
             //string fileName = "PurachaaseOrder.pdf";
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { OptionType } from '../interfaces/home-tab';
 import { DropdownServiceService } from './dropdown-service.service';
 import { DropwDown } from '../interfaces/models';
+import { ProjectTypes } from '../interfaces/sonic';
 
 @Injectable({
   providedIn: 'root'
@@ -43,34 +44,80 @@ export class CommonService {
 
   GetDropdown(columnName: string): OptionType[] {
     let ddItems: OptionType[] = [];
-    for (var item in CommonService.allItems) {
-      if (CommonService.allItems[item].tModuleName == columnName) {
-        ddItems.push({
-          optionDisplayName: CommonService.allItems[item].tDropdownText,
-          optionIndex: CommonService.allItems[item].aDropdownId.toString(),
-          optionOrder: 1
-        });
-      }
+    if (columnName == "ProjectType") {
+      //  , , , , , , , 
+      ddItems = [{
+        optionDisplayName: "New",
+        optionIndex: ProjectTypes.New.toString(),
+        optionOrder: 1
+      }, {
+        optionDisplayName: "Rebuild",
+        optionIndex: ProjectTypes.Rebuild.toString(),
+        optionOrder: 1
+      }, {
+        optionDisplayName: "Remodel",
+        optionIndex: ProjectTypes.Remodel.toString(),
+        optionOrder: 1
+      }, {
+        optionDisplayName: "Relocation",
+        optionIndex: ProjectTypes.Relocation.toString(),
+        optionOrder: 1
+      }, {
+        optionDisplayName: "Acquisition",
+        optionIndex: ProjectTypes.Acquisition.toString(),
+        optionOrder: 1
+      }, {
+        optionDisplayName: "POSInstallation",
+        optionIndex: ProjectTypes.POSInstallation.toString(),
+        optionOrder: 1
+      }, {
+        optionDisplayName: "AudioInstallation",
+        optionIndex: ProjectTypes.AudioInstallation.toString(),
+        optionOrder: 1
+      }, {
+        optionDisplayName: "MenuInstallation",
+        optionIndex: ProjectTypes.MenuInstallation.toString(),
+        optionOrder: 1
+      }, {
+        optionDisplayName: "PaymentTerminalInstallation",
+        optionIndex: ProjectTypes.PaymentTerminalInstallation.toString(),
+        optionOrder: 1
+      }, {
+        optionDisplayName: "PartsReplacement",
+        optionIndex: ProjectTypes.PartsReplacement.toString(),
+        optionOrder: 1
+      }];
     }
-    if (ddItems.length == 0) {
-      if (columnName == "YesNo") { 
-        ddItems = [{
-          optionDisplayName: "No",
-          optionIndex: "0",
-          optionOrder: 1
-        },
-        {
-          optionDisplayName: "Yes",
-          optionIndex: "1",
-          optionOrder: 2
-        }];
+    else {
+      for (var item in CommonService.allItems) {
+        if (CommonService.allItems[item].tModuleName == columnName) {
+          ddItems.push({
+            optionDisplayName: CommonService.allItems[item].tDropdownText,
+            optionIndex: CommonService.allItems[item].aDropdownId.toString(),
+            optionOrder: 1
+          });
+        }
       }
-      else {
-        ddItems = [{
-          optionDisplayName: "Dummy",
-          optionIndex: "1",
-          optionOrder: 1
-        }];
+      if (ddItems.length == 0) {
+        if (columnName == "YesNo") {
+          ddItems = [{
+            optionDisplayName: "No",
+            optionIndex: "0",
+            optionOrder: 1
+          },
+          {
+            optionDisplayName: "Yes",
+            optionIndex: "1",
+            optionOrder: 2
+          }];
+        }
+        else {
+          ddItems = [{
+            optionDisplayName: "Dummy",
+            optionIndex: "1",
+            optionOrder: 1
+          }];
+        }
       }
     }
     return ddItems;

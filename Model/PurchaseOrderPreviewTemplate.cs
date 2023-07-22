@@ -160,7 +160,8 @@ namespace DeploymentTool.Model
     {
         public string tMyFolderId { get; set; }
         public string tFileName { get; set; }
-        public int nProjectId { get; set; }
+        //public int nProjectId { get; set; }
+        public int nStoreId { get; set; }// Changed from nProjectId to aStoreId to download PO
     }
 
 }

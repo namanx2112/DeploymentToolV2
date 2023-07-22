@@ -58,7 +58,43 @@ namespace DeploymentTool.Misc
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public static void SetActiveProjectId(ProjectType pType, int? nStoreId, ModelParent objRef)
+        {
+            try
+            {
+                dtDBEntities db = new dtDBEntities();
+                IQueryable<tblProject> query;
+                switch (pType)
+                {
+                    case ProjectType.AudioInstallation:
+                    case ProjectType.POSInstallation:
+                    case ProjectType.MenuInstallation:
+                    case ProjectType.PaymentTerminalInstallation:
+                        query = db.tblProjects.Where(x => x.nStoreID == nStoreId && x.nProjectActiveStatus == 1 && (x.nProjectType == (int)pType || x.aProjectID > 0));
+                        break;
+                    default:
+                        query = db.tblProjects.Where(x => x.nStoreID == nStoreId && x.nProjectActiveStatus == 1);
+                        break;
+                }
+                tblProject tProject = query.FirstOrDefault();
+                if (tProject != null)
+                {
+
+                    PropertyInfo prop;
+                    prop = objRef.GetType().GetProperty("nProjectID", BindingFlags.Public | BindingFlags.Instance);
+                    if (null != prop && prop.CanWrite)
+                    {
+                        prop.SetValue(objRef, (int)tProject.aProjectID, null);
+                    }
+                }
+            }
+            catch (Exception ex)
             {
 
             }
@@ -75,8 +111,8 @@ namespace DeploymentTool.Misc
 
                 if (!exists)
                     System.IO.Directory.CreateDirectory(URL);
-                 strFilePath = URL + "\\" + fileName;
-                
+                strFilePath = URL + "\\" + fileName;
+
                 StringReader sr = new StringReader(strBody);
                 Document pdfDoc = new Document();// PageSize.A4, 10f, 10f, 10f, 0f);
                 HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
@@ -84,7 +120,7 @@ namespace DeploymentTool.Misc
                 {
                     PdfWriter writer = PdfWriter.GetInstance(pdfDoc, new FileStream(strFilePath, FileMode.Create));
                     pdfDoc.Open();
-                
+
                     htmlparser.Style.LoadTagStyle(HtmlTags.DIV, "size", "10px");
                     htmlparser.Style.LoadTagStyle(HtmlTags.HEADERCELL, HtmlTags.BACKGROUNDCOLOR, "gray");
                     htmlparser.Style.LoadTagStyle(HtmlTags.HEADERCELL, HtmlTags.COLOR, "#fff");
@@ -95,22 +131,22 @@ namespace DeploymentTool.Misc
                     htmlparser.Parse(sr);
                     pdfDoc.Close();
 
-                  
+
                 }
 
 
             }
-            catch(Exception ex) { }
+            catch (Exception ex) { }
             return strFilePath;
         }
 
         public static void SendMail(EMailRequest request)
         {
-           
+
             System.Net.Mail.MailMessage mailMessage = new System.Net.Mail.MailMessage();
             using (SmtpClient smtpClient = new SmtpClient())
             {
-                
+
                 if (request.tTo != null && request.tTo.Length > 0)
                 {
                     foreach (string toAddress in request.tTo.Split(';'))
@@ -145,8 +181,8 @@ namespace DeploymentTool.Misc
 
 
             }
-           
-            
+
+
         }
 
 

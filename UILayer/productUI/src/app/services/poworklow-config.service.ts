@@ -28,8 +28,8 @@ export class POWorkflowConfigService {
     return this.http.get<any>(this.configUrl + "PurchaseOrder/Delete?id=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
   }
 
-  GetMergedPO(nProjectId: number, nTemplateId: number) {
-    return this.http.get<MergedPO>(this.configUrl + "PurchaseOrder/GetMergedPO?nProjectId=" + nProjectId + "&nTemplateId=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
+  GetMergedPO(nStoreId: number, nTemplateId: number) {
+    return this.http.get<MergedPO>(this.configUrl + "PurchaseOrder/GetMergedPO?nStoreId=" + nStoreId + "&nTemplateId=" + nTemplateId, { headers: this.authService.getHttpHeaders() });
   }
 
   SenMergedPO(request: MergedPO) {
@@ -40,11 +40,11 @@ export class POWorkflowConfigService {
     return this.http.post<any>(this.configUrl + "PurchaseOrder/SendPO", request, { headers: this.authService.getHttpHeaders() });
   }
 
-  downloadPO(tMyFolderId: string, tFileName: string, nProjectId: number) {
+  downloadPO(tMyFolderId: string, tFileName: string, nStoreId: number) {
     let httpHeader = new HttpHeaders({
       "Authorization": "Bearer " + this.authService.getToken(),
       "Accept": "application/pdf"
     });
-    return this.http.post(this.configUrl + "PurchaseOrder/downloadPO", { tMyFolderId: tMyFolderId, tFileName: tFileName, nProjectId: nProjectId }, { responseType: "blob", headers: httpHeader });
+    return this.http.post(this.configUrl + "PurchaseOrder/downloadPO", { tMyFolderId: tMyFolderId, tFileName: tFileName, nStoreId: nStoreId }, { responseType: "blob", headers: httpHeader });
   }
 }

@@ -22,9 +22,9 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectInteriorMenus
         public IQueryable<tblProjectInteriorMenu> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectInteriorMenus.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
+            return db.tblProjectInteriorMenus.Where(p => p.nStoreId == nStoreId).AsQueryable();
 
         }
         [Authorize]
@@ -47,7 +47,8 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectInteriorMenu tblProjectInteriorMenu)
         {
-            tblProjectInteriorMenu.ProjectActiveStatus = 1;
+            //tblProjectInteriorMenu.ProjectActiveStatus = 1;Santosh
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.MenuInstallation, tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu);
             db.Entry(tblProjectInteriorMenu).State = EntityState.Modified;
 
             try
@@ -74,9 +75,10 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectInteriorMenu))]
         public async Task<IHttpActionResult> Create(tblProjectInteriorMenu tblProjectInteriorMenu)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInteriorMenus set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectInteriorMenu.nProjectID));
-            tblProjectInteriorMenu.ProjectActiveStatus = 1;
+            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInteriorMenus set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectInteriorMenu.nProjectID));
+            //tblProjectInteriorMenu.ProjectActiveStatus = 1;Santosh
             tblProjectInteriorMenu.aProjectInteriorMenuID = 0;
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.MenuInstallation, tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu);
             db.tblProjectInteriorMenus.Add(tblProjectInteriorMenu);
             await db.SaveChangesAsync();
 

@@ -22,9 +22,9 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectPaymentSystems
         public IQueryable<tblProjectPaymentSystem> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectPaymentSystems.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
+            return db.tblProjectPaymentSystems.Where(p => p.nStoreId == nStoreId).AsQueryable();
 
         }
         [Authorize]
@@ -47,7 +47,8 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectPaymentSystem tblProjectPaymentSystem)
         {
-            tblProjectPaymentSystem.ProjectActiveStatus = 1;
+            //tblProjectPaymentSystem.ProjectActiveStatus = 1;Santosh
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.PaymentTerminalInstallation, tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem);
             db.Entry(tblProjectPaymentSystem).State = EntityState.Modified;
 
             try
@@ -74,9 +75,10 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectPaymentSystem))]
         public async Task<IHttpActionResult> Create(tblProjectPaymentSystem tblProjectPaymentSystem)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectPaymentSystem set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectPaymentSystem.nProjectID));
-            tblProjectPaymentSystem.ProjectActiveStatus = 1;
+            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectPaymentSystem set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectPaymentSystem.nProjectID));
+            //tblProjectPaymentSystem.ProjectActiveStatus = 1;Santosh
             tblProjectPaymentSystem.aProjectPaymentSystemID = 0;
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.PaymentTerminalInstallation, tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem);
             db.tblProjectPaymentSystems.Add(tblProjectPaymentSystem);
             await db.SaveChangesAsync();
 

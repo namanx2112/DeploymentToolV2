@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectSonicRadio
+    public partial class tblProjectSonicRadio: Misc.ModelParent
     {
         public int aProjectSonicRadioID { get; set; }
         public Nullable<int> nProjectID { get; set; }
@@ -25,6 +25,6 @@ namespace DeploymentTool
         public Nullable<int> nStatus { get; set; }
         public Nullable<System.DateTime> dDeliveryDate { get; set; }
         public Nullable<decimal> cCost { get; set; }
-        public Nullable<int> ProjectActiveStatus { get; set; }
+        public Nullable<int> nStoreId { get; set; }
     }
 }

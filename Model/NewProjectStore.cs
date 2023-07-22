@@ -13,7 +13,6 @@ namespace DeploymentTool.Model
         public int nProjectType { get; set; }
         public tblProjectStakeHolder tStakeHolder { get; set; }
 
-        public int nStoreId { get; set; }
         public string tStoreNumber { get; set; }
         public string tAddress { get; set; }
         public int nState { get; set; }
@@ -28,7 +27,7 @@ namespace DeploymentTool.Model
         public DateTime dOpenStore { get; set; }
         public int nProjectStatus { get; set; }
         [JsonPropertyName("aStoreId")]
-        public int aProjectStoreID { get; set; }
+        public int aStoreId { get; set; }
         public Nullable<int> nProjectID { get; set; }
         public string tStoreName { get; set; }
         public string tStoreAddressLine1 { get; set; }
@@ -48,12 +47,18 @@ namespace DeploymentTool.Model
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
         public int nBrandID { get; set; }
+        public string tBillToCompany { get; set; }
+        public string tBillToAddress { get; set; }
+        public string tBillToCity { get; set; }
+        public Nullable<int> nBillToState { get; set; }
+        public string tBillToZip { get; set; }
+        public string tBillToEmail { get; set; }
 
-        public void SetValues(tblProject tProj, tblProjectStore tProjStore, tblStore tStore)
+        public void SetValues(tblProject tProj, tblStore tStore)
         {
             this.nProjectID = tProj.aProjectID;
             this.tStoreName = tProj.tProjectName;
-            this.nStoreId = (int)tProj.nStoreID;
+            this.aStoreId = (int)tStore.aStoreID;
             this.dOpenStore = (DateTime)tProj.dGoLiveDate;
             this.nProjectType = (int)tProj.nProjectType;
             if (tProj.nProjectStatus != null)
@@ -64,25 +69,29 @@ namespace DeploymentTool.Model
             if (tProj.nBrandID != null)
                 this.nBrandID = (int)tProj.nBrandID;
 
-            this.nStoreId = tStore.aStoreID;
             this.tStoreNumber = tStore.tStoreNumber;
 
-            this.aProjectStoreID = tProjStore.aProjectStoreID;
-            this.tStoreName = tProjStore.tStoreName;
-            this.tStoreAddressLine1 = tProjStore.tStoreAddressLine1;
-            this.tStoreAddressLine2 = tProjStore.tStoreAddressLine2;
-            if (tProjStore.tCity != null)
-                this.tCity = tProjStore.tCity;
-            if (tProjStore.nStoreState != null)
-                this.nState = (int)tProjStore.nStoreState;
-            this.tStoreZip = tProjStore.tStoreZip;
-            this.tStoreManager = tProjStore.tStoreManager;
-            this.tPOC = tProjStore.tPOC;
-            this.tPOCPhone = tProjStore.tPOCPhone;
-            this.tPOCEmail = tProjStore.tPOCEmail;
-            this.tGC = tProjStore.tGC;
-            this.tGCPhone = tProjStore.tGCPhone;
-            this.tGCEMail = tProjStore.tGCEMail;
+            this.tStoreName = tStore.tStoreName;
+            this.tStoreAddressLine1 = tStore.tStoreAddressLine1;
+            this.tStoreAddressLine2 = tStore.tStoreAddressLine2;
+            if (tStore.tCity != null)
+                this.tCity = tStore.tCity;
+            if (tStore.nStoreState != null)
+                this.nState = (int)tStore.nStoreState;
+            this.tStoreZip = tStore.tStoreZip;
+            this.tStoreManager = tStore.tStoreManager;
+            this.tPOC = tStore.tPOC;
+            this.tPOCPhone = tStore.tPOCPhone;
+            this.tPOCEmail = tStore.tPOCEmail;
+            this.tGC = tStore.tGC;
+            this.tGCPhone = tStore.tGCPhone;
+            this.tGCEMail = tStore.tGCEmail;
+            this.tBillToCompany = tStore.tBillToCompany;
+            this.tBillToAddress = tStore.tBillToAddress;
+            this.tBillToCity = tStore.tBillToCity;
+            this.nBillToState = tStore.nBillToState;
+            this.tBillToZip = tStore.tBillToZip;
+            this.tBillToEmail = tStore.tBillToEmail;
         }
 
         public tblProject GettblProject()
@@ -91,7 +100,7 @@ namespace DeploymentTool.Model
             {
                 aProjectID = (int)this.nProjectID,
                 tProjectName = this.tStoreName,
-                nStoreID = this.nStoreId,
+                nStoreID = this.aStoreId,
                 dGoLiveDate = this.dOpenStore,
                 nProjectType = this.nProjectType,
                 nProjectStatus = this.nProjectStatus,
@@ -106,25 +115,12 @@ namespace DeploymentTool.Model
             };
             return tObj;
         }
-
-        public tblStore GettblStore()
+        public tblStore GettblStores()
         {
             tblStore tObj = new tblStore()
             {
-                aStoreID = this.nStoreId,
                 tStoreNumber = this.tStoreNumber,
-                dtCreatedOn = this.dtCreatedOn,
-                nCreatedBy = this.nCreatedBy
-            };
-            return tObj;
-        }
-
-        public tblProjectStore GettblProjectStores()
-        {
-            tblProjectStore tObj = new tblProjectStore()
-            {
-                aProjectStoreID = this.aProjectStoreID,
-                nProjectID = this.nProjectID,
+                aStoreID = this.aStoreId,
                 tStoreName = this.tStoreName,
                 tStoreAddressLine1 = this.tStoreAddressLine1,
                 tStoreAddressLine2 = this.tStoreAddressLine2,
@@ -137,12 +133,18 @@ namespace DeploymentTool.Model
                 tPOCEmail = this.tPOCEmail,
                 tGC = this.tGC,
                 tGCPhone = this.tGCPhone,
-                tGCEMail = this.tGCEMail,
+                tGCEmail = this.tGCEMail,
                 nCreatedBy = this.nCreatedBy,
                 nUpdateBy = this.nUpdateBy,
                 dtCreatedOn = this.dtCreatedOn,
                 dtUpdatedOn = this.dtUpdatedOn,
-                bDeleted = this.bDeleted
+                bDeleted = this.bDeleted,
+                tBillToCompany = this.tBillToCompany,
+                tBillToAddress = this.tBillToAddress,
+                tBillToCity = this.tBillToCity,
+                nBillToState = this.nBillToState,
+                tBillToZip = this.tBillToZip,
+                tBillToEmail = this.tBillToEmail
             };
             return tObj;
         }

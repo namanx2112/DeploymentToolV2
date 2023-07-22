@@ -22,9 +22,9 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectInstallations
         public IQueryable<tblProjectInstallation> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectInstallations.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
+            return db.tblProjectInstallations.Where(p => p.nStoreId == nStoreId).AsQueryable();
             
         }
         [Authorize]
@@ -47,7 +47,8 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectInstallation tblProjectInstallation)
         {
-            tblProjectInstallation.ProjectActiveStatus = 1;
+            //tblProjectInstallation.ProjectActiveStatus = 1;Santosh
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectInstallation.nStoreId, tblProjectInstallation);
             db.Entry(tblProjectInstallation).State = EntityState.Modified;
 
             try
@@ -74,10 +75,11 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectInstallation))]
         public async Task<IHttpActionResult> Create(tblProjectInstallation tblProjectInstallation)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInstallation set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectInstallation.nProjectID));
-            tblProjectInstallation.ProjectActiveStatus = 1;
+            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInstallation set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectInstallation.nProjectID));
+            //tblProjectInstallation.ProjectActiveStatus = 1;Santosh
 
             tblProjectInstallation.aProjectInstallationID = 0;
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectInstallation.nStoreId, tblProjectInstallation);
             db.tblProjectInstallations.Add(tblProjectInstallation);
             await db.SaveChangesAsync();
 

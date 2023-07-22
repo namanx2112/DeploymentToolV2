@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
-import { ActiveProject, HistoricalProjects, SonicNotes, SonicProjectExcel, StoreSearchModel } from '../interfaces/sonic';
+import { ActiveProject, HistoricalProjects, ProjectTypes, SonicNotes, SonicProjectExcel, StoreSearchModel } from '../interfaces/sonic';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -32,6 +32,44 @@ export class SonicService {
 
   SearchStore(request: string) {
     return this.http.get<StoreSearchModel[]>(this.configUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.authService.getHttpHeaders() });
+  }
+
+  
+  getProjectType(tabType: HomeTab, curStore: StoreSearchModel) {
+    let type: ProjectTypes = ProjectTypes.New;
+    switch (tabType.tab_type) {
+      case TabType.StorePOS:
+        type = ProjectTypes.POSInstallation;
+        break;
+      case TabType.StoreAudio:
+        type = ProjectTypes.AudioInstallation;
+        break;
+      case TabType.StoreExteriorMenus:
+      case TabType.StoreInteriorMenus:
+        type = ProjectTypes.MenuInstallation;
+        break;
+      case TabType.StorePaymetSystem:
+        type = ProjectTypes.PaymentTerminalInstallation;
+        break;
+      default:
+        let indx = curStore.lstProjectsInfo.findIndex(x => x.nProjectType != ProjectTypes.POSInstallation && x.nProjectType != ProjectTypes.AudioInstallation &&
+          x.nProjectType != ProjectTypes.MenuInstallation && x.nProjectType != ProjectTypes.PartsReplacement)
+        if (indx > -1) {
+          type = curStore.lstProjectsInfo[indx].nProjectType;
+        }
+        break;
+    }
+    return type;
+  }
+
+  getProjectIdFromSearchStore(tabType: HomeTab, curStore: StoreSearchModel) {
+    let nProjectId = 0;
+    let tProjectType = this.getProjectType(tabType, curStore);
+    let tIndx = curStore.lstProjectsInfo.findIndex(x => x.nProjectType == tProjectType)
+    if (tIndx > -1) {
+      nProjectId = curStore.lstProjectsInfo[tIndx].nProjectId;
+    }
+    return nProjectId;
   }
 
   // Delete(request: UserModel) {
@@ -266,13 +304,13 @@ export class SonicService {
   GetNewStoresTab(instType: TabInstanceType): HomeTab {
     let fields = this.GetStoreContactFields(false);
     fields.push({
-      field_name: "nStoreId",
-      fieldUniqeName: "nStoreId",
+      field_name: "aStoreId",
+      fieldUniqeName: "aStoreId",
       defaultVal: "0",
       readOnly: true,
       invalid: false,
       field_type: FieldType.number,
-      field_placeholder: "Enter nStoreId",
+      field_placeholder: "Enter StoreId",
       validator: [],
       mandatory: false,
       hidden: true
@@ -444,30 +482,28 @@ export class SonicService {
 
   GetStoreContactFields(readOnly: boolean): Fields[] {
     let fArray = [{
-      field_name: "aProjectStoreID",
-      field_group: "Store Contact",
-      fieldUniqeName: "aProjectStoreID",
+      field_name: "Store Id",
+      fieldUniqeName: "aStoreID",
       defaultVal: "0",
       readOnly: false,
       invalid: false,
       field_type: FieldType.number,
-      field_placeholder: "Enter aProjectStoreID",
+      field_placeholder: "Enter Store Id",
       validator: [],
       mandatory: false,
       hidden: true
     }, {
-      field_name: "ProjectID",
-      field_group: "Store Contact",
-      fieldUniqeName: "nProjectID",
-      defaultVal: "0",
-      readOnly: false,
+      field_name: "Store Number",
+      fieldUniqeName: "tStoreNumber",
+      defaultVal: "",
+      readOnly: readOnly,
       invalid: false,
-      field_type: FieldType.number,
-      field_placeholder: "Enter nProjectID",
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store Number",
       validator: [],
       mandatory: false,
       hidden: true
-    }, {
+    },{
       field_name: "Store Name",
       field_group: "Store Contact",
       fieldUniqeName: "tStoreName",
@@ -759,6 +795,17 @@ export class SonicService {
         mandatory: false,
         hidden: true
       }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
         field_name: "nProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "",
@@ -876,6 +923,17 @@ export class SonicService {
         mandatory: false,
         hidden: true
       }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "nProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -1030,6 +1088,17 @@ export class SonicService {
         mandatory: false,
         hidden: true
       }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "ProjectID",
         field_group: "Primary",
         fieldUniqeName: "nProjectID",
@@ -1213,6 +1282,17 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
+      },{
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
       },
       {
         field_name: "nrojectID",
@@ -1349,6 +1429,17 @@ export class SonicService {
         mandatory: false,
         hidden: true
       }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -1497,6 +1588,17 @@ export class SonicService {
         mandatory: false,
         hidden: true
       }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -1677,6 +1779,17 @@ export class SonicService {
         mandatory: false,
         hidden: true
       }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -1889,6 +2002,17 @@ export class SonicService {
         mandatory: false,
         hidden: true
       }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -1998,6 +2122,17 @@ export class SonicService {
         mandatory: false,
         hidden: true
       }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -2156,6 +2291,17 @@ export class SonicService {
         mandatory: false,
         hidden: true
       }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },{
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",

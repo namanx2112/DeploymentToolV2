@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace DeploymentTool.Controller
 {
@@ -21,9 +22,9 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectStakeHolders
         public IQueryable<tblProjectStakeHolder> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectStakeHolders.Where(p => p.nProjectID == nProjectID).AsQueryable();
+            return db.tblProjectStakeHolders.Where(p => p.nStoreId == nStoreId).AsQueryable();
 
         }
         [Authorize]
@@ -46,7 +47,7 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> update(tblProjectStakeHolder tblProjectStakeHolder)
         {
-
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectStakeHolder.nStoreId, tblProjectStakeHolder);
             db.Entry(tblProjectStakeHolder).State = EntityState.Modified;
 
             try
@@ -71,14 +72,13 @@ namespace DeploymentTool.Controller
         [HttpPost]
         // POST: api/ProjectStakeHolders
         [ResponseType(typeof(tblProjectStakeHolder))]
-        public async Task<IHttpActionResult> Create(tblProjectStakeHolder tblProjectStakeHolder)
+        public async Task<IHttpActionResult> Create(tblProjectStakeHolder request)
         {
-            tblProjectStakeHolder.aProjectStakeHolderID = 0;
-
-            db.tblProjectStakeHolders.Add(tblProjectStakeHolder);
+            request.aProjectStakeHolderID = 0;
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, request.nStoreId, request);
+            db.tblProjectStakeHolders.Add(request);
             await db.SaveChangesAsync();
-
-            return Json(tblProjectStakeHolder);
+            return Json(request);
         }
         [Authorize]
         [HttpPost]

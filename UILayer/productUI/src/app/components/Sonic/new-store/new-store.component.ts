@@ -90,14 +90,14 @@ export class NewStoreComponent {
     this.loadCurTab();
   }
 
-  setProjectId(nProjectID: string) {
+  setStoreId(nStoreId: string) {
     for (var indx in this.allTabs) {
       if (typeof this.tValues[this.allTabs[indx].tab_name] != 'undefined') {
-        this.tValues[this.allTabs[indx].tab_name]["nProjectID"] = nProjectID;
+        this.tValues[this.allTabs[indx].tab_name]["nStoreId"] = nStoreId;
         this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.optionIndex;
       }
       else {
-        this.tValues[this.allTabs[indx].tab_name] = { "nProjectID": nProjectID };
+        this.tValues[this.allTabs[indx].tab_name] = { "nStoreId": nStoreId };
         this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.optionIndex;
       }
     }
@@ -117,16 +117,16 @@ export class NewStoreComponent {
     }
     switch (tab.tab_type) {
       case TabType.NewStore:
-        let nProjectID = parseInt(this.tValues[tab.tab_name]["nProjectID"]);
-        if (nProjectID > 0) {
-          this.storeSerice.UpdateStore(fieldValues).subscribe((nProjectID: string) => {
+        let aStoreId = parseInt(this.tValues[tab.tab_name]["aStoreId"]);
+        if (aStoreId > 0) {
+          this.storeSerice.UpdateStore(fieldValues).subscribe((nStoreId: string) => {
             callBack(fieldValues);
           });
         }
         else {
           this.storeSerice.CreateNewStores(fieldValues).subscribe((x: any) => {
             this.tValues[tab.tab_name] = x;
-            this.setProjectId(x.nProjectID);
+            this.setStoreId(x.aStoreId);
             this.curTabIndex++;
             this.loadCurTab();
           });

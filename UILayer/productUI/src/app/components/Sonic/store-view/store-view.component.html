@@ -4,8 +4,10 @@
         <h4 class="projHeader">Store - {{_curStore.tStoreNumber}}</h4>
         <button class="noBorderButton lightGray" (click)="moveView('projecttemplatelist')">Workflows</button>
     </div>
-    <div class="storeTitle"><span class="storeStatus">{{_curStore.tProjectType}} Store
-            {{_curStore.dGoLiveDate.toString().split('T')[0]}}</span></div>
+    <div class="projectInfoTabs">
+        <span class="storeStatus" *ngFor="let tItem of _curStore.lstProjectsInfo">{{tItem.nProjectType}} Store
+            {{tItem.dGoLiveDate.toString().split('T')[0]}}</span>
+    </div>
     <div class="storeTiles" *ngIf="allTabs.length > 0">
         <div class="fullTile">
             <h4>{{allTabs[0].tab_header}}
@@ -36,7 +38,8 @@
                     (onSubmit)="onSubmit($event, allTabs[2])" [themeClass]="'grayWhite'"></app-controls>
             </div>
             <div class="tileGroup tileButtonGroup">
-                <button class="noBorderButton lightGray" mat-raised-button (click)="ShowNotes();"><mat-icon>event_note</mat-icon>Tasks</button>
+                <button class="noBorderButton lightGray" mat-raised-button
+                    (click)="ShowNotes();"><mat-icon>event_note</mat-icon>Tasks</button>
                 <button class="noBorderButton lightGray" mat-raised-button (click)="ShowNotes();"><mat-icon>
                         notes</mat-icon>Notes</button>
                 <button class="noBorderButton lightGray" (click)="ShowProject('projecttaleview')">Active

@@ -22,9 +22,9 @@ namespace DeploymentTool.Model
         // GET: api/ProjectExteriorMenus
         public IQueryable<tblProjectExteriorMenu> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectExteriorMenus.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
+            return db.tblProjectExteriorMenus.Where(p => p.nStoreId == nStoreId).AsQueryable();
 
           
         }
@@ -48,7 +48,8 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Update(tblProjectExteriorMenu tblProjectExteriorMenu)
         {
-            tblProjectExteriorMenu.ProjectActiveStatus = 1;
+            // tblProjectExteriorMenu.ProjectActiveStatus = 1;//Santosh
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.MenuInstallation, tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu);
             db.Entry(tblProjectExteriorMenu).State = EntityState.Modified;
 
             try
@@ -77,11 +78,11 @@ namespace DeploymentTool.Model
         {
             try
             {
-                var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectExteriorMenus set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectExteriorMenu.nProjectID));
-                tblProjectExteriorMenu.ProjectActiveStatus = 1;
+                //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectExteriorMenus set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectExteriorMenu.nProjectID));
+                //tblProjectExteriorMenu.ProjectActiveStatus = 1;Santosh
 
                 tblProjectExteriorMenu.aProjectExteriorMenuID = 0;
-
+                Misc.Utilities.SetActiveProjectId(Misc.ProjectType.MenuInstallation, tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu);
                 db.tblProjectExteriorMenus.Add(tblProjectExteriorMenu);
                 await db.SaveChangesAsync();
             }

@@ -224,13 +224,14 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public HttpResponseMessage GetMergedQuoteRequest(int nProjectID, int nTemplateId)
+        public HttpResponseMessage GetMergedQuoteRequest(int nStoreId, int nTemplateId)// SantoshPP
         {
             try
             {
+                int nProjectId = nStoreId;// Need to get ProjectId from store Id
                 //PO Start
                 //int aPurchaseOrderTemplateID = 1;//nProjectID;
-               
+
                 //string strBody = "";
                 //string strSubject = "";
                 //var strNumber = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where aStoreID= (Select nStoreID from tblProject  with (nolock) where aProjectID= @nProjectID)", new SqlParameter("@nProjectID", nProjectID)).FirstOrDefault();
@@ -253,7 +254,7 @@ namespace DeploymentTool.Controller
                 //bool btemp = true;              
                 //foreach (var PurchaseOrderAdress in itemAdress)
                 //{
-                
+
                 //    //if (PurchaseOrderAdress.nPurchaseOrderAddressType == PurchaseOrderAddressType.Billing)
                 //    if (btemp)
                 //    {
@@ -282,7 +283,7 @@ namespace DeploymentTool.Controller
 
                 //        strBody += "<div><b> Address </b> " + PurchaseOrderAdress.tAddress + "</div></td>";
                 //    }
-                    
+
                 //}
                 //strBody += "</tr></tbody></table></br><div><b> Notes </b> &nbsp;</div>";
                 //strBody += "<div><table><thead><tr><th style='width:35%;'>Description</th><th style='width:35%;'>Parts Number</th><th style='width:10%;'>Price</th><th style='width:10%;'> Quantity</th><th style='width:10%;'>Total</th></tr></thead>";
@@ -366,7 +367,7 @@ namespace DeploymentTool.Controller
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             cmd.Parameters.AddWithValue("@nQuoteRequestTechCompId", RequestTechComp.aQuoteRequestTechCompId);
-                            cmd.Parameters.AddWithValue("@nProjectID", nProjectID);
+                            cmd.Parameters.AddWithValue("@nProjectID", nProjectId);
 
                             conn.Open();
 
@@ -401,7 +402,7 @@ namespace DeploymentTool.Controller
                     }
                     strBody += "<div><table>" + strData + "</table></div>";
                 }
-                SqlParameter tModuleparmAdress = new SqlParameter("@nProjectID", nProjectID);
+                SqlParameter tModuleparmAdress = new SqlParameter("@nProjectID", nProjectId);
 
                 List<PurchaseOrderPreviewTemplate> itemPOStore = db.Database.SqlQuery<PurchaseOrderPreviewTemplate>("exec sproc_GetPurchaseOrdeStorerDetails @nProjectID", tModuleparmAdress).ToList();
 

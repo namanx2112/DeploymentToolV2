@@ -33,7 +33,7 @@ export class RenderQuoteRequestComponent {
   }
 
   getMergedContent() {
-    this.quoteService.GetMergedQuoteRequest(this.curStore.nProjectId, this.curTemplate.nTemplateId).subscribe((x: MergedQuoteRequest) => {
+    this.quoteService.GetMergedQuoteRequest(this.curStore.nStoreId, this.curTemplate.nTemplateId).subscribe((x: MergedQuoteRequest) => {
       this.tRequest = x;
     })
   }

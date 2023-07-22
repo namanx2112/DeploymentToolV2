@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectAudio
+    public partial class tblProjectAudio: Misc.ModelParent
     {
         public int aProjectAudioID { get; set; }
         public Nullable<int> nProjectID { get; set; }
@@ -24,6 +24,6 @@ namespace DeploymentTool
         public Nullable<int> nLoopType { get; set; }
         public Nullable<System.DateTime> dLoopDeliveryDate { get; set; }
         public Nullable<decimal> cCost { get; set; }
-        public Nullable<int> ProjectActiveStatus { get; set; }
+        public Nullable<int> nStoreId { get; set; }
     }
 }

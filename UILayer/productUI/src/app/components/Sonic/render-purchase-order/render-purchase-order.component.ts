@@ -14,7 +14,7 @@ import { POWorkflowConfigService } from 'src/app/services/poworklow-config.servi
 export class RenderPurchaseOrderComponent {
   curTemplate: MergedPO;
   nTemplateId: number;
-  nProjectId: number;
+  nStoreId: number;
   onDone: any;
   allParts: PartsModel[];
   partNumber: number;
@@ -25,7 +25,7 @@ export class RenderPurchaseOrderComponent {
     this.ckConfig = this.commonService.GetCKEditorConfig("320px");
     this.partNumber = 1;
     this.nTemplateId = data.nTemplateId;
-    this.nProjectId = data.nProjectId;
+    this.nStoreId = data.nStoreId;
     this.onDone = data.onDone;
     this.getMergedContent();
   }
@@ -35,7 +35,7 @@ export class RenderPurchaseOrderComponent {
 
   // First Part Start
   getMergedContent() {
-    this.poService.GetMergedPO(this.nProjectId, this.nTemplateId).subscribe(x => {
+    this.poService.GetMergedPO(this.nStoreId, this.nTemplateId).subscribe(x => {
       this.curTemplate = x;
       this.reCalculateTotal();
       this.getAllParts();
@@ -63,7 +63,7 @@ export class RenderPurchaseOrderComponent {
   }
 
   downloadPDF(tMyFolderId: string, tFieName: string) {
-    this.poService.downloadPO(tMyFolderId, tFieName, this.nProjectId).subscribe(tdata => {
+    this.poService.downloadPO(tMyFolderId, tFieName, this.nStoreId).subscribe(tdata => {
       var newBlob = new Blob([tdata], { type: "application/pdf" });
 
       // For other browsers: 

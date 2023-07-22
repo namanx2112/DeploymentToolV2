@@ -6,7 +6,7 @@ import { SonicService } from 'src/app/services/sonic.service';
 import { ControlsComponent } from '../../controls/controls.component';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { NotesListComponent } from '../notes-list/notes-list.component';
-import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/sonic';
+import { ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/sonic';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { NotImplementedComponent } from '../../not-implemented/not-implemented.component';
 
@@ -102,7 +102,7 @@ export class StoreViewComponent {
   }
 
   getValues(tabType: HomeTab) {
-    let searchField: Dictionary<string> = { "nProjectID": this._curStore.nProjectId.toString() };
+    let searchField: Dictionary<string> = { "nStoreId": this._curStore.nStoreId.toString() };
     switch (tabType.tab_type) {
       case TabType.StoreContact:
         this.techCompService.GetStoreContact(searchField).subscribe((x: StoreContact[]) => {
@@ -121,7 +121,7 @@ export class StoreViewComponent {
         break;
       case TabType.StoreNetworking:
         this.techCompService.GetNetworking(searchField).subscribe((x: StoreNetworkings[]) => {
-          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);          
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
           this.selectedTab = 0;
         });
         break;
@@ -168,7 +168,7 @@ export class StoreViewComponent {
     if (typeof resp == 'undefined') {
       for (var tIndx in fields) {
         let fieldName = fields[tIndx].fieldUniqeName;
-        let val = (fieldName.toLocaleLowerCase() == 'nprojectid') ? this._curStore.nProjectId : "";
+        let val = (fieldName.toLocaleLowerCase() == 'nStoreId') ? this._curStore.nStoreId.toString() : "";
         values[fieldName] = val;
       }
     }
@@ -229,7 +229,7 @@ export class StoreViewComponent {
           dialogRef.close();
         });
       },
-      onClose: function(ev: any){
+      onClose: function (ev: any) {
         dialogRef.close();
       },
       themeClass: "grayWhite",
@@ -244,7 +244,7 @@ export class StoreViewComponent {
 
   SaveTechComp(tab: HomeTab, data: any, callBack: any) {
     let fieldValues = data.value;
-    fieldValues["nProjectID"] = this._curStore.nProjectId.toString();
+    fieldValues["nStoreId"] = this._curStore.nStoreId;
     switch (tab.tab_type) {
       case TabType.StoreContact:
         this.techCompService.UpdateStoreContact(fieldValues).subscribe((x: StoreContact) => {
@@ -384,7 +384,7 @@ export class StoreViewComponent {
     }
   }
 
-  moveView(view: string){
+  moveView(view: string) {
     let param = {
       view: view,
       curStore: this._curStore

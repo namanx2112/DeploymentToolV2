@@ -27,7 +27,7 @@ export class SonicDashboardComponent {
     });
   }
 
-  projectSelect(evt: any) {
+  storeSelect(evt: any) {
     this.SearchedResult.emit(evt);
   }
 }

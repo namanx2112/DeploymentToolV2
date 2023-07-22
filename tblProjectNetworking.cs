@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectNetworking
+    public partial class tblProjectNetworking: Misc.ModelParent
     {
         public int aProjectNetworkingID { get; set; }
         public Nullable<int> nProjectID { get; set; }
@@ -26,6 +26,6 @@ namespace DeploymentTool
         public Nullable<int> nTempStatus { get; set; }
         public Nullable<System.DateTime> dTempDate { get; set; }
         public Nullable<int> nTempType { get; set; }
-        public Nullable<int> ProjectActiveStatus { get; set; }
+        public Nullable<int> nStoreId { get; set; }
     }
 }

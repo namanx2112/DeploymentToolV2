@@ -22,9 +22,9 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectSonicRadios
         public IQueryable<tblProjectSonicRadio> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields["nProjectID"] != null ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectSonicRadios.Where(p => p.nProjectID == nProjectID && p.ProjectActiveStatus == 1).AsQueryable();
+            return db.tblProjectSonicRadios.Where(p => p.nStoreId == nStoreId).AsQueryable();
 
         }
         [Authorize]
@@ -47,7 +47,8 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectSonicRadio tblProjectSonicRadio)
         {
-            tblProjectSonicRadio.ProjectActiveStatus = 1;
+            //tblProjectSonicRadio.ProjectActiveStatus = 1;Santosh
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectSonicRadio.nStoreId, tblProjectSonicRadio);
             db.Entry(tblProjectSonicRadio).State = EntityState.Modified;
 
             try
@@ -74,9 +75,9 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectSonicRadio))]
         public async Task<IHttpActionResult> Create(tblProjectSonicRadio tblProjectSonicRadio)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectSonicRadio set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectSonicRadio.nProjectID));
-            tblProjectSonicRadio.ProjectActiveStatus = 1;
-
+            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectSonicRadio set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectSonicRadio.nProjectID));
+            //tblProjectSonicRadio.ProjectActiveStatus = 1;Santosh
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectSonicRadio.nStoreId, tblProjectSonicRadio);
             tblProjectSonicRadio.aProjectSonicRadioID = 0;
 
             db.tblProjectSonicRadios.Add(tblProjectSonicRadio);

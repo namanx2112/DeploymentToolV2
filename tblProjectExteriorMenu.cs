@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectExteriorMenu
+    public partial class tblProjectExteriorMenu: Misc.ModelParent
     {
         public int aProjectExteriorMenuID { get; set; }
         public Nullable<int> nProjectID { get; set; }
@@ -27,6 +27,6 @@ namespace DeploymentTool
         public Nullable<decimal> cFabConCost { get; set; }
         public Nullable<decimal> cIDTechCost { get; set; }
         public Nullable<decimal> cTotalCost { get; set; }
-        public Nullable<int> ProjectActiveStatus { get; set; }
+        public Nullable<int> nStoreId { get; set; }
     }
 }

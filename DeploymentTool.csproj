@@ -964,7 +964,6 @@
     <Compile Include="Controller\FranchiseController.cs" />
     <Compile Include="Controller\MyApiContext.cs" />
     <Compile Include="Controller\ProjectAudiosController.cs" />
-    <Compile Include="Controller\ProjectBillToesController.cs" />
     <Compile Include="Controller\ProjectConfigsController.cs" />
     <Compile Include="Controller\ProjectExteriorMenusController.cs" />
     <Compile Include="Controller\ProjectInstallationsController.cs" />
@@ -974,7 +973,7 @@
     <Compile Include="Controller\ProjectPOSController.cs" />
     <Compile Include="Controller\ProjectSonicRadiosController.cs" />
     <Compile Include="Controller\ProjectStakeHoldersController.cs" />
-    <Compile Include="Controller\ProjectStoreContactsController.cs" />
+    <Compile Include="Controller\StoreContactsController.cs" />
     <Compile Include="Controller\PurchaseOrderController.cs" />
     <Compile Include="Controller\QuoteRequestController.cs" />
     <Compile Include="Controller\SonicController.cs" />
@@ -1002,6 +1001,7 @@
     <Compile Include="Helpers\StoreDAL.cs" />
     <Compile Include="Helpers\TechComponentDAL.cs" />
     <Compile Include="Helpers\VendorDAL.cs" />
+    <Compile Include="Misc\Constants.cs" />
     <Compile Include="Misc\ModelParent.cs" />
     <Compile Include="Misc\TraceUtility.cs" />
     <Compile Include="Misc\Utilities.cs" />
@@ -1103,15 +1103,6 @@
     <Compile Include="tblProjectAudio.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblProjectBillTo.cs">
-      <DependentUpon>ModelDTool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblProjectComponent.cs">
-      <DependentUpon>ModelDTool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblProjectComponentUpload.cs">
-      <DependentUpon>ModelDTool.tt</DependentUpon>
-    </Compile>
     <Compile Include="tblProjectConfig.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
@@ -1140,9 +1131,6 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProjectStakeHolder.cs">
-      <DependentUpon>ModelDTool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblProjectStore.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblPurchaseOrder.cs">
