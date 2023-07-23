@@ -171,13 +171,14 @@ export interface HistoricalProjects {
     nStoreNo: number,
     dProjectGoliveDate: Date,
     tProjectType: string,
+    dProjEndDate: Date,
     tProjManager: string,
     tVendor: string
 }
 
 export interface ActiveProject {
     nProjectId: number,
-    nStoreNo: number,
+    tStoreNumber: number,
     dProjectGoliveDate: Date,
     dProjEndDate: Date,
     tProjectType: string,

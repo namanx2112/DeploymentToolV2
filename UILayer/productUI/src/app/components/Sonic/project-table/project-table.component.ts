@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Input, Component, EventEmitter, Output } from '@angular/core';
 import { HomeTab, TabInstanceType } from 'src/app/interfaces/home-tab';
+import { StoreSearchModel } from 'src/app/interfaces/sonic';
 import { SonicService } from 'src/app/services/sonic.service';
 
 @Component({
@@ -8,19 +9,29 @@ import { SonicService } from 'src/app/services/sonic.service';
   styleUrls: ['./project-table.component.css']
 })
 export class ProjectTableComponent {
-
+  @Input()
+  set curStore(val: StoreSearchModel) {
+    this.tableCondition = { nStoreId: val.nStoreId.toString() };
+  }
+  @Input()
+  set tabName(val: string) {
+    this._tabName = val;
+    this.getTable();
+  }
+  get tabName() {
+    return this._tabName;
+  }
+  _tabName: string;
   @Output() ChangeView = new EventEmitter<string>();
-  tabName: string;
   curTab: HomeTab;
   curProj: HomeTab;
   historProj: HomeTab;
+  tableCondition: any;
   constructor(private service: SonicService) {
-    this.tabName = "Active";
     this.curProj = this.service.GetProjectsTab(TabInstanceType.Table);
     this.curProj.tab_header = "Active Projects";
-    this.historProj = this.service.GetProjectsTab(TabInstanceType.Table);
+    this.historProj = this.service.GetHistoricalProjectsTab(TabInstanceType.Table);
     this.historProj.tab_header = "Historical Projects";
-    this.getTable();
   }
 
   changeTab(name: string) {
@@ -44,7 +55,7 @@ export class ProjectTableComponent {
     // }
   }
 
-  goBack(){
+  goBack() {
     this.ChangeView.emit("storeview");
   }
 }

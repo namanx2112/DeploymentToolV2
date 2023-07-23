@@ -117,7 +117,7 @@ export class SonicService {
       }
       else {
         return [
-          "tStoreNo",
+          "tStoreNumber",
           "dProjectGoliveDate",
           "tProjectType",
           "tStatus",
@@ -138,66 +138,6 @@ export class SonicService {
     }
     else
       return [];
-  }
-
-
-  Get(fields: Fields, tab: HomeTab) {
-    if (tab.tab_type == TabType.StoreProjects)
-      return this.getActiveProjects(1);
-    else
-      return this.getNotes();
-
-  }
-
-  getNotes() {
-    return new Observable<SonicNotes[]>((obj) => {
-      let items: SonicNotes[] = [
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "General",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        },
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "POPS",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        },
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "TEGS",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        },
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "DFDDSD",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        },
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "RRSD",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        }
-      ];
-      obj.next(items);
-    });
-  }
-
-  getActiveProjects(nBrandId: number) {
-    return this.http.get<ActiveProject>(this.configUrl + "Sonic/GetActiveProjects?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });    
-  }
-
-  getHistoricalProjects(nBrandId: number) {
-    return this.http.get<HistoricalProjects>(this.configUrl + "Sonic/GetHistoricalProjects?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });    
   }
 
   GetProjecthighlights() {
@@ -2408,7 +2348,7 @@ export class SonicService {
         field_type: FieldType.dropdown,
         field_placeholder: "Enter Project Status",
         validator: [],
-        options: this.commonService.GetDropdown("ProjectStatus"),
+        options: this.commonService.GetDropdown("InstallationProjectStatus"),
         mandatory: false,
         hidden: false
       },
@@ -2450,12 +2390,24 @@ export class SonicService {
       }],
       fields: [{
         field_name: "Store No",
-        fieldUniqeName: "nStoreNo",
+        fieldUniqeName: "tStoreNumber",
         defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.number,
         field_placeholder: "Enter Store No",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Project GoliveDate",
+        fieldUniqeName: "dProjectGoliveDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter ProjectGoliveDate",
         validator: [],
         mandatory: false,
         hidden: false
@@ -2509,18 +2461,6 @@ export class SonicService {
         hidden: false
       },
       {
-        field_name: "Project GoliveDate",
-        fieldUniqeName: "dProjectGoliveDate",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.date,
-        field_placeholder: "Enter ProjectGoliveDate",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
         field_name: "Old Vendor",
         fieldUniqeName: "tOldVendor",
         defaultVal: "",
@@ -2535,6 +2475,102 @@ export class SonicService {
       {
         field_name: "New Vendor",
         fieldUniqeName: "tNewVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter New Vendor",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }]
+    };
+  }
+
+  GetHistoricalProjectsTab(instType: TabInstanceType): HomeTab {
+    return {
+      tab_name: "Historical Projects",
+      tab_header: "Historical Projects",
+      tTableName: "tblProject",
+      tab_type: TabType.HistoricalProjects,
+      tab_unique_name: "",
+      instanceType: instType,
+      childTabs: [],
+      search_fields: [{
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }],
+      fields: [{
+        field_name: "Store No",
+        fieldUniqeName: "tStoreNumber",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Store No",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Project GoliveDate",
+        fieldUniqeName: "dProjectGoliveDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter ProjectGoliveDate",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Project Type",
+        fieldUniqeName: "tProjectType",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Store Type",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Project End Date",
+        fieldUniqeName: "dProjEndDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Store End Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Proj Manager",
+        fieldUniqeName: "tProjManager",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Proj Manager",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Vendor",
+        fieldUniqeName: "tVendor",
         defaultVal: "",
         readOnly: false,
         invalid: false,

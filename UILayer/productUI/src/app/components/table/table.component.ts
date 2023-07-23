@@ -8,6 +8,7 @@ import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { FranchiseService } from 'src/app/services/frenchise.service';
 import { PartsService } from 'src/app/services/parts.service';
 import { SonicService } from 'src/app/services/sonic.service';
+import { StoreService } from 'src/app/services/store.service';
 import { TechComponenttService } from 'src/app/services/tech-component.service';
 import { UserService } from 'src/app/services/user.service';
 import { VendorService } from 'src/app/services/vendor.service';
@@ -43,7 +44,8 @@ export class TableComponent implements OnChanges {
   cService: any;
   initVal: Date;
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
-    private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService) {
+    private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService,
+    private storeService: StoreService) {
     this.initVal = new Date();
   }
 
@@ -83,8 +85,8 @@ export class TableComponent implements OnChanges {
       else if (this.curTab.tab_type == TabType.Users) {
         this.cService = this.userSerice;
       }
-      else if (this.curTab.tab_type == TabType.StoreProjects) {
-        this.cService = this.sonicService;
+      else if (this.curTab.tab_type == TabType.StoreProjects || this.curTab.tab_type == TabType.HistoricalProjects) {
+        this.cService = this.storeService;
       }
       else if (this.curTab.tab_type == TabType.StoreNotes) {
         this.cService = this.sonicService;

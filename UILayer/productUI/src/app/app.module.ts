@@ -64,6 +64,8 @@ import { RenderPurchaseOrderComponent } from './components/Sonic/render-purchase
 import { ForFilterPipe } from './pipes/for-filter.pipe';
 import { SupportPageComponent } from './components/support-page/support-page.component';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { TableExpendableComponent } from './components/table-expendable/table-expendable.component';
+import { StoreTechComponentsComponent } from './components/Sonic/store-tech-components/store-tech-components.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +110,9 @@ import { CKEditorModule } from 'ckeditor4-angular';
     POConfigQuantityFieldsComponent,
     RenderPurchaseOrderComponent,
     ForFilterPipe,
-    SupportPageComponent
+    SupportPageComponent,
+    TableExpendableComponent,
+    StoreTechComponentsComponent
   ],
   imports: [
     CKEditorModule,

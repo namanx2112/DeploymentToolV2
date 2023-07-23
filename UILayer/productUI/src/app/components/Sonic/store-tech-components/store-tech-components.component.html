@@ -1,0 +1,14 @@
+<div class="fullView" *ngIf="tabForUI.length > 0">
+    <div class="fullTab lightGray" *ngFor="let tTab of tabForUI;let index = index">
+        <div class="tHeader white blackBorder">
+            <h4>{{tTab.tab_header}}</h4>
+            <!-- <div class="right"><button class="noBorderButton white" (click)="editTab(tTab)">Edit</button></div> -->
+        </div>
+        <div class="tBody">
+            <app-controls *ngIf="tValues[tTab.tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"
+                [fields]="tTab.fields" [readOnlyForm]="true" [needButton]="false"
+                [controlValues]="tValues[tTab.tab_name]" [SubmitLabel]="'None'"                 
+                [themeClass]="'grayWhite'"></app-controls>
+        </div>
+    </div>
+</div>
