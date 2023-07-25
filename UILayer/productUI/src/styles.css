@@ -207,3 +207,8 @@ button {
 .mat-mdc-progress-spinner {
     stroke: #6495ED;
 }
+
+.example-element-diagram{
+    height: auto!important;
+    border: 0px none!important;
+}

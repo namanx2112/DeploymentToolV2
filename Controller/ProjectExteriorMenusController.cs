@@ -22,11 +22,28 @@ namespace DeploymentTool.Model
         // GET: api/ProjectExteriorMenus
         public IQueryable<tblProjectExteriorMenu> Get(Dictionary<string, string> searchFields)
         {
-            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
+            IQueryable<tblProjectExteriorMenu> items = null;
+            try
+            {
+                int nProjectID = searchFields.ContainsKey("nProjectID") ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+                int nStoreId = searchFields.ContainsKey("nStoreId") ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectExteriorMenus.Where(p => p.nStoreId == nStoreId).AsQueryable();
+                if (nProjectID != 0)
+                {
+                    return db.tblProjectExteriorMenus.Where(p => p.nProjectID == nProjectID).AsQueryable();
+                }
+                else
+                {
+                    SqlParameter tModuleNameParam = new SqlParameter("@nStoreId", nStoreId);
+                    SqlParameter tModuleTech = new SqlParameter("@tTechnologyTableName", "tblProjectExteriorMenus");
+                    items = db.Database.SqlQuery<tblProjectExteriorMenu>("exec sproc_getTechnologyData @nStoreId,@tTechnologyTableName", tModuleNameParam, tModuleTech).AsQueryable();
+                    //return items;
+                }
+            }
+            catch (Exception ex) { }
+            return items;
 
-          
+
         }
 
         // GET: api/ProjectExteriorMenus/5

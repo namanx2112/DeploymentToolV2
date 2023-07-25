@@ -221,24 +221,23 @@
 
 .fullView .tHeader {
     width: calc(100% - 2px);
-    height: 80px;
-    border-radius: 10px 10px 0px 0px;
-    border-width: 1px;
-    border-style: solid;
+    height: 40px;
 }
 
 .fullView .tHeader h4 {
     float: left;
     text-indent: 20px;
+    margin: 10px 0px 0px 0px;
 }
 
 .fullView .tBody {
     width: 100%;
-    height: 400px;
+    float: left;
+    margin-top: -25px;
 }
 
 .fullTab {
     width: 400px;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin: 15px 0px 8px 0px;
 }

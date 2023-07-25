@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -22,11 +23,29 @@ namespace DeploymentTool.Model
         // GET: api/ProjectNetworkings
         public IQueryable<tblProjectNetworking> Get(Dictionary<string, string> searchFields)
         {
-            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectNetworkings.Where(p => p.nStoreId == nStoreId).AsQueryable();
+            IQueryable<tblProjectNetworking> items = null;
+            try
+            {
+                int nProjectID = searchFields.ContainsKey("nProjectID") ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+                int nStoreId = searchFields.ContainsKey("nStoreId") ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-           
+                if (nProjectID != 0)
+                {
+                    return db.tblProjectNetworkings.Where(p => p.nProjectID == nProjectID).AsQueryable();
+                }
+                else
+                {
+                    SqlParameter tModuleNameParam = new SqlParameter("@nStoreId", nStoreId);
+                    SqlParameter tModuleTech = new SqlParameter("@tTechnologyTableName", "tblProjectNetworking");
+                   items = db.Database.SqlQuery<tblProjectNetworking>("exec sproc_getTechnologyData @nStoreId,@tTechnologyTableName", tModuleNameParam, tModuleTech).AsQueryable();
+                  //  return items;
+                }
+            }
+            catch (Exception ex) { }
+
+            return items;
+
         }
 
         // GET: api/ProjectNetworkings/5

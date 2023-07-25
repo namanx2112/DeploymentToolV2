@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,10 +23,27 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectStakeHolders
         public IQueryable<tblProjectStakeHolder> Get(Dictionary<string, string> searchFields)
         {
-            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
-            return db.tblProjectStakeHolders.Where(p => p.nStoreId == nStoreId).AsQueryable();
+            IQueryable<tblProjectStakeHolder> items = null;
+            try
+            {
+                int nProjectID = searchFields.ContainsKey("nProjectID") ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+                int nStoreId = searchFields.ContainsKey("nStoreId") ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
+                if (nProjectID != 0)
+                {
+                    return db.tblProjectStakeHolders.Where(p => p.nProjectID == nProjectID).AsQueryable();
+                }
+                else
+                {
+                    SqlParameter tModuleNameParam = new SqlParameter("@nStoreId", nStoreId);
+                    SqlParameter tModuleTech = new SqlParameter("@tTechnologyTableName", "tblProjectStakeHolders");
+                    items = db.Database.SqlQuery<tblProjectStakeHolder>("exec sproc_getTechnologyData @nStoreId,@tTechnologyTableName", tModuleNameParam, tModuleTech).AsQueryable();
+                    
+                }
+            }
+            catch (Exception ex) { }
+            return items;
         }
         [Authorize]
         [HttpPost]

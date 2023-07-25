@@ -17,22 +17,19 @@ export class StoreTechComponentsComponent {
     this._element = value;
     this.initTab();
   }
-  tabForUI: HomeTab[];
   allTabs: HomeTab[];
   tValues: Dictionary<Dictionary<string>>;
   constructor(private service: SonicService, private techCompService: AllTechnologyComponentsService) {
 
   }
   initTab() {
-    this.allTabs = this.service.GetStoretabs();
+    if (typeof this._element.nProjectType != 'undefined')
+      this.allTabs = this.service.GetStoreTabsForProjectType(this._element.nProjectType);
+    else
+      this.allTabs = this.service.GetStoretabs();
     this.tValues = {};
-    this.tabForUI = [];
     for (var tIndx in this.allTabs) {
       let tTab = this.allTabs[tIndx];
-      // this.tValues[tTab.tab_name] = this.getValues(tTab);
-      // tTab = this.changeTab(tTab);
-      if (parseInt(tIndx) > 2)
-        this.tabForUI.push(tTab);
       this.getValues(tTab);
     }
   }
@@ -97,7 +94,7 @@ export class StoreTechComponentsComponent {
         break;
     }
   }
-  
+
   translateValuesToFields(fields: Fields[], resp: any) {
     let values: any = {};
     if (typeof resp == 'undefined') {

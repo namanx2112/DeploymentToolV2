@@ -8,6 +8,7 @@ namespace DeploymentTool.Model
     public class ActiveProjectModel
     {
         public int nProjectId { get; set; }
+
         public string tStoreNumber { get; set; }
         public string tProjectType { get; set; }
         public string tStatus { get; set; }

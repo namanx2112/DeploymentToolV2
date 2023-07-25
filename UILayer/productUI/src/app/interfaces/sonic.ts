@@ -168,6 +168,7 @@ export interface StoreInstallation {
 
 export interface HistoricalProjects {
     nProjectId: number,
+    nProjectType: number,
     nStoreNo: number,
     dProjectGoliveDate: Date,
     tProjectType: string,

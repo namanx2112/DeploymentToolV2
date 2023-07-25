@@ -22,9 +22,28 @@ namespace DeploymentTool.Controller
         // GET: api/ProjectPOS
         public IQueryable<tblProjectPOS> Get(Dictionary<string, string> searchFields)
         {
-            int nStoreId = searchFields["nStoreId"] != null ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
+            IQueryable<tblProjectPOS> items = null;
+            try
+            {
 
-            return db.tblProjectPOS.Where(p => p.nStoreId == nStoreId).AsQueryable();
+
+                int nProjectID = searchFields.ContainsKey("nProjectID") ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+                int nStoreId = searchFields.ContainsKey("nStoreId") ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
+
+                if (nProjectID != 0)
+                {
+                    return db.tblProjectPOS.Where(p => p.nProjectID == nProjectID).AsQueryable();
+                }
+                else
+                {
+                    SqlParameter tModuleNameParam = new SqlParameter("@nStoreId", nStoreId);
+                    SqlParameter tModuleTech = new SqlParameter("@tTechnologyTableName", "tblProjectPOS");
+                    items = db.Database.SqlQuery<tblProjectPOS>("exec sproc_getTechnologyData @nStoreId,@tTechnologyTableName", tModuleNameParam, tModuleTech).AsQueryable();
+                    
+                }
+            }
+            catch(Exception ex) { }
+            return items;
 
         }
 

@@ -34,7 +34,7 @@ export class SonicService {
     return this.http.get<StoreSearchModel[]>(this.configUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
-  
+
   getProjectType(tabType: HomeTab, curStore: StoreSearchModel) {
     let type: ProjectTypes = ProjectTypes.New;
     switch (tabType.tab_type) {
@@ -188,6 +188,36 @@ export class SonicService {
       this.GetStoreSonicRadioTab(TabInstanceType.Single),
       this.GetStoreInsallationTab(TabInstanceType.Single)
     ];
+    return tabs;
+  }
+
+  GetStoreTabsForProjectType(projectType: number): HomeTab[] {
+    let tabs: HomeTab[] = [];
+    switch (projectType) {
+      case 5://POS
+        tabs.push(this.GetStorePOSTab(TabInstanceType.Single));
+        break;
+      case 6://Audio
+        tabs.push(this.GetStoreAudioTab(TabInstanceType.Single));
+        break;
+      case 7://Menu
+        tabs.push(this.GetStoreExteriorMenusTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInteriorMenusTab(TabInstanceType.Single));
+        break;
+      case 8://Payment
+        tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
+        break;
+      default:
+        tabs.push(this.GetStorePOSTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreNetworingTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreAudioTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreExteriorMenusTab(TabInstanceType.Single));
+        tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInteriorMenusTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreSonicRadioTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
+        break;
+    }
     return tabs;
   }
 
@@ -443,7 +473,7 @@ export class SonicService {
       validator: [],
       mandatory: false,
       hidden: true
-    },{
+    }, {
       field_name: "Store Name",
       field_group: "Store Contact",
       fieldUniqeName: "tStoreName",
@@ -873,7 +903,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "nProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -1038,7 +1068,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "ProjectID",
         field_group: "Primary",
         fieldUniqeName: "nProjectID",
@@ -1222,7 +1252,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "nStoreId",
         fieldUniqeName: "nStoreId",
         defaultVal: "",
@@ -1379,7 +1409,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -1538,7 +1568,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -1729,7 +1759,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -1952,7 +1982,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -2072,7 +2102,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
@@ -2241,7 +2271,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },{
+      }, {
         field_name: "ProjectID",
         fieldUniqeName: "nProjectID",
         defaultVal: "0",
