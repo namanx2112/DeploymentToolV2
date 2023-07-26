@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectPaymentSystem: Misc.ModelParent
+    public partial class tblProjectPaymentSystem : Misc.ModelParent
     {
         public int aProjectPaymentSystemID { get; set; }
         public Nullable<int> nProjectID { get; set; }
@@ -31,5 +31,6 @@ namespace DeploymentTool
         public Nullable<decimal> cCost { get; set; }
         public Nullable<int> nType { get; set; }
         public Nullable<int> nStoreId { get; set; }
+        public Nullable<int> nMyActiveStatus { get; set; }
     }
 }

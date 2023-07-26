@@ -95,7 +95,7 @@ namespace DeploymentTool.Model
         {
             try
             {
-                //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectExteriorMenus set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectExteriorMenu.nProjectID));
+                var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectExteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectExteriorMenu.nStoreId));
                 //tblProjectExteriorMenu.ProjectActiveStatus = 1;Santosh
 
                 tblProjectExteriorMenu.aProjectExteriorMenuID = 0;

@@ -70,27 +70,35 @@ namespace DeploymentTool.Misc
             {
                 dtDBEntities db = new dtDBEntities();
                 IQueryable<tblProject> query;
+                int nProjectId = 0;
                 switch (pType)
                 {
                     case ProjectType.AudioInstallation:
                     case ProjectType.POSInstallation:
                     case ProjectType.MenuInstallation:
                     case ProjectType.PaymentTerminalInstallation:
-                        query = db.tblProjects.Where(x => x.nStoreID == nStoreId && x.nProjectActiveStatus == 1 && (x.nProjectType == (int)pType || x.aProjectID > 0));
+                        nProjectId = db.Database.SqlQuery<int>($"select aProjectID from tblProject with(nolock) where nProjectActiveStatus=1 and nStoreID={nStoreId} and nProjectType={(int)pType}").FirstOrDefault();
+                        //query = db.tblProjects.Where(x => x.nStoreID == nStoreId && x.nProjectActiveStatus == 1 && (x.nProjectType == (int)pType || x.aProjectID > 0));
                         break;
                     default:
-                        query = db.tblProjects.Where(x => x.nStoreID == nStoreId && x.nProjectActiveStatus == 1);
+                        nProjectId = db.Database.SqlQuery<int>($"select aProjectID from tblProject with(nolock) where nProjectActiveStatus=1 and nStoreID={nStoreId}").FirstOrDefault();
+                        //query = db.tblProjects.Where(x => x.nStoreID == nStoreId && x.nProjectActiveStatus == 1);
                         break;
                 }
-                tblProject tProject = query.FirstOrDefault();
-                if (tProject != null)
+                //tblProject tProject = query.FirstOrDefault();
+                if (nProjectId > 0)
                 {
 
                     PropertyInfo prop;
                     prop = objRef.GetType().GetProperty("nProjectID", BindingFlags.Public | BindingFlags.Instance);
                     if (null != prop && prop.CanWrite)
                     {
-                        prop.SetValue(objRef, (int)tProject.aProjectID, null);
+                        prop.SetValue(objRef, nProjectId, null);
+                    }
+                    prop = objRef.GetType().GetProperty("nMyActiveStatus", BindingFlags.Public | BindingFlags.Instance);
+                    if (null != prop && prop.CanWrite)
+                    {
+                        prop.SetValue(objRef, (int)1, null);
                     }
                 }
             }

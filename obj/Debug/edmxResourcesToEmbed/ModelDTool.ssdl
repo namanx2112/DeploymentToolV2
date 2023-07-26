@@ -226,6 +226,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
     <Property Name="nProjectActiveStatus" Type="int" />
+    <Property Name="dProjEndDate" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectAudio">
     <Key>
@@ -242,6 +243,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dLoopDeliveryDate" Type="date" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectConfig">
     <Key>
@@ -256,6 +258,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dGroundBreak" Type="datetime" />
     <Property Name="dKitchenInstall" Type="datetime" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectExteriorMenus">
     <Key>
@@ -275,6 +278,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="cIDTechCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="cTotalCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectInstallation">
     <Key>
@@ -292,6 +296,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nProjectStatus" Type="int" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenus">
     <Key>
@@ -305,6 +310,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dDeliveryDate" Type="date" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectNetworking">
     <Key>
@@ -323,6 +329,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dTempDate" Type="date" />
     <Property Name="nTempType" Type="int" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectNotes">
     <Key>
@@ -361,6 +368,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nType" Type="int" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectPOS">
     <Key>
@@ -376,6 +384,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nPaperworkStatus" Type="int" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">
     <Key>
@@ -393,6 +402,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dDeliveryDate" Type="date" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectStakeHolders">
     <Key>
@@ -410,7 +420,14 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="tCD" Type="nvarchar" MaxLength="500" />
     <Property Name="tITPM" Type="nvarchar" MaxLength="500" />
     <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tblProjectTypeConfig">
+          <Property Name="aTypeId" Type="int" />
+          <Property Name="tTableName" Type="varchar" MaxLength="100" />
+        </EntityType>-->
   <EntityType Name="tblPurchaseOrder">
     <Key>
       <PropertyRef Name="aPurchaseOrderID" />
@@ -714,7 +731,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
   </EntityType>
   <Function Name="sproc_CreateStoreFromExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tStoreName" Type="varchar" Mode="In" />
-    <Parameter Name="tProjectType" Type="varchar" Mode="In" />
+    <Parameter Name="nProjectType" Type="int" Mode="In" />
     <Parameter Name="tStoreNumber" Type="varchar" Mode="In" />
     <Parameter Name="tAddress" Type="varchar" Mode="In" />
     <Parameter Name="tCity" Type="varchar" Mode="In" />

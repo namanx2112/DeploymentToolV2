@@ -92,7 +92,8 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectPaymentSystem))]
         public async Task<IHttpActionResult> Create(tblProjectPaymentSystem tblProjectPaymentSystem)
         {
-            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectPaymentSystem set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectPaymentSystem.nProjectID));
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectPaymentSystem set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectPaymentSystem.nStoreId));
+
             //tblProjectPaymentSystem.ProjectActiveStatus = 1;Santosh
             tblProjectPaymentSystem.aProjectPaymentSystemID = 0;
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.PaymentTerminalInstallation, tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem);

@@ -208,9 +208,9 @@ export class SonicService {
         tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
         break;
       default:
-        tabs.push(this.GetStorePOSTab(TabInstanceType.Single));
-        tabs.push(this.GetStoreNetworingTab(TabInstanceType.Single));
         tabs.push(this.GetStoreAudioTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreNetworingTab(TabInstanceType.Single));
+        tabs.push(this.GetStorePOSTab(TabInstanceType.Single));
         tabs.push(this.GetStoreExteriorMenusTab(TabInstanceType.Single));
         tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInteriorMenusTab(TabInstanceType.Single));

@@ -92,7 +92,8 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectSonicRadio))]
         public async Task<IHttpActionResult> Create(tblProjectSonicRadio tblProjectSonicRadio)
         {
-            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectSonicRadio set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectSonicRadio.nProjectID));
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectSonicRadio set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectSonicRadio.nStoreId));
+
             //tblProjectSonicRadio.ProjectActiveStatus = 1;Santosh
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectSonicRadio.nStoreId, tblProjectSonicRadio);
             tblProjectSonicRadio.aProjectSonicRadioID = 0;

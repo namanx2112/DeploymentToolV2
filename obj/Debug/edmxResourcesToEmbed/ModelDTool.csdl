@@ -33,7 +33,7 @@
     <EntitySet Name="tblDropdowns" EntityType="dtDBModel.tblDropdown" />
     <FunctionImport Name="sproc_CreateStoreFromExcel">
       <Parameter Name="tStoreName" Mode="In" Type="String" />
-      <Parameter Name="tProjectType" Mode="In" Type="String" />
+      <Parameter Name="nProjectType" Mode="In" Type="Int32" />
       <Parameter Name="tStoreNumber" Mode="In" Type="String" />
       <Parameter Name="tAddress" Mode="In" Type="String" />
       <Parameter Name="tCity" Mode="In" Type="String" />
@@ -177,6 +177,7 @@
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
     <Property Name="nProjectActiveStatus" Type="Int32" />
+    <Property Name="dProjEndDate" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectAudio">
     <Key>
@@ -193,6 +194,7 @@
     <Property Name="dLoopDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectConfig">
     <Key>
@@ -207,6 +209,7 @@
     <Property Name="dGroundBreak" Type="DateTime" Precision="3" />
     <Property Name="dKitchenInstall" Type="DateTime" Precision="3" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectExteriorMenu">
     <Key>
@@ -226,6 +229,7 @@
     <Property Name="cIDTechCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="cTotalCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectInstallation">
     <Key>
@@ -243,6 +247,7 @@
     <Property Name="nProjectStatus" Type="Int32" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenu">
     <Key>
@@ -256,6 +261,7 @@
     <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectNetworking">
     <Key>
@@ -274,6 +280,7 @@
     <Property Name="dTempDate" Type="DateTime" Precision="0" />
     <Property Name="nTempType" Type="Int32" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectNote">
     <Key>
@@ -312,6 +319,7 @@
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nType" Type="Int32" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectPOS">
     <Key>
@@ -327,6 +335,7 @@
     <Property Name="nPaperworkStatus" Type="Int32" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">
     <Key>
@@ -344,6 +353,7 @@
     <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblProjectStakeHolder">
     <Key>
@@ -361,6 +371,7 @@
     <Property Name="tCD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="tITPM" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblStore">
     <Key>

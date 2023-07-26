@@ -95,7 +95,7 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectAudio tblProjectAudio)
         {
-            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectAudio set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectAudio.nProjectID));
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectAudio set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectAudio.nStoreId));
             //tblProjectAudio.ProjectActiveStatus = 1; SantoshPP
             tblProjectAudio.aProjectAudioID = 0;
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.AudioInstallation, tblProjectAudio.nStoreId, tblProjectAudio);

@@ -74,15 +74,15 @@ namespace DeploymentTool
         public virtual DbSet<tblUserVendorRel> tblUserVendorRels { get; set; }
         public virtual DbSet<tblSupportTicket> tblSupportTickets { get; set; }
     
-        public virtual int sproc_CreateStoreFromExcel(string tStoreName, string tProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
+        public virtual int sproc_CreateStoreFromExcel(string tStoreName, Nullable<int> nProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
         {
             var tStoreNameParameter = tStoreName != null ?
                 new ObjectParameter("tStoreName", tStoreName) :
                 new ObjectParameter("tStoreName", typeof(string));
     
-            var tProjectTypeParameter = tProjectType != null ?
-                new ObjectParameter("tProjectType", tProjectType) :
-                new ObjectParameter("tProjectType", typeof(string));
+            var nProjectTypeParameter = nProjectType.HasValue ?
+                new ObjectParameter("nProjectType", nProjectType) :
+                new ObjectParameter("nProjectType", typeof(int));
     
             var tStoreNumberParameter = tStoreNumber != null ?
                 new ObjectParameter("tStoreNumber", tStoreNumber) :
@@ -148,7 +148,7 @@ namespace DeploymentTool
                 new ObjectParameter("nBrandId", nBrandId) :
                 new ObjectParameter("nBrandId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sproc_CreateStoreFromExcel", tStoreNameParameter, tProjectTypeParameter, tStoreNumberParameter, tAddressParameter, tCityParameter, tStateParameter, nDMAIDParameter, tDMAParameter, tREDParameter, tCMParameter, tANEParameter, tRVPParameter, tPrincipalPartnerParameter, dStatusParameter, dOpenStoreParameter, tProjectStatusParameter, nCreatedByParameter, nBrandIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sproc_CreateStoreFromExcel", tStoreNameParameter, nProjectTypeParameter, tStoreNumberParameter, tAddressParameter, tCityParameter, tStateParameter, nDMAIDParameter, tDMAParameter, tREDParameter, tCMParameter, tANEParameter, tRVPParameter, tPrincipalPartnerParameter, dStatusParameter, dOpenStoreParameter, tProjectStatusParameter, nCreatedByParameter, nBrandIdParameter);
         }
     
         public virtual ObjectResult<sproc_SearchStore_Result> sproc_SearchStore(string tText)

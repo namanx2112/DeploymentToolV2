@@ -28,32 +28,37 @@ namespace DeploymentTool.Controller
             {
                 foreach (var request in requestArr)
                 {
-                    db.sproc_CreateStoreFromExcel(string.Empty, request.tProjectType, request.tStoreNumber, request.tAddress, request.tCity, request.tState, request.nDMAID, request.tDMA,
-                        request.tRED, request.tCM, request.tANE, request.tRVP, request.tPrincipalPartner, request.dStatus, request.dOpenStore, request.tProjectStatus, securityContext.nUserID, 6);
+                    ProjectType pType;
+                    if (Enum.TryParse(request.tProjectType.Replace(" ", ""), true, out pType))
+                    {
+                        int nProjectType = (int)pType;
+                        db.sproc_CreateStoreFromExcel(string.Empty, nProjectType, request.tStoreNumber, request.tAddress, request.tCity, request.tState, request.nDMAID, request.tDMA,
+                            request.tRED, request.tCM, request.tANE, request.tRVP, request.tPrincipalPartner, request.dStatus, request.dOpenStore, request.tProjectStatus, securityContext.nUserID, 6);
 
-                    //List<SqlParameter> tPramList = new List<SqlParameter>();
-                    //tPramList.Add(new SqlParameter("@tStoreName", "Dont Know"));
-                    //tPramList.Add(new SqlParameter("@tProjectType", request.tProjectType));
-                    //tPramList.Add(new SqlParameter("@tStoreNumber", request.tStoreNumber));
-                    //tPramList.Add(new SqlParameter("@tAddress", request.tAddress));
-                    //tPramList.Add(new SqlParameter("@tCity", request.tCity));
-                    //tPramList.Add(new SqlParameter("@tState", request.tState));
-                    //tPramList.Add(new SqlParameter("@nDMAID", request.nDMAID));
-                    //tPramList.Add(new SqlParameter("@tDMA", request.tDMA));
-                    //tPramList.Add(new SqlParameter("@tRED", request.tRED));
-                    //tPramList.Add(new SqlParameter("@tCM", request.tCM));
-                    //tPramList.Add(new SqlParameter("@tANE", request.tANE));
-                    //tPramList.Add(new SqlParameter("@tRVP", request.tRVP));
-                    //tPramList.Add(new SqlParameter("@tPrincipalPartner", request.tPrincipalPartner));
-                    //tPramList.Add(new SqlParameter("@dStatus", request.tState));
-                    //tPramList.Add(new SqlParameter("@dOpenStore", request.dOpenStore));
-                    //tPramList.Add(new SqlParameter("@tProjectStatus", request.tProjectStatus));
-                    //tPramList.Add(new SqlParameter("@nCreatedBy", securityContext.nUserID));
-                    //tPramList.Add(new SqlParameter("@nBrandId", 6));
-                    //string output = db.Database.SqlQuery<Dropdown>("exec sproc_CreateStoreFromExcel @tStoreName,@tProjectType,@tStoreNumber,@tAddress,@tCity,@tState,@nDMAID,@tDMA,@tRED,@tCM," +
-                    //    "@tANE,@tRVP,@tPrincipalPartner,@dStatus,@dOpenStore,@tProjectStatus,@nCreatedBy,@nBrandId ", tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
-                    //    tPramList[6], tPramList[7], tPramList[8], tPramList[9], tPramList[10], tPramList[11], tPramList[12], tPramList[13], tPramList[14], tPramList[15], tPramList[16], tPramList[17]).ToString();
-                    await db.SaveChangesAsync();
+                        //List<SqlParameter> tPramList = new List<SqlParameter>();
+                        //tPramList.Add(new SqlParameter("@tStoreName", "Dont Know"));
+                        //tPramList.Add(new SqlParameter("@tProjectType", request.tProjectType));
+                        //tPramList.Add(new SqlParameter("@tStoreNumber", request.tStoreNumber));
+                        //tPramList.Add(new SqlParameter("@tAddress", request.tAddress));
+                        //tPramList.Add(new SqlParameter("@tCity", request.tCity));
+                        //tPramList.Add(new SqlParameter("@tState", request.tState));
+                        //tPramList.Add(new SqlParameter("@nDMAID", request.nDMAID));
+                        //tPramList.Add(new SqlParameter("@tDMA", request.tDMA));
+                        //tPramList.Add(new SqlParameter("@tRED", request.tRED));
+                        //tPramList.Add(new SqlParameter("@tCM", request.tCM));
+                        //tPramList.Add(new SqlParameter("@tANE", request.tANE));
+                        //tPramList.Add(new SqlParameter("@tRVP", request.tRVP));
+                        //tPramList.Add(new SqlParameter("@tPrincipalPartner", request.tPrincipalPartner));
+                        //tPramList.Add(new SqlParameter("@dStatus", request.tState));
+                        //tPramList.Add(new SqlParameter("@dOpenStore", request.dOpenStore));
+                        //tPramList.Add(new SqlParameter("@tProjectStatus", request.tProjectStatus));
+                        //tPramList.Add(new SqlParameter("@nCreatedBy", securityContext.nUserID));
+                        //tPramList.Add(new SqlParameter("@nBrandId", 6));
+                        //string output = db.Database.SqlQuery<Dropdown>("exec sproc_CreateStoreFromExcel @tStoreName,@tProjectType,@tStoreNumber,@tAddress,@tCity,@tState,@nDMAID,@tDMA,@tRED,@tCM," +
+                        //    "@tANE,@tRVP,@tPrincipalPartner,@dStatus,@dOpenStore,@tProjectStatus,@nCreatedBy,@nBrandId ", tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
+                        //    tPramList[6], tPramList[7], tPramList[8], tPramList[9], tPramList[10], tPramList[11], tPramList[12], tPramList[13], tPramList[14], tPramList[15], tPramList[16], tPramList[17]).ToString();
+                        await db.SaveChangesAsync();
+                    }
                 }
 
                 return new HttpResponseMessage(HttpStatusCode.OK)
@@ -159,6 +164,8 @@ namespace DeploymentTool.Controller
                 db.tblProjects.Add(tProjectModel);
                 db.SaveChanges();
                 newStore.nProjectID = tProjectModel.aProjectID;
+                var CopyTechIfRequired = db.Database.ExecuteSqlCommand("exec sproc_CopyTechnologyToCurrentProject @nStoreId, @nProjectType, @nProjectID", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), new SqlParameter("@nProjectID", newStore.nProjectID));
+
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<NewProjectStore>(newStore, new JsonMediaTypeFormatter())

@@ -93,7 +93,9 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectInstallation))]
         public async Task<IHttpActionResult> Create(tblProjectInstallation tblProjectInstallation)
         {
-            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInstallation set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectInstallation.nProjectID));
+
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInstallation set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectInstallation.nStoreId));
+
             //tblProjectInstallation.ProjectActiveStatus = 1;Santosh
 
             tblProjectInstallation.aProjectInstallationID = 0;

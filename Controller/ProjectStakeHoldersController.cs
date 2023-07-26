@@ -92,6 +92,8 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectStakeHolder))]
         public async Task<IHttpActionResult> Create(tblProjectStakeHolder request)
         {
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", request.nStoreId));
+
             request.aProjectStakeHolderID = 0;
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, request.nStoreId, request);
             db.tblProjectStakeHolders.Add(request);

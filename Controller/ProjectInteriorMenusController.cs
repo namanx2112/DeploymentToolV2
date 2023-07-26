@@ -93,7 +93,9 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectInteriorMenu))]
         public async Task<IHttpActionResult> Create(tblProjectInteriorMenu tblProjectInteriorMenu)
         {
-            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInteriorMenus set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectInteriorMenu.nProjectID));
+
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectInteriorMenu.nStoreId));
+
             //tblProjectInteriorMenu.ProjectActiveStatus = 1;Santosh
             tblProjectInteriorMenu.aProjectInteriorMenuID = 0;
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.MenuInstallation, tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu);

@@ -94,7 +94,8 @@ namespace DeploymentTool.Model
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectNetworking tblProjectNetworking)
         {
-            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectNetworking set projectActiveStatus=0 where nProjectId =@nProjectId", new SqlParameter("@nProjectId", tblProjectNetworking.nProjectID));
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectNetworking set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectNetworking.nStoreId));
+
             //tblProjectNetworking.ProjectActiveStatus = 1;Santosh
             tblProjectNetworking.aProjectNetworkingID = 0;
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectNetworking.nStoreId, tblProjectNetworking);

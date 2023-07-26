@@ -29,5 +29,6 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
         public Nullable<int> nProjectActiveStatus { get; set; }
+        public Nullable<System.DateTime> dProjEndDate { get; set; }
     }
 }

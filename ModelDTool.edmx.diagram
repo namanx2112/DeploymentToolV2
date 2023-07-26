@@ -25,7 +25,7 @@
         <EntityTypeShape EntityType="dtDBModel.tblStore" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="dtDBModel.tblUser1" Width="1.5" PointX="6.75" PointY="13.75" />
         <EntityTypeShape EntityType="dtDBModel.tblBrandBKP" Width="1.5" PointX="2.75" PointY="14.75" />
-        <EntityTypeShape EntityType="dtDBModel.tblCountry" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblCountry" Width="1.5" PointX="15.875" PointY="3" />
         <EntityTypeShape EntityType="dtDBModel.tblEnum" Width="1.5" PointX="14.75" PointY="7.75" />
         <EntityTypeShape EntityType="dtDBModel.tblEnumTableField" Width="1.5" PointX="8.75" PointY="14.75" />
         <EntityTypeShape EntityType="dtDBModel.tblFranchise" Width="1.5" PointX="14.75" PointY="10.75" />

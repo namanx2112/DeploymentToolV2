@@ -231,6 +231,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
           <Property Name="nProjectActiveStatus" Type="int" />
+          <Property Name="dProjEndDate" Type="date" />
         </EntityType>
         <EntityType Name="tblProjectAudio">
           <Key>
@@ -247,6 +248,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dLoopDeliveryDate" Type="date" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectConfig">
           <Key>
@@ -261,6 +263,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dGroundBreak" Type="datetime" />
           <Property Name="dKitchenInstall" Type="datetime" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectExteriorMenus">
           <Key>
@@ -280,6 +283,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="cIDTechCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="cTotalCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectInstallation">
           <Key>
@@ -297,6 +301,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="nProjectStatus" Type="int" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectInteriorMenus">
           <Key>
@@ -310,6 +315,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dDeliveryDate" Type="date" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectNetworking">
           <Key>
@@ -328,6 +334,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dTempDate" Type="date" />
           <Property Name="nTempType" Type="int" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectNotes">
           <Key>
@@ -366,6 +373,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="nType" Type="int" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectPOS">
           <Key>
@@ -381,6 +389,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="nPaperworkStatus" Type="int" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectSonicRadio">
           <Key>
@@ -398,6 +407,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dDeliveryDate" Type="date" />
           <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectStakeHolders">
           <Key>
@@ -415,7 +425,14 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="tCD" Type="nvarchar" MaxLength="500" />
           <Property Name="tITPM" Type="nvarchar" MaxLength="500" />
           <Property Name="nStoreId" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tblProjectTypeConfig">
+          <Property Name="aTypeId" Type="int" />
+          <Property Name="tTableName" Type="varchar" MaxLength="100" />
+        </EntityType>-->
         <EntityType Name="tblPurchaseOrder">
           <Key>
             <PropertyRef Name="aPurchaseOrderID" />
@@ -719,7 +736,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
         </EntityType>
         <Function Name="sproc_CreateStoreFromExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tStoreName" Type="varchar" Mode="In" />
-          <Parameter Name="tProjectType" Type="varchar" Mode="In" />
+          <Parameter Name="nProjectType" Type="int" Mode="In" />
           <Parameter Name="tStoreNumber" Type="varchar" Mode="In" />
           <Parameter Name="tAddress" Type="varchar" Mode="In" />
           <Parameter Name="tCity" Type="varchar" Mode="In" />
@@ -919,7 +936,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySet Name="tblDropdowns" EntityType="dtDBModel.tblDropdown" />
 					<FunctionImport Name="sproc_CreateStoreFromExcel">
             <Parameter Name="tStoreName" Mode="In" Type="String" />
-            <Parameter Name="tProjectType" Mode="In" Type="String" />
+            <Parameter Name="nProjectType" Mode="In" Type="Int32" />
             <Parameter Name="tStoreNumber" Mode="In" Type="String" />
             <Parameter Name="tAddress" Mode="In" Type="String" />
             <Parameter Name="tCity" Mode="In" Type="String" />
@@ -1063,6 +1080,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
           <Property Name="nProjectActiveStatus" Type="Int32" />
+          <Property Name="dProjEndDate" Type="DateTime" Precision="0" />
 				</EntityType>
 				<EntityType Name="tblProjectAudio">
 					<Key>
@@ -1079,6 +1097,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dLoopDeliveryDate" Type="DateTime" Precision="0" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectConfig">
 					<Key>
@@ -1093,6 +1112,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dGroundBreak" Type="DateTime" Precision="3" />
 					<Property Name="dKitchenInstall" Type="DateTime" Precision="3" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectExteriorMenu">
 					<Key>
@@ -1112,6 +1132,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="cIDTechCost" Type="Decimal" Precision="18" Scale="2" />
 					<Property Name="cTotalCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectInstallation">
 					<Key>
@@ -1129,6 +1150,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nProjectStatus" Type="Int32" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectInteriorMenu">
 					<Key>
@@ -1142,6 +1164,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectNetworking">
 					<Key>
@@ -1160,6 +1183,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dTempDate" Type="DateTime" Precision="0" />
 					<Property Name="nTempType" Type="Int32" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectNote">
 					<Key>
@@ -1198,6 +1222,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
 					<Property Name="nType" Type="Int32" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectPOS">
 					<Key>
@@ -1213,6 +1238,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nPaperworkStatus" Type="Int32" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectSonicRadio">
 					<Key>
@@ -1230,6 +1256,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
 					<Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblProjectStakeHolder">
 					<Key>
@@ -1247,6 +1274,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="tCD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
 					<Property Name="tITPM" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="nStoreId" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblStore">
 					<Key>
@@ -1755,7 +1783,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjects">
 						<EntityTypeMapping TypeName="dtDBModel.tblProject">
 							<MappingFragment StoreEntitySet="tblProject">
-								<ScalarProperty Name="nProjectActiveStatus" ColumnName="nProjectActiveStatus" />
+								<ScalarProperty Name="dProjEndDate" ColumnName="dProjEndDate" />
+                <ScalarProperty Name="nProjectActiveStatus" ColumnName="nProjectActiveStatus" />
                 <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
 								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
 								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
@@ -1776,7 +1805,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectAudios">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectAudio">
 							<MappingFragment StoreEntitySet="tblProjectAudio">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
                 <ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="dLoopDeliveryDate" ColumnName="dLoopDeliveryDate" />
 								<ScalarProperty Name="nLoopType" ColumnName="nLoopType" />
@@ -1793,7 +1823,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectConfigs">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectConfig">
 							<MappingFragment StoreEntitySet="tblProjectConfig">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
                 <ScalarProperty Name="dKitchenInstall" ColumnName="dKitchenInstall" />
 								<ScalarProperty Name="dGroundBreak" ColumnName="dGroundBreak" />
 								<ScalarProperty Name="cProjectCost" ColumnName="cProjectCost" />
@@ -1808,7 +1839,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectExteriorMenus">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectExteriorMenu">
 							<MappingFragment StoreEntitySet="tblProjectExteriorMenus">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
                 <ScalarProperty Name="cTotalCost" ColumnName="cTotalCost" />
 								<ScalarProperty Name="cIDTechCost" ColumnName="cIDTechCost" />
 								<ScalarProperty Name="cFabConCost" ColumnName="cFabConCost" />
@@ -1828,7 +1860,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectInstallations">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectInstallation">
 							<MappingFragment StoreEntitySet="tblProjectInstallation">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
                 <ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="nProjectStatus" ColumnName="nProjectStatus" />
 								<ScalarProperty Name="nTestTransactions" ColumnName="nTestTransactions" />
@@ -1846,7 +1879,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectInteriorMenus">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectInteriorMenu">
 							<MappingFragment StoreEntitySet="tblProjectInteriorMenus">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
                 <ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
 								<ScalarProperty Name="nStatus" ColumnName="nStatus" />
@@ -1860,7 +1894,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectNetworkings">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectNetworking">
 							<MappingFragment StoreEntitySet="tblProjectNetworking">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
                 <ScalarProperty Name="nTempType" ColumnName="nTempType" />
 								<ScalarProperty Name="dTempDate" ColumnName="dTempDate" />
 								<ScalarProperty Name="nTempStatus" ColumnName="nTempStatus" />
@@ -1896,7 +1931,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectPaymentSystems">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectPaymentSystem">
 							<MappingFragment StoreEntitySet="tblProjectPaymentSystem">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
 								<ScalarProperty Name="nType" ColumnName="nType" />
 								<ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="nShelf" ColumnName="nShelf" />
@@ -1919,7 +1955,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectPOS">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectPOS">
 							<MappingFragment StoreEntitySet="tblProjectPOS">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
 								<ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="nPaperworkStatus" ColumnName="nPaperworkStatus" />
 								<ScalarProperty Name="nStatus" ColumnName="nStatus" />
@@ -1935,7 +1972,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectSonicRadios">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectSonicRadio">
 							<MappingFragment StoreEntitySet="tblProjectSonicRadio">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
 								<ScalarProperty Name="cCost" ColumnName="cCost" />
 								<ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
 								<ScalarProperty Name="nStatus" ColumnName="nStatus" />
@@ -1953,7 +1991,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblProjectStakeHolders">
 						<EntityTypeMapping TypeName="dtDBModel.tblProjectStakeHolder">
 							<MappingFragment StoreEntitySet="tblProjectStakeHolders">
-								<ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+								<ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
                 <ScalarProperty Name="tITPM" ColumnName="tITPM" />
 								<ScalarProperty Name="tCD" ColumnName="tCD" />
 								<ScalarProperty Name="tPrincipalPartner" ColumnName="tPrincipalPartner" />
