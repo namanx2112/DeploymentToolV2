@@ -41,7 +41,8 @@ namespace DeploymentTool.Controller
                     items = db.Database.SqlQuery<tblProjectInstallation>("exec sproc_getTechnologyData @nStoreId,@tTechnologyTableName", tModuleNameParam, tModuleTech).AsQueryable();
                     //return items;
                 }
-            }catch (Exception ex) { }
+            }
+            catch (Exception ex) { }
             return items;
 
         }
@@ -103,6 +104,8 @@ namespace DeploymentTool.Controller
             db.tblProjectInstallations.Add(tblProjectInstallation);
             await db.SaveChangesAsync();
 
+            if (tblProjectInstallation.dInstallEnd != null)
+                db.Database.ExecuteSqlCommand("update tblProject set dGoLiveDate=@dInstallationDate where aProjectID =@aProjectID", new SqlParameter("@dInstallationDate", tblProjectInstallation.dInstallEnd), new SqlParameter("@aProjectID", tblProjectInstallation.nProjectID)); // Update goLive date as installation end date
             return Json(tblProjectInstallation);
         }
         [Authorize]

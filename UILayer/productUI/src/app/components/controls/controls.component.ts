@@ -227,7 +227,7 @@ export class ControlsComponent implements AfterViewChecked {
 export function dateRegexValidator(
   control: AbstractControl
 ): { [key: string]: boolean } | null {
-  if (control.value.toString() == 'Invalid Date')
+  if (control.value == null || control.value.toString() == 'Invalid Date')
     return null;
   const regexPattern = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/gi;
   let val = control.value;

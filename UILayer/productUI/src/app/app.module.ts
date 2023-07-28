@@ -66,6 +66,7 @@ import { SupportPageComponent } from './components/support-page/support-page.com
 import { CKEditorModule } from 'ckeditor4-angular';
 import { TableExpendableComponent } from './components/table-expendable/table-expendable.component';
 import { StoreTechComponentsComponent } from './components/Sonic/store-tech-components/store-tech-components.component';
+import { ChangeGoliveDateComponent } from './components/Sonic/change-golive-date/change-golive-date.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { StoreTechComponentsComponent } from './components/Sonic/store-tech-comp
     ForFilterPipe,
     SupportPageComponent,
     TableExpendableComponent,
-    StoreTechComponentsComponent
+    StoreTechComponentsComponent,
+    ChangeGoliveDateComponent
   ],
   imports: [
     CKEditorModule,

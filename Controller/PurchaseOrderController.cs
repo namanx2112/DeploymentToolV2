@@ -318,20 +318,20 @@ namespace DeploymentTool.Controller
 
             try
             {
-                int nProjectId = nStoreId;//SantoshPP getActive Projects for This Store and then process
+               // int nProjectId = nStoreId;//SantoshPP getActive Projects for This Store and then process
                 //PO Start
                 // int aPurchaseOrderTemplateID = 4;
-                SqlParameter tModuleparmAdress = new SqlParameter("@nProjectID", nProjectId);
+                SqlParameter tModuleparmAdress = new SqlParameter("@nStoreId", nStoreId);
 
-                List<PurchaseOrderPreviewTemplate> itemPOStore = db.Database.SqlQuery<PurchaseOrderPreviewTemplate>("exec sproc_GetPurchaseOrdeStorerDetails @nProjectID", tModuleparmAdress).ToList();
+                List<PurchaseOrderPreviewTemplate> itemPOStore = db.Database.SqlQuery<PurchaseOrderPreviewTemplate>("exec sproc_GetPurchaseOrdeStorerDetails @nStoreId", tModuleparmAdress).ToList();
                 SqlParameter tModuleparm = new SqlParameter("@aPurchaseOrderTemplateID", nTemplateId);
-                List<PurchaseOrderTemplate> itemPOTemplate = db.Database.SqlQuery<PurchaseOrderTemplate>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID,@nProjectID", tModuleparm, new SqlParameter("@nProjectID", nProjectId)).ToList();
+                List<PurchaseOrderTemplate> itemPOTemplate = db.Database.SqlQuery<PurchaseOrderTemplate>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID,@nStoreId", tModuleparm, new SqlParameter("@nStoreId", nStoreId)).ToList();
 
                 SqlParameter tModuleparmTempID = new SqlParameter("@nPurchaseOrderTemplateID", nTemplateId);
-                SqlParameter tModuleparmParts = new SqlParameter("@nProjectID", nProjectId);
+                SqlParameter tModuleparmParts = new SqlParameter("@nStoreId", nStoreId);
 
-                List<PurchaseOrderPartDetails> itemPOParts = db.Database.SqlQuery<PurchaseOrderPartDetails>("exec sproc_GetPurchaseOrderPartsDetails @nPurchaseOrderTemplateID,@nProjectID", tModuleparmTempID, tModuleparmParts).ToList();
-                poRequest.nProjectId = nProjectId;
+                List<PurchaseOrderPartDetails> itemPOParts = db.Database.SqlQuery<PurchaseOrderPartDetails>("exec sproc_GetPurchaseOrderPartsDetails @nPurchaseOrderTemplateID,@nStoreId", tModuleparmTempID, tModuleparmParts).ToList();
+                poRequest.nProjectId = nStoreId;
                 poRequest.nVendorId = (int)itemPOTemplate[0].nVendorID;// 1;
                 poRequest.tVendorName = itemPOTemplate[0].tVendorName;
                 poRequest.tStore = itemPOStore[0].tStore + " #" + itemPOStore[0].tStoreNumber;

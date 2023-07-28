@@ -56,8 +56,9 @@ export class NewProjectComponent {
     this.storeSerice.getStoreDetails(this.curStore.nStoreId, this.nProjectType).subscribe((x: any) => {
       x.nProjectType = this.nProjectType.toString();
       this.tValues[pStoreTab.tab_name] = x;
-      this.tValues[pStakeHolerTab.tab_name] = x.tStakeHolder;
-      this.setProjectId(x["aStoreId"]);
+      if (x.tStakeHolder != null)
+        this.tValues[pStakeHolerTab.tab_name] = x.tStakeHolder;
+      this.setStoreId(x["aStoreId"]);
       this.moveNext();
     });
   }
@@ -126,7 +127,7 @@ export class NewProjectComponent {
     this.loadCurTab();
   }
 
-  setProjectId(nStoreId: string) {
+  setStoreId(nStoreId: string) {
     let counter = 0;
     for (var indx in this.allTabs) {
       if (counter > 1) {
@@ -151,7 +152,7 @@ export class NewProjectComponent {
       let tTab = this.allTabs[tIndex];
       var saveCallback = function (resp: any, tab: HomeTab) {
         if (tIndex == 1) {
-          cThis.setProjectId(resp.aStoreId);
+          cThis.setStoreId(resp.aStoreId);
           switch (cThis.nProjectType) {
             case ProjectTypes.AudioInstallation:
             case ProjectTypes.POSInstallation:

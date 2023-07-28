@@ -3,9 +3,11 @@ using DeploymentTool.Model;
 using DeploymentTool.Model.Templates;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Dynamic.Core.Tokenizer;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -140,23 +142,30 @@ namespace DeploymentTool.Controller
             {
                 ProjectType pType = (ProjectType)newStore.nProjectType;
                 Utilities.SetHousekeepingFields(true, HttpContext.Current, newStore);
-                var noOfRowUpdated = db.Database.ExecuteSqlCommand("exec sproc_MoveProjectToHistory @nStoreId, @nProjectType", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType));
+                int nMovedProjectId = 0;
+                var paramProjectId = new SqlParameter("@movedProjectId", nMovedProjectId);
+                paramProjectId.Direction = ParameterDirection.Output;
+                var noOfRowUpdated = db.Database.ExecuteSqlCommand("exec sproc_MoveProjectToHistory @nStoreId, @nProjectType,@movedProjectId OUTPUT", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), paramProjectId);
+                if (noOfRowUpdated != 0)
+                    nMovedProjectId = (paramProjectId.Value == null) ? 0 : Convert.ToInt32(paramProjectId.Value);
                 tblStore ttboStore = newStore.GettblStores();
-                switch (pType)
-                {
-                    case ProjectType.AudioInstallation:
-                    case ProjectType.POSInstallation:
-                    case ProjectType.MenuInstallation:
-                    case ProjectType.PaymentTerminalInstallation:
-                        db.Entry(ttboStore).State = EntityState.Modified;
-                        db.SaveChanges();
-                        break;
-                    default:
-                        newStore.nProjectID = 0;
-                        db.tblStores.Add(ttboStore);
-                        db.SaveChanges();
-                        break;
-                }
+                //switch (pType)
+                //{
+                //    case ProjectType.AudioInstallation:
+                //    case ProjectType.POSInstallation:
+                //    case ProjectType.MenuInstallation:
+                //    case ProjectType.PaymentTerminalInstallation:
+                //        db.Entry(ttboStore).State = EntityState.Modified;
+                //        db.SaveChanges();
+                //        break;
+                //    default:
+                //        newStore.nProjectID = 0;
+                //        db.tblStores.Add(ttboStore);
+                //        db.SaveChanges();
+                //        break;
+                //}
+                db.Entry(ttboStore).State = EntityState.Modified;
+                db.SaveChanges();
                 tblProject tProjectModel = newStore.GettblProject();
                 tProjectModel.nProjectActiveStatus = 1;
                 tProjectModel.nStoreID = ttboStore.aStoreID;
@@ -164,7 +173,10 @@ namespace DeploymentTool.Controller
                 db.tblProjects.Add(tProjectModel);
                 db.SaveChanges();
                 newStore.nProjectID = tProjectModel.aProjectID;
-                var CopyTechIfRequired = db.Database.ExecuteSqlCommand("exec sproc_CopyTechnologyToCurrentProject @nStoreId, @nProjectType, @nProjectID", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), new SqlParameter("@nProjectID", newStore.nProjectID));
+                if (nMovedProjectId > 0)
+                {
+                    var CopyTechIfRequired = db.Database.ExecuteSqlCommand("exec sproc_CopyTechnologyToCurrentProject @nStoreId, @nProjectType, @nProjectID, @nFromProjectId", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), new SqlParameter("@nProjectID", newStore.nProjectID), new SqlParameter("@nFromProjectId", nMovedProjectId));
+                }
 
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {

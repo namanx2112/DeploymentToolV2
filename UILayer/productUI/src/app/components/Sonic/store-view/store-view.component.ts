@@ -6,9 +6,10 @@ import { SonicService } from 'src/app/services/sonic.service';
 import { ControlsComponent } from '../../controls/controls.component';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { NotesListComponent } from '../notes-list/notes-list.component';
-import { ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/sonic';
+import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/sonic';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { NotImplementedComponent } from '../../not-implemented/not-implemented.component';
+import { ChangeGoliveDateComponent } from '../change-golive-date/change-golive-date.component';
 
 @Component({
   selector: 'app-store-view',
@@ -46,8 +47,35 @@ export class StoreViewComponent {
     }
   }
 
+  projectTypeString(pType: number) {
+    let pString = "";
+    pString = ProjectTypes[pType];
+    return pString;
+  }
+
   changeTileView(tName: string) {
     this.viewName = tName;
+  }
+
+  changeGoliveDate(projInfo: ProjectInfo) {
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
+
+    dialogConfig.data = {
+      projInfo: projInfo,
+      onSave: function (data: any) {
+        projInfo.dGoLiveDate = data.toLocaleDateString();
+        dialogRef.close();
+      },
+      onClose: function (data: any) {
+        dialogRef.close();
+      },
+      themeClass: "grayWhite",
+      dialogTheme: "lightGrayWhiteTheme"
+    };
+    dialogRef = this.dialog.open(ChangeGoliveDateComponent, dialogConfig);
   }
 
   ShowProject(view: string) {

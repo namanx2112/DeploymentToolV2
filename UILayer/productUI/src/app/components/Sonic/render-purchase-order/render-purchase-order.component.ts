@@ -22,7 +22,7 @@ export class RenderPurchaseOrderComponent {
   ckConfig: any;
   constructor(public dialogRef: MatDialogRef<RenderPurchaseOrderComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private poService: POWorkflowConfigService, private partService: PartsService, private commonService: CommonService) {
-    this.ckConfig = this.commonService.GetCKEditorConfig("320px");
+    this.ckConfig = this.commonService.GetCKEditorConfig("calc(100vh - 515px)");
     this.partNumber = 1;
     this.nTemplateId = data.nTemplateId;
     this.nStoreId = data.nStoreId;

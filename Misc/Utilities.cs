@@ -77,11 +77,11 @@ namespace DeploymentTool.Misc
                     case ProjectType.POSInstallation:
                     case ProjectType.MenuInstallation:
                     case ProjectType.PaymentTerminalInstallation:
-                        nProjectId = db.Database.SqlQuery<int>($"select aProjectID from tblProject with(nolock) where nProjectActiveStatus=1 and nStoreID={nStoreId} and nProjectType={(int)pType}").FirstOrDefault();
+                        nProjectId = db.Database.SqlQuery<int>($"select nProjectId from dbo.fn_GetProjectIdForThisTechOrAnyProjectType({nStoreId},{(int)pType},1)").FirstOrDefault();
                         //query = db.tblProjects.Where(x => x.nStoreID == nStoreId && x.nProjectActiveStatus == 1 && (x.nProjectType == (int)pType || x.aProjectID > 0));
                         break;
                     default:
-                        nProjectId = db.Database.SqlQuery<int>($"select aProjectID from tblProject with(nolock) where nProjectActiveStatus=1 and nStoreID={nStoreId}").FirstOrDefault();
+                        nProjectId = db.Database.SqlQuery<int>($"select nProjectId from dbo.fn_GetProjectIdForThisTechOrAnyProjectType({nStoreId},{(int)pType},1)").FirstOrDefault();
                         //query = db.tblProjects.Where(x => x.nStoreID == nStoreId && x.nProjectActiveStatus == 1);
                         break;
                 }

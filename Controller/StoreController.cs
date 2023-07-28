@@ -21,8 +21,8 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public IQueryable<ActiveProjectModel> GetActiveProjects(Dictionary<string, string> searchFields)
         {
-                int nStoreId = (searchFields["nStoreId"] == null) ? 0 : Convert.ToInt32(searchFields["nStoreId"]);
-                IQueryable<ActiveProjectModel> items = db.Database.SqlQuery<ActiveProjectModel>("exec sproc_getActiveProjects @nStoreId", new SqlParameter("@nStoreId", nStoreId)).AsQueryable();
+            int nStoreId = (searchFields["nStoreId"] == null) ? 0 : Convert.ToInt32(searchFields["nStoreId"]);
+            IQueryable<ActiveProjectModel> items = db.Database.SqlQuery<ActiveProjectModel>("exec sproc_getActiveProjects @nStoreId", new SqlParameter("@nStoreId", nStoreId)).AsQueryable();
             //    new List<ActiveProjectModel>() {
             //    new ActiveProjectModel()
             //    {
@@ -216,6 +216,29 @@ namespace DeploymentTool.Controller
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<Store>(store, new JsonMediaTypeFormatter())
+            };
+
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/Store/UpdateGoliveDate")]
+        // PUT api/<controller>/5
+        public HttpResponseMessage UpdateGoliveDate(ProjectInfo projInfo)
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            if (!ModelState.IsValid)
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
+            if (securityContext == null)
+                throw new HttpRequestValidationException("Exception while creating Security Context");
+
+            db.Database.ExecuteSqlCommand("update tblProject set dGoLiveDate=@dGoLiveDate where aProjectID=@aProjectID", new SqlParameter("@dGoLiveDate", projInfo.dGoLiveDate), new SqlParameter("@aProjectID", projInfo.nProjectId));
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<ProjectInfo>(projInfo, new JsonMediaTypeFormatter())
             };
 
         }

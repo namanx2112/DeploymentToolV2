@@ -32,6 +32,11 @@ export class StoreService {
     return this.http.get<ProjectTemplates[]>(this.configUrl + "Sonic/GetProjectTemplates?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });
   }
 
+
+  UpdateGoliveDate(request: any) {
+    return this.http.post<any>(this.configUrl + "Store/UpdateGoliveDate", request, { headers: this.authService.getHttpHeaders() });
+  }
+
   GetTableVisibleColumns(tab: HomeTab) {
     if (tab.tab_type == TabType.StoreProjects) {
       return [

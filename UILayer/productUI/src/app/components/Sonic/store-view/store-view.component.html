@@ -3,10 +3,11 @@
         <mat-icon class="backIcon" (click)="moveView('dashboard')">arrow_back_ios</mat-icon>
         <h4 class="projHeader">Store - {{_curStore.tStoreNumber}}</h4>
         <button class="noBorderButton lightGray" (click)="moveView('projecttemplatelist')">Workflows</button>
-    </div>
-    <div class="projectInfoTabs">
-        <span class="storeStatus" *ngFor="let tItem of _curStore.lstProjectsInfo">{{tItem.nProjectType}} Store
-            {{tItem.dGoLiveDate.toString().split('T')[0]}}</span>
+        <div class="projectInfoTabs">
+            <span class="storeStatus" *ngFor="let tItem of _curStore.lstProjectsInfo" (click)="changeGoliveDate(tItem);"
+                title="Click to change Golive Date">{{projectTypeString(tItem.nProjectType)}} Store
+                {{tItem.dGoLiveDate.toString().split('T')[0]}}</span>
+        </div>
     </div>
     <div class="storeTiles" *ngIf="allTabs.length > 0">
         <div class="fullTile">
