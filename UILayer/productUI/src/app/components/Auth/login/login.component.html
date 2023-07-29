@@ -8,26 +8,9 @@
         </div>
         <div class="loginControl">
             <div class="loginBox">
-                <form class="loginForm" [formGroup]="formGroup" (ngSubmit)="logMeIn()">
-                    <p>
-                        <mat-form-field appearance="outline" class="curField">
-                            <mat-label>Enter your email</mat-label>
-                            <input matInput placeholder="User Name" type="text" formControlName="UserName" required>
-                            <mat-error *ngIf="hasEror('UserName')">Please Enter User Name</mat-error>
-                        </mat-form-field>
-                    </p>
-                    <p>
-                        <mat-form-field appearance="outline" class="curField">
-                            <mat-label>Enter your password</mat-label>
-                            <input matInput placeholder="Password" type="password" formControlName="Password" required>
-                            <mat-error *ngIf="hasEror('Password')">Please Enter Password</mat-error>
-                        </mat-form-field>
-                    </p>
-                    <p>
-                        <button type="submit" [disabled]="hasEror('Password') || hasEror('UserName')" mat-raised-button
-                            color="primary" class="button">Login</button>
-                    </p>
-                </form>
+                <app-controls class="tabForm" *ngIf="dtField.length > 0" [numberOfControlsInARow]="1" [fields]="dtField"
+                    [needButton]="true" [readOnlyForm]="false" [controlValues]="{}" [themeClass]="'grayWhite'"
+                    [SubmitLabel]="'Login'" (onSubmit)="logMeIn($event)"></app-controls>
             </div>
         </div>
     </div>

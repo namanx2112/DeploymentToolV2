@@ -8,6 +8,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { SupportPageComponent } from '../support-page/support-page.component';
 import html2canvas from 'html2canvas';
 import { AccessService } from 'src/app/services/access.service';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 @Component({
   selector: 'app-home',
@@ -63,7 +64,23 @@ export class HomeComponent {
         }
       };
       dialogRef = cThis.dialog.open(SupportPageComponent, dialogConfig);
-    })
+    });
+  }
+
+  ChangePassword(){
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '50%';
+    dialogConfig.data = {
+      onChange: function(){
+        dialogRef.close();
+      },
+      onClose: function(){
+        dialogRef.close();
+      }
+    };
+    dialogRef = this.dialog.open(ChangePasswordComponent, dialogConfig);
   }
 
   getScreenshot(callBack: any) {

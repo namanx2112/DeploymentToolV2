@@ -29,18 +29,10 @@
                 <span *ngIf="access.hasAccess('home.find', 0)" [class]="tTabName == 'Find' ? 'action selected' : 'action'" title="Find" (click)="switchView('Find')"><mat-icon>find_in_page</mat-icon><span></span></span>                                                
                 <span *ngIf="access.hasAccess('home.list', 0)" [class]="tTabName == 'List' ? 'action selected' : 'action'" title="List" (click)="switchView('List')"><mat-icon>list</mat-icon><span></span></span>                
                 <span *ngIf="access.hasAccess('home.setting', 0)" [class]="tTabName == 'Settings' ? 'action selected' : 'action'" title="Settings" (click)="switchView('Settings')"><mat-icon>settings</mat-icon><span></span></span>
-                <span class="action logout" title="LogOut" [matMenuTriggerFor]="menu" (click)="LogOut()"><mat-icon>person</mat-icon></span>
+                <span class="action logout" title="LogOut" [matMenuTriggerFor]="menu"><mat-icon>person</mat-icon></span>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="LogOut();">New Store</button>
-                    <button mat-menu-item (click)="menuClick('newproject', 'all','Remodel');">Remodel Store</button>
-                    <button mat-menu-item (click)="menuClick('newproject', 'all','Rebuild');">Rebuild Store</button>
-                    <button mat-menu-item (click)="menuClick('newproject', 'all','Relocation');">Relocation</button>
-                    <button mat-menu-item (click)="menuClick('newproject', 'all','Acquisition');">Acquisition</button>
-                    <button mat-menu-item (click)="menuClick('newproject', 'pos', 'POSInstallation');">POS Installation</button>
-                    <button mat-menu-item (click)="menuClick('newproject', 'audio', 'AudioInstallation');">Audio Installation</button>
-                    <button mat-menu-item  (click)="menuClick('newproject', 'menu', 'MenuInstallation');">Menu Installation</button>
-                    <button mat-menu-item (click)="menuClick('newproject', 'payment', 'PaymentTerminalInstallation');">Payment Terminal Installation</button>
-                    <button mat-menu-item (click)="menuClick('newproject', 'all', 'PartsReplacement');">Parts Replacement</button>
+                    <button mat-menu-item (click)="ChangePassword();">Change password</button>
+                    <button mat-menu-item (click)="LogOut();">Log out</button>                    
                 </mat-menu>
             </div>
         </div>

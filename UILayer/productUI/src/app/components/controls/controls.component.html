@@ -8,10 +8,10 @@
                     *ngIf="curControl.field_type == 8" matPrefix
                     class="dollarSymbolReadOnly">$&nbsp;</span>{{getReadOnlyVal(curControl,
                 controlValues[curControl.fieldUniqeName])}}</span>
-            <mat-form-field appearance="outline"
-                *ngIf="!(curControl.readOnly || readOnlyForm) && (curControl.field_type == 0 || curControl.field_type == 1 || curControl.field_type == 3 || curControl.field_type == 5 || curControl.field_type == 8)">
+            <mat-form-field appearance="outline" *ngIf="!(curControl.readOnly || readOnlyForm) && (curControl.field_type == 0 || curControl.field_type == 1 || curControl.field_type == 3 || 
+                curControl.field_type == 5 || curControl.field_type == 8 || curControl.field_type == 9)">
                 <input matInput *ngIf="!curControl.readOnly" placeholder="{{curControl.field_placeholder}}"
-                    [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 3) ? 'time' : 'number'"
+                    [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 3) ? 'time' : (curControl.field_type == 5)? 'number' : 'password'"
                     formControlName="{{curControl.fieldUniqeName}}" [ngModel]="controlValues[curControl.fieldUniqeName]"
                     (keydown)="onKeydown($event)">
                 <span *ngIf="curControl.field_type == 8" matPrefix class="dollarSymbol">$&nbsp;</span>

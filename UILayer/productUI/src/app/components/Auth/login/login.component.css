@@ -15,6 +15,11 @@
     padding: 10px;
 }
 
+.tabForm{
+    width: 85%;
+    margin: auto;
+}
+
 .logo {
     background-image: url("https://inspirebrands.com/wp-content/uploads/2022/12/Inspire-All-Brands.jpg");
     background-repeat: no-repeat;

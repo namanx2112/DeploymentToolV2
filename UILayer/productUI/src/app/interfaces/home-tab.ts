@@ -42,7 +42,7 @@ export interface Fields {
 }
 
 export enum FieldType {
-    text, email, date, time, dropdown, number, textarea, multiTab, currency
+    text, email, date, time, dropdown, number, textarea, multiTab, currency, password
 }
 
 export interface OptionType {

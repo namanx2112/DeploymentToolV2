@@ -14,7 +14,7 @@ namespace DeploymentTool.Auth
     {
         private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
 
-        public static AuthResponse GenerateToken( User objUser, int expireMinutes = 60)
+        public static AuthResponse GenerateToken(User objUser, int expireMinutes = 60)
         {
             var symmetricKey = Convert.FromBase64String(Secret);
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -28,11 +28,11 @@ namespace DeploymentTool.Auth
             new Claim(ClaimTypes.Name, objUser.userName),
             new Claim(ClaimTypes.Role, objUser.nRoleType),
             new Claim(ClaimTypes.NameIdentifier, objUser.nUserID.ToString())
-            
+
         }),
 
                 Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
-                
+
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(symmetricKey),
                     SecurityAlgorithms.HmacSha256Signature)
@@ -76,9 +76,16 @@ namespace DeploymentTool.Auth
         }
     }
 
-    public class UserForAuthentication { 
+    public class UserForAuthentication
+    {
         public string UserName { get; set; }
         public string Password { get; set; }
+    }
+
+    public class ChangePasswordModel
+    {
+        public string tCurrentPassword { get; set; }
+        public string tNewPassword { get; set; }
     }
 
     public class AuthResponse
