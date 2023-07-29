@@ -70,6 +70,13 @@
     <EntitySet Name="tblVendorPartRels" EntityType="dtDBModel.tblVendorPartRel" />
     <EntitySet Name="tblUserVendorRels" EntityType="dtDBModel.tblUserVendorRel" />
     <EntitySet Name="tblSupportTickets" EntityType="dtDBModel.tblSupportTicket" />
+    <EntitySet Name="tblRoles" EntityType="dtDBModel.tblRole" />
+    <EntitySet Name="tblRolePermissionRels" EntityType="dtDBModel.tblRolePermissionRel" />
+    <EntitySet Name="tblUserAndUserTypeRels" EntityType="dtDBModel.tblUserAndUserTypeRel" />
+    <EntitySet Name="tblUserPermissionRels" EntityType="dtDBModel.tblUserPermissionRel" />
+    <EntitySet Name="tblUserRoleRels" EntityType="dtDBModel.tblUserRoleRel" />
+    <EntitySet Name="tblUserTypes" EntityType="dtDBModel.tblUserType" />
+    <EntitySet Name="tbPermissions" EntityType="dtDBModel.tbPermission" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -111,6 +118,8 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="nUserTypeID" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tblVendor">
     <Key>
@@ -779,5 +788,70 @@
     <Property Name="fBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nCreatedBy" Type="Int32" />
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblRole">
+    <Key>
+      <PropertyRef Name="aRoleID" />
+    </Key>
+    <Property Name="aRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tRoleName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblRolePermissionRel">
+    <Key>
+      <PropertyRef Name="aRolePermissionRelID" />
+    </Key>
+    <Property Name="aRolePermissionRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nRoleID" Type="Int32" />
+    <Property Name="nPermissionID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblUserAndUserTypeRel">
+    <Key>
+      <PropertyRef Name="aUserAndUserTypeRelID" />
+    </Key>
+    <Property Name="aUserAndUserTypeRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nUserID" Type="Int32" />
+    <Property Name="nPermissionID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblUserPermissionRel">
+    <Key>
+      <PropertyRef Name="aUserPermissionRelID" />
+    </Key>
+    <Property Name="aUserPermissionRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nUserID" Type="Int32" />
+    <Property Name="nPermissionID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblUserRoleRel">
+    <Key>
+      <PropertyRef Name="aUserRoleRelID" />
+    </Key>
+    <Property Name="aUserRoleRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nUserID" Type="Int32" />
+    <Property Name="nRoleID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblUserType">
+    <Key>
+      <PropertyRef Name="aUserTypeID" />
+    </Key>
+    <Property Name="aUserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tUserTypeName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tVisibleFor" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbPermission">
+    <Key>
+      <PropertyRef Name="aPermissionlID" />
+    </Key>
+    <Property Name="aPermissionlID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tPermissionName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="tPermissionDiplayName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
   </EntityType>
 </Schema>

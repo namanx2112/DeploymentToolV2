@@ -26,6 +26,8 @@
     <EntitySetMapping Name="tblUser">
       <EntityTypeMapping TypeName="dtDBModel.tblUser">
         <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nUserTypeID" ColumnName="nUserTypeID" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
@@ -755,6 +757,78 @@
           <ScalarProperty Name="tContent" ColumnName="tContent" />
           <ScalarProperty Name="nPriority" ColumnName="nPriority" />
           <ScalarProperty Name="aTicketId" ColumnName="aTicketId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRoles">
+      <EntityTypeMapping TypeName="dtDBModel.tblRole">
+        <MappingFragment StoreEntitySet="tblRole">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tRoleName" ColumnName="tRoleName" />
+          <ScalarProperty Name="aRoleID" ColumnName="aRoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRolePermissionRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblRolePermissionRel">
+        <MappingFragment StoreEntitySet="tblRolePermissionRel">
+          <ScalarProperty Name="nPermissionID" ColumnName="nPermissionID" />
+          <ScalarProperty Name="nRoleID" ColumnName="nRoleID" />
+          <ScalarProperty Name="aRolePermissionRelID" ColumnName="aRolePermissionRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserAndUserTypeRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblUserAndUserTypeRel">
+        <MappingFragment StoreEntitySet="tblUserAndUserTypeRel">
+          <ScalarProperty Name="nPermissionID" ColumnName="nPermissionID" />
+          <ScalarProperty Name="nUserID" ColumnName="nUserID" />
+          <ScalarProperty Name="aUserAndUserTypeRelID" ColumnName="aUserAndUserTypeRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserPermissionRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblUserPermissionRel">
+        <MappingFragment StoreEntitySet="tblUserPermissionRel">
+          <ScalarProperty Name="nPermissionID" ColumnName="nPermissionID" />
+          <ScalarProperty Name="nUserID" ColumnName="nUserID" />
+          <ScalarProperty Name="aUserPermissionRelID" ColumnName="aUserPermissionRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserRoleRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblUserRoleRel">
+        <MappingFragment StoreEntitySet="tblUserRoleRel">
+          <ScalarProperty Name="nRoleID" ColumnName="nRoleID" />
+          <ScalarProperty Name="nUserID" ColumnName="nUserID" />
+          <ScalarProperty Name="aUserRoleRelID" ColumnName="aUserRoleRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserTypes">
+      <EntityTypeMapping TypeName="dtDBModel.tblUserType">
+        <MappingFragment StoreEntitySet="tblUserType">
+          <ScalarProperty Name="tVisibleFor" ColumnName="tVisibleFor" />
+          <ScalarProperty Name="tUserTypeName" ColumnName="tUserTypeName" />
+          <ScalarProperty Name="aUserTypeID" ColumnName="aUserTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbPermissions">
+      <EntityTypeMapping TypeName="dtDBModel.tbPermission">
+        <MappingFragment StoreEntitySet="tbPermission">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tPermissionDiplayName" ColumnName="tPermissionDiplayName" />
+          <ScalarProperty Name="tPermissionName" ColumnName="tPermissionName" />
+          <ScalarProperty Name="aPermissionlID" ColumnName="aPermissionlID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

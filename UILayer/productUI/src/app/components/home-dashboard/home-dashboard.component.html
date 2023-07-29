@@ -2,26 +2,27 @@
     <div class="chips">
         <div class="chipsHeader">Brands</div>
         <div class="chipsBody">
-            <span class="brands" *ngFor="let brand of brands" (click)="showBrand(brand)" title="{{brand.tBrandName}}">
+            <span class="brands" *ngFor="let brand of brands|forFilter:filterBrand" (click)="showBrand(brand)"
+                title="{{brand.tBrandName}}">
                 <img src="{{brand.tIconURL}}" />
             </span>
         </div>
     </div>
-    <div class="chips">
+    <div class="chips" *ngIf="access.hasAccess('home.dashboard.priority', 0)">
         <div class="chipsHeader">Priorities</div>
         <div class="chipsBody whiteBG"></div>
     </div>
-    <div class="chips">
+    <div class="chips" *ngIf="access.hasAccess('home.dashboard.goal', 0)">
         <div class="chipsHeader">Goals</div>
         <div class="chipsBody whiteBG"></div>
     </div>
 </div>
 <div class="rightPart floatLeft">
-    <div class="chips">
+    <div class="chips" *ngIf="access.hasAccess('home.dashboard.notification', 0)">
         <div class="chipsHeader">Notifications</div>
         <div class="chipsBody"></div>
     </div>
-    <div class="chips">
+    <div class="chips" *ngIf="access.hasAccess('home.dashboard.request', 0)">
         <div class="chipsHeader">Pending Requests</div>
         <div class="chipsBody"></div>
     </div>

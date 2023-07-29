@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { HomeService } from 'src/app/services/home.service';
 import { SupportPageComponent } from '../support-page/support-page.component';
 import html2canvas from 'html2canvas';
+import { AccessService } from 'src/app/services/access.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent {
   tTabName: string;
   userName: string;
   constructor(private homeService: HomeService, private brandService: BrandServiceService,
-    private commonService: CommonService, private authService: AuthService, private dialog: MatDialog) {
+    private commonService: CommonService, private authService: AuthService, private dialog: MatDialog, public access: AccessService) {
     this.viewName = "Dashboard";
     this.tTabName = "Dashboard";
     this.userName = this.authService.getUserName();

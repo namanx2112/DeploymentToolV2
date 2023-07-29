@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { QuoteRequestTemplate } from 'src/app/interfaces/models';
+import { AccessService } from 'src/app/services/access.service';
 import { QuoteRequestWorkflowConfigService } from 'src/app/services/quote-request-workflow-config.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class QuoteRequestTemplateListComponent {
   allQuotes: any[];
   nBrandId: number;
   nTemplateId: number;
-  constructor(private service: QuoteRequestWorkflowConfigService) {
+  constructor(private service: QuoteRequestWorkflowConfigService, public access: AccessService) {
     this.nTemplateId = -1;
     this.nBrandId = 1;
     this.searchText = "";

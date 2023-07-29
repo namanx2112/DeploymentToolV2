@@ -427,6 +427,7 @@ warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a pri
         <EntityType Name="tblProjectTypeConfig">
           <Property Name="aTypeId" Type="int" />
           <Property Name="tTableName" Type="varchar" MaxLength="100" />
+          <Property Name="isTechProjectType" Type="int" />
         </EntityType>-->
   <EntityType Name="tblPurchaseOrder">
     <Key>
@@ -526,6 +527,26 @@ warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a pri
     <Property Name="tTechCompField" Type="varchar" MaxLength="500" />
     <Property Name="tTechCompFieldName" Type="varchar" MaxLength="500" />
     <Property Name="nQuoteRequestTechCompId" Type="int" />
+  </EntityType>
+  <EntityType Name="tblRole">
+    <Key>
+      <PropertyRef Name="aRoleID" />
+    </Key>
+    <Property Name="aRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tRoleName" Type="varchar" MaxLength="500" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblRolePermissionRel">
+    <Key>
+      <PropertyRef Name="aRolePermissionRelID" />
+    </Key>
+    <Property Name="aRolePermissionRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nRoleID" Type="int" />
+    <Property Name="nPermissionID" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -644,6 +665,16 @@ warning 6002: The table/view 'dtDB.dbo.tblTrace' does not have a primary key def
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+    <Property Name="nUserTypeID" Type="int" />
+    <Property Name="nStatus" Type="int" />
+  </EntityType>
+  <EntityType Name="tblUserAndUserTypeRel">
+    <Key>
+      <PropertyRef Name="aUserAndUserTypeRelID" />
+    </Key>
+    <Property Name="aUserAndUserTypeRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nUserID" Type="int" />
+    <Property Name="nPermissionID" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblUserBrandRel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -665,6 +696,22 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Property Name="nUserID" Type="int" />
     <Property Name="nFunctionID" Type="int" />
   </EntityType>
+  <EntityType Name="tblUserPermissionRel">
+    <Key>
+      <PropertyRef Name="aUserPermissionRelID" />
+    </Key>
+    <Property Name="aUserPermissionRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nUserID" Type="int" />
+    <Property Name="nPermissionID" Type="int" />
+  </EntityType>
+  <EntityType Name="tblUserRoleRel">
+    <Key>
+      <PropertyRef Name="aUserRoleRelID" />
+    </Key>
+    <Property Name="aUserRoleRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nUserID" Type="int" />
+    <Property Name="nRoleID" Type="int" />
+  </EntityType>
   <EntityType Name="tblUsers">
     <Key>
       <PropertyRef Name="aUserID" />
@@ -684,6 +731,14 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblUserType">
+    <Key>
+      <PropertyRef Name="aUserTypeID" />
+    </Key>
+    <Property Name="aUserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tUserTypeName" Type="varchar" MaxLength="500" />
+    <Property Name="tVisibleFor" Type="nvarchar" MaxLength="1000" />
   </EntityType>
   <EntityType Name="tblUserVendorRel">
     <Key>
@@ -728,6 +783,19 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Property Name="aVendorPartRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nVendorID" Type="int" />
     <Property Name="nPartID" Type="int" />
+  </EntityType>
+  <EntityType Name="tbPermission">
+    <Key>
+      <PropertyRef Name="aPermissionlID" />
+    </Key>
+    <Property Name="aPermissionlID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tPermissionName" Type="nvarchar" MaxLength="1000" />
+    <Property Name="tPermissionDiplayName" Type="nvarchar" MaxLength="1000" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
   </EntityType>
   <Function Name="sproc_CreateStoreFromExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tStoreName" Type="varchar" Mode="In" />
@@ -782,13 +850,20 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblQuoteRequestMain" EntityType="Self.tblQuoteRequestMain" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestTechComp" EntityType="Self.tblQuoteRequestTechComp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="Self.tblQuoteRequestTechCompFields" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRole" EntityType="Self.tblRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRolePermissionRel" EntityType="Self.tblRolePermissionRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStore" EntityType="Self.tblStore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblSupportTicket" EntityType="Self.tblSupportTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserAndUserTypeRel" EntityType="Self.tblUserAndUserTypeRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserPermissionRel" EntityType="Self.tblUserPermissionRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserRoleRel" EntityType="Self.tblUserRoleRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserType" EntityType="Self.tblUserType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUserVendorRel" EntityType="Self.tblUserVendorRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblVendorPartRel" EntityType="Self.tblVendorPartRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbPermission" EntityType="Self.tbPermission" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBrandBKP" EntityType="Self.tblBrandBKP" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [tblBrandBKP].[aBrandId] AS [aBrandId], 

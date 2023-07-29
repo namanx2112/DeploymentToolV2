@@ -22,14 +22,26 @@
                         transform="translate(-29.82 -12.9)"></path>
                 </svg></div>
             <div class="toolBar floatLeft">
-                <span [class]="tTabName == 'Dashboard' ? 'action selected' : 'action'" title="Dashboard" (click)="switchView('Dashboard')"><mat-icon>home</mat-icon><span></span></span>
-                <span [class]="tTabName == 'Configurations' ? 'action selected' : 'action'" title="Configurations" (click)="switchView('Configurations')"><mat-icon>insert_chart</mat-icon><span></span></span>
-                <span [class]="tTabName == 'Notifications' ? 'action selected' : 'action'" title="Notifications" (click)="switchView('Notifications')"><mat-icon>notifications_none</mat-icon><span></span></span>
-                <span [class]="tTabName == 'Mails' ? 'action selected' : 'action'" title="Mails" (click)="switchView('Mails')"><mat-icon>email</mat-icon><span></span></span>
-                <span [class]="tTabName == 'Find' ? 'action selected' : 'action'" title="Find" (click)="switchView('Find')"><mat-icon>find_in_page</mat-icon><span></span></span>                                                
-                <span [class]="tTabName == 'List' ? 'action selected' : 'action'" title="List" (click)="switchView('List')"><mat-icon>list</mat-icon><span></span></span>                
-                <span [class]="tTabName == 'Settings' ? 'action selected' : 'action'" title="Settings" (click)="switchView('Settings')"><mat-icon>settings</mat-icon><span></span></span>
-                <span class="action logout" title="LogOut" (click)="LogOut()"><mat-icon>power_settings_new</mat-icon></span>
+                <span *ngIf="access.hasAccess('home.dashboard', 0)" [class]="tTabName == 'Dashboard' ? 'action selected' : 'action'" title="Dashboard" (click)="switchView('Dashboard')"><mat-icon>home</mat-icon><span></span></span>
+                <span *ngIf="access.hasAccess('home.configuration', 0)" [class]="tTabName == 'Configurations' ? 'action selected' : 'action'" title="Configurations" (click)="switchView('Configurations')"><mat-icon>insert_chart</mat-icon><span></span></span>
+                <span *ngIf="access.hasAccess('home.notification', 0)" [class]="tTabName == 'Notifications' ? 'action selected' : 'action'" title="Notifications" (click)="switchView('Notifications')"><mat-icon>notifications_none</mat-icon><span></span></span>
+                <span *ngIf="access.hasAccess('home.mail', 0)" [class]="tTabName == 'Mails' ? 'action selected' : 'action'" title="Mails" (click)="switchView('Mails')"><mat-icon>email</mat-icon><span></span></span>
+                <span *ngIf="access.hasAccess('home.find', 0)" [class]="tTabName == 'Find' ? 'action selected' : 'action'" title="Find" (click)="switchView('Find')"><mat-icon>find_in_page</mat-icon><span></span></span>                                                
+                <span *ngIf="access.hasAccess('home.list', 0)" [class]="tTabName == 'List' ? 'action selected' : 'action'" title="List" (click)="switchView('List')"><mat-icon>list</mat-icon><span></span></span>                
+                <span *ngIf="access.hasAccess('home.setting', 0)" [class]="tTabName == 'Settings' ? 'action selected' : 'action'" title="Settings" (click)="switchView('Settings')"><mat-icon>settings</mat-icon><span></span></span>
+                <span class="action logout" title="LogOut" [matMenuTriggerFor]="menu" (click)="LogOut()"><mat-icon>person</mat-icon></span>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="LogOut();">New Store</button>
+                    <button mat-menu-item (click)="menuClick('newproject', 'all','Remodel');">Remodel Store</button>
+                    <button mat-menu-item (click)="menuClick('newproject', 'all','Rebuild');">Rebuild Store</button>
+                    <button mat-menu-item (click)="menuClick('newproject', 'all','Relocation');">Relocation</button>
+                    <button mat-menu-item (click)="menuClick('newproject', 'all','Acquisition');">Acquisition</button>
+                    <button mat-menu-item (click)="menuClick('newproject', 'pos', 'POSInstallation');">POS Installation</button>
+                    <button mat-menu-item (click)="menuClick('newproject', 'audio', 'AudioInstallation');">Audio Installation</button>
+                    <button mat-menu-item  (click)="menuClick('newproject', 'menu', 'MenuInstallation');">Menu Installation</button>
+                    <button mat-menu-item (click)="menuClick('newproject', 'payment', 'PaymentTerminalInstallation');">Payment Terminal Installation</button>
+                    <button mat-menu-item (click)="menuClick('newproject', 'all', 'PartsReplacement');">Parts Replacement</button>
+                </mat-menu>
             </div>
         </div>
         <div class="right floatLeft">

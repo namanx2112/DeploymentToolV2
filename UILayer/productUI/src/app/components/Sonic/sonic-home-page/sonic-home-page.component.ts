@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OptionType } from 'src/app/interfaces/home-tab';
 import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { AccessService } from 'src/app/services/access.service';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class SonicHomePageComponent {
   techCompType: string;
   projectType: OptionType;
   configMenu: string;
-  constructor(private commonService: CommonService) {
+  constructor(private commonService: CommonService, public access: AccessService) {
     this.configMenu = "dashboard";
     this.showMode = "dashboard";
     this.techCompType = "all";

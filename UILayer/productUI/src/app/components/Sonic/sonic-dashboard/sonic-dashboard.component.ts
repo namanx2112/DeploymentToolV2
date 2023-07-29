@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { SonicProjectHighlights } from 'src/app/interfaces/commons';
 import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { AccessService } from 'src/app/services/access.service';
 import { SonicService } from 'src/app/services/sonic.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { SonicService } from 'src/app/services/sonic.service';
 export class SonicDashboardComponent {
   projects: SonicProjectHighlights[];
   @Output() SearchedResult = new EventEmitter<string>();
-  constructor(private service: SonicService) {
+  constructor(private service: SonicService, public access: AccessService) {
     this.getProjectHoghlights();
   }
 

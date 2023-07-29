@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { POConfigTemplateTemp } from 'src/app/interfaces/models';
+import { AccessService } from 'src/app/services/access.service';
 import { POWorkflowConfigService } from 'src/app/services/poworklow-config.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class PurchaseOrderTemplateListComponent {
   allPO: POConfigTemplateTemp[];
   nBrandId: number;
   nTemplateId: number;
-  constructor(private service: POWorkflowConfigService) {
+  constructor(private service: POWorkflowConfigService,public access: AccessService) {
     this.nTemplateId = -1;
     this.nBrandId = 1;
     this.searchText = "";

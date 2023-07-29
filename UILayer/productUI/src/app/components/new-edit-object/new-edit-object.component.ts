@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogControlsComponent } from '../dialog-controls/dialog-controls.component';
 import { PartsService } from 'src/app/services/parts.service';
+import { AccessService } from 'src/app/services/access.service';
 
 @Component({
   selector: 'app-new-edit-object',
@@ -44,7 +45,7 @@ export class NewEditObjectComponent {
   childSearchFields: any = {};
   refreshChildTable: any = {};
   constructor(private dialog: MatDialog, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
-    private franchiseService: FranchiseService, private userSerice: UserService, private partsService: PartsService) {
+    private franchiseService: FranchiseService, private userSerice: UserService, private partsService: PartsService, public access: AccessService) {
     this.SubmitLabel = "Save";
     this.controlValues = {};
   }

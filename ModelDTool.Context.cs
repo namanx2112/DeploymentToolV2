@@ -73,6 +73,13 @@ namespace DeploymentTool
         public virtual DbSet<tblVendorPartRel> tblVendorPartRels { get; set; }
         public virtual DbSet<tblUserVendorRel> tblUserVendorRels { get; set; }
         public virtual DbSet<tblSupportTicket> tblSupportTickets { get; set; }
+        public virtual DbSet<tblRole> tblRoles { get; set; }
+        public virtual DbSet<tblRolePermissionRel> tblRolePermissionRels { get; set; }
+        public virtual DbSet<tblUserAndUserTypeRel> tblUserAndUserTypeRels { get; set; }
+        public virtual DbSet<tblUserPermissionRel> tblUserPermissionRels { get; set; }
+        public virtual DbSet<tblUserRoleRel> tblUserRoleRels { get; set; }
+        public virtual DbSet<tblUserType> tblUserTypes { get; set; }
+        public virtual DbSet<tbPermission> tbPermissions { get; set; }
     
         public virtual int sproc_CreateStoreFromExcel(string tStoreName, Nullable<int> nProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
         {

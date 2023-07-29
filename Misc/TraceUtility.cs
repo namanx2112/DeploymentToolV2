@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace DeploymentTool.Misc
@@ -18,15 +19,21 @@ namespace DeploymentTool.Misc
             }
         }
 
-        public static void WriteTrace(string sApplication, string sTrace)
+        public static async void WriteTrace(string sApplication, string sTrace, params string[] items)
+        {
+            Task.Run(() => LogTrace(sApplication, sTrace, items));
+        }
+
+        static async void LogTrace(string sApplication, string sTrace, params string[] items)
         {
             try
             {
                 if (_traceEnable)
                 {
+                    string sCompleteTrace = string.Format(sTrace, items);
                     tblApplicationTrace traec = new tblApplicationTrace();
                     traec.tModule = sApplication;
-                    traec.tTrace = sTrace;
+                    traec.tTrace = sCompleteTrace;
                     db.tblApplicationTraces.Add(traec);
                     db.SaveChanges();
                 }
@@ -36,5 +43,10 @@ namespace DeploymentTool.Misc
 
             }
         }
+    }
+
+    public enum TraceLevel
+    {
+        Info, Warn, Error
     }
 }

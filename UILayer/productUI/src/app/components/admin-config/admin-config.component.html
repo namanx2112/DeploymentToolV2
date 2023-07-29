@@ -1,15 +1,15 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="sideNav" mode="side" opened="true">
         <div class="ConfigList tabSelectionOption">
-            <span (click)="clickOption(-1, 'Dashboard')" [className]="selectedOption=='Dashboard'?'selected':''">{{tabItems[0]}}</span>
-            <span (click)="clickOption(0, 'Users')" [className]="selectedOption=='Users'?'selected':''">{{tabItems[1]}}</span>
-            <span (click)="clickOption(1, 'Brands Profile')" [className]="selectedOption=='Brands Profile'?'selected':''">{{tabItems[2]}}</span>
-            <span (click)="clickOption(2, 'Vendors')" [className]="selectedOption=='Vendors'?'selected':''">{{tabItems[3]}}</span>
-            <span (click)="clickOption(-2, 'Manage Dropdowns')" [className]="selectedOption=='Manage Dropdowns'?'selected':''">{{tabItems[4]}}</span>
-            <span (click)="clickOption(3, 'Technology Areas')" [className]="selectedOption=='Technology Areas'?'selected':''">{{tabItems[5]}}</span>
-            <span (click)="clickOption(4, 'Franchise')" [className]="selectedOption=='Franchise'?'selected':''">{{tabItems[6]}}</span>
-            <span (click)="clickOption(5, 'Quote Request Workflow Config')" [className]="selectedOption=='Quote Request Workflow Config'?'selected':''">{{tabItems[7]}}</span>
-            <span (click)="clickOption(7, 'PO Workflow Config')" [className]="selectedOption=='PO Workflow Config'?'selected':''">{{tabItems[8]}}</span>
+            <span *ngIf="access.hasAccess('home.configuration.dashboard', 0)" (click)="clickOption(-1, 'Dashboard')" [className]="selectedOption=='Dashboard'?'selected':''">{{tabItems[0]}}</span>
+            <span *ngIf="access.hasAccess('home.configuration.user', 0)" (click)="clickOption(0, 'Users')" [className]="selectedOption=='Users'?'selected':''">{{tabItems[1]}}</span>
+            <span *ngIf="access.hasAccess('home.configuration.brand', 0)" (click)="clickOption(1, 'Brands Profile')" [className]="selectedOption=='Brands Profile'?'selected':''">{{tabItems[2]}}</span>
+            <span *ngIf="access.hasAccess('home.configuration.vendor', 0)" (click)="clickOption(2, 'Vendors')" [className]="selectedOption=='Vendors'?'selected':''">{{tabItems[3]}}</span>
+            <span *ngIf="access.hasAccess('home.configuration.managedropdown', 0)" (click)="clickOption(-2, 'Manage Dropdowns')" [className]="selectedOption=='Manage Dropdowns'?'selected':''">{{tabItems[4]}}</span>
+            <span *ngIf="access.hasAccess('home.configuration.techarea', 0)" (click)="clickOption(3, 'Technology Areas')" [className]="selectedOption=='Technology Areas'?'selected':''">{{tabItems[5]}}</span>
+            <span *ngIf="access.hasAccess('home.configuration.franchise', 0)" (click)="clickOption(4, 'Franchise')" [className]="selectedOption=='Franchise'?'selected':''">{{tabItems[6]}}</span>
+            <span *ngIf="access.hasAccess('home.configuration.quoterequest', 0)" (click)="clickOption(5, 'Quote Request Workflow Config')" [className]="selectedOption=='Quote Request Workflow Config'?'selected':''">{{tabItems[7]}}</span>
+            <span *ngIf="access.hasAccess('home.configuration.po', 0)" (click)="clickOption(7, 'PO Workflow Config')" [className]="selectedOption=='PO Workflow Config'?'selected':''">{{tabItems[8]}}</span>
         </div>
     </mat-drawer>
     <div class="sideNavContent">

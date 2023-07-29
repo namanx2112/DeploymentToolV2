@@ -10,6 +10,7 @@ import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { NotImplementedComponent } from '../../not-implemented/not-implemented.component';
 import { ChangeGoliveDateComponent } from '../change-golive-date/change-golive-date.component';
+import { AccessService } from 'src/app/services/access.service';
 
 @Component({
   selector: 'app-store-view',
@@ -29,7 +30,7 @@ export class StoreViewComponent {
   selectedTab: number;
   viewName: string;
   @Output() ChangeFromStoreView = new EventEmitter<any>();
-  constructor(private service: SonicService, private dialog: MatDialog, private techCompService: AllTechnologyComponentsService) {
+  constructor(private service: SonicService, private dialog: MatDialog, private techCompService: AllTechnologyComponentsService, public access: AccessService) {
     this.viewName = "tabview";
   }
 

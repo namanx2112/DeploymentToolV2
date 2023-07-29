@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="menuPart">
-            <button mat-button [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon>New Project</button>
+            <button mat-button [matMenuTriggerFor]="menu" *ngIf="access.hasAccess('home.sonic.newproject', 1)"><mat-icon>add</mat-icon>New Project</button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="menuClick('newstore', 'all', 'New');">New Store</button>
                 <button mat-menu-item (click)="menuClick('newproject', 'all','Remodel');">Remodel Store</button>
@@ -19,14 +19,14 @@
                 <button mat-menu-item (click)="menuClick('newproject', 'payment', 'PaymentTerminalInstallation');">Payment Terminal Installation</button>
                 <button mat-menu-item (click)="menuClick('newproject', 'all', 'PartsReplacement');">Parts Replacement</button>
             </mat-menu>
-            <button mat-button  (click)="menuClick('search')"><mat-icon>search</mat-icon>Search Project</button>
-            <button mat-button (click)="menuClick('importproject')"><mat-icon>attach_file</mat-icon>Import Project</button>
+            <button mat-button *ngIf="access.hasAccess('home.sonic.searchproject', 1)" (click)="menuClick('search')"><mat-icon>search</mat-icon>Search Project</button>
+            <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)" (click)="menuClick('importproject')"><mat-icon>attach_file</mat-icon>Import Project</button>
         </div>
         <div class="ConfigList tabSelectionOption">
             <span (click)="clickOption('dashboard')" [className]="configMenu=='dashboard'?'selected':''">Sonic Homepage</span>
-            <span (click)="clickOption('Project Portfolio')" [className]="configMenu=='Project Portfolio'?'selected':''">Project Portfolio</span>
-            <span (click)="clickOption('Report Generator')" [className]="configMenu=='Report Generator'?'selected':''">Report Generator</span>
-            <span (click)="clickOption('Saved Reports')" [className]="configMenu=='Saved Reports'?'selected':''">Saved Reports</span>
+            <span (click)="clickOption('Project Portfolio')"  *ngIf="access.hasAccess('home.sonic.projectportfolio', 0)" [className]="configMenu=='Project Portfolio'?'selected':''">Project Portfolio</span>
+            <span (click)="clickOption('Report Generator')"  *ngIf="access.hasAccess('home.sonic.reportgenerator', 1)" [className]="configMenu=='Report Generator'?'selected':''">Report Generator</span>
+            <span (click)="clickOption('Saved Reports')"  *ngIf="access.hasAccess('home.sonic.report', 0)" [className]="configMenu=='Saved Reports'?'selected':''">Saved Reports</span>
         </div>
     </mat-drawer>
     <div class="sideNavContent">

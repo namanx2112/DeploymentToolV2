@@ -1,4 +1,8 @@
 export interface AuthRequest {
-    UserName: string, 
+    UserName: string,
     Password: string
+}
+
+export enum AuthCodes {
+    Show, Edit
 }

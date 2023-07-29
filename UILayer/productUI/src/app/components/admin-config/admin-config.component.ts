@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HomeTab } from 'src/app/interfaces/home-tab';
+import { AccessService } from 'src/app/services/access.service';
 import { HomeService } from 'src/app/services/home.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class AdminConfigComponent {
   curTab: HomeTab;
   needNew: boolean;
   selectedOption: string;
-  constructor(private homeService: HomeService) {
+  constructor(private homeService: HomeService, public access: AccessService) {
     this.getAllTabs();
     this.selectedOption = "Dashboard";
     this.tabIndex = -1;

@@ -5,6 +5,7 @@ import { StoreSearchModel } from 'src/app/interfaces/sonic';
 import { StoreService } from 'src/app/services/store.service';
 import { RenderQuoteRequestComponent } from '../render-quote-request/render-quote-request.component';
 import { RenderPurchaseOrderComponent } from '../render-purchase-order/render-purchase-order.component';
+import { AccessService } from 'src/app/services/access.service';
 
 @Component({
   selector: 'app-project-template-list',
@@ -22,7 +23,7 @@ export class ProjectTemplateListComponent {
   notificationTemplates: ProjectTemplates[];
   quoteRequestTemplates: ProjectTemplates[];
   poTemplates: ProjectTemplates[];
-  constructor(private service: StoreService, private dialog: MatDialog) {
+  constructor(private service: StoreService, private dialog: MatDialog, public access: AccessService) {
     this.getAllTemplates();
   }
 

@@ -3,7 +3,7 @@
     <h4 class="projHeader">Project - {{_curStore.tStoreNumber}}</h4>
 </div>
 <div class="projectBody">
-    <div class="templateItem">
+    <div class="templateItem" *ngIf="access.hasAccess('home.sonic.notificationtemplate.render', 0)">
         <h4 class="templateHeader">Notification</h4>
         <div class="templateBody">
             <div *ngFor="let item of notificationTemplates" class="lightGray templateTile" (click)="OpenNotification(item)">
@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-    <div class="templateItem">
+    <div class="templateItem" *ngIf="access.hasAccess('home.sonic.quoterequest.render', 0)">
         <h4 class="templateHeader">Quote Request</h4>
         <div class="templateBody">
             <div *ngFor="let item of quoteRequestTemplates" class="lightGray templateTile" (click)="OpenQuoteRequest(item)">
@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="templateItem">
+    <div class="templateItem" *ngIf="access.hasAccess('home.sonic.po.render', 0)">
         <h4 class="templateHeader">Purchase Order</h4>
         <div class="templateBody">
             <div *ngFor="let item of poTemplates" class="lightGray templateTile" (click)="OpenPurchaseOrder(item)">

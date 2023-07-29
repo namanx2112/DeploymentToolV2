@@ -3,16 +3,20 @@
         <mat-icon class="backIcon" (click)="moveView('dashboard')">arrow_back_ios</mat-icon>
         <h4 class="projHeader">Store - {{_curStore.tStoreNumber}}</h4>
         <button class="noBorderButton lightGray" (click)="moveView('projecttemplatelist')">Workflows</button>
-        <div class="projectInfoTabs">
+        <div class="projectInfoTabs" *ngIf="access.hasAccess('home.sonic.project.golive', 1)">
             <span class="storeStatus" *ngFor="let tItem of _curStore.lstProjectsInfo" (click)="changeGoliveDate(tItem);"
                 title="Click to change Golive Date">{{projectTypeString(tItem.nProjectType)}} Store
+                {{tItem.dGoLiveDate.toString().split('T')[0]}}</span>
+        </div>
+        <div class="projectInfoTabs" *ngIf="!access.hasAccess('home.sonic.project.golive', 1)">
+            <span class="storeStatus" *ngFor="let tItem of _curStore.lstProjectsInfo">{{projectTypeString(tItem.nProjectType)}} Store
                 {{tItem.dGoLiveDate.toString().split('T')[0]}}</span>
         </div>
     </div>
     <div class="storeTiles" *ngIf="allTabs.length > 0">
         <div class="fullTile">
             <h4>{{allTabs[0].tab_header}}
-                <div class="right"><a (click)="editTab(allTabs[0])">Edit</a></div>
+                <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[0].tab_name, 1)"><a (click)="editTab(allTabs[0])">Edit</a></div>
             </h4>
             <app-controls *ngIf="tValues[allTabs[0].tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"
                 [fields]="allTabs[0].fields" [readOnlyForm]="true" [needButton]="false"
@@ -21,7 +25,7 @@
         </div>
         <div class="fullTile">
             <h4>{{allTabs[1].tab_header}}
-                <div class="right"><a (click)="editTab(allTabs[1])">Edit</a></div>
+                <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[1].tab_name, 1)"><a (click)="editTab(allTabs[1])">Edit</a></div>
             </h4>
             <app-controls *ngIf="tValues[allTabs[1].tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"
                 [fields]="allTabs[1].fields" [readOnlyForm]="true" [needButton]="false"
@@ -31,7 +35,7 @@
         <div class="tileGroup">
             <div class="halfTile">
                 <h4>{{allTabs[2].tab_header}}
-                    <div class="right"><a (click)="editTab(allTabs[2])">Edit</a></div>
+                    <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[2].tab_name, 1)"><a (click)="editTab(allTabs[2])">Edit</a></div>
                 </h4>
                 <app-controls *ngIf="tValues[allTabs[2].tab_name] != undefined" class="tabForm"
                     [numberOfControlsInARow]="1" [fields]="allTabs[2].fields" [readOnlyForm]="true" [needButton]="false"
@@ -40,12 +44,12 @@
             </div>
             <div class="tileGroup tileButtonGroup">
                 <button class="noBorderButton lightGray" mat-raised-button
-                    (click)="ShowNotes();"><mat-icon>event_note</mat-icon>Tasks</button>
-                <button class="noBorderButton lightGray" mat-raised-button (click)="ShowNotes();"><mat-icon>
+                    (click)="ShowNotes();" *ngIf="access.hasAccess('home.sonic.project.task', 1)"><mat-icon>event_note</mat-icon>Tasks</button>
+                <button *ngIf="access.hasAccess('home.sonic.project.notes', 1)" class="noBorderButton lightGray" mat-raised-button (click)="ShowNotes();"><mat-icon>
                         notes</mat-icon>Notes</button>
-                <button class="noBorderButton lightGray" (click)="ShowProject('projectactiveview')">Active
+                <button  *ngIf="access.hasAccess('home.sonic.project.activeproject', 0)" class="noBorderButton lightGray" (click)="ShowProject('projectactiveview')">Active
                     Projects</button>
-                <button class="noBorderButton lightGray" (click)="ShowProject('projecthistoricalview')">Historical
+                <button *ngIf="access.hasAccess('home.sonic.project.historicproject', 1)" class="noBorderButton lightGray" (click)="ShowProject('projecthistoricalview')">Historical
                     Projects</button>
             </div>
         </div>
@@ -68,7 +72,7 @@
         <div class="tabBody">
             <div class="tHeader" *ngIf="tabForUI[selectedTab] != undefined">
                 <h4>{{tabForUI[selectedTab].tab_header}}</h4>
-                <div class="right"><button class="noBorderButton white"
+                <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + tabForUI[selectedTab].tab_name, 1)"><button class="noBorderButton white"
                         (click)="editTab(tabForUI[selectedTab])">Edit</button></div>
             </div>
             <app-controls *ngIf="canShowTab(allTabs[selectedTab])" class="tabForm white" [numberOfControlsInARow]="1"
@@ -81,7 +85,7 @@
         <div class="fullTab lightGray" *ngFor="let tTab of tabForUI;let index = index">
             <div class="tHeader white blackBorder">
                 <h4>{{tTab.tab_header}}</h4>
-                <div class="right"><button class="noBorderButton white" (click)="editTab(tTab)">Edit</button></div>
+                <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + tTab.tab_name, 1)"><button class="noBorderButton white" (click)="editTab(tTab)">Edit</button></div>
             </div>
             <div class="tBody">
                 <app-controls *ngIf="tValues[tTab.tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"

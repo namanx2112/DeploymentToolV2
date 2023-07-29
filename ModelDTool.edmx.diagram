@@ -52,6 +52,13 @@
         <EntityTypeShape EntityType="dtDBModel.tblVendorPartRel" Width="1.5" PointX="21.375" PointY="12.75" />
         <EntityTypeShape EntityType="dtDBModel.tblUserVendorRel" Width="1.5" PointX="21.375" PointY="15.75" />
         <EntityTypeShape EntityType="dtDBModel.tblSupportTicket" Width="1.5" PointX="21.375" PointY="18.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblRole" Width="1.5" PointX="22.375" PointY="3.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblRolePermissionRel" Width="1.5" PointX="22.375" PointY="7.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblUserAndUserTypeRel" Width="1.5" PointX="13.375" PointY="22.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblUserPermissionRel" Width="1.5" PointX="15.375" PointY="22.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblUserRoleRel" Width="1.5" PointX="17.375" PointY="22.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblUserType" Width="1.5" PointX="19.375" PointY="22.75" />
+        <EntityTypeShape EntityType="dtDBModel.tbPermission" Width="1.5" PointX="21.375" PointY="22.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/Auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeTabComponent } from './components/home-tab/home-tab.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import { TabBodyComponent } from './components/tab-body/tab-body.component';
@@ -42,7 +41,6 @@ import { PosInstallationComponent } from './components/Sonic/pos-installation/po
 import { AudioInstallationComponent } from './components/Sonic/audio-installation/audio-installation.component';
 import { MenuInstallationComponent } from './components/Sonic/menu-installation/menu-installation.component';
 import { PaymentTerminalInstallationComponent } from './components/Sonic/payment-terminal-installation/payment-terminal-installation.component';
-import { WorkflowsComponent } from './components/Sonic/workflows/workflows.component';
 import { QuoteRequestWorkflowTemplateComponent } from './components/quote-request-workflow-template/quote-request-workflow-template.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { QuoteRequestTemplateListComponent } from './components/quote-request-template-list/quote-request-template-list.component';
@@ -67,13 +65,13 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { TableExpendableComponent } from './components/table-expendable/table-expendable.component';
 import { StoreTechComponentsComponent } from './components/Sonic/store-tech-components/store-tech-components.component';
 import { ChangeGoliveDateComponent } from './components/Sonic/change-golive-date/change-golive-date.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    HomeTabComponent,
     TabBodyComponent,
     ControlsComponent,
     TableComponent,
@@ -97,7 +95,6 @@ import { ChangeGoliveDateComponent } from './components/Sonic/change-golive-date
     AudioInstallationComponent,
     MenuInstallationComponent,
     PaymentTerminalInstallationComponent,
-    WorkflowsComponent,
     QuoteRequestWorkflowTemplateComponent,
     QuoteRequestTemplateListComponent,
     FileStoreSelectionComponent,
@@ -114,7 +111,8 @@ import { ChangeGoliveDateComponent } from './components/Sonic/change-golive-date
     SupportPageComponent,
     TableExpendableComponent,
     StoreTechComponentsComponent,
-    ChangeGoliveDateComponent
+    ChangeGoliveDateComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CKEditorModule,

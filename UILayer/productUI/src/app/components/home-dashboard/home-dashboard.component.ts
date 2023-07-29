@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { BrandModel } from 'src/app/interfaces/models';
+import { AccessService } from 'src/app/services/access.service';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { HomeService } from 'src/app/services/home.service';
 
@@ -11,7 +12,7 @@ import { HomeService } from 'src/app/services/home.service';
 export class HomeDashboardComponent {
   brands: BrandModel[];
   @Output() brandClicked = new EventEmitter<BrandModel>()
-  constructor(private homeService: HomeService, private brandService: BrandServiceService) {
+  constructor(private homeService: HomeService, private brandService: BrandServiceService, public access: AccessService) {
     this.getBrands();
   }
 
@@ -39,13 +40,17 @@ export class HomeDashboardComponent {
     })
   }
 
+  filterBrand(brand: BrandModel) {
+    return (typeof brand.access == 'undefined') ? true : brand.access;
+  }
+
   showBrand(brand: BrandModel) {
     this.brandClicked.emit(brand);
   }
 
   updateIconsTemp() {
     for (var i in this.brands) {
-      if (this.brands[i].tBrandName?.toLowerCase().indexOf("dunkin")> -1) {
+      if (this.brands[i].tBrandName?.toLowerCase().indexOf("dunkin") > -1) {
         this.brands[i].tIconURL = "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png";
       }
       else if (this.brands[i].tBrandName?.toLowerCase().indexOf("baskin") > -1) {

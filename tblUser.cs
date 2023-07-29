@@ -29,5 +29,7 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
+        public Nullable<int> nUserTypeID { get; set; }
+        public Nullable<int> nStatus { get; set; }
     }
 }

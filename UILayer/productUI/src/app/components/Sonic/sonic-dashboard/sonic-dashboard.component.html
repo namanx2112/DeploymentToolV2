@@ -1,8 +1,8 @@
 <h2 class="headerPart">Sonic Homepage</h2>
 <div class="searchPart">
-  <app-search-store (SearchedResult)="storeSelect($event)"></app-search-store>    
+  <app-search-store (SearchedResult)="storeSelect($event)" *ngIf="access.hasAccess('home.sonic.viewstore', 0)"></app-search-store>    
 </div>
-<div class="tilesPart">
+<div class="tilesPart" *ngIf="access.hasAccess('home.sonic.storehighlight', 0)">
     <div class="tileShortcut" *ngFor="let cur of projects">
         <span class="count">{{cur.count}}</span>
         <span class="title">{{cur.title}}</span>

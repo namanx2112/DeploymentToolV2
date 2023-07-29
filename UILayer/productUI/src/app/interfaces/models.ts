@@ -2,6 +2,7 @@ import { HomeTab } from "./home-tab"
 
 export interface BrandModel {
     aBrandId: number,
+    tBrandIdentifier: string,
     tBrandName: string,
     tBrandDomain: string,
     tBrandAddressLine1: string,
@@ -16,7 +17,8 @@ export interface BrandModel {
     dtCreatedOn: Date,
     dtUpdatedOn: Date,
     bDeleted: boolean,
-    tIconURL: string
+    tIconURL: string,
+    access: boolean | true
 }
 
 

@@ -3,11 +3,11 @@
     <div class="SearchPart whiteGrayTheme">
         <app-controls [themeClass]="'whiteGray'" [numberOfControlsInARow]="1" [needButton]="false"
             [fields]="searchField" [controlValues]="{}" [SubmitLabel]="'Search'" class="searchControls"></app-controls>
-        <button mat-raised-button class="searchButton" (click)="OpenView(0)">Create New Workflow</button>
+        <button mat-raised-button class="searchButton" (click)="OpenView(0)" *ngIf="access.hasAccess('home.dashboard.po', 1)">Create New Workflow</button>
     </div>
     <div class="tablePart">
         <div *ngFor="let item of allPO" class="lightGray requestTile">
-            <div class="tileHeader">
+            <div class="tileHeader" *ngIf="access.hasAccess('home.dashboard.po', 1)">
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButton">
                     <mat-icon>more_vert</mat-icon>
                 </button>
@@ -22,8 +22,9 @@
                     </button>
                 </mat-menu>
             </div>
-            <span class="tName" title="Click to Open"
+            <span class="tName" *ngIf="access.hasAccess('home.dashboard.po', 1)" title="Click to Open"
                 (click)="OpenView(item.aPurchaseOrderTemplateID)">{{item.tTemplateName}}</span>
+            <span *ngIf="!access.hasAccess('home.dashboard.po', 1)" class="tName">{{item.tTemplateName}}</span>
         </div>
     </div>
 </div>
