@@ -1,0 +1,8 @@
+ng build --output-hashing none --optimization=false
+
+devuser2@zytossolutions.com
+Zytos@321
+
+DB:
+sqladmin
+Zytos@123
