@@ -3,6 +3,8 @@ ng build --output-hashing none --optimization=false
 devuser2@zytossolutions.com
 Zytos@321
 
+deploymenttoolserver.database.windows.net
+
 DB:
 sqladmin
 Zytos@123
