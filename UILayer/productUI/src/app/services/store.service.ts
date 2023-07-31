@@ -43,7 +43,7 @@ export class StoreService {
         "tStoreNumber",
         "dProjectGoliveDate",
         "tProjectType",
-        "tStatus",
+        // "tStatus",
         "tPrevProjManager",
         "tProjManager",
         "tOldVendor",

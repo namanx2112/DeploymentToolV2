@@ -3,6 +3,7 @@ import { OptionType } from '../interfaces/home-tab';
 import { DropdownServiceService } from './dropdown-service.service';
 import { DropwDown } from '../interfaces/models';
 import { ProjectTypes } from '../interfaces/sonic';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +15,20 @@ export class CommonService {
   }
 
   public getAllDropdowns() {
-    if (typeof CommonService.allItems == 'undefined') {
-      this.ddService.Get("").subscribe((x: DropwDown[]) => {
-        CommonService.allItems = x;
-      });
-    }
+    this.ddService.Get("").subscribe((x: DropwDown[]) => {
+      CommonService.allItems = x;
+    });
   }
 
   static getFormatedDateString(dString: any) {
     let rString = "";
-    if (typeof dString == 'string')
-      rString = new Date(dString).toLocaleDateString();
-    else
+    if (typeof dString == 'string') {
+      if (dString != "") {
+        let momentVal = moment(dString, 'YYYY-MM-DD')
+        rString = momentVal.format('MM/DD/YYYY');
+      }
+    }
+    else if (dString != null)
       rString = dString.toLocaleDateString();
     return rString;
   }

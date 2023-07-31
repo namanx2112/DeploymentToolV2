@@ -151,6 +151,17 @@ namespace DeploymentTool.Controller
                 if (noOfRowUpdated != 0)
                     nMovedProjectId = (paramProjectId.Value == null) ? 0 : Convert.ToInt32(paramProjectId.Value);
                 tblStore ttboStore = newStore.GettblStores();
+                if(ttboStore.aStoreID > 0)
+                {
+                    db.Entry(ttboStore).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    newStore.nProjectID = 0;
+                    db.tblStores.Add(ttboStore);
+                    db.SaveChanges();
+                }
                 //switch (pType)
                 //{
                 //    case ProjectType.AudioInstallation:
@@ -166,8 +177,6 @@ namespace DeploymentTool.Controller
                 //        db.SaveChanges();
                 //        break;
                 //}
-                db.Entry(ttboStore).State = EntityState.Modified;
-                db.SaveChanges();
                 tblProject tProjectModel = newStore.GettblProject();
                 tProjectModel.nProjectActiveStatus = 1;
                 tProjectModel.nStoreID = ttboStore.aStoreID;

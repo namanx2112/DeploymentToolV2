@@ -9,8 +9,10 @@ import { SonicService } from 'src/app/services/sonic.service';
   styleUrls: ['./project-table.component.css']
 })
 export class ProjectTableComponent {
+  _curStore: StoreSearchModel;
   @Input()
   set curStore(val: StoreSearchModel) {
+    this._curStore = val;
     this.tableCondition = { nStoreId: val.nStoreId.toString() };
   }
   @Input()

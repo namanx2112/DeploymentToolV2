@@ -467,7 +467,7 @@ namespace DeploymentTool.Controller
             strBody += "<div style='text-align:right;'><b> PO#: </b> " + request.aPurchaseOrderPreviewTeamplateID.ToString() + "</div>";
             strBody += "<div style='text-align:right;'><b> Deliver#: </b> " + request.dDeliver.ToShortDateString() + "</div>";
             strBody += "</body></html>";
-            string fileName = "PurachaseOrder.pdf";
+            string fileName = "PurchaseOrder.pdf";
             String strFilePath = DeploymentTool.Misc.Utilities.WriteHTMLToPDF(strBody, fileName);
             string strStyle = "<style>td{ border: 0px none!important;} " +
                     "table{ width: 60%!important;border: 1px solid lightgray!important;border-radius: 5px!important;}</style>";

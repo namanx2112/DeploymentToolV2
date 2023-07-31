@@ -17,6 +17,7 @@ import { StoreService } from 'src/app/services/store.service';
 import { TechComponenttService } from 'src/app/services/tech-component.service';
 import { UserService } from 'src/app/services/user.service';
 import { VendorService } from 'src/app/services/vendor.service';
+import { CommonService } from 'src/app/services/common.service';
 
 export interface TableColumnDef {
   columnDef: string,
@@ -62,6 +63,17 @@ export class TableExpendableComponent {
 
   cellClick(row: MatRow) {
     this.rowClicked.emit(row);
+  }
+
+  getCellVal(colName: string, colVal: string) {
+    let rVal = colVal;
+    if (colName.indexOf("c") == 0) {
+      rVal = "$" + colVal;
+    }
+    else if (colName.indexOf("d") == 0) {
+      rVal = CommonService.getFormatedDateString(colVal);
+    }
+    return rVal;
   }
 
   cellDelete(row: MatRow) {

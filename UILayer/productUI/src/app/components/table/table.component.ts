@@ -6,6 +6,7 @@ import { MatRow, MatTableDataSource, MatTableModule } from '@angular/material/ta
 import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
 import { BrandModel, FranchiseModel, TechComponentModel, VendorModel, UserModel } from 'src/app/interfaces/models';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
+import { CommonService } from 'src/app/services/common.service';
 import { FranchiseService } from 'src/app/services/frenchise.service';
 import { PartsService } from 'src/app/services/parts.service';
 import { SonicService } from 'src/app/services/sonic.service';
@@ -52,7 +53,18 @@ export class TableComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit() {
   }
-  
+
+  getCellVal(colName: string, colVal: string) {
+    let rVal = colVal;
+    if (colName.indexOf("c") == 0) {
+      rVal = "$" + colVal;
+    }
+    else if (colName.indexOf("d") == 0) {
+      rVal = CommonService.getFormatedDateString(colVal);
+    }
+    return rVal;
+  }
+
   announceSortChange(sortState: Sort) {
     // This example uses English messages. If your application supports
     // multiple language, you would internationalize these strings.

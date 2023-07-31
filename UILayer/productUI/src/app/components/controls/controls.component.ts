@@ -8,6 +8,7 @@ import { ControlsErrorMessages, Dictionary } from 'src/app/interfaces/commons';
 import { Fields, FieldType, HomeTab } from 'src/app/interfaces/home-tab';
 import * as _moment from 'moment';
 import { Moment } from 'moment';
+import { CommonService } from 'src/app/services/common.service';
 
 const moment = _moment;
 
@@ -62,10 +63,11 @@ export class ControlsComponent implements AfterViewChecked {
   formControls: Dictionary<FormControl>;
   regexPattern =
     /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/gi;
-  constructor(private readonly changeDetectorRef: ChangeDetectorRef, private datePipe: DatePipe) {
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef, private datePipe: DatePipe, private dateAdapter: DateAdapter<Date>) {
     this.formControls = {};
     this.fieldClass = "curField";
     this.groupLabel = "";
+    this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
   }
 
   ngAfterViewChecked(): void {
@@ -93,7 +95,7 @@ export class ControlsComponent implements AfterViewChecked {
   valueChanged() {
     this.formGroup = new FormGroup({});
     for (const formField of this.fields) {
-      let tmpVal = (formField.field_type == FieldType.date) ? (typeof this._controlValues[formField.fieldUniqeName] == 'undefined') ? new Date() : new Date(this._controlValues[formField.fieldUniqeName]) : (typeof this._controlValues[formField.fieldUniqeName] == 'undefined') ? formField.defaultVal : this._controlValues[formField.fieldUniqeName];
+      let tmpVal = (formField.field_type == FieldType.date) ? (typeof this._controlValues[formField.fieldUniqeName] == 'undefined' || this._controlValues[formField.fieldUniqeName] == null) ? null : this._controlValues[formField.fieldUniqeName] : (typeof this._controlValues[formField.fieldUniqeName] == 'undefined') ? formField.defaultVal : this._controlValues[formField.fieldUniqeName];
       let tFormControl = new FormControl(
         tmpVal, formField.validator);
       if (typeof this._controlValues[formField.fieldUniqeName] == 'undefined')
@@ -124,14 +126,7 @@ export class ControlsComponent implements AfterViewChecked {
       }
     }
     else if (field.field_type == FieldType.date) {
-      if (typeof val != 'undefined' && val != null) {
-        if (typeof val == 'object')
-          sVal = val["_i"];
-        else {
-          if (val != "")
-            sVal = new Date(val).toLocaleDateString();
-        }
-      }
+      sVal = CommonService.getFormatedDateString(val);
     }
     return sVal;
   }
@@ -231,7 +226,7 @@ export function dateRegexValidator(
     return null;
   const regexPattern = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/gi;
   let val = control.value;
-  const isValid = regexPattern.test(val); 
+  const isValid = regexPattern.test(val);
   if (isValid) {
     return { dateRegex: true };
   }

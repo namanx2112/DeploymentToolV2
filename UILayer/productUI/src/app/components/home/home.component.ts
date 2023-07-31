@@ -63,7 +63,8 @@ export class HomeComponent {
         dialogRef.close();
       }
     };
-    dialogRef = cThis.dialog.open(TicketViewComponent, dialogConfig);
+    // dialogRef = cThis.dialog.open(TicketViewComponent, dialogConfig);
+    dialogRef = cThis.dialog.open(NotImplementedComponent, dialogConfig);
   }
 
   ChangePassword() {

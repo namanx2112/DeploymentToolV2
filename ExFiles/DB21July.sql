@@ -260,80 +260,104 @@ BEGIN
 END
 
 GO
-Create  procedure sproc_getActiveProjects
+create function fn_getVendorName
+(@nVendorId int)
+returns VARCHAR(500)
+AS
+BEGIN
+	Declare @tVendorName VARCHAR(500)
+	SELECT @tVendorName = tVendorName from tblVendor with(nolock) where aVendorId = @nVendorId
+	if(@tVendorName is null)
+		SET @tVendorName = ''
+	return @tVendorName
+END
+
+GO
+
+create  procedure sproc_getVendorNameFromPreviousProject
+@nProjectId int,
+@nStoreId int,
+@tTableName varchar(100),
+@tVendorName VARCHAR(500) OUTPUT
+as
+BEGIN
+	select top 1 @tVendorName= dbo.fn_getVendorName(nVendor) from tblProjectPOS where nStoreId = @nStoreId and nProjectID < @nProjectId and nVendor is not null order by nProjectID desc	
+	if(@tVendorName is null)
+		SET @tVendorName = ''
+END
+
+GO
+create function fn_getDropdownText
+(@nId int)
+returns VARCHAR(500)
+as
+BEGIN
+	Declare @dText varchar(500)
+	select @dText = tDropdownText from tblDropDowns with(nolock) where aDropDownId  = @nID
+	return @dText
+END
+GO
+
+Create procedure sproc_getPMFromPreviousProject
+@nProjectId int,
+@nStoreId int,
+@tPM VARCHAR(500) OUTPUT
+as
+BEGIN
+	select top 1 @tPM = tITPM from tblProjectStakeHolders with(nolock) where nStoreId = 8 and nProjectID < 18 and tITPM is not null order by aProjectStakeHolderID	desc
+	if(@tPM is null)
+		SET @tPM = ''
+END
+
+GO
+Create procedure sproc_getActiveProjects
 @nStoreId int
 as
 BEGIN	
-	create table #pTypeTable(tProjectId int, nPType int, nVendorId INT, tVendorName varchar(500), tTableName varchar(100), nActiveStatus int, tProjManager Varchar(500))
+	create table #tmpTable(nProjectId int, tStoreNumber varchar(100), tTableName VARCHAR(100), tProjectType varchar(100), tStatus varchar(100), tPrevProjManager varchar(500), tProjManager varchar(500), 
+	dProjectGoliveDate date, dProjEndDate date, tOldVendor  varchar(500), tNewVendor varchar(500))
 
-	insert into #pTypeTable (tProjectId, tTableName,nActiveStatus,nPType) select aProjectId, tTableName,nActiveStatus, nPType from(
-	select aProjectId, tTableName, nProjectActiveStatus nActiveStatus, row_number() OVER (PARTITION BY nProjectType ORDER BY aProjectID desc) AS rNumber, nProjectType nPType from tblProject
-	left join tblProjectTypeConfig on tblProjectTypeConfig.aTypeId = case when (tblProject.nProjectType < 5 OR  tblProject.nProjectType = 9) then -1 else tblProject.nProjectType end
-	where nStoreId = @nStoreId
-	) tTable where rNumber <= 2
-
-	
+	Insert into #tmpTable(nProjectId,tTableName,tProjectType,tStatus,dProjectGoliveDate,dProjEndDate)-- , tStatus, tPrevProjManager, tProjManager, dProjectGoliveDate, dProjEndDate, tOldVendor, tNewVendor)
+	select aProjectId,tTableName, dbo.fn_getProjectType(nProjectType) tProjectType, dbo.fn_getDropdownText(nProjectStatus) tStatus,dGoLiveDate dProjectGoliveDate,dProjEndDate from(
+	select aProjectId, tTableName,nProjectType,nProjectStatus,dGoLiveDate,dProjEndDate from tblProject with(nolock)
+	left join tblProjectTypeConfig with(nolock) on tblProjectTypeConfig.aTypeId = case when (tblProject.nProjectType < 5 OR  tblProject.nProjectType = 9) then -1 else tblProject.nProjectType end
+	where nStoreId = @nStoreId and nProjectActiveStatus = 1
+	) tTable
 
 	declare @tQuery NVARCHAR(MAX), @tmpProjectId int, @tmpTableName VARCHAR(100)
+	declare @tOldVendor as varchar(500), @tOldPM as VARCHAR(500)
+
 	DECLARE db_cursor CURSOR FOR 
-	SELECT tProjectId,tTableName from #pTypeTable where nActiveStatus = 1
+	SELECT nProjectId,tTableName from #tmpTable
 
 	OPEN db_cursor  
 	FETCH NEXT FROM db_cursor INTO @tmpProjectId, @tmpTableName
 
 	WHILE @@FETCH_STATUS = 0  
 	BEGIN  
-		Set @tQuery  = N'update #pTypeTable set nVendorId = nVendor from [dbo].['+ @tmpTableName +'] Where nProjectId = tProjectId and tProjectId = ' + CAST(@tmpProjectId as VARCHAR) + ' and nMyActiveStatus = 1'		
+		Set @tQuery  = N'update #tmpTable set tNewVendor=dbo.fn_getVendorName(nVendor) from [dbo].['+ @tmpTableName +'] Where #tmpTable.nProjectId = [dbo].['+ @tmpTableName +'].nProjectId and nMyActiveStatus = 1 and #tmpTable.nProjectId = ' + CAST(@tmpProjectId as VARCHAR) -- update NewVendor
 		EXEC sp_executesql @tQuery
+
+		EXEC sproc_getVendorNameFromPreviousProject @tmpProjectId,@nStoreId,'tblProjectPOS', @tOldVendor OUTPUT	
+		EXEC sproc_getPMFromPreviousProject @tmpProjectId, @nStoreId, @tOldPM OUTPUT
+
+		Set @tQuery  = N'update #tmpTable set tOldVendor='''+@tOldVendor+''', tPrevProjManager='''+@tOldPM+''' Where nProjectId = ' + CAST(@tmpProjectId as VARCHAR) -- update Old vendor and PM
+		EXEC sp_executesql @tQuery
+		
+		update #tmpTable set tStoreNumber = tblStore.tStoreNumber from tblStore with(nolock) where aStoreID = @nStoreId
+
+		update #tmpTable set tProjManager = tITPM from tblProjectStakeHolders with(nolock) where nStoreId = @nStoreId and nMyActiveStatus = 1 and tITPM is not null
+
 		FETCH NEXT FROM db_cursor INTO @tmpProjectId, @tmpTableName
 	END 
-	--Update Previous Vendor Name
-	--update #pTypeTable set tOldVendorName = tOldVendorName from #pTypeTable inActive join  #pTypeTable active on inActive.nPType = active.nPType where inActive.nActiveStatus = 0 and active.nActiveStatus = 1 
-	CLOSE db_cursor  
-	DEALLOCATE db_cursor 	
-	DECLARE db_cursor CURSOR FOR 
-	SELECT tProjectId,tTableName from #pTypeTable where nActiveStatus = 0
-
-	OPEN db_cursor  
-	FETCH NEXT FROM db_cursor INTO @tmpProjectId, @tmpTableName
-
-	WHILE @@FETCH_STATUS = 0  
-	BEGIN  
-		-- Old Project
-		Set @tQuery = N'update #pTypeTable set nVendorId = nVendor from [dbo].['+ @tmpTableName +'] Where tProjectId =  nProjectId and tProjectId = ' + CAST(@tmpProjectId as VARCHAR) + ' and (nMyActiveStatus = 0 OR nMyActiveStatus is null)'		
-		EXEC sp_executesql @tQuery
-		--Previous Project Manager
-		Set @tQuery = N'Update #pTypeTable set tProjManager = tITPM from tblProjectStakeHolders with(nolock) where tProjectId = tblProjectStakeHolders.nProjectID and tProjectId = ' + CAST(@tmpProjectId as VARCHAR)
-		EXEC sp_executesql @tQuery
-		FETCH NEXT FROM db_cursor INTO @tmpProjectId, @tmpTableName
-	END 
-	--Update Previous Vendor Name
-	--update #pTypeTable set tOldVendorName = tOldVendorName from #pTypeTable inActive join  #pTypeTable active on inActive.nPType = active.nPType where inActive.nActiveStatus = 0 and active.nActiveStatus = 1 
+	
 	
 	CLOSE db_cursor  
-	DEALLOCATE db_cursor 	
-	
-	Set @tQuery = N'Update #pTypeTable set tVendorName = tblVendor.tVendorName from tblVendor with(nolock) where nVendorId = tblVendor.aVendorId'  
-	EXEC sp_executesql @tQuery
+	DEALLOCATE db_cursor
 
-	create table #resutTable(tProjectId int, nPType int, tOldVendorName varchar(500), tNewVendorName varchar(500), tTableName varchar(100), nActiveStatus int, tPrevProjManager Varchar(500))
+	select * from #tmpTable
 
-	insert into #resutTable(tProjectId,nPType,tNewVendorName) select tProjectId, nPType, tVendorName from #pTypeTable where nActiveStatus = 1
-
-	update #resutTable set tOldVendorName = tVendorName, tPrevProjManager = tProjManager from #pTypeTable where #resutTable.nPType = #pTypeTable.nPType and #pTypeTable.nActiveStatus =0
-	--select * from #resutTable
-	drop table #pTypeTable
-
-	select aProjectId, tStoreNumber, dbo.fn_getProjectType(nProjectType) tProjectType,nProjectType,  dDown.tDropdownText tStatus,tPrevProjManager tPrevProjManager, sHolder.tITPM tProjManager, tblProject.dGoLiveDate dProjectGoliveDate,
-	tblProject.dProjEndDate dProjEndDate, tOldVendorName tOldVendor, tNewVendorName tNewVendor 
-	from tblProject with(nolock) 
-	join tblStore with(nolock) on aStoreId = tblProject.nStoreId
-	left join tblProjectStakeHolders sHolder with(nolock) on sHolder.nProjectID = aProjectID
-	join (select aDropDownId, tDropdownText from tblDropDowns with(nolock) where aDropDownId in(Select nDropdownId from tblDropDownMain with(nolock) where tModuleName = 'ProjectStatus')) dDown on tblProject.nProjectStatus = dDown.aDropDownId
-	Join #resutTable on tProjectId = aProjectId
-	where nProjectActiveStatus = 1 and aStoreId = @nStoreId
-
-	drop table #resutTable
+	drop table #tmpTable
 END
 
 GO
@@ -373,10 +397,10 @@ Create   procedure sproc_getHistoricalProjects
 as
 BEGIN	
 	exec sproc_UpdateProjectEndDateForHistoricProjects @nStoreId
-	create table #pTypeTable(tProjectId int, nPType int, nVendorId INT,nProjectStatus int, tProjectStatus varchar(100), tVendorName varchar(500), tTableName varchar(100), tProjManager Varchar(500))
+	create table #pTypeTable(tProjectId int, nPType int, nVendorId INT,tProjectStatus varchar(100), tVendorName varchar(500), tTableName varchar(100), tProjManager Varchar(500))
 
-	insert into #pTypeTable (tProjectId, tTableName,nPType,nProjectStatus) select aProjectId, tTableName, nPType,nProjectStatus from(
-	select aProjectId, tTableName, nProjectType nPType,nProjectStatus from (select max(aProjectId) aProjectId, nProjectType, nProjectStatus from tblProject where nStoreID = @nStoreId and (nProjectActiveStatus = 0 or nProjectActiveStatus is null)
+	insert into #pTypeTable (tProjectId, tTableName,nPType,tProjectStatus) select aProjectId, tTableName, nPType,tProjectStatus from(
+	select aProjectId, tTableName, nProjectType nPType,dbo.fn_getDropdownText(nProjectStatus) tProjectStatus from (select max(aProjectId) aProjectId, nProjectType, nProjectStatus from tblProject where nStoreID = @nStoreId and (nProjectActiveStatus = 0 or nProjectActiveStatus is null)
 group by nProjectType,nProjectStatus) tmpTable left join 
 	tblProjectTypeConfig on tblProjectTypeConfig.aTypeId = case when (tmpTable.nProjectType < 5 OR  tmpTable.nProjectType = 9) then -1 else tmpTable.nProjectType end
 	) tTable 
@@ -389,18 +413,11 @@ group by nProjectType,nProjectStatus) tmpTable left join
 
 	WHILE @@FETCH_STATUS = 0  
 	BEGIN  
-		Set @tQuery = N'update #pTypeTable set nVendorId = nVendor from [dbo].['+ @tmpTableName +'] Where tProjectId =  nProjectId and tProjectId = ' + CAST(@tmpProjectId as VARCHAR)		
+		Set @tQuery = N'update #pTypeTable set tVendorName = dbo.fn_getVendorName(nVendor) from [dbo].['+ @tmpTableName +'] Where tProjectId =  nProjectId and tProjectId = ' + CAST(@tmpProjectId as VARCHAR)		
 		EXEC sp_executesql @tQuery
+		update #pTypeTable set tProjManager = tITPM from tblProjectStakeHolders with(nolock) where nProjectID = tProjectId and tProjectId = @tmpProjectId
 		FETCH NEXT FROM db_cursor INTO @tmpProjectId, @tmpTableName
 	END 
-	
-	Set @tQuery = N'Update #pTypeTable set tVendorName = tblVendor.tVendorName from tblVendor with(nolock) where nVendorId = tblVendor.aVendorId'  
-	EXEC sp_executesql @tQuery
-
-	Set @tQuery = N'Update #pTypeTable set tProjectStatus = tDropdownText from tblDropDowns with(nolock) where aDropDownId = nProjectStatus'  
-	EXEC sp_executesql @tQuery
-	
-	update #pTypeTable set tProjManager = tITPM from tblProjectStakeHolders with(nolock) where nProjectID = #pTypeTable.tProjectId
 	
 	--Update Previous Vendor Name
 	--update #pTypeTable set tOldVendorName = tOldVendorName from #pTypeTable inActive join  #pTypeTable active on inActive.nPType = active.nPType where inActive.nActiveStatus = 0 and active.nActiveStatus = 1 
