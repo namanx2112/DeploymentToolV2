@@ -17,6 +17,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { TableComponent } from './components/table/table.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NewEditObjectComponent } from './components/new-edit-object/new-edit-object.component';
 import { HomeDashboardComponent } from './components/home-dashboard/home-dashboard.component';
@@ -66,6 +67,7 @@ import { TableExpendableComponent } from './components/table-expendable/table-ex
 import { StoreTechComponentsComponent } from './components/Sonic/store-tech-components/store-tech-components.component';
 import { ChangeGoliveDateComponent } from './components/Sonic/change-golive-date/change-golive-date.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { TicketViewComponent } from './components/ticket-view/ticket-view.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +114,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     TableExpendableComponent,
     StoreTechComponentsComponent,
     ChangeGoliveDateComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    TicketViewComponent
   ],
   imports: [
     CKEditorModule,
@@ -130,6 +133,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     MatButtonModule,
     MatIconModule,
     MatTableModule,
+    MatSortModule,
     MatPaginatorModule,
     MatSidenavModule,
     MatMenuModule,

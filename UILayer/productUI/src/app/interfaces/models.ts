@@ -237,8 +237,11 @@ export enum SuportPriorities{
 }
 
 export interface SupportContent {
+    aTicketId: number,
     nPriority: number,
     tContent: string,
     nFileSie: number,
-    fBase64: string
+    fBase64: string,
+    nCreatedBy: number,
+    dtCreatedOn: Date
 }

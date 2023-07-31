@@ -27,7 +27,7 @@ export class NewProjectComponent {
   @Output() ChangeView = new EventEmitter<string>();
   allTabs: HomeTab[];
   curTab: HomeTab;
-  tValues: Dictionary<Dictionary<string>>;
+  tValues: Dictionary<Dictionary<any>>;
   SubmitLabel: string;
   curTabIndex: number;
   curStore: StoreSearchModel;
@@ -169,8 +169,14 @@ export class NewProjectComponent {
         else {
           tIndex++;
           let tTab = cThis.allTabs[tIndex];
-          cThis.onSubmit(cThis.tValues[tTab.tab_name], tTab, saveCallback);
+          if (tTab.tab_type == TabType.StoreStackHolder) // No need to save again as stakeholder has been save through newProject API
+            saveCallback({}, tTab);
+          else
+            cThis.onSubmit(cThis.tValues[tTab.tab_name], tTab, saveCallback);
         }
+      }
+      if(tIndex == 1){
+        cThis.tValues[tTab.tab_name]["tStakeHolder"] = cThis.tValues[cThis.allTabs[2].tab_name];// to take latest stakeholder data
       }
       this.onSubmit(cThis.tValues[tTab.tab_name], tTab, saveCallback);
     }

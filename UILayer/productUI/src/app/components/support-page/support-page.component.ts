@@ -21,6 +21,9 @@ export class SupportPageComponent {
     else
       this.tRequest = {
         nPriority: 2,
+        aTicketId: 0,
+        dtCreatedOn : new Date(),
+        nCreatedBy: 1,
         tContent: "",
         nFileSie: data.fileBytes.length,
         fBase64: data.fileBytes

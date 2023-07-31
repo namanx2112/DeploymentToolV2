@@ -340,7 +340,7 @@ namespace DeploymentTool.Controller
                 poRequest.tName = itemPOStore[0].tName;// "Name";
                 poRequest.tPhone = itemPOStore[0].tPhone;// "33982823498423";
                 poRequest.tEmail = itemPOStore[0].tEmail;// "heell@ggmail.com";
-                poRequest.tAddress = itemPOStore[0].tAddress + " " + itemPOStore[0].tCity + ", " + itemPOStore[0].tStoreState + " " + itemPOStore[0].tStoreZip;// "1st streat, scond block";
+                poRequest.tAddress = itemPOStore[0].tAddress + ", " + itemPOStore[0].tAddress2 + ", " + itemPOStore[0].tCity + ", " + itemPOStore[0].tStoreState + ", " + itemPOStore[0].tStoreZip;// "1st streat, scond block";
                 poRequest.tCity = itemPOStore[0].tCity;// "Atlaanta";
                 poRequest.tStoreState = itemPOStore[0].tStoreState;// "NewYork";
                 poRequest.tStoreZip = itemPOStore[0].tStoreZip;// "45449";

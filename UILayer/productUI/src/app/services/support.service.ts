@@ -18,6 +18,10 @@ export class SupportService {
     return this.http.get<any>(this.configUrl + "Support/Get?nTicketId=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
+  GetAll() {
+    return this.http.get<any>(this.configUrl + "Support/GetAll", { headers: this.authService.getHttpHeaders() });
+  }
+
   LogSupportTicket(request: SupportContent) {
     return this.http.post<any>(this.configUrl + "Support/Log", request, { headers: this.authService.getHttpHeaders() });
   }

@@ -21,6 +21,54 @@ export class CommonService {
     }
   }
 
+  static getFormatedDateString(dString: any) {
+    let rString = "";
+    if (typeof dString == 'string')
+      rString = new Date(dString).toLocaleDateString();
+    else
+      rString = dString.toLocaleDateString();
+    return rString;
+  }
+
+  static getProjectName(projectType: number) {
+    let pString = "";
+    let pType = projectType;
+    switch (pType) {
+      case ProjectTypes.New:
+        pString = "New";
+        break;
+      case ProjectTypes.Rebuild:
+        pString = "Rebuild";
+        break;
+      case ProjectTypes.Remodel:
+        pString = "Remodel";
+        break;
+      case ProjectTypes.Relocation:
+        pString = "Relocation";
+        break;
+      case ProjectTypes.Acquisition:
+        pString = "Acquisition";
+        break;
+      case ProjectTypes.POSInstallation:
+        pString = "POS Installation";
+        break;
+      case ProjectTypes.AudioInstallation:
+        pString = "Audio Installation";
+        break;
+      case ProjectTypes.MenuInstallation:
+        pString = "Menu Installation";
+        break;
+      case ProjectTypes.PaymentTerminalInstallation:
+        pString = "Payment Terminal Installation";
+        break;
+      case ProjectTypes.PartsReplacement:
+        pString = "Parts Replacement";
+        break;
+
+    }
+    return pString;
+  }
+
   // GetCountryDropdowns(): OptionType[] {
   //   let contries = [
   //     {

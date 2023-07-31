@@ -167,3 +167,16 @@ form {
 .pageStep .lastPg {
     float: right;
 }
+
+.dollarTD{
+    position: relative;
+}
+.dollarTD input{
+    text-indent: 10px;
+}
+.dollarTD span{
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    margin-left: 10px;
+}

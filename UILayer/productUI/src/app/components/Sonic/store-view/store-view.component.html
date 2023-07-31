@@ -6,11 +6,11 @@
         <div class="projectInfoTabs" *ngIf="access.hasAccess('home.sonic.project.golive', 1)">
             <span class="storeStatus" *ngFor="let tItem of _curStore.lstProjectsInfo" (click)="changeGoliveDate(tItem);"
                 title="Click to change Golive Date">{{projectTypeString(tItem.nProjectType)}} Store
-                {{tItem.dGoLiveDate.toString().split('T')[0]}}</span>
+                {{getFormatedDate(tItem.dGoLiveDate)}}</span>
         </div>
         <div class="projectInfoTabs" *ngIf="!access.hasAccess('home.sonic.project.golive', 1)">
             <span class="storeStatus" *ngFor="let tItem of _curStore.lstProjectsInfo">{{projectTypeString(tItem.nProjectType)}} Store
-                {{tItem.dGoLiveDate.toString().split('T')[0]}}</span>
+                {{getFormatedDate(tItem.dGoLiveDate)}}</span>
         </div>
     </div>
     <div class="storeTiles" *ngIf="allTabs.length > 0">

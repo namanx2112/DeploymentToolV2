@@ -1,6 +1,7 @@
 ﻿using DeploymentTool.Misc;
 using DeploymentTool.Model;
 using DeploymentTool.Model.Templates;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +15,7 @@ using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using static System.Data.Entity.Infrastructure.Design.Executor;
 
 namespace DeploymentTool.Controller
 {
@@ -110,7 +112,7 @@ namespace DeploymentTool.Controller
                 //tblProjectStore tProjStore = db.tblProjectStores.Where(p => p.nProjectID == nProjectId).FirstOrDefault();
                 tblProject tProj = db.tblProjects.Where(p => p.nStoreID == nStoreId && p.nProjectActiveStatus == 1).FirstOrDefault();
                 tblStore tStore = db.tblStores.Where(p => p.aStoreID == nStoreId).FirstOrDefault();
-                tmpStore.tStakeHolder = db.tblProjectStakeHolders.Where(p => p.nStoreId == nStoreId && p.nProjectID == tProj.aProjectID).FirstOrDefault();
+                tmpStore.tStakeHolder = db.tblProjectStakeHolders.Where(p => p.nStoreId == nStoreId && p.nMyActiveStatus == 1).FirstOrDefault();
                 // var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProject set projectActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tStore.aStoreID));
                 //tProj.ProjectActiveStatus = 1;
                 //Utilities.SetHousekeepingFields(true, HttpContext.Current, tProj);
@@ -176,6 +178,18 @@ namespace DeploymentTool.Controller
                 if (nMovedProjectId > 0)
                 {
                     var CopyTechIfRequired = db.Database.ExecuteSqlCommand("exec sproc_CopyTechnologyToCurrentProject @nStoreId, @nProjectType, @nProjectID, @nFromProjectId", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), new SqlParameter("@nProjectID", newStore.nProjectID), new SqlParameter("@nFromProjectId", nMovedProjectId));
+                }
+
+                // Update Config Data
+                db.Database.ExecuteSqlCommand("update tblProjectConfig set nProjectID=@nProjectId where nStoreId =@nStoreId", new SqlParameter("@nProjectId", tProjectModel.aProjectID), new SqlParameter("@nStoreId", newStore.aStoreId));
+                if (newStore.tStakeHolder != null)// Add stakeholder data to get it copied
+                {
+                    db.Database.ExecuteSqlCommand("update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", newStore.aStoreId));
+                    newStore.tStakeHolder.nProjectID = tProjectModel.aProjectID;
+                    newStore.tStakeHolder.nMyActiveStatus = 1;
+                    newStore.tStakeHolder.aProjectStakeHolderID = 0;
+                    db.tblProjectStakeHolders.Add(newStore.tStakeHolder);
+                    db.SaveChangesAsync();
                 }
 
                 return new HttpResponseMessage(HttpStatusCode.OK)

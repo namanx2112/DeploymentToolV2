@@ -11,6 +11,7 @@ import { AllTechnologyComponentsService } from 'src/app/services/all-technology-
 import { NotImplementedComponent } from '../../not-implemented/not-implemented.component';
 import { ChangeGoliveDateComponent } from '../change-golive-date/change-golive-date.component';
 import { AccessService } from 'src/app/services/access.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-store-view',
@@ -50,8 +51,12 @@ export class StoreViewComponent {
 
   projectTypeString(pType: number) {
     let pString = "";
-    pString = ProjectTypes[pType];
+    pString = CommonService.getProjectName(pType);
     return pString;
+  }
+
+  getFormatedDate(dtString: any){
+    return CommonService.getFormatedDateString(dtString);
   }
 
   changeTileView(tName: string) {

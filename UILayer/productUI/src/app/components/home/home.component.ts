@@ -9,6 +9,8 @@ import { SupportPageComponent } from '../support-page/support-page.component';
 import html2canvas from 'html2canvas';
 import { AccessService } from 'src/app/services/access.service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { NotImplementedComponent } from '../not-implemented/not-implemented.component';
+import { TicketViewComponent } from '../ticket-view/ticket-view.component';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +35,7 @@ export class HomeComponent {
     });
   }
 
-  async loadDropdown(){    
+  async loadDropdown() {
     this.commonService.getAllDropdowns();
   }
 
@@ -52,50 +54,32 @@ export class HomeComponent {
 
   supportPage() {
     let cThis = this;
-    this.getScreenshot(function (bytes: any) {
-      const dialogConfig = new MatDialogConfig();
-      let dialogRef: any;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = '60%';
-      dialogConfig.data = {
-        fileBytes: bytes,
-        onSubmit: function (data: any) {
-          dialogRef.close();
-        }
-      };
-      dialogRef = cThis.dialog.open(SupportPageComponent, dialogConfig);
-    });
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+    dialogConfig.data = {
+      onSubmit: function (data: any) {
+        dialogRef.close();
+      }
+    };
+    dialogRef = cThis.dialog.open(TicketViewComponent, dialogConfig);
   }
 
-  ChangePassword(){
+  ChangePassword() {
     const dialogConfig = new MatDialogConfig();
     let dialogRef: any;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '50%';
     dialogConfig.data = {
-      onChange: function(){
+      onChange: function () {
         dialogRef.close();
       },
-      onClose: function(){
+      onClose: function () {
         dialogRef.close();
       }
     };
-    dialogRef = this.dialog.open(ChangePasswordComponent, dialogConfig);
-  }
-
-  getScreenshot(callBack: any) {
-    const div = document.body;
-    if (div) {
-      const options = {
-        background: 'white',
-        scale: 3
-      };
-
-      html2canvas(div, options).then((canvas) => {
-        //var base64URL = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream');
-        callBack(canvas.toDataURL('image/jpeg'))
-      });
-    }
+    dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
   }
 
   OpenTicketWatcher() {
@@ -103,23 +87,21 @@ export class HomeComponent {
     if (inpVal != null) {
       let nTicketId = parseInt(inpVal);
       let cThis = this;
-      this.getScreenshot(function (bytes: any) {
-        const dialogConfig = new MatDialogConfig();
-        let dialogRef: any;
-        dialogConfig.autoFocus = true;
-        dialogConfig.width = '60%';
-        dialogConfig.data = {
-          nTicketId: nTicketId,
-          onSubmit: function (data: any) {
-            dialogRef.close();
-          }
-        };
-        dialogRef = cThis.dialog.open(SupportPageComponent, dialogConfig);
-      })
+      const dialogConfig = new MatDialogConfig();
+      let dialogRef: any;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = '60%';
+      dialogConfig.data = {
+        nTicketId: nTicketId,
+        onSubmit: function (data: any) {
+          dialogRef.close();
+        }
+      };
+      dialogRef = cThis.dialog.open(SupportPageComponent, dialogConfig);
     }
   }
 
-  actionChanged(ev: any){
+  actionChanged(ev: any) {
     this.tTabName = ev;
   }
 }

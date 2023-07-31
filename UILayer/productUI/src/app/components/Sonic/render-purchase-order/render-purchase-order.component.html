@@ -1,4 +1,5 @@
-<h2 mat-dialog-title class="header" *ngIf="curTemplate != undefined">{{ (partNumber == 1) ? curTemplate.tTemplateName : "" }} Purchase Order {{ (partNumber == 1) ? " Preview" : "" }}</h2>
+<h2 mat-dialog-title class="header" *ngIf="curTemplate != undefined">{{ (partNumber == 1) ? curTemplate.tTemplateName :
+    "" }} Purchase Order {{ (partNumber == 1) ? " Preview" : "" }}</h2>
 <div class="pageStep" *ngIf="curTemplate != undefined"><span
         [className]="(partNumber == 1) ? 'firstPg active': 'firstPg'" title="Step One">1</span><span
         [className]="(partNumber == 2) ? 'lastPg active': 'lastPg'" title="Last Step">2</span></div>
@@ -49,9 +50,9 @@
                     <tr>
                         <th>Description</th>
                         <th>Parts Number</th>
-                        <th style="width: 50px;">$Price</th>
+                        <th style="width: 55px;">Price</th>
                         <th style="width: 50px;">Quantity</th>
-                        <th style="width: 50px;">$Total</th>
+                        <th style="width: 50px;">Total</th>
                         <th style="width: 30px;"></th>
                     </tr>
                 </thead>
@@ -59,8 +60,11 @@
                     <tr *ngFor="let item of curTemplate.purchaseOrderParts;let index=index">
                         <td><input class="tableInput" (input)="validate(this)" [(ngModel)]="item.tPartDesc" /></td>
                         <td><input class="tableInput" (input)="validate(this)" [(ngModel)]="item.tPartNumber" /></td>
-                        <td><input class="tableInput" min="0" (keypress)="onNumber($event)"
-                                (input)="numberChanged(this)" type="text" [(ngModel)]="item.cPrice" /></td>
+                        <td class="dollarTD">
+                            <input class="tableInput" min="0" (keypress)="onNumber($event)"
+                                (input)="numberChanged(this)" type="text" [(ngModel)]="item.cPrice" />
+                                <span matPrefix class="dollarTD">$&nbsp;</span>
+                            </td>
                         <td><input class="tableInput" min="1" (keypress)="onNumber($event)"
                                 (input)="numberChanged(this)" type="number" [(ngModel)]="item.nQuantity" /></td>
                         <td>${{item.cTotal}}</td>
@@ -126,8 +130,7 @@
             (click)="GenerateMail()">Next</button>
         <button class="lightGray aButton" *ngIf="partNumber == 2" [disabled]="cannotSend()" cdkFocusInitial
             (click)="SendRequest()">Send</button>
-        <button class="lightGray aButton" *ngIf="partNumber == 2" cdkFocusInitial
-            (click)="MoveBack()">Back</button>
+        <button class="lightGray aButton" *ngIf="partNumber == 2" cdkFocusInitial (click)="MoveBack()">Back</button>
         <button class="lightGray aButton" mat-dialog-close (click)="onCancelUserDialog()">Cancel</button>
     </div>
 </div>

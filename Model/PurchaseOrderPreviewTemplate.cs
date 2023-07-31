@@ -20,6 +20,7 @@ namespace DeploymentTool.Model
         public string tPhone { get; set; }
         public string tEmail { get; set; }
         public string tAddress { get; set; }
+        public string tAddress2 { get; set; }
         public string tCity { get; set; }
         public string tStoreState { get; set; }
         public string tBillToCompany { get; set; }

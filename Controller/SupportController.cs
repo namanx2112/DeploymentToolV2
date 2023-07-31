@@ -28,13 +28,9 @@ namespace DeploymentTool.Controller
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAll(int nTicketId)
+        public IQueryable<tblSupportTicket> GetAll()
         {
-            var request = db.tblSupportTickets;
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new ObjectContent<IEnumerable<tblSupportTicket>>(request, new JsonMediaTypeFormatter())
-            };
+            return db.tblSupportTickets;
         }
 
         [HttpGet]

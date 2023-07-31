@@ -1,0 +1,32 @@
+<div class="tabsBody" *ngIf="nTemplateId == -1">
+    <div class="header">PO Worflow Configurations</div>
+    <div class="SearchPart whiteGrayTheme">
+        <app-controls [themeClass]="'whiteGray'" [numberOfControlsInARow]="1" [needButton]="false"
+            [fields]="searchField" [controlValues]="{}" [SubmitLabel]="'Search'" class="searchControls"></app-controls>
+        <button mat-raised-button class="searchButton" (click)="OpenView(0)" *ngIf="access.hasAccess('home.dashboard.po', 1)">Create New Workflow</button>
+    </div>
+    <div class="tablePart">
+        <div *ngFor="let item of allPO" class="lightGray requestTile">
+            <div class="tileHeader" *ngIf="access.hasAccess('home.dashboard.po', 1)">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButton">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="OpenView(item.aPurchaseOrderTemplateID)">
+                        <mat-icon>open_in_new</mat-icon>
+                        <span>Open</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteMe(item.aPurchaseOrderTemplateID)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                    </button>
+                </mat-menu>
+            </div>
+            <span class="tName" *ngIf="access.hasAccess('home.dashboard.po', 1)" title="Click to Open"
+                (click)="OpenView(item.aPurchaseOrderTemplateID)">{{item.tTemplateName}}</span>
+            <span *ngIf="!access.hasAccess('home.dashboard.po', 1)" class="tName">{{item.tTemplateName}}</span>
+        </div>
+    </div>
+</div>
+<app-purchase-order-workflow-template *ngIf="nTemplateId > -1" [nTemplateId]="nTemplateId"
+    (moveBack)="moveBack($event)"></app-purchase-order-workflow-template>
