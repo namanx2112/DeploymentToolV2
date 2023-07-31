@@ -86,7 +86,7 @@ export class SonicService {
       },
       { name: "Interior Menus", fields: [{ title: "DMB Quantity", field: "nDMBQuantity", tableName: "tblProjectInteriorMenus" }] },
       {
-        name: "Payment Systems", field: [{ title: "PAYS Units", field: "nPAYSUnits", tableName: "tblProjectPaymentSystem" }, { title: "45 Enclosures", field: "n45Enclosures", tableName: "tblProjectPaymentSystem" },
+        name: "Payment Systems", fields: [{ title: "PAYS Units", field: "nPAYSUnits", tableName: "tblProjectPaymentSystem" }, { title: "45 Enclosures", field: "n45Enclosures", tableName: "tblProjectPaymentSystem" },
         { title: "90 Enclosures", field: "n90Enclosures", tableName: "tblProjectPaymentSystem" }, { title: "DT Enclosures", field: "nDTEnclosures", tableName: "tblProjectPaymentSystem" }, { title: "15 Sun Shields", field: "n15SunShields", tableName: "tblProjectPaymentSystem" },
         { title: "UPS", field: "nUPS", tableName: "tblProjectPaymentSystem" }, { title: "Shelf", field: "nShelf", tableName: "tblProjectPaymentSystem" }]
       },
@@ -2641,7 +2641,7 @@ export class SonicService {
         hidden: false
       }],
       fields: [{
-        field_name: "Store No",
+        field_name: "Store Number",
         fieldUniqeName: "tStoreNumber",
         defaultVal: "",
         readOnly: false,
@@ -2653,7 +2653,7 @@ export class SonicService {
         hidden: false
       },
       {
-        field_name: "Project GoliveDate",
+        field_name: "Project Go-live Date",
         fieldUniqeName: "dProjectGoliveDate",
         defaultVal: "",
         readOnly: false,
@@ -2689,7 +2689,7 @@ export class SonicService {
         hidden: false
       },
       {
-        field_name: "Prev Proj Manager",
+        field_name: "Previous Project Manager",
         fieldUniqeName: "tPrevProjManager",
         defaultVal: "",
         readOnly: false,
@@ -2701,7 +2701,7 @@ export class SonicService {
         hidden: false
       },
       {
-        field_name: "Proj Manager",
+        field_name: "Project Manager",
         fieldUniqeName: "tProjManager",
         defaultVal: "",
         readOnly: false,

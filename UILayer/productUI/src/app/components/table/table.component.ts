@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatRow, MatTableDataSource } from '@angular/material/table';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MatRow, MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
 import { BrandModel, FranchiseModel, TechComponentModel, VendorModel, UserModel } from 'src/app/interfaces/models';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
@@ -25,7 +26,7 @@ export interface TableColumnDef {
   styleUrls: ['./table.component.css']
 })
 
-export class TableComponent implements OnChanges {
+export class TableComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @Input() curTab: HomeTab;
   @Input() searchFields: any;
@@ -43,11 +44,27 @@ export class TableComponent implements OnChanges {
   @ViewChild(MatSort) sort: MatSort;
   cService: any;
   initVal: Date;
-  constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
+  constructor(private _liveAnnouncer: LiveAnnouncer, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService,
     private storeService: StoreService) {
     this.initVal = new Date();
   }
+
+  ngAfterViewInit() {
+  }
+  
+  announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
+
 
   cellClick(row: MatRow) {
     this.rowClicked.emit(row);
@@ -101,6 +118,7 @@ export class TableComponent implements OnChanges {
   getTable() {
     this.cService.Get(this.searchFields, this.curTab).subscribe((resp: any[]) => {
       this.dataSource = new MatTableDataSource(resp);
+      this.dataSource.sort = this.sort;
       let fColumns = this.cService.GetTableVisibleColumns(this.curTab);
       for (var indx in this.curTab.fields) {
         if (fColumns.indexOf(this.curTab.fields[indx].fieldUniqeName) == -1)
