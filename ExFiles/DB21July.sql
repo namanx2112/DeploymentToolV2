@@ -155,67 +155,7 @@ from(
     
  --order by nProjectID desc    
 END 
-GO
 
-Alter Procedure sproc_CreateStoreFromExcel              
-@tStoreName as VARCHAR(500),              
-@tProjectType as VARCHAR(500),              
-@tStoreNumber as VARCHAR(20),              
-@tAddress as VARCHAR(4000),              
-@tCity as VARCHAR(500),              
-@tState as VARCHAR(500),              
-@nDMAID as INT,              
-@tDMA as VARCHAR(500),              
-@tRED as VARCHAR(500),              
-@tCM as VARCHAR(500),              
-@tANE as VARCHAR(500),              
-@tRVP as VARCHAR(500),              
-@tPrincipalPartner  as VARCHAR(500),              
-@dStatus as datetime,              
-@dOpenStore as dateTIME,              
-@tProjectStatus as VARCHAR(100),              
-@nCreatedBy int=0,              
-@nBrandId int=0              
-as              
-BEGIN              
-            
-            
- --insert into tbltrace (StoreName,ProjectType,StoreNumber,[Address],City,[State],DMAID,DMA,RED,CM,ANE,RVP,PrincipalPartner,dtCreatedOn,dtUpdatedOn,ProjectStatus,CreatedBy,BrandId)            
- --values (@tStoreName,@tProjectType,@tStoreNumber,@tAddress,@tCity,@tState,@nDMAID,@tDMA,@tRED,@tCM,@tANE,@tRVP,@tPrincipalPartner,@dStatus,@dOpenStore, @tProjectStatus, @nCreatedBy,@nBrandId )            
- declare @nStoreId int, @nProjectType INT,  @nProjectStatus INT, @nProjectId INT, @nStoreState INT           
- Select @nProjectType = aDropDownId from tblDropdowns WHERE tDropdownText = @tProjectType              
- Select @nProjectStatus = aDropDownId from tblDropdowns WHERE tDropdownText = @tProjectStatus              
- Select @nStoreState = aDropDownId from tblDropdowns WHERE tDropdownText = @tState         
-            
- select @nStoreId=aStoreID from tblStore with(nolock) where tStoreNumber=@tStoreNumber             
- if (@nStoreId>0)            
- begin            
-  update tblProject set tProjectName=@tStoreName,dGoLiveDate=@dOpenStore,nProjectType=@nProjectType,nProjectStatus=@nProjectStatus,  
-  nDMAID=@nDMAID,tDMA=@tDMA,nBrandID=@nBrandId,dtUpdatedOn=GETDATE(),@nProjectId=aProjectID  
-  where nStoreID=@nStoreId 
-   
-  update tblStore set tStoreName=@tStoreName,tStoreAddressLine1=@tAddress,tCity=@tCity,nStoreState=@nStoreState,dtUpdatedOn=GETDATE()   
-  where aStoreID=@nStoreId
-  
-  update tblProjectStakeHolders set tRVP=@tRVP,tRED=@tRED,tCM=@tCM,tAandE=@tANE,tPrincipalPartner=@tPrincipalPartner  
-  where nStoreId=@nStoreId
- end            
- else             
- begin            
-  INSERT INTO tblStore(tStoreNumber, nCreatedBy, dtCreatedOn, tStoreName, tStoreAddressLine1, tCity, nStoreState) VALUES(@tStoreNumber, @nCreatedBy, GETDATE(), @tStoreName, @tAddress, @tCity,@nStoreState)              
-  SET @nStoreId = @@IDENTITY  
-            
-  INSERT INTO tblProject(tProjectName,nStoreID,dGoLiveDate,nProjectType,nProjectStatus,nDMAID,tDMA,nBrandID,nCreatedBy,dtCreatedOn, nProjectActiveStatus)              
-  VALUES(@tStoreName, @nStoreId, @dOpenStore,@nProjectType,  @nProjectStatus, @nDMAID, @tDMA, @nBrandId, @nCreatedBy,GETDATE(),1)              
-              
-  SET @nProjectId = @@IDENTITY                 
-     
-  insert into tblProjectStakeHolders(nProjectID,tRVP,tRED,tCM,tAandE,tPrincipalPartner, nStoreId)    
-  values(@nProjectId,@tRVP,@tRED,@tCM,@tANE,@tPrincipalPartner, @nStoreId)      
-            
- end                
-    
-END
 GO
 Create Procedure sproc_MoveProjectToHistory    
 @nStoreId int,    
@@ -260,6 +200,7 @@ BEGIN
 END
 
 GO
+
 create function fn_getVendorName
 (@nVendorId int)
 returns VARCHAR(500)
@@ -274,14 +215,16 @@ END
 
 GO
 
-create  procedure sproc_getVendorNameFromPreviousProject
+create procedure sproc_getVendorNameFromPreviousProject
 @nProjectId int,
 @nStoreId int,
 @tTableName varchar(100),
 @tVendorName VARCHAR(500) OUTPUT
 as
-BEGIN
-	select top 1 @tVendorName= dbo.fn_getVendorName(nVendor) from tblProjectPOS where nStoreId = @nStoreId and nProjectID < @nProjectId and nVendor is not null order by nProjectID desc	
+BEGIN	
+	Declare @tQuery as NVARCHAR(MAX)
+	set @tQuery = N'select top 1 @tVendorName= dbo.fn_getVendorName(nVendor) from '+ @tTableName +' where nStoreId = '+ CAST(@nStoreId as VARCHAR) +' and nProjectID < '+ CAST(@nProjectId as VARCHAR) +' and nVendor is not null order by nProjectID desc'
+	EXEC sp_executesql @tQuery , N'@tVendorName VARCHAR(500) OUTPUT' , @tVendorName=@tVendorName OUTPUT  	
 	if(@tVendorName is null)
 		SET @tVendorName = ''
 END
@@ -304,7 +247,7 @@ Create procedure sproc_getPMFromPreviousProject
 @tPM VARCHAR(500) OUTPUT
 as
 BEGIN
-	select top 1 @tPM = tITPM from tblProjectStakeHolders with(nolock) where nStoreId = 8 and nProjectID < 18 and tITPM is not null order by aProjectStakeHolderID	desc
+	select top 1 @tPM = tITPM from tblProjectStakeHolders with(nolock) where nStoreId = @nStoreId and nProjectID < @nProjectId and tITPM is not null order by aProjectStakeHolderID	desc
 	if(@tPM is null)
 		SET @tPM = ''
 END
@@ -337,8 +280,9 @@ BEGIN
 	BEGIN  
 		Set @tQuery  = N'update #tmpTable set tNewVendor=dbo.fn_getVendorName(nVendor) from [dbo].['+ @tmpTableName +'] Where #tmpTable.nProjectId = [dbo].['+ @tmpTableName +'].nProjectId and nMyActiveStatus = 1 and #tmpTable.nProjectId = ' + CAST(@tmpProjectId as VARCHAR) -- update NewVendor
 		EXEC sp_executesql @tQuery
-
-		EXEC sproc_getVendorNameFromPreviousProject @tmpProjectId,@nStoreId,'tblProjectPOS', @tOldVendor OUTPUT	
+		SET @tOldVendor = ''
+		SET @tOldPM = ''
+		EXEC sproc_getVendorNameFromPreviousProject @tmpProjectId,@nStoreId,@tmpTableName, @tOldVendor OUTPUT	
 		EXEC sproc_getPMFromPreviousProject @tmpProjectId, @nStoreId, @tOldPM OUTPUT
 
 		Set @tQuery  = N'update #tmpTable set tOldVendor='''+@tOldVendor+''', tPrevProjManager='''+@tOldPM+''' Where nProjectId = ' + CAST(@tmpProjectId as VARCHAR) -- update Old vendor and PM
@@ -392,7 +336,7 @@ END
 
 GO
 
-Create   procedure sproc_getHistoricalProjects
+Create  procedure sproc_getHistoricalProjects
 @nStoreId int
 as
 BEGIN	
@@ -400,8 +344,7 @@ BEGIN
 	create table #pTypeTable(tProjectId int, nPType int, nVendorId INT,tProjectStatus varchar(100), tVendorName varchar(500), tTableName varchar(100), tProjManager Varchar(500))
 
 	insert into #pTypeTable (tProjectId, tTableName,nPType,tProjectStatus) select aProjectId, tTableName, nPType,tProjectStatus from(
-	select aProjectId, tTableName, nProjectType nPType,dbo.fn_getDropdownText(nProjectStatus) tProjectStatus from (select max(aProjectId) aProjectId, nProjectType, nProjectStatus from tblProject where nStoreID = @nStoreId and (nProjectActiveStatus = 0 or nProjectActiveStatus is null)
-group by nProjectType,nProjectStatus) tmpTable left join 
+	select aProjectId, tTableName, nProjectType nPType,dbo.fn_getDropdownText(nProjectStatus) tProjectStatus from (select aProjectId, nProjectType, nProjectStatus from tblProject where nStoreID = @nStoreId and (nProjectActiveStatus = 0 or nProjectActiveStatus is null)) tmpTable left join 
 	tblProjectTypeConfig on tblProjectTypeConfig.aTypeId = case when (tmpTable.nProjectType < 5 OR  tmpTable.nProjectType = 9) then -1 else tmpTable.nProjectType end
 	) tTable 
 	declare @tQuery NVARCHAR(MAX), @tmpProjectId int, @tmpTableName VARCHAR(100)
@@ -480,17 +423,39 @@ BEGIN
  Select @nStoreState = aDropDownId from tblDropdowns WHERE tDropdownText = @tState           
               
  select @nStoreId=aStoreID from tblStore with(nolock) where tStoreNumber=@tStoreNumber               
- if (@nStoreId>0)              
- begin              
-  update tblProject set tProjectName=@tStoreName,dGoLiveDate=@dOpenStore,nProjectType=@nProjectType,nProjectStatus=@nProjectStatus,    
-  nDMAID=@nDMAID,tDMA=@tDMA,nBrandID=@nBrandId,dtUpdatedOn=GETDATE(),@nProjectId=aProjectID    
-  where nStoreID=@nStoreId   
-     
-  update tblStore set tStoreName=@tStoreName,tStoreAddressLine1=@tAddress,tCity=@tCity,nStoreState=@nStoreState,dtUpdatedOn=GETDATE()     
+ if (@nStoreId>0) -- Move all To history and create a new Project            
+ begin     
+  Declare @movedProjectId int
+  Exec sproc_MoveProjectToHistory @nStoreId, @nProjectType, @movedProjectId OUTPUT
+  update tblProjectNetworking set nMyActiveStatus = 0 where nStoreId = @nStoreId
+  update tblProjectSonicRadio set nMyActiveStatus = 0 where nStoreId = @nStoreId
+  update tblProjectStakeHolders set nMyActiveStatus = 0 where nStoreId = @nStoreId
+  update tblProjectAudio set nMyActiveStatus = 0 where nStoreId = @nStoreId
+  update tblProjectExteriorMenus set nMyActiveStatus = 0 where nStoreId = @nStoreId
+  update tblProjectInteriorMenus set nMyActiveStatus = 0 where nStoreId = @nStoreId
+  update tblProjectPaymentSystem set nMyActiveStatus = 0 where nStoreId = @nStoreId
+  update tblProjectPOS set nMyActiveStatus = 0 where nStoreId = @nStoreId
+  
+  INSERT INTO tblProject(tProjectName,nStoreID,dGoLiveDate,nProjectType,nProjectStatus,nDMAID,tDMA,nBrandID,nCreatedBy,dtCreatedOn, nProjectActiveStatus)                
+  VALUES(@tStoreName, @nStoreId, @dOpenStore,@nProjectType,  @nProjectStatus, @nDMAID, @tDMA, @nBrandId, @nCreatedBy,GETDATE(),1)             
+
+  SET @nProjectId = @@IDENTITY                
+
+   update tblStore set tStoreName=@tStoreName,tStoreAddressLine1=@tAddress,tCity=@tCity,nStoreState=@nStoreState,dtUpdatedOn=GETDATE()     
   where aStoreID=@nStoreId  
+       
+  insert into tblProjectStakeHolders(nProjectID,tRVP,tRED,tCM,tAandE,tPrincipalPartner, nStoreId)      
+  values(@nProjectId,@tRVP,@tRED,@tCM,@tANE,@tPrincipalPartner, @nStoreId)       
+
+  --update tblProject set tProjectName=@tStoreName,dGoLiveDate=@dOpenStore,nProjectType=@nProjectType,nProjectStatus=@nProjectStatus,    
+  --nDMAID=@nDMAID,tDMA=@tDMA,nBrandID=@nBrandId,dtUpdatedOn=GETDATE(),@nProjectId=aProjectID    
+  --where nStoreID=@nStoreId   
+     
+  --update tblStore set tStoreName=@tStoreName,tStoreAddressLine1=@tAddress,tCity=@tCity,nStoreState=@nStoreState,dtUpdatedOn=GETDATE()     
+  --where aStoreID=@nStoreId  
     
-  update tblProjectStakeHolders set tRVP=@tRVP,tRED=@tRED,tCM=@tCM,tAandE=@tANE,tPrincipalPartner=@tPrincipalPartner    
-  where nStoreId=@nStoreId  
+  --update tblProjectStakeHolders set tRVP=@tRVP,tRED=@tRED,tCM=@tCM,tAandE=@tANE,tPrincipalPartner=@tPrincipalPartner    
+  --where nStoreId=@nStoreId  
  end              
  else               
  begin              
@@ -511,104 +476,184 @@ END
 
 GO
 
-Create Procedure sproc_CopyTechnologyToCurrentProject    
-@nStoreId int,    
-@nProjectType int,  
-@nProjectID int,
-@nFromProjectId int
-as                  
-BEGIN          
- declare @nPrevProjectType int  
- set @nPrevProjectType=0  
- select @nPrevProjectType=@nProjectType from tblProject with(nolock) where aProjectID = @nFromProjectId
-  --(0,'New'),(1,'Rebuild'),(2,'Remodel'),(3,'Relocation'),(4,'Acquisition'),(5,'POSInstallation'),(6,'AudioInstallation'),(7,'MenuInstallation'),(8,'PaymentTerminalInstallation'),(9,'PartsReplacement')    
-  
- if(@nPrevProjectType<> 5 or  @nPrevProjectType<> 6 or @nPrevProjectType<> 7 or @nPrevProjectType<> 8)  
- begin  
- update tblProjectNetworking set nMyActiveStatus=0 where nStoreId =@nStoreId  
- insert into tblProjectNetworking (nProjectID,nVendor,nPrimaryStatus,dPrimaryDate,nPrimaryType,nBackupStatus,dBackupDate,nBackupType,nTempStatus,dTempDate,nTempType,nStoreId,nMyActiveStatus)   
- (select top 1 @nProjectID,nVendor,nPrimaryStatus,dPrimaryDate,nPrimaryType,nBackupStatus,dBackupDate,nBackupType,nTempStatus,dTempDate,nTempType,@nStoreId,1 from tblProjectNetworking with (nolock)  where nProjectID=@nFromProjectId)  
-  
- update tblProjectSonicRadio set nMyActiveStatus=0 where nStoreId =@nStoreId  
- insert into tblProjectSonicRadio (nProjectID,nVendor,nOutdoorSpeakers,nColors,nIndoorSpeakers,nZones,nServerRacks,nStatus,dDeliveryDate,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nOutdoorSpeakers,nColors,nIndoorSpeakers,nZones,nServerRacks,nStatus,dDeliveryDate,cCost,@nStoreId,1 from tblProjectSonicRadio with (nolock) where nProjectID=@nFromProjectId  
-  
-  update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId    -- no need to copy Stakeholder as it will be created through newStore API
-
- if(@nPrevProjectType=5)--5,'POSInstallation'  
- Begin  
- update tblProjectAudio set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectAudio (nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,@nStoreId,1 from tblProjectAudio with (nolock) where nProjectID=@nFromProjectId  
-  
-  update tblProjectExteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectExteriorMenus (nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,@nStoreId,1 from tblProjectExteriorMenus with (nolock) where nProjectID=@nFromProjectId  
-  
- update tblProjectInteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectInteriorMenus (nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,@nStoreId,1 from tblProjectInteriorMenus with (nolock) where nProjectID=@nFromProjectId  
-  
-  update tblProjectPaymentSystem set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectPaymentSystem (nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,nStoreId,nMyActiveStatus)  
-  select top 1 @nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,@nStoreId,1 from tblProjectPaymentSystem with (nolock) where nProjectID=@nFromProjectId  
-  
- End  
- else if(@nPrevProjectType=6)--6,'AudioInstallation'  
- Begin  
- update tblProjectPOS set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectPOS (nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,@nStoreId,1 from tblProjectPOS with (nolock) where nProjectID=@nFromProjectId  
-  
-  update tblProjectExteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectExteriorMenus (nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,@nStoreId,1 from tblProjectExteriorMenus with (nolock) where nProjectID=@nFromProjectId  
-  
- update tblProjectInteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectInteriorMenus (nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,@nStoreId,1 from tblProjectInteriorMenus with (nolock) where nProjectID=@nFromProjectId  
-  
-  update tblProjectPaymentSystem set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectPaymentSystem (nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,nStoreId,nMyActiveStatus)  
-  select top 1 @nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,@nStoreId,1 from tblProjectPaymentSystem with (nolock) where nProjectID=@nFromProjectId  
-  
- End  
- else if(@nPrevProjectType=7)--7,'MenuInstallation'  
- Begin  
- update tblProjectAudio set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectAudio (nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,@nStoreId,1 from tblProjectAudio with (nolock) where nProjectID=@nFromProjectId  
-  
- update tblProjectPOS set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectPOS (nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,@nStoreId,1 from tblProjectPOS with (nolock) where nProjectID=@nFromProjectId  
-  
-   update tblProjectPaymentSystem set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectPaymentSystem (nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,nStoreId,nMyActiveStatus)  
-  select top 1 @nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,@nStoreId,1 from tblProjectPaymentSystem with (nolock) where nProjectID=@nFromProjectId  
-  
- End  
-  else if(@nPrevProjectType=8)--8,'PaymentTerminalInstallation'  
- Begin  
- update tblProjectAudio set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectAudio (nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,@nStoreId,1 from tblProjectAudio with (nolock) where nProjectID=@nFromProjectId  
-  
- update tblProjectPOS set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectPOS (nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,@nStoreId,1 from tblProjectPOS with (nolock) where nProjectID=@nFromProjectId  
-  
-  update tblProjectExteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectExteriorMenus (nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,@nStoreId,1 from tblProjectExteriorMenus with (nolock) where nProjectID=@nFromProjectId  
-  
- update tblProjectInteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId  
-  insert into tblProjectInteriorMenus (nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,nStoreId,nMyActiveStatus)  
- select top 1 @nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,@nStoreId,1 from tblProjectInteriorMenus with (nolock) where nProjectID=@nFromProjectId  
-  
- End  
- End
+Create Procedure sproc_CopyTechnologyToCurrentProject       
+@nStoreId int,        
+@nProjectType int,      
+@nProjectID int,    
+@nFromProjectId int    
+as                      
+BEGIN              
+ declare @nPrevProjectType int      
+ set @nPrevProjectType=0      
+ select @nPrevProjectType=@nProjectType from tblProject with(nolock) where aProjectID = @nFromProjectId    
+  --(0,'New'),(1,'Rebuild'),(2,'Remodel'),(3,'Relocation'),(4,'Acquisition'),(5,'POSInstallation'),(6,'AudioInstallation'),(7,'MenuInstallation'),(8,'PaymentTerminalInstallation'),(9,'PartsReplacement')        
+      
+ if(@nPrevProjectType<> 5 or  @nPrevProjectType<> 6 or @nPrevProjectType<> 7 or @nPrevProjectType<> 8)      
+ begin      
+ if(EXISTS(select top 1 1 from tblProjectNetworking with (nolock) where nProjectID=@nFromProjectId))
+ BEGIN
+	 update tblProjectNetworking set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	 insert into tblProjectNetworking (nProjectID,nVendor,nPrimaryStatus,dPrimaryDate,nPrimaryType,nBackupStatus,dBackupDate,nBackupType,nTempStatus,dTempDate,nTempType,nStoreId,nMyActiveStatus)       
+	 (select top 1 @nProjectID,nVendor,nPrimaryStatus,dPrimaryDate,nPrimaryType,nBackupStatus,dBackupDate,nBackupType,nTempStatus,dTempDate,nTempType,@nStoreId,1 from tblProjectNetworking with (nolock)  where nProjectID=@nFromProjectId)      
  END
+ ELSE
+	update tblProjectNetworking set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+
+ if(EXISTS(select top 1 1 from tblProjectSonicRadio with (nolock) where nProjectID=@nFromProjectId))
+ BEGIN
+	 update tblProjectSonicRadio set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	 insert into tblProjectSonicRadio (nProjectID,nVendor,nOutdoorSpeakers,nColors,nIndoorSpeakers,nZones,nServerRacks,nStatus,dDeliveryDate,cCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,nOutdoorSpeakers,nColors,nIndoorSpeakers,nZones,nServerRacks,nStatus,dDeliveryDate,cCost,@nStoreId,1 from tblProjectSonicRadio with (nolock) where nProjectID=@nFromProjectId      
+ END
+ ELSE
+	update tblProjectSonicRadio set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+
+ update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId    -- no need to copy Stakeholder as it will be created through newStore API  
+      
+ if(@nPrevProjectType=5)--5,'POSInstallation'      
+ Begin      
+	if(EXISTS(select top 1 1 from tblProjectAudio with (nolock) where nProjectID=@nFromProjectId))
+	BEGIN
+		update tblProjectAudio set nMyActiveStatus=0 where nStoreId =@nStoreId      
+		insert into tblProjectAudio (nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,nStoreId,nMyActiveStatus)      
+		select top 1 @nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,@nStoreId,1 from tblProjectAudio with (nolock) where nProjectID=@nFromProjectId      
+    END
+	ELSE
+		update tblProjectAudio set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+	if(EXISTS(select top 1 1 from tblProjectExteriorMenus with (nolock) where nProjectID=@nFromProjectId))
+	BEGIN
+		  update tblProjectExteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId      
+		  insert into tblProjectExteriorMenus (nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,nStoreId,nMyActiveStatus)      
+		 select top 1 @nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,@nStoreId,1 from tblProjectExteriorMenus with (nolock) where nProjectID=@nFromProjectId      
+    END
+	ELSE
+		update tblProjectExteriorMenus set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+	if(EXISTS(select top 1 1 from tblProjectInteriorMenus with (nolock) where nProjectID=@nFromProjectId))
+	BEGIN
+		 update tblProjectInteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId      
+		  insert into tblProjectInteriorMenus (nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,nStoreId,nMyActiveStatus)      
+		 select top 1 @nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,@nStoreId,1 from tblProjectInteriorMenus with (nolock) where nProjectID=@nFromProjectId      
+    END
+	ELSE
+		update tblProjectInteriorMenus set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+
+	if(EXISTS(select top 1 1 from tblProjectPaymentSystem with (nolock) where nProjectID=@nFromProjectId))
+	BEGIN
+	  update tblProjectPaymentSystem set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectPaymentSystem (nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,nStoreId,nMyActiveStatus)      
+	  select top 1 @nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,@nStoreId,1 from tblProjectPaymentSystem with (nolock) where nProjectID=@nFromProjectId      
+    END
+	ELSE
+		update tblProjectPaymentSystem set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+ End      
+ else if(@nPrevProjectType=6)--6,'AudioInstallation'      
+ Begin      
+	if(EXISTS(select top 1 1 from tblProjectPOS with (nolock) where nProjectID=@nFromProjectId))
+	BEGIN
+	 update tblProjectPOS set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectPOS (nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,@nStoreId,1 from tblProjectPOS with (nolock) where nProjectID=@nFromProjectId      
+	END
+	ELSE
+		update tblProjectPOS set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+
+
+   if(EXISTS(select top 1 1 from tblProjectExteriorMenus with (nolock) where nProjectID=@nFromProjectId))
+   BEGIN   
+	  update tblProjectExteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectExteriorMenus (nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,@nStoreId,1 from tblProjectExteriorMenus with (nolock) where nProjectID=@nFromProjectId      
+   END
+	ELSE
+		update tblProjectExteriorMenus set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+      
+   if(EXISTS(select top 1 1 from tblProjectInteriorMenus with (nolock) where nProjectID=@nFromProjectId))
+   BEGIN   
+	 update tblProjectInteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	 insert into tblProjectInteriorMenus (nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,@nStoreId,1 from tblProjectInteriorMenus with (nolock) where nProjectID=@nFromProjectId      
+   END
+   ELSE
+		update tblProjectInteriorMenus set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+      
+   if(EXISTS(select top 1 1 from tblProjectPaymentSystem with (nolock) where nProjectID=@nFromProjectId))
+   BEGIN   
+	  update tblProjectPaymentSystem set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectPaymentSystem (nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,nStoreId,nMyActiveStatus)      
+	  select top 1 @nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,@nStoreId,1 from tblProjectPaymentSystem with (nolock) where nProjectID=@nFromProjectId      
+   END
+   ELSE
+		update tblProjectPaymentSystem set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+ End      
+ else if(@nPrevProjectType=7)--7,'MenuInstallation'      
+ Begin      
+   if(EXISTS(select top 1 1 from tblProjectAudio with (nolock) where nProjectID=@nFromProjectId))
+   BEGIN   
+	 update tblProjectAudio set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectAudio (nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,@nStoreId,1 from tblProjectAudio with (nolock) where nProjectID=@nFromProjectId      
+  END
+   ELSE
+		update tblProjectAudio set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+      
+  if(EXISTS(select top 1 1 from tblProjectPOS with (nolock) where nProjectID=@nFromProjectId))
+  BEGIN 
+	 update tblProjectPOS set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectPOS (nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,@nStoreId,1 from tblProjectPOS with (nolock) where nProjectID=@nFromProjectId     
+  END
+   ELSE
+		update tblProjectPOS set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+      
+  if(EXISTS(select top 1 1 from tblProjectPaymentSystem with (nolock) where nProjectID=@nFromProjectId))
+  BEGIN 
+	  update tblProjectPaymentSystem set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectPaymentSystem (nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,nStoreId,nMyActiveStatus)      
+	  select top 1 @nProjectID,nVendor,nBuyPassID,nServerEPS,nStatus,dDeliveryDate,nPAYSUnits,n45Enclosures,n90Enclosures,nDTEnclosures,n15SunShields,nUPS,nShelf,cCost,nType,@nStoreId,1 from tblProjectPaymentSystem with (nolock) where nProjectID=@nFromProjectId      
+  END
+   ELSE
+		update tblProjectPaymentSystem set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+      
+ End      
+ else if(@nPrevProjectType=8)--8,'PaymentTerminalInstallation'      
+ Begin      
+ if(EXISTS(select top 1 1 from tblProjectAudio with (nolock) where nProjectID=@nFromProjectId))
+  BEGIN 
+	 update tblProjectAudio set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectAudio (nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,nStatus,nConfiguration,dDeliveryDate,nLoopStatus,nLoopType,dLoopDeliveryDate,cCost,@nStoreId,1 from tblProjectAudio with (nolock) where nProjectID=@nFromProjectId      
+  END
+   ELSE
+		update tblProjectAudio set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+  if(EXISTS(select top 1 1 from tblProjectPOS with (nolock) where nProjectID=@nFromProjectId))
+  BEGIN 
+	 update tblProjectPOS set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectPOS (nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,dDeliveryDate,dConfigDate,dSupportDate,nStatus,nPaperworkStatus,cCost,@nStoreId,1 from tblProjectPOS with (nolock) where nProjectID=@nFromProjectId       
+  END
+   ELSE
+		update tblProjectPOS set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+      
+   if(EXISTS(select top 1 1 from tblProjectExteriorMenus with (nolock) where nProjectID=@nFromProjectId))
+  BEGIN
+	  update tblProjectExteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectExteriorMenus (nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,nStalls,nPatio,nFlat,nDTPops,nDTMenu,nStatus,dDeliveryDate,cFabConCost,cIDTechCost,cTotalCost,@nStoreId,1 from tblProjectExteriorMenus with (nolock) where nProjectID=@nFromProjectId      
+  END
+   ELSE
+		update tblProjectExteriorMenus set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+      
+  if(EXISTS(select top 1 1 from tblProjectInteriorMenus with (nolock) where nProjectID=@nFromProjectId))
+  BEGIN
+	 update tblProjectInteriorMenus set nMyActiveStatus=0 where nStoreId =@nStoreId      
+	  insert into tblProjectInteriorMenus (nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,nStoreId,nMyActiveStatus)      
+	 select top 1 @nProjectID,nVendor,nDMBQuantity,nStatus,dDeliveryDate,cCost,@nStoreId,1 from tblProjectInteriorMenus with (nolock) where nProjectID=@nFromProjectId      
+   END
+   ELSE
+		update tblProjectInteriorMenus set nProjectID=@nProjectID where nStoreId =@nStoreId and nMyActiveStatus = 1
+ End      
+ End    
+ END  
  GO
  alter procedure sproc_getDynamicDataFromCompID    
 @nQuoteRequestTechCompid as int,    

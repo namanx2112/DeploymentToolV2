@@ -815,7 +815,7 @@
     </Key>
     <Property Name="aUserAndUserTypeRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nUserID" Type="Int32" />
-    <Property Name="nPermissionID" Type="Int32" />
+    <Property Name="nUserTypeID" Type="Int32" />
   </EntityType>
   <EntityType Name="tblUserPermissionRel">
     <Key>

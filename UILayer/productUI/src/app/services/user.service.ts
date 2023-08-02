@@ -13,21 +13,19 @@ import { Validators } from '@angular/forms';
 })
 export class UserService {
 
-  configUrl: any;
   constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
-    this.configUrl = authService.getConfigUrl();
   }
 
   Create(request: any) {
-    return this.http.post<number>(this.configUrl + "User/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<number>(CommonService.ConfigUrl + "User/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<number>(this.configUrl + "User/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<number>(CommonService.ConfigUrl + "User/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Delete(request: UserModel) {
-    return this.http.get<UserModel>(this.configUrl + "User/Delete?id=" + request.aUserID, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<UserModel>(CommonService.ConfigUrl + "User/Delete?id=" + request.aUserID, { headers: this.authService.getHttpHeaders() });
   }
 
   
@@ -41,7 +39,7 @@ export class UserService {
   }
 
   Get(searchFields: Dictionary<string> | null) {
-    return this.http.post<UserModel[]>(this.configUrl + "User/Get", searchFields, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<UserModel[]>(CommonService.ConfigUrl + "User/Get", searchFields, { headers: this.authService.getHttpHeaders() });
     // return new Observable<UserModel[]>((obj) => {
     //   let items = [{
     //     aUserID: 0,
@@ -170,6 +168,19 @@ export class UserService {
       field_placeholder: "Enter User Role",
       validator: [],
       mandatory: false,
+      hidden: false
+    },
+    {
+      field_name: "Assign Brands",
+      fieldUniqeName: "rBrandID",
+      defaultVal: "1",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.multidropdown,
+      options: this.commonService.GetDropdown("Brand"),
+      field_placeholder: "Select brand",
+      validator: [],
+      mandatory: true,
       hidden: false
     },
     {

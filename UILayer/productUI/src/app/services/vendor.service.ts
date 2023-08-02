@@ -11,25 +11,23 @@ import { CommonService } from './common.service';
 })
 export class VendorService {
 
-  configUrl: any;
   constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
-    this.configUrl = authService.getConfigUrl();
   }
 
   Create(request: any) {
-    return this.http.post<VendorModel>(this.configUrl + "Vendor/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<VendorModel>(CommonService.ConfigUrl + "Vendor/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<VendorModel>(this.configUrl + "Vendor/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<VendorModel>(CommonService.ConfigUrl + "Vendor/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Get(request: any | null){
-    return this.http.post<VendorModel[]>(this.configUrl + "Vendor/Get", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<VendorModel[]>(CommonService.ConfigUrl + "Vendor/Get", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Delete(request: VendorModel) {
-    return this.http.get<VendorModel>(this.configUrl + "Vendor/Delete?id=" + request.aVendorId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<VendorModel>(CommonService.ConfigUrl + "Vendor/Delete?id=" + request.aVendorId, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(){

@@ -674,10 +674,8 @@ warning 6002: The table/view 'dtDB.dbo.tblTrace' does not have a primary key def
     </Key>
     <Property Name="aUserAndUserTypeRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nUserID" Type="int" />
-    <Property Name="nPermissionID" Type="int" />
+    <Property Name="nUserTypeID" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'dtDB.dbo.tblUserBrandRel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="tblUserBrandRel">
     <Key>
       <PropertyRef Name="aUserBrandRelID" />
@@ -856,6 +854,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblSupportTicket" EntityType="Self.tblSupportTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUserAndUserTypeRel" EntityType="Self.tblUserAndUserTypeRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserBrandRel" EntityType="Self.tblUserBrandRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUserPermissionRel" EntityType="Self.tblUserPermissionRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUserRoleRel" EntityType="Self.tblUserRoleRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
@@ -953,13 +952,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     [tblTrace].[CreatedBy] AS [CreatedBy], 
     [tblTrace].[BrandId] AS [BrandId]
     FROM [dbo].[tblTrace] AS [tblTrace]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="tblUserBrandRel" EntityType="Self.tblUserBrandRel" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblUserBrandRel].[aUserBrandRelID] AS [aUserBrandRelID], 
-    [tblUserBrandRel].[nUserID] AS [nUserID], 
-    [tblUserBrandRel].[nBrandID] AS [nBrandID]
-    FROM [dbo].[tblUserBrandRel] AS [tblUserBrandRel]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblUserFunctionRel" EntityType="Self.tblUserFunctionRel" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

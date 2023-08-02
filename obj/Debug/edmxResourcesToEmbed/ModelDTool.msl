@@ -785,7 +785,7 @@
     <EntitySetMapping Name="tblUserAndUserTypeRels">
       <EntityTypeMapping TypeName="dtDBModel.tblUserAndUserTypeRel">
         <MappingFragment StoreEntitySet="tblUserAndUserTypeRel">
-          <ScalarProperty Name="nPermissionID" ColumnName="nPermissionID" />
+          <ScalarProperty Name="nUserTypeID" ColumnName="nUserTypeID" />
           <ScalarProperty Name="nUserID" ColumnName="nUserID" />
           <ScalarProperty Name="aUserAndUserTypeRelID" ColumnName="aUserAndUserTypeRelID" />
         </MappingFragment>

@@ -28,13 +28,20 @@ namespace DeploymentTool.Model
         public string tEmail { get; set; }
         public Nullable<int> nDepartment { get; set; }
         public Nullable<int> nRole { get; set; }
+        public List<int> rBrandID { get; set; }
         public string tEmpID { get; set; }
         public string tMobile { get; set; }
         public int nVendorId { get; set; }
 
+        public List<UserTypeByUser> userAndUsertypeRel { get; set; }
+
+
+        public List<UserPermission> userAndParmissionRel { get; set; }
+
         public tblUser GetTblUser()
         {
-            return new tblUser(){
+            return new tblUser()
+            {
                 aUserID = this.aUserID,
                 tName = this.tName,
                 tUserName = this.tUserName,
@@ -56,6 +63,26 @@ namespace DeploymentTool.Model
                 nUserID = userRequest.aUserID
             };
         }
+
+    }
+
+    public class UserPermission
+    {
+        public int nUserID { get; set; }
+        public int aPermissionlID { get; set; }
+        public string tPermissionName { get; set; }
+        public string tPermissionDiplayName { get; set; }
+        public int nCreatedBy { get; set; }
+
+
+    }
+    public class UserTypeByUser
+    {
+        public int nUserID { get; set; }
+        public int aUserTypeID { get; set; }
+        public string tUserTypeName { get; set; }
+        public string tVisibleFor { get; set; }
+
 
     }
 }

@@ -3,19 +3,18 @@ import { Injectable } from '@angular/core';
 import { Fields, FieldType } from '../interfaces/home-tab';
 import { TechComponentModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TechComponenttService {
 
-  configUrl: any;
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.configUrl = authService.getConfigUrl();
   }
 
   Create(request: any) {
-    return this.http.post<TechComponentModel>(this.configUrl + "TechComponent/CreateTechComponent", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<TechComponentModel>(CommonService.ConfigUrl + "TechComponent/CreateTechComponent", request, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(){
@@ -26,15 +25,15 @@ export class TechComponenttService {
   }
 
   Update(request: any) {
-    return this.http.post<TechComponentModel>(this.configUrl + "TechComponent/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<TechComponentModel>(CommonService.ConfigUrl + "TechComponent/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Get(request: TechComponentModel | null){
-    return this.http.post<TechComponentModel[]>(this.configUrl + "TechComponent/GetTechComponents", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<TechComponentModel[]>(CommonService.ConfigUrl + "TechComponent/GetTechComponents", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Delete(request: TechComponentModel) {
-    return this.http.get<TechComponentModel>(this.configUrl + "TechComponent/Delete?id=" + request.aTechComponentId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<TechComponentModel>(CommonService.ConfigUrl + "TechComponent/Delete?id=" + request.aTechComponentId, { headers: this.authService.getHttpHeaders() });
   }
 
   GetSearchFields(): Fields[]{

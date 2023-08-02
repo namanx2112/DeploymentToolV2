@@ -14,6 +14,9 @@ export class CommonService {
 
   }
 
+  
+  static ConfigUrl: string = "./api/";
+
   public getAllDropdowns() {
     this.ddService.Get("").subscribe((x: DropwDown[]) => {
       CommonService.allItems = x;
@@ -24,12 +27,25 @@ export class CommonService {
     let rString = "";
     if (typeof dString == 'string') {
       if (dString != "") {
-        let momentVal = moment(dString, 'YYYY-MM-DD')
+        let momentVal = (dString.indexOf("-") > -1) ? moment(dString, 'YYYY-MM-DD') : moment(dString, 'DD/MM/YYYY');
         rString = momentVal.format('MM/DD/YYYY');
       }
     }
     else if (dString != null)
-      rString = dString.toLocaleDateString();
+      rString = moment(dString).format('MM/DD/YYYY');
+    return rString;
+  }
+
+  static getFormatedDateStringForDB(dString: any) {
+    let rString = "";
+    if (typeof dString == 'string') {
+      if (dString != "") {
+        let momentVal = moment(dString, 'MM/DD/YYYY')
+        rString = momentVal.format('YYYY-MM-DD');
+      }
+    }
+    else if (dString != null)
+      rString = moment(dString).format('YYYY-MM-DD');
     return rString;
   }
 

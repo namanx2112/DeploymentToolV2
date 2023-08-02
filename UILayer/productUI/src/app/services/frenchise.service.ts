@@ -11,25 +11,23 @@ import { CommonService } from './common.service';
 })
 export class FranchiseService {
 
-  configUrl: any;
   constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
-    this.configUrl = authService.getConfigUrl();
   }
 
   Create(request: any) {
-    return this.http.post<FranchiseModel>(this.configUrl + "Franchise/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<FranchiseModel>(this.configUrl + "Franchise/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Get(request: FranchiseModel | null){
-    return this.http.post<FranchiseModel[]>(this.configUrl + "Franchise/Get", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<FranchiseModel[]>(CommonService.ConfigUrl + "Franchise/Get", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Delete(request: FranchiseModel) {
-    return this.http.get<FranchiseModel>(this.configUrl + "Franchise/Delete?id=" + request.aFranchiseId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Delete?id=" + request.aFranchiseId, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(){

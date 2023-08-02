@@ -131,21 +131,6 @@ export class ControlsComponent implements AfterViewChecked {
     return sVal;
   }
 
-  getFormatedValue(field: Fields, val: string) {
-    let retVal = val;
-    switch (field.field_type) {
-      case FieldType.date:
-        if (typeof val != 'undefined' && val != null) {
-          if (typeof val == 'object')
-            retVal = val["_i"];
-          else
-            retVal = val.split('T')[0];
-        }
-        break;
-    }
-    return retVal;
-  }
-
   hasEror(cControl: Fields): boolean {
     let has = false;
     let control = this.formGroup.get(cControl.fieldUniqeName);
@@ -182,8 +167,12 @@ export class ControlsComponent implements AfterViewChecked {
   getFieldControlValues() {
     var cVal: Dictionary<any> = {};
     Object.keys(this.formGroup.controls).forEach(key => {
-      if (typeof this.formGroup.get(key)?.value == 'object' && this.formGroup.get(key)?.value != null)
-        cVal[key] = new Date(this.formGroup.get(key)?.value).toLocaleDateString();
+      if (typeof this.formGroup.get(key)?.value == 'object' && this.formGroup.get(key)?.value != null) {
+        if (key.indexOf("d") == 0)
+          cVal[key] =  CommonService.getFormatedDateStringForDB(this.formGroup.get(key)?.value);
+        else
+          cVal[key] = this.formGroup.get(key)?.value;
+      }
       else
         cVal[key] = this.formGroup.get(key)?.value;
     });

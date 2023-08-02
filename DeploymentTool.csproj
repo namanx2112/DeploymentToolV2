@@ -973,6 +973,7 @@
     <Compile Include="Controller\ProjectPOSController.cs" />
     <Compile Include="Controller\ProjectSonicRadiosController.cs" />
     <Compile Include="Controller\ProjectStakeHoldersController.cs" />
+    <Compile Include="Controller\RoleController.cs" />
     <Compile Include="Controller\StoreContactsController.cs" />
     <Compile Include="Controller\PurchaseOrderController.cs" />
     <Compile Include="Controller\QuoteRequestController.cs" />
@@ -1035,6 +1036,7 @@
     <Compile Include="Model\ProjectExcelFields.cs" />
     <Compile Include="Model\PurchaseOrderPreviewTemplate.cs" />
     <Compile Include="Model\QuoteRequestTemplate.cs" />
+    <Compile Include="Model\Role.cs" />
     <Compile Include="Model\SearchField.cs" />
     <Compile Include="Model\SecurityContext.cs" />
     <Compile Include="Model\Store.cs" />

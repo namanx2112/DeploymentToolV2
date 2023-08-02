@@ -10,21 +10,20 @@ import { UserService } from './user.service';
 import { FranchiseService } from './frenchise.service';
 import { PartsService } from './parts.service';
 import { SupportContent } from '../interfaces/models';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  configUrl: any;
   constructor(private http: HttpClient, private authService: AuthService, private brandService: BrandServiceService,
     private vendorService: VendorService, private techComponentService: TechComponenttService, private userSerice: UserService, private franchiseSerice: FranchiseService
     , private partsService: PartsService) {
-    this.configUrl = authService.getConfigUrl();
    }
 
    public loginGet = () => {
-    return this.http.get<string>(this.configUrl + "login/get?username=cuong&password=1", { headers: this.authService.getHttpHeaders() });
+    return this.http.get<string>(CommonService.ConfigUrl + "login/get?username=cuong&password=1", { headers: this.authService.getHttpHeaders() });
   }
 
 

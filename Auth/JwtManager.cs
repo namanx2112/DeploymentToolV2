@@ -14,7 +14,7 @@ namespace DeploymentTool.Auth
     {
         private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
 
-        public static AuthResponse GenerateToken(User objUser, int expireMinutes = 60)
+        public static AuthResponse GenerateToken(User objUser, int expireHours = 24)
         {
             var symmetricKey = Convert.FromBase64String(Secret);
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -31,7 +31,7 @@ namespace DeploymentTool.Auth
 
         }),
 
-                Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
+                Expires = now.AddHours(Convert.ToInt32(expireHours)),
 
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(symmetricKey),

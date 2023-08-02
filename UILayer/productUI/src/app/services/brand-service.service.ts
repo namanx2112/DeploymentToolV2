@@ -13,9 +13,7 @@ import { Dictionary } from '../interfaces/commons';
 })
 export class BrandServiceService {
 
-  configUrl: any;
   constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
-    this.configUrl = authService.getConfigUrl();
   }
 
   //Create
@@ -26,15 +24,15 @@ export class BrandServiceService {
   //GetTableVisibleColumns
 
   Create(request: any) {
-    return this.http.post<BrandModel>(this.configUrl + "Brand/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<BrandModel>(CommonService.ConfigUrl + "Brand/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<BrandModel>(this.configUrl + "Brand/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<BrandModel>(CommonService.ConfigUrl + "Brand/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Delete(request: BrandModel) {
-    return this.http.get<BrandModel>(this.configUrl + "Brand/Delete?id=" + request.aBrandId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<BrandModel>(CommonService.ConfigUrl + "Brand/Delete?id=" + request.aBrandId, { headers: this.authService.getHttpHeaders() });
   }
 
   Get(searchFields: Dictionary<string> | null) {
@@ -61,7 +59,7 @@ export class BrandServiceService {
     //   ];
     //   obj.next(items);
     // });
-    return this.http.post<BrandModel[]>(this.configUrl + "Brand/Get", searchFields, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<BrandModel[]>(CommonService.ConfigUrl + "Brand/Get", searchFields, { headers: this.authService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns() {

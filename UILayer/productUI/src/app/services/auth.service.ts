@@ -3,21 +3,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthResponse } from '../interfaces/auth-response';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthCodes, AuthRequest } from '../interfaces/auth-request';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  configUrl: string;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient, private route: ActivatedRoute, public router: Router) {
-    this.configUrl = "./api/";
-    localStorage.setItem("configUrl", this.configUrl);
   }
 
   signIn(user: any) {
-    return this.http.post<AuthResponse>(this.configUrl + "token/get", user, { headers: this.headers })
+    return this.http.post<AuthResponse>(CommonService.ConfigUrl + "token/get", user, { headers: this.headers })
       .subscribe((res: AuthResponse) => {
         localStorage.setItem('authResponse', JSON.stringify(res));
         this.router.navigate(['./home'], { skipLocationChange: true, relativeTo: this.route });
@@ -25,7 +23,7 @@ export class AuthService {
   }
 
   ChangePassword(request: any) {
-    return this.http.post<any>(this.configUrl + "token/ChangePassword", request, { headers: this.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "token/ChangePassword", request, { headers: this.getHttpHeaders() });
   }
 
 
@@ -60,9 +58,5 @@ export class AuthService {
       token = JSON.parse(authResp).auth.Token;
     }
     return token;
-  }
-
-  getConfigUrl() {
-    return localStorage.getItem('configUrl');
   }
 }

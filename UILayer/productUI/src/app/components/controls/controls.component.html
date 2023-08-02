@@ -50,6 +50,16 @@
                 <mat-error
                     *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
             </mat-form-field>
+            <mat-form-field appearance="outline"
+                *ngIf="!(curControl.readOnly || readOnlyForm) && curControl.field_type == 10">
+                <mat-select [compareWith]="compareDropDown" formControlName="{{curControl.fieldUniqeName}}"
+                    [(value)]="controlValues[curControl.fieldUniqeName]" multiple>
+                    <mat-option *ngFor="let opt of curControl.options"
+                        [value]="opt.optionIndex">{{opt.optionDisplayName}}</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
+            </mat-form-field>
         </div>
     </ng-container>
     <div *ngIf="needButton" class="controlButton">

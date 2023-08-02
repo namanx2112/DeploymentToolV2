@@ -12,10 +12,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SonicService {
-  configUrl: any;
   constructor(private http: HttpClient, private commonService: CommonService, private authService: AuthService) {
-    this.configUrl = authService.getConfigUrl();
   }
+
 
   UploadStore({ fileToUpload }: { fileToUpload: File; }) {
     const formData: FormData = new FormData();
@@ -23,15 +22,15 @@ export class SonicService {
     let httpHeader = new HttpHeaders({
       "Authorization": "Bearer " + this.authService.getToken()
     });
-    return this.http.post<SonicProjectExcel[]>(this.configUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
+    return this.http.post<SonicProjectExcel[]>(CommonService.ConfigUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
   }
 
   CreateNewStores(request: SonicProjectExcel[]) {
-    return this.http.post<string>(this.configUrl + "Sonic/CreateNewStores", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<string>(CommonService.ConfigUrl + "Sonic/CreateNewStores", request, { headers: this.authService.getHttpHeaders() });
   }
 
   SearchStore(request: string) {
-    return this.http.get<StoreSearchModel[]>(this.configUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<StoreSearchModel[]>(CommonService.ConfigUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
 
@@ -73,7 +72,7 @@ export class SonicService {
   }
 
   // Delete(request: UserModel) {
-  //   return this.http.delete<UserModel>(this.configUrl + "User/Delete?id=" + request.aUserID, { headers: this.authService.getHttpHeaders() });
+  //   return this.http.delete<UserModel>(CommonService.ConfigUrl + "User/Delete?id=" + request.aUserID, { headers: this.authService.getHttpHeaders() });
   // }
 
 

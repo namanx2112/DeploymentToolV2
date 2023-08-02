@@ -106,9 +106,9 @@ export interface UserModel {
     tEmail: string,
     nDepartment: number,
     nRole: number,
+    rBrandID: number,
     tEmpID: string,
     tMobile: string,
-    nBrandId: number,
     nVendorId: number
 }
 

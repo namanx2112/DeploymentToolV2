@@ -10,27 +10,25 @@ import { FieldType, Fields } from '../interfaces/home-tab';
 })
 export class DropdownServiceService {
 
-  configUrl: any;
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.configUrl = authService.getConfigUrl();
   }
 
   Create(request: DropwDown) {
-    return this.http.post<number>(this.configUrl + "Dropdown/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<number>(CommonService.ConfigUrl + "Dropdown/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: DropwDown) {
-    return this.http.post<any>(this.configUrl + "Dropdown/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "Dropdown/Update", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Get(request: string) {
     // let params = new HttpParams();
     //     params = params.set('tModuleName', request);
-    return this.http.get<DropwDown[]>(this.configUrl + "Dropdown/Get?tModuleName=" + request, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<DropwDown[]>(CommonService.ConfigUrl + "Dropdown/Get?tModuleName=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
   Delete(request: number) {
-    return this.http.get<number>(this.configUrl + "Dropdown/Delete?id=" + request, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<number>(CommonService.ConfigUrl + "Dropdown/Delete?id=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
 
