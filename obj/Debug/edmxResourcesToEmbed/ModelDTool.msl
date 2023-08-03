@@ -61,15 +61,10 @@
           <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
           <ScalarProperty Name="tVendorContact" ColumnName="tVendorContact" />
           <ScalarProperty Name="tVendorCategory" ColumnName="tVendorCategory" />
-          <ScalarProperty Name="tVendorEstablished" ColumnName="tVendorEstablished" />
-          <ScalarProperty Name="tVendorCountry" ColumnName="tVendorCountry" />
           <ScalarProperty Name="tVendorWebsite" ColumnName="tVendorWebsite" />
-          <ScalarProperty Name="tVendorContactPerson" ColumnName="tVendorContactPerson" />
           <ScalarProperty Name="tVendorPhone" ColumnName="tVendorPhone" />
           <ScalarProperty Name="tVendorAddress" ColumnName="tVendorAddress" />
           <ScalarProperty Name="tVendorEmail" ColumnName="tVendorEmail" />
-          <ScalarProperty Name="tVendorDescription" ColumnName="tVendorDescription" />
-          <ScalarProperty Name="nTechComponentID" ColumnName="nTechComponentID" />
           <ScalarProperty Name="tVendorName" ColumnName="tVendorName" />
           <ScalarProperty Name="aVendorId" ColumnName="aVendorId" />
         </MappingFragment>
@@ -425,21 +420,18 @@
     <EntitySetMapping Name="tblFranchises">
       <EntityTypeMapping TypeName="dtDBModel.tblFranchise">
         <MappingFragment StoreEntitySet="tblFranchise">
+          <ScalarProperty Name="tFranchiseZip" ColumnName="tFranchiseZip" />
+          <ScalarProperty Name="nFranchiseState" ColumnName="nFranchiseState" />
+          <ScalarProperty Name="tFranchiseCity" ColumnName="tFranchiseCity" />
+          <ScalarProperty Name="tFranchiseAddress2" ColumnName="tFranchiseAddress2" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
           <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
           <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-          <ScalarProperty Name="nFranchiseRevenue" ColumnName="nFranchiseRevenue" />
-          <ScalarProperty Name="nFranchiseEmployeeCount" ColumnName="nFranchiseEmployeeCount" />
           <ScalarProperty Name="tFranchiseAddress" ColumnName="tFranchiseAddress" />
           <ScalarProperty Name="tFranchisePhone" ColumnName="tFranchisePhone" />
           <ScalarProperty Name="tFranchiseEmail" ColumnName="tFranchiseEmail" />
-          <ScalarProperty Name="tFranchiseOwner" ColumnName="tFranchiseOwner" />
-          <ScalarProperty Name="tFranchiseContact" ColumnName="tFranchiseContact" />
-          <ScalarProperty Name="dFranchiseEstablished" ColumnName="dFranchiseEstablished" />
-          <ScalarProperty Name="tFranchiseLocation" ColumnName="tFranchiseLocation" />
-          <ScalarProperty Name="tFranchiseDescription" ColumnName="tFranchiseDescription" />
           <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
           <ScalarProperty Name="tFranchiseName" ColumnName="tFranchiseName" />
           <ScalarProperty Name="aFranchiseId" ColumnName="aFranchiseId" />
@@ -776,6 +768,7 @@
     <EntitySetMapping Name="tblRolePermissionRels">
       <EntityTypeMapping TypeName="dtDBModel.tblRolePermissionRel">
         <MappingFragment StoreEntitySet="tblRolePermissionRel">
+          <ScalarProperty Name="nPermVal" ColumnName="nPermVal" />
           <ScalarProperty Name="nPermissionID" ColumnName="nPermissionID" />
           <ScalarProperty Name="nRoleID" ColumnName="nRoleID" />
           <ScalarProperty Name="aRolePermissionRelID" ColumnName="aRolePermissionRelID" />
@@ -794,6 +787,7 @@
     <EntitySetMapping Name="tblUserPermissionRels">
       <EntityTypeMapping TypeName="dtDBModel.tblUserPermissionRel">
         <MappingFragment StoreEntitySet="tblUserPermissionRel">
+          <ScalarProperty Name="nPermVal" ColumnName="nPermVal" />
           <ScalarProperty Name="nPermissionID" ColumnName="nPermissionID" />
           <ScalarProperty Name="nUserID" ColumnName="nUserID" />
           <ScalarProperty Name="aUserPermissionRelID" ColumnName="aUserPermissionRelID" />

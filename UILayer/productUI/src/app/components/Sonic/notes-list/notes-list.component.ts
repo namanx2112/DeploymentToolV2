@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { HomeTab, TabInstanceType } from 'src/app/interfaces/home-tab';
 import { SonicService } from 'src/app/services/sonic.service';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
+import { NotesService } from 'src/app/services/notes.service';
+import { StoreSearchModel } from 'src/app/interfaces/sonic';
 
 @Component({
   selector: 'app-notes-list',
@@ -11,19 +13,27 @@ import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.c
 })
 export class NotesListComponent {
   curTab: HomeTab;
-  constructor(private service: SonicService, private dialog: MatDialog) {
+  refreshFlag: Date;
+  curStore: StoreSearchModel;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: NotesService, private dialog: MatDialog) {
     this.curTab = this.service.GetNotesTab(TabInstanceType.Table);
+    if (typeof data != 'undefined')
+      this.curStore = data.curStore;
   }
 
   rowClicked(row: any) {
   }
 
   createNotes() {
+    let cThis = this;
     const dialogConfig = new MatDialogConfig();
     let dialogRef: any;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
-    dialogConfig.height = '90%';
+    let pFillData = {
+      "nStoreID": this.curStore.nStoreId,
+      "nProjectID": this.curStore.lstProjectsInfo[this.curStore.lstProjectsInfo.length - 1].nProjectId
+    };
 
     dialogConfig.data = {
       numberOfControlsInARow: 1,
@@ -31,13 +41,15 @@ export class NotesListComponent {
       fields: this.curTab.fields,
       readOnlyForm: false,
       needButton: true,
-      controlValues: [],
+      controlValues: pFillData,
       SubmitLabel: "Post",
       onSubmit: function (data: any) {
-        let clickedVal = data.values;
-        dialogRef.close();
+        cThis.service.Create(data.value).subscribe((x: any) => {
+          cThis.refreshFlag = new Date();
+          dialogRef.close();
+        });
       },
-      onClose: function(ev: any){
+      onClose: function (ev: any) {
         dialogRef.close();
       },
       themeClass: "grayWhite",

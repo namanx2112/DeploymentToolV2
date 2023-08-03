@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommonService } from './common.service';
 import { AuthService } from './auth.service';
-import { ActiveProject, HistoricalProjects, NewProjectStore, SonicNotes } from '../interfaces/sonic';
+import { ActiveProject, HistoricalProjects, NewProjectStore } from '../interfaces/sonic';
 import { ProjectTemplates } from '../interfaces/models';
 import { Fields, HomeTab, TabType } from '../interfaces/home-tab';
 import { Observable } from 'rxjs';
@@ -82,46 +82,46 @@ export class StoreService {
 
 
   getNotes() {
-    return new Observable<SonicNotes[]>((obj) => {
-      let items: SonicNotes[] = [
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "General",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        },
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "POPS",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        },
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "TEGS",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        },
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "DFDDSD",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        },
-        {
-          aNotesId: 1005,
-          dNotesDate: new Date(),
-          tType: "RRSD",
-          tSource: "Clark Kent",
-          tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
-        }
-      ];
-      obj.next(items);
-    });
+    // return new Observable<SonicNotes[]>((obj) => {
+    //   let items: SonicNotes[] = [
+    //     {
+    //       aNotesId: 1005,
+    //       dNotesDate: new Date(),
+    //       tType: "General",
+    //       tSource: "Clark Kent",
+    //       tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+    //     },
+    //     {
+    //       aNotesId: 1005,
+    //       dNotesDate: new Date(),
+    //       tType: "POPS",
+    //       tSource: "Clark Kent",
+    //       tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+    //     },
+    //     {
+    //       aNotesId: 1005,
+    //       dNotesDate: new Date(),
+    //       tType: "TEGS",
+    //       tSource: "Clark Kent",
+    //       tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+    //     },
+    //     {
+    //       aNotesId: 1005,
+    //       dNotesDate: new Date(),
+    //       tType: "DFDDSD",
+    //       tSource: "Clark Kent",
+    //       tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+    //     },
+    //     {
+    //       aNotesId: 1005,
+    //       dNotesDate: new Date(),
+    //       tType: "RRSD",
+    //       tSource: "Clark Kent",
+    //       tNote: "Mr. Guterres said peace is needed today more than ever before, as war and conflict unleash devastating poverty and hunger, forcing tens of millions from their homes. The entire planet is battling climate chaos, and even peaceful countries are facing “gaping inequalities and political polarization”, he added. "
+    //     }
+    //   ];
+    //   obj.next(items);
+    // });
   }
 
   getActiveProjects(request: any) {

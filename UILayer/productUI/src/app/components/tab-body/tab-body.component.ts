@@ -4,6 +4,7 @@ import { MatRow } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
+import { AccessService } from 'src/app/services/access.service';
 
 @Component({
   selector: 'app-tab-body',
@@ -35,7 +36,7 @@ export class TabBodyComponent {
   searchFields: any | null;
   NewInstanceName: string;
   isNew: boolean;
-  constructor(private route: ActivatedRoute, public router: Router) {
+  constructor(private route: ActivatedRoute, public router: Router, public access: AccessService) {
     this.searchControlVals = {};
     this.curControlVals = {};
     this.secondPart = "table";

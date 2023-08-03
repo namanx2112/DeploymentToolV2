@@ -146,21 +146,18 @@ warning 6002: The table/view 'dtDB.dbo.tblEnumTableField' does not have a primar
     <Property Name="aFranchiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tFranchiseName" Type="nvarchar" MaxLength="255" />
     <Property Name="nBrandID" Type="int" />
-    <Property Name="tFranchiseDescription" Type="nvarchar" MaxLength="255" />
-    <Property Name="tFranchiseLocation" Type="nvarchar" MaxLength="255" />
-    <Property Name="dFranchiseEstablished" Type="datetime" />
-    <Property Name="tFranchiseContact" Type="nvarchar" MaxLength="255" />
-    <Property Name="tFranchiseOwner" Type="nvarchar" MaxLength="255" />
     <Property Name="tFranchiseEmail" Type="nvarchar" MaxLength="255" />
     <Property Name="tFranchisePhone" Type="nvarchar" MaxLength="255" />
     <Property Name="tFranchiseAddress" Type="nvarchar" MaxLength="255" />
-    <Property Name="nFranchiseEmployeeCount" Type="int" />
-    <Property Name="nFranchiseRevenue" Type="int" />
     <Property Name="nCreatedBy" Type="int" />
     <Property Name="nUpdateBy" Type="int" />
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+    <Property Name="tFranchiseAddress2" Type="varchar" MaxLength="5000" />
+    <Property Name="tFranchiseCity" Type="varchar" MaxLength="100" />
+    <Property Name="nFranchiseState" Type="int" />
+    <Property Name="tFranchiseZip" Type="varchar" MaxLength="100" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -422,13 +419,6 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tblProjectTypeConfig">
-          <Property Name="aTypeId" Type="int" />
-          <Property Name="tTableName" Type="varchar" MaxLength="100" />
-          <Property Name="isTechProjectType" Type="int" />
-        </EntityType>-->
   <EntityType Name="tblPurchaseOrder">
     <Key>
       <PropertyRef Name="aPurchaseOrderID" />
@@ -547,6 +537,7 @@ warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a pri
     <Property Name="aRolePermissionRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nRoleID" Type="int" />
     <Property Name="nPermissionID" Type="int" />
+    <Property Name="nPermVal" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -701,6 +692,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Property Name="aUserPermissionRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nUserID" Type="int" />
     <Property Name="nPermissionID" Type="int" />
+    <Property Name="nPermVal" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tblUserRoleRel">
     <Key>
@@ -752,15 +744,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     </Key>
     <Property Name="aVendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tVendorName" Type="nvarchar" MaxLength="255" />
-    <Property Name="nTechComponentID" Type="int" />
-    <Property Name="tVendorDescription" Type="nvarchar" MaxLength="255" />
     <Property Name="tVendorEmail" Type="nvarchar" MaxLength="255" />
     <Property Name="tVendorAddress" Type="nvarchar" MaxLength="255" />
     <Property Name="tVendorPhone" Type="nvarchar" MaxLength="255" />
-    <Property Name="tVendorContactPerson" Type="nvarchar" MaxLength="255" />
     <Property Name="tVendorWebsite" Type="nvarchar" MaxLength="255" />
-    <Property Name="tVendorCountry" Type="nvarchar" MaxLength="255" />
-    <Property Name="tVendorEstablished" Type="datetime" />
     <Property Name="tVendorCategory" Type="nvarchar" MaxLength="255" />
     <Property Name="tVendorContact" Type="nvarchar" MaxLength="255" />
     <Property Name="nCreatedBy" Type="int" />

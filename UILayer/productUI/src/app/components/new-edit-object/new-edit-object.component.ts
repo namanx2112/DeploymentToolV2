@@ -132,8 +132,13 @@ export class NewEditObjectComponent {
   updateChildProperties(tTab: HomeTab, vals: any) {
     switch (tTab.tab_type) {
       case TabType.VendorParts:
-      case TabType.Users:
         vals["nVendorId"] = this._controlValues["aVendorId"];
+        break;
+      case TabType.Users:
+        if (this.curTab.tab_type == TabType.Vendor)
+          vals["nVendorId"] = this._controlValues["aVendorId"];
+        else if (this.curTab.tab_type == TabType.Franchise)
+          vals["nFranchiseId"] = this._controlValues["aFranchiseId"];
         break;
     }
     return vals;
@@ -190,12 +195,15 @@ export class NewEditObjectComponent {
         if (this._curTab.tab_type == TabType.Vendor && typeof this._controlValues[cTab.tab_name] != 'undefined') {
           aField = { nVendorId: this._controlValues["aVendorId"] };
         }
+        else if (this._curTab.tab_type == TabType.Franchise && typeof this._controlValues[cTab.tab_name] != 'undefined') {
+          aField = { nFranchiseId: this._controlValues["aFranchiseId"] };
+        }
         break;
     }
     return aField;
   }
 
-  onCloseClicked(ev: any){
+  onCloseClicked(ev: any) {
     ev.closed = true;
     this.returnBack.emit(ev);
   }

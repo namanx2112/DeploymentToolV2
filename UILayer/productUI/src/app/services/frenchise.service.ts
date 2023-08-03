@@ -34,8 +34,8 @@ export class FranchiseService {
     return [
       "tFranchiseName",
       "tFranchiseEmail",
-      "tFranchiseOwner",
-      "tFranchiseLocation"
+      "tFranchiseAddress",
+      "nFranchiseState"
     ];
   }
 
@@ -85,13 +85,84 @@ export class FranchiseService {
         hidden: false
       },
       {
-        field_name: "Franchise Franchise Description",
-        fieldUniqeName: "tFranchiseDescription",
+        field_name: "Email ID",
+        fieldUniqeName: "tFranchiseEmail",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.email,
+        field_placeholder: "Enter Franchise Email",
+        validator: [Validators.email],
+        mandatory: true,
+        hidden: false
+      },
+      {
+        field_name: "Address Line 1",
+        fieldUniqeName: "tFranchiseAddress",
         defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.text,
-        field_placeholder: "Enter Franchise Franchise Description",
+        field_placeholder: "Enter Address Line 1",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Address Line 2",
+        fieldUniqeName: "tFranchiseAddress2",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Address Line 2",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "City",
+        fieldUniqeName: "tFranchiseCity",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter City",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },{
+        field_name: "State",
+        fieldUniqeName: "nFranchiseState",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        options: this.commonService.GetDropdown("State"),
+        field_placeholder: "Enter State",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },{
+        field_name: "Zip Code",
+        fieldUniqeName: "tFranchiseZip",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Zip Code",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Phone No.",
+        fieldUniqeName: "tFranchisePhone",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Phone",
         validator: [],
         mandatory: false,
         hidden: false
@@ -107,139 +178,6 @@ export class FranchiseService {
         validator: [],
         mandatory: true,
         hidden: true
-      },
-      {
-        field_name: "Franchise Location",
-        fieldUniqeName: "tFranchiseLocation",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Franchise Location",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Email",
-        fieldUniqeName: "tFranchiseEmail",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.email,
-        field_placeholder: "Enter Franchise Email",
-        validator: [Validators.email],
-        mandatory: true,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Address",
-        fieldUniqeName: "tFranchiseAddress",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Franchise Address",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Phone",
-        fieldUniqeName: "tFranchisePhone",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Franchise Phone",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Contact",
-        fieldUniqeName: "tFranchiseContact",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Franchise Contact",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Owner",
-        fieldUniqeName: "tFranchiseOwner",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Franchise Owner",
-        validator: [],
-        mandatory: true,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Franchise EmployeeCount",
-        fieldUniqeName: "nFranchiseEmployeeCount",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Franchise Franchise EmployeeCount",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Franchise Revenue",
-        fieldUniqeName: "nFranchiseRevenue",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Franchise Franchise Franchise Revenue",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Country",
-        fieldUniqeName: "tFranchiseCountry",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.dropdown,
-        field_placeholder: "Enter Franchise Country",
-        validator: [Validators.required],
-        options: this.commonService.GetDropdown("Country"),
-        mandatory: true,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Established",
-        fieldUniqeName: "dFranchiseEstablished",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.date,
-        field_placeholder: "Enter Franchise Established",
-        validator: [],
-        mandatory: true,
-        hidden: false
-      },
-      {
-        field_name: "Franchise Category",
-        fieldUniqeName: "tFranchiseCategory",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Franchise Category",
-        validator: [],
-        mandatory: true,
-        hidden: false
       },
       {
         field_name: "Franchise Created By",

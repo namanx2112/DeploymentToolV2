@@ -9,12 +9,9 @@ namespace DeploymentTool.Model
     public class User
     {
         public int nUserID { get; set; }
-        public string userName { get; set; }
-        public string password { get; set; }
+        public int nRole { get; set; }
         public string tName { get; set; }
         public string tEmail { get; set; }
-        public string nRoleType { get; set; }
-
         public AuthResponse auth { get; set; }
 
     }
@@ -32,6 +29,7 @@ namespace DeploymentTool.Model
         public string tEmpID { get; set; }
         public string tMobile { get; set; }
         public int nVendorId { get; set; }
+        public int nFranchiseId { get; set; }
 
         public List<UserTypeByUser> userAndUsertypeRel { get; set; }
 

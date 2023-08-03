@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
-import { ActiveProject, HistoricalProjects, ProjectTypes, SonicNotes, SonicProjectExcel, StoreSearchModel } from '../interfaces/sonic';
+import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, SonicProjectExcel, StoreSearchModel } from '../interfaces/sonic';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -126,14 +126,6 @@ export class SonicService {
           "tNewVendor"
         ];
       }
-    }
-    else if (tab.tab_type == TabType.StoreNotes) {
-      return [
-        "dNotesDate",
-        "tType",
-        "tSource",
-        "tNote"
-      ];
     }
     else
       return [];
@@ -2827,91 +2819,6 @@ export class SonicService {
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter New Vendor",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }]
-    };
-  }
-
-  GetNotesTab(instType: TabInstanceType): HomeTab {
-    return {
-      tab_name: "Notes",
-      tab_header: "Notes",
-      tTableName: "tblNotes",
-      tab_type: TabType.StoreNotes,
-      tab_unique_name: "",
-      instanceType: instType,
-      childTabs: [],
-      search_fields: [{
-        field_name: "aNotesId",
-        fieldUniqeName: "aNotesId",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Notes Id",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }],
-      fields: [{
-        field_name: "aNotesId",
-        fieldUniqeName: "aNotesId",
-        defaultVal: "0",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Notes Id",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      },
-      {
-        field_name: "Date",
-        fieldUniqeName: "dNotesDate",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.date,
-        field_placeholder: "Enter Date",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      },
-      {
-        field_name: "Type",
-        fieldUniqeName: "tType",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.dropdown,
-        options: this.commonService.GetDropdown("SonicNoteType"),
-        field_placeholder: "Enter Type",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Source",
-        fieldUniqeName: "tSource",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Source",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Note",
-        fieldUniqeName: "tNote",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.textarea,
-        field_placeholder: "Enter Note",
         validator: [],
         mandatory: false,
         hidden: false

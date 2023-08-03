@@ -54,9 +54,9 @@ namespace DeploymentTool.Jwt.Filters
                 return false;
             objUser = new User();
             var usernameClaim = identity.FindFirst(ClaimTypes.Name);
-            objUser.userName = usernameClaim?.Value;
+            objUser.tName = usernameClaim?.Value;
             var roleClaim = identity.FindFirst(ClaimTypes.Role);
-            objUser.nRoleType = roleClaim?.Value;
+            objUser.nRole = Convert.ToInt32(roleClaim?.Value);
             var NameIdentifierClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
             objUser.nUserID = Convert.ToInt32(NameIdentifierClaim?.Value);
 
@@ -76,8 +76,8 @@ namespace DeploymentTool.Jwt.Filters
                 // based on username to get more information from database in order to build local identity
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, objUser.userName),
-                    new Claim(ClaimTypes.Role, objUser.nRoleType),
+                    new Claim(ClaimTypes.Name, objUser.tName),
+                    new Claim(ClaimTypes.Role, objUser.nRole.ToString()),
                     new Claim(ClaimTypes.NameIdentifier, Convert.ToString(objUser.nUserID))
                     // Add more claims if needed: Roles, ...
                 };

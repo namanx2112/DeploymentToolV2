@@ -110,7 +110,7 @@ this.GetPartsTab(TabInstanceType.Table)
       search_fields: this.franchiseSerice.GetSearchFields(),
       fields: this.franchiseSerice.GetFields(),
       instanceType: instType,
-      childTabs: []
+      childTabs: [this.GetUsersTab(TabInstanceType.Table)]
     };
   }
   

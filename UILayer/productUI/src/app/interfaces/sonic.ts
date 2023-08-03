@@ -190,12 +190,16 @@ export interface ActiveProject {
     tNewVendor: string
 }
 
-export interface SonicNotes {
-    aNotesId: number,
+export interface ProjectNotes {
+    aNoteID: number,
+    nProjectID: number,
+    nStoreID: number,
+    nNoteType: number,
     dNotesDate: Date,
-    tType: string,
     tSource: string,
-    tNote: string
+    tNoteDesc: string,
+    dtCreatedOn: Date,
+    nCreatedBy: number
 }
 
 export interface SonicNotification {

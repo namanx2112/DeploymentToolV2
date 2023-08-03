@@ -159,8 +159,8 @@ namespace DeploymentTool
             {
                 SqlCommand cmd = new SqlCommand("sproc_UserLogin", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("tUserName", objUser.userName);
-                cmd.Parameters.AddWithValue("tPassword ", objUser.password);
+                cmd.Parameters.AddWithValue("tUserName", objUser.tName);
+                //cmd.Parameters.AddWithValue("tPassword ", objUser.);
 
                 SqlParameter outputPara = new SqlParameter();
                 outputPara.ParameterName = "@tName";
@@ -191,7 +191,7 @@ namespace DeploymentTool
 
                 objUser.tName = outputPara.Value.ToString();
                 objUser.tEmail = outputPara1.Value.ToString();
-                objUser.nRoleType = outputPara2.Value.ToString();
+                //objUser.nRoleType = outputPara2.Value.ToString();
                 objUser.nUserID = Convert.ToInt32(outputPara3.Value.ToString());
             }
 

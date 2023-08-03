@@ -30,8 +30,10 @@ namespace DeploymentTool.Controller
             try
             {
                 int nVendorId = (searchFields != null && searchFields.ContainsKey("nVendorId")) ? Convert.ToInt32(searchFields["nVendorId"]) : 0;
+                int nFranchiseId = (searchFields != null && searchFields.ContainsKey("nFranchiseId")) ? Convert.ToInt32(searchFields["nFranchiseId"]) : 0;
                 SqlParameter tModuleNameParam = new SqlParameter("@nVendorId", nVendorId);
-                List<UserModel> items = db.Database.SqlQuery<UserModel>("exec sproc_getUserModel @nVendorId", tModuleNameParam).ToList();
+                SqlParameter tModuleNameParam2 = new SqlParameter("@nFranchiseId", nFranchiseId);
+                List<UserModel> items = db.Database.SqlQuery<UserModel>("exec sproc_getUserModel @nVendorId, @nFranchiseId", tModuleNameParam, tModuleNameParam2).ToList();
                 //await db.SaveChangesAsync();
                 foreach (var UserModel in items)
                 {
@@ -108,23 +110,26 @@ namespace DeploymentTool.Controller
                 }
 
 
-                if (userRequest.userAndParmissionRel != null)
-                {
-                    List<tblUserPermissionRel> objUserPermissionRel = new List<tblUserPermissionRel>();
-                    foreach (var UserTypeByUser in userRequest.userAndParmissionRel)
-                    {
-                        tblUserPermissionRel objPermRel = new tblUserPermissionRel();
+                // Commenting for now as this is for future release
+                //if (userRequest.userAndParmissionRel != null)
+                //{
+                //    List<tblUserPermissionRel> objUserPermissionRel = new List<tblUserPermissionRel>();
+                //    foreach (var UserTypeByUser in userRequest.userAndParmissionRel)
+                //    {
+                //        tblUserPermissionRel objPermRel = new tblUserPermissionRel();
 
-                        objPermRel.aUserPermissionRelID = 0;
-                        objPermRel.nUserID = userRequest.aUserID;
-                        objPermRel.nPermissionID = UserTypeByUser.aPermissionlID;
-                        objUserPermissionRel.Add(objPermRel);
+                //        objPermRel.aUserPermissionRelID = 0;
+                //        objPermRel.nUserID = userRequest.aUserID;
+                //        objPermRel.nPermissionID = UserTypeByUser.aPermissionlID;
+                //        objUserPermissionRel.Add(objPermRel);
 
-                    }
-                    db.tblUserPermissionRels.AddRange(objUserPermissionRel);
+                //    }
+                //    db.tblUserPermissionRels.AddRange(objUserPermissionRel);
 
-                    await db.SaveChangesAsync();
-                }
+                //    await db.SaveChangesAsync();
+                //}
+
+                var resole = db.Database.ExecuteSqlCommand("Exec sproc_ChangeUserPermissionFromRole @nUserId, @nRoleId", new SqlParameter("@nUserId", userRequest.aUserID), new SqlParameter("@nRoleId", userRequest.nRole));
 
                 if (userRequest.rBrandID != null)
                 {
@@ -187,8 +192,6 @@ namespace DeploymentTool.Controller
 
                 }
                 db.tblUserAndUserTypeRels.AddRange(objUserUserTypeRel);
-
-                await db.SaveChangesAsync();
             }
 
             if (userRequest.userAndParmissionRel != null)
@@ -206,14 +209,15 @@ namespace DeploymentTool.Controller
 
                 }
                 db.tblUserPermissionRels.AddRange(objUserPermissionRel);
-
-                await db.SaveChangesAsync();
+               
             }
 
-            if(userRequest.rBrandID != null)
+            var resole = db.Database.ExecuteSqlCommand("Exec sproc_ChangeUserPermissionFromRole @nUserId, @nRoleId", new SqlParameter("@nUserId", userRequest.aUserID), new SqlParameter("@nRoleId", userRequest.nRole));
+
+            if (userRequest.rBrandID != null)
             {
                 List<tblUserBrandRel> lstBrandUser = new List<tblUserBrandRel>();
-                foreach(int nbrandId in userRequest.rBrandID)
+                foreach (int nbrandId in userRequest.rBrandID)
                 {
                     lstBrandUser.Add(new tblUserBrandRel()
                     {
@@ -223,6 +227,7 @@ namespace DeploymentTool.Controller
                 }
                 db.tblUserBrandRels.AddRange(lstBrandUser);
             }
+            await db.SaveChangesAsync();
             return Json(userRequest);
         }
 
@@ -260,7 +265,7 @@ namespace DeploymentTool.Controller
             SqlParameter tModuleNameParam = new SqlParameter("@aUserID", aUserID);
             IQueryable<UserTypeByUser> items = db.Database.SqlQuery<UserTypeByUser>("exec sproc_GetUserTypeByUserID @aUserID", tModuleNameParam).AsQueryable();
             return items;
-        }        
+        }
         [Authorize]
         [HttpPost]
         public IQueryable<UserPermission> GetUserPermissionByUser(int aUserID)

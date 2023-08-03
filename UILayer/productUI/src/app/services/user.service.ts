@@ -109,6 +109,18 @@ export class UserService {
       validator: [],
       mandatory: false,
       hidden: true
+    },    
+    {
+      field_name: "Franchise Id",
+      fieldUniqeName: "nFranchiseId",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter Franchise Id",
+      validator: [],
+      mandatory: false,
+      hidden: true
     },
     {
       field_name: "Name",

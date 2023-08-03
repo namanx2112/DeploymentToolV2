@@ -2,7 +2,7 @@
     <div class="projectHeader">
         <mat-icon class="backIcon" (click)="moveView('dashboard')">arrow_back_ios</mat-icon>
         <h4 class="projHeader">Store - {{_curStore.tStoreNumber}}</h4>
-        <button class="noBorderButton lightGray" (click)="moveView('projecttemplatelist')">Workflows</button>
+        <button class="noBorderButton lightGray" (click)="moveView('projecttemplatelist')" *ngIf="access.hasAccess('home.sonic.project.workflows', 1)">Workflows</button>
         <div class="projectInfoTabs" *ngIf="access.hasAccess('home.sonic.project.golive', 1)">
             <span class="storeStatus" *ngFor="let tItem of _curStore.lstProjectsInfo" (click)="changeGoliveDate(tItem);"
                 title="Click to change Golive Date">{{projectTypeString(tItem.nProjectType)}} Store

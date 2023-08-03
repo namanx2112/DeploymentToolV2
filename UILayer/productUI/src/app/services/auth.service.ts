@@ -4,6 +4,7 @@ import { AuthResponse } from '../interfaces/auth-response';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthCodes, AuthRequest } from '../interfaces/auth-request';
 import { CommonService } from './common.service';
+import { AccessService } from './access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,19 @@ export class AuthService {
     return this.http.post<AuthResponse>(CommonService.ConfigUrl + "token/get", user, { headers: this.headers })
       .subscribe((res: AuthResponse) => {
         localStorage.setItem('authResponse', JSON.stringify(res));
-        this.router.navigate(['./home'], { skipLocationChange: true, relativeTo: this.route });
+        this.getAccess();
       });
   }
 
   ChangePassword(request: any) {
     return this.http.post<any>(CommonService.ConfigUrl + "token/ChangePassword", request, { headers: this.getHttpHeaders() });
+  }
+
+  getAccess() {
+    this.http.get<any>(CommonService.ConfigUrl + "token/GetAccess", { headers: this.getHttpHeaders() }).subscribe((x: any) => {
+      AccessService.setAccess(x);
+      this.router.navigate(['./home'], { skipLocationChange: true, relativeTo: this.route });
+    });
   }
 
 
@@ -46,7 +54,7 @@ export class AuthService {
     let authResp = localStorage.getItem('authResponse');
     let userName = 'NA';
     if (typeof authResp != 'undefined' && authResp != null && authResp != '') {
-      userName = JSON.parse(authResp).userName;
+      userName = JSON.parse(authResp).tName;
     }
     return userName;
   }

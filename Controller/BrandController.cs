@@ -14,6 +14,8 @@ using System.Web.Http.Description;
 using DeploymentTool;
 using DeploymentTool.Misc;
 using System.Linq.Dynamic.Core;
+using System.Data.SqlClient;
+using DeploymentTool.Model;
 
 namespace DeploymentTool.Controller
 {
@@ -26,8 +28,9 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public IQueryable<tblBrand> Get(Dictionary<string, string> searchFields)
         {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             if (searchFields == null)
-                return db.tblBrand;
+                return db.Database.SqlQuery<tblBrand>("Exec sproc_getAccesibleBrand @nUserId", new SqlParameter("@nUserId", securityContext.nUserID)).AsQueryable();
             else
             {
                 StringBuilder sBuilder = new StringBuilder();
@@ -37,7 +40,7 @@ namespace DeploymentTool.Controller
                         sBuilder.Append(" and ");
                     sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
                 }
-                return db.tblBrand.Where("x=>" + sBuilder.ToString());
+                return db.Database.SqlQuery<tblBrand>("Exec sproc_getAccesibleBrand @nUserId", new SqlParameter("@nUserId", securityContext.nUserID)).AsQueryable().Where("x=>" + sBuilder.ToString());
             }
         }
 

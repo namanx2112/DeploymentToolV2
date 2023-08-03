@@ -32,5 +32,9 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
+        public string tFranchiseAddress2 { get; set; }
+        public string tFranchiseCity { get; set; }
+        public Nullable<int> nFranchiseState { get; set; }
+        public string tFranchiseZip { get; set; }
     }
 }

@@ -17,5 +17,6 @@ namespace DeploymentTool
         public int aRolePermissionRelID { get; set; }
         public Nullable<int> nRoleID { get; set; }
         public Nullable<int> nPermissionID { get; set; }
+        public int nPermVal { get; set; }
     }
 }

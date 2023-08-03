@@ -1,5 +1,7 @@
 ﻿using DeploymentTool.Auth;
+using DeploymentTool.Misc;
 using DeploymentTool.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -25,7 +27,7 @@ namespace DeploymentTool.Controller
         {
             var user = CheckUser(request.UserName, request.Password);
 
-            if (user.nUserID != -1)
+            if (user.nUserID > 0)
             {
                 user.auth = JwtManager.GenerateToken(user);
                 return Request.CreateResponse(HttpStatusCode.OK, user);
@@ -48,14 +50,28 @@ namespace DeploymentTool.Controller
             };
         }
 
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetAccess()
+        {
+            UserAccessResponse tObj = new UserAccessResponse();
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            var returnList = db.Database.SqlQuery<UserAccessModel>("exec sproc_getMyAccess @nUserId", new SqlParameter("@nUserId", securityContext.nUserID)).ToList();
+            if (returnList != null && returnList.Count > 0)
+            {
+                string sObject = JsonConvert.SerializeObject(returnList);
+                tObj.tData = Utilities.EncodeString(sObject);
+            }
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<UserAccessResponse>(tObj, new JsonMediaTypeFormatter())
+            };
+        }
+
         User CheckUser(string username, string password)
         {
-            User objUser = new User();
-            objUser.userName = username;
-            objUser.password = password;
-            DBHelper.login(ref objUser);
+            User objUser = db.Database.SqlQuery<User>("Exec sproc_UserLogin @tUserName, @tPassword", new SqlParameter("@tUserName", username), new SqlParameter("@tPassword", password)).FirstOrDefault();
             return objUser;
-
         }
 
     }

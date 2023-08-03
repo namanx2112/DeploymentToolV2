@@ -5,9 +5,11 @@ import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatRow, MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
 import { BrandModel, FranchiseModel, TechComponentModel, VendorModel, UserModel } from 'src/app/interfaces/models';
+import { AccessService } from 'src/app/services/access.service';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { CommonService } from 'src/app/services/common.service';
 import { FranchiseService } from 'src/app/services/frenchise.service';
+import { NotesService } from 'src/app/services/notes.service';
 import { PartsService } from 'src/app/services/parts.service';
 import { SonicService } from 'src/app/services/sonic.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -47,7 +49,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
   initVal: Date;
   constructor(private _liveAnnouncer: LiveAnnouncer, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService,
-    private storeService: StoreService) {
+    private storeService: StoreService, public access: AccessService, private noteService: NotesService) {
     this.initVal = new Date();
   }
 
@@ -118,7 +120,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
         this.cService = this.storeService;
       }
       else if (this.curTab.tab_type == TabType.StoreNotes) {
-        this.cService = this.sonicService;
+        this.cService = this.noteService;
       }
       else if (this.curTab.tab_type == TabType.VendorParts) {
         this.cService = this.partsService;

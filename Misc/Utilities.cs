@@ -193,6 +193,20 @@ namespace DeploymentTool.Misc
 
         }
 
+        public static string EncodeString(string str)
+        {
+            string sResp = string.Empty;
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(str);
+            sResp = System.Convert.ToBase64String(plainTextBytes);
+            return sResp;
+        }
+
+        public static string DecodeString(string str)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(str);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
 
     }
 }

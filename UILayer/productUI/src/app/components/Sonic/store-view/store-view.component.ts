@@ -236,9 +236,10 @@ export class StoreViewComponent {
 
     dialogConfig.data = {
       themeClass: "grayWhite",
-      dialogTheme: "lightGrayWhiteTheme"
+      dialogTheme: "lightGrayWhiteTheme",
+      curStore: this._curStore
     };
-    dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
+    dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
   }
 
   editTab(cTab: HomeTab) {

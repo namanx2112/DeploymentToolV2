@@ -13,4 +13,9 @@ namespace DeploymentTool.Misc
     {
         New, Rebuild, Remodel, Relocation, Acquisition, POSInstallation, AudioInstallation, MenuInstallation, PaymentTerminalInstallation, PartsReplacement
     }
+
+    public enum Permission
+    {
+        None, View, Edit
+    }
 }

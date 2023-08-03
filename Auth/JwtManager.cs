@@ -25,8 +25,8 @@ namespace DeploymentTool.Auth
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-            new Claim(ClaimTypes.Name, objUser.userName),
-            new Claim(ClaimTypes.Role, objUser.nRoleType),
+            new Claim(ClaimTypes.Name, objUser.tName),
+            new Claim(ClaimTypes.Role, objUser.nRole.ToString()),
             new Claim(ClaimTypes.NameIdentifier, objUser.nUserID.ToString())
 
         }),
@@ -94,5 +94,16 @@ namespace DeploymentTool.Auth
         public string ErrorMessage { get; set; }
         public string Token { get; set; }
         public DateTime? Expires { get; set; }
+    }
+
+    public class UserAccessModel
+    {
+        public string tPermissionName { get; set; }
+        public int nPermVal { get; set; }
+    }
+
+    public class UserAccessResponse
+    {
+        public string tData { get; set; }
     }
 }

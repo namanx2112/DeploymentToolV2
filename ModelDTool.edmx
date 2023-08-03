@@ -151,21 +151,18 @@ warning 6002: The table/view 'dtDB.dbo.tblEnumTableField' does not have a primar
           <Property Name="aFranchiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tFranchiseName" Type="nvarchar" MaxLength="255" />
           <Property Name="nBrandID" Type="int" />
-          <Property Name="tFranchiseDescription" Type="nvarchar" MaxLength="255" />
-          <Property Name="tFranchiseLocation" Type="nvarchar" MaxLength="255" />
-          <Property Name="dFranchiseEstablished" Type="datetime" />
-          <Property Name="tFranchiseContact" Type="nvarchar" MaxLength="255" />
-          <Property Name="tFranchiseOwner" Type="nvarchar" MaxLength="255" />
           <Property Name="tFranchiseEmail" Type="nvarchar" MaxLength="255" />
           <Property Name="tFranchisePhone" Type="nvarchar" MaxLength="255" />
           <Property Name="tFranchiseAddress" Type="nvarchar" MaxLength="255" />
-          <Property Name="nFranchiseEmployeeCount" Type="int" />
-          <Property Name="nFranchiseRevenue" Type="int" />
           <Property Name="nCreatedBy" Type="int" />
           <Property Name="nUpdateBy" Type="int" />
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+          <Property Name="tFranchiseAddress2" Type="varchar" MaxLength="5000" />
+          <Property Name="tFranchiseCity" Type="varchar" MaxLength="100" />
+          <Property Name="nFranchiseState" Type="int" />
+          <Property Name="tFranchiseZip" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -427,13 +424,6 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="nStoreId" Type="int" />
           <Property Name="nMyActiveStatus" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tblProjectTypeConfig">
-          <Property Name="aTypeId" Type="int" />
-          <Property Name="tTableName" Type="varchar" MaxLength="100" />
-          <Property Name="isTechProjectType" Type="int" />
-        </EntityType>-->
         <EntityType Name="tblPurchaseOrder">
           <Key>
             <PropertyRef Name="aPurchaseOrderID" />
@@ -552,6 +542,7 @@ warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a pri
           <Property Name="aRolePermissionRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nRoleID" Type="int" />
           <Property Name="nPermissionID" Type="int" />
+          <Property Name="nPermVal" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -706,6 +697,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="aUserPermissionRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nUserID" Type="int" />
           <Property Name="nPermissionID" Type="int" />
+          <Property Name="nPermVal" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUserRoleRel">
           <Key>
@@ -757,15 +749,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           </Key>
           <Property Name="aVendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tVendorName" Type="nvarchar" MaxLength="255" />
-          <Property Name="nTechComponentID" Type="int" />
-          <Property Name="tVendorDescription" Type="nvarchar" MaxLength="255" />
           <Property Name="tVendorEmail" Type="nvarchar" MaxLength="255" />
           <Property Name="tVendorAddress" Type="nvarchar" MaxLength="255" />
           <Property Name="tVendorPhone" Type="nvarchar" MaxLength="255" />
-          <Property Name="tVendorContactPerson" Type="nvarchar" MaxLength="255" />
           <Property Name="tVendorWebsite" Type="nvarchar" MaxLength="255" />
-          <Property Name="tVendorCountry" Type="nvarchar" MaxLength="255" />
-          <Property Name="tVendorEstablished" Type="datetime" />
           <Property Name="tVendorCategory" Type="nvarchar" MaxLength="255" />
           <Property Name="tVendorContact" Type="nvarchar" MaxLength="255" />
           <Property Name="nCreatedBy" Type="int" />
@@ -1097,15 +1084,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					</Key>
 					<Property Name="aVendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
 					<Property Name="tVendorName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="nTechComponentID" Type="Int32" />
-					<Property Name="tVendorDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tVendorEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tVendorAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tVendorPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tVendorContactPerson" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tVendorWebsite" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tVendorCountry" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tVendorEstablished" Type="DateTime" Precision="3" />
 					<Property Name="tVendorCategory" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tVendorContact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="nCreatedBy" Type="Int32" />
@@ -1455,21 +1437,18 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="aFranchiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
 					<Property Name="tFranchiseName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="nBrandID" Type="Int32" />
-					<Property Name="tFranchiseDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tFranchiseLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="dFranchiseEstablished" Type="DateTime" Precision="3" />
-					<Property Name="tFranchiseContact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="tFranchiseOwner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tFranchiseEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tFranchisePhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tFranchiseAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-					<Property Name="nFranchiseEmployeeCount" Type="Int32" />
-					<Property Name="nFranchiseRevenue" Type="Int32" />
 					<Property Name="nCreatedBy" Type="Int32" />
 					<Property Name="nUpdateBy" Type="Int32" />
 					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
+          <Property Name="tFranchiseAddress2" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="tFranchiseCity" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nFranchiseState" Type="Int32" />
+          <Property Name="tFranchiseZip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
 				</EntityType>
 				<EntityType Name="tblFunction">
 					<Key>
@@ -1778,6 +1757,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="aRolePermissionRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nRoleID" Type="Int32" />
           <Property Name="nPermissionID" Type="Int32" />
+          <Property Name="nPermVal" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUserAndUserTypeRel">
           <Key>
@@ -1794,6 +1774,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="aUserPermissionRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nUserID" Type="Int32" />
           <Property Name="nPermissionID" Type="Int32" />
+          <Property Name="nPermVal" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUserRoleRel">
           <Key>
@@ -1890,15 +1871,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 								<ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
 								<ScalarProperty Name="tVendorContact" ColumnName="tVendorContact" />
 								<ScalarProperty Name="tVendorCategory" ColumnName="tVendorCategory" />
-								<ScalarProperty Name="tVendorEstablished" ColumnName="tVendorEstablished" />
-								<ScalarProperty Name="tVendorCountry" ColumnName="tVendorCountry" />
 								<ScalarProperty Name="tVendorWebsite" ColumnName="tVendorWebsite" />
-								<ScalarProperty Name="tVendorContactPerson" ColumnName="tVendorContactPerson" />
 								<ScalarProperty Name="tVendorPhone" ColumnName="tVendorPhone" />
 								<ScalarProperty Name="tVendorAddress" ColumnName="tVendorAddress" />
 								<ScalarProperty Name="tVendorEmail" ColumnName="tVendorEmail" />
-								<ScalarProperty Name="tVendorDescription" ColumnName="tVendorDescription" />
-								<ScalarProperty Name="nTechComponentID" ColumnName="nTechComponentID" />
 								<ScalarProperty Name="tVendorName" ColumnName="tVendorName" />
 								<ScalarProperty Name="aVendorId" ColumnName="aVendorId" />
 							</MappingFragment>
@@ -2254,21 +2230,18 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySetMapping Name="tblFranchises">
 						<EntityTypeMapping TypeName="dtDBModel.tblFranchise">
 							<MappingFragment StoreEntitySet="tblFranchise">
-								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+								<ScalarProperty Name="tFranchiseZip" ColumnName="tFranchiseZip" />
+                <ScalarProperty Name="nFranchiseState" ColumnName="nFranchiseState" />
+                <ScalarProperty Name="tFranchiseCity" ColumnName="tFranchiseCity" />
+                <ScalarProperty Name="tFranchiseAddress2" ColumnName="tFranchiseAddress2" />
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
 								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
 								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
 								<ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
 								<ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-								<ScalarProperty Name="nFranchiseRevenue" ColumnName="nFranchiseRevenue" />
-								<ScalarProperty Name="nFranchiseEmployeeCount" ColumnName="nFranchiseEmployeeCount" />
 								<ScalarProperty Name="tFranchiseAddress" ColumnName="tFranchiseAddress" />
 								<ScalarProperty Name="tFranchisePhone" ColumnName="tFranchisePhone" />
 								<ScalarProperty Name="tFranchiseEmail" ColumnName="tFranchiseEmail" />
-								<ScalarProperty Name="tFranchiseOwner" ColumnName="tFranchiseOwner" />
-								<ScalarProperty Name="tFranchiseContact" ColumnName="tFranchiseContact" />
-								<ScalarProperty Name="dFranchiseEstablished" ColumnName="dFranchiseEstablished" />
-								<ScalarProperty Name="tFranchiseLocation" ColumnName="tFranchiseLocation" />
-								<ScalarProperty Name="tFranchiseDescription" ColumnName="tFranchiseDescription" />
 								<ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
 								<ScalarProperty Name="tFranchiseName" ColumnName="tFranchiseName" />
 								<ScalarProperty Name="aFranchiseId" ColumnName="aFranchiseId" />
@@ -2605,6 +2578,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblRolePermissionRels">
             <EntityTypeMapping TypeName="dtDBModel.tblRolePermissionRel">
               <MappingFragment StoreEntitySet="tblRolePermissionRel">
+                <ScalarProperty Name="nPermVal" ColumnName="nPermVal" />
                 <ScalarProperty Name="nPermissionID" ColumnName="nPermissionID" />
                 <ScalarProperty Name="nRoleID" ColumnName="nRoleID" />
                 <ScalarProperty Name="aRolePermissionRelID" ColumnName="aRolePermissionRelID" />
@@ -2623,6 +2597,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySetMapping Name="tblUserPermissionRels">
             <EntityTypeMapping TypeName="dtDBModel.tblUserPermissionRel">
               <MappingFragment StoreEntitySet="tblUserPermissionRel">
+                <ScalarProperty Name="nPermVal" ColumnName="nPermVal" />
                 <ScalarProperty Name="nPermissionID" ColumnName="nPermissionID" />
                 <ScalarProperty Name="nUserID" ColumnName="nUserID" />
                 <ScalarProperty Name="aUserPermissionRelID" ColumnName="aUserPermissionRelID" />

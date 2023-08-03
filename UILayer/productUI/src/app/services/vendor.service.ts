@@ -85,18 +85,6 @@ export class VendorService {
         hidden: false
       },
       {
-        field_name: "Vendor TechComponent ID",
-        fieldUniqeName: "nTechComponentID",
-        defaultVal: "1",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Vendor TechComponent ID",
-        validator: [],
-        mandatory: true,
-        hidden: true
-      },
-      {
         field_name: "Brand Id",
         fieldUniqeName: "nBrandID",
         defaultVal: "1",
@@ -106,18 +94,6 @@ export class VendorService {
         field_placeholder: "Enter Brand Id",
         validator: [],
         mandatory: true,
-        hidden: true
-      },
-      {
-        field_name: "Vendor Description",
-        fieldUniqeName: "tVendorDescription",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Vendor Description",
-        validator: [],
-        mandatory: false,
         hidden: true
       },
       {
@@ -157,18 +133,6 @@ export class VendorService {
         hidden: false
       },
       {
-        field_name: "Vendor Contact Person",
-        fieldUniqeName: "tVendorContactPerson",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Vendor Contact Person",
-        validator: [],
-        mandatory: false,
-        hidden: true
-      },
-      {
         field_name: "Website",
         fieldUniqeName: "tVendorWebsite",
         defaultVal: "",
@@ -179,31 +143,6 @@ export class VendorService {
         validator: [],
         mandatory: false,
         hidden: false
-      },
-      {
-        field_name: "Vendor Country",
-        fieldUniqeName: "tVendorCountry",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.dropdown,
-        field_placeholder: "Enter Vendor Country",
-        validator: [Validators.required],
-        options: this.commonService.GetDropdown("Country"),
-        mandatory: true,
-        hidden: true
-      },
-      {
-        field_name: "Vendor Established",
-        fieldUniqeName: "tVendorEstablished",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.date,
-        field_placeholder: "Enter Vendor Established",
-        validator: [],
-        mandatory: false,
-        hidden: true
       },
       {
         field_name: "Type",
