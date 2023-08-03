@@ -161,6 +161,7 @@ Select *, 1 nVendorId from tblUser A with(nolock) where bDeleted is null or bDel
  inner join tblUserVendorRel B with(nolock) on  A.aUserID=B.nUserID      
  where nVendorId=@nVendorId and bDeleted is null or bDeleted = 0  
 else if(@nFranchiseId <> 0)
+	Select *, 1 nVendorId from tblUser A with(nolock) where bDeleted is null or bDeleted = 0  
  --Select *, nVendorId from tblUser A with(nolock)       
  --inner join tblUserFranchiseRel B with(nolock) on  A.aUserID=B.nUserID      
  --where nVendorId=@nVendorId and bDeleted is null or bDeleted = 0   
