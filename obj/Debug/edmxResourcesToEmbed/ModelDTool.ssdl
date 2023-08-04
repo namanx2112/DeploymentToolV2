@@ -107,6 +107,17 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
   </EntityType>
+  <EntityType Name="tblDropdownModule">
+    <Key>
+      <PropertyRef Name="aModuleId" />
+    </Key>
+    <Property Name="aModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nBrandId" Type="int" />
+    <Property Name="tModuleName" Type="varchar" MaxLength="500" />
+    <Property Name="tModuleDisplayName" Type="varchar" MaxLength="1000" />
+    <Property Name="tModuleGroup" Type="varchar" MaxLength="500" />
+    <Property Name="editable" Type="bit" />
+  </EntityType>
   <EntityType Name="tblDropdowns">
     <Key>
       <PropertyRef Name="aDropdownId" />
@@ -117,6 +128,8 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+    <Property Name="nOrder" Type="int" />
+    <Property Name="nFunction" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblEnum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -241,6 +254,8 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
+    <Property Name="dDateFor_nLoopStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectConfig">
     <Key>
@@ -276,6 +291,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="cTotalCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectInstallation">
     <Key>
@@ -294,6 +310,8 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
+    <Property Name="dDateFor_nProjectStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenus">
     <Key>
@@ -308,6 +326,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectNetworking">
     <Key>
@@ -327,6 +346,9 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nTempType" Type="int" />
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nPrimaryStatus" Type="date" />
+    <Property Name="dDateFor_nBackupStatus" Type="date" />
+    <Property Name="dDateFor_nTempStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectNotes">
     <Key>
@@ -366,6 +388,9 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nType" Type="int" />
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nBuyPassID" Type="date" />
+    <Property Name="dDateFor_nServerEPS" Type="date" />
+    <Property Name="dDateFor_nStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectPOS">
     <Key>
@@ -382,6 +407,8 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
+    <Property Name="dDateFor_nPaperworkStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">
     <Key>
@@ -400,6 +427,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="cCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectStakeHolders">
     <Key>
@@ -419,6 +447,13 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tblProjectTypeConfig">
+          <Property Name="aTypeId" Type="int" />
+          <Property Name="tTableName" Type="varchar" MaxLength="100" />
+          <Property Name="isTechProjectType" Type="int" />
+        </EntityType>-->
   <EntityType Name="tblPurchaseOrder">
     <Key>
       <PropertyRef Name="aPurchaseOrderID" />
@@ -738,6 +773,14 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Property Name="nVendorID" Type="int" />
     <Property Name="nUserID" Type="int" />
   </EntityType>
+  <EntityType Name="tblUserVendorRels">
+    <Key>
+      <PropertyRef Name="aUserVendorRelsID" />
+    </Key>
+    <Property Name="aUserVendorRelsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nUserID" Type="int" />
+    <Property Name="nVendorID" Type="int" />
+  </EntityType>
   <EntityType Name="tblVendor">
     <Key>
       <PropertyRef Name="aVendorId" />
@@ -811,6 +854,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDropdownModule" EntityType="Self.tblDropdownModule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOutgoingEmail" EntityType="Self.tblOutgoingEmail" Schema="dbo" store:Type="Tables" />
@@ -847,105 +891,124 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUserType" EntityType="Self.tblUserType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUserVendorRel" EntityType="Self.tblUserVendorRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserVendorRels" EntityType="Self.tblUserVendorRels" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblVendor" EntityType="Self.tblVendor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblVendorPartRel" EntityType="Self.tblVendorPartRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbPermission" EntityType="Self.tbPermission" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBrandBKP" EntityType="Self.tblBrandBKP" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblBrandBKP].[aBrandId] AS [aBrandId], 
-    [tblBrandBKP].[tBrandName] AS [tBrandName], 
-    [tblBrandBKP].[tBrandDomain] AS [tBrandDomain], 
-    [tblBrandBKP].[tBrandAddressLine1] AS [tBrandAddressLine1], 
-    [tblBrandBKP].[tBrandAddressLine2] AS [tBrandAddressLine2], 
-    [tblBrandBKP].[tBrandCity] AS [tBrandCity], 
-    [tblBrandBKP].[nBrandState] AS [nBrandState], 
-    [tblBrandBKP].[nBrandCountry] AS [nBrandCountry], 
-    [tblBrandBKP].[tBrandZipCode] AS [tBrandZipCode], 
-    [tblBrandBKP].[nBrandLogoAttachmentID] AS [nBrandLogoAttachmentID], 
-    [tblBrandBKP].[nCreatedBy] AS [nCreatedBy], 
-    [tblBrandBKP].[nUpdateBy] AS [nUpdateBy], 
-    [tblBrandBKP].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblBrandBKP].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblBrandBKP].[bDeleted] AS [bDeleted]
-    FROM [dbo].[tblBrandBKP] AS [tblBrandBKP]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblBrandBKP].[aBrandId] AS [aBrandId],
+							[tblBrandBKP].[tBrandName] AS [tBrandName],
+							[tblBrandBKP].[tBrandDomain] AS [tBrandDomain],
+							[tblBrandBKP].[tBrandAddressLine1] AS [tBrandAddressLine1],
+							[tblBrandBKP].[tBrandAddressLine2] AS [tBrandAddressLine2],
+							[tblBrandBKP].[tBrandCity] AS [tBrandCity],
+							[tblBrandBKP].[nBrandState] AS [nBrandState],
+							[tblBrandBKP].[nBrandCountry] AS [nBrandCountry],
+							[tblBrandBKP].[tBrandZipCode] AS [tBrandZipCode],
+							[tblBrandBKP].[nBrandLogoAttachmentID] AS [nBrandLogoAttachmentID],
+							[tblBrandBKP].[nCreatedBy] AS [nCreatedBy],
+							[tblBrandBKP].[nUpdateBy] AS [nUpdateBy],
+							[tblBrandBKP].[dtCreatedOn] AS [dtCreatedOn],
+							[tblBrandBKP].[dtUpdatedOn] AS [dtUpdatedOn],
+							[tblBrandBKP].[bDeleted] AS [bDeleted]
+							FROM [dbo].[tblBrandBKP] AS [tblBrandBKP]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblCountry" EntityType="Self.tblCountry" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblCountry].[aCountryId] AS [aCountryId], 
-    [tblCountry].[tCountryName] AS [tCountryName]
-    FROM [dbo].[tblCountry] AS [tblCountry]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblCountry].[aCountryId] AS [aCountryId],
+							[tblCountry].[tCountryName] AS [tCountryName]
+							FROM [dbo].[tblCountry] AS [tblCountry]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblEnum" EntityType="Self.tblEnum" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblEnum].[aEnumID] AS [aEnumID], 
-    [tblEnum].[nConstraintID] AS [nConstraintID], 
-    [tblEnum].[nIndexID] AS [nIndexID], 
-    [tblEnum].[tDisplayName] AS [tDisplayName]
-    FROM [dbo].[tblEnum] AS [tblEnum]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblEnum].[aEnumID] AS [aEnumID],
+							[tblEnum].[nConstraintID] AS [nConstraintID],
+							[tblEnum].[nIndexID] AS [nIndexID],
+							[tblEnum].[tDisplayName] AS [tDisplayName]
+							FROM [dbo].[tblEnum] AS [tblEnum]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblEnumTableField" EntityType="Self.tblEnumTableField" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblEnumTableField].[aConstraintID] AS [aConstraintID], 
-    [tblEnumTableField].[tTableName] AS [tTableName], 
-    [tblEnumTableField].[tColumnName] AS [tColumnName]
-    FROM [dbo].[tblEnumTableField] AS [tblEnumTableField]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblEnumTableField].[aConstraintID] AS [aConstraintID],
+							[tblEnumTableField].[tTableName] AS [tTableName],
+							[tblEnumTableField].[tColumnName] AS [tColumnName]
+							FROM [dbo].[tblEnumTableField] AS [tblEnumTableField]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblFunctions" EntityType="Self.tblFunctions" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblFunctions].[aFunctionID] AS [aFunctionID], 
-    [tblFunctions].[tFunctionName] AS [tFunctionName]
-    FROM [dbo].[tblFunctions] AS [tblFunctions]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblFunctions].[aFunctionID] AS [aFunctionID],
+							[tblFunctions].[tFunctionName] AS [tFunctionName]
+							FROM [dbo].[tblFunctions] AS [tblFunctions]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblState" EntityType="Self.tblState" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblState].[aStateId] AS [aStateId], 
-    [tblState].[tStateName] AS [tStateName], 
-    [tblState].[nCountryId] AS [nCountryId]
-    FROM [dbo].[tblState] AS [tblState]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblState].[aStateId] AS [aStateId],
+							[tblState].[tStateName] AS [tStateName],
+							[tblState].[nCountryId] AS [nCountryId]
+							FROM [dbo].[tblState] AS [tblState]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblTechComponent" EntityType="Self.tblTechComponent" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblTechComponent].[aTechComponentId] AS [aTechComponentId], 
-    [tblTechComponent].[tTechComponentName] AS [tTechComponentName], 
-    [tblTechComponent].[nBrandID] AS [nBrandID], 
-    [tblTechComponent].[tTechComponentDescription] AS [tTechComponentDescription], 
-    [tblTechComponent].[tComponentType] AS [tComponentType], 
-    [tblTechComponent].[nCreatedBy] AS [nCreatedBy], 
-    [tblTechComponent].[nUpdateBy] AS [nUpdateBy], 
-    [tblTechComponent].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblTechComponent].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblTechComponent].[bDeleted] AS [bDeleted]
-    FROM [dbo].[tblTechComponent] AS [tblTechComponent]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblTechComponent].[aTechComponentId] AS [aTechComponentId],
+							[tblTechComponent].[tTechComponentName] AS [tTechComponentName],
+							[tblTechComponent].[nBrandID] AS [nBrandID],
+							[tblTechComponent].[tTechComponentDescription] AS [tTechComponentDescription],
+							[tblTechComponent].[tComponentType] AS [tComponentType],
+							[tblTechComponent].[nCreatedBy] AS [nCreatedBy],
+							[tblTechComponent].[nUpdateBy] AS [nUpdateBy],
+							[tblTechComponent].[dtCreatedOn] AS [dtCreatedOn],
+							[tblTechComponent].[dtUpdatedOn] AS [dtUpdatedOn],
+							[tblTechComponent].[bDeleted] AS [bDeleted]
+							FROM [dbo].[tblTechComponent] AS [tblTechComponent]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblTrace" EntityType="Self.tblTrace" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblTrace].[aTraceID] AS [aTraceID], 
-    [tblTrace].[StoreName] AS [StoreName], 
-    [tblTrace].[ProjectType] AS [ProjectType], 
-    [tblTrace].[StoreNumber] AS [StoreNumber], 
-    [tblTrace].[Address] AS [Address], 
-    [tblTrace].[City] AS [City], 
-    [tblTrace].[State] AS [State], 
-    [tblTrace].[DMAID] AS [DMAID], 
-    [tblTrace].[DMA] AS [DMA], 
-    [tblTrace].[RED] AS [RED], 
-    [tblTrace].[CM] AS [CM], 
-    [tblTrace].[ANE] AS [ANE], 
-    [tblTrace].[RVP] AS [RVP], 
-    [tblTrace].[PrincipalPartner] AS [PrincipalPartner], 
-    [tblTrace].[dtCreatedOn] AS [dtCreatedOn], 
-    [tblTrace].[dtUpdatedOn] AS [dtUpdatedOn], 
-    [tblTrace].[ProjectStatus] AS [ProjectStatus], 
-    [tblTrace].[CreatedBy] AS [CreatedBy], 
-    [tblTrace].[BrandId] AS [BrandId]
-    FROM [dbo].[tblTrace] AS [tblTrace]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblTrace].[aTraceID] AS [aTraceID],
+							[tblTrace].[StoreName] AS [StoreName],
+							[tblTrace].[ProjectType] AS [ProjectType],
+							[tblTrace].[StoreNumber] AS [StoreNumber],
+							[tblTrace].[Address] AS [Address],
+							[tblTrace].[City] AS [City],
+							[tblTrace].[State] AS [State],
+							[tblTrace].[DMAID] AS [DMAID],
+							[tblTrace].[DMA] AS [DMA],
+							[tblTrace].[RED] AS [RED],
+							[tblTrace].[CM] AS [CM],
+							[tblTrace].[ANE] AS [ANE],
+							[tblTrace].[RVP] AS [RVP],
+							[tblTrace].[PrincipalPartner] AS [PrincipalPartner],
+							[tblTrace].[dtCreatedOn] AS [dtCreatedOn],
+							[tblTrace].[dtUpdatedOn] AS [dtUpdatedOn],
+							[tblTrace].[ProjectStatus] AS [ProjectStatus],
+							[tblTrace].[CreatedBy] AS [CreatedBy],
+							[tblTrace].[BrandId] AS [BrandId]
+							FROM [dbo].[tblTrace] AS [tblTrace]
+						</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblUserFunctionRel" EntityType="Self.tblUserFunctionRel" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblUserFunctionRel].[aUserFunctionRelID] AS [aUserFunctionRelID], 
-    [tblUserFunctionRel].[nUserID] AS [nUserID], 
-    [tblUserFunctionRel].[nFunctionID] AS [nFunctionID]
-    FROM [dbo].[tblUserFunctionRel] AS [tblUserFunctionRel]</DefiningQuery>
+      <DefiningQuery>
+							SELECT
+							[tblUserFunctionRel].[aUserFunctionRelID] AS [aUserFunctionRelID],
+							[tblUserFunctionRel].[nUserID] AS [nUserID],
+							[tblUserFunctionRel].[nFunctionID] AS [nFunctionID]
+							FROM [dbo].[tblUserFunctionRel] AS [tblUserFunctionRel]
+						</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ForFilterPipe implements PipeTransform {
 
-  transform(items: any[], callback: (item: any) => boolean): any {
+  transform(items: any[] | undefined, callback: (item: any) => boolean): any {
     if (!items || !callback) {
       return items;
     }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OptionType } from '../interfaces/home-tab';
+import { Fields, OptionType } from '../interfaces/home-tab';
 import { DropdownServiceService } from './dropdown-service.service';
 import { DropwDown } from '../interfaces/models';
 import { ProjectTypes } from '../interfaces/sonic';
@@ -9,18 +9,36 @@ import moment from 'moment';
   providedIn: 'root'
 })
 export class CommonService {
-  static allItems: DropwDown[];
+  static allItems: any;
+  static ddMonthString: string = "[Day/Month]";
   constructor(private ddService: DropdownServiceService) {
 
   }
 
-  
+
   static ConfigUrl: string = "./api/";
+
+  loadDropdowns(x: DropwDown[]) {
+    CommonService.allItems = {};
+    for (let indx in x) {
+      let tItem = x[indx];
+      if (CommonService.allItems[tItem.tModuleName])
+        CommonService.allItems[tItem.tModuleName].push(tItem);
+      else {
+        CommonService.allItems[tItem.tModuleName] = [];
+        CommonService.allItems[tItem.tModuleName].push(tItem);
+      }
+    }
+  }
 
   public getAllDropdowns() {
     this.ddService.Get("").subscribe((x: DropwDown[]) => {
-      CommonService.allItems = x;
+      this.loadDropdowns(x);
     });
+  }
+
+  public refreshDropdownValue(module: string, ddVal: DropwDown[]) {
+    CommonService.allItems[module] = ddVal;
   }
 
   static getFormatedDateString(dString: any) {
@@ -108,6 +126,15 @@ export class CommonService {
   //   ];
   //   return contries;
   // }
+  compare(a: OptionType, b: OptionType) {
+    if (a.optionOrder < b.optionOrder) {
+      return -1;
+    }
+    if (a.optionOrder > b.optionOrder) {
+      return 1;
+    }
+    return 0;
+  }
 
   GetDropdown(columnName: string): OptionType[] {
     let ddItems: OptionType[] = [];
@@ -116,78 +143,147 @@ export class CommonService {
       ddItems = [{
         optionDisplayName: "New",
         optionIndex: ProjectTypes.New.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }, {
         optionDisplayName: "Rebuild",
         optionIndex: ProjectTypes.Rebuild.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }, {
         optionDisplayName: "Remodel",
         optionIndex: ProjectTypes.Remodel.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }, {
         optionDisplayName: "Relocation",
         optionIndex: ProjectTypes.Relocation.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }, {
         optionDisplayName: "Acquisition",
         optionIndex: ProjectTypes.Acquisition.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }, {
         optionDisplayName: "POSInstallation",
         optionIndex: ProjectTypes.POSInstallation.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }, {
         optionDisplayName: "AudioInstallation",
         optionIndex: ProjectTypes.AudioInstallation.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }, {
         optionDisplayName: "MenuInstallation",
         optionIndex: ProjectTypes.MenuInstallation.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }, {
         optionDisplayName: "PaymentTerminalInstallation",
         optionIndex: ProjectTypes.PaymentTerminalInstallation.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }, {
         optionDisplayName: "PartsReplacement",
         optionIndex: ProjectTypes.PartsReplacement.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       }];
     }
     else {
-      for (var item in CommonService.allItems) {
-        if (CommonService.allItems[item].tModuleName == columnName) {
+      if (CommonService.allItems[columnName]) {
+        var tItem = CommonService.allItems[columnName];
+        for (var item in tItem) {
           ddItems.push({
-            optionDisplayName: CommonService.allItems[item].tDropdownText,
-            optionIndex: CommonService.allItems[item].aDropdownId.toString(),
-            optionOrder: 1
+            optionDisplayName: tItem[item].tDropdownText,
+            optionIndex: tItem[item].aDropdownId.toString(),
+            optionOrder: tItem[item].nOrder,
+            bDeleted: tItem[item].bDeleted,
+            nFunction: tItem[item].nFunction
           });
         }
+        ddItems.sort(this.compare);
       }
-      if (ddItems.length == 0) {
-        if (columnName == "YesNo") {
-          ddItems = [{
-            optionDisplayName: "No",
-            optionIndex: "0",
-            optionOrder: 1
-          },
-          {
-            optionDisplayName: "Yes",
-            optionIndex: "1",
-            optionOrder: 2
-          }];
-        }
-        else {
-          ddItems = [{
-            optionDisplayName: "Dummy",
-            optionIndex: "1",
-            optionOrder: 1
-          }];
-        }
+    }
+    if (ddItems.length == 0) {
+      if (columnName == "YesNo") {
+        ddItems = [{
+          optionDisplayName: "No",
+          optionIndex: "0",
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        },
+        {
+          optionDisplayName: "Yes",
+          optionIndex: "1",
+          optionOrder: 2,
+          bDeleted: false,
+          nFunction: 0
+        }];
+      }
+      else {
+        ddItems = [{
+          optionDisplayName: "Dummy",
+          optionIndex: "1",
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }];
       }
     }
     return ddItems;
+  }
+
+  static GetDropdownDMonthFieldName(field: Fields) {
+    let tPrefix = "dDateFor_";
+    return tPrefix + field.fieldUniqeName;
+  }
+
+  static GetDropDownValueFromControl(curControl: Fields, optVal: string, _controlValues: any) {
+    let outputVal = optVal;
+    let tOpton = curControl.options?.find(x => x.optionIndex == optVal);
+    if (tOpton) {
+      outputVal = CommonService.GetDropDownValueFromControlOption(curControl, tOpton, _controlValues);
+    }
+    return outputVal;
+  }
+
+  static GetDropDownValueFromControlOption(curControl: Fields, opt: OptionType, _controlValues: any) {
+    let val = opt.optionDisplayName;
+    if (opt.nFunction == 1) {
+      let newVal = val;
+      if (_controlValues[curControl.fieldUniqeName] && _controlValues[curControl.fieldUniqeName] == opt.optionIndex) {
+        let dString = _controlValues[CommonService.GetDropdownDMonthFieldName(curControl)];
+        if (dString) {
+          let momentVal = (typeof dString == 'object') ? moment(dString) : (dString.indexOf("-") > -1) ? moment(dString, 'YYYY-MM-DD') : moment(dString, 'DD/MM/YYYY');
+          newVal = "[" + momentVal.format('DD/MMM') + "]";
+        }
+      }
+      else {
+        let tDate = moment(new Date());
+        newVal = "[" + tDate.format('DD/MMM') + "]";
+      }
+      val = val.replace("[Day/Month]", newVal)
+    }
+    return val;
+  }
+
+  static GetDateMonthForDropdown(dString: any, curArr: any) {
+    let momentVal = (typeof dString == 'object') ? moment(dString) : (dString.indexOf("-") > -1) ? moment(dString, 'YYYY-MM-DD') : moment(dString, 'DD/MM/YYYY');
+    return "[" + momentVal.format('DD/MMM') + "]";
   }
 
   GetCKEditorConfig(height: string) {

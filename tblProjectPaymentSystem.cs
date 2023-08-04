@@ -32,5 +32,8 @@ namespace DeploymentTool
         public Nullable<int> nType { get; set; }
         public Nullable<int> nStoreId { get; set; }
         public Nullable<int> nMyActiveStatus { get; set; }
+        public Nullable<System.DateTime> dDateFor_nBuyPassID { get; set; }
+        public Nullable<System.DateTime> dDateFor_nServerEPS { get; set; }
+        public Nullable<System.DateTime> dDateFor_nStatus { get; set; }
     }
 }

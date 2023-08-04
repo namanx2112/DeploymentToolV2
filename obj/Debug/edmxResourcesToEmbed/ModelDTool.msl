@@ -126,6 +126,8 @@
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
           <ScalarProperty Name="aProjectAudioID" ColumnName="aProjectAudioID" />
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
+          <ScalarProperty Name="dDateFor_nLoopStatus" ColumnName="dDateFor_nLoopStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -163,6 +165,7 @@
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
           <ScalarProperty Name="aProjectExteriorMenuID" ColumnName="aProjectExteriorMenuID" />
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -182,6 +185,8 @@
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
           <ScalarProperty Name="aProjectInstallationID" ColumnName="aProjectInstallationID" />
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
+          <ScalarProperty Name="dDateFor_nProjectStatus" ColumnName="dDateFor_nProjectStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -197,6 +202,7 @@
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
           <ScalarProperty Name="aProjectInteriorMenuID" ColumnName="aProjectInteriorMenuID" />
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -214,6 +220,9 @@
           <ScalarProperty Name="nPrimaryType" ColumnName="nPrimaryType" />
           <ScalarProperty Name="dPrimaryDate" ColumnName="dPrimaryDate" />
           <ScalarProperty Name="nPrimaryStatus" ColumnName="nPrimaryStatus" />
+          <ScalarProperty Name="dDateFor_nPrimaryStatus" ColumnName="dDateFor_nPrimaryStatus" />
+          <ScalarProperty Name="dDateFor_nBackupStatus" ColumnName="dDateFor_nBackupStatus" />
+          <ScalarProperty Name="dDateFor_nTempStatus" ColumnName="dDateFor_nTempStatus" />
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
           <ScalarProperty Name="aProjectNetworkingID" ColumnName="aProjectNetworkingID" />
@@ -258,6 +267,9 @@
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
           <ScalarProperty Name="aProjectPaymentSystemID" ColumnName="aProjectPaymentSystemID" />
+          <ScalarProperty Name="dDateFor_nBuyPassID" ColumnName="dDateFor_nBuyPassID" />
+          <ScalarProperty Name="dDateFor_nServerEPS" ColumnName="dDateFor_nServerEPS" />
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -275,6 +287,8 @@
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
           <ScalarProperty Name="aProjectPOSID" ColumnName="aProjectPOSID" />
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
+          <ScalarProperty Name="dDateFor_nPaperworkStatus" ColumnName="dDateFor_nPaperworkStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -294,6 +308,7 @@
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
           <ScalarProperty Name="aProjectSonicRadioID" ColumnName="aProjectSonicRadioID" />
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -507,12 +522,14 @@
     <EntitySetMapping Name="tblDropdowns">
       <EntityTypeMapping TypeName="dtDBModel.tblDropdown">
         <MappingFragment StoreEntitySet="tblDropdowns">
+          <ScalarProperty Name="nOrder" ColumnName="nOrder" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
           <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
           <ScalarProperty Name="tDropdownText" ColumnName="tDropdownText" />
           <ScalarProperty Name="aDropdownId" ColumnName="aDropdownId" />
+          <ScalarProperty Name="nFunction" ColumnName="nFunction" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -823,6 +840,27 @@
           <ScalarProperty Name="tPermissionDiplayName" ColumnName="tPermissionDiplayName" />
           <ScalarProperty Name="tPermissionName" ColumnName="tPermissionName" />
           <ScalarProperty Name="aPermissionlID" ColumnName="aPermissionlID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDropdownModules">
+      <EntityTypeMapping TypeName="dtDBModel.tblDropdownModule">
+        <MappingFragment StoreEntitySet="tblDropdownModule">
+          <ScalarProperty Name="editable" ColumnName="editable" />
+          <ScalarProperty Name="tModuleGroup" ColumnName="tModuleGroup" />
+          <ScalarProperty Name="tModuleDisplayName" ColumnName="tModuleDisplayName" />
+          <ScalarProperty Name="tModuleName" ColumnName="tModuleName" />
+          <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
+          <ScalarProperty Name="aModuleId" ColumnName="aModuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserVendorRels1">
+      <EntityTypeMapping TypeName="dtDBModel.tblUserVendorRel1">
+        <MappingFragment StoreEntitySet="tblUserVendorRels">
+          <ScalarProperty Name="nVendorID" ColumnName="nVendorID" />
+          <ScalarProperty Name="nUserID" ColumnName="nUserID" />
+          <ScalarProperty Name="aUserVendorRelsID" ColumnName="aUserVendorRelsID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

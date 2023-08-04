@@ -17,16 +17,9 @@ namespace DeploymentTool
         public int aFranchiseId { get; set; }
         public string tFranchiseName { get; set; }
         public Nullable<int> nBrandID { get; set; }
-        public string tFranchiseDescription { get; set; }
-        public string tFranchiseLocation { get; set; }
-        public Nullable<System.DateTime> dFranchiseEstablished { get; set; }
-        public string tFranchiseContact { get; set; }
-        public string tFranchiseOwner { get; set; }
         public string tFranchiseEmail { get; set; }
         public string tFranchisePhone { get; set; }
         public string tFranchiseAddress { get; set; }
-        public Nullable<int> nFranchiseEmployeeCount { get; set; }
-        public Nullable<int> nFranchiseRevenue { get; set; }
         public Nullable<int> nCreatedBy { get; set; }
         public Nullable<int> nUpdateBy { get; set; }
         public Nullable<System.DateTime> dtCreatedOn { get; set; }

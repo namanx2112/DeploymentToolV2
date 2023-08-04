@@ -77,6 +77,8 @@
     <EntitySet Name="tblUserRoleRels" EntityType="dtDBModel.tblUserRoleRel" />
     <EntitySet Name="tblUserTypes" EntityType="dtDBModel.tblUserType" />
     <EntitySet Name="tbPermissions" EntityType="dtDBModel.tbPermission" />
+    <EntitySet Name="tblDropdownModules" EntityType="dtDBModel.tblDropdownModule" />
+    <EntitySet Name="tblUserVendorRels1" EntityType="dtDBModel.tblUserVendorRel1" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -199,6 +201,8 @@
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+    <Property Name="dDateFor_nLoopStatus" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectConfig">
     <Key>
@@ -234,6 +238,7 @@
     <Property Name="cTotalCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" />
   </EntityType>
   <EntityType Name="tblProjectInstallation">
     <Key>
@@ -252,6 +257,8 @@
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+    <Property Name="dDateFor_nProjectStatus" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenu">
     <Key>
@@ -266,6 +273,7 @@
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectNetworking">
     <Key>
@@ -285,6 +293,9 @@
     <Property Name="nTempType" Type="Int32" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nPrimaryStatus" Type="DateTime" />
+    <Property Name="dDateFor_nBackupStatus" Type="DateTime" />
+    <Property Name="dDateFor_nTempStatus" Type="DateTime" />
   </EntityType>
   <EntityType Name="tblProjectNote">
     <Key>
@@ -324,6 +335,9 @@
     <Property Name="nType" Type="Int32" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nBuyPassID" Type="DateTime" Precision="0" />
+    <Property Name="dDateFor_nServerEPS" Type="DateTime" Precision="0" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectPOS">
     <Key>
@@ -340,6 +354,8 @@
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+    <Property Name="dDateFor_nPaperworkStatus" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">
     <Key>
@@ -358,6 +374,7 @@
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectStakeHolder">
     <Key>
@@ -565,6 +582,8 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="nOrder" Type="Int32" />
+    <Property Name="nFunction" Type="Int32" />
   </EntityType>
   <ComplexType Name="sproc_SearchStore_Result">
     <Property Type="Int32" Name="nProjectId" Nullable="true" />
@@ -847,5 +866,24 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblDropdownModule">
+    <Key>
+      <PropertyRef Name="aModuleId" />
+    </Key>
+    <Property Name="aModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nBrandId" Type="Int32" />
+    <Property Name="tModuleName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="tModuleDisplayName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tModuleGroup" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="editable" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblUserVendorRel1">
+    <Key>
+      <PropertyRef Name="aUserVendorRelsID" />
+    </Key>
+    <Property Name="aUserVendorRelsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nUserID" Type="Int32" />
+    <Property Name="nVendorID" Type="Int32" />
   </EntityType>
 </Schema>

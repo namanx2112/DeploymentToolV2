@@ -65,7 +65,10 @@ export interface StoreNetworkings {
     nBackupType: number,
     nTempStatus: number,
     dTempDate: Date,
-    nTempType: number
+    nTempType: number,
+    dDateFor_nPrimaryStatus: Date,
+    dDateFor_nBackupStatus: Date,
+    dDateFor_nTempStatus: Date
 }
 export interface StorePOS {
     aProjectPOSID: number,
@@ -77,7 +80,9 @@ export interface StorePOS {
     dSupportDate: Date,
     nStatus: number
     nPaperworkStatus: number,
-    cCost: number
+    cCost: number,
+    dDateFor_nStatus: Date,
+    dDateFor_nPaperworkStatus: Date
 }
 export interface StoreAudio {
     aProjectAudioID: number,
@@ -90,7 +95,9 @@ export interface StoreAudio {
     nLoopStatus: number,
     nLoopType: number,
     dLoopDeliveryDate: Date,
-    cCost: number
+    cCost: number,
+    dDateFor_nStatus: Date,
+    dDateFor_nLoopStatus:Date
 }
 export interface StoreExteriorMenus {
     aProjectExteriorMenuID: number,
@@ -107,6 +114,7 @@ export interface StoreExteriorMenus {
     cFabConCost: number,
     cIDTechCost: number,
     cTotalCost: number
+    dDateFor_nStatus: Date
 }
 export interface StorePaymentSystem {
     aProjectPaymentSystemID: number,
@@ -126,6 +134,9 @@ export interface StorePaymentSystem {
     nShelf: number,
     cCost: number,
     nType: number,
+    dDateFor_nBuyPassID: Date,
+    dDateFor_nServerEPS: Date,
+    dDateFor_nStatus: Date
 }
 export interface StoreInteriorMenus {
     aProjectInteriorMenuID: number,
@@ -135,7 +146,8 @@ export interface StoreInteriorMenus {
     nDMBQuantity: number,
     nStatus: number,
     dDeliveryDate: Date,
-    cCost: number
+    cCost: number,
+    dDateFor_nStatus: Date
 }
 export interface StoreSonicRadio {
     aProjectSonicRadioID: number,
@@ -149,7 +161,8 @@ export interface StoreSonicRadio {
     nServerRacks: number,
     nStatus: number
     dDeliveryDate: Date,
-    cCost: number
+    cCost: number,
+    dDateFor_nStatus: Date
 }
 export interface StoreInstallation {
     aProjectInstallationID: number,
@@ -163,7 +176,9 @@ export interface StoreInstallation {
     nSignoffs: number,
     nTestTransactions: number,
     nProjectStatus: number,
-    cCost: number
+    cCost: number,
+    dDateFor_nStatus: Date,
+    dDateFor_nProjectStatus: Date
 }
 
 export interface HistoricalProjects {

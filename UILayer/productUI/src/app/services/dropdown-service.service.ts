@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
-import { DropwDown } from '../interfaces/models';
+import { DropdownModule, DropwDown } from '../interfaces/models';
 import { FieldType, Fields } from '../interfaces/home-tab';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class DropdownServiceService {
   }
 
   Create(request: DropwDown) {
-    return this.http.post<number>(CommonService.ConfigUrl + "Dropdown/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "Dropdown/Create", request, { headers: this.authService.getHttpHeaders() });
   }
 
   Update(request: DropwDown) {
@@ -27,10 +27,17 @@ export class DropdownServiceService {
     return this.http.get<DropwDown[]>(CommonService.ConfigUrl + "Dropdown/Get?tModuleName=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
+  GetModules(nBrandId: number) {
+    return this.http.get<DropdownModule[]>(CommonService.ConfigUrl + "Dropdown/GetModules?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });
+  }
+
   Delete(request: number) {
     return this.http.get<number>(CommonService.ConfigUrl + "Dropdown/Delete?id=" + request, { headers: this.authService.getHttpHeaders() });
   }
 
+  UpdateOrder(request: DropwDown[]){
+    return this.http.post<any>(CommonService.ConfigUrl + "Dropdown/UpdateOrder", request, { headers: this.authService.getHttpHeaders() });
+  }
 
   GetTableVisibleColumns() {
     return [

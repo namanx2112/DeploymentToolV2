@@ -80,6 +80,8 @@ namespace DeploymentTool
         public virtual DbSet<tblUserRoleRel> tblUserRoleRels { get; set; }
         public virtual DbSet<tblUserType> tblUserTypes { get; set; }
         public virtual DbSet<tbPermission> tbPermissions { get; set; }
+        public virtual DbSet<tblDropdownModule> tblDropdownModules { get; set; }
+        public virtual DbSet<tblUserVendorRel1> tblUserVendorRels1 { get; set; }
     
         public virtual int sproc_CreateStoreFromExcel(string tStoreName, Nullable<int> nProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
         {

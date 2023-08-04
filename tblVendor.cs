@@ -16,15 +16,10 @@ namespace DeploymentTool
     {
         public int aVendorId { get; set; }
         public string tVendorName { get; set; }
-        public Nullable<int> nTechComponentID { get; set; }
-        public string tVendorDescription { get; set; }
         public string tVendorEmail { get; set; }
         public string tVendorAddress { get; set; }
         public string tVendorPhone { get; set; }
-        public string tVendorContactPerson { get; set; }
         public string tVendorWebsite { get; set; }
-        public string tVendorCountry { get; set; }
-        public Nullable<System.DateTime> tVendorEstablished { get; set; }
         public string tVendorCategory { get; set; }
         public string tVendorContact { get; set; }
         public Nullable<int> nCreatedBy { get; set; }

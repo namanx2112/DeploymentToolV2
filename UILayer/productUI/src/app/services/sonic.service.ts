@@ -1185,7 +1185,6 @@ export class SonicService {
         field_type: FieldType.text,
         field_placeholder: "Enter IT PM",
         validator: [],
-        // options: this.commonService.GetDropdown("StackHolderITPM"),
         mandatory: false,
         hidden: false
       },
@@ -1320,6 +1319,45 @@ export class SonicService {
         options: this.commonService.GetDropdown("NetworkingStatus"),
         mandatory: false,
         hidden: false
+      },      
+      {
+        field_name: "dDateFor_nPrimaryStatus",
+        field_group: "Primary",
+        fieldUniqeName: "dDateFor_nPrimaryStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nPrimaryStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },           
+      {
+        field_name: "dDateFor_nBackupStatus",
+        field_group: "Primary",
+        fieldUniqeName: "dDateFor_nBackupStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nBackupStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },           
+      {
+        field_name: "dDateFor_nTempStatus",
+        field_group: "Primary",
+        fieldUniqeName: "dDateFor_nTempStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nTempStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
       },
       {
         field_name: "Date",
@@ -1575,6 +1613,32 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
+      },        
+      {
+        field_name: "dDateFor_nStatus",
+        field_group: "Primary",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },             
+      {
+        field_name: "dDateFor_nPaperworkStatus",
+        field_group: "Primary",
+        fieldUniqeName: "dDateFor_nPaperworkStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nPaperworkStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
       }]
     };
   }
@@ -1734,7 +1798,31 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      }]
+      },
+      {
+        field_name: "dDateFor_nStatus",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "dDateFor_nLoopStatus",
+        fieldUniqeName: "dDateFor_nLoopStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "dDateFor_nLoopStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },]
     };
   }
 
@@ -1925,6 +2013,18 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
+      },
+      {
+        field_name: "dDateFor_nStatus",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
       }]
     };
   }
@@ -2148,6 +2248,42 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
+      },
+      {
+        field_name: "dDateFor_nBuyPassID",
+        fieldUniqeName: "dDateFor_nBuyPassID",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nBuyPassID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "dDateFor_nServerEPS",
+        fieldUniqeName: "dDateFor_nServerEPS",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nServerEPS",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },
+      {
+        field_name: "dDateFor_nStatus",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
       }]
     };
   }
@@ -2268,6 +2404,18 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
+      },
+      {
+        field_name: "dDateFor_nStatus",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
       }]
     };
   }
@@ -2437,6 +2585,18 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
+      },
+      {
+        field_name: "dDateFor_nStatus",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
       }]
     };
   }
@@ -2606,6 +2766,28 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
+      }, {
+        field_name: "dDateFor_nStatus",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "dDateFor_nProjectStatus",
+        fieldUniqeName: "dDateFor_nProjectStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nProjectStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
       }]
     };
   }

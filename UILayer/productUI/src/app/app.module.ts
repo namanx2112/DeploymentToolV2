@@ -6,6 +6,7 @@ import { LoginComponent } from './components/Auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatTabsModule} from '@angular/material/tabs';
 import { TabBodyComponent } from './components/tab-body/tab-body.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -141,7 +142,8 @@ import { TicketViewComponent } from './components/ticket-view/ticket-view.compon
     MatCheckboxModule,
     MatChipsModule,
     MatProgressSpinnerModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    DragDropModule
   ],
   providers: [
     {

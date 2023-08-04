@@ -48,7 +48,9 @@ export enum FieldType {
 export interface OptionType {
     optionDisplayName: string,
     optionIndex: string,
-    optionOrder: number
+    optionOrder: number,
+    nFunction: number,
+    bDeleted: boolean
 }
 
 export interface ConditionalOption {

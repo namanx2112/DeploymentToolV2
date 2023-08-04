@@ -70,7 +70,9 @@ export class PurchaseOrderWorkflowTemplateComponent {
       oArr.push({
         optionDisplayName: tVendor.tVendorName,
         optionIndex: tVendor.aVendorId.toString(),
-        optionOrder: 1
+        optionOrder: 1,
+        bDeleted: false,
+        nFunction: 0
       });
     }
     return oArr;

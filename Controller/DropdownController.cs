@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -33,7 +34,7 @@ namespace DeploymentTool.Controller
             if (tModuleName == null)
                 tModuleName = "";
             SqlParameter tModuleNameParam = new SqlParameter("@tModuleName", tModuleName);
-            List<Dropdown> items= db.Database.SqlQuery<Dropdown>("exec sproc_GetDropdown @tModuleName", tModuleNameParam).ToList();            
+            List<Dropdown> items = db.Database.SqlQuery<Dropdown>("exec sproc_GetDropdown @tModuleName", tModuleNameParam).OrderBy(x => x.nOrder).ToList();
             if (items == null || items.Count == 0)
             {
                 return new HttpResponseMessage(HttpStatusCode.NoContent);
@@ -41,6 +42,23 @@ namespace DeploymentTool.Controller
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<List<Dropdown>>(items, new JsonMediaTypeFormatter())
+            };
+        }
+
+        [Authorize]
+        [HttpGet]
+        [ActionName("GetModules")]
+        public HttpResponseMessage GetModules(int nBrandId)
+        {
+            SqlParameter tModuleNameParam = new SqlParameter("@nBrandId", nBrandId);
+            List<DropdownModule> items = db.Database.SqlQuery<DropdownModule>("exec sproc_getDropdownModules @nBrandId", tModuleNameParam).ToList();
+            if (items == null || items.Count == 0)
+            {
+                return new HttpResponseMessage(HttpStatusCode.NoContent);
+            }
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<DropdownModule>>(items, new JsonMediaTypeFormatter())
             };
         }
 
@@ -59,69 +77,123 @@ namespace DeploymentTool.Controller
             return Ok(tblDropdown);
         }
 
-        // PUT: api/Dropdown/5
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Update(Dropdown request)
+        public HttpResponseMessage UpdateOrder(Dropdown[] request)
         {
-            tblDropdown ddObj = new tblDropdown()
+
+            foreach (var item in request)
             {
-                tDropdownText = request.tDropdownText,
-                bDeleted = request.bDeleted,
-                aDropdownId = request.aDropdownId
-            };
-
-            Utilities.SetHousekeepingFields(false, HttpContext.Current, ddObj);
-            db.tblDropdowns.Add(ddObj);
-
-            db.Entry(ddObj).State = EntityState.Modified;
+                tblDropdown ddObj = new tblDropdown()
+                {
+                    aDropdownId = item.aDropdownId,
+                    nOrder = item.nOrder
+                };
+                Utilities.SetHousekeepingFields(false, HttpContext.Current, ddObj);
+                db.tblDropdowns.Attach(ddObj);
+                db.Entry(ddObj).Property(x => x.nOrder).IsModified = true;
+                db.Entry(ddObj).Property(x => x.dtUpdatedOn).IsModified = true;
+                db.Entry(ddObj).Property(x => x.nUpdateBy).IsModified = true;
+            }
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tblDropdownExists(request.aDropdownId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
 
-            return StatusCode(HttpStatusCode.NoContent);
+        // PUT: api/Dropdown/5
+        [Authorize]
+        [HttpPost]
+        public HttpResponseMessage Update(Dropdown request)
+        {
+            var alredyExist = db.Database.SqlQuery<int>("select top 1 1 from tblDropDownMain with(nolock) where tModuleName = '" + request.tModuleName + "' and nDropdownID in(select aDropdownId from tblDropDowns with(nolock) where UPPER(tDropDownText) = '" + request.tDropdownText.ToUpper() + "' and aDropdownId<>" + request.aDropdownId + ")").FirstOrDefault();
+            if (alredyExist == null || alredyExist == 0)
+            {
+                tblDropdown ddObj = new tblDropdown()
+                {
+                    tDropdownText = request.tDropdownText,
+                    bDeleted = request.bDeleted,
+                    aDropdownId = request.aDropdownId,
+                    nFunction = request.nFunction
+                };
+
+                Utilities.SetHousekeepingFields(false, HttpContext.Current, ddObj);
+                db.tblDropdowns.Add(ddObj);
+
+                db.Entry(ddObj).State = EntityState.Modified;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!tblDropdownExists(request.aDropdownId))
+                    {
+                        return new HttpResponseMessage(HttpStatusCode.NotFound);
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<tblDropdown>(ddObj, new JsonMediaTypeFormatter())
+                };
+            }
+            else
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<string>($"The item {request.tDropdownText} already exist!", new JsonMediaTypeFormatter())
+                };
         }
 
         // POST: api/Dropdown
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Create(Dropdown request)
+        public HttpResponseMessage Create(Dropdown request)
         {
-
-            tblDropdown ddObj = new tblDropdown()
+            var alredyExist = db.Database.SqlQuery<int>("select top 1 1 from tblDropDownMain with(nolock) where tModuleName = '" + request.tModuleName + "' and nDropdownID in(select aDropdownId from tblDropDowns with(nolock) where UPPER(tDropDownText)='" + request.tDropdownText.ToUpper() + "')").FirstOrDefault();
+            if (alredyExist == null || alredyExist == 0)
             {
-                tDropdownText = request.tDropdownText,
-            };
+                tblDropdown ddObj = new tblDropdown()
+                {
+                    nFunction  = request.nFunction,
+                    tDropdownText = request.tDropdownText,
+                };
 
-            Utilities.SetHousekeepingFields(true, HttpContext.Current, ddObj);
-            db.tblDropdowns.Add(ddObj);
-            await db.SaveChangesAsync();
+                Utilities.SetHousekeepingFields(true, HttpContext.Current, ddObj);
+                db.tblDropdowns.Add(ddObj);
+                db.SaveChanges();
 
-            tblDropdownMain mainObj = new tblDropdownMain()
-            {
-                nBrandId = request.nBrandId,
-                nDropdownId = ddObj.aDropdownId,
-                tModuleName = request.tModuleName,
-            };
+                tblDropdownMain mainObj = new tblDropdownMain()
+                {
+                    nBrandId = request.nBrandId,
+                    nDropdownId = ddObj.aDropdownId,
+                    tModuleName = request.tModuleName,
+                };
 
-            Utilities.SetHousekeepingFields(true, HttpContext.Current, mainObj);
-            db.tblDropdownMains.Add(mainObj);
-            await db.SaveChangesAsync();
+                Utilities.SetHousekeepingFields(true, HttpContext.Current, mainObj);
+                db.tblDropdownMains.Add(mainObj);
+                db.SaveChanges();
 
-            return Json(ddObj.aDropdownId);
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<tblDropdown>(ddObj, new JsonMediaTypeFormatter())
+                };
+            }
+            else
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<string>($"The item {request.tDropdownText} already exist!", new JsonMediaTypeFormatter())
+                };
         }
 
         // DELETE: api/Dropdown/5
@@ -136,7 +208,8 @@ namespace DeploymentTool.Controller
                 aDropdownId = id
             };
 
-            db.tblDropdowns.Attach(ddObj).bDeleted = true;
+            db.tblDropdowns.Attach(ddObj);
+            db.Entry(ddObj).Property(x => x.bDeleted).IsModified = true;
 
             try
             {

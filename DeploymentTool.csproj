@@ -1079,6 +1079,9 @@
     <Compile Include="tblDropdownMain.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblDropdownModule.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblEnum.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
@@ -1203,6 +1206,9 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUserVendorRel.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblUserVendorRel1.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblVendor.cs">

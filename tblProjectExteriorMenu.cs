@@ -29,5 +29,6 @@ namespace DeploymentTool
         public Nullable<decimal> cTotalCost { get; set; }
         public Nullable<int> nStoreId { get; set; }
         public Nullable<int> nMyActiveStatus { get; set; }
+        public Nullable<System.DateTime> dDateFor_nStatus { get; set; }
     }
 }

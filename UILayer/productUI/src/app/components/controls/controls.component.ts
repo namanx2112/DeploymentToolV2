@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { ControlsErrorMessages, Dictionary } from 'src/app/interfaces/commons';
-import { Fields, FieldType, HomeTab } from 'src/app/interfaces/home-tab';
+import { Fields, FieldType, HomeTab, OptionType } from 'src/app/interfaces/home-tab';
 import * as _moment from 'moment';
 import { Moment } from 'moment';
 import { CommonService } from 'src/app/services/common.service';
@@ -117,12 +117,7 @@ export class ControlsComponent implements AfterViewChecked {
     let sVal = val;
     if (field.field_type == FieldType.dropdown) {
       if (typeof field.options != 'undefined') {
-        for (var indx in field.options) {
-          if (field.options[indx].optionIndex == val) {
-            sVal = field.options[indx].optionDisplayName;
-            break;
-          }
-        }
+        sVal = CommonService.GetDropDownValueFromControl(field, val, this._controlValues);
       }
     }
     else if (field.field_type == FieldType.date) {
@@ -166,10 +161,11 @@ export class ControlsComponent implements AfterViewChecked {
 
   getFieldControlValues() {
     var cVal: Dictionary<any> = {};
+    let dateValueOptions: string[];
     Object.keys(this.formGroup.controls).forEach(key => {
       if (typeof this.formGroup.get(key)?.value == 'object' && this.formGroup.get(key)?.value != null) {
         if (key.indexOf("d") == 0)
-          cVal[key] =  CommonService.getFormatedDateStringForDB(this.formGroup.get(key)?.value);
+          cVal[key] = CommonService.getFormatedDateStringForDB(this.formGroup.get(key)?.value);
         else
           cVal[key] = this.formGroup.get(key)?.value;
       }
@@ -177,6 +173,24 @@ export class ControlsComponent implements AfterViewChecked {
         cVal[key] = this.formGroup.get(key)?.value;
     });
     return cVal;
+  }
+
+  dropdownChange(val: any, curControl: Fields) {
+    let tItem = curControl.options?.filter(x => x.optionIndex == val);
+    if (tItem && tItem[0].nFunction == 1) {
+      let dFieldName = CommonService.GetDropdownDMonthFieldName(curControl);
+      this.formGroup.get(dFieldName)?.setValue(new Date());
+    }
+    else {
+      if (curControl.options?.filter(x => x.nFunction == 1)) {
+        let dFieldName = CommonService.GetDropdownDMonthFieldName(curControl);
+        this.formGroup.get(dFieldName)?.setValue(null);
+      }
+    }
+  }
+
+  getOptionValue(curControl: Fields, opt: OptionType) {
+    return CommonService.GetDropDownValueFromControlOption(curControl, opt, this._controlValues);
   }
 
   onSubmitClick(): void {
@@ -205,6 +219,10 @@ export class ControlsComponent implements AfterViewChecked {
 
   CloseClicked(ev: any) {
     this.onClose?.emit(this.formGroup);
+  }
+
+  filterOption(request: OptionType) {
+    return (typeof request.bDeleted == 'undefined' || request.bDeleted == null || request.bDeleted == false) ? true : false;
   }
 }
 

@@ -211,7 +211,18 @@ export interface DropwDown {
     nBrandId: number,
     tModuleName: string,
     tDropdownText: string,
+    nOrder: number,
+    nFunction: number,
     bDeleted: boolean
+}
+
+export interface DropdownModule{
+    aModuleId: number,
+    nBrnadId: number,
+    tModuleName: string,
+    tModuleDisplayName: string,
+    tModuleGroup: string,
+    editable: boolean
 }
 
 export interface ProjectTemplates {

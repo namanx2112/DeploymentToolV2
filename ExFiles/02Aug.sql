@@ -167,3 +167,89 @@ else if(@nFranchiseId <> 0)
  --where nVendorId=@nVendorId and bDeleted is null or bDeleted = 0   
 END
 
+GO
+create table tblDropdownModule(aModuleId int identity primary key, nBrandId int, tModuleName VARCHAR(500) unique, tModuleDisplayName VARCHAR(1000), tModuleGroup VARCHAR(500), editable bit default 1)
+GO
+INSERT into tblDropdownModule(nBrandId, tModuleName, tModuleDisplayName, tModuleGroup, editable) values(1, 'ConfigurationDriveThrou', 'DriveThrou', 'Configuration',1),(1, 'ConfigurationInsideDining', 'Inside Dining', 'Configuration',1),(1, 'StackHolderCD', 'CD', 'Stack Holder',1)
+,(1, 'NetworkingStatus', 'Status', 'Networking',1),(1, 'NetworkingPrimaryType', 'Primary Type', 'Networking',1),(1, 'NetworkingBackupStatus', 'Backup Status', 'Networking',1),(1, 'NetworkingBackupType', 'Backup Type', 'Networking',1)
+,(1, 'NetworkingTempStatus', 'TempStatus', 'Networking',1),(1, 'NetworkingTempType', 'TempType', 'Networking',1),(1, 'POSStatus', 'Status', 'POS',1),(1, 'AudioLoopType', 'LoopType', 'Audio',1),(1, 'POSPaperworkStatus', 'PaperworkStatus', 'POS',1)
+,(1, 'AudioStatus', 'Status', 'Audio',1),(1, 'AudioConfiguration', 'Configuration', 'Audio',1),(1, 'AudioLoopStatus', 'LoopStatus', 'Audio',1),(1, 'PaymentSystemType', 'System Type', 'Payment',1),(1, 'ExteriorMenuStatus', 'Status', 'Exterior Menu',1)
+,(1, 'PaymentSystemBuyPassID', 'BuyPass ID', 'Payment System',1),(1, 'PaymentSystemServerEPS', 'Server EPS', 'Payment System',1),(1, 'PaymentSystemStatus', 'Status', 'Payment System',1),(1, 'InteriorMenuStatus', 'Status', 'Interior Menu',1),(1, 'InstallationProjectStatus', 'Project Status', 'Installation',1)
+,(1, 'SonicRaidoColors', 'Raido Colors', 'Sonic',1),(1, 'SonicRadioStatus', 'Radio Status', 'Sonic',1),(1, 'InstallationStatus', 'Status', 'Installation',1),(1, 'InstallationSignOffs', 'SignOffs', 'Installation',1),(1, 'InstallationTestTransactions', 'Test Transactions', 'Installation',1)
+,(1, 'SonicNoteType', 'NoteType', 'Sonic',1),(1, 'ProjectStatus', 'Status', 'ProjectStatus',0),(1, 'VendorType', 'Type', 'Vendor',1),(1, 'VendorStatus', 'Status', 'Vendor',1)
+,(1, 'UserDepartment', 'Department', 'User',1),(1, 'UserRole', 'Role', 'User',0),(1, 'City', 'City', 'All',1),(1, 'State', 'State', 'All',1),(1, 'Country', 'Country', 'All',1)
+GO
+create procedure sproc_getDropdownModules
+@nBrandId int
+AS
+BEGIN
+	select * from tblDropdownModule with(nolock)
+END
+
+alter table tblDropDowns add nOrder int
+alter table tblDropDowns add nFunction int
+
+GO
+
+--sproc_GetDropdown ''  
+Alter Procedure [dbo].[sproc_GetDropdown]          
+@tModuleName as VARCHAR(500)          
+as          
+BEGIN          
+ IF(@tModuleName is null OR @tModuleName = '')          
+ BEGIN          
+  Select nBrandId, tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdownMain  with(nolock) join tblDropdowns with(nolock) on          
+  aDropdownId = nDropdownId  UNION          
+ Select 1, 'Vendor', aVendorId, tVendorName, bDeleted, 1, 0 from tblVendor with(nolock)  UNION      
+ Select 1, 'Franchise', aFranchiseId, tFranchiseName,bDeleted,1, 0 from tblFranchise  with(nolock) UNION  
+ select 1, 'UserRole', aRoleID, tRoleName, bDeleted,1, 0 from tblRole with(nolock) UNION  
+ select 1, 'Brand', aBrandId, tBrandName, bDeleted,1, 0 from tblBrand with(nolock)        
+ END          
+ ELSE           
+ BEGIN          
+ IF(@tModuleName = 'Vendor')        
+ BEGIN        
+ Select nBrand, @tModuleName, aVendorId, tVendorName, bDeleted,1, 0 from tblVendor with(nolock) order by tVendorName   
+ END        
+ ELSE        
+ BEGIN        
+ Select 1, tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdownMain join tblDropdowns on          
+  aDropdownId = nDropdownId where tModuleName = @tModuleName and (tblDropdowns.bDeleted is null or tblDropdowns.bDeleted = 0)  order by nOrder       
+  END        
+ END          
+END 
+
+GO
+
+alter table tblProjectNetworking add dDateFor_nPrimaryStatus date
+alter table tblProjectNetworking add dDateFor_nBackupStatus date
+alter table tblProjectNetworking add dDateFor_nTempStatus date
+
+alter table tblProjectPOS add dDateFor_nStatus date
+alter table tblProjectPOS add dDateFor_nPaperworkStatus date
+
+alter table tblProjectAudio add dDateFor_nStatus date
+alter table tblProjectAudio add dDateFor_nLoopStatus date
+
+alter table tblProjectExteriorMenus add dDateFor_nStatus date
+
+alter table tblProjectInteriorMenus add dDateFor_nStatus date
+
+alter table tblProjectPaymentSystem add dDateFor_nBuyPassID date
+alter table tblProjectPaymentSystem add dDateFor_nServerEPS date
+alter table tblProjectPaymentSystem add dDateFor_nStatus date
+
+alter table tblProjectSonicRadio add dDateFor_nStatus date
+
+alter table tblProjectInstallation add dDateFor_nStatus date
+alter table tblProjectInstallation add dDateFor_nProjectStatus date
+
+update tblDropDowns set nFunction = 1 where tDropDownText like '%]%'
+
+GO
+
+select * from tblDropDownMain with(nolock) where tModuleName = 'ProjectType' and nDropdownID in(select * from tblDropDowns with(nolock) where tDropDownText = 'Remodel' and aDropDownId) 
+
+
+select * from tblDropDowns where tDropDownText like '%]%'
+select * from tblDropDownMain

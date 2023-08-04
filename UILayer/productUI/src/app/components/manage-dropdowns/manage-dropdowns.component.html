@@ -8,28 +8,35 @@
                 <mat-option *ngFor="let item of allBrands" [value]="item">{{item.tBrandName}}</mat-option>
             </mat-select>
         </mat-form-field>
+    </div>
+    <div class="dropDowns" *ngIf="selectedModule != undefined">
         <mat-form-field class="dropDownField whiteDropdown roundedCorner">
             <mat-label>Select a Section</mat-label>
             <mat-select [(value)]="selectedModule" (selectionChange)="moduleChanged($event)">
-                <mat-option *ngFor="let module of moduleList" [value]="module">{{module}}</mat-option>
+                <mat-optgroup *ngFor="let group of modules" [label]="group">
+                    <mat-option *ngFor="let module of moduleGroupList[group]" [value]="module">
+                        {{module.tModuleDisplayName}}
+                    </mat-option>
+                </mat-optgroup>
             </mat-select>
         </mat-form-field>
-    </div>
-    <div class="dropDowns">
         <mat-form-field class="DropdownChips roundedCorner vChips">
-            <mat-label>Dropwdown Fields</mat-label>
-            <mat-chip-grid #chipGrid aria-label="Enter Field">
-                <mat-chip-row *ngFor="let item of ddList" (removed)="remove(item)" [editable]="true"
-                    (edited)="edit(item, $event)" [aria-description]="'press enter to edit ' + item.tDropdownText">
-                    {{item.tDropdownText}}
-                    <button matChipRemove [attr.aria-label]="'remove ' + item.tDropdownText">
-                        <mat-icon>cancel</mat-icon>
-                    </button>
-                </mat-chip-row>
-                <input placeholder="New Dropdown..." [matChipInputFor]="chipGrid"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)" />
-            </mat-chip-grid>
+            <span *ngIf="ddList.length > 0" class="ddfieldLabel">Dropwdown Fields</span>
+            <span *ngIf="ddList.length == 0" class="noItem">There are no Dropdown item configured for
+                {{selectedModule.tModuleName}}</span>
+            <div *ngIf="ddList.length > 0" [cdkDropListData]="ddList" cdkDropList class="ddList" (cdkDropListDropped)="drop($event)">
+                <div class="dropdownItem" *ngFor="let item of ddList" cdkDrag>
+                    <span class="lText">{{item.tDropdownText}}</span>
+                    <span class="dragHelp">Drag and drop this item to rearrange</span>
+                    <div class="cAction">
+                        <span title="Edit" (click)="edit(item)"><mat-icon>edit</mat-icon></span>
+                        <span title="Remove" (click)="remove(item)" style="margin-left: 2px;"><mat-icon>cancel</mat-icon></span>
+                    </div>
+                </div>
+            </div>
+            <input class="inpNewItem" matInput placeholder="Type here and press Enter key to add a new Dropdown item"
+                (keydown)="add($event)">
+            <mat-hint>You can drag items to rearrange</mat-hint>
         </mat-form-field>
     </div>
 </div>

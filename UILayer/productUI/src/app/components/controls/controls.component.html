@@ -43,9 +43,9 @@
             <mat-form-field appearance="outline"
                 *ngIf="!(curControl.readOnly || readOnlyForm) && curControl.field_type == 4">
                 <mat-select [compareWith]="compareDropDown" formControlName="{{curControl.fieldUniqeName}}"
-                    [(value)]="controlValues[curControl.fieldUniqeName]">
-                    <mat-option *ngFor="let opt of curControl.options"
-                        [value]="opt.optionIndex">{{opt.optionDisplayName}}</mat-option>
+                    [(value)]="controlValues[curControl.fieldUniqeName]" (selectionChange)="dropdownChange($event.value, curControl)">
+                    <mat-option *ngFor="let opt of curControl.options|forFilter:filterOption"
+                        [value]="opt.optionIndex">{{getOptionValue(curControl, opt)}}</mat-option>
                 </mat-select>
                 <mat-error
                     *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
