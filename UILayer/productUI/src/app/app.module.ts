@@ -70,6 +70,7 @@ import { ChangeGoliveDateComponent } from './components/Sonic/change-golive-date
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { TicketViewComponent } from './components/ticket-view/ticket-view.component';
 import { DeliveryStatusComponent } from './components/Sonic/delivery-status/delivery-status.component';
+import { DocumentsTabComponent } from './components/sonic/documents-tab/documents-tab.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { DeliveryStatusComponent } from './components/Sonic/delivery-status/deli
     ChangeGoliveDateComponent,
     ChangePasswordComponent,
     TicketViewComponent,
-    DeliveryStatusComponent
+    DeliveryStatusComponent,
+    DocumentsTabComponent
   ],
   imports: [
     CKEditorModule,
