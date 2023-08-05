@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Fields, OptionType } from '../interfaces/home-tab';
 import { DropdownServiceService } from './dropdown-service.service';
-import { DropwDown } from '../interfaces/models';
+import { BrandModel, DropwDown } from '../interfaces/models';
 import { ProjectTypes } from '../interfaces/sonic';
 import moment from 'moment';
+import { BrandServiceService } from './brand-service.service';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +15,19 @@ import moment from 'moment';
 export class CommonService {
   static allItems: any;
   static ddMonthString: string = "[Day/Month]";
-  constructor(private ddService: DropdownServiceService) {
+  static allBrands: any;
+  constructor(private cacheService: CacheService, private ddService: DropdownServiceService) {
 
   }
 
 
   static ConfigUrl: string = "./api/";
 
-  loadDropdowns(x: DropwDown[]) {
+  getBrands(callBack: any) {
+    this.cacheService.getBrands(callBack);
+  }
+
+  loadDropdownArray(x: DropwDown[]) {
     CommonService.allItems = {};
     for (let indx in x) {
       let tItem = x[indx];
@@ -31,10 +40,17 @@ export class CommonService {
     }
   }
 
-  public getAllDropdowns() {
-    this.ddService.Get("").subscribe((x: DropwDown[]) => {
-      this.loadDropdowns(x);
-    });
+  public getAllDropdowns(callBack?: any) {
+    if (typeof CommonService.allItems == 'undefined') {
+      let cThis = this;
+      this.ddService.Get("").subscribe((x: DropwDown[]) => {
+        cThis.loadDropdownArray(x);
+        if (typeof callBack != 'undefined')
+          callBack();
+      });
+    }
+    else if (typeof callBack != 'undefined')
+      callBack();
   }
 
   public refreshDropdownValue(module: string, ddVal: DropwDown[]) {
@@ -215,6 +231,13 @@ export class CommonService {
           });
         }
         ddItems.sort(this.compare);
+        ddItems.unshift({
+          optionDisplayName: "",
+          optionIndex: "0",
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        });
       }
     }
     if (ddItems.length == 0) {
@@ -236,6 +259,12 @@ export class CommonService {
       }
       else {
         ddItems = [{
+          optionDisplayName: "None",
+          optionIndex: "0",
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }, {
           optionDisplayName: "Dummy",
           optionIndex: "1",
           optionOrder: 1,

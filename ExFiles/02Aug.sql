@@ -92,14 +92,45 @@ nPermissionID in(Select aPermissionID from tblPermission where tPermissionName i
 
 GO
 
-create procedure sproc_ChangeUserPermissionFromRole
-@nUserId int,
-@nRoleId int
-as
-BEGIN
-	delete from tblUserPermissionRel where nUserID = @nUserId
-	Insert into tblUserPermissionRel(nUserID, nPermissionID, nPermVal) Select @nUserId, nPermissionID, nPermVal from tblRolePermissionRel with(nolock) where nRoleID = @nRoleId
-END
+Alter procedure sproc_ChangeUserPermissionFromRole  
+@nUserId int,  
+@nRoleId int,
+@nVendorId int,
+@nFranchiseId int
+as  
+BEGIN  
+	if(@nRoleId = -1) -- get Role for Vendor or Franchise
+	BEGIN	
+		Declare @tRole int
+		delete from tblUserPermissionRel where nUserID = @nUserId  
+		if(@nVendorId <> 0)
+		BEGIN
+			Declare @equp int, @inst int
+			Select @equp = nEquipment, @inst = nInstallation from tblVendor with(nolock) where aVendorId = @nVendorId
+			if(@equp is not null)
+			BEGIN
+				select @tRole = aRoleId from tblrole with(nolock) where tRoleName = 'Equipment Vendor'
+				Insert into tblUserPermissionRel(nUserID, nPermissionID, nPermVal) Select @nUserId, nPermissionID, nPermVal from tblRolePermissionRel with(nolock) where nRoleID = @tRole  
+			END
+			if(@inst is not null)
+			BEGIN
+				select @tRole = aRoleId from tblrole with(nolock) where tRoleName = 'Installation Vendor'
+				Insert into tblUserPermissionRel(nUserID, nPermissionID, nPermVal) Select @nUserId, nPermissionID, nPermVal from tblRolePermissionRel with(nolock) where nRoleID = @tRole  
+			END
+		END
+		else if(@nFranchiseId <> 0)
+		BEGIN
+			select @tRole = aRoleId from tblrole with(nolock) where tRoleName = 'Franchise'
+			Insert into tblUserPermissionRel(nUserID, nPermissionID, nPermVal) Select @nUserId, nPermissionID, nPermVal from tblRolePermissionRel with(nolock) where nRoleID = @tRole
+		END
+		
+	END
+	ELSE
+	BEGIN
+		 delete from tblUserPermissionRel where nUserID = @nUserId  
+		 Insert into tblUserPermissionRel(nUserID, nPermissionID, nPermVal) Select @nUserId, nPermissionID, nPermVal from tblRolePermissionRel with(nolock) where nRoleID = @nRoleId  
+	END
+END  
 
 Go
 
@@ -128,7 +159,7 @@ Alter  PROC sproc_UserLogin
 )              
 AS              
 BEGIN              
-   select tName, tEmail, nRole, aUserID nUserID from tblUser with(nolock) where UPPER(tUserName) = UPPER(@tUserName) and tPassword = @tPassword  
+   select tName, tEmail, case when(nRole is null) then 0 else nRole end, aUserID nUserID from tblUser with(nolock) where UPPER(tUserName) = UPPER(@tUserName) and tPassword = @tPassword  
 END 
 
 
@@ -146,27 +177,26 @@ alter table tblVendor drop column nTechComponentID, tVendorDescription, tVendorC
 
 Go
 
-Alter procedure sproc_getUserModel        
-@nVendorId as int = 0,
-@nFranchiseId as int = 0 
-as         
-BEGIN        
-       
-if(@nVendorId=0 and @nFranchiseId = 0)      
-Select *, 1 nVendorId from tblUser A with(nolock) where bDeleted is null or bDeleted = 0  
- --inner join tblUserVendorRel B with(nolock) on  A.bDeleted=B.nPartID      
- --where nVendorId=@nVendorId      
- else if(@nVendorId <> 0)
- Select *, nVendorId from tblUser A with(nolock)       
- inner join tblUserVendorRel B with(nolock) on  A.aUserID=B.nUserID      
- where nVendorId=@nVendorId and bDeleted is null or bDeleted = 0  
-else if(@nFranchiseId <> 0)
-	Select *, 1 nVendorId from tblUser A with(nolock) where bDeleted is null or bDeleted = 0  
- --Select *, nVendorId from tblUser A with(nolock)       
- --inner join tblUserFranchiseRel B with(nolock) on  A.aUserID=B.nUserID      
- --where nVendorId=@nVendorId and bDeleted is null or bDeleted = 0   
-END
-
+Alter procedure sproc_getUserModel          
+@nVendorId as int = 0,  
+@nFranchiseId as int = 0   
+as           
+BEGIN          
+         
+if(@nVendorId=0 and @nFranchiseId = 0)        
+Select *, 0 nVendorId from tblUser A with(nolock) where (bDeleted is null or bDeleted = 0) and aUserId not in(select nuserID from tblUserVendorRel with(nolock) union Select nUserID from tblUserFranchiseRel with(nolock)) order by tName 
+ --inner join tblUserVendorRel B with(nolock) on  A.bDeleted=B.nPartID        
+ --where nVendorId=@nVendorId        
+ else if(@nVendorId <> 0)  
+ Select *, nVendorId from tblUser A with(nolock)         
+ inner join tblUserVendorRel B with(nolock) on  A.aUserID=B.nUserID        
+ where nVendorId=@nVendorId and bDeleted is null or bDeleted = 0    
+else if(@nFranchiseId <> 0)  
+ Select *, nFranchiseID from tblUser A with(nolock)         
+ inner join tblUserFranchiseRel B with(nolock) on  A.aUserID=B.nUserID        
+ where nFranchiseID=@nFranchiseId and bDeleted is null or bDeleted = 0     
+END  
+  
 GO
 create table tblDropdownModule(aModuleId int identity primary key, nBrandId int, tModuleName VARCHAR(500) unique, tModuleDisplayName VARCHAR(1000), tModuleGroup VARCHAR(500), editable bit default 1)
 GO
@@ -253,3 +283,25 @@ select * from tblDropDownMain with(nolock) where tModuleName = 'ProjectType' and
 
 select * from tblDropDowns where tDropDownText like '%]%'
 select * from tblDropDownMain
+
+select * from tblUser order by 1 desc
+select * from tblUser with(nolock) where UPPER(tUserName)=UPPER('johndoe') and aUserID <> 1
+select * from tblUser with(nolock) where UPPER(tUserName)='FRANCHISEUSER' and aUSERID <> 43
+update tblUser	set tUserName ='FRANCHISEUSER1' where aUserId = 45
+
+select * from tblUserVendorrel where nUserId = 43
+delete from tblUserVendorrel where nUserId = 43
+
+sp_helptext sproc_ChangeUserPermissionFromRole
+update tblUser set tUserName = 'aaaa' where auserId = 50
+
+sproc_UserLogin 'roshan', 'OA=='
+
+select * from tblUserPermissionRel where nUserId = 52
+
+select * from tblVendor where avendorId = 1
+update tblvendor set nInstallation = 1 where aVendorId = 1
+select * from tblRole
+select * from tblRolePermissionRel where nRoleId = 7
+
+select * from tblApplicationTrace order by 1 desc

@@ -5,29 +5,30 @@ import { Fields, FieldType } from '../interfaces/home-tab';
 import { VendorModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VendorService {
 
-  constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
+  constructor(private http: HttpClient, private cacheService: CacheService, private commonService: CommonService) {
   }
 
   Create(request: any) {
-    return this.http.post<VendorModel>(CommonService.ConfigUrl + "Vendor/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<VendorModel>(CommonService.ConfigUrl + "Vendor/Create", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<VendorModel>(CommonService.ConfigUrl + "Vendor/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<VendorModel>(CommonService.ConfigUrl + "Vendor/Update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Get(request: any | null){
-    return this.http.post<VendorModel[]>(CommonService.ConfigUrl + "Vendor/Get", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<VendorModel[]>(CommonService.ConfigUrl + "Vendor/Get", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Delete(request: VendorModel) {
-    return this.http.get<VendorModel>(CommonService.ConfigUrl + "Vendor/Delete?id=" + request.aVendorId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<VendorModel>(CommonService.ConfigUrl + "Vendor/Delete?id=" + request.aVendorId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(){

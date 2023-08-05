@@ -14,7 +14,9 @@ namespace DeploymentTool
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using System.Data.Entity.SqlServer;
+
+    [DbConfigurationType(typeof(MyConfiguration))]
     public partial class dtDBEntities : DbContext
     {
         public dtDBEntities()
@@ -72,6 +74,7 @@ namespace DeploymentTool
         public virtual DbSet<tblPurchaseOrderTemplatePart> tblPurchaseOrderTemplateParts { get; set; }
         public virtual DbSet<tblVendorPartRel> tblVendorPartRels { get; set; }
         public virtual DbSet<tblUserVendorRel> tblUserVendorRels { get; set; }
+        public virtual DbSet<tblUserFranchiseRel> tblUserFranchiseRel { get; set; }
         public virtual DbSet<tblSupportTicket> tblSupportTickets { get; set; }
         public virtual DbSet<tblRole> tblRoles { get; set; }
         public virtual DbSet<tblRolePermissionRel> tblRolePermissionRels { get; set; }
@@ -81,7 +84,7 @@ namespace DeploymentTool
         public virtual DbSet<tblUserType> tblUserTypes { get; set; }
         public virtual DbSet<tbPermission> tbPermissions { get; set; }
         public virtual DbSet<tblDropdownModule> tblDropdownModules { get; set; }
-        public virtual DbSet<tblUserVendorRel1> tblUserVendorRels1 { get; set; }
+        public virtual DbSet<tblUserFranchiseRel> tblUserFranchiseRels { get; set; }
     
         public virtual int sproc_CreateStoreFromExcel(string tStoreName, Nullable<int> nProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
         {
@@ -167,6 +170,16 @@ namespace DeploymentTool
                 new ObjectParameter("tText", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sproc_SearchStore_Result>("sproc_SearchStore", tTextParameter);
+        }
+    }
+
+    public class MyConfiguration : DbConfiguration
+    {
+        public MyConfiguration()
+        {
+            SetExecutionStrategy(
+                "System.Data.SqlClient",
+                () => new SqlAzureExecutionStrategy(1, TimeSpan.FromSeconds(30)));
         }
     }
 }

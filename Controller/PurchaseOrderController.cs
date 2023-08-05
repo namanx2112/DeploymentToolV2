@@ -15,6 +15,7 @@ using System.Data;
 using DeploymentTool.Model.Templates;
 using System.IO;
 using System.Web;
+using DeploymentTool.Misc;
 
 namespace DeploymentTool.Controller
 {
@@ -224,6 +225,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("PurchseOrder.CreateTemplate", HttpContext.Current, ex);
                 if (poRequest.aPurchaseOrderTemplateID == 0)
                 {
                     return NotFound();
@@ -411,6 +413,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("PurchseOrder.FeneratePO", HttpContext.Current, ex);
                 //return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
 
@@ -580,7 +583,8 @@ namespace DeploymentTool.Controller
                 }
             }
             catch (Exception ex)
-            { 
+            {
+                TraceUtility.ForceWriteException("PurchseOrder.SendPO", HttpContext.Current, ex);
             }
             // request.
             // Send PO

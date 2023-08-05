@@ -4,13 +4,14 @@ import { Fields, FieldType } from '../interfaces/home-tab';
 import { PartsModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PartsService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private cacheService: CacheService) {
   }
 
   GetTableVisibleColumns() {
@@ -22,19 +23,19 @@ export class PartsService {
   }
 
   Create(request: any) {
-    return this.http.post<PartsModel>(CommonService.ConfigUrl + "VendorParts/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<PartsModel>(CommonService.ConfigUrl + "VendorParts/Create", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<PartsModel>(CommonService.ConfigUrl + "VendorParts/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<PartsModel>(CommonService.ConfigUrl + "VendorParts/Update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Get(request: any | null) {
-    return this.http.post<PartsModel[]>(CommonService.ConfigUrl + "VendorParts/Get", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<PartsModel[]>(CommonService.ConfigUrl + "VendorParts/Get", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Delete(request: PartsModel) {
-    return this.http.get<PartsModel>(CommonService.ConfigUrl + "VendorParts/Delete?id=" + request.aPartID, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<PartsModel>(CommonService.ConfigUrl + "VendorParts/Delete?id=" + request.aPartID, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetSearchFields(): Fields[] {

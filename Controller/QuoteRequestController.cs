@@ -23,6 +23,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Runtime.Remoting.Contexts;
+using DeploymentTool.Misc;
 
 namespace DeploymentTool.Controller
 {
@@ -153,6 +154,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("QuoteRequerst.GetTemplate", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -216,6 +218,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("QuoteRequerst.CreateUpdateTemplate", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -314,6 +317,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("QuoteRequerst.GetMergedQuoteRequest", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -351,6 +355,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("QuoteRequerst.SendQuoteRequest", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }

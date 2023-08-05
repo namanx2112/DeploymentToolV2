@@ -3,7 +3,6 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { BrandModel, DropdownModule, DropwDown } from 'src/app/interfaces/models';
 import { DropdownServiceService } from 'src/app/services/dropdown-service.service';
 // import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { CdkDragDrop, moveItemInArray, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -27,10 +26,8 @@ export class ManageDropdownsComponent {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   moduleGroupList: any;
   modules: string[];
-  constructor(private dialog: MatDialog, private service: DropdownServiceService, private brandService: BrandServiceService, private commonService: CommonService) {
+  constructor(private dialog: MatDialog, private service: DropdownServiceService, private commonService: CommonService) {
     this.loadBrands();
-    this.loadModules();
-    //this.moduleList = this.service.GetAllModules();    
   }
 
   loadModules() {
@@ -56,9 +53,11 @@ export class ManageDropdownsComponent {
   }
 
   loadBrands() {
-    this.brandService.Get(null).subscribe((x: BrandModel[]) => {
-      this.allBrands = x;
-      this.selectedBrand = this.allBrands[0];
+    let cThis = this;
+    this.commonService.getBrands(function (x: any) {
+      cThis.allBrands = x;
+      cThis.selectedBrand = cThis.allBrands[0];
+      cThis.loadModules();
     });
   }
 

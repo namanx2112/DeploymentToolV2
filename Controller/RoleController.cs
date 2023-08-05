@@ -16,6 +16,8 @@ using DeploymentTool.Model;
 using System.Data.SqlClient;
 using System.Net.Http.Formatting;
 using iTextSharp.text;
+using DeploymentTool.Misc;
+using System.Web;
 
 namespace DeploymentTool.Controller
 {
@@ -65,6 +67,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("Role.GetAllRole", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
 }

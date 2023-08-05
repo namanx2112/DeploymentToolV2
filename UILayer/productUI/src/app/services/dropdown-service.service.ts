@@ -4,39 +4,40 @@ import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
 import { DropdownModule, DropwDown } from '../interfaces/models';
 import { FieldType, Fields } from '../interfaces/home-tab';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DropdownServiceService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private cacheService: CacheService) {
   }
 
   Create(request: DropwDown) {
-    return this.http.post<any>(CommonService.ConfigUrl + "Dropdown/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "Dropdown/Create", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Update(request: DropwDown) {
-    return this.http.post<any>(CommonService.ConfigUrl + "Dropdown/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "Dropdown/Update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Get(request: string) {
     // let params = new HttpParams();
     //     params = params.set('tModuleName', request);
-    return this.http.get<DropwDown[]>(CommonService.ConfigUrl + "Dropdown/Get?tModuleName=" + request, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<DropwDown[]>(CommonService.ConfigUrl + "Dropdown/Get?tModuleName=" + request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetModules(nBrandId: number) {
-    return this.http.get<DropdownModule[]>(CommonService.ConfigUrl + "Dropdown/GetModules?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<DropdownModule[]>(CommonService.ConfigUrl + "Dropdown/GetModules?nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Delete(request: number) {
-    return this.http.get<number>(CommonService.ConfigUrl + "Dropdown/Delete?id=" + request, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<number>(CommonService.ConfigUrl + "Dropdown/Delete?id=" + request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   UpdateOrder(request: DropwDown[]){
-    return this.http.post<any>(CommonService.ConfigUrl + "Dropdown/UpdateOrder", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "Dropdown/UpdateOrder", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns() {

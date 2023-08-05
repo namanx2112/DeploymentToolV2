@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Data.SqlClient;
+using DeploymentTool.Misc;
+using System.Web;
 
 namespace DeploymentTool.Controller
 {
@@ -39,8 +41,9 @@ namespace DeploymentTool.Controller
             {
                 await db.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
+                TraceUtility.ForceWriteException("VendorParts.Update", HttpContext.Current, ex);
                 if (!tblUserExists(partsRequest.aPartID))
                 {
                     return NotFound();

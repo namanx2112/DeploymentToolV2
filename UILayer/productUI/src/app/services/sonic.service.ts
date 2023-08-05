@@ -7,12 +7,13 @@ import { CommonService } from './common.service';
 import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, SonicProjectExcel, StoreSearchModel } from '../interfaces/sonic';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SonicService {
-  constructor(private http: HttpClient, private commonService: CommonService, private authService: AuthService) {
+  constructor(private http: HttpClient, private commonService: CommonService, private cacheService: CacheService) {
   }
 
 
@@ -20,17 +21,17 @@ export class SonicService {
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name);
     let httpHeader = new HttpHeaders({
-      "Authorization": "Bearer " + this.authService.getToken()
+      "Authorization": "Bearer " + this.cacheService.getToken()
     });
     return this.http.post<SonicProjectExcel[]>(CommonService.ConfigUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
   }
 
   CreateNewStores(request: SonicProjectExcel[]) {
-    return this.http.post<string>(CommonService.ConfigUrl + "Sonic/CreateNewStores", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<string>(CommonService.ConfigUrl + "Sonic/CreateNewStores", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   SearchStore(request: string) {
-    return this.http.get<StoreSearchModel[]>(CommonService.ConfigUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<StoreSearchModel[]>(CommonService.ConfigUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.cacheService.getHttpHeaders() });
   }
 
 
@@ -72,7 +73,7 @@ export class SonicService {
   }
 
   // Delete(request: UserModel) {
-  //   return this.http.delete<UserModel>(CommonService.ConfigUrl + "User/Delete?id=" + request.aUserID, { headers: this.authService.getHttpHeaders() });
+  //   return this.http.delete<UserModel>(CommonService.ConfigUrl + "User/Delete?id=" + request.aUserID, { headers: this.cacheService.getHttpHeaders() });
   // }
 
 

@@ -132,8 +132,9 @@ namespace DeploymentTool.Controller
                 {
                     db.SaveChanges();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
+                    TraceUtility.ForceWriteException("Dropdown.Update", HttpContext.Current, ex);
                     if (!tblDropdownExists(request.aDropdownId))
                     {
                         return new HttpResponseMessage(HttpStatusCode.NotFound);
@@ -215,8 +216,9 @@ namespace DeploymentTool.Controller
             {
                 await db.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
+                TraceUtility.ForceWriteException("Dropdown.Delete", HttpContext.Current, ex);
                 if (!tblDropdownExists(id))
                 {
                     return NotFound();

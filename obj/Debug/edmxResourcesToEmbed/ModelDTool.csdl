@@ -78,7 +78,7 @@
     <EntitySet Name="tblUserTypes" EntityType="dtDBModel.tblUserType" />
     <EntitySet Name="tbPermissions" EntityType="dtDBModel.tbPermission" />
     <EntitySet Name="tblDropdownModules" EntityType="dtDBModel.tblDropdownModule" />
-    <EntitySet Name="tblUserVendorRels1" EntityType="dtDBModel.tblUserVendorRel1" />
+    <EntitySet Name="tblUserFranchiseRels" EntityType="dtDBModel.tblUserFranchiseRel" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -238,7 +238,7 @@
     <Property Name="cTotalCost" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
-    <Property Name="dDateFor_nStatus" Type="DateTime" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectInstallation">
     <Key>
@@ -293,9 +293,9 @@
     <Property Name="nTempType" Type="Int32" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
-    <Property Name="dDateFor_nPrimaryStatus" Type="DateTime" />
-    <Property Name="dDateFor_nBackupStatus" Type="DateTime" />
-    <Property Name="dDateFor_nTempStatus" Type="DateTime" />
+    <Property Name="dDateFor_nPrimaryStatus" Type="DateTime" Precision="0" />
+    <Property Name="dDateFor_nBackupStatus" Type="DateTime" Precision="0" />
+    <Property Name="dDateFor_nTempStatus" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectNote">
     <Key>
@@ -885,5 +885,13 @@
     <Property Name="aUserVendorRelsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nUserID" Type="Int32" />
     <Property Name="nVendorID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblUserFranchiseRel">
+    <Key>
+      <PropertyRef Name="aUserFranchiseRelID" />
+    </Key>
+    <Property Name="aUserFranchiseRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nUserID" Type="Int32" />
+    <Property Name="nFranchiseID" Type="Int32" />
   </EntityType>
 </Schema>

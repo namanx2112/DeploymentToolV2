@@ -855,12 +855,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblUserVendorRels1">
-      <EntityTypeMapping TypeName="dtDBModel.tblUserVendorRel1">
-        <MappingFragment StoreEntitySet="tblUserVendorRels">
-          <ScalarProperty Name="nVendorID" ColumnName="nVendorID" />
+    <EntitySetMapping Name="tblUserFranchiseRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblUserFranchiseRel">
+        <MappingFragment StoreEntitySet="tblUserFranchiseRel">
+          <ScalarProperty Name="nFranchiseID" ColumnName="nFranchiseID" />
           <ScalarProperty Name="nUserID" ColumnName="nUserID" />
-          <ScalarProperty Name="aUserVendorRelsID" ColumnName="aUserVendorRelsID" />
+          <ScalarProperty Name="aUserFranchiseRelID" ColumnName="aUserFranchiseRelID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

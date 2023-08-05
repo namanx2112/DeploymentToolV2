@@ -4,17 +4,18 @@ import { Fields, FieldType } from '../interfaces/home-tab';
 import { TechComponentModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TechComponenttService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private cacheService: CacheService) {
   }
 
   Create(request: any) {
-    return this.http.post<TechComponentModel>(CommonService.ConfigUrl + "TechComponent/CreateTechComponent", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<TechComponentModel>(CommonService.ConfigUrl + "TechComponent/CreateTechComponent", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(){
@@ -25,15 +26,15 @@ export class TechComponenttService {
   }
 
   Update(request: any) {
-    return this.http.post<TechComponentModel>(CommonService.ConfigUrl + "TechComponent/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<TechComponentModel>(CommonService.ConfigUrl + "TechComponent/Update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Get(request: TechComponentModel | null){
-    return this.http.post<TechComponentModel[]>(CommonService.ConfigUrl + "TechComponent/GetTechComponents", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<TechComponentModel[]>(CommonService.ConfigUrl + "TechComponent/GetTechComponents", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Delete(request: TechComponentModel) {
-    return this.http.get<TechComponentModel>(CommonService.ConfigUrl + "TechComponent/Delete?id=" + request.aTechComponentId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<TechComponentModel>(CommonService.ConfigUrl + "TechComponent/Delete?id=" + request.aTechComponentId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetSearchFields(): Fields[]{

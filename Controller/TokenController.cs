@@ -26,13 +26,17 @@ namespace DeploymentTool.Controller
         public HttpResponseMessage Get(UserForAuthentication request)
         {
             var user = CheckUser(request.UserName, request.Password);
-
-            if (user.nUserID > 0)
+            if (user == null)
+                return Request.CreateResponse(HttpStatusCode.OK, "Wrong password or user name. Try again!");
+            else
             {
-                user.auth = JwtManager.GenerateToken(user);
-                return Request.CreateResponse(HttpStatusCode.OK, user);
+                if (user.nUserID > 0)
+                {
+                    user.auth = JwtManager.GenerateToken(user);
+                    return Request.CreateResponse(HttpStatusCode.OK, user);
+                }
+                return Request.CreateResponse(HttpStatusCode.Unauthorized);
             }
-            return Request.CreateResponse(HttpStatusCode.Unauthorized);
         }
 
         [Authorize]

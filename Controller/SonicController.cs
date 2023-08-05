@@ -72,6 +72,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("Sonic.CreateNewStores", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -94,6 +95,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("Sonic.SearchStore", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -128,6 +130,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("Sonic.getStoreDetails", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -208,6 +211,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("Sonic.NewStore", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -232,6 +236,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("Sonic.UpdateStore", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -303,6 +308,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("Sonic.GetProjectTemplates", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }

@@ -5,13 +5,14 @@ import { ProjectNotes } from '../interfaces/sonic';
 import { CommonService } from './common.service';
 import { FieldType, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
 
-  constructor( private commonService: CommonService, private http: HttpClient, private authService: AuthService) {
+  constructor( private commonService: CommonService, private http: HttpClient, private cacheService: CacheService) {
   }
 
   GetTableVisibleColumns() {
@@ -23,19 +24,19 @@ export class NotesService {
   }
 
   Create(request: any) {
-    return this.http.post<ProjectNotes>(CommonService.ConfigUrl + "Notes/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<ProjectNotes>(CommonService.ConfigUrl + "Notes/Create", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<ProjectNotes>(CommonService.ConfigUrl + "Notes/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<ProjectNotes>(CommonService.ConfigUrl + "Notes/Update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Get(request: any | null) {
-    return this.http.post<ProjectNotes[]>(CommonService.ConfigUrl + "Notes/Get", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<ProjectNotes[]>(CommonService.ConfigUrl + "Notes/Get", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Delete(request: ProjectNotes) {
-    return this.http.get<ProjectNotes>(CommonService.ConfigUrl + "Notes/Delete?id=" + request.aNoteID, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<ProjectNotes>(CommonService.ConfigUrl + "Notes/Delete?id=" + request.aNoteID, { headers: this.cacheService.getHttpHeaders() });
   }
 
   

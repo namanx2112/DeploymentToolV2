@@ -222,12 +222,13 @@ namespace DeploymentTool.Controller
                 }
                 catch (System.Exception ex)
                 {
-                    TraceUtility.WriteTrace("AttachmentController", "UploadStore:Exception:" + ex.Message);
+                    TraceUtility.ForceWriteException("AttachmentController", HttpContext.Current, ex);
                     return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
                 }
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("AttachmentController2", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -318,7 +319,7 @@ namespace DeploymentTool.Controller
                 }
                 catch (Exception ex)
                 {
-                    TraceUtility.WriteTrace("AttachmentController", "ImportExceltoDatabase:Exception:"+ ex.Message);
+                    TraceUtility.ForceWriteException("ImportExceltoDatabase", HttpContext.Current, ex);
                     //result = false;
                 }
                 finally
@@ -328,7 +329,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
-
+                TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
             }
            // return ip;
             // return result;
@@ -366,6 +367,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("UpdateAttachment", HttpContext.Current, ex);
                 return BadRequest(ex.Message);
             }
         }
@@ -386,6 +388,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("DeleteAttachment", HttpContext.Current, ex);
                 return BadRequest(ex.Message);
             }
         }
@@ -403,6 +406,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("GetAttachment", HttpContext.Current, ex);
                 return BadRequest(ex.Message);
             }
         }
@@ -434,6 +438,7 @@ namespace DeploymentTool.Controller
             }
             catch (SqlException ex)
             {
+                TraceUtility.ForceWriteException("GetAttachmentBlob", HttpContext.Current, ex);
                 // log error message
                 return InternalServerError(ex);
             }

@@ -12,6 +12,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
 using System.Linq.Dynamic.Core;
+using DeploymentTool.Misc;
+using System.Web;
 
 namespace DeploymentTool.Controller
 {
@@ -69,8 +71,9 @@ namespace DeploymentTool.Controller
             {
                 await db.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
+                TraceUtility.ForceWriteException("Vendor.Update", HttpContext.Current, ex);
                 if (!tblVendorExists(tblVendor.aVendorId))
                 {
                     return NotFound();

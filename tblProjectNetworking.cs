@@ -28,8 +28,8 @@ namespace DeploymentTool
         public Nullable<int> nTempType { get; set; }
         public Nullable<int> nStoreId { get; set; }
         public Nullable<int> nMyActiveStatus { get; set; }
-        public Nullable<DateTime> dDateFor_nPrimaryStatus { get; set; }
-        public Nullable<DateTime> dDateFor_nBackupStatus { get; set; }
-        public Nullable<DateTime> dDateFor_nTempStatus { get; set; }
+        public Nullable<System.DateTime> dDateFor_nPrimaryStatus { get; set; }
+        public Nullable<System.DateTime> dDateFor_nBackupStatus { get; set; }
+        public Nullable<System.DateTime> dDateFor_nTempStatus { get; set; }
     }
 }

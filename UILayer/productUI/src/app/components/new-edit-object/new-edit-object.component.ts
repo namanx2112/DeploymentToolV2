@@ -12,6 +12,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogControlsComponent } from '../dialog-controls/dialog-controls.component';
 import { PartsService } from 'src/app/services/parts.service';
 import { AccessService } from 'src/app/services/access.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-new-edit-object',
@@ -45,7 +46,7 @@ export class NewEditObjectComponent {
   childSearchFields: any = {};
   refreshChildTable: any = {};
   constructor(private dialog: MatDialog, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
-    private franchiseService: FranchiseService, private userSerice: UserService, private partsService: PartsService, public access: AccessService) {
+    private franchiseService: FranchiseService, private userSerice: UserService, private partsService: PartsService, public access: AccessService, private commonService: CommonService) {
     this.SubmitLabel = "Save";
     this.controlValues = {};
   }
@@ -135,10 +136,21 @@ export class NewEditObjectComponent {
         vals["nVendorId"] = this._controlValues["aVendorId"];
         break;
       case TabType.Users:
-        if (this.curTab.tab_type == TabType.Vendor)
+        let tOptions = this.commonService.GetDropdown("UserRole");
+        let brandOptions = this.commonService.GetDropdown("Brand");
+        vals["rBrandID"] = [1];
+        if (this.curTab.tab_type == TabType.Vendor) {
+          let cOption = tOptions.find(x => x.optionDisplayName == "Vendor");
+          if (cOption)
+            vals["nRole"] = cOption.optionIndex;
           vals["nVendorId"] = this._controlValues["aVendorId"];
-        else if (this.curTab.tab_type == TabType.Franchise)
+        }
+        else if (this.curTab.tab_type == TabType.Franchise) {
+          let cOption = tOptions.find(x => x.optionDisplayName == "Franchise");
+          if (cOption)
+            vals["nRole"] = cOption.optionIndex;
           vals["nFranchiseId"] = this._controlValues["aFranchiseId"];
+        }
         break;
     }
     return vals;
@@ -147,6 +159,28 @@ export class NewEditObjectComponent {
   getChildRefreshFlag(tabName: string) {
     if (this.refreshChildTable[tabName])
       return this.refreshChildTable[tabName];
+  }
+
+  getChildFields(cTab: HomeTab, isNew: boolean): Fields[] {
+    let tFields = cTab.fields;
+    if (cTab.tab_type == TabType.Users) {
+      if (this._curTab.tab_type == TabType.Franchise || this._curTab.tab_type == TabType.Vendor) {
+        for (var indx in tFields) {
+          if (tFields[indx].fieldUniqeName == "nRole") {
+            tFields[indx].hidden = true;
+          }
+          else if (tFields[indx].fieldUniqeName == "rBrandID") {
+            tFields[indx].hidden = true;
+          }
+          // if (!isNew) {
+          //   if (tFields[indx].fieldUniqeName == "tUserName") {
+          //     tFields[indx].readOnly = true;
+          //   }
+          // }
+        }
+      }
+    }
+    return tFields;
   }
 
   editChildTab(cTab: HomeTab, isNew: boolean) {
@@ -162,7 +196,7 @@ export class NewEditObjectComponent {
     dialogConfig.data = {
       numberOfControlsInARow: 1,
       title: cTab.tab_header,
-      fields: cTab.fields,
+      fields: this.getChildFields(cTab, isNew),
       readOnlyForm: false,
       needButton: true,
       controlValues: tVals,
@@ -228,12 +262,20 @@ export class NewEditObjectComponent {
     this.cService = this.getService(tab);
     if (this.isEditMode(tab, controlVals.value)) {
       this.cService.Update(controlVals.value).subscribe((resp: any) => {
-        callBack(resp);
+        if (typeof resp == 'string') {
+          alert(resp);
+        }
+        else
+          callBack(resp);
       });
     }
     else {
       this.cService.Create(controlVals.value).subscribe((resp: any) => {
-        callBack(resp);
+        if (typeof resp == 'string') {
+          alert(resp);
+        }
+        else
+          callBack(resp);
       });
     }
   }

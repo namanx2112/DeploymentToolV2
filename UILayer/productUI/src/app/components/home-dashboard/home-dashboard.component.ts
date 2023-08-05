@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { BrandModel } from 'src/app/interfaces/models';
 import { AccessService } from 'src/app/services/access.service';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
+import { CommonService } from 'src/app/services/common.service';
 import { HomeService } from 'src/app/services/home.service';
 
 @Component({
@@ -12,11 +13,11 @@ import { HomeService } from 'src/app/services/home.service';
 export class HomeDashboardComponent {
   brands: BrandModel[];
   @Output() brandClicked = new EventEmitter<BrandModel>()
-  constructor(private homeService: HomeService, private brandService: BrandServiceService, public access: AccessService) {
+  constructor(private homeService: HomeService, public access: AccessService, private commonService: CommonService) {
     this.getBrands();
   }
 
-  async getBrands() {
+  getBrands() {
     // this.brands = this.brandService.GetAllBrands();
     //  {
     //   aBrandId: 0,
@@ -34,10 +35,11 @@ export class HomeDashboardComponent {
     //   dtUpdatedOn: null,
     //   tIconURL: ''
     // }
-    this.brandService.Get(null).subscribe((resp: BrandModel[]) => {
-      this.brands = resp;
-      this.updateIconsTemp();
-    })
+    let cThis= this;
+    this.commonService.getBrands(function(resp: any){
+      cThis.brands = resp;
+      cThis.updateIconsTemp();
+    });
   }
 
   filterBrand(brand: BrandModel) {

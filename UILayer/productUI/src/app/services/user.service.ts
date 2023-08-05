@@ -7,25 +7,26 @@ import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
 import { Dictionary } from '../interfaces/commons';
 import { Validators } from '@angular/forms';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
+  constructor(private http: HttpClient, private cacheService: CacheService, private commonService: CommonService) {
   }
 
   Create(request: any) {
-    return this.http.post<number>(CommonService.ConfigUrl + "User/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<number>(CommonService.ConfigUrl + "User/Create", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<number>(CommonService.ConfigUrl + "User/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<number>(CommonService.ConfigUrl + "User/Update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Delete(request: UserModel) {
-    return this.http.get<UserModel>(CommonService.ConfigUrl + "User/Delete?id=" + request.aUserID, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<UserModel>(CommonService.ConfigUrl + "User/Delete?id=" + request.aUserID, { headers: this.cacheService.getHttpHeaders() });
   }
 
   
@@ -39,7 +40,7 @@ export class UserService {
   }
 
   Get(searchFields: Dictionary<string> | null) {
-    return this.http.post<UserModel[]>(CommonService.ConfigUrl + "User/Get", searchFields, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<UserModel[]>(CommonService.ConfigUrl + "User/Get", searchFields, { headers: this.cacheService.getHttpHeaders() });
     // return new Observable<UserModel[]>((obj) => {
     //   let items = [{
     //     aUserID: 0,
@@ -141,7 +142,7 @@ export class UserService {
       readOnly: false,
       invalid: false,
       field_type: FieldType.text,
-      field_placeholder: "Enter User Login Name",
+      field_placeholder: "Enter User's Login Name using which user can login!",
       validator: [],
       mandatory: false,
       hidden: false
@@ -196,7 +197,7 @@ export class UserService {
       hidden: false
     },
     {
-      field_name: "Emp Id",
+      field_name: "Employee Id",
       fieldUniqeName: "tEmpID",
       defaultVal: "",
       readOnly: false,

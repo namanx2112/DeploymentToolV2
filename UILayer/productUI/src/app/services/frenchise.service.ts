@@ -5,29 +5,30 @@ import { Fields, FieldType } from '../interfaces/home-tab';
 import { FranchiseModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FranchiseService {
 
-  constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
+  constructor(private http: HttpClient, private cacheService: CacheService, private commonService: CommonService) {
   }
 
   Create(request: any) {
-    return this.http.post<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Create", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Get(request: FranchiseModel | null){
-    return this.http.post<FranchiseModel[]>(CommonService.ConfigUrl + "Franchise/Get", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<FranchiseModel[]>(CommonService.ConfigUrl + "Franchise/Get", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Delete(request: FranchiseModel) {
-    return this.http.get<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Delete?id=" + request.aFranchiseId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Delete?id=" + request.aFranchiseId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(){

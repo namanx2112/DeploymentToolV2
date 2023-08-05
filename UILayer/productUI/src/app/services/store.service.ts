@@ -6,33 +6,34 @@ import { ActiveProject, HistoricalProjects, NewProjectStore } from '../interface
 import { ProjectTemplates } from '../interfaces/models';
 import { Fields, HomeTab, TabType } from '../interfaces/home-tab';
 import { Observable } from 'rxjs';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-  constructor(private http: HttpClient, private commonService: CommonService, private authService: AuthService) {
+  constructor(private http: HttpClient, private commonService: CommonService, private cacheService: CacheService) {
   }
 
   CreateNewStores(request: any) {
-    return this.http.post<any>(CommonService.ConfigUrl + "Sonic/NewStore", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "Sonic/NewStore", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   UpdateStore(request: any) {
-    return this.http.post<any>(CommonService.ConfigUrl + "Sonic/UpdateStore", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "Sonic/UpdateStore", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   getStoreDetails(nStoreId: number, nProjectType: number) {
-    return this.http.get<any>(CommonService.ConfigUrl + "Sonic/getStoreDetails?nStoreId=" + nStoreId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<any>(CommonService.ConfigUrl + "Sonic/getStoreDetails?nStoreId=" + nStoreId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetProjectTemplates(nBrandId: number) {
-    return this.http.get<ProjectTemplates[]>(CommonService.ConfigUrl + "Sonic/GetProjectTemplates?nBrandId=" + nBrandId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<ProjectTemplates[]>(CommonService.ConfigUrl + "Sonic/GetProjectTemplates?nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
   }
 
 
   UpdateGoliveDate(request: any) {
-    return this.http.post<any>(CommonService.ConfigUrl + "Store/UpdateGoliveDate", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "Store/UpdateGoliveDate", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns(tab: HomeTab) {
@@ -125,10 +126,10 @@ export class StoreService {
   }
 
   getActiveProjects(request: any) {
-    return this.http.post<HistoricalProjects>(CommonService.ConfigUrl + "Store/GetActiveProjects", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<HistoricalProjects>(CommonService.ConfigUrl + "Store/GetActiveProjects", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   getHistoricalProjects(request: any) {
-    return this.http.post<HistoricalProjects>(CommonService.ConfigUrl + "Store/GetHistoricalProjects", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<HistoricalProjects>(CommonService.ConfigUrl + "Store/GetHistoricalProjects", request, { headers: this.cacheService.getHttpHeaders() });
   }
 }

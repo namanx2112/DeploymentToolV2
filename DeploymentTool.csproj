@@ -1193,6 +1193,9 @@
     <Compile Include="tblUserBrandRel.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblUserFranchiseRel.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblUserFunctionRel.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>

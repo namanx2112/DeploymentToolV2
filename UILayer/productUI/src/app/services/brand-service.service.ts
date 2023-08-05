@@ -7,13 +7,14 @@ import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
 import { Observable } from 'rxjs';
 import { Dictionary } from '../interfaces/commons';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrandServiceService {
 
-  constructor(private http: HttpClient, private authService: AuthService, private commonService: CommonService) {
+  constructor(private http: HttpClient, private cacheService: CacheService, private commonService: CommonService) {
   }
 
   //Create
@@ -24,15 +25,15 @@ export class BrandServiceService {
   //GetTableVisibleColumns
 
   Create(request: any) {
-    return this.http.post<BrandModel>(CommonService.ConfigUrl + "Brand/Create", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<BrandModel>(CommonService.ConfigUrl + "Brand/Create", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Update(request: any) {
-    return this.http.post<BrandModel>(CommonService.ConfigUrl + "Brand/Update", request, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<BrandModel>(CommonService.ConfigUrl + "Brand/Update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Delete(request: BrandModel) {
-    return this.http.get<BrandModel>(CommonService.ConfigUrl + "Brand/Delete?id=" + request.aBrandId, { headers: this.authService.getHttpHeaders() });
+    return this.http.get<BrandModel>(CommonService.ConfigUrl + "Brand/Delete?id=" + request.aBrandId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   Get(searchFields: Dictionary<string> | null) {
@@ -59,7 +60,7 @@ export class BrandServiceService {
     //   ];
     //   obj.next(items);
     // });
-    return this.http.post<BrandModel[]>(CommonService.ConfigUrl + "Brand/Get", searchFields, { headers: this.authService.getHttpHeaders() });
+    return this.http.post<BrandModel[]>(CommonService.ConfigUrl + "Brand/Get", searchFields, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetTableVisibleColumns() {

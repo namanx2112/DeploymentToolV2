@@ -15,6 +15,9 @@ using System.Linq.Dynamic.Core;
 using DeploymentTool.Model;
 using System.Data.SqlClient;
 using System.Net.Http.Formatting;
+using DeploymentTool.Model.Templates;
+using DeploymentTool.Misc;
+using System.Web;
 
 namespace DeploymentTool.Controller
 {
@@ -37,9 +40,9 @@ namespace DeploymentTool.Controller
                 //await db.SaveChangesAsync();
                 foreach (var UserModel in items)
                 {
-                    UserModel.userAndUsertypeRel = db.Database.SqlQuery<UserTypeByUser>("exec sproc_GetUserTypeByUserID @aUserID", new SqlParameter("@aUserID", UserModel.aUserID)).ToList();
+                    //    UserModel.userAndUsertypeRel = db.Database.SqlQuery<UserTypeByUser>("exec sproc_GetUserTypeByUserID @aUserID", new SqlParameter("@aUserID", UserModel.aUserID)).ToList();
 
-                    UserModel.userAndParmissionRel = db.Database.SqlQuery<UserPermission>("exec sproc_GetPermissionsByUser @aUserID", new SqlParameter("@aUserID", UserModel.aUserID)).ToList();
+                    //    UserModel.userAndParmissionRel = db.Database.SqlQuery<UserPermission>("exec sproc_GetPermissionsByUser @aUserID", new SqlParameter("@aUserID", UserModel.aUserID)).ToList();
 
                     UserModel.rBrandID = db.Database.SqlQuery<int>("exec sproc_GetBrandByUser @aUserID", new SqlParameter("@aUserID", UserModel.aUserID)).ToList();
 
@@ -51,6 +54,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                TraceUtility.ForceWriteException("User.Get", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
             // return items;
@@ -74,92 +78,131 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Update(UserModel userRequest)
         {
-
-            db.Entry(userRequest.GetTblUser()).State = EntityState.Modified;
-            // Update into tblUserVendorRelation
-            try
+            var exist = db.Database.SqlQuery<int>("select top 1 1 from tblUser with(nolock) where UPPER(tUserName)='" + userRequest.tUserName.ToUpper() + "'  and aUserID <> " + userRequest.aUserID.ToString()).FirstOrDefault();
+            if (exist == null || exist == 0)
             {
-                await db.SaveChangesAsync();
-
-                //  var nUserVendor = db.Database.ExecuteSqlCommand("delete from tblUserVendorRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
-                var nUserType = db.Database.ExecuteSqlCommand("delete from tblUserAndUserTypeRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
-                var nUserPermission = db.Database.ExecuteSqlCommand("delete from tblUserPermissionRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
-                var nUserPBrand = db.Database.ExecuteSqlCommand("delete from tblUserBrandRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
-                // Add into tblUserVendorRelation
-
-                //db.tblUserVendorRels.Add(userRequest.GetTblUserVendorRel(userRequest));
-                //await db.SaveChangesAsync();
-
-
-                if (userRequest.userAndUsertypeRel != null)
+                db.Entry(userRequest.GetTblUser()).State = EntityState.Modified;
+                // Update into tblUserVendorRelation
+                try
                 {
-                    List<tblUserAndUserTypeRel> objUserUserTypeRel = new List<tblUserAndUserTypeRel>();
-                    foreach (var UserTypeByUser in userRequest.userAndUsertypeRel)
-                    {
-                        tblUserAndUserTypeRel objRel = new tblUserAndUserTypeRel();
+                    db.Database.BeginTransaction();
+                    await db.SaveChangesAsync();
 
-                        objRel.aUserAndUserTypeRelID = 0;
-                        objRel.nUserID = userRequest.aUserID;
-                        //objRel.nPermissionID = UserTypeByUser.aUserTypeID;
-                        objUserUserTypeRel.Add(objRel);
+                    var nUserType = db.Database.ExecuteSqlCommand("delete from tblUserAndUserTypeRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
+                    var nUserPermission = db.Database.ExecuteSqlCommand("delete from tblUserPermissionRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
+                    var nUserPBrand = db.Database.ExecuteSqlCommand("delete from tblUserBrandRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
+                    // Add into tblUserVendorRelation
+
+
+
+                    if (userRequest.nVendorId > 0)
+                    {
+                        var nUserVendor = db.Database.ExecuteSqlCommand("delete from tblUserVendorRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
+
+                        db.tblUserVendorRels.Add(userRequest.GetTblUserVendorRel(userRequest));
+                        await db.SaveChangesAsync();
+                        if (userRequest.userAndUsertypeRel == null)
+                        {
+                            List<UserTypeByUser> itemParts = db.Database.SqlQuery<UserTypeByUser>("exec sproc_GetUsertypeByVendorID @nVendorID, @nUserID", new SqlParameter("@nVendorID", userRequest.nVendorId), new SqlParameter("@nUserID", userRequest.aUserID)).ToList();
+                            userRequest.userAndUsertypeRel = itemParts;
+                        }
+                    }
+                    if (userRequest.nFranchiseId > 0)
+                    {
+                        var nUserVendor = db.Database.ExecuteSqlCommand("delete from tblUserFranchiseRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
+
+                        db.tblUserFranchiseRel.Add(userRequest.GetTblUserFranchiseRel(userRequest));//Need to check 
+                        await db.SaveChangesAsync();
+                        if (userRequest.userAndUsertypeRel == null)
+                        {
+                            userRequest.userAndUsertypeRel = new List<UserTypeByUser>();
+                            UserTypeByUser objuser = new UserTypeByUser();
+                            objuser.nUserID = userRequest.aUserID;
+                            objuser.aUserTypeID = 5;
+                            userRequest.userAndUsertypeRel.Add(objuser);
+                        }
 
                     }
-                    db.tblUserAndUserTypeRels.AddRange(objUserUserTypeRel);
+                    if (userRequest.userAndUsertypeRel != null)
+                    {
+                        List<tblUserAndUserTypeRel> objUserUserTypeRel = new List<tblUserAndUserTypeRel>();
+                        foreach (var UserTypeByUser in userRequest.userAndUsertypeRel)
+                        {
+                            tblUserAndUserTypeRel objRel = new tblUserAndUserTypeRel();
+
+                            objRel.aUserAndUserTypeRelID = 0;
+                            objRel.nUserID = userRequest.aUserID;
+                            objRel.nUserTypeID = UserTypeByUser.aUserTypeID;
+                            objUserUserTypeRel.Add(objRel);
+
+                        }
+                        db.tblUserAndUserTypeRels.AddRange(objUserUserTypeRel);
+
+                        await db.SaveChangesAsync();
+                    }
+
+
+                    // Commenting for now as this is for future release
+                    //if (userRequest.userAndParmissionRel != null)
+                    //{
+                    //    List<tblUserPermissionRel> objUserPermissionRel = new List<tblUserPermissionRel>();
+                    //    foreach (var UserTypeByUser in userRequest.userAndParmissionRel)
+                    //    {
+                    //        tblUserPermissionRel objPermRel = new tblUserPermissionRel();
+
+                    //        objPermRel.aUserPermissionRelID = 0;
+                    //        objPermRel.nUserID = userRequest.aUserID;
+                    //        objPermRel.nPermissionID = UserTypeByUser.aPermissionlID;
+                    //        objUserPermissionRel.Add(objPermRel);
+
+                    //    }
+                    //    db.tblUserPermissionRels.AddRange(objUserPermissionRel);
+
+                    //    await db.SaveChangesAsync();
+                    //}
+                    var resole = db.Database.ExecuteSqlCommand("Exec sproc_ChangeUserPermissionFromRole @nUserId, @nRoleId,@nVendorId,@nFranchiseId", new SqlParameter("@nUserId", userRequest.aUserID), new SqlParameter("@nRoleId", userRequest.nRole), new SqlParameter("@nVendorId", userRequest.nVendorId), new SqlParameter("@nFranchiseId", userRequest.nFranchiseId));
+
+                    if (userRequest.rBrandID != null)
+                    {
+                        List<tblUserBrandRel> lstBrandUser = new List<tblUserBrandRel>();
+                        foreach (int nbrandId in userRequest.rBrandID)
+                        {
+                            lstBrandUser.Add(new tblUserBrandRel()
+                            {
+                                nBrandID = nbrandId,
+                                nUserID = userRequest.aUserID
+                            });
+                        }
+                        db.tblUserBrandRels.AddRange(lstBrandUser);
+                    }
 
                     await db.SaveChangesAsync();
+                    db.Database.CurrentTransaction.Commit();
                 }
-
-
-                // Commenting for now as this is for future release
-                //if (userRequest.userAndParmissionRel != null)
-                //{
-                //    List<tblUserPermissionRel> objUserPermissionRel = new List<tblUserPermissionRel>();
-                //    foreach (var UserTypeByUser in userRequest.userAndParmissionRel)
-                //    {
-                //        tblUserPermissionRel objPermRel = new tblUserPermissionRel();
-
-                //        objPermRel.aUserPermissionRelID = 0;
-                //        objPermRel.nUserID = userRequest.aUserID;
-                //        objPermRel.nPermissionID = UserTypeByUser.aPermissionlID;
-                //        objUserPermissionRel.Add(objPermRel);
-
-                //    }
-                //    db.tblUserPermissionRels.AddRange(objUserPermissionRel);
-
-                //    await db.SaveChangesAsync();
-                //}
-
-                var resole = db.Database.ExecuteSqlCommand("Exec sproc_ChangeUserPermissionFromRole @nUserId, @nRoleId", new SqlParameter("@nUserId", userRequest.aUserID), new SqlParameter("@nRoleId", userRequest.nRole));
-
-                if (userRequest.rBrandID != null)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    List<tblUserBrandRel> lstBrandUser = new List<tblUserBrandRel>();
-                    foreach (int nbrandId in userRequest.rBrandID)
+                    TraceUtility.ForceWriteException("User.Update", HttpContext.Current, ex);
+                    db.Database.CurrentTransaction.Rollback();
+                    if (!tblUserExists(userRequest.aUserID))
                     {
-                        lstBrandUser.Add(new tblUserBrandRel()
-                        {
-                            nBrandID = nbrandId,
-                            nUserID = userRequest.aUserID
-                        });
+                        return NotFound();
                     }
-                    db.tblUserBrandRels.AddRange(lstBrandUser);
+                    else
+                    {
+                        throw;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TraceUtility.ForceWriteException("User.Update", HttpContext.Current, ex);
+                    db.Database.BeginTransaction();
+                    throw ex;
                 }
 
-                await db.SaveChangesAsync();
+                return StatusCode(HttpStatusCode.NoContent);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!tblUserExists(userRequest.aUserID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            else
+                return Ok("User name \"" + userRequest.tUserName + "\" already taken, please choose a different user name!");
         }
 
         // POST: api/tblUser
@@ -167,68 +210,123 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(UserModel userRequest)
         {
-            var tmpUser = userRequest.GetTblUser();
-            db.tblUser.Add(tmpUser);
-            await db.SaveChangesAsync();
-
-            userRequest.aUserID = tmpUser.aUserID;
-            // Add into tblUserVendorRelation
-
-            db.tblUserVendorRels.Add(userRequest.GetTblUserVendorRel(userRequest));
-            await db.SaveChangesAsync();
-
-            if (userRequest.userAndUsertypeRel != null)
+            var exist = db.Database.SqlQuery<int>("select top 1 1 from tblUser with(nolock) where UPPER(tUserName)='" + userRequest.tUserName.ToUpper() + "'").FirstOrDefault();
+            if (exist == null || exist == 0)
             {
-                List<tblUserAndUserTypeRel> objUserUserTypeRel = new List<tblUserAndUserTypeRel>();
-
-                foreach (var UserTypeByUser in userRequest.userAndUsertypeRel)
+                try
                 {
-                    tblUserAndUserTypeRel objRel = new tblUserAndUserTypeRel();
+                    db.Database.BeginTransaction();
+                    string strPwd;
+                    userRequest.tPassword = DeploymentTool.Misc.Utilities.CreatePassword(userRequest.tUserName, out strPwd);
+                    var tmpUser = userRequest.GetTblUser();
+                    db.tblUser.Add(tmpUser);
+                    await db.SaveChangesAsync();
 
-                    objRel.aUserAndUserTypeRelID = 0;
-                    objRel.nUserID = userRequest.aUserID;
-                    //objRel.nUserTypeID = UserTypeByUser.aUserTypeID;
-                    objUserUserTypeRel.Add(objRel);
-
-                }
-                db.tblUserAndUserTypeRels.AddRange(objUserUserTypeRel);
-            }
-
-            if (userRequest.userAndParmissionRel != null)
-            {
-                List<tblUserPermissionRel> objUserPermissionRel = new List<tblUserPermissionRel>();
-
-                foreach (var UserTypeByUser in userRequest.userAndParmissionRel)
-                {
-                    tblUserPermissionRel objPermRel = new tblUserPermissionRel();
-
-                    objPermRel.aUserPermissionRelID = 0;
-                    objPermRel.nUserID = userRequest.aUserID;
-                    //objPermRel.nPermissionID = UserTypeByUser.aPermissionlID;
-                    objUserPermissionRel.Add(objPermRel);
-
-                }
-                db.tblUserPermissionRels.AddRange(objUserPermissionRel);
-               
-            }
-
-            var resole = db.Database.ExecuteSqlCommand("Exec sproc_ChangeUserPermissionFromRole @nUserId, @nRoleId", new SqlParameter("@nUserId", userRequest.aUserID), new SqlParameter("@nRoleId", userRequest.nRole));
-
-            if (userRequest.rBrandID != null)
-            {
-                List<tblUserBrandRel> lstBrandUser = new List<tblUserBrandRel>();
-                foreach (int nbrandId in userRequest.rBrandID)
-                {
-                    lstBrandUser.Add(new tblUserBrandRel()
+                    userRequest.aUserID = tmpUser.aUserID;
+                    // Add into tblUserVendorRelation
+                    // var reso = db.Database.ExecuteSqlCommand("Exec sproc_UpdateUserAndVendorRel @nVendorID,@nUserId", new SqlParameter("@nVendorID", userRequest.nVendorId), new SqlParameter("@nUserId", userRequest.aUserID));
+                    if (userRequest.nVendorId > 0)
                     {
-                        nBrandID = nbrandId,
-                        nUserID = tmpUser.aUserID
-                    });
+                        db.tblUserVendorRels.Add(userRequest.GetTblUserVendorRel(userRequest));
+                        await db.SaveChangesAsync();
+                        if (userRequest.userAndUsertypeRel == null)
+                        {
+                            List<UserTypeByUser> itemParts = db.Database.SqlQuery<UserTypeByUser>("exec sproc_GetUsertypeByVendorID @nVendorID, @nUserID", new SqlParameter("@nVendorID", userRequest.nVendorId), new SqlParameter("@nUserID", userRequest.aUserID)).ToList();
+                            userRequest.userAndUsertypeRel = itemParts;
+                        }
+                    }
+                    if (userRequest.nFranchiseId > 0)
+                    {
+                        db.tblUserFranchiseRel.Add(userRequest.GetTblUserFranchiseRel(userRequest));//Need to check 
+                        await db.SaveChangesAsync();
+                        if (userRequest.userAndUsertypeRel == null)
+                        {
+                            userRequest.userAndUsertypeRel = new List<UserTypeByUser>();
+                            UserTypeByUser objuser = new UserTypeByUser();
+                            objuser.nUserID = userRequest.aUserID;
+                            objuser.aUserTypeID = 5;
+                            userRequest.userAndUsertypeRel.Add(objuser);
+
+                        }
+                    }
+                    if (userRequest.userAndUsertypeRel != null)
+                    {
+                        List<tblUserAndUserTypeRel> objUserUserTypeRel = new List<tblUserAndUserTypeRel>();
+
+                        foreach (var UserTypeByUser in userRequest.userAndUsertypeRel)
+                        {
+                            tblUserAndUserTypeRel objRel = new tblUserAndUserTypeRel();
+
+                            objRel.aUserAndUserTypeRelID = 0;
+                            objRel.nUserID = userRequest.aUserID;
+                            objRel.nUserTypeID = UserTypeByUser.aUserTypeID;
+                            objUserUserTypeRel.Add(objRel);
+
+                        }
+                        db.tblUserAndUserTypeRels.AddRange(objUserUserTypeRel);
+                        await db.SaveChangesAsync();
+                    }
+
+                    //if (userRequest.userAndParmissionRel != null)
+                    //{
+                    //    List<tblUserPermissionRel> objUserPermissionRel = new List<tblUserPermissionRel>();
+
+                    //    foreach (var UserTypeByUser in userRequest.userAndParmissionRel)
+                    //    {
+                    //        tblUserPermissionRel objPermRel = new tblUserPermissionRel();
+
+                    //        objPermRel.aUserPermissionRelID = 0;
+                    //        objPermRel.nUserID = userRequest.aUserID;
+                    //        //objPermRel.nPermissionID = UserTypeByUser.aPermissionlID;
+                    //        objUserPermissionRel.Add(objPermRel);
+
+                    //    }
+                    //    db.tblUserPermissionRels.AddRange(objUserPermissionRel);
+
+                    //}
+                    if (userRequest.nRole == null)
+                        userRequest.nRole = -1;
+                    var resole = db.Database.ExecuteSqlCommand("Exec sproc_ChangeUserPermissionFromRole @nUserId, @nRoleId,@nVendorId,@nFranchiseId", new SqlParameter("@nUserId", userRequest.aUserID), new SqlParameter("@nRoleId", userRequest.nRole), new SqlParameter("@nVendorId", userRequest.nVendorId), new SqlParameter("@nFranchiseId", userRequest.nFranchiseId));
+
+                    if (userRequest.rBrandID != null)
+                    {
+                        List<tblUserBrandRel> lstBrandUser = new List<tblUserBrandRel>();
+                        foreach (int nbrandId in userRequest.rBrandID)
+                        {
+                            lstBrandUser.Add(new tblUserBrandRel()
+                            {
+                                nBrandID = nbrandId,
+                                nUserID = tmpUser.aUserID
+                            });
+                        }
+                        db.tblUserBrandRels.AddRange(lstBrandUser);
+                    }
+                    await db.SaveChangesAsync();
+                    string tContent = "<div>Dear " + userRequest.tName + ",<br/></div>";
+                    tContent += "<div>We have created your Inspire Brands user account for you!.<br/></div>";
+                    tContent += "<div>Please find the below credentials to Login Inspire Brands.<br/></div>";
+                    tContent += $"<div>URL: {System.Web.HttpContext.Current.Request.UrlReferrer.AbsoluteUri} <br/></div>";
+                    tContent += "<div>User Name:" + userRequest.tUserName + " <br/></div>";
+                    tContent += "<div>Password:  " + strPwd + " <br/><br/></div>";
+                    tContent += "<div>Thanks & Regards<br/></div>";
+                    tContent += "<div>Inspire Brands Team</div>";
+                    EMailRequest MailObj = new EMailRequest();
+                    MailObj.tSubject = "Welcome to Inspire Brands";
+                    MailObj.tTo = userRequest.tEmail;
+
+                    MailObj.tContent = tContent;
+                    DeploymentTool.Misc.Utilities.SendMail(MailObj);
+                    db.Database.CurrentTransaction.Commit();
                 }
-                db.tblUserBrandRels.AddRange(lstBrandUser);
+                catch (Exception ex)
+                {
+                    TraceUtility.ForceWriteException("User.Create", HttpContext.Current, ex);
+                    db.Database.CurrentTransaction.Rollback();
+                }
+                return Json(userRequest);
             }
-            await db.SaveChangesAsync();
-            return Json(userRequest);
+            else
+                return Ok("User name \"" + userRequest.tUserName + "\" already taken, please choose a different user name!");
         }
 
         // DELETE: api/tblUser/5

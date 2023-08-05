@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { BrandModel } from 'src/app/interfaces/models';
 import { AuthService } from 'src/app/services/auth.service';
-import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { CommonService } from 'src/app/services/common.service';
 import { HomeService } from 'src/app/services/home.service';
 import { SupportPageComponent } from '../support-page/support-page.component';
@@ -21,22 +20,17 @@ export class HomeComponent {
   viewName: string;
   tTabName: string;
   userName: string;
-  constructor(private homeService: HomeService, private brandService: BrandServiceService,
-    private commonService: CommonService, private authService: AuthService, private dialog: MatDialog, public access: AccessService) {
+  constructor(private homeService: HomeService, private commonService: CommonService, private authService: AuthService, private dialog: MatDialog, public access: AccessService) {
     this.viewName = "Dashboard";
     this.tTabName = "Dashboard";
     this.userName = this.authService.getUserName();
-    this.loadDropdown();
+    this.commonService.getAllDropdowns();
   }
 
   getValue() {
     this.homeService.loginGet().subscribe((res: string) => {
       alert(res);
     });
-  }
-
-  async loadDropdown() {
-    this.commonService.getAllDropdowns();
   }
 
   switchView(vName: string) {

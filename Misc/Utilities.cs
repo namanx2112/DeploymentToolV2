@@ -207,6 +207,11 @@ namespace DeploymentTool.Misc
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
-
+        internal static string CreatePassword(string sUserName, out string sPassword)
+        {
+            sPassword = sUserName.Substring((sUserName.Length / 2)) + DateTime.Now.Second.ToString();
+            string sEncoded = EncodeString(sPassword);
+            return sEncoded;
+        }
     }
 }
