@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommonService } from './common.service';
 import { AuthService } from './auth.service';
-import { ActiveProject, HistoricalProjects, NewProjectStore } from '../interfaces/sonic';
+import { ActiveProject, DeliveryStatus, HistoricalProjects, NewProjectStore } from '../interfaces/sonic';
 import { ProjectTemplates } from '../interfaces/models';
 import { Fields, HomeTab, TabType } from '../interfaces/home-tab';
 import { Observable } from 'rxjs';
@@ -31,6 +31,9 @@ export class StoreService {
     return this.http.get<ProjectTemplates[]>(CommonService.ConfigUrl + "Sonic/GetProjectTemplates?nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  GetDeliveryStatus(nStoreId: number) {
+    return this.http.get<DeliveryStatus[]>(CommonService.ConfigUrl + "Store/GetDeliveryStatus?nStoreId=" + nStoreId, { headers: this.cacheService.getHttpHeaders() });
+  }
 
   UpdateGoliveDate(request: any) {
     return this.http.post<any>(CommonService.ConfigUrl + "Store/UpdateGoliveDate", request, { headers: this.cacheService.getHttpHeaders() });

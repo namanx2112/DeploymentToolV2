@@ -1,0 +1,22 @@
+<div class="outer">
+    <table>
+        <thead>
+            <th>Tech Components</th>
+            <th>Date</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of allStatus">
+                <td>
+                    {{item.tTechComponent}}
+                </td>
+                <td>
+                    {{getFormateDate(item.dDeliveryDate)}}
+                </td>
+                <td>
+                    {{item.tStatus}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

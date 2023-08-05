@@ -288,3 +288,9 @@ export interface NewProjectStore {
     tGCPhone: string,
     tGCEMail: string
 }
+
+export interface DeliveryStatus{
+    tTechComponent: string,
+    dDeliveryDate: Date,
+    tStatus: string
+}

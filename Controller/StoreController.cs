@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
+using System.Web.WebSockets;
 
 namespace DeploymentTool.Controller
 {
@@ -239,6 +240,64 @@ namespace DeploymentTool.Controller
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<ProjectInfo>(projInfo, new JsonMediaTypeFormatter())
+            };
+
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/Store/GetDeliveryStatus")]
+        // PUT api/<controller>/5
+        public HttpResponseMessage GetDeliveryStatus(int nStoreId)
+        {
+            List<DeliveryStatus> items = new List<DeliveryStatus>()
+            {
+                new DeliveryStatus()
+                {
+                    tStatus = "Completed",
+                    dDeliveryDate = DateTime.Now,
+                    tTechComponent = "Networking"
+                },
+                new DeliveryStatus()
+                {
+                    tStatus = "Completed",
+                    dDeliveryDate = DateTime.Now.AddDays(10),
+                    tTechComponent = "Networking"
+                },
+                new DeliveryStatus()
+                {
+                    tStatus = "Completed",
+                    dDeliveryDate = DateTime.Now.AddDays(-10),
+                    tTechComponent = "Networking"
+                },
+                new DeliveryStatus()
+                {
+                    tStatus = "Completed",
+                    dDeliveryDate = DateTime.Now.AddDays(30),
+                    tTechComponent = "Networking"
+                },
+                new DeliveryStatus()
+                {
+                    tStatus = "Completed",
+                    dDeliveryDate = DateTime.Now.AddDays(44),
+                    tTechComponent = "Networking"
+                },
+                new DeliveryStatus()
+                {
+                    tStatus = "Completed",
+                    dDeliveryDate = DateTime.Now.AddDays(-12),
+                    tTechComponent = "Networking"
+                },
+                new DeliveryStatus()
+                {
+                    tStatus = "Completed",
+                    dDeliveryDate = DateTime.Now.AddDays(34),
+                    tTechComponent = "Networking"
+                }
+            };
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<DeliveryStatus>>(items, new JsonMediaTypeFormatter())
             };
 
         }

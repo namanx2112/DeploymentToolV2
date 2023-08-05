@@ -37,4 +37,11 @@ namespace DeploymentTool.Model
         public bool? bDeleted { get; set; }
     }
 
+    public class DeliveryStatus
+    {
+        public string tTechComponent { get; set; }
+        public DateTime dDeliveryDate { get; set; }
+        public string tStatus { get; set; }
+    }
+
 }

@@ -69,6 +69,7 @@ import { StoreTechComponentsComponent } from './components/Sonic/store-tech-comp
 import { ChangeGoliveDateComponent } from './components/Sonic/change-golive-date/change-golive-date.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { TicketViewComponent } from './components/ticket-view/ticket-view.component';
+import { DeliveryStatusComponent } from './components/Sonic/delivery-status/delivery-status.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import { TicketViewComponent } from './components/ticket-view/ticket-view.compon
     StoreTechComponentsComponent,
     ChangeGoliveDateComponent,
     ChangePasswordComponent,
-    TicketViewComponent
+    TicketViewComponent,
+    DeliveryStatusComponent
   ],
   imports: [
     CKEditorModule,
