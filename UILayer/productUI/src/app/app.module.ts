@@ -70,7 +70,9 @@ import { ChangeGoliveDateComponent } from './components/Sonic/change-golive-date
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { TicketViewComponent } from './components/ticket-view/ticket-view.component';
 import { DeliveryStatusComponent } from './components/Sonic/delivery-status/delivery-status.component';
-import { DocumentsTabComponent } from './components/sonic/documents-tab/documents-tab.component';
+import { DocumentsTabComponent } from './components/Sonic/documents-tab/documents-tab.component';
+import { RenderDateChangeTemplateComponent } from './components/Sonic/render-date-change-template/render-date-change-template.component';
+import { DateChangeRevisedPOComponent } from './components/Sonic/date-change-revised-po/date-change-revised-po.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +122,9 @@ import { DocumentsTabComponent } from './components/sonic/documents-tab/document
     ChangePasswordComponent,
     TicketViewComponent,
     DeliveryStatusComponent,
-    DocumentsTabComponent
+    DocumentsTabComponent,
+    RenderDateChangeTemplateComponent,
+    DateChangeRevisedPOComponent
   ],
   imports: [
     CKEditorModule,

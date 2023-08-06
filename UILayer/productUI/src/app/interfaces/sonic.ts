@@ -210,10 +210,9 @@ export interface ProjectNotes {
     nProjectID: number,
     nStoreID: number,
     nNoteType: number,
-    dNotesDate: Date,
+    dtCreatedOn: Date,
     tSource: string,
     tNoteDesc: string,
-    dtCreatedOn: Date,
     nCreatedBy: number
 }
 
@@ -293,4 +292,30 @@ export interface DeliveryStatus{
     tTechComponent: string,
     dDeliveryDate: Date,
     tStatus: string
+}
+
+export interface DateChangeNotitication{
+    tComponent: string,
+    tVendor: string,
+    isSelected: boolean
+}
+
+export interface DateChangeBody{
+    nStoreId: number,
+    lstItems: DateChangeNotitication[]
+}
+
+export interface DateChangeNotificationBody{
+    tTo: string,
+    tCC: string,
+    tSubject: string,
+    tContent: string,
+    nStoreId: number
+}
+
+export interface DateChangePOOption{
+    nStoreId: number,
+    nPOId: number,
+    tPONumber: number,
+    isSelected: boolean
 }

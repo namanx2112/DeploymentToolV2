@@ -224,7 +224,6 @@ namespace DeploymentTool.Controller
         [Authorize]
         [HttpPost]
         [Route("api/Store/UpdateGoliveDate")]
-        // PUT api/<controller>/5
         public HttpResponseMessage UpdateGoliveDate(ProjectInfo projInfo)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
@@ -247,59 +246,191 @@ namespace DeploymentTool.Controller
         [Authorize]
         [HttpGet]
         [Route("api/Store/GetDeliveryStatus")]
-        // PUT api/<controller>/5
         public HttpResponseMessage GetDeliveryStatus(int nStoreId)
         {
-            List<DeliveryStatus> items = new List<DeliveryStatus>()
-            {
-                new DeliveryStatus()
-                {
-                    tStatus = "Completed",
-                    dDeliveryDate = DateTime.Now,
-                    tTechComponent = "Networking"
-                },
-                new DeliveryStatus()
-                {
-                    tStatus = "Completed",
-                    dDeliveryDate = DateTime.Now.AddDays(10),
-                    tTechComponent = "Networking"
-                },
-                new DeliveryStatus()
-                {
-                    tStatus = "Completed",
-                    dDeliveryDate = DateTime.Now.AddDays(-10),
-                    tTechComponent = "Networking"
-                },
-                new DeliveryStatus()
-                {
-                    tStatus = "Completed",
-                    dDeliveryDate = DateTime.Now.AddDays(30),
-                    tTechComponent = "Networking"
-                },
-                new DeliveryStatus()
-                {
-                    tStatus = "Completed",
-                    dDeliveryDate = DateTime.Now.AddDays(44),
-                    tTechComponent = "Networking"
-                },
-                new DeliveryStatus()
-                {
-                    tStatus = "Completed",
-                    dDeliveryDate = DateTime.Now.AddDays(-12),
-                    tTechComponent = "Networking"
-                },
-                new DeliveryStatus()
-                {
-                    tStatus = "Completed",
-                    dDeliveryDate = DateTime.Now.AddDays(34),
-                    tTechComponent = "Networking"
-                }
-            };
+
+            List<DeliveryStatus> items = db.Database.SqlQuery<DeliveryStatus>("exec sproc_GetDeliveryStatus @nStoreID", new SqlParameter("@nStoreID", nStoreId)).ToList();
+
+            //{
+            //    new DeliveryStatus()
+            //    {
+            //        tStatus = "Completed",
+            //        dDeliveryDate = DateTime.Now,
+            //        tTechComponent = "Networking"
+            //    },
+            //    new DeliveryStatus()
+            //    {
+            //        tStatus = "Completed",
+            //        dDeliveryDate = DateTime.Now.AddDays(10),
+            //        tTechComponent = "Networking"
+            //    },
+            //    new DeliveryStatus()
+            //    {
+            //        tStatus = "Completed",
+            //        dDeliveryDate = DateTime.Now.AddDays(-10),
+            //        tTechComponent = "Networking"
+            //    },
+            //    new DeliveryStatus()
+            //    {
+            //        tStatus = "Completed",
+            //        dDeliveryDate = DateTime.Now.AddDays(30),
+            //        tTechComponent = "Networking"
+            //    },
+            //    new DeliveryStatus()
+            //    {
+            //        tStatus = "Completed",
+            //        dDeliveryDate = DateTime.Now.AddDays(44),
+            //        tTechComponent = "Networking"
+            //    },
+            //    new DeliveryStatus()
+            //    {
+            //        tStatus = "Completed",
+            //        dDeliveryDate = DateTime.Now.AddDays(-12),
+            //        tTechComponent = "Networking"
+            //    },
+            //    new DeliveryStatus()
+            //    {
+            //        tStatus = "Completed",
+            //        dDeliveryDate = DateTime.Now.AddDays(34),
+            //        tTechComponent = "Networking"
+            //    }
+            //};
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<List<DeliveryStatus>>(items, new JsonMediaTypeFormatter())
             };
 
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/Store/GetDateChange")]
+        public HttpResponseMessage GetDateChangeTable(int nStoreId)
+        {
+            List<DateChangeNotitication> items = new List<DateChangeNotitication>()
+            {
+                new DateChangeNotitication()
+                {
+                    isSelected = false,
+                    tComponent = "Netowkring",
+                    tVendor = "Comecast"
+                },
+                new DateChangeNotitication()
+                {
+                    isSelected = false,
+                    tComponent = "Audio",
+                    tVendor = "HME"
+                },
+                new DateChangeNotitication()
+                {
+                    isSelected = false,
+                    tComponent = "POS",
+                    tVendor = "Infor"
+                },
+                new DateChangeNotitication()
+                {
+                    isSelected = false,
+                    tComponent = "Exterior Menus",
+                    tVendor = "Fabcon"
+                },
+                new DateChangeNotitication()
+                {
+                    isSelected = false,
+                    tComponent = "Payment Systems",
+                    tVendor = "Fiserv"
+                },
+                new DateChangeNotitication()
+                {
+                    isSelected = false,
+                    tComponent = "Interior Menus",
+                    tVendor = "TDS"
+                },
+                new DateChangeNotitication()
+                {
+                    isSelected = false,
+                    tComponent = "Sonic Radio",
+                    tVendor = "PAM"
+                },
+                new DateChangeNotitication()
+                {
+                    isSelected = false,
+                    tComponent = "Installation",
+                    tVendor = "MIRA"
+                }
+            };
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<DateChangeNotitication>>(items, new JsonMediaTypeFormatter())
+            };
+
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/Store/GetDateChangeBody")]
+        public HttpResponseMessage GetDateChangeBody(DateChangeBody request)
+        {
+            DateChangeNotificationBody reeponse = new DateChangeNotificationBody()
+            {
+                tTo = "",
+                tCC = "",
+                nStoreId = request.nStoreId,
+                tContent = "<h3>Test Body</h3>",
+                tSubject = "Test, OK #10005 - Update Install & delivery status"
+            };
+
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<DateChangeNotificationBody>(reeponse, new JsonMediaTypeFormatter())
+            };
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/Store/SendDateChangeNotification")]
+        public HttpResponseMessage SendDateChangeNotification(DateChangeNotificationBody request)
+        {
+
+            List<DateChangePOOption> response = new List<DateChangePOOption>() {
+            new DateChangePOOption()
+            {
+                nStoreId = 1,
+                nPOId = 1,
+                tPONumber = "Exterior Menu PO #1010"
+            },
+            new DateChangePOOption()
+            {
+                nStoreId = 2,
+                nPOId = 2,
+                tPONumber = "Interior Menu PO #8010",
+            },
+            new DateChangePOOption()
+            {
+                nStoreId = 3,
+                nPOId = 3,
+                tPONumber = "Interior Menu PO #9898",
+            }
+            };
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<DateChangePOOption>>(response, new JsonMediaTypeFormatter())
+            };
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/Store/SendDateChangeRevisedPO")]
+        public HttpResponseMessage SendDateChangeRevisedPO(List<DateChangePOOption> request)
+        {
+
+            string resp = "";
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<string>(resp, new JsonMediaTypeFormatter())
+            };
         }
     }
 }

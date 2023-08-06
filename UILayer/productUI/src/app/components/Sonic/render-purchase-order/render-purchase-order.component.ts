@@ -187,7 +187,7 @@ export class RenderPurchaseOrderComponent {
     if (!cannot) {
       let eIds = this.tRequest.tTo.split(";");
       for (var indx in eIds) {
-        if (!this.isValidEmail(eIds[indx].trim())) {
+        if (!CommonService.isValidEmail(eIds[indx].trim())) {
           cannot = true;
           break;
         }
@@ -195,7 +195,7 @@ export class RenderPurchaseOrderComponent {
       if (!cannot && this.tRequest.tCC != null && this.tRequest.tCC != '') {
         let eIds = this.tRequest.tCC.split(";");
         for (var indx in eIds) {
-          if (!this.isValidEmail(eIds[indx].trim())) {
+          if (!CommonService.isValidEmail(eIds[indx].trim())) {
             cannot = true;
             break;
           }
@@ -203,11 +203,6 @@ export class RenderPurchaseOrderComponent {
       }
     }
     return cannot;
-  }
-
-  isValidEmail(email: string) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
   }
 
   SendRequest() {

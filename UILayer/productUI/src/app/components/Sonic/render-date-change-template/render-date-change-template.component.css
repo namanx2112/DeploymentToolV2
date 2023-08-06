@@ -1,0 +1,66 @@
+.outerDiv{
+    width: 80%;
+    margin: auto;
+}
+table{
+    width: 100%;
+}
+
+.quoteRequest > *{
+    float: left;
+    width: 100%;
+}
+
+h2{
+    padding: 0px;
+}
+td,th{
+    padding: 10px;
+    text-align: center;
+}
+
+.actions {
+    width: 100%;
+    margin: auto;
+}
+
+
+.aButton {
+    float: right;
+    margin-left: 20px;
+    border: 0px none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.mailField{
+    float: left;
+    width: 100%;
+    min-height: 50px;
+    margin: 10px 0px;
+}
+
+.mailField label{
+    float: left;
+    width: 100px;
+}
+
+.mailField input{
+    width: calc(100% - 110px);
+    height: 40px;
+    float: left;
+    border: 0px none;
+}
+.editor{
+    width: calc(100% - 106px);
+    height: 300px;
+    margin-left: 100px;
+}
+
+.quillEditor{
+    width: 100%;
+}
+
+input{
+    text-indent: 10px;
+}

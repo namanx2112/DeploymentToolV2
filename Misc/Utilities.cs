@@ -207,11 +207,41 @@ namespace DeploymentTool.Misc
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
-        internal static string CreatePassword(string sUserName, out string sPassword)
+        internal static string CreatePassword(string sUserName, int length, out string sPassword)
         {
             sPassword = sUserName.Substring((sUserName.Length / 2)) + DateTime.Now.Second.ToString();
-            string sEncoded = EncodeString(sPassword);
-            return sEncoded;
+            const string lower = "abcdefghijklmnopqrstuvwxyz";
+            const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string number = "1234567890";
+            const string special = "!@#$%^&*";
+
+            var middle = length / 2;
+            StringBuilder res = new StringBuilder();
+            Random rnd = new Random();
+            while (0 < length--)
+            {
+                if (middle == length)
+                {
+                    res.Append(number[rnd.Next(number.Length)]);
+                }
+                else if (middle - 1 == length)
+                {
+                    res.Append(special[rnd.Next(special.Length)]);
+                }
+                else
+                {
+                    if (length % 2 == 0)
+                    {
+                        res.Append(lower[rnd.Next(lower.Length)]);
+                    }
+                    else
+                    {
+                        res.Append(upper[rnd.Next(upper.Length)]);
+                    }
+                }
+            }
+            string sEncoded = EncodeString(res.ToString());
+            return sEncoded.ToString();
         }
     }
 }

@@ -6,6 +6,7 @@ import { StoreService } from 'src/app/services/store.service';
 import { RenderQuoteRequestComponent } from '../render-quote-request/render-quote-request.component';
 import { RenderPurchaseOrderComponent } from '../render-purchase-order/render-purchase-order.component';
 import { AccessService } from 'src/app/services/access.service';
+import { RenderDateChangeTemplateComponent } from '../render-date-change-template/render-date-change-template.component';
 
 @Component({
   selector: 'app-project-template-list',
@@ -40,7 +41,18 @@ export class ProjectTemplateListComponent {
   }
 
   OpenNotification(item: ProjectTemplates) {
-
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '80%';
+    dialogConfig.width = '60%';
+    dialogConfig.data = {
+      curStore: this._curStore,
+      onSubmit: function (data: any) {
+        dialogRef.close();
+      }
+    };
+    dialogRef = this.dialog.open(RenderDateChangeTemplateComponent, dialogConfig);       
   }
 
   OpenQuoteRequest(item: ProjectTemplates) {

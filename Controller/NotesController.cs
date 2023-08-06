@@ -23,7 +23,7 @@ namespace DeploymentTool.Controller
                 {
                     aNoteID = 1,
                     nProjectID = 1,
-                    nNoteType = 1,
+                    nNoteType = 109,
                     nStoreID = 1,
                     tNoteDesc = "Test Notes",
                     tSource = "Fron dummy",
@@ -34,7 +34,7 @@ namespace DeploymentTool.Controller
                 {
                     aNoteID = 1,
                     nProjectID = 1,
-                    nNoteType = 1,
+                    nNoteType = 109,
                     nStoreID = 1,
                     tNoteDesc = "Test Notes",
                     tSource = "Fron dummy",
@@ -45,7 +45,7 @@ namespace DeploymentTool.Controller
                 {
                     aNoteID = 1,
                     nProjectID = 1,
-                    nNoteType = 1,
+                    nNoteType = 108,
                     nStoreID = 1,
                     tNoteDesc = "Test Notes",
                     tSource = "Fron dummy",
@@ -56,7 +56,7 @@ namespace DeploymentTool.Controller
                 {
                     aNoteID = 1,
                     nProjectID = 1,
-                    nNoteType = 1,
+                    nNoteType = 109,
                     nStoreID = 1,
                     tNoteDesc = "Test Notes",
                     tSource = "Fron dummy",

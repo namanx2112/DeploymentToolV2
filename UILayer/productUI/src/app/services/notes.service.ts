@@ -18,6 +18,7 @@ export class NotesService {
   GetTableVisibleColumns() {
     return [
       "dtCreatedOn",
+      "nNoteType",
       "tSource",
       "tNoteDesc"
     ];

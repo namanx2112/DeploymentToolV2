@@ -1,0 +1,30 @@
+.POItems {
+    width: 100%;
+    float: left;
+}
+
+.dBody>* {
+    width: 100%;
+    float: left;
+}
+.header{
+    text-align: center;
+}
+.dBody, .header{
+    width: 80%;
+    margin: auto;
+}
+
+.actions {
+    width: 80%;
+    margin: auto;
+}
+
+
+.aButton {
+    float: right;
+    margin-left: 20px;
+    border: 0px none;
+    border-radius: 10px;
+    cursor: pointer;
+}

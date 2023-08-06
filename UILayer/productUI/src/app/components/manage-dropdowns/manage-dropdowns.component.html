@@ -28,14 +28,14 @@
                 <div class="dropdownItem" *ngFor="let item of ddList" cdkDrag>
                     <span class="lText">{{item.tDropdownText}}</span>
                     <span class="dragHelp">Drag and drop this item to rearrange</span>
-                    <div class="cAction">
+                    <div class="cAction" *ngIf="(selectedModule.editable == undefined || selectedModule.editable == true)">
                         <span title="Edit" (click)="edit(item)"><mat-icon>edit</mat-icon></span>
                         <span title="Remove" (click)="remove(item)" style="margin-left: 2px;"><mat-icon>cancel</mat-icon></span>
                     </div>
                 </div>
             </div>
-            <input class="inpNewItem" matInput placeholder="Type here and press Enter key to add a new Dropdown item"
-                (keydown)="add($event)">
+            <input [disabled]="selectedModule.editable == false" class="inpNewItem" matInput placeholder="Type here and press Enter key to add a new Dropdown item"
+                (keydown)="add($event)"/>
             <mat-hint>You can drag items to rearrange</mat-hint>
         </mat-form-field>
     </div>

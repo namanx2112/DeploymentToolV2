@@ -3,7 +3,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Outpu
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatRow, MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
+import { FieldType, HomeTab, TabType } from 'src/app/interfaces/home-tab';
 import { BrandModel, FranchiseModel, TechComponentModel, VendorModel, UserModel } from 'src/app/interfaces/models';
 import { AccessService } from 'src/app/services/access.service';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
@@ -63,6 +63,14 @@ export class TableComponent implements OnChanges, AfterViewInit {
     }
     else if (colName.indexOf("d") == 0) {
       rVal = CommonService.getFormatedDateString(colVal);
+    }
+    else {
+      let tField = this.curTab.fields.find(x => x.fieldUniqeName == colName)
+      if (tField && tField.field_type == FieldType.dropdown && tField.options) {
+        let dVal = tField.options.find(x => x.optionIndex == colVal)?.optionDisplayName;
+        if (dVal)
+          rVal = dVal;
+      }
     }
     return rVal;
   }

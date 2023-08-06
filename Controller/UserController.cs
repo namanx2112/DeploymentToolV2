@@ -217,7 +217,7 @@ namespace DeploymentTool.Controller
                 {
                     db.Database.BeginTransaction();
                     string strPwd;
-                    userRequest.tPassword = DeploymentTool.Misc.Utilities.CreatePassword(userRequest.tUserName, out strPwd);
+                    userRequest.tPassword = DeploymentTool.Misc.Utilities.CreatePassword(userRequest.tUserName, 8, out strPwd);
                     var tmpUser = userRequest.GetTblUser();
                     db.tblUser.Add(tmpUser);
                     await db.SaveChangesAsync();
