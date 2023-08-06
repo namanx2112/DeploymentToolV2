@@ -78,17 +78,26 @@
                 [ngClass]="(selectedTab == index) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(index);">
                 {{tTab.tab_header}}
             </div>
+            <div [ngClass]="(selectedTab == -11) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-11);">
+                Documents</div>
         </div>
         <div class="tabBody">
             <div class="tHeader" *ngIf="(selectedTab == -10)">
                 <h4>Delivery Status</h4>
             </div>
-            <app-delivery-status *ngIf="(selectedTab == -10)" [curStore]="_curStore" class="tabForm"></app-delivery-status>
+            <div class="tHeader" *ngIf="(selectedTab == -11)">
+                <h4>Documents</h4>
+            </div>
+            <app-delivery-status *ngIf="(selectedTab == -10)" [curStore]="_curStore"
+                class="tabForm"></app-delivery-status>
+
+            <app-documents-tab *ngIf="(selectedTab == -11)" [curStore]="_curStore" class="tabForm"></app-documents-tab>
 
             <div class="tHeader" *ngIf="tabForUI[selectedTab] != undefined">
                 <h4>{{tabForUI[selectedTab].tab_header}}</h4>
                 <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + tabForUI[selectedTab].tab_name, 1)">
-                    <button class="noBorderButton white" (click)="editTab(tabForUI[selectedTab])">Edit</button></div>
+                    <button class="noBorderButton white" (click)="editTab(tabForUI[selectedTab])">Edit</button>
+                </div>
             </div>
             <app-controls *ngIf="canShowTab(allTabs[selectedTab])" class="tabForm white" [numberOfControlsInARow]="1"
                 [fields]="tabForUI[selectedTab].fields" [readOnlyForm]="true" [needButton]="false"

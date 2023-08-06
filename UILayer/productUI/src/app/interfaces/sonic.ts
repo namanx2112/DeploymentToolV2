@@ -319,3 +319,13 @@ export interface DateChangePOOption{
     tPONumber: number,
     isSelected: boolean
 }
+
+export interface DocumentsTabTable{
+    nStoreId: number,
+    nProjectId: number,
+    nPOId: number,
+    tFileName: string,
+    tStoreNumber: string,
+    tSentBy: string,
+    dtCreatedOn: Date
+}

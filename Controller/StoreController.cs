@@ -3,6 +3,7 @@ using DeploymentTool.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -431,6 +432,91 @@ namespace DeploymentTool.Controller
             {
                 Content = new ObjectContent<string>(resp, new JsonMediaTypeFormatter())
             };
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/Store/GetDateChangeBody")]
+        public HttpResponseMessage GetDocumentationTab(int nStoreId)
+        {
+            List<DocumentationTable> response = new List<DocumentationTable>()
+            {
+                new DocumentationTable()
+                {
+                    nPOId = 1,
+                    nProjectId = 1,
+                    nStoreId = nStoreId,
+                    tFileName = "Test.pdf",
+                    tSentBy = "Roshan",
+                    tStoreNumber = "32423",
+                    dtCreatedOn = DateTime.Now,
+                },
+                new DocumentationTable()
+                {
+                    nPOId = 1,
+                    nProjectId = 1,
+                    nStoreId = nStoreId,
+                    tFileName = "Testdsads.pdf",
+                    tSentBy = "Santosh",
+                    tStoreNumber = "4324",
+                    dtCreatedOn = DateTime.Now.AddDays(10)
+                },
+                new DocumentationTable()
+                {
+                    nPOId = 1,
+                    nProjectId = 1,
+                    nStoreId = nStoreId,
+                    tFileName = "Tdsadasd.pdf",
+                    tSentBy = "Roshan",
+                    tStoreNumber = "423",
+                    dtCreatedOn = DateTime.Now.AddDays(120)
+                },
+                new DocumentationTable()
+                {
+                    nPOId = 1,
+                    nProjectId = 1,
+                    nStoreId = nStoreId,
+                    tFileName = "Tedr43443st.pdf",
+                    tSentBy = "Santosh",
+                    tStoreNumber = "4324",
+                    dtCreatedOn = DateTime.Now.AddDays(-10)
+                },
+                new DocumentationTable()
+                {
+                    nPOId = 1,
+                    nProjectId = 1,
+                    nStoreId = nStoreId,
+                    tFileName = "dasdasd.pdf",
+                    tSentBy = "Roshan",
+                    tStoreNumber = "4324234",
+                    dtCreatedOn = DateTime.Now.AddDays(101)
+                }
+            };
+
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<DocumentationTable>>(response, new JsonMediaTypeFormatter())
+            };
+        }
+
+        [Authorize]
+        [HttpPost]
+        public HttpResponseMessage downloadPO(DocumentationTable request)// SantoshPP
+        {
+            //string fileName = "PurachaaseOrder.pdf";
+
+            // string URL = HttpRuntime.AppDomainAppPath;
+            string strFilePath = "C:\\ProjectCode\\DeploymentToolV2\\Attachments\\294232e5-8a08-4d2f-83d6-5bdfecd29385\\PurchaseOrder.pdf";
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new StreamContent(new FileStream(strFilePath, FileMode.Open, FileAccess.Read));
+            response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+            response.Content.Headers.ContentDisposition.FileName = request.tFileName;
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+
+            return response;
         }
     }
 }

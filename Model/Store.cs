@@ -84,6 +84,7 @@ namespace DeploymentTool.Model
         public string tFileName { get; set; }
         public string tStoreNumber { get; set; }
         public string tSentBy { get; set; }
+        public DateTime dtCreatedOn { get; set; }
     }
 
 }

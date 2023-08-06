@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommonService } from './common.service';
 import { AuthService } from './auth.service';
-import { ActiveProject, DateChangeBody, DateChangeNotificationBody, DateChangeNotitication, DateChangePOOption, DeliveryStatus, HistoricalProjects, NewProjectStore } from '../interfaces/sonic';
+import { ActiveProject, DateChangeBody, DateChangeNotificationBody, DateChangeNotitication, DateChangePOOption, DeliveryStatus, DocumentsTabTable, HistoricalProjects, NewProjectStore } from '../interfaces/sonic';
 import { ProjectTemplates } from '../interfaces/models';
 import { Fields, HomeTab, TabType } from '../interfaces/home-tab';
 import { Observable } from 'rxjs';
@@ -97,5 +97,17 @@ export class StoreService {
 
   SendDateChangeRevisedPO(request: DateChangePOOption[]) {
     return this.http.post<any>(CommonService.ConfigUrl + "Store/SendDateChangeRevisedPO", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  GetDocumentationTab(nStoreId: number) {
+    return this.http.get<DocumentsTabTable[]>(CommonService.ConfigUrl + "Store/GetDocumentationTab?nStoreId=" + nStoreId, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  downloadPO(request: DocumentsTabTable) {
+    let httpHeader = new HttpHeaders({
+      "Authorization": "Bearer " + this.cacheService.getToken(),
+      "Accept": "application/pdf"
+    });
+    return this.http.post(CommonService.ConfigUrl + "Store/downloadPO", request, { responseType: "blob", headers: httpHeader });
   }
 }
