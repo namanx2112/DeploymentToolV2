@@ -22,6 +22,7 @@ namespace DeploymentTool.Controller
             {
                 new ProjectPortfolio()
                 {
+                    nProjectType = -1,
                     nProjectId = 1,
                     store = new ProjectPortfolioStore()
                     {
@@ -74,6 +75,7 @@ namespace DeploymentTool.Controller
                 },
                 new ProjectPortfolio()
                 {
+                    nProjectType = -1,
                     nProjectId = 2,
                     store = new ProjectPortfolioStore()
                     {
@@ -126,6 +128,7 @@ namespace DeploymentTool.Controller
                 },
                 new ProjectPortfolio()
                 {
+                    nProjectType = -1,
                     nProjectId = 3,
                     store = new ProjectPortfolioStore()
                     {
@@ -181,6 +184,7 @@ namespace DeploymentTool.Controller
                 },
                 new ProjectPortfolio()
                 {
+                    nProjectType = -1,
                     nProjectId = 4,
                     store = new ProjectPortfolioStore()
                     {
@@ -236,6 +240,7 @@ namespace DeploymentTool.Controller
                 },
                 new ProjectPortfolio()
                 {
+                    nProjectType = -1,
                     nProjectId = 5,
                     store = new ProjectPortfolioStore()
                     {
@@ -291,6 +296,7 @@ namespace DeploymentTool.Controller
                 },
                 new ProjectPortfolio()
                 {
+                    nProjectType = -1,
                     nProjectId = 6,
                     store = new ProjectPortfolioStore()
                     {

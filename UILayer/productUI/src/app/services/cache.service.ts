@@ -32,7 +32,7 @@ export class CacheService {
   }  
 
   getToken() {
-    let authResp = localStorage.getItem('aResp');
+    let authResp = sessionStorage.getItem('aResp');
     let token = '';
     if (typeof authResp != 'undefined' && authResp != null && authResp != '') {
       token = JSON.parse(authResp).auth.Token;

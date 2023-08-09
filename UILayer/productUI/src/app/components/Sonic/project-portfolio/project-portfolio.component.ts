@@ -59,7 +59,7 @@ export class ProjectPortfolioComponent {
         header: ""
       },
       {
-        columnDef: "netorking",
+        columnDef: "networking",
         header: "Netorking"
       }
       , {

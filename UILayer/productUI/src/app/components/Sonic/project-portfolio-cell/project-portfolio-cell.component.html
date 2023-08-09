@@ -1,0 +1,20 @@
+<div *ngIf="tColumn == 'store'" class="cellDiv">
+    <span>{{ jObject.tStoreDetails}}</span>
+    <span>Go live:{{ getCellVal('dtGoliveDate', jObject.dtGoliveDate)}}</span>
+    <span>{{ jObject.tProjectManager}}</span>
+    <span>{{ jObject.tProjectType}}</span>
+</div>
+<div *ngIf="jObject &&  (tColumn == 'networking' || tColumn == 'pos' || tColumn == 'audio' || tColumn == 'exteriormenu' || tColumn == 'paymentsystem' || tColumn == 'interiormenu'
+ || tColumn == 'sonicradio' || tColumn == 'installation')" class="cellDiv">
+    <span>{{ jObject.tVendor}}</span>
+    <span>{{ getCellVal('dtDate', jObject.dtDate)}}</span>
+    <span class="label">Install Date</span>
+    <span>{{ jObject.tStatus}}</span>
+    <span class="label">Install Status</span>
+</div>
+<div *ngIf="tColumn == 'notes'" class="cellDiv">
+    <div *ngFor="let item of jObject">
+        <span>{{ item.tNotesOwner}}</span>
+        <span>{{ item.tNotesDesc}}</span>
+    </div>
+</div>

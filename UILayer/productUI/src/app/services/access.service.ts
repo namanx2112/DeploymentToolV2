@@ -32,7 +32,7 @@ export class AccessService {
   getAccess(path: string) {
     let tAccess = null;
     if (typeof AccessService.userAccessList == 'undefined' || AccessService.userAccessList.length == 0) {
-      let userAccessList = localStorage.getItem('userAccessList');
+      let userAccessList = sessionStorage.getItem('userAccessList');
       if (typeof userAccessList != 'undefined' && userAccessList != null)
         AccessService.userAccessList = JSON.parse(atob(userAccessList));
     }
@@ -41,6 +41,6 @@ export class AccessService {
   }
 
   static setAccess(sAccess: any) {
-    localStorage.setItem("userAccessList", sAccess.tData);
+    sessionStorage.setItem("userAccessList", sAccess.tData);
   }
 }

@@ -74,6 +74,7 @@ import { DocumentsTabComponent } from './components/Sonic/documents-tab/document
 import { RenderDateChangeTemplateComponent } from './components/Sonic/render-date-change-template/render-date-change-template.component';
 import { DateChangeRevisedPOComponent } from './components/Sonic/date-change-revised-po/date-change-revised-po.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { ProjectPortfolioCellComponent } from './components/Sonic/project-portfolio-cell/project-portfolio-cell.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +127,8 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
     DocumentsTabComponent,
     RenderDateChangeTemplateComponent,
     DateChangeRevisedPOComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    ProjectPortfolioCellComponent
   ],
   imports: [
     CKEditorModule,

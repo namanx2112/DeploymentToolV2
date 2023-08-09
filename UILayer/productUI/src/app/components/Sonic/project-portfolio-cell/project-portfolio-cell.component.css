@@ -1,0 +1,8 @@
+.cellDiv span{
+    float: left;
+    width: 100%;
+}
+
+.label{
+    font-size: 10px;
+}

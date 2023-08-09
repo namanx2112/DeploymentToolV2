@@ -7,6 +7,7 @@ namespace DeploymentTool.Model
 {
     public class ProjectPortfolio
     {        
+        public int nProjectType { get; set; }
         public int nProjectId {  get; set; }
         public ProjectPortfolioStore store { get; set; }
         public ProjectPortfolioItems networking { get; set; }

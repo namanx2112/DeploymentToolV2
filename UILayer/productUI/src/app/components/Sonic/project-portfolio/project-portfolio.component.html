@@ -1,7 +1,7 @@
 <div class="SearchPart whiteGrayTheme">
-    <app-controls [themeClass]="'whiteGray'" [numberOfControlsInARow]="1" [needButton]="false" [fields]="searchFields"
+    <!-- <app-controls [themeClass]="'whiteGray'" [numberOfControlsInARow]="1" [needButton]="false" [fields]="searchFields"
         [controlValues]="searchVal" [SubmitLabel]="'Search'" (onSubmit)="onSubmit($event)"
-        class="searchControls"></app-controls>
+        class="searchControls"></app-controls> -->
 </div>
 <div class="tablePart">
     <table mat-table *ngIf="dataSource != undefined" [dataSource]="dataSource" multiTemplateDataRows
@@ -9,9 +9,8 @@
         <ng-container matColumnDef="{{column.columnDef}}" *ngFor="let column of columnsToDisplay;let index = index;">
             <th mat-header-cell *matHeaderCellDef> {{column.header}} </th>
             <td mat-cell *matCellDef="let element">
-                <span *ngIf="index == 0">{{ getCellVal(column.columnDef, element[column.columnDef])}}</span>
-                <span *ngIf="index > 0 && index < 9">{{ getCellVal(column.columnDef, element[column.columnDef])}}</span>
-                <span *ngIf="index == 9">{{ getCellVal(column.columnDef, element[column.columnDef])}}</span>
+                <app-project-portfolio-cell [jObject]="element[column.columnDef]"
+                    [tColumn]="column.columnDef"></app-project-portfolio-cell>
             </td>
         </ng-container>
         <ng-container matColumnDef="expand">
