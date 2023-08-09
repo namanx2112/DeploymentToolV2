@@ -5,6 +5,8 @@ import { AuthRequest } from 'src/app/interfaces/auth-request';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ForgetPasswordComponent } from '../../forget-password/forget-password.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ export class LoginComponent implements OnInit {
   authResp?: AuthResponse;
   auth: AuthRequest;
   dtField: Fields[] = [];
-  constructor(private authService: AuthService, public router: Router, private route: ActivatedRoute) {
+  constructor(private authService: AuthService, public router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
     this.dtField = [];
     this.dtField.push({
       field_name: "User Name",
@@ -59,5 +61,18 @@ export class LoginComponent implements OnInit {
       }
       this.authService.signIn(request);
     }
+  }
+
+  forgotPasswordClick() {
+    let cthis = this;
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
+    dialogConfig.data = {
+      themeClass: "grayWhite",
+      dialogTheme: "lightGrayWhiteTheme"
+    };
+    dialogRef = this.dialog.open(ForgetPasswordComponent, dialogConfig);
   }
 }

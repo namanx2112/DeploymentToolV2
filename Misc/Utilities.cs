@@ -193,6 +193,38 @@ namespace DeploymentTool.Misc
 
         }
 
+        public static void SendPasswordToEmail(string tName, string tUserName, string tEmail, string sPassword, bool forReset)
+        {
+            string tContent = "<div>Dear " + tName + ",<br/></div>";
+            EMailRequest MailObj = new EMailRequest();
+            if (forReset)
+            {
+                tContent += "<div>We have reset your password for accessing the Inspire Brands's Restaurant Technology Deployment tool!.<br/></div>";
+                tContent += "<div>Please find the below credentials to Login:<br/></div>";
+                tContent += $"<div>URL: {System.Web.HttpContext.Current.Request.UrlReferrer.AbsoluteUri} <br/></div>";
+                tContent += "<div>User Name:" + tUserName + " <br/></div>";
+                tContent += "<div>Password:  " + sPassword + " <br/><br/></div>";
+                tContent += "<div>Thanks & Regards<br/></div>";
+                tContent += "<div>Restaurant Technology Deployment Team</div>";
+                MailObj.tSubject = "Password Reset:Inspire Brands";
+            }
+            else
+            {
+                tContent += "<div>We have created your user account for accessing the Inspire Brands's Restaurant Technology Deployment tool!.<br/></div>";
+                tContent += "<div>Please find the below credentials to Login:<br/></div>";
+                tContent += $"<div>URL: {System.Web.HttpContext.Current.Request.UrlReferrer.AbsoluteUri} <br/></div>";
+                tContent += "<div>User Name:" + tUserName + " <br/></div>";
+                tContent += "<div>Password:  " + sPassword + " <br/><br/></div>";
+                tContent += "<div>Thanks & Regards<br/></div>";
+                tContent += "<div>Restaurant Technology Deployment Team</div>";
+                MailObj.tSubject = "Welcome to Inspire Brands";
+            }
+
+            MailObj.tTo = tEmail;
+            MailObj.tContent = tContent;
+            DeploymentTool.Misc.Utilities.SendMail(MailObj);
+        }
+
         public static string EncodeString(string str)
         {
             string sResp = string.Empty;
@@ -208,8 +240,7 @@ namespace DeploymentTool.Misc
         }
 
         internal static string CreatePassword(string sUserName, int length, out string sPassword)
-        {
-            sPassword = sUserName.Substring((sUserName.Length / 2)) + DateTime.Now.Second.ToString();
+        {            
             const string lower = "abcdefghijklmnopqrstuvwxyz";
             const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const string number = "1234567890";
@@ -240,7 +271,8 @@ namespace DeploymentTool.Misc
                     }
                 }
             }
-            string sEncoded = EncodeString(res.ToString());
+            sPassword = res.ToString();
+            string sEncoded = EncodeString(sPassword);
             return sEncoded.ToString();
         }
     }

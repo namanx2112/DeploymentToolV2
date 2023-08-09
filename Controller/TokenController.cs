@@ -2,6 +2,7 @@
 using DeploymentTool.Misc;
 using DeploymentTool.Model;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -54,6 +55,28 @@ namespace DeploymentTool.Controller
             };
         }
 
+        [HttpPost]
+        public HttpResponseMessage ForgotPassword(ForgotPasswordModel tUserNameOrEmail)
+        {
+            string resp = "";
+            //var userObject = db.Database.SqlQuery<User>("select tName, tUserName, tEmail, case when(nRole is null) then 0 else nRole end, aUserID nUserID from tblUser with(nolock) where UPPER(tUserName)='" + tUserNameOrEmail.tContent.ToUpper() + "' or UPPER(tEmail) = '" + tUserNameOrEmail.tContent.ToUpper() + "'").FirstOrDefault();
+            var userObject = db.Database.SqlQuery<User>("select tName, tUserName, tEmail, case when(nRole is null) then 0 else nRole end, aUserID nUserID from tblUser with(nolock) where UPPER(tUserName)='" + tUserNameOrEmail.tContent.ToUpper() + "'").FirstOrDefault();
+            if (userObject != null)
+            {
+                string sPassword;
+                string encodedPassword = DeploymentTool.Misc.Utilities.CreatePassword(userObject.tUserName, 8, out sPassword);
+                var returnVal = db.Database.ExecuteSqlCommand("update tblUser set tPassword='" + encodedPassword + "', isFirstTime=1 where aUserID =" + userObject.nUserID);
+                Utilities.SendPasswordToEmail(userObject.tName, userObject.tUserName, userObject.tEmail, sPassword, true);
+                resp = "We have reset your password and sent you the details to login, please check your email!";
+            }
+            else
+                resp = "There’s no Account with the info that you provided.!";
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<string>(resp, new JsonMediaTypeFormatter())
+            };
+        }
+
         [Authorize]
         [HttpGet]
         public HttpResponseMessage GetAccess()
@@ -75,6 +98,10 @@ namespace DeploymentTool.Controller
         User CheckUser(string username, string password)
         {
             User objUser = db.Database.SqlQuery<User>("Exec sproc_UserLogin @tUserName, @tPassword", new SqlParameter("@tUserName", username), new SqlParameter("@tPassword", password)).FirstOrDefault();
+            if (objUser != null && objUser.isFirstTime == 1)
+            {
+                db.Database.ExecuteSqlCommand("update tblUser set isFirstTime = 0 where aUserID=" + objUser.nUserID);
+            }
             return objUser;
         }
 

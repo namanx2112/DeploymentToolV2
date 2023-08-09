@@ -4,26 +4,26 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
 import { BrandModel, DropwDown } from '../interfaces/models';
+import { AccessService } from './access.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CacheService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private accessService: AccessService) { }
 
   getBrands(callBack: any) {
-    if (CommonService.allBrands)
+    if (CommonService.allBrands && CommonService.allBrands.length > 0)
       callBack(CommonService.allBrands);
     else {
       this.http.post<BrandModel[]>(CommonService.ConfigUrl + "Brand/Get", null, { headers: this.getHttpHeaders() }).
         subscribe(x => {
           callBack(x);
-          CommonService.allBrands;
+          CommonService.allBrands = x;
         });
     }
   }
-
   
 
   getHttpHeaders(): HttpHeaders {
@@ -32,7 +32,7 @@ export class CacheService {
   }  
 
   getToken() {
-    let authResp = localStorage.getItem('authResponse');
+    let authResp = localStorage.getItem('aResp');
     let token = '';
     if (typeof authResp != 'undefined' && authResp != null && authResp != '') {
       token = JSON.parse(authResp).auth.Token;

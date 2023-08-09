@@ -10,7 +10,7 @@
             <div class="loginBox">
                 <app-controls class="tabForm" *ngIf="dtField.length > 0" [numberOfControlsInARow]="1" [fields]="dtField"
                     [needButton]="true" [readOnlyForm]="false" [controlValues]="{}" [themeClass]="'grayWhite'"
-                    [SubmitLabel]="'Login'" (onSubmit)="logMeIn($event)"></app-controls>
+                    [SubmitLabel]="'Login'" (onSubmit)="logMeIn($event)" [CloseLabel]="'Forgot Password'" (onClose)="forgotPasswordClick()"></app-controls>
             </div>
         </div>
     </div>

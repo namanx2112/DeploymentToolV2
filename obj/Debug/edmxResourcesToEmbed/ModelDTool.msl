@@ -43,6 +43,7 @@
           <ScalarProperty Name="tUserName" ColumnName="tUserName" />
           <ScalarProperty Name="tName" ColumnName="tName" />
           <ScalarProperty Name="aUserID" ColumnName="aUserID" />
+          <ScalarProperty Name="isFirstTime" ColumnName="isFirstTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -691,6 +692,8 @@
     <EntitySetMapping Name="tblPurchaseOrders">
       <EntityTypeMapping TypeName="dtDBModel.tblPurchaseOrder">
         <MappingFragment StoreEntitySet="tblPurchaseOrder">
+          <ScalarProperty Name="tSentHtml" ColumnName="tSentHtml" />
+          <ScalarProperty Name="tPDFData" ColumnName="tPDFData" />
           <ScalarProperty Name="nTemplateId" ColumnName="nTemplateId" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
@@ -861,6 +864,36 @@
           <ScalarProperty Name="nFranchiseID" ColumnName="nFranchiseID" />
           <ScalarProperty Name="nUserID" ColumnName="nUserID" />
           <ScalarProperty Name="aUserFranchiseRelID" ColumnName="aUserFranchiseRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblNoteTypes">
+      <EntityTypeMapping TypeName="dtDBModel.tblNoteType">
+        <MappingFragment StoreEntitySet="tblNoteType">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tNoteTypeName" ColumnName="tNoteTypeName" />
+          <ScalarProperty Name="aNoteTypeID" ColumnName="aNoteTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectNote1">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectNote1">
+        <MappingFragment StoreEntitySet="tblProjectNote">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tNoteDesc" ColumnName="tNoteDesc" />
+          <ScalarProperty Name="tSource" ColumnName="tSource" />
+          <ScalarProperty Name="nStoreID" ColumnName="nStoreID" />
+          <ScalarProperty Name="nNoteType" ColumnName="nNoteType" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aNoteID" ColumnName="aNoteID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,0 +1,34 @@
+export interface Analytics {
+}
+
+export interface ProjectPortfolio{
+    nProjectId: number,
+    store: ProjectPortfolioStore,
+    networking: ProjectPortfolioItems,
+    pos: ProjectPortfolioItems,
+    audio: ProjectPortfolioItems,
+    exteriormenu: ProjectPortfolioItems,
+    paymentsystem: ProjectPortfolioItems,
+    interiormenu: ProjectPortfolioItems,
+    sonicradio: ProjectPortfolioItems,
+    installation: ProjectPortfolioItems,
+    notes: ProjectPorfolioNotes
+}
+
+export interface ProjectPortfolioStore{
+    tStoreDetails: string,
+    dtGoliveDate: Date,
+    tProjectManager: string,
+    tProjectType: string
+}
+
+export interface ProjectPortfolioItems{
+    tVendor: string,
+    dtDate: Date,
+    tStatus: string
+}
+
+export interface ProjectPorfolioNotes{
+    tNotesOwner: string,
+    tNotesDesc: string
+}

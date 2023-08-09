@@ -627,17 +627,6 @@ export class SonicService {
       validator: [],
       mandatory: false,
       hidden: true
-    },{
-      field_name: "Status",
-      fieldUniqeName: "dStatus",
-      defaultVal: "",
-      readOnly: false,
-      invalid: false,
-      field_type: FieldType.date,
-      field_placeholder: "Enter Status",
-      validator: [],
-      mandatory: false,
-      hidden: false
     });
 
     return {

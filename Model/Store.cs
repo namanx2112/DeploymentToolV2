@@ -39,7 +39,7 @@ namespace DeploymentTool.Model
 
     public class DeliveryStatus
     {
-        public string tTechComponent { get; set; }
+        public string tComponent { get; set; }
         public Nullable<DateTime> dDeliveryDate { get; set; }
         public string tStatus { get; set; }
     }

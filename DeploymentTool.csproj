@@ -959,6 +959,7 @@
     <Compile Include="AppStart\globalExceptionHandler.cs" />
     <Compile Include="AppStart\RouteConfig.cs" />
     <Compile Include="Auth\JwtManager.cs" />
+    <Compile Include="Controller\AnalyticsController.cs" />
     <Compile Include="Controller\AttachmentController.cs" />
     <Compile Include="Controller\DropdownController.cs" />
     <Compile Include="Controller\FranchiseController.cs" />
@@ -1035,6 +1036,7 @@
     <Compile Include="Model\ProjectComponent.cs" />
     <Compile Include="Model\ProjectComponentUpload.cs" />
     <Compile Include="Model\ProjectExcelFields.cs" />
+    <Compile Include="Model\ProjectPortfolio.cs" />
     <Compile Include="Model\PurchaseOrderPreviewTemplate.cs" />
     <Compile Include="Model\QuoteRequestTemplate.cs" />
     <Compile Include="Model\Role.cs" />
@@ -1094,6 +1096,9 @@
     <Compile Include="tblFunction.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblNoteType.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblOutgoingEmail.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
@@ -1125,6 +1130,9 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProjectNote.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblProjectNote1.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProjectPaymentSystem.cs">
@@ -1209,9 +1217,6 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUserVendorRel.cs">
-      <DependentUpon>ModelDTool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblUserVendorRel1.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblVendor.cs">

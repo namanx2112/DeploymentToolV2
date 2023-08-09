@@ -73,6 +73,7 @@ import { DeliveryStatusComponent } from './components/Sonic/delivery-status/deli
 import { DocumentsTabComponent } from './components/Sonic/documents-tab/documents-tab.component';
 import { RenderDateChangeTemplateComponent } from './components/Sonic/render-date-change-template/render-date-change-template.component';
 import { DateChangeRevisedPOComponent } from './components/Sonic/date-change-revised-po/date-change-revised-po.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -124,7 +125,8 @@ import { DateChangeRevisedPOComponent } from './components/Sonic/date-change-rev
     DeliveryStatusComponent,
     DocumentsTabComponent,
     RenderDateChangeTemplateComponent,
-    DateChangeRevisedPOComponent
+    DateChangeRevisedPOComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     CKEditorModule,

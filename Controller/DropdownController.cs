@@ -33,8 +33,10 @@ namespace DeploymentTool.Controller
         {
             if (tModuleName == null)
                 tModuleName = "";
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             SqlParameter tModuleNameParam = new SqlParameter("@tModuleName", tModuleName);
-            List<Dropdown> items = db.Database.SqlQuery<Dropdown>("exec sproc_GetDropdown @tModuleName", tModuleNameParam).OrderBy(x => x.nOrder).ToList();
+            SqlParameter userNameParam = new SqlParameter("@nUserId", securityContext.nUserID.ToString());
+            List<Dropdown> items = db.Database.SqlQuery<Dropdown>("exec sproc_GetDropdown @tModuleName, @nUserId", tModuleNameParam, userNameParam).OrderBy(x => x.nOrder).ToList();
             if (items == null || items.Count == 0)
             {
                 return new HttpResponseMessage(HttpStatusCode.NoContent);

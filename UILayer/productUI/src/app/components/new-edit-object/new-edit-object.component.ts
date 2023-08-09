@@ -138,7 +138,7 @@ export class NewEditObjectComponent {
       case TabType.Users:
         let tOptions = this.commonService.GetDropdown("UserRole");
         let brandOptions = this.commonService.GetDropdown("Brand");
-        vals["rBrandID"] = [1];
+        vals["rBrandID"] = [1,2,3,4,5,6];
         if (this.curTab.tab_type == TabType.Vendor) {
           let cOption = tOptions.find(x => x.optionDisplayName == "Vendor");
           if (cOption)

@@ -81,7 +81,18 @@ namespace DeploymentTool.Controller
             var exist = db.Database.SqlQuery<int>("select top 1 1 from tblUser with(nolock) where UPPER(tUserName)='" + userRequest.tUserName.ToUpper() + "'  and aUserID <> " + userRequest.aUserID.ToString()).FirstOrDefault();
             if (exist == null || exist == 0)
             {
-                db.Entry(userRequest.GetTblUser()).State = EntityState.Modified;
+                var tblUser = userRequest.GetTblUser();
+                db.tblUser.Attach(tblUser);
+                db.Entry(tblUser).Property(x => x.nDepartment).IsModified = true;
+                db.Entry(tblUser).Property(x => x.tUserName).IsModified = true;
+                db.Entry(tblUser).Property(x => x.tName).IsModified = true;
+                db.Entry(tblUser).Property(x => x.nRole).IsModified = true;
+                db.Entry(tblUser).Property(x => x.nStatus).IsModified = true;
+                db.Entry(tblUser).Property(x => x.tEmpID).IsModified = true;
+                db.Entry(tblUser).Property(x => x.tMobile).IsModified = true;
+                db.Entry(tblUser).Property(x => x.tEmpID).IsModified = true;
+                db.Entry(tblUser).Property(x => x.dtUpdatedOn).IsModified = true;
+                db.Entry(tblUser).Property(x => x.nUpdateBy).IsModified = true;
                 // Update into tblUserVendorRelation
                 try
                 {
@@ -160,6 +171,8 @@ namespace DeploymentTool.Controller
 
                     //    await db.SaveChangesAsync();
                     //}
+                    if (userRequest.nRole == null)
+                        userRequest.nRole = -1;
                     var resole = db.Database.ExecuteSqlCommand("Exec sproc_ChangeUserPermissionFromRole @nUserId, @nRoleId,@nVendorId,@nFranchiseId", new SqlParameter("@nUserId", userRequest.aUserID), new SqlParameter("@nRoleId", userRequest.nRole), new SqlParameter("@nVendorId", userRequest.nVendorId), new SqlParameter("@nFranchiseId", userRequest.nFranchiseId));
 
                     if (userRequest.rBrandID != null)
@@ -219,6 +232,7 @@ namespace DeploymentTool.Controller
                     string strPwd;
                     userRequest.tPassword = DeploymentTool.Misc.Utilities.CreatePassword(userRequest.tUserName, 8, out strPwd);
                     var tmpUser = userRequest.GetTblUser();
+                    tmpUser.isFirstTime = 1;
                     db.tblUser.Add(tmpUser);
                     await db.SaveChangesAsync();
 
@@ -302,20 +316,7 @@ namespace DeploymentTool.Controller
                         db.tblUserBrandRels.AddRange(lstBrandUser);
                     }
                     await db.SaveChangesAsync();
-                    string tContent = "<div>Dear " + userRequest.tName + ",<br/></div>";
-                    tContent += "<div>We have created your Inspire Brands user account for you!.<br/></div>";
-                    tContent += "<div>Please find the below credentials to Login Inspire Brands.<br/></div>";
-                    tContent += $"<div>URL: {System.Web.HttpContext.Current.Request.UrlReferrer.AbsoluteUri} <br/></div>";
-                    tContent += "<div>User Name:" + userRequest.tUserName + " <br/></div>";
-                    tContent += "<div>Password:  " + strPwd + " <br/><br/></div>";
-                    tContent += "<div>Thanks & Regards<br/></div>";
-                    tContent += "<div>Inspire Brands Team</div>";
-                    EMailRequest MailObj = new EMailRequest();
-                    MailObj.tSubject = "Welcome to Inspire Brands";
-                    MailObj.tTo = userRequest.tEmail;
-
-                    MailObj.tContent = tContent;
-                    DeploymentTool.Misc.Utilities.SendMail(MailObj);
+                    Utilities.SendPasswordToEmail(userRequest.tName, userRequest.tUserName, userRequest.tEmail, strPwd, false);
                     db.Database.CurrentTransaction.Commit();
                 }
                 catch (Exception ex)

@@ -22,19 +22,16 @@ GO
 truncate table tbPermission
 -- Insert Permissions
 insert into tbPermission (tPermissionName,tPermissionDiplayName) values('home.configuration', 'home.configuration'),('home.configuration.dashboard', 'home.configuration.dashboard'),('home.configuration.Users','home.configuration.Users'),
-('home.configuration.Brands','home.configuration.Brands'), ('home.configuration.Vendors','home.configuration.Vendors'), ('home.configuration.managedropdown','home.configuration.managedropdown'),
-('home.configuration.Tech Components','home.configuration.Tech Components'), ('home.configuration.Franchises','home.configuration.Franchises'), ('home.configuration.quoterequest', 'home.configuration.quoterequest'),
-('home.configuration.po', 'home.configuration.po'),('home.configuration.Items','home.configuration.ItemsPart'),
+('home.configuration.Brands','home.configuration.Brands'), ('home.configuration.Vendors','home.configuration.Vendors'), ('home.configuration.managedropdown','home.configuration.managedropdown'),('home.configuration.report', 'home.configuration.report'),
+('home.configuration.Tech Components','home.configuration.Tech Components'), ('home.configuration.Franchises','home.configuration.Franchises'), ('home.configuration.quoterequest', 'home.configuration.quoterequest'),('home.configuration.techarea', 'home.configuration.techarea'),
+('home.configuration.po', 'home.configuration.po'),('home.configuration.Items','home.configuration.ItemsPart'),('home.configuration.setting', 'home.configuration.setting'),
 ('home.configuration.Stores','home.configuration.Stores'),('home.configuration.Tech Component Tools','home.configuration.Tech Component Tools'),('home.configuration.Analytics','home.configuration.Analytics'),
 ('home.configuration.Store Contact','home.configuration.Store Contact'),('home.configuration.Store Configuration','home.configuration.Store Configuration'),('home.configuration.Stake Holders','home.configuration.Stake Holders'),
 ('home.configuration.Networking','home.configuration.Networking'),('home.configuration.POS','home.configuration.POS'),('home.configuration.Audio','home.configuration.Audio'),
 ('home.configuration.Exterior Menus','home.configuration.Exterior Menus'),('home.configuration.Payment System','home.configuration.Payment System'),('home.configuration.Interior Menus','home.configuration.Interior Menus'),
 ('home.configuration.Sonic Radio','home.configuration.Sonic Radio'),('home.configuration.Installation','home.configuration.Installation'),('home.configuration.Projects','home.configuration.Projects'),
 ('home.configuration.Historical Projects','home.configuration.Historical Projects'),('home.configuration.Notes','home.configuration.Notes'),
-('home.dashboard.user', 'home.dashboard.user'), ('home.dashboard.brand', 'home.dashboard.brand'), ('home.dashboard.vendor', 'home.dashboard.vendor'),
-('home.dashboard.managedropdown', 'home.dashboard.managedropdown'),('home.dashboard.report', 'home.dashboard.report'), ('home.dashboard.techarea', 'home.dashboard.techarea'),
-('home.dashboard.setting', 'home.dashboard.setting'), ('home.dashboard.franchise', 'home.dashboard.franchise'),('home.dashboard.quoterequest', 'home.dashboard.quoterequest'),
-('home.dashboard.po', 'home.dashboard.po'), ('home.dashboard', 'home.dashboard'), ('home.notification', 'home.notification'),
+ ('home.dashboard', 'home.dashboard'), ('home.notification', 'home.notification'),
 ('home.mail', 'home.mail'), ('home.find', 'home.find'), ('home.list', 'home.list'), ('home.setting', 'home.setting'), ('home.dashboard.priority', 'home.dashboard.priority'),
 ('home.dashboard.goal', 'home.dashboard.goal'), ('home.dashboard.notification', 'home.dashboard.notification'), ('home.dashboard.request', 'home.dashboard.request'),
 ('home.sonic.notificationtemplate.render', 'home.sonic.notificationtemplate.render'), ('home.sonic.quoterequest.render', 'home.sonic.quoterequest.render'),('home.sonic.po.render', 'home.sonic.po.render'),
@@ -49,8 +46,8 @@ insert into tbPermission (tPermissionName,tPermissionDiplayName) values('home.co
 ('home.sonic.project.Store Contact','home.sonic.project.Store Contact'),('home.sonic.project.Store Configuration','home.sonic.project.Store Configuration'),('home.sonic.project.Stake Holders','home.sonic.project.Stake Holders'),
 ('home.sonic.project.Networking','home.sonic.project.Networking'),('home.sonic.project.POS','home.sonic.project.POS'),('home.sonic.project.Audio','home.sonic.project.Audio'),
 ('home.sonic.project.Exterior Menus','home.sonic.project.Exterior Menus'),('home.sonic.project.Payment System','home.sonic.project.Payment System'),('home.sonic.project.Interior Menus','home.sonic.project.Interior Menus'),
-('home.sonic.project.Sonic Radio','home.sonic.project.Sonic Radio'),('home.sonic.project.Installation','home.sonic.project.Installation'),
-('home.sonic.project.Projects','home.sonic.project.Projects'),('home.sonic.project.Historical Projects','home.sonic.project.Historical Projects')
+('home.sonic.project.Sonic Radio','home.sonic.project.Sonic Radio'),('home.sonic.project.Installation','home.sonic.project.Installation'), ('home.sonic.project.dailyupdate','home.sonic.project.dailyupdate'),
+('home.sonic.project.Projects','home.sonic.project.Projects'),('home.sonic.project.Historical Projects','home.sonic.project.Historical Projects'), ('home.sonic.project.dailyupdate','home.sonic.project.signoff')
 
 Go
 
@@ -84,15 +81,62 @@ insert into tblRolePermissionRel (nRoleID, nPermissionID, nPermVal) select @nRol
 Select @nRoleID = select aRoleID from tblRole where tRoleName  = 'Read Only'
 insert into tblRolePermissionRel (nRoleID, nPermissionID, nPermVal) select @nRoleID, aPermissionlID, 1 from tbPermission
 
-update tblRolePermissionRel set nPermVal = 1 where nRoleID in (select aRoleID from tblRole where tRoleName in('Admin', 'Project Manager')) and nPermissionID in(Select aPermissionID from tblPermission where tPermissionName in ('home.configuration.Users', 'home.configuration.Brands'))
-update tblRolePermissionRel set nPermVal = 0 where nRoleID in (select aRoleID from tblRole where tRoleName in('Franchise', 'Installation Vendor', 'Equipment Vendor')) and 
-nPermissionID in(Select aPermissionID from tblPermission where tPermissionName in ('home.configuration', 'home.dashboard.report', 'home.sonic.reportgenerator', 'home.sonic.importproject', 'home.sonic.projectportfolio', 'home.sonic.reportgenerator',
-'home.sonic.project.workflows')
+update tblRolePermissionRel set nPermVal = 0 where nRoleID in (select aRoleID from tblRole where tRoleName in('Read Only')) and 
+nPermissionID in(Select aPermissionlID from tbPermission where tPermissionName in ('home.configuration', 'home.sonic.project.workflows', 'home.sonic.project.dailyupdate', 'home.sonic.project.signoff'))
 
+update tblRolePermissionRel set nPermVal = 0 where nRoleID in (select aRoleID from tblRole where tRoleName in('Admin', 'Project Manager')) and nPermissionID 
+in(Select aPermissionlID from tbPermission where tPermissionName in ('home.configuration.Users', 'home.configuration.Brands', 'home.sonic.project.dailyupdate', 'home.sonic.project.signoff'))
+
+update tblRolePermissionRel set nPermVal = 0 where nRoleID in (select aRoleID from tblRole where tRoleName in('Franchise', 'Installation Vendor', 'Equipment Vendor')) and 
+nPermissionID in(Select aPermissionlID from tbPermission where tPermissionName in ('home.configuration', 'home.dashboard.report', 'home.sonic.reportgenerator', 'home.sonic.importproject',
+'home.sonic.projectportfolio', 'home.sonic.reportgenerator', 'home.sonic.project.workflows', 'home.sonic.project.dailyupdate', 'home.sonic.project.signoff'))
+
+update tblRolePermissionRel set nPermVal = 2 where nRoleID in (select aRoleID from tblRole where tRoleName in('Installation Vendor')) and 
+nPermissionID in(Select aPermissionlID from tbPermission where tPermissionName in ('home.sonic.project.dailyupdate', 'home.sonic.project.signoff'))
+
+update tblRolePermissionRel set nPermVal = 2 where nRoleID in (select aRoleID from tblRole where tRoleName in('Installation Vendor','Equipment Vendor')) and 
+nPermissionID in(Select aPermissionlID from tbPermission where tPermissionName in ('home.sonic.project.deliverystatus'))
+
+--select * from tblUser where tUserName like '%fr%'
+--select * from tblUserBrandRel where nUserId = 45
+--select * from tblBrand
+--update tblUserBrandRel set nBrandID = 6 where nUserId = 45
+
+--update tblUser set tpassword = 'YWRtaW4=' where aUserId = 58
+
+--select * from tblUserPermissionRel where nUserId = 59 and nPermissionID in(3,4)
 
 GO
+CREATE TABLE [dbo].[tblUserFranchiseRel](
+	[aUserFranchiseRelID] [int] IDENTITY(1,1) NOT NULL,
+	[nUserID] [int] NULL,
+	[nFranchiseID] [int] NULL
+	
+PRIMARY KEY CLUSTERED 
+(
+	[aUserFranchiseRelID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+Create  PROC sproc_GetUsertypeByVendorID               
+(              
+@nVendorID int ,
+@nUserID int
+)              
+AS              
+BEGIN              
+--6	Installation Vendor
+--7	Equipment Vendor
+--declare @nVendorID int ,@nUserID int    
+--set @nVendorID=1012 set @nUserID=36
+   Select nUserID,6 as aUserTypeID from  tblVendor A with (nolock) inner join tblUserVendorRel B with (nolock) on A.aVendorID=B.NvendorID  where aVendorID=@nVendorID and nInstallation=1 and nUserID=@nUserID
+   union all
+    Select nUserID,7 as aUserTypeID from  tblVendor A with (nolock) inner join tblUserVendorRel B with (nolock) on A.aVendorID=B.NvendorID where aVendorID=@nVendorID and nEquipment=1 and nUserID=@nUserID
 
-Alter procedure sproc_ChangeUserPermissionFromRole  
+
+END 
+GO
+create procedure sproc_ChangeUserPermissionFromRole  
 @nUserId int,  
 @nRoleId int,
 @nVendorId int,
@@ -138,7 +182,7 @@ Create procedure sproc_getMyAccess
 @nuserId int
 as
 BEGIN
-	Select tPermissionName, nPermVal from tblUserPermissionRel with(nolock) join tbPermission with(nolock) on aPermissionlID = nPermissionId where nUserId = @nUserId
+	Select lower(tPermissionName) tPermissionName, nPermVal from tblUserPermissionRel with(nolock) join tbPermission with(nolock) on aPermissionlID = nPermissionId where nUserId = @nUserId
 END
 
 GO
@@ -223,7 +267,8 @@ GO
 
 --sproc_GetDropdown ''  
 Alter Procedure [dbo].[sproc_GetDropdown]          
-@tModuleName as VARCHAR(500)          
+@tModuleName as VARCHAR(500),
+@nUserId int      
 as          
 BEGIN          
  IF(@tModuleName is null OR @tModuleName = '')          
@@ -233,7 +278,7 @@ BEGIN
  Select 1, 'Vendor', aVendorId, tVendorName, bDeleted, 1, 0 from tblVendor with(nolock)  UNION      
  Select 1, 'Franchise', aFranchiseId, tFranchiseName,bDeleted,1, 0 from tblFranchise  with(nolock) UNION  
  select 1, 'UserRole', aRoleID, tRoleName, bDeleted,1, 0 from tblRole with(nolock) UNION  
- select 1, 'Brand', aBrandId, tBrandName, bDeleted,1, 0 from tblBrand with(nolock)        
+ select 1, 'Brand', aBrandId, tBrandName, bDeleted,1, 0 from tblBrand with(nolock) join tblUserBrandRel with(nolock) on nBrandID = aBrandID where nUserID = @nUserID        
  END          
  ELSE           
  BEGIN          
@@ -278,6 +323,98 @@ update tblDropDowns set nFunction = 1 where tDropDownText like '%]%'
 
 GO
 
+
+Create FUNCTION dbo.geDropDownStatusTextByID (@aDropDownId int,@dDtate nvarchar(100))  
+RETURNS nvarchar(max)  
+AS  
+Begin  
+Declare @Temp nvarchar(max)
+set @Temp=''
+declare @day nvarchar(5)
+declare @maonth nvarchar(5)
+set @Temp=(Select  tDropdownText from tblDropdowns with (nolock) WHERE aDropDownId = @aDropDownId) 
+if exists(Select top 1 1 from tblDropdowns with (nolock) WHERE aDropDownId = @aDropDownId and nFunction=1)
+begin
+
+	set @dDtate=isnull(@dDtate,'')
+	if(@dDtate <>'')
+	begin
+		
+		select @day =datename(day,@dDtate),@maonth=month(@dDtate)
+		
+		set @Temp=(replace(@Temp,'[Day/','['+@day+'/'))
+		set @Temp=(replace(@Temp,'/Month]','/'+@maonth+']'))
+		
+	End	
+end
+
+
+return @Temp
+END  
+
+GO
+
+Create procedure sproc_GetDeliveryStatus   
+@nStoreID int=0
+AS    
+BEGIN    
+
+DECLARE @ListOfDeliveryStatus TABLE(aID INT,tTechComponent VARCHAR(100) , dDeliveryDate VARCHAR(100), tStatus VARCHAR(500))
+ 
+INSERT INTO @ListOfDeliveryStatus
+VALUES 
+(1,'Installation','','')  ,
+(2,'Exterior Menus','','') ,
+(3,'Interior Menus','','') ,
+(4,'Payment Systems','',''),
+(5,'Sonic Radio','',''),
+(6,'Audio','',''),
+(7,'POS','',''),	
+(8,'Networking','','')	
+
+
+Declare @tTechName nVARCHAR(100)
+Declare @dDate VARCHAR(100)
+Declare @tStatus VARCHAR(500)
+
+Select top 1 @dDate=dInstallDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectInstallation  with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1 
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus where aID=1
+Select top 1 @dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectExteriorMenus with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1    
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus where aID=2
+Select top 1 @dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectInteriorMenus with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1    
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus where aID=3
+Select top 1 @dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectPaymentSystem with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1  
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus where aID=4
+Select top 1 @dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectSonicRadio with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1  
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus where aID=5
+Select top 1 @dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectAudio with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus where aID=6
+Select top 1 @dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectPOS with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1    
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus where aID=7
+Select top 1 @dDate=dPrimaryDate, @tStatus=dbo.geDropDownStatusTextByID(nPrimaryStatus,dDateFor_nPrimaryStatus)  from tblProjectNetworking with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1   
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus where aID=8
+select tTechComponent,isnull(dDeliveryDate,'') as dDeliveryDate,tStatus from @ListOfDeliveryStatus
+END  
+
+GO
+
+alter table tblProjectNotes ADD  DEFAULT (getdate()) FOR [dtCreatedOn]
+GO
+alter procedure [dbo].[sproc_GetNotes]
+@nPojectId as int=0
+as          
+BEGIN  
+if(@nPojectId>0)
+select aNoteID,nProjectID,nNoteType,nStoreID,tSource,tNoteDesc,dtCreatedOn,nCreatedBy,nUpdateBy,dtCreatedOn,dtUpdatedOn,bDeleted
+from tblProjectNotes A with (nolock)
+--inner join  tblNoteType B with (nolock) on A.nNoteType=B.aNoteTypeID
+where  nProjectID=@nPojectId
+else
+select aNoteID,nProjectID,nNoteType,nStoreID,tSource,tNoteDesc,dtCreatedOn,nCreatedBy,nUpdateBy,dtCreatedOn,dtUpdatedOn,bDeleted
+from tblProjectNotes A with (nolock)
+
+END
+GO
 select * from tblDropDownMain with(nolock) where tModuleName = 'ProjectType' and nDropdownID in(select * from tblDropDowns with(nolock) where tDropDownText = 'Remodel' and aDropDownId) 
 
 
@@ -305,3 +442,59 @@ select * from tblRole
 select * from tblRolePermissionRel where nRoleId = 7
 
 select * from tblApplicationTrace order by 1 desc
+
+select * from tblDropdowns order by 1 desc
+
+sp_helptext sproc_GetDeliveryStatus
+
+select * from tblUser order by 1 desc
+update tblUser set tpassword = 'YWRtaW4=' where aUserId = 58
+
+select * from tblUserPermissionRel where nUserId = 59 and nPermissionID in(3,4)
+
+
+sproc_GetDeliveryStatus 
+
+
+sp_helptext sproc_getUserModel
+select * from tblUser
+tblUser
+
+sp_helptext sproc_ChangePassword
+----
+
+Alter table tblUser add isFirstTime int default 0
+
+GO
+
+Alter  PROC sproc_UserLogin               
+(              
+@tUserName NVARCHAR(255),              
+@tPassword NVARCHAR(255)             
+)              
+AS              
+BEGIN   
+   select tName, tUserName, tEmail, case when(nRole is null) then 0 else nRole end, aUserID nUserID, isFirstTime from tblUser with(nolock) where UPPER(tUserName) = UPPER(@tUserName) and tPassword = @tPassword     
+END 
+
+select * from tblUser order by 1 desc
+
+
+update tblRolePermissionRel set nPermVal = 1 where nRoleID in (select aRoleID from tblRole where tRoleName in('Franchise', 'Installation Vendor', 'Equipment Vendor','Read Only')) and 
+nPermissionID in(Select aPermissionlID from tbPermission where tPermissionName in ('home.sonic.project.golive', 'home.sonic.project.task', 'home.sonic.project.notes', 'home.sonic.project.Store Contact',
+'home.sonic.project.Store Configuration', 'home.sonic.project.Stake Holders', 'home.sonic.project.Networking', 'home.sonic.project.POS', 'home.sonic.project.Audio','home.sonic.project.Exterior Menus','home.sonic.project.Payment System',
+'home.sonic.project.Interior Menus','home.sonic.project.Sonic Radio', 'home.sonic.project.Installation'))
+
+update tblRolePermissionRel set nPermVal = 0 where nRoleID in (select aRoleID from tblRole where tRoleName in('Franchise', 'Installation Vendor', 'Equipment Vendor')) and 
+nPermissionID in(Select aPermissionlID from tbPermission where tPermissionName in ('home.configuration', 'home.dashboard.report', 'home.sonic.reportgenerator', 'home.sonic.importproject',
+'home.sonic.projectportfolio', 'home.sonic.reportgenerator', 'home.sonic.project.workflows', 'home.sonic.project.dailyupdate', 'home.sonic.project.signoff','home.sonic.newproject'))
+
+
+select * from tblUser with(nolock) order by 1 desc
+where UPPER(tUserName) = 'fu2' or UPPER(tEmail) = 'droshanjha29@gmail.com'
+select * from tbPermission where tPermissionName = ''
+select * from tblUserPermissionRel where nUserId = 62
+
+select nBrandID from tblUserBrandRel with(nolock) where nUserID = 2
+
+select 1, 'Brand', aBrandId, tBrandName, bDeleted,1, 0 from tblBrand with(nolock) join tblUserBrandRel with(nolock) on nBrandID = aBrandID where nUserID = 64    

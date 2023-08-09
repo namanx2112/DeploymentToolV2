@@ -25,7 +25,10 @@ export class HomeComponent {
     this.tTabName = "Dashboard";
     this.userName = this.authService.getUserName();
     this.commonService.getAllDropdowns();
+    if (this.authService.isFirstTime())
+      this.ChangePassword("Please change your password");
   }
+
 
   getValue() {
     this.homeService.loginGet().subscribe((res: string) => {
@@ -61,12 +64,13 @@ export class HomeComponent {
     dialogRef = cThis.dialog.open(NotImplementedComponent, dialogConfig);
   }
 
-  ChangePassword() {
+  ChangePassword(title?: string) {
     const dialogConfig = new MatDialogConfig();
     let dialogRef: any;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '50%';
     dialogConfig.data = {
+      title: (typeof title == "undefined") ? "Change Password": title,
       onChange: function () {
         dialogRef.close();
       },
@@ -74,7 +78,7 @@ export class HomeComponent {
         dialogRef.close();
       }
     };
-    dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
+    dialogRef = this.dialog.open(ChangePasswordComponent, dialogConfig);
   }
 
   OpenTicketWatcher() {

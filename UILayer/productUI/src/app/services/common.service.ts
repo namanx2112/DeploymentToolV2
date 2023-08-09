@@ -16,6 +16,7 @@ export class CommonService {
   static allItems: any;
   static ddMonthString: string = "[Day/Month]";
   static allBrands: any;
+  noNeedBlankDropDown: string[] = ["UserRole", "Brand"];
   constructor(private cacheService: CacheService, private ddService: DropdownServiceService) {
 
   }
@@ -45,7 +46,7 @@ export class CommonService {
   }
 
   public getAllDropdowns(callBack?: any) {
-    if (typeof CommonService.allItems == 'undefined') {
+    if (typeof CommonService.allItems == 'undefined' || CommonService.allItems.length == 0) {
       let cThis = this;
       this.ddService.Get("").subscribe((x: DropwDown[]) => {
         cThis.loadDropdownArray(x);
@@ -235,13 +236,18 @@ export class CommonService {
           });
         }
         ddItems.sort(this.compare);
-        ddItems.unshift({
-          optionDisplayName: "",
-          optionIndex: "0",
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        });
+        if (this.noNeedBlankDropDown.indexOf(columnName) == -1)
+          ddItems.unshift({
+            optionDisplayName: "",
+            optionIndex: "0",
+            optionOrder: 1,
+            bDeleted: false,
+            nFunction: 0
+          });
+        else {
+          if (columnName == "UserRole")
+            ddItems = ddItems.filter(x => x.optionDisplayName.indexOf("Vendor") == -1 && x.optionDisplayName.indexOf("Franchise") == -1)
+        }
       }
     }
     if (ddItems.length == 0) {

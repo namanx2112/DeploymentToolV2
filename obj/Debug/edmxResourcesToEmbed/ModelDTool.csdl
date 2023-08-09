@@ -79,6 +79,8 @@
     <EntitySet Name="tbPermissions" EntityType="dtDBModel.tbPermission" />
     <EntitySet Name="tblDropdownModules" EntityType="dtDBModel.tblDropdownModule" />
     <EntitySet Name="tblUserFranchiseRels" EntityType="dtDBModel.tblUserFranchiseRel" />
+    <EntitySet Name="tblNoteTypes" EntityType="dtDBModel.tblNoteType" />
+    <EntitySet Name="tblProjectNote1" EntityType="dtDBModel.tblProjectNote1" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -122,6 +124,7 @@
     <Property Name="bDeleted" Type="Boolean" />
     <Property Name="nUserTypeID" Type="Int32" />
     <Property Name="nStatus" Type="Int32" />
+    <Property Name="isFirstTime" Type="Int32" />
   </EntityType>
   <EntityType Name="tblVendor">
     <Key>
@@ -750,6 +753,8 @@
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
     <Property Name="nTemplateId" Type="Int32" />
+    <Property Name="tPDFData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="tSentHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tblPurchaseOrderPart">
     <Key>
@@ -878,14 +883,6 @@
     <Property Name="tModuleGroup" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="editable" Type="Boolean" />
   </EntityType>
-  <EntityType Name="tblUserVendorRel1">
-    <Key>
-      <PropertyRef Name="aUserVendorRelsID" />
-    </Key>
-    <Property Name="aUserVendorRelsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nUserID" Type="Int32" />
-    <Property Name="nVendorID" Type="Int32" />
-  </EntityType>
   <EntityType Name="tblUserFranchiseRel">
     <Key>
       <PropertyRef Name="aUserFranchiseRelID" />
@@ -893,5 +890,33 @@
     <Property Name="aUserFranchiseRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nUserID" Type="Int32" />
     <Property Name="nFranchiseID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblNoteType">
+    <Key>
+      <PropertyRef Name="aNoteTypeID" />
+    </Key>
+    <Property Name="aNoteTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tNoteTypeName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblProjectNote1">
+    <Key>
+      <PropertyRef Name="aNoteID" />
+    </Key>
+    <Property Name="aNoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nNoteType" Type="Int32" />
+    <Property Name="nStoreID" Type="Int32" />
+    <Property Name="tSource" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="tNoteDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
   </EntityType>
 </Schema>

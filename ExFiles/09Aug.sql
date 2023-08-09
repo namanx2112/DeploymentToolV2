@@ -1,0 +1,1 @@
+insert into tbPermission (tPermissionName,tPermissionDiplayName) values('home.configuration', 'home.configuration')

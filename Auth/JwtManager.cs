@@ -82,6 +82,11 @@ namespace DeploymentTool.Auth
         public string Password { get; set; }
     }
 
+    public class ForgotPasswordModel
+    {
+        public string tContent { get; set; }
+    }
+
     public class ChangePasswordModel
     {
         public string tCurrentPassword { get; set; }

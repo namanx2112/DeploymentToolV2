@@ -13,9 +13,11 @@ export class ChangePasswordComponent {
   dtField: Fields[] = [];
   onClose: any;
   onChange: any;
+  title: string;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: AuthService) {
     if (data) {
       this.dtField = [];
+      this.title = data.title;
       this.dtField.push({
         field_name: "Current password",
         fieldUniqeName: "tCurrentPassword",

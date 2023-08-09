@@ -1,4 +1,5 @@
 ﻿using DeploymentTool.Auth;
+using DeploymentTool.Model.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,13 @@ namespace DeploymentTool.Model
 {
     public class User
     {
+        public string tUserName { get; set; }
         public int nUserID { get; set; }
         public int nRole { get; set; }
         public string tName { get; set; }
         public string tEmail { get; set; }
         public AuthResponse auth { get; set; }
+        public Nullable<int> isFirstTime { get; set; }
 
     }
 
@@ -71,7 +74,6 @@ namespace DeploymentTool.Model
                 nUserID = userRequest.aUserID
             };
         }
-
     }
 
     public class UserPermission

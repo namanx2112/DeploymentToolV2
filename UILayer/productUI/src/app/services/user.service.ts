@@ -35,7 +35,7 @@ export class UserService {
       "tName",
       "tUserName",
       "tEmail",
-      "tEmpID"
+      "nRole"
     ];
   }
 
@@ -206,7 +206,7 @@ export class UserService {
       field_placeholder: "Enter User Emp Id",
       validator: [],
       mandatory: false,
-      hidden: false
+      hidden: true
     },
     {
       field_name: "Mobile Number",
@@ -218,7 +218,7 @@ export class UserService {
       field_placeholder: "Enter User Mobile Number",
       validator: [],
       mandatory: false,
-      hidden: false
+      hidden: true
     }]
     return fields;
   }

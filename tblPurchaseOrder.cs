@@ -35,5 +35,7 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
         public Nullable<int> nTemplateId { get; set; }
+        public string tPDFData { get; set; }
+        public string tSentHtml { get; set; }
     }
 }

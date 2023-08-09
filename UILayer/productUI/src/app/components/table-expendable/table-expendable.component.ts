@@ -76,19 +76,6 @@ export class TableExpendableComponent {
     return rVal;
   }
 
-  cellDelete(row: MatRow) {
-    if (confirm("Are you sure you want to delete this item?")) {
-      this.cService.Delete(row).subscribe((x: any) => {
-        this.initTable();
-      });
-    }
-  }
-
-  rowClick(row: MatRow) {
-    if (this.clickCol == 'all')
-      this.rowClicked.emit(row);
-  }
-
   initTable() {
     if (typeof this.curTab != 'undefined') {
       this.columnsToDisplay = [];

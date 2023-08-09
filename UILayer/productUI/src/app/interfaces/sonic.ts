@@ -289,7 +289,7 @@ export interface NewProjectStore {
 }
 
 export interface DeliveryStatus{
-    tTechComponent: string,
+    tComponent: string,
     dDeliveryDate: Date,
     tStatus: string
 }

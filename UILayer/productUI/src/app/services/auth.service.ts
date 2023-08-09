@@ -22,7 +22,7 @@ export class AuthService {
         if (typeof res == 'string')
           alert(res);
         else {
-          localStorage.setItem('authResponse', JSON.stringify(res));
+          localStorage.setItem('aResp', JSON.stringify(res));
           this.getAccess();
         }
       });
@@ -30,6 +30,10 @@ export class AuthService {
 
   ChangePassword(request: any) {
     return this.http.post<any>(CommonService.ConfigUrl + "token/ChangePassword", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  ForgotPassword(request: any) {
+    return this.http.post<any>(CommonService.ConfigUrl + "token/ForgotPassword", request,  { headers: this.headers });
   }
 
   getAccess() {
@@ -50,11 +54,28 @@ export class AuthService {
 
   loggedOut() {
     localStorage.clear();
+    AccessService.userAccessList = [];
+    CommonService.allBrands = [];
+    CommonService.allItems = [];
     this.router.navigate(['./login'], { skipLocationChange: true, relativeTo: this.route });
   }
 
+  isFirstTime() {
+    let yesFirstTime = false;
+    let resp = localStorage.getItem('aResp');
+    if (typeof resp != 'undefined' && resp != null && resp != '') {
+      let jResp = JSON.parse(resp);
+      yesFirstTime = (jResp.isFirstTime == 1);
+      if (yesFirstTime) {
+        jResp.isFirstTime = 0
+        localStorage.setItem("aResp", JSON.stringify(jResp));
+      }
+    }
+    return yesFirstTime;
+  }
+
   getUserName() {
-    let authResp = localStorage.getItem('authResponse');
+    let authResp = localStorage.getItem('aResp');
     let userName = 'NA';
     if (typeof authResp != 'undefined' && authResp != null && authResp != '') {
       userName = JSON.parse(authResp).tName;

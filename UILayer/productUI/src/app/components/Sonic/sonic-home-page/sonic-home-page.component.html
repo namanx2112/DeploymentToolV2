@@ -45,8 +45,10 @@
         <app-menu-installation *ngIf="showMode == 'menuinstallation'" (ChangeView)="ChangeView($event)"></app-menu-installation>
         <app-audio-installation *ngIf="showMode == 'audioinstallation'" (ChangeView)="ChangeView($event)"></app-audio-installation>
         <app-project-template-list *ngIf="showMode == 'projecttemplatelist'" (BackToStoreView)="BackToStoreView($event)" [curStore]="curStore"></app-project-template-list>
+        <!-- <app-project-portfolio *ngIf="showMode == 'Project Portfolio'" (BackToStoreView)="BackToStoreView($event)"></app-project-portfolio> -->
+        <app-not-implemented *ngIf="showMode == 'Project Portfolio'"></app-not-implemented>
 
-        <app-not-implemented *ngIf="showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'menuinstallation' && 
+        <app-not-implemented *ngIf="showMode != 'Project Portfolio' && showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'menuinstallation' && 
         showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && 
         showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
     </div>

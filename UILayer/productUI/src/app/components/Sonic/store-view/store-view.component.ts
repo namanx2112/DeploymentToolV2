@@ -240,6 +240,37 @@ export class StoreViewComponent {
       curStore: this._curStore
     };
     dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
+    // dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
+  }
+
+  ShowDailyUpdates() {
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+
+    dialogConfig.data = {
+      themeClass: "grayWhite",
+      dialogTheme: "lightGrayWhiteTheme",
+      curStore: this._curStore
+    };
+     dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
+    //dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
+  }
+
+  ShowSignOff() {
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+
+    dialogConfig.data = {
+      themeClass: "grayWhite",
+      dialogTheme: "lightGrayWhiteTheme",
+      curStore: this._curStore
+    };
+    // dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
+    dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
   }
 
   editTab(cTab: HomeTab) {

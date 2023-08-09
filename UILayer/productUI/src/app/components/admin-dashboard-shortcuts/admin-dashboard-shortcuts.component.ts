@@ -13,19 +13,28 @@ export class AdminDashboardShortcutsComponent {
   searchText: string;
   constructor(public access: AccessService) {
     this.searchText = "";
-    this.tItems = [
-      { name: "NewUser", title: "Add New User", show: access.hasAccess('home.dashboard.user', 1), icon: "account_box", tabName: "Users" },
-      { name: "NewBrand", title: "Add New Brand", show: access.hasAccess('home.dashboard.brand', 1), icon: "dashboard", tabName: "Brands Profile" },
-      { name: "NewVendor", title: "Add New Vendor", show: access.hasAccess('home.dashboard.vendor', 1), icon: "extension", tabName: "Vendors" },
-      { name: "NewDropdown", title: "Add Dropdown", show: access.hasAccess('home.dashboard.managedropdown', 1), icon: "shopping_basket", tabName: "Manage Dropdowns" },
-      { name: "NewReport", title: "Add New Report", show: access.hasAccess('home.dashboard.report', 1), icon: "featured_play_list", tabName: "Users" },
-      { name: "NewTechnologyArea", title: "Add New Technology Area", show: access.hasAccess('home.dashboard.techarea', 1), icon: "settings_input_component", tabName: "Technology Areas" },
-      { name: "Setting", title: "Setting", show: access.hasAccess('home.dashboard.setting', 1), icon: "settings", tabName: "Users" },
-      { name: "NewFrenchise", title: "Add New Frenchise", show: access.hasAccess('home.dashboard.franchise', 1), icon: "account_circle", tabName: "Franchise" },
-      { name: "NewQuoteRequest", title: "Add Quote Request", show: access.hasAccess('home.dashboard.quoterequest', 1), icon: "event_note", tabName: "Quote Request Workflow Config" },
-      { name: "NewPO", title: "Add Purchase Order", show: access.hasAccess('home.dashboard.po', 1), icon: "event_note", tabName: "PO Workflow Config" },
-      // { name: "NewDummy", title: "Add NewDummy", show: true }
-    ];
+    this.tItems = []
+    if (access.hasAccess('home.configuration.users', 0))
+      this.tItems.push({ name: "NewUser", title: "Add New User", show: access.hasAccess('home.configuration.user', 1), icon: "account_box", tabName: "Users" });
+    if (access.hasAccess('home.configuration.Brands', 0))
+      this.tItems.push({ name: "NewBrand", title: "Add New Brand", show: access.hasAccess('home.configuration.brand', 1), icon: "dashboard", tabName: "Brands Profile" });
+    if (access.hasAccess('home.configuration.Vendors', 0))
+      this.tItems.push({ name: "NewVendor", title: "Add New Vendor", show: access.hasAccess('home.configuration.vendor', 1), icon: "extension", tabName: "Vendors" });
+    if (access.hasAccess('home.configuration.managedropdown', 0))
+      this.tItems.push({ name: "NewDropdown", title: "Add Dropdown", show: access.hasAccess('home.configuration.managedropdown', 1), icon: "shopping_basket", tabName: "Manage Dropdowns" });
+    if (access.hasAccess('home.configuration.report', 0))
+      this.tItems.push({ name: "NewReport", title: "Add New Report", show: access.hasAccess('home.configuration.report', 1), icon: "featured_play_list", tabName: "Users" });
+    if (access.hasAccess('home.configuration.Tech Components', 0))
+      this.tItems.push({ name: "NewTechnologyArea", title: "Add New Technology Area", show: access.hasAccess('home.configuration.techarea', 1), icon: "settings_input_component", tabName: "Technology Areas" });
+    if (access.hasAccess('home.configuration.setting', 0))
+      this.tItems.push({ name: "Setting", title: "Setting", show: access.hasAccess('home.configuration.setting', 1), icon: "settings", tabName: "Users" });
+    if (access.hasAccess('home.configuration.Franchises', 0))
+      this.tItems.push({ name: "NewFrenchise", title: "Add New Frenchise", show: access.hasAccess('home.configuration.franchise', 1), icon: "account_circle", tabName: "Franchise" });
+    if (access.hasAccess('home.configuration.quoterequest', 0))
+      this.tItems.push({ name: "NewQuoteRequest", title: "Add Quote Request", show: access.hasAccess('home.configuration.quoterequest', 1), icon: "event_note", tabName: "Quote Request Workflow Config" });
+    if (access.hasAccess('home.configuration.po', 0))
+      this.tItems.push({ name: "NewPO", title: "Add Purchase Order", show: access.hasAccess('home.configuration.po', 1), icon: "event_note", tabName: "PO Workflow Config" });
+    // { name: "NewDummy", title: "Add NewDummy", show: true }
   }
 
   ShortcutClick(type: any) {

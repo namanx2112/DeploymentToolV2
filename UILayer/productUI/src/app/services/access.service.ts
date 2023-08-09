@@ -6,15 +6,19 @@ import { AuthCodes } from '../interfaces/auth-request';
 })
 export class AccessService {
 
-  static userAccessList: any[];
+  static userAccessList: any[] = [];
+  restricted: string[];
   constructor() {
-
+    this.restricted = [
+      "home.sonic.project.deliverystatus", "home.sonic.project.documentstab"
+    ];
   }
 
 
 
   public hasAccess(path: string, code: AuthCodes) {
-    let tVal = true;
+    path = path.toLowerCase()
+    let tVal = (this.restricted.indexOf(path) > -1) ? false : true;
     var tAccess = this.getAccess(path);
     if (tAccess) {
       if (code == AuthCodes.Show)
@@ -27,7 +31,7 @@ export class AccessService {
 
   getAccess(path: string) {
     let tAccess = null;
-    if (typeof AccessService.userAccessList == 'undefined') {
+    if (typeof AccessService.userAccessList == 'undefined' || AccessService.userAccessList.length == 0) {
       let userAccessList = localStorage.getItem('userAccessList');
       if (typeof userAccessList != 'undefined' && userAccessList != null)
         AccessService.userAccessList = JSON.parse(atob(userAccessList));

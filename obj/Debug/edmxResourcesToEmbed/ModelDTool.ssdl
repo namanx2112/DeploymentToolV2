@@ -181,6 +181,18 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="aFunctionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tFunctionName" Type="nvarchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="tblNoteType">
+    <Key>
+      <PropertyRef Name="aNoteTypeID" />
+    </Key>
+    <Property Name="aNoteTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tNoteTypeName" Type="nvarchar" MaxLength="1000" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
+  </EntityType>
   <EntityType Name="tblOutgoingEmail">
     <Key>
       <PropertyRef Name="aOutgoingEmailID" />
@@ -350,6 +362,22 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dDateFor_nBackupStatus" Type="date" />
     <Property Name="dDateFor_nTempStatus" Type="date" />
   </EntityType>
+  <EntityType Name="tblProjectNote">
+    <Key>
+      <PropertyRef Name="aNoteID" />
+    </Key>
+    <Property Name="aNoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nProjectID" Type="int" />
+    <Property Name="nNoteType" Type="int" />
+    <Property Name="nStoreID" Type="int" />
+    <Property Name="tSource" Type="nvarchar" MaxLength="1000" />
+    <Property Name="tNoteDesc" Type="nvarchar(max)" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
+  </EntityType>
   <EntityType Name="tblProjectNotes">
     <Key>
       <PropertyRef Name="aNoteID" />
@@ -479,6 +507,8 @@ warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a pri
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
     <Property Name="nTemplateId" Type="int" />
+    <Property Name="tPDFData" Type="varchar(max)" />
+    <Property Name="tSentHtml" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="tblPurchaseOrderParts">
     <Key>
@@ -693,6 +723,7 @@ warning 6002: The table/view 'dtDB.dbo.tblTrace' does not have a primary key def
     <Property Name="bDeleted" Type="bit" />
     <Property Name="nUserTypeID" Type="int" />
     <Property Name="nStatus" Type="int" />
+    <Property Name="isFirstTime" Type="int" />
   </EntityType>
   <EntityType Name="tblUserAndUserTypeRel">
     <Key>
@@ -857,6 +888,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblDropdownModule" EntityType="Self.tblDropdownModule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNoteType" EntityType="Self.tblNoteType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOutgoingEmail" EntityType="Self.tblOutgoingEmail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOutgoingEmailAttachment" EntityType="Self.tblOutgoingEmailAttachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblParts" EntityType="Self.tblParts" Schema="dbo" store:Type="Tables" />
@@ -867,6 +899,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblProjectInstallation" EntityType="Self.tblProjectInstallation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectInteriorMenus" EntityType="Self.tblProjectInteriorMenus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectNetworking" EntityType="Self.tblProjectNetworking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectNote" EntityType="Self.tblProjectNote" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectNotes" EntityType="Self.tblProjectNotes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectPaymentSystem" EntityType="Self.tblProjectPaymentSystem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectPOS" EntityType="Self.tblProjectPOS" Schema="dbo" store:Type="Tables" />

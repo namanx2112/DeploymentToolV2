@@ -3,8 +3,8 @@
     <h4 class="projHeader">Store - {{_curStore.tStoreNumber}}</h4>
 </div>
 <div class="tabHeader">
-    <a (click)="changeTab('Active')" [ngClass]="tabName == 'Active' ? 'active' : ''">Active Projects</a>
-    <a (click)="changeTab('Historical')" [ngClass]="tabName != 'Active' ? 'active' : ''">Historical Projects</a>
+    <a (click)="changeTab('Active')" [ngClass]="tabName == 'Active' ? 'active' : ''" *ngIf="access.hasAccess('home.sonic.project.activeproject', 0)">Active Projects</a>
+    <a (click)="changeTab('Historical')" [ngClass]="tabName != 'Active' ? 'active' : ''" *ngIf="access.hasAccess('home.sonic.project.historicproject', 0)">Historical Projects</a>
 </div>
 <div class="tabBody">
     <div class="projectView">

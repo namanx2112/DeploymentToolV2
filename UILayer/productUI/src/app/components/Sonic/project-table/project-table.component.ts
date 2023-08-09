@@ -1,6 +1,7 @@
 import { Input, Component, EventEmitter, Output } from '@angular/core';
 import { HomeTab, TabInstanceType } from 'src/app/interfaces/home-tab';
 import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { AccessService } from 'src/app/services/access.service';
 import { SonicService } from 'src/app/services/sonic.service';
 
 @Component({
@@ -29,7 +30,7 @@ export class ProjectTableComponent {
   curProj: HomeTab;
   historProj: HomeTab;
   tableCondition: any;
-  constructor(private service: SonicService) {
+  constructor(private service: SonicService, public access: AccessService) {
     this.curProj = this.service.GetProjectsTab(TabInstanceType.Table);
     this.curProj.tab_header = "Active Projects";
     this.historProj = this.service.GetHistoricalProjectsTab(TabInstanceType.Table);
