@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { OptionType } from 'src/app/interfaces/home-tab';
 import { StoreSearchModel } from 'src/app/interfaces/sonic';
 import { AccessService } from 'src/app/services/access.service';
@@ -10,6 +10,13 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./sonic-home-page.component.css']
 })
 export class SonicHomePageComponent {
+  @Input()
+  set openStore(val: StoreSearchModel) {
+    if (val) {
+      this.curStore = val;
+      this.showMode = "storeview";
+    }
+  }
   showMode: string;
   curStore: StoreSearchModel;
   ProjectTypes: OptionType[];
@@ -48,7 +55,7 @@ export class SonicHomePageComponent {
     this.showMode = view;
   }
 
-  ChangeFromStoreView(param: any){    
+  ChangeFromStoreView(param: any) {
     this.curStore = param.curStore;
     this.showMode = param.view;
   }

@@ -24,7 +24,7 @@
             <div class="toolBar floatLeft">
                 <span *ngIf="access.hasAccess('home.dashboard', 0)" [class]="tTabName == 'Dashboard' ? 'action selected' : 'action'" title="Dashboard" (click)="switchView('Dashboard')"><mat-icon>home</mat-icon><span></span></span>
                 <span *ngIf="access.hasAccess('home.configuration', 0)" [class]="tTabName == 'Configurations' ? 'action selected' : 'action'" title="Configurations" (click)="switchView('Configurations')"><mat-icon>insert_chart</mat-icon><span></span></span>
-                <span *ngIf="access.hasAccess('home.notification', 0)" [class]="tTabName == 'Notifications' ? 'action selected' : 'action'" title="Notifications" (click)="switchView('Notifications')"><mat-icon>notifications_none</mat-icon><span></span></span>
+                <span *ngIf="access.hasAccess('home.notification', 0)" [class]="tTabName == 'Notifications' ? 'action selected' : 'action'" title="Notifications" (click)="switchView('notifications')"><mat-icon>notifications_none</mat-icon><span></span></span>
                 <span *ngIf="access.hasAccess('home.mail', 0)" [class]="tTabName == 'Mails' ? 'action selected' : 'action'" title="Mails" (click)="switchView('Mails')"><mat-icon>email</mat-icon><span></span></span>
                 <span *ngIf="access.hasAccess('home.find', 0)" [class]="tTabName == 'Find' ? 'action selected' : 'action'" title="Find" (click)="switchView('Find')"><mat-icon>find_in_page</mat-icon><span></span></span>                                                
                 <span *ngIf="access.hasAccess('home.list', 0)" [class]="tTabName == 'List' ? 'action selected' : 'action'" title="List" (click)="switchView('List')"><mat-icon>list</mat-icon><span></span></span>                
@@ -48,10 +48,11 @@
                 </div>
             </div>
             <div class="mainBody floatLeft">
-                <app-home-dashboard (brandClicked)="brandClicked($event);" *ngIf="viewName=='Dashboard'"></app-home-dashboard>
+                <app-home-dashboard (changeView)="changeViewFromDashboard($event);" *ngIf="viewName=='Dashboard'"></app-home-dashboard>
                 <app-admin-config *ngIf="viewName=='Configurations'"></app-admin-config>
-                <app-not-implemented *ngIf="viewName!='Dashboard' && viewName!='Configurations' && viewName.toLowerCase().indexOf('sonic') == -1"></app-not-implemented>
-                <app-sonic-home-page *ngIf="viewName.toLowerCase().indexOf('sonic') > -1"></app-sonic-home-page>
+                <app-not-implemented *ngIf="viewName!='Dashboard' && viewName!='notifications' && viewName!='Configurations' && viewName.toLowerCase().indexOf('sonic') == -1"></app-not-implemented>
+                <app-sonic-home-page *ngIf="viewName.toLowerCase().indexOf('sonic') > -1" [openStore]="directStore"></app-sonic-home-page>
+                <app-notification *ngIf="viewName.toLowerCase().indexOf('notifications') > -1" [fullView]="true" (openStore)="openStoreFromNotification($event)"></app-notification>
             </div>
         </div>
     </div>

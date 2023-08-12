@@ -76,6 +76,7 @@ import { DateChangeRevisedPOComponent } from './components/Sonic/date-change-rev
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ProjectPortfolioCellComponent } from './components/Sonic/project-portfolio-cell/project-portfolio-cell.component';
 import { ReportTableComponent } from './components/report-table/report-table.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
     declarations: [
@@ -130,7 +131,8 @@ import { ReportTableComponent } from './components/report-table/report-table.com
         DateChangeRevisedPOComponent,
         ForgetPasswordComponent,
         ProjectPortfolioCellComponent,
-        ReportTableComponent
+        ReportTableComponent,
+        NotificationComponent
     ],
     providers: [
         {

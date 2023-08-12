@@ -12,6 +12,14 @@
     overflow: auto;
 }
 
+.chipButton{
+    text-decoration: underline;
+    float: right;
+    font-size: 15px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
 .chips {
     min-height: 50px;
     width: calc(100% - 40px);

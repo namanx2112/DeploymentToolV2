@@ -358,12 +358,16 @@ BEGIN
 END
 
 GO
+sp_tables '%log%'
+select * from tblApplicationTrace order by 1 desc
+sproc_CopyTechnologyToCurrentProject
 
 select * from tblProjectNotes
 update tblProjectNotes set nNoteType = 108
 select * from tblDropdownMain where tModuleName like '%note%'
 
 select * from tblProjectConfig where nStoreID = 1
+update tblProjectConfig set nProjectId = 15 where aProjectConfigID = 18
 select * from tblProjectStakeHolders where nStoreID = 1
 
 update tblProjectConfig set nMyActiveStatus =1 where aProjectConfigID = 11

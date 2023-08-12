@@ -1,0 +1,31 @@
+<div *ngIf="fullView" class="outerDiv">
+    <h3>Notification</h3>
+    <div class="filterButton"><button>All</button><button>Unread</button></div>
+    <div class="nTable lightGray">
+        <h5>New</h5>
+        <div *ngFor="let item of news" class="nItem">
+            <span class="icon" (click)="readMe(item)" title="Click to read"><mat-icon>{{item.tIcon}}</mat-icon></span>
+            <div class="nBody">
+                <div class="bodyText">{{item.tNotification}}</div>
+                <span class="nTime">{{getTime(item.dCreatedOn)}}</span>
+            </div>
+        </div>
+        <h5>Earlier</h5>
+        <div *ngFor="let item of news" class="nItem">
+            <span class="icon" (click)="readMe(item)" title="Click to read"><mat-icon>{{item.tIcon}}</mat-icon></span>
+            <div class="nBody">
+                <div class="bodyText">{{item.tNotification}}</div>
+                <span class="nTime">{{getTime(item.dCreatedOn)}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!fullView">
+    <div *ngFor="let item of firstFew" class="nItem">
+        <span class="icon" (click)="readMe(item)" title="Click to read"><mat-icon>{{item.tIcon}}</mat-icon></span>
+        <div class="nBody">
+            <div class="bodyText">{{item.tNotification}}</div>
+            <a *ngFor="let inst of item.relatedInstances" (click)="openItem(inst)" class="clickable">{{inst}}, </a>
+        </div>
+    </div>
+</div>

@@ -965,6 +965,7 @@
     <Compile Include="Controller\FranchiseController.cs" />
     <Compile Include="Controller\MyApiContext.cs" />
     <Compile Include="Controller\NotesController.cs" />
+    <Compile Include="Controller\NotificationsController.cs" />
     <Compile Include="Controller\ProjectAudiosController.cs" />
     <Compile Include="Controller\ProjectConfigsController.cs" />
     <Compile Include="Controller\ProjectExteriorMenusController.cs" />
@@ -1031,6 +1032,7 @@
     <Compile Include="Model\HistoricalProjectModel.cs" />
     <Compile Include="Model\MyApiContext.cs" />
     <Compile Include="Model\NewProjectStore.cs" />
+    <Compile Include="Model\Notifications.cs" />
     <Compile Include="Model\Params.cs" />
     <Compile Include="Model\Project.cs" />
     <Compile Include="Model\ProjectComponent.cs" />

@@ -19,8 +19,10 @@
 </div>
 <div class="rightPart floatLeft">
     <div class="chips" *ngIf="access.hasAccess('home.dashboard.notification', 0)">
-        <div class="chipsHeader">Notifications</div>
-        <div class="chipsBody"></div>
+        <div class="chipsHeader">Notifications <a (click)="showNotification()" class="chipButton">See all</a></div>
+        <div class="chipsBody">
+            <app-notification [fullView]="false" (openStore)="openStoreFromNotification($event)"></app-notification>
+        </div>
     </div>
     <div class="chips" *ngIf="access.hasAccess('home.dashboard.request', 0)">
         <div class="chipsHeader">Pending Requests</div>

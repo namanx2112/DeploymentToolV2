@@ -12,7 +12,7 @@ import { HomeService } from 'src/app/services/home.service';
 })
 export class HomeDashboardComponent {
   brands: BrandModel[];
-  @Output() brandClicked = new EventEmitter<BrandModel>()
+  @Output() changeView = new EventEmitter<any>();
   constructor(private homeService: HomeService, public access: AccessService, private commonService: CommonService) {
     this.getBrands();
   }
@@ -35,8 +35,8 @@ export class HomeDashboardComponent {
     //   dtUpdatedOn: null,
     //   tIconURL: ''
     // }
-    let cThis= this;
-    this.commonService.getBrands(function(resp: any){
+    let cThis = this;
+    this.commonService.getBrands(function (resp: any) {
       cThis.brands = resp;
       cThis.updateIconsTemp();
     });
@@ -47,7 +47,15 @@ export class HomeDashboardComponent {
   }
 
   showBrand(brand: BrandModel) {
-    this.brandClicked.emit(brand);
+    this.changeView.emit(brand.tBrandName);
+  }
+
+  showNotification() {
+    this.changeView.emit({ view: "notifications", instance: null });
+  }
+
+  openStoreFromNotification(item: any) {
+    this.changeView.emit({ view: "sonic", instance: item });
   }
 
   updateIconsTemp() {

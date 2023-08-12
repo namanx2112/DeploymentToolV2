@@ -10,6 +10,7 @@ import { AccessService } from 'src/app/services/access.service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { NotImplementedComponent } from '../not-implemented/not-implemented.component';
 import { TicketViewComponent } from '../ticket-view/ticket-view.component';
+import { StoreSearchModel } from 'src/app/interfaces/sonic';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent {
   viewName: string;
   tTabName: string;
   userName: string;
+  directStore: StoreSearchModel;
   constructor(private homeService: HomeService, private commonService: CommonService, private authService: AuthService, private dialog: MatDialog, public access: AccessService) {
     this.viewName = "Dashboard";
     this.tTabName = "Dashboard";
@@ -36,13 +38,24 @@ export class HomeComponent {
     });
   }
 
+  openStoreFromNotification(item: any) {
+    this.directStore = item;
+  }
+
   switchView(vName: string) {
     this.viewName = vName;
     this.tTabName = vName;
   }
 
-  brandClicked(brand: BrandModel) {
-    this.viewName = brand.tBrandName;
+  changeViewFromDashboard(item: any) {
+    if (item.view == "sonic") {
+      this.directStore = item.instance;
+    }
+    this.viewName = item.view;
+  }
+
+  changeView(vName: string) {
+    this.viewName = vName;
   }
 
   LogOut() {
@@ -70,7 +83,7 @@ export class HomeComponent {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '50%';
     dialogConfig.data = {
-      title: (typeof title == "undefined") ? "Change Password": title,
+      title: (typeof title == "undefined") ? "Change Password" : title,
       onChange: function () {
         dialogRef.close();
       },
