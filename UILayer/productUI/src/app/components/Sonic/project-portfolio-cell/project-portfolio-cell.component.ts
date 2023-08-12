@@ -25,4 +25,12 @@ export class ProjectPortfolioCellComponent {
     }
     return rVal;
   }
+
+  getDateClass(val: string) {
+    return "redColor";
+  }
+
+  getStatusClass(val: string) {
+    return "greenColor";
+  }
 }

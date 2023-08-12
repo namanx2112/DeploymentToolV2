@@ -39,7 +39,7 @@ namespace DeploymentTool.Controller
                     SqlParameter tModuleNameParam = new SqlParameter("@nStoreId", nStoreId);
                     SqlParameter tModuleTech = new SqlParameter("@tTechnologyTableName", "tblProjectStakeHolders");
                     items = db.Database.SqlQuery<tblProjectStakeHolder>("exec sproc_getTechnologyData @nStoreId,@tTechnologyTableName", tModuleNameParam, tModuleTech).AsQueryable();
-                    
+
                 }
             }
             catch (Exception ex) { }
@@ -65,9 +65,11 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> update(tblProjectStakeHolder tblProjectStakeHolder)
         {
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectStakeHolder.nStoreId, tblProjectStakeHolder);
             db.Entry(tblProjectStakeHolder).State = EntityState.Modified;
-
+            if (tblProjectStakeHolder.nProjectID == null || tblProjectStakeHolder.nProjectID == 0)// Special handling since it can be for individual project
+            {
+                Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectStakeHolder.nStoreId, tblProjectStakeHolder);
+            }
             try
             {
                 await db.SaveChangesAsync();
@@ -92,10 +94,12 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectStakeHolder))]
         public async Task<IHttpActionResult> Create(tblProjectStakeHolder request)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", request.nStoreId));
-
+            if (request.nProjectID == null || request.nProjectID == 0)// Special handling since it can be for individual project
+            {
+                var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", request.nStoreId));
+                Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, request.nStoreId, request);
+            }
             request.aProjectStakeHolderID = 0;
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, request.nStoreId, request);
             db.tblProjectStakeHolders.Add(request);
             await db.SaveChangesAsync();
             return Json(request);

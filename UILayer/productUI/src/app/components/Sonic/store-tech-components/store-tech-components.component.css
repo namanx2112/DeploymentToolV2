@@ -215,9 +215,17 @@
 .fullView {
     display: flex !important;
     flex-wrap: wrap;
-    justify-content: space-between;
-    flex-direction: row;
+    justify-content: center;
+    padding: 5px 0;
 }
+
+.fullView::before {
+    content: "";
+  }
+  
+.fullView::after {
+    content: "";
+  }
 
 .fullView .tHeader {
     width: calc(100% - 2px);
@@ -239,5 +247,5 @@
 .fullTab {
     width: 400px;
     border-radius: 10px;
-    margin: 15px 0px 8px 0px;
+    margin: 15px;
 }

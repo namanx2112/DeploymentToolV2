@@ -14,6 +14,7 @@ import { SonicService } from 'src/app/services/sonic.service';
 export class SonicDashboardComponent {
   projects: SonicProjectHighlights[];
   @Output() SearchedResult = new EventEmitter<string>();
+  @Output() ChangeView = new EventEmitter<string>();
   constructor(private service: SonicService, public access: AccessService) {
     this.getProjectHoghlights();
   }
@@ -26,6 +27,10 @@ export class SonicDashboardComponent {
     this.service.GetProjecthighlights().subscribe((resp: SonicProjectHighlights[]) => {
       this.projects = resp;
     });
+  }
+
+  showReport(cur: SonicProjectHighlights) {
+    this.ChangeView.emit("viewreport");
   }
 
   storeSelect(evt: any) {

@@ -27,6 +27,8 @@ namespace DeploymentTool.Model
         public DateTime dtGoliveDate { get; set; }
         public string tProjectManager { get; set; }
         public string tProjectType { get; set; }
+        public string tFranchise { get; set; }
+        public decimal cCost { get; set; }
     }
 
     public class ProjectPortfolioItems

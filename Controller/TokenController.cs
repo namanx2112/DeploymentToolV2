@@ -2,7 +2,6 @@
 using DeploymentTool.Misc;
 using DeploymentTool.Model;
 using Newtonsoft.Json;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;

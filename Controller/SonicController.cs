@@ -193,7 +193,7 @@ namespace DeploymentTool.Controller
                 }
 
                 // Update Config Data
-                db.Database.ExecuteSqlCommand("update tblProjectConfig set nProjectID=@nProjectId where nStoreId =@nStoreId", new SqlParameter("@nProjectId", tProjectModel.aProjectID), new SqlParameter("@nStoreId", newStore.aStoreId));
+                db.Database.ExecuteSqlCommand("exec sproc_copyProjectsConfig @nStoreId, @nProjectId", new SqlParameter("@nProjectId", tProjectModel.aProjectID), new SqlParameter("@nStoreId", newStore.aStoreId));
                 if (newStore.tStakeHolder != null)// Add stakeholder data to get it copied
                 {
                     db.Database.ExecuteSqlCommand("update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", newStore.aStoreId));

@@ -38,7 +38,7 @@ namespace DeploymentTool.Controller
                     SqlParameter tModuleNameParam = new SqlParameter("@nStoreId", nStoreId);
                     SqlParameter tModuleTech = new SqlParameter("@tTechnologyTableName", "tblProjectConfig");
                     items = db.Database.SqlQuery<tblProjectConfig>("exec sproc_getTechnologyData @nStoreId,@tTechnologyTableName", tModuleNameParam, tModuleTech).AsQueryable();
-                   // return items;
+                    // return items;
                 }
             }
             catch (Exception ex) { }
@@ -65,10 +65,12 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectConfig tblProjectConfig)
         {
-           
 
             db.Entry(tblProjectConfig).State = EntityState.Modified;
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectConfig.nStoreId, tblProjectConfig);
+            if (tblProjectConfig.nProjectID == null || tblProjectConfig.nProjectID == 0)// Special handling since it can be for individual project
+            {
+                Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectConfig.nStoreId, tblProjectConfig);
+            }
             try
             {
                 await db.SaveChangesAsync();
@@ -93,11 +95,13 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(tblProjectConfig))]
         public async Task<IHttpActionResult> Create(tblProjectConfig tblProjectConfig)
         {
-           
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectConfig set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectConfig.nStoreId));
+            if (tblProjectConfig.nProjectID == null || tblProjectConfig.nProjectID == 0)// Special handling since it can be for individual project
+            {
+                var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectConfig set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectConfig.nStoreId));
+                Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectConfig.nStoreId, tblProjectConfig);
+            }
             //tblProjectConfig.ProjectActiveStatus = 1;SantoshPP
-            tblProjectConfig.aProjectConfigID = 0;
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectConfig.nStoreId, tblProjectConfig);
+            tblProjectConfig.aProjectConfigID = 0;            
             db.tblProjectConfigs.Add(tblProjectConfig);
             await db.SaveChangesAsync();
             return Json(tblProjectConfig);

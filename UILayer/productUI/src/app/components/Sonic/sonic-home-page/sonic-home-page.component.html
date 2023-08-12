@@ -33,7 +33,8 @@
         <span [ngClass]="drawer.opened ? 'toggleIcon opened' : 'toggleIcon'" (click)="drawer.toggle()">
             <mat-icon>play_arrow</mat-icon>
         </span>
-        <app-sonic-dashboard *ngIf="showMode == 'dashboard'" (SearchedResult)="SearchedResult($event)"></app-sonic-dashboard>
+        <app-sonic-dashboard *ngIf="showMode == 'dashboard'" (ChangeView)="ChangeView($event)" (SearchedResult)="SearchedResult($event)"></app-sonic-dashboard>
+        <app-report-table *ngIf="showMode == 'viewreport'"></app-report-table>
         <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)" [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-store>
         <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)" [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-project>
         <app-store-view *ngIf="showMode == 'storeview'" (ChangeFromStoreView)="ChangeFromStoreView($event)" [curStore]="curStore"></app-store-view>
@@ -49,6 +50,6 @@
 
         <app-not-implemented *ngIf="showMode != 'Project Portfolio' && showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'menuinstallation' && 
         showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && 
-        showMode != 'newstore' && showMode != 'dashboard' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
+        showMode != 'newstore' && showMode != 'dashboard' && showMode != 'viewreport' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
     </div>
 </mat-drawer-container>

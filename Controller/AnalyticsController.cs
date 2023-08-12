@@ -29,7 +29,9 @@ namespace DeploymentTool.Controller
                         tStoreDetails = "2455- Austin TX",
                         dtGoliveDate = DateTime.Now.AddDays(-33),
                         tProjectManager = "Bruce Wayne",
-                        tProjectType = "Remodel"
+                        tProjectType = "Remodel",
+                        cCost = 650.55M,
+                        tFranchise = "ARD LLC"
                     },
                     networking = new ProjectPortfolioItems()
                     {
@@ -135,7 +137,9 @@ namespace DeploymentTool.Controller
                         tStoreDetails = "2455- Austin TX",
                         dtGoliveDate = DateTime.Now.AddDays(-33),
                         tProjectManager = "Bruce Wayne",
-                        tProjectType = "Remodel"
+                        tProjectType = "Remodel",
+                        cCost = 650.55M,
+                        tFranchise = "ARD LLC"
                     },
                     networking = new ProjectPortfolioItems()
                     {
@@ -191,7 +195,9 @@ namespace DeploymentTool.Controller
                         tStoreDetails = "2455- Austin TX",
                         dtGoliveDate = DateTime.Now.AddDays(-33),
                         tProjectManager = "Bruce Wayne",
-                        tProjectType = "Remodel"
+                        tProjectType = "New",
+                        cCost = 1650.55M,
+                        tFranchise = "ARD LLC"
                     },
                     networking = new ProjectPortfolioItems()
                     {
@@ -247,7 +253,9 @@ namespace DeploymentTool.Controller
                         tStoreDetails = "2455- Austin TX",
                         dtGoliveDate = DateTime.Now.AddDays(-33),
                         tProjectManager = "Bruce Wayne",
-                        tProjectType = "Remodel"
+                        tProjectType = "Rebuild",
+                        cCost = 6250.55M,
+                        tFranchise = "ARD LLC"
                     },
                     networking = new ProjectPortfolioItems()
                     {
@@ -303,7 +311,9 @@ namespace DeploymentTool.Controller
                         tStoreDetails = "2455- Austin TX",
                         dtGoliveDate = DateTime.Now.AddDays(-33),
                         tProjectManager = "Bruce Wayne",
-                        tProjectType = "Remodel"
+                        tProjectType = "Audio",
+                        cCost = 650.55M,
+                        tFranchise = "ARD LLC"
                     },
                     networking = new ProjectPortfolioItems()
                     {
@@ -357,5 +367,59 @@ namespace DeploymentTool.Controller
             };
 
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/Store/GetReport")]
+        public HttpResponseMessage GetReport(int reportId)
+        {
+            ReportModel reportModel = new ReportModel()
+            {
+                titles = new List<string>() {
+                    "Store Number", "Status","Franchise", "Delivery Date"
+                },
+                headers = new List<string>()
+                {
+                    "tStoreNumber",
+                    "tStatus",
+                    "tFranchise",
+                    "dDeliveryDate"
+                },
+                data = new List<Dictionary<string, string>>()
+                {
+                    new Dictionary<string, string>(){
+                    { "tStoreNumber" , "111" },
+                    {"tStatus", "Completed" },
+                    {"tFranchise", "Bruce Banner" },
+                    {"dDeliveryDate", DateTime.Now.ToString() }
+                },new Dictionary<string, string>(){
+                    { "tStoreNumber" , "222" },
+                    {"tStatus", "Completed" },
+                    {"tFranchise", "Bruce Banner" },
+                    {"dDeliveryDate", DateTime.Now.ToString() }
+                },new Dictionary<string, string>(){
+                    { "tStoreNumber" , "2321" },
+                    {"tStatus", "Completed" },
+                    {"tFranchise", "Bruce Banner" },
+                    {"dDeliveryDate", DateTime.Now.ToString() }
+                },new Dictionary<string, string>(){
+                    { "tStoreNumber" , "434" },
+                    {"tStatus", "Completed" },
+                    {"tFranchise", "Bruce Banner" },
+                    {"dDeliveryDate", DateTime.Now.ToString() }
+                },new Dictionary<string, string>(){
+                    { "tStoreNumber" , "423432" },
+                    {"tStatus", "Completed" },
+                    {"tFranchise", "Bruce Banner" },
+                    {"dDeliveryDate", DateTime.Now.ToString() }
+                }
+                }
+            };
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<ReportModel>(reportModel, new JsonMediaTypeFormatter())
+            };
+        }
     }
+
 }

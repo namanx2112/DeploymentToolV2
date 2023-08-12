@@ -1,6 +1,9 @@
 ﻿using DeploymentTool.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,76 +19,112 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public List<tblProjectNote> Get(Dictionary<string, string> searchFields)
         {
-            int nPojectId = (searchFields != null && searchFields.ContainsKey("nPojectId")) ? Convert.ToInt32(searchFields["nPojectId"]) : 0;
-            List<tblProjectNote> notes = new List<tblProjectNote>()
-            {
-                new tblProjectNote()
-                {
-                    aNoteID = 1,
-                    nProjectID = 1,
-                    nNoteType = 109,
-                    nStoreID = 1,
-                    tNoteDesc = "Test Notes",
-                    tSource = "Fron dummy",
-                    dtCreatedOn = DateTime.Now,
-                    nCreatedBy = 1
-                },
-                new tblProjectNote()
-                {
-                    aNoteID = 1,
-                    nProjectID = 1,
-                    nNoteType = 109,
-                    nStoreID = 1,
-                    tNoteDesc = "Test Notes",
-                    tSource = "Fron dummy",
-                    dtCreatedOn = DateTime.Now,
-                    nCreatedBy = 1
-                },
-                new tblProjectNote()
-                {
-                    aNoteID = 1,
-                    nProjectID = 1,
-                    nNoteType = 108,
-                    nStoreID = 1,
-                    tNoteDesc = "Test Notes",
-                    tSource = "Fron dummy",
-                    dtCreatedOn = DateTime.Now,
-                    nCreatedBy = 1
-                },
-                new tblProjectNote()
-                {
-                    aNoteID = 1,
-                    nProjectID = 1,
-                    nNoteType = 109,
-                    nStoreID = 1,
-                    tNoteDesc = "Test Notes",
-                    tSource = "Fron dummy",
-                    dtCreatedOn = DateTime.Now,
-                    nCreatedBy = 1
-                }
-            };
+            int nProjectID = searchFields.ContainsKey("nProjectID") ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            int nStoreId = searchFields.ContainsKey("nStoreId") ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
+
+            List<tblProjectNote> notes = db.Database.SqlQuery<tblProjectNote>("exec sproc_GetNotes @nStoreId,@nProjectID", new SqlParameter("@nStoreId", nStoreId), new SqlParameter("@nProjectID", nProjectID)).ToList();
+
+            //List<tblProjectNote> notes = new List<tblProjectNote>()
+            //{
+            //    new tblProjectNote()
+            //    {
+            //        aNoteID = 1,
+            //        nProjectID = 1,
+            //        nNoteType = 1,
+            //        nStoreID = 1,
+            //        tNoteDesc = "Test Notes",
+            //        tSource = "Fron dummy",
+            //        dtCreatedOn = DateTime.Now,
+            //        nCreatedBy = 1
+            //    },
+            //    new tblProjectNote()
+            //    {
+            //        aNoteID = 1,
+            //        nProjectID = 1,
+            //        nNoteType = 1,
+            //        nStoreID = 1,
+            //        tNoteDesc = "Test Notes",
+            //        tSource = "Fron dummy",
+            //        dtCreatedOn = DateTime.Now,
+            //        nCreatedBy = 1
+            //    },
+            //    new tblProjectNote()
+            //    {
+            //        aNoteID = 1,
+            //        nProjectID = 1,
+            //        nNoteType = 1,
+            //        nStoreID = 1,
+            //        tNoteDesc = "Test Notes",
+            //        tSource = "Fron dummy",
+            //        dtCreatedOn = DateTime.Now,
+            //        nCreatedBy = 1
+            //    },
+            //    new tblProjectNote()
+            //    {
+            //        aNoteID = 1,
+            //        nProjectID = 1,
+            //        nNoteType = 1,
+            //        nStoreID = 1,
+            //        tNoteDesc = "Test Notes",
+            //        tSource = "Fron dummy",
+            //        dtCreatedOn = DateTime.Now,
+            //        nCreatedBy = 1
+            //    }
+            //};
             return notes;
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Update(tblProject userRequest)
+        public async Task<IHttpActionResult> Update(tblProjectNote noteRequest)
         {
-            return Json(userRequest);
+            db.Entry(noteRequest).State = EntityState.Modified;
+            noteRequest.dtUpdatedOn = DateTime.Now;
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                //if (!db.tblProjectNotes.con(noteRequest.aNoteID))
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
+                    throw;
+                //}
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Create(tblProject userRequest)
+        public async Task<IHttpActionResult> Create(tblProjectNote noteRequest)
         {
-            return Json(userRequest);
+            noteRequest.aNoteID = 0;
+            noteRequest.dtCreatedOn = DateTime.Now;
+            db.tblProjectNotes.Add(noteRequest);
+            await db.SaveChangesAsync();
+            return Json(noteRequest);
         }
 
         [Authorize]
         [HttpGet]
         public async Task<IHttpActionResult> Delete(int id)
         {
-            return Json(new tblProjectNote());
+            tblProjectNote tblNote = await db.tblProjectNotes.FindAsync(id);
+            if (tblNote == null)
+            {
+                return NotFound();
+            }
+
+            db.tblProjectNotes.Remove(tblNote);
+            await db.SaveChangesAsync();
+
+            return Ok(tblNote);
+            
         }
     }
 }

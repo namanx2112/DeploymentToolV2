@@ -51,6 +51,17 @@ namespace DeploymentTool.Model
         public bool isSelected { get; set; }
     }
 
+    public class TechData
+    {
+        public bool isSelected { get; set; }
+        public string tComponent { get; set; }
+        public string tVendor { get; set; }
+        public Nullable<DateTime> dDeliveryDate { get; set; }
+        public Nullable<DateTime> dInstallDate { get; set; }
+        public Nullable<DateTime> dConfigDate { get; set; }
+        public string tStatus { get; set; }
+
+    }
     public class DateChangeBody
     {
         public int nStoreId { get; set; }
@@ -74,6 +85,7 @@ namespace DeploymentTool.Model
         public int nPOId { get; set; }
         public string tPONumber { get; set; }
         public bool isSelected { get; set; }
+        public int aPurchaseOrderTemplateID { get; set; }
     }
 
     public class DocumentationTable
@@ -84,7 +96,43 @@ namespace DeploymentTool.Model
         public string tFileName { get; set; }
         public string tStoreNumber { get; set; }
         public string tSentBy { get; set; }
-        public DateTime dtCreatedOn { get; set; }
+        public Nullable<DateTime> dtCreatedOn { get; set; }
     }
+    public partial class tblPurchaseOrderNotification
+    {
+        public int aPurchaseOrderID { get; set; }
+        public string tPurchaseOrderNumber { get; set; }
+        public Nullable<int> nStoreID { get; set; }
+        public string tBillingName { get; set; }
+        public string tBillingPhone { get; set; }
+        public string tBillingEmail { get; set; }
+        public string tBillingAddress { get; set; }
+        public string tShippingName { get; set; }
+        public string tShippingPhone { get; set; }
+        public string tShippingEmail { get; set; }
+        public string tShippingAddress { get; set; }
+        public string tNotes { get; set; }
+        public Nullable<System.DateTime> dDeliver { get; set; }
+        public Nullable<decimal> cTotal { get; set; }
+        public Nullable<int> nOutgoingEmailID { get; set; }
+        public Nullable<int> nCreatedBy { get; set; }
+        public Nullable<int> nUpdateBy { get; set; }
+        public Nullable<System.DateTime> dtCreatedOn { get; set; }
+        public Nullable<System.DateTime> dtUpdatedOn { get; set; }
+        public Nullable<bool> bDeleted { get; set; }
+        public Nullable<int> nTemplateId { get; set; }
+        public string tPDFData { get; set; }
+        public string tTo { get; set; }
 
+        public string tSubject { get; set; }
+
+        public string tCC { get; set; }
+        public string tStoreNumber { get; set; }
+
+        public string tVendorName { get; set; }
+
+        public string tSentHtml { get; set; }
+
+        public string tProjectManager { get; set; }
+    }
 }

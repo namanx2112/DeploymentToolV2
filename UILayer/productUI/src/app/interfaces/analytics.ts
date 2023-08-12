@@ -19,7 +19,9 @@ export interface ProjectPortfolioStore{
     tStoreDetails: string,
     dtGoliveDate: Date,
     tProjectManager: string,
-    tProjectType: string
+    tProjectType: string,
+    cCost: number,
+    tFranchise: string
 }
 
 export interface ProjectPortfolioItems{
@@ -31,4 +33,10 @@ export interface ProjectPortfolioItems{
 export interface ProjectPorfolioNotes{
     tNotesOwner: string,
     tNotesDesc: string
+}
+
+export interface ReportModel{
+    titles: string[]
+    headers: string[],
+    data: any
 }

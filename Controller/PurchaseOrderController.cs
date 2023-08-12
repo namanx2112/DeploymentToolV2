@@ -380,28 +380,56 @@ namespace DeploymentTool.Controller
                 }
                 poRequest.cTotal = cTotal;
                 poRequest.purchaseOrderParts = obj;
+                var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+                Nullable<int> lUserId = securityContext.nUserID;
+                int ret = 0;
+                List<SqlParameter> tPramList = new List<SqlParameter>();
+                tPramList.Add(new SqlParameter("@nStoreId", nStoreId));
+                tPramList.Add(new SqlParameter("@nTemplateId", nTemplateId));
+                tPramList.Add(new SqlParameter("@nUserID", lUserId));
+                tPramList.Add(new SqlParameter("@ret", ret) { Direction = ParameterDirection.InputOutput });
+                db.Database.ExecuteSqlCommand("exec sproc_getPOID @nStoreId,@nTemplateId,@nUserID,@ret out", tPramList[0], tPramList[1], tPramList[2], tPramList[3]);
+                var aPurchaseOrderID = ((SqlParameter)tPramList[3]).Value == DBNull.Value ? 0 : Convert.ToInt32(((SqlParameter)tPramList[3]).Value);
 
-                tblPurchaseOrder tblPO = new tblPurchaseOrder()
-                {
-                    nTemplateId = poRequest.nTemplateId,
-                    nStoreID = Convert.ToInt32(poRequest.tStoreNumber),
-                    tBillingName = poRequest.tName,
-                    tBillingPhone = poRequest.tPhone,
-                    tBillingEmail = poRequest.tBillToEmail,
-                    tBillingAddress = poRequest.tBillToAddress,
-                    tShippingName = poRequest.tName,
-                    tShippingPhone = poRequest.tPhone,
-                    tShippingEmail = poRequest.tEmail,
-                    tShippingAddress = poRequest.tAddress,
-                    tNotes = poRequest.tNotes,
-                    dDeliver = poRequest.dDeliver,
-                    cTotal = poRequest.cTotal
+                //var aPurchaseOrderID = db.Database.ExecuteSqlCommand("exec @ret=sproc_getPOID @nStoreId, @nTemplateId, @nUserID ", new SqlParameter("@nStoreId", nStoreId), new SqlParameter("@nTemplateId", nTemplateId), new SqlParameter("@nUserID", lUserId), new SqlParameter("@ret", ret));
 
-                };
+                //var aPurchaseOrderID = db.Database.ExecuteSqlCommand("select top 1 aPurchaseOrderID from tblpurchaseOrder with (nolock) where nCreatedBy=@nUserID  order by 1 desc ", new SqlParameter("@nUserID", lUserId));
 
-                db.tblPurchaseOrders.Add(tblPO);
-                await db.SaveChangesAsync();
-                var aPurchaseOrderID = tblPO.aPurchaseOrderID;
+                //var nOutgoingEmailID = db.Database.ExecuteSqlCommand("select top 1 nOutgoingEmailID from tblpurchaseOrder with (nolock) where aPurchaseOrderID=@aPurchaseOrderID ", new SqlParameter("@aPurchaseOrderID", aPurchaseOrderID));
+                ////var aPurchaseOrderID = db.Database.SqlQuery<int>("select top 1 aPurchaseOrderID from tblpurchaseOrder with (nolock) where nCreatedBy=@nUserID  order by 1 desc ", new SqlParameter("@nUserID", lUserId)).FirstOrDefault();
+
+
+                ////var nOutgoingEmailID = db.Database.SqlQuery<int>("select top 1 nOutgoingEmailID from tblpurchaseOrder with (nolock) where aPurchaseOrderID=@aPurchaseOrderID ", new SqlParameter("@aPurchaseOrderID", aPurchaseOrderID)).FirstOrDefault();
+
+                //if (nOutgoingEmailID <1)
+                //{
+
+                //    tblPurchaseOrder tblPO = new tblPurchaseOrder()
+                //    {
+                //        nTemplateId = poRequest.nTemplateId,
+                //        nStoreID = Convert.ToInt32(poRequest.tStoreNumber),
+                //        tBillingName = poRequest.tName,
+                //        tBillingPhone = poRequest.tPhone,
+                //        tBillingEmail = poRequest.tBillToEmail,
+                //        tBillingAddress = poRequest.tBillToAddress,
+                //        tShippingName = poRequest.tName,
+                //        tShippingPhone = poRequest.tPhone,
+                //        tShippingEmail = poRequest.tEmail,
+                //        tShippingAddress = poRequest.tAddress,
+                //        tNotes = poRequest.tNotes,
+                //        dDeliver = poRequest.dDeliver,
+                //        cTotal = poRequest.cTotal,
+                //        nCreatedBy = lUserId,
+                //        dtCreatedOn = DateTime.Now
+
+                //    };
+
+                //    //DeploymentTool.Misc.Utilities.SetHousekeepingFields(true, HttpContext.Current, tblPO);
+                //    db.tblPurchaseOrders.Add(tblPO);
+                //    await db.SaveChangesAsync();
+                //    aPurchaseOrderID = tblPO.aPurchaseOrderID;
+                //}
+                
                 poRequest.aPurchaseOrderPreviewTeamplateID = aPurchaseOrderID;
 
 
@@ -467,27 +495,35 @@ namespace DeploymentTool.Controller
             strBody += "</tbody>";
             strBody += "</table></div>";
             strBody += "<div style='text-align:right;'><b> Total:</b> " + request.cTotal.ToString() + "</div>";
-            strBody += "<div style='text-align:right;'><b> PO#: </b> " + request.aPurchaseOrderPreviewTeamplateID.ToString() + "</div>";
-            strBody += "<div style='text-align:right;'><b> Deliver#: </b> " + request.dDeliver.ToShortDateString() + "</div>";
+            strBody += "<div style='text-align:right;'><b> PO#: </b> @@InspirePOID@@</div>";
+            strBody += "<div style='text-align:right;'><b> Deliver#: </b> @@InspiredDeliver@@</div>";
             strBody += "</body></html>";
+            string sPDFData = strBody + "@@Splitter@@" + request.aPurchaseOrderPreviewTeamplateID.ToString() + "@@Splitter@@" + request.dDeliver.ToShortDateString();
+            strBody = strBody.Replace("@@InspirePOID@@", request.aPurchaseOrderPreviewTeamplateID.ToString()).Replace("@@InspiredDeliver@@", request.dDeliver.ToShortDateString());
+            
+            
             string fileName = "PurchaseOrder.pdf";
             String strFilePath = DeploymentTool.Misc.Utilities.WriteHTMLToPDF(strBody, fileName);
             string strStyle = "<style>td{ border: 0px none!important;} " +
                     "table{ width: 60%!important;border: 1px solid lightgray!important;border-radius: 5px!important;}</style>";
+            string tContent = strStyle + "<div>All,</br></br>See attached purchase order, Please verify that you can meet the delivery date listed.</div>Thanks!" +
+                "<table>" +
+                "<tr><td>PO#:</td><td>@@InspirePOID@@</td></tr>" +
+                "<tr><td>Revision/Filename:</td><td>" + fileName + "</td></tr>" +
+                "<tr><td>Type:</td><td>@@InspiretVendorName@@</td></tr>" +
+                "<tr><td>Store:</td><td>@@InspiretStoreNumber@@</td></tr>" +
+                "<tr><td>Delivery:</td><td>@@InspiredDeliver@@ </td></tr>" +
+                "<tr><td>Project Manager:</td><td>@@InspiretProjectManager@@</td></tr>" +
+                "<table>";
+            
+            string sSentHtml = tContent + "@@Splitter@@" + request.aPurchaseOrderPreviewTeamplateID.ToString() + "@@Splitter@@" + request.tVendorName + "@@Splitter@@" + request.tStoreNumber + "@@Splitter@@" + request.dDeliver.ToShortDateString() + "@@Splitter@@" + request.tProjectManager;
+            tContent = tContent.Replace("@@InspirePOID@@", request.aPurchaseOrderPreviewTeamplateID.ToString()).Replace("@@InspiretVendorName@@", request.tVendorName).Replace("@@InspiretStoreNumber@@", request.tStoreNumber).Replace("@@InspiredDeliver@@", request.dDeliver.ToShortDateString()).Replace("@@InspiretProjectManager@@", request.tProjectManager);
             PurchaseOrderMailMessage message = new PurchaseOrderMailMessage()
             {
                 nProjectId = request.nProjectId,
                 tTo = request.tTo,
                 tCC = request.tCC,
-                tContent = strStyle + "<div>All,</br></br>See attached purchase order, Please verify that you can meet the delivery date listed.</div>Thanks!" +
-                "<table>" +
-                "<tr><td>PO#:</td><td>" + request.aPurchaseOrderPreviewTeamplateID + "</td></tr>" +
-                "<tr><td>Revision/Filename:</td><td>" + fileName + "</td></tr>" +
-                "<tr><td>Type:</td><td>" + request.tVendorName + "</td></tr>" +
-                "<tr><td>Store:</td><td>" + request.tStoreNumber + "</td></tr>" +
-                "<tr><td>Delivery:</td><td>" + request.dDeliver.ToShortDateString() + "</td></tr>" +
-                "<tr><td>Project Manager:</td><td>" + request.tProjectManager + "</td></tr>" +
-                "<table>",
+                tContent= tContent,
                 tFileName = fileName,
                 tSubject = request.tCity + ", " + request.tStoreState + " #" + request.tStoreNumber + " - " + request.tVendorName + " " + request.tTemplateName + " Purchase Order",
                 tMyFolderId = strFilePath,
@@ -495,11 +531,16 @@ namespace DeploymentTool.Controller
 
             };
 
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+           
             tblPurchaseOrder tblPO = new tblPurchaseOrder()
             {
                 aPurchaseOrderID = request.aPurchaseOrderPreviewTeamplateID,
                 nTemplateId = request.nTemplateId,
-                nStoreID = Convert.ToInt32(request.tStoreNumber),
+                nStoreID = request.nProjectId,
+               // tPurchaseOrderNumber = request.tStoreNumber,
                 tBillingName = request.tName,
                 tBillingPhone = request.tPhone,
                 tBillingEmail = request.tBillToEmail,
@@ -510,7 +551,11 @@ namespace DeploymentTool.Controller
                 tShippingAddress = request.tAddress,
                 tNotes = request.tNotes,
                 dDeliver = request.dDeliver,
-                cTotal = request.cTotal
+                cTotal = request.cTotal,
+                tPDFData= sPDFData,
+                tSentHtml = sSentHtml,
+                nCreatedBy = lUserId,
+                dtCreatedOn = DateTime.Now
 
             };
 

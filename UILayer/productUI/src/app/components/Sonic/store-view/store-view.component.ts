@@ -23,6 +23,7 @@ export class StoreViewComponent {
   @Input()
   public set curStore(value: StoreSearchModel) {
     this._curStore = value;
+    this.selectedProject = value.lstProjectsInfo[0];
     this.initTab();
   }
   allTabs: HomeTab[];
@@ -31,6 +32,7 @@ export class StoreViewComponent {
   selectedTab: number;
   viewName: string;
   @Output() ChangeFromStoreView = new EventEmitter<any>();
+  selectedProject: ProjectInfo;
   constructor(private service: SonicService, private dialog: MatDialog, private techCompService: AllTechnologyComponentsService, public access: AccessService) {
     this.viewName = "tabview";
   }
@@ -49,13 +51,23 @@ export class StoreViewComponent {
     }
   }
 
+  projectClick(tProject: ProjectInfo) {
+    this.selectedProject = tProject;
+    let configTab = this.allTabs.find(x => x.tab_type == TabType.StoreConfiguration);
+    let stackeTab = this.allTabs.find(x => x.tab_type == TabType.StoreStackHolder);
+    if (stackeTab && configTab) {
+      this.getValues(configTab);
+      this.getValues(stackeTab);
+    }
+  }
+
   projectTypeString(pType: number) {
     let pString = "";
     pString = CommonService.getProjectName(pType);
     return pString;
   }
 
-  getFormatedDate(dtString: any){
+  getFormatedDate(dtString: any) {
     return CommonService.getFormatedDateString(dtString);
   }
 
@@ -137,6 +149,7 @@ export class StoreViewComponent {
 
   getValues(tabType: HomeTab) {
     let searchField: Dictionary<string> = { "nStoreId": this._curStore.nStoreId.toString() };
+    let projIdSearchField: Dictionary<string> = { "nProjectID": this.selectedProject.nProjectId.toString() };
     switch (tabType.tab_type) {
       case TabType.StoreContact:
         this.techCompService.GetStoreContact(searchField).subscribe((x: StoreContact[]) => {
@@ -144,12 +157,12 @@ export class StoreViewComponent {
         });
         break;
       case TabType.StoreConfiguration:
-        this.techCompService.GetStoreConfig(searchField).subscribe((x: StoreConfiguration[]) => {
+        this.techCompService.GetStoreConfig(projIdSearchField).subscribe((x: StoreConfiguration[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
         break;
       case TabType.StoreStackHolder:
-        this.techCompService.GetStackholders(searchField).subscribe((x: StoreStackholders[]) => {
+        this.techCompService.GetStackholders(projIdSearchField).subscribe((x: StoreStackholders[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
         break;
@@ -254,7 +267,7 @@ export class StoreViewComponent {
       dialogTheme: "lightGrayWhiteTheme",
       curStore: this._curStore
     };
-     dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
+    dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
     //dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
   }
 
@@ -320,11 +333,14 @@ export class StoreViewComponent {
       case TabType.StoreConfiguration:
         let aProjectConfigID = (this.tValues[tab.tab_name]["aProjectConfigID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectConfigID"]) : 0;
         if (aProjectConfigID > 0) {
+          fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.UpdateStoreConfig(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
           });
         }
         else {
+          fieldValues["nProjectID"] = this.selectedProject.nProjectId;
+          fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.CreateStoreConfig(fieldValues).subscribe((x: any) => {
             callBack(x);
           });
@@ -333,11 +349,14 @@ export class StoreViewComponent {
       case TabType.StoreStackHolder:
         let aProjectStakeHolderID = (this.tValues[tab.tab_name]["aProjectStakeHolderID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectStakeHolderID"]) : 0;
         if (aProjectStakeHolderID > 0) {
+          fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.UpdateStackholders(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
           });
         }
         else {
+          fieldValues["nProjectID"] = this.selectedProject.nProjectId;
+          fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.CreateStackholders(fieldValues).subscribe((x: any) => {
             callBack(x);
           });

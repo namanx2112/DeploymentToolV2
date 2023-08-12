@@ -49,14 +49,40 @@
     margin-top: 60px;
 }
 
-.storeStatus {
+.storeProject {
     float: left;
-    padding: 10px;
     margin-right: 20px;
-    border-radius: 10px;
+}
+
+.storeProject div{
+    float: left;    
+    padding: 8px 0px 5px 8px;
+    border-radius: 10px 0px 0px 10px;
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
+    border-bottom: 4px solid chartreuse;
+    background-color: chartreuse;
+}
+
+.storeProject.selected div,.storeProject.selected button, .tileSelected{
+    border-bottom: 4px solid darkgrey;
+}
+
+.storeProject button{
+    margin: 0px!important;
+    border-radius: 0px 10px 10px 0px!important;
+    width: 25px;
+    height: 32px;
+    padding: 0px!important;
+    float: left;
+    background-color: chartreuse;
+    line-height: 1px;
+    border-bottom: 4px solid chartreuse;
+}
+
+.projTypeOnTabHeader{
+    font-size: 10px;
 }
 
 
@@ -78,6 +104,8 @@
     font-size: 14px;
     text-decoration: underline;
 }
+
+
 
 .projectInfoTabs{
     float: left;

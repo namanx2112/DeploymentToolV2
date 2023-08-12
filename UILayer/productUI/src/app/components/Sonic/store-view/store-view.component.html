@@ -4,15 +4,28 @@
         <h4 class="projHeader">Store - {{_curStore.tStoreNumber}}</h4>
         <button class="noBorderButton lightGray" (click)="moveView('projecttemplatelist')"
             *ngIf="access.hasAccess('home.sonic.project.workflows', 1)">Workflows</button>
-        <div class="projectInfoTabs" *ngIf="access.hasAccess('home.sonic.project.golive', 1)">
-            <span class="storeStatus" *ngFor="let tItem of _curStore.lstProjectsInfo" (click)="changeGoliveDate(tItem);"
-                title="Click to change Golive Date">{{projectTypeString(tItem.nProjectType)}} Store
-                {{getFormatedDate(tItem.dGoLiveDate)}}</span>
-        </div>
-        <div class="projectInfoTabs" *ngIf="!access.hasAccess('home.sonic.project.golive', 1)">
-            <span class="storeStatus"
-                *ngFor="let tItem of _curStore.lstProjectsInfo">{{projectTypeString(tItem.nProjectType)}} Store
-                {{getFormatedDate(tItem.dGoLiveDate)}}</span>
+        <div class="projectInfoTabs">
+            <div *ngFor="let tItem of _curStore.lstProjectsInfo"
+                [className]="(selectedProject.nProjectId == tItem.nProjectId)? 'storeProject selected': 'storeProject'"
+                title="Click to view this projects's details">
+                <div (click)="projectClick(tItem)"> {{projectTypeString(tItem.nProjectType)}} Store
+                    {{getFormatedDate(tItem.dGoLiveDate)}}
+                </div>
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButton">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="projectClick(tItem)">
+                        <mat-icon>open_in_new</mat-icon>
+                        <span>View Details</span>
+                    </button>
+                    <button mat-menu-item (click)="changeGoliveDate(tItem);"
+                        *ngIf="access.hasAccess('home.sonic.project.golive', 1)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Change Golive Date</span>
+                    </button>
+                </mat-menu>
+            </div>
         </div>
     </div>
     <div class="storeTiles" *ngIf="allTabs.length > 0">
@@ -26,8 +39,9 @@
                 [controlValues]="tValues[allTabs[0].tab_name]" [SubmitLabel]="'None'"
                 (onSubmit)="onSubmit($event, allTabs[0])" [themeClass]="'grayWhite'"></app-controls>
         </div>
-        <div class="fullTile">
-            <h4>{{allTabs[1].tab_header}}
+        <div class="fullTile tileSelected">
+            <h4>{{allTabs[1].tab_header}} <span class="projTypeOnTabHeader">{{ "(" +
+                    projectTypeString(selectedProject.nProjectType) + ")"}}</span>
                 <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[1].tab_name, 1)"><a
                         (click)="editTab(allTabs[1])">Edit</a></div>
             </h4>
@@ -37,8 +51,9 @@
                 (onSubmit)="onSubmit($event, allTabs[1])" [themeClass]="'grayWhite'"></app-controls>
         </div>
         <div class="tileGroup">
-            <div class="halfTile">
-                <h4>{{allTabs[2].tab_header}}
+            <div class="halfTile tileSelected">
+                <h4>{{allTabs[2].tab_header}} <span class="projTypeOnTabHeader">{{ "(" +
+                        projectTypeString(selectedProject.nProjectType) + ")"}} </span>
                     <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[2].tab_name, 1)"><a
                             (click)="editTab(allTabs[2])">Edit</a></div>
                 </h4>
@@ -59,10 +74,10 @@
                 <button *ngIf="access.hasAccess('home.sonic.project.historicproject', 0)"
                     class="noBorderButton lightGray" (click)="ShowProject('projecthistoricalview')">Historical
                     Projects</button>
-                <button *ngIf="access.hasAccess('home.sonic.project.dailyupdate', 0)"
-                    class="noBorderButton lightGray" (click)="ShowDailyUpdates()">Daily Update</button>
-                <button *ngIf="access.hasAccess('home.sonic.project.signoff', 0)"
-                    class="noBorderButton lightGray" (click)="ShowSignOff()">Sign Off</button>
+                <button *ngIf="access.hasAccess('home.sonic.project.dailyupdate', 0)" class="noBorderButton lightGray"
+                    (click)="ShowDailyUpdates()">Daily Update</button>
+                <button *ngIf="access.hasAccess('home.sonic.project.signoff', 0)" class="noBorderButton lightGray"
+                    (click)="ShowSignOff()">Sign Off</button>
             </div>
         </div>
     </div>

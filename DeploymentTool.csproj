@@ -1039,6 +1039,7 @@
     <Compile Include="Model\ProjectPortfolio.cs" />
     <Compile Include="Model\PurchaseOrderPreviewTemplate.cs" />
     <Compile Include="Model\QuoteRequestTemplate.cs" />
+    <Compile Include="Model\Report.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\SearchField.cs" />
     <Compile Include="Model\SecurityContext.cs" />

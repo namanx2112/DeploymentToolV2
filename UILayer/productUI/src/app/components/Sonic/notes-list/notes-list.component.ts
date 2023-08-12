@@ -5,6 +5,7 @@ import { SonicService } from 'src/app/services/sonic.service';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { NotesService } from 'src/app/services/notes.service';
 import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { Dictionary } from 'src/app/interfaces/commons';
 
 @Component({
   selector: 'app-notes-list',
@@ -15,10 +16,12 @@ export class NotesListComponent {
   curTab: HomeTab;
   refreshFlag: Date;
   curStore: StoreSearchModel;
+  searchFields: Dictionary<string> = {};
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: NotesService, private dialog: MatDialog) {
-    this.curTab = this.service.GetNotesTab(TabInstanceType.Table);
     if (typeof data != 'undefined')
       this.curStore = data.curStore;
+    this.searchFields = { "nStoreId": this.curStore.nStoreId.toString() };
+    this.curTab = this.service.GetNotesTab(TabInstanceType.Table);
   }
 
   rowClicked(row: any) {
