@@ -16,6 +16,7 @@ using DeploymentTool.Model.Templates;
 using System.IO;
 using System.Web;
 using DeploymentTool.Misc;
+using System.Reflection;
 
 namespace DeploymentTool.Controller
 {
@@ -172,6 +173,8 @@ namespace DeploymentTool.Controller
                 {
                     var npoRequest = db.Database.ExecuteSqlCommand("delete from tblPurchaseOrderTemplateParts where nPurchaseOrderTemplateID =@nPurchaseOrderTemplateID ", new SqlParameter("@nPurchaseOrderTemplateID", poRequest.aPurchaseOrderTemplateID));
                     db.Entry(tPurchaseOrder).State = EntityState.Modified;
+                    db.Entry(tPurchaseOrder).Property(x => x.dtCreatedOn).IsModified = false;
+                    db.Entry(tPurchaseOrder).Property(x => x.nCreatedBy).IsModified = false;
                 }
                 else
                 {

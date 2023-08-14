@@ -3,6 +3,9 @@ export interface Analytics {
 
 export interface ProjectPortfolio{
     nProjectId: number,
+    nStoreId: number,
+    tProjectType: string,
+    nProjectType: number,
     store: ProjectPortfolioStore,
     networking: ProjectPortfolioItems,
     pos: ProjectPortfolioItems,

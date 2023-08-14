@@ -194,9 +194,9 @@ export class ControlsComponent implements AfterViewChecked {
   }
 
   onSubmitClick(): void {
-    // if (this.formGroup.valid) {
-    this.onSubmit.emit({ value: this.getFieldControlValues() });
-    // }
+    if (this.formGroup.valid) {
+      this.onSubmit.emit({ value: this.getFieldControlValues() });
+    }
   }
 
   onKeydown(event: any) {

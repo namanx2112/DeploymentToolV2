@@ -15,7 +15,7 @@ namespace DeploymentTool.Model
 
         public string tStoreNumber { get; set; }
         public string tAddress { get; set; }
-        public int nState { get; set; }
+        public int nStoreState { get; set; }
         public int nDMAID { get; set; }
         public string tDMA { get; set; }
         public string tRED { get; set; }
@@ -77,7 +77,7 @@ namespace DeploymentTool.Model
             if (tStore.tCity != null)
                 this.tCity = tStore.tCity;
             if (tStore.nStoreState != null)
-                this.nState = (int)tStore.nStoreState;
+                this.nStoreState = (int)tStore.nStoreState;
             this.tStoreZip = tStore.tStoreZip;
             this.tStoreManager = tStore.tStoreManager;
             this.tPOC = tStore.tPOC;
@@ -125,7 +125,7 @@ namespace DeploymentTool.Model
                 tStoreAddressLine1 = this.tStoreAddressLine1,
                 tStoreAddressLine2 = this.tStoreAddressLine2,
                 tCity = this.tCity,
-                nStoreState = this.nState,
+                nStoreState = this.nStoreState,
                 tStoreZip = this.tStoreZip,
                 tStoreManager = this.tStoreManager,
                 tPOC = this.tPOC,

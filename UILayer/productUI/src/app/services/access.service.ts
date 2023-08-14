@@ -7,6 +7,7 @@ import { AuthCodes } from '../interfaces/auth-request';
 export class AccessService {
 
   static userAccessList: any[] = [];
+  static shown: boolean;
   restricted: string[];
   constructor() {
     this.restricted = [
@@ -33,8 +34,15 @@ export class AccessService {
     let tAccess = null;
     if (typeof AccessService.userAccessList == 'undefined' || AccessService.userAccessList.length == 0) {
       let userAccessList = sessionStorage.getItem('userAccessList');
-      if (typeof userAccessList != 'undefined' && userAccessList != null)
+      if (typeof userAccessList != 'undefined' && userAccessList != null && userAccessList != "null")
         AccessService.userAccessList = JSON.parse(atob(userAccessList));
+      else {
+        if (!AccessService.shown) {
+          AccessService.shown = true;
+          alert("You don not have any access, please contact Admin to get access");
+        }
+        return {};
+      }
     }
     tAccess = AccessService.userAccessList.find(x => x.tPermissionName == path);
     return tAccess;

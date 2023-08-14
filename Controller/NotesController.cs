@@ -9,6 +9,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web;
+using DeploymentTool.Misc;
 
 namespace DeploymentTool.Controller
 {
@@ -19,8 +21,10 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public List<tblProjectNote> Get(Dictionary<string, string> searchFields)
         {
-            int nProjectID = searchFields.ContainsKey("nProjectID") ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
-            int nStoreId = searchFields.ContainsKey("nStoreId") ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
+            int nStoreId =  searchFields != null && searchFields["nStoreId"] != null? Convert.ToInt32(searchFields["nStoreId"]):0;
+
+            int nProjectID = searchFields!=null && searchFields.ContainsKey("nProjectID") ? Convert.ToInt32(searchFields["nProjectID"]) : 0;
+            //int nStoreId = searchFields.ContainsKey("nStoreId") ? Convert.ToInt32(searchFields["nStoreId"]) : 0;
 
             List<tblProjectNote> notes = db.Database.SqlQuery<tblProjectNote>("exec sproc_GetNotes @nStoreId,@nProjectID", new SqlParameter("@nStoreId", nStoreId), new SqlParameter("@nProjectID", nProjectID)).ToList();
 
@@ -104,7 +108,7 @@ namespace DeploymentTool.Controller
         public async Task<IHttpActionResult> Create(tblProjectNote noteRequest)
         {
             noteRequest.aNoteID = 0;
-            noteRequest.dtCreatedOn = DateTime.Now;
+            Utilities.SetHousekeepingFields(true, HttpContext.Current, noteRequest);
             db.tblProjectNotes.Add(noteRequest);
             await db.SaveChangesAsync();
             return Json(noteRequest);

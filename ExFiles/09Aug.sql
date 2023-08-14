@@ -77,7 +77,7 @@ from tblProjectNotes A with (nolock) order by aNoteID desc
 END
 Go
 --sproc_GetDocumentation 2
-ALter procedure [dbo].[sproc_GetDocumentation]
+Create procedure [dbo].[sproc_GetDocumentation]
 @nStoreId int=0
 as          
 BEGIN
@@ -104,7 +104,7 @@ else
 
 END
 Go
-  alter procedure sproc_getAttachemntByPOID     
+  create procedure sproc_getAttachemntByPOID     
 @aPurchaseOrderID as int
 AS    
 Begin
@@ -157,7 +157,7 @@ ENd
 --END  
 --GO
 
-alter procedure sproc_GetAllTechData  
+create procedure sproc_GetAllTechData  
 @nStoreID int=0
 AS    
 BEGIN    
@@ -209,7 +209,7 @@ Alter table tblpurchaseOrder add tSentHtml VARCHAR(max)
 
 Go
 
-alter procedure [dbo].[sproc_getPOID]
+create procedure [dbo].[sproc_getPOID]
 @nStoreId int=0,
 @nTemplateId int=0,
 @nUserID int=0,
@@ -256,7 +256,7 @@ BEGIN
   GO
 
 
- Alter procedure [dbo].[sproc_getPreviousPODetails]
+ create procedure [dbo].[sproc_getPreviousPODetails]
 @nStoreId int=0,
 @nUserID int=0,
 @nTemplateId int=0
@@ -348,7 +348,7 @@ Go
 --		sproc_GetUsertypeByVendorID 1012,36 
 
 GO
-alter procedure sproc_copyProjectsConfig
+create procedure sproc_copyProjectsConfig
 @nStoreId int,
 @nProjectId int
 as
@@ -358,20 +358,217 @@ BEGIN
 END
 
 GO
-sp_tables '%log%'
-select * from tblApplicationTrace order by 1 desc
-sproc_CopyTechnologyToCurrentProject
 
-select * from tblProjectNotes
-update tblProjectNotes set nNoteType = 108
-select * from tblDropdownMain where tModuleName like '%note%'
+Alter procedure sproc_getActiveProjects
+@nStoreId int  
+as  
+BEGIN   
+ create table #tmpTable(nProjectId int, tStoreNumber varchar(100), tTableName VARCHAR(100), tProjectType varchar(100), tStatus varchar(100), tPrevProjManager varchar(500), tProjManager varchar(500),   
+ dProjectGoliveDate date, dProjEndDate date, tOldVendor  varchar(500), tNewVendor varchar(500))  
+  
+ Insert into #tmpTable(nProjectId,tTableName,tProjectType,tStatus,dProjectGoliveDate,dProjEndDate)-- , tStatus, tPrevProjManager, tProjManager, dProjectGoliveDate, dProjEndDate, tOldVendor, tNewVendor)  
+ select aProjectId,tTableName, dbo.fn_getProjectType(nProjectType) tProjectType, dbo.fn_getDropdownText(nProjectStatus) tStatus,dGoLiveDate dProjectGoliveDate,dProjEndDate from(  
+ select aProjectId, tTableName,nProjectType,nProjectStatus,dGoLiveDate,dProjEndDate from tblProject with(nolock)  
+ left join tblProjectTypeConfig with(nolock) on tblProjectTypeConfig.aTypeId = case when (tblProject.nProjectType < 5 OR  tblProject.nProjectType = 9) then -1 else tblProject.nProjectType end  
+ where nStoreId = @nStoreId and nProjectActiveStatus = 1  
+ ) tTable  
+  
+ declare @tQuery NVARCHAR(MAX), @tmpProjectId int, @tmpTableName VARCHAR(100)  
+ declare @tOldVendor as varchar(500), @tOldPM as VARCHAR(500)  
+  
+ DECLARE db_cursor CURSOR FOR   
+ SELECT nProjectId,tTableName from #tmpTable  
+  
+ OPEN db_cursor    
+ FETCH NEXT FROM db_cursor INTO @tmpProjectId, @tmpTableName  
+  
+ WHILE @@FETCH_STATUS = 0    
+ BEGIN    
+  Set @tQuery  = N'update #tmpTable set tNewVendor= dbo.fn_getVendorName(nVendor) from [dbo].['+ @tmpTableName +'] Where nMyActiveStatus = 1 and nStoreId=' + CAST(@nStoreId as VARCHAR) + '    
+  and #tmpTable.nProjectId = ' + CAST(@tmpProjectId as VARCHAR) -- update NewVendor  
+  print @tQuery  
+  EXEC sp_executesql @tQuery  
+  SET @tOldVendor = ''  
+  SET @tOldPM = ''  
+  EXEC sproc_getVendorNameFromPreviousProject @tmpProjectId,@nStoreId,@tmpTableName, @tOldVendor OUTPUT   
+  EXEC sproc_getPMFromPreviousProject @tmpProjectId, @nStoreId, @tOldPM OUTPUT  
+  Set @tQuery  = N'update #tmpTable set tOldVendor='''+@tOldVendor+''', tPrevProjManager='''+@tOldPM+''' Where nProjectId = ' + CAST(@tmpProjectId as VARCHAR) -- update Old vendor and PM  
+  EXEC sp_executesql @tQuery  
+    
+  update #tmpTable set tStoreNumber = tblStore.tStoreNumber from tblStore with(nolock) where aStoreID = @nStoreId  
+  
+  update #tmpTable set tProjManager = tITPM from tblProjectStakeHolders with(nolock) where tblProjectStakeHolders.nProjectId = @tmpProjectId and #tmpTable.nProjectId = @tmpProjectId 
+  
+  FETCH NEXT FROM db_cursor INTO @tmpProjectId, @tmpTableName  
+ END   
+   
+   
+ CLOSE db_cursor    
+ DEALLOCATE db_cursor  
+  
+ select * from #tmpTable  
+  
+ drop table #tmpTable  
+END
 
-select * from tblProjectConfig where nStoreID = 1
-update tblProjectConfig set nProjectId = 15 where aProjectConfigID = 18
-select * from tblProjectStakeHolders where nStoreID = 1
+Go
+create procedure sproc_getActivePortFolioProjects  
+@nStoreId int=0  
+as  
+BEGIN 
+  create table #tmpTable(nStoreId int,nProjectId int,nProjectType int,tProjectType varchar(100), tStoreNumber varchar(100), tStoreDetails VARCHAR(500),dProjectGoliveDate date,  dProjEndDate date, tProjManager varchar(500), tStatus varchar(100), tNewVendor varchar(500),tTableName VARCHAR(100),tFranchise VARCHAR(100),cCost decimal)  
 
-update tblProjectConfig set nMyActiveStatus =1 where aProjectConfigID = 11
+  
+ Insert into #tmpTable(nStoreId,nProjectId,nProjectType,tProjectType,tStatus,dProjectGoliveDate,dProjEndDate,tTableName)-- , tStatus, tPrevProjManager, tProjManager, dProjectGoliveDate, dProjEndDate, tOldVendor, tNewVendor)  
+ select nStoreId,aProjectId,nProjectType, dbo.fn_getProjectType(nProjectType) tProjectType, dbo.fn_getDropdownText(nProjectStatus) tStatus,dGoLiveDate dProjectGoliveDate,dProjEndDate ,tTableName
+ from tblProject with(nolock)  
+ left join tblProjectTypeConfig with(nolock) on tblProjectTypeConfig.aTypeId = case when (tblProject.nProjectType < 5 OR  tblProject.nProjectType = 9)
+ then -1 else tblProject.nProjectType end  
+ where --nStoreId = @nStoreId and
+ nProjectActiveStatus = 1  
+ 
+  
+ declare @tQuery NVARCHAR(MAX), @tmpProjectId int, @tmpTableName VARCHAR(100),@TempnStoreId int
+  
+ DECLARE db_cursor CURSOR FOR   
+ SELECT nStoreId,nProjectId,tTableName from #tmpTable  
+  
+ OPEN db_cursor    
+ FETCH NEXT FROM db_cursor INTO @TempnStoreId,@tmpProjectId, @tmpTableName  
+  
+ WHILE @@FETCH_STATUS = 0    
+ BEGIN    
+  Set @tQuery  = N'update #tmpTable set tNewVendor=dbo.fn_getVendorName(nVendor) from [dbo].['+ @tmpTableName +'] Where #tmpTable.nProjectId = [dbo].['+ @tmpTableName +'].nProjectId and nMyActiveStatus = 1 and #tmpTable.nProjectId = ' + CAST(@tmpProjectId as VARCHAR) -- update NewVendor  
+  EXEC sp_executesql @tQuery  
+ 
+ print @TempnStoreId
+  update #tmpTable set tStoreNumber = tblStore.tStoreNumber,tStoreDetails=tblStore.tStoreAddressLine1 from tblStore with(nolock) where aStoreID = @TempnStoreId    and nStoreId=@TempnStoreId
+  
+  update #tmpTable set tProjManager = tITPM, tFranchise=(select tFranchiseName from tblFranchise with (nolock) where aFranchiseId=nFranchisee) from tblProjectStakeHolders with(nolock) where tblProjectStakeHolders.nStoreId = @TempnStoreId and nMyActiveStatus = 1 and tITPM is not null    and #tmpTable.nStoreId=@TempnStoreId
+   update #tmpTable set cCost = tblProjectConfig.cProjectCost from tblProjectConfig with(nolock) where tblProjectConfig.nStoreId = @TempnStoreId and nMyActiveStatus = 1 and tblProjectConfig.cProjectCost is not null    and #tmpTable.nStoreId=@TempnStoreId
+ 
+  FETCH NEXT FROM db_cursor INTO @TempnStoreId,@tmpProjectId, @tmpTableName  
+ END   
+   
+   
+ CLOSE db_cursor    
+ DEALLOCATE db_cursor  
+  
+ select * from #tmpTable  
+  
+  drop table #tmpTable
 
-select * from tblProjectStakeHolders
-delete from tblProjectStakeHolders where aProjectStakeholderId = 10
-update tblProjectStakeHolders set nProjectID = 8 where  aProjectStakeholderId = 9
+END
+GO
+
+
+
+create procedure sproc_getProjectPortfolioNotes  
+@nStoreId int  ,
+@nPojectID as int=0
+as  
+BEGIN 
+  
+ 
+if(@nStoreId>0 )
+	if(@nPojectID>0)
+		select aNoteID,nProjectID,nNoteType,nStoreID,tSource,tNoteDesc as tNotesDesc,dtCreatedOn,nCreatedBy,(select tName from tbluser with (nolock) where aUserID=A.nCreatedBy) as tNotesOwner, nUpdateBy,dtCreatedOn,dtUpdatedOn,bDeleted
+		from tblProjectNotes A with (nolock)
+		where  nStoreID=@nStoreId And nProjectID=@nPojectID
+	else 
+		select aNoteID,nProjectID,nNoteType,nStoreID,tSource,tNoteDesc as tNotesDesc,dtCreatedOn,nCreatedBy,(select tName from tbluser with (nolock) where aUserID=A.nCreatedBy) as tNotesOwner,nUpdateBy,dtCreatedOn,dtUpdatedOn,bDeleted
+		from tblProjectNotes A with (nolock)
+		where  nStoreId=@nStoreId
+else
+select aNoteID,nProjectID,nNoteType,nStoreID,tSource,tNoteDesc as tNotesDesc,dtCreatedOn,nCreatedBy,nUpdateBy,dtCreatedOn,(select tName from tbluser with (nolock) where aUserID=A.nCreatedBy) as tNotesOwner,dtUpdatedOn,bDeleted
+from tblProjectNotes A with (nolock)
+END
+
+GO
+
+Create procedure sproc_GetPortfolioData    
+@nPojectID as int=0,  
+@nStoreID int=0  
+AS      
+BEGIN      
+  
+DECLARE @ListOfDeliveryStatus TABLE(aID INT,tTechComponent VARCHAR(100) ,tVendor VARCHAR(500), dDeliveryDate date  ,dInstallDate date ,dConfigDate date, tStatus VARCHAR(500))  
+   
+INSERT INTO @ListOfDeliveryStatus  
+VALUES  
+(1,'Installation','',NULL,NULL,NULL,''),  
+(2,'Exterior Menus','',NULL,NULL,NULL,''),  
+(3,'Interior Menus','',NULL,NULL,NULL,''),  
+(4,'Payment Systems','',NULL,NULL,NULL,''),  
+(5,'Sonic Radio','',NULL,NULL,NULL,''),  
+(6,'Audio','',NULL,NULL,NULL,''),  
+(7,'POS','',NULL,NULL,NULL,''),  
+(8,'Networking','',NULL,NULL,NULL,'')  
+  
+  
+Declare @tTechName nVARCHAR(100)  
+Declare @dDate VARCHAR(100)  
+Declare @tStatus VARCHAR(500)  
+Declare @tVendor VARCHAR(500)  
+Declare @dInstallDate VARCHAR(100)  
+Declare @dConfigDate VARCHAR(100)  
+  
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor), @dDate=dInstallDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectInstallation  with (nolock) where nProjectID =@nPojectID  
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor where aID=1  
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectExteriorMenus with (nolock) where nProjectID =@nPojectID  
+  
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor where aID=2  
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor), @dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectInteriorMenus with (nolock) where nProjectID =@nPojectID 
+     
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor where aID=3  
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectPaymentSystem with (nolock) where nProjectID =@nPojectID  
+ 
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor where aID=4  
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectSonicRadio with (nolock) where nProjectID =@nPojectID   
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor where aID=5  
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectAudio with (nolock) where nProjectID =@nPojectID  
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor where aID=6  
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@dDate=dDeliveryDate, @dInstallDate=dSupportDate, @dConfigDate=dConfigDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) from tblProjectPOS 
+with (nolock) where nProjectID =@nPojectID   
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,dInstallDate=@dInstallDate,dConfigDate=@dConfigDate,tStatus=@tStatus,tVendor=@tVendor where aID=7  
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@dDate=dPrimaryDate,@dInstallDate=dBackupDate, @tStatus=dbo.geDropDownStatusTextByID(nPrimaryStatus,dDateFor_nPrimaryStatus)  from tblProjectNetworking with (nolock) where nProjectID =@nPojectID    
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,dInstallDate=@dInstallDate,tStatus=@tStatus,tVendor=@tVendor where aID=8  
+  
+select aID, tTechComponent as tComponent,tVendor,dDeliveryDate as dDeliveryDate,dInstallDate,dConfigDate, tStatus from @ListOfDeliveryStatus  
+END    
+
+GO
+
+  
+Alter procedure [dbo].[sproc_getPOID]  
+@nStoreId int=0,  
+@nTemplateId int=0,  
+@nUserID int=0,  
+@aPurchaseOrderID int=0 out  
+as            
+BEGIN  
+  
+declare @nOutgoingEmailID int  
+set @nOutgoingEmailID=0  
+if(@nTemplateId>0)  
+select top 1 @aPurchaseOrderID=aPurchaseOrderID from tblpurchaseOrder with (nolock) where nCreatedBy=@nUserID and nTemplateId=@nTemplateId   order by 1 desc   
+else  
+select top 1 @aPurchaseOrderID=aPurchaseOrderID from tblpurchaseOrder with (nolock) where nCreatedBy=@nUserID  order by 1 desc   
+
+if(@aPurchaseOrderID is not null)
+BEGIN
+	select top 1 @nOutgoingEmailID=nOutgoingEmailID from tblpurchaseOrder with (nolock) where aPurchaseOrderID=@aPurchaseOrderID   
+END
+if(@nOutgoingEmailID = 0)  
+begin  
+insert into tblpurchaseOrder(nStoreID,nTemplateID,nCreatedBy,dtCreatedOn)values(@nStoreId,@nTemplateId,@nUserID,getdate())  
+set @aPurchaseOrderID=@@identity  
+print @aPurchaseOrderID  
+return @aPurchaseOrderID  
+end  
+  
+END  
+GO
+
+
+select * from tblUser

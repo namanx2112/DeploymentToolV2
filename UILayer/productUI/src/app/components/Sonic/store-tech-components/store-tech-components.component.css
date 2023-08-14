@@ -41,12 +41,21 @@
 
 .right {
     float: right;
+    margin: 10px 10px 0px 0px;
 }
 
 .storeTitle {
     height: 50px;
     margin-top: 60px;
 }
+
+.tHeader a {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
 
 .storeStatus {
     float: left;
@@ -70,14 +79,14 @@
 }
 
 .fullTile a,
-.halfTile a{
+.halfTile a {
     cursor: pointer;
     font-weight: bold;
     font-size: 14px;
     text-decoration: underline;
 }
 
-.projectInfoTabs{
+.projectInfoTabs {
     float: left;
     margin-top: 60px;
     height: 50px;
@@ -167,6 +176,8 @@
 .noBorderButton {
     border-radius: 10px;
     cursor: pointer;
+    width: 80px!important;
+    height: 35px!important;
 }
 
 .tabBody h4 {
@@ -192,7 +203,7 @@
 .tabForm {
     float: left;
     width: calc(100% - 40px);
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
     border-radius: 10px;
 }
 
@@ -202,13 +213,13 @@
     margin-bottom: 20px;
     line-height: 48px;
     text-align: center;
-    border: 1px solid transparent; 
-    font-size: 18px;       
+    border: 1px solid transparent;
+    font-size: 18px;
     cursor: pointer;
 }
 
-.selectedTab{
-    border: 1px solid #525252!important; 
+.selectedTab {
+    border: 1px solid #525252 !important;
 }
 
 
@@ -221,11 +232,11 @@
 
 .fullView::before {
     content: "";
-  }
-  
+}
+
 .fullView::after {
     content: "";
-  }
+}
 
 .fullView .tHeader {
     width: calc(100% - 2px);
@@ -241,7 +252,6 @@
 .fullView .tBody {
     width: 100%;
     float: left;
-    margin-top: -25px;
 }
 
 .fullTab {

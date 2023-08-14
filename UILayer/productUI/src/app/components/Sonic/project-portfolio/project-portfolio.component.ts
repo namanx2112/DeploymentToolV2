@@ -5,6 +5,9 @@ import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { MatPaginator } from '@angular/material/paginator';
 import { CommonService } from 'src/app/services/common.service';
 import { AnalyticsService } from 'src/app/services/analytics.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NotesListComponent } from '../notes-list/notes-list.component';
+import { AccessService } from 'src/app/services/access.service';
 
 export interface TableColumnDef {
   columnDef: string,
@@ -29,22 +32,7 @@ export class ProjectPortfolioComponent {
   dataSource: any[];
   expandedElement: any;
   columnsToDisplayWithExpand: any;
-  searchVal: any | null = null;
-  searchFields: Fields[];
-  constructor(private analyticsService: AnalyticsService) {
-    this.searchFields = [{
-      field_name: "",
-      fieldUniqeName: "tStore",
-      field_type: FieldType.text,
-      readOnly: false,
-      field_placeholder: "Search Store",
-      invalid: false,
-      validator: [],
-      mandatory: false,
-      defaultVal: "",
-      hidden: false
-    }
-    ];
+  constructor(private dialog: MatDialog, private analyticsService: AnalyticsService, public access: AccessService) {
     this.loadColumns();
   }
 
@@ -103,8 +91,26 @@ export class ProjectPortfolioComponent {
     });
   }
 
-  onSubmit(controlVals: FormGroup) {
-    this.searchVal = controlVals.value;
+  ShowNotes(element: any) {
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+
+    dialogConfig.data = {
+      themeClass: "grayWhite",
+      dialogTheme: "lightGrayWhiteTheme",
+      curStore: element
+    };
+    dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
+    // dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
+  }
+
+  applyFilter(event: Event) {
+    let filterValue: any;
+    filterValue = (event.target as HTMLInputElement).value;
+    if (this.dataSource)
+      this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   getCellVal(colName: string, colVal: string) {

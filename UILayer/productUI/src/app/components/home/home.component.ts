@@ -48,10 +48,14 @@ export class HomeComponent {
   }
 
   changeViewFromDashboard(item: any) {
-    if (item.view == "sonic") {
-      this.directStore = item.instance;
+    if (typeof item == 'string')
+      this, this.viewName = item;
+    else {
+      if (item.view == "sonic") {
+        this.directStore = item.instance;
+      }
+      this.viewName = item.view;
     }
-    this.viewName = item.view;
   }
 
   changeView(vName: string) {

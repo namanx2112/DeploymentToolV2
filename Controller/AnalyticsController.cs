@@ -1,11 +1,13 @@
 ﻿using DeploymentTool.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using System.Web.Security;
 
 namespace DeploymentTool.Controller
 {
@@ -18,349 +20,118 @@ namespace DeploymentTool.Controller
         [Route("api/Store/GetProjectPortfolio")]
         public HttpResponseMessage GetProjectPortfolio(Dictionary<string, string> searchFields)
         {
-            List<ProjectPortfolio> items = new List<ProjectPortfolio>()
+            int nStoreId = 0;// (searchFields == null || searchFields["nStoreId"] == null) ? 0 : Convert.ToInt32(searchFields["nStoreId"]);
+
+            List<ProjectPortfolio> items = new List<ProjectPortfolio>();
+            try
             {
-                new ProjectPortfolio()
+                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nStoreId", new SqlParameter("@nStoreId", nStoreId)).ToList();
+
+                foreach (var parts in activeProj)
                 {
-                    nProjectType = -1,
-                    nProjectId = 1,
-                    store = new ProjectPortfolioStore()
+                    List<ProjectPorfolioNotes> portnotes = db.Database.SqlQuery<ProjectPorfolioNotes>("exec sproc_getProjectPortfolioNotes @nStoreId,@nProjectId", new SqlParameter("@nStoreId", parts.nStoreId), new SqlParameter("@nProjectId", parts.nProjectId)).ToList();
+
+                    ProjectPortfolio obj = new ProjectPortfolio();
+                    obj.nProjectType = parts.nProjectType;
+                    obj.tProjectType = parts.tProjectType;
+                    obj.nProjectId = parts.nProjectId;
+                    obj.notes = portnotes;
+                    obj.nStoreId = parts.nStoreId;
+
+                    List<TechData> techData = db.Database.SqlQuery<TechData>("exec sproc_GetPortfolioData @nProjectId", new SqlParameter("@nProjectId", parts.nProjectId)).ToList();
+
+                    obj.store = new ProjectPortfolioStore()
                     {
-                        tStoreDetails = "2455- Austin TX",
-                        dtGoliveDate = DateTime.Now.AddDays(-33),
-                        tProjectManager = "Bruce Wayne",
-                        tProjectType = "Remodel",
-                        cCost = 650.55M,
-                        tFranchise = "ARD LLC"
-                    },
-                    networking = new ProjectPortfolioItems()
+                        tStoreDetails = parts.tStoreNumber + "-" + parts.tStoreDetails,
+                        dtGoliveDate = (DateTime)parts.dProjectGoliveDate,
+                        tProjectManager = parts.tProjManager,
+                        tProjectType = parts.tProjectType,
+                        tFranchise = parts.tFranchise,
+                        cCost = parts.cCost != null ? (decimal)parts.cCost : 0
+                    };
+                    foreach (var techparts in techData)
                     {
-                        dtDate = DateTime.Now.AddDays(-333),
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    pos = new ProjectPortfolioItems(){
-                        dtDate = DateTime.Now.AddDays(-333),
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    audio = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    paymentsystem = new ProjectPortfolioItems()
-                    {dtDate = DateTime.Now.AddDays(-333), tStatus = "Completed", tVendor = "Chomecase"},
-                    exteriormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333), tStatus = "Completed", tVendor = "Chomecase"},
-                    interiormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333), tStatus = "Completed", tVendor = "Chomecase"},
-                    sonicradio = new ProjectPortfolioItems() { dtDate = DateTime.Now.AddDays(-333), tStatus = "Completed", tVendor = "Chomecase" },
-                    installation = new ProjectPortfolioItems() {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    notes = new List<ProjectPorfolioNotes>()
-                    {
-                        new ProjectPorfolioNotes()
+                        if (techparts.tComponent == "Networking")
                         {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "dasdo 99 asdoosajm pm daspoidas -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
+                            obj.networking = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "POS")
                         {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "sadd 99 asdoosajm pm daspoidas -as0d as-fgdfg as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
+                            obj.pos = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "Audio")
                         {
-                            tNotesOwner = "Brguce wayne",
-                            tNotesDesc = "gfhfghfgh 99 asdoosajm pm hgfhfg -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
+                            obj.audio = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "Sonic Radio")
+                        {
+                            obj.sonicradio = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "Payment Systems")
+                        {
+                            obj.paymentsystem = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "Interior Menus")
+                        {
+                            obj.interiormenu = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "Exterior Menus")
+                        {
+                            obj.exteriormenu = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "Installation")
+                        {
+                            obj.installation = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
                         }
                     }
-                },
-                new ProjectPortfolio()
-                {
-                    nProjectType = -1,
-                    nProjectId = 2,
-                    store = new ProjectPortfolioStore()
-                    {
-                        tStoreDetails = "2455- Austin TX",
-                        dtGoliveDate = DateTime.Now.AddDays(-33),
-                        tProjectManager = "Bruce Wayne",
-                        tProjectType = "Remodel"
-                    },
-                    networking = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    pos = new ProjectPortfolioItems(){
-                        dtDate = DateTime.Now.AddDays(-333),
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    audio = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    paymentsystem = new ProjectPortfolioItems()
-                    {dtDate = DateTime.Now.AddDays(-333), tStatus = "Completed", tVendor = "Chomecase"},
-                    exteriormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    interiormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    sonicradio = new ProjectPortfolioItems() { dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase" },
-                    installation = new ProjectPortfolioItems() {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    notes = new List<ProjectPorfolioNotes>()
-                    {
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "dasdo 99 asdoosajm pm daspoidas -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "sadd 99 asdoosajm pm daspoidas -as0d as-fgdfg as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Brguce wayne",
-                            tNotesDesc = "gfhfghfgh 99 asdoosajm pm hgfhfg -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        }
-                    }
-                },
-                new ProjectPortfolio()
-                {
-                    nProjectType = -1,
-                    nProjectId = 3,
-                    store = new ProjectPortfolioStore()
-                    {
-                        tStoreDetails = "2455- Austin TX",
-                        dtGoliveDate = DateTime.Now.AddDays(-33),
-                        tProjectManager = "Bruce Wayne",
-                        tProjectType = "Remodel",
-                        cCost = 650.55M,
-                        tFranchise = "ARD LLC"
-                    },
-                    networking = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
+                    items.Add(obj);
 
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    pos = new ProjectPortfolioItems(){
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    audio = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    paymentsystem = new ProjectPortfolioItems()
-                    {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    exteriormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    interiormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    sonicradio = new ProjectPortfolioItems() { dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase" },
-                    installation = new ProjectPortfolioItems() {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    notes = new List<ProjectPorfolioNotes>()
-                    {
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "dasdo 99 asdoosajm pm daspoidas -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "sadd 99 asdoosajm pm daspoidas -as0d as-fgdfg as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Brguce wayne",
-                            tNotesDesc = "gfhfghfgh 99 asdoosajm pm hgfhfg -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        }
-                    }
-                },
-                new ProjectPortfolio()
-                {
-                    nProjectType = -1,
-                    nProjectId = 4,
-                    store = new ProjectPortfolioStore()
-                    {
-                        tStoreDetails = "2455- Austin TX",
-                        dtGoliveDate = DateTime.Now.AddDays(-33),
-                        tProjectManager = "Bruce Wayne",
-                        tProjectType = "New",
-                        cCost = 1650.55M,
-                        tFranchise = "ARD LLC"
-                    },
-                    networking = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    pos = new ProjectPortfolioItems(){
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    audio = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    paymentsystem = new ProjectPortfolioItems()
-                    {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    exteriormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    interiormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    sonicradio = new ProjectPortfolioItems() { dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase" },
-                    installation = new ProjectPortfolioItems() {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    notes = new List<ProjectPorfolioNotes>()
-                    {
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "dasdo 99 asdoosajm pm daspoidas -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "sadd 99 asdoosajm pm daspoidas -as0d as-fgdfg as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Brguce wayne",
-                            tNotesDesc = "gfhfghfgh 99 asdoosajm pm hgfhfg -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        }
-                    }
-                },
-                new ProjectPortfolio()
-                {
-                    nProjectType = -1,
-                    nProjectId = 5,
-                    store = new ProjectPortfolioStore()
-                    {
-                        tStoreDetails = "2455- Austin TX",
-                        dtGoliveDate = DateTime.Now.AddDays(-33),
-                        tProjectManager = "Bruce Wayne",
-                        tProjectType = "Rebuild",
-                        cCost = 6250.55M,
-                        tFranchise = "ARD LLC"
-                    },
-                    networking = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    pos = new ProjectPortfolioItems(){
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    audio = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    paymentsystem = new ProjectPortfolioItems()
-                    {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    exteriormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    interiormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    sonicradio = new ProjectPortfolioItems() { dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase" },
-                    installation = new ProjectPortfolioItems() {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    notes = new List<ProjectPorfolioNotes>()
-                    {
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "dasdo 99 asdoosajm pm daspoidas -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "sadd 99 asdoosajm pm daspoidas -as0d as-fgdfg as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Brguce wayne",
-                            tNotesDesc = "gfhfghfgh 99 asdoosajm pm hgfhfg -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        }
-                    }
-                },
-                new ProjectPortfolio()
-                {
-                    nProjectType = -1,
-                    nProjectId = 6,
-                    store = new ProjectPortfolioStore()
-                    {
-                        tStoreDetails = "2455- Austin TX",
-                        dtGoliveDate = DateTime.Now.AddDays(-33),
-                        tProjectManager = "Bruce Wayne",
-                        tProjectType = "Audio",
-                        cCost = 650.55M,
-                        tFranchise = "ARD LLC"
-                    },
-                    networking = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    pos = new ProjectPortfolioItems(){
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    audio = new ProjectPortfolioItems()
-                    {
-                        dtDate = DateTime.Now.AddDays(-333),
-
-                        tStatus = "Completed",
-                        tVendor = "Chomecase"
-                    },
-                    paymentsystem = new ProjectPortfolioItems()
-                    {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    exteriormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    interiormenu = new ProjectPortfolioItems(){dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    sonicradio = new ProjectPortfolioItems() { dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase" },
-                    installation = new ProjectPortfolioItems() {dtDate = DateTime.Now.AddDays(-333),  tStatus = "Completed", tVendor = "Chomecase"},
-                    notes = new List<ProjectPorfolioNotes>()
-                    {
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "dasdo 99 asdoosajm pm daspoidas -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Bruce wayne",
-                            tNotesDesc = "sadd 99 asdoosajm pm daspoidas -as0d as-fgdfg as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        },
-                        new ProjectPorfolioNotes()
-                        {
-                            tNotesOwner = "Brguce wayne",
-                            tNotesDesc = "gfhfghfgh 99 asdoosajm pm hgfhfg -as0d as-d90 as-d sa-d9asdpasdkasd[askdaskd dkasdlkasd sapdoi sad,"
-                        }
-                    }
                 }
-            };
+            }
+            catch (Exception ex)
+            {
+
+            }
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<List<ProjectPortfolio>>(items, new JsonMediaTypeFormatter())

@@ -15,7 +15,7 @@ import { Dictionary } from 'src/app/interfaces/commons';
 export class NotesListComponent {
   curTab: HomeTab;
   refreshFlag: Date;
-  curStore: StoreSearchModel;
+  curStore: any;
   searchFields: Dictionary<string> = {};
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: NotesService, private dialog: MatDialog) {
     if (typeof data != 'undefined')
@@ -35,7 +35,7 @@ export class NotesListComponent {
     dialogConfig.width = '60%';
     let pFillData = {
       "nStoreID": this.curStore.nStoreId,
-      "nProjectID": this.curStore.lstProjectsInfo[this.curStore.lstProjectsInfo.length - 1].nProjectId
+      "nProjectID": (typeof this.curStore.nProjectId != 'undefined') ? this.curStore.nProjectId : this.curStore.lstProjectsInfo[this.curStore.lstProjectsInfo.length - 1].nProjectId
     };
 
     dialogConfig.data = {

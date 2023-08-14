@@ -280,59 +280,7 @@ namespace DeploymentTool.Controller
         {
             List<TechData> items = db.Database.SqlQuery<TechData>("exec sproc_GetAllTechData @nStoreID", new SqlParameter("@nStoreID", nStoreId)).ToList();
 
-            // List<DateChangeNotitication> items = db.Database.SqlQuery<DateChangeNotitication>("exec sproc_GetDateChangeNotification @nStoreId", new SqlParameter("@nStoreId", nStoreId)).ToList();
-
-            // List<DateChangeNotitication> items = new List<DateChangeNotitication>()
-            //{
-            //    new DateChangeNotitication()
-            //    {
-            //        isSelected = false,
-            //        tComponent = "Netowkring",
-            //        tVendor = "Comecast"
-            //    },
-            //    new DateChangeNotitication()
-            //    {
-            //        isSelected = false,
-            //        tComponent = "Audio",
-            //        tVendor = "HME"
-            //    },
-            //    new DateChangeNotitication()
-            //    {
-            //        isSelected = false,
-            //        tComponent = "POS",
-            //        tVendor = "Infor"
-            //    },
-            //    new DateChangeNotitication()
-            //    {
-            //        isSelected = false,
-            //        tComponent = "Exterior Menus",
-            //        tVendor = "Fabcon"
-            //    },
-            //    new DateChangeNotitication()
-            //    {
-            //        isSelected = false,
-            //        tComponent = "Payment Systems",
-            //        tVendor = "Fiserv"
-            //    },
-            //    new DateChangeNotitication()
-            //    {
-            //        isSelected = false,
-            //        tComponent = "Interior Menus",
-            //        tVendor = "TDS"
-            //    },
-            //    new DateChangeNotitication()
-            //    {
-            //        isSelected = false,
-            //        tComponent = "Sonic Radio",
-            //        tVendor = "PAM"
-            //    },
-            //    new DateChangeNotitication()
-            //    {
-            //        isSelected = false,
-            //        tComponent = "Installation",
-            //        tVendor = "MIRA"
-            //    }
-            //};
+            
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<List<TechData>>(items, new JsonMediaTypeFormatter())
@@ -355,12 +303,20 @@ namespace DeploymentTool.Controller
             tContent += "<div>There has been a change in target dates for this project. please update your schedule to reflect </div>";
             tContent += "<div>the following responding to this email chain with confirmation of the change or any issues. </div>";
             tContent += "<div></br>Schedule</div>";
-            tContent += "<div><table style='border: 1px solid black;'><thead style='border: 1px solid black;'><tr><b><th>Components</th><th>Delivery Date</th><th>Install/Support Date</th><th>Config Date</th><th>Status</th></b></tr></thead>";
-            tContent += "<tbody>";
+            //tContent += "<div><table style='border: 1px solid black;'><thead style='border: 1px solid black;'><tr><b><th>Components</th><th>Delivery Date</th><th>Install/Support Date</th><th>Config Date</th><th>Status</th></b></tr></thead>";
+            tContent += "<div><table style='border: 1px solid black;width=100%'><thead style='border: 1px solid black;'><tr><b><th>Components</th><th>Delivery Date</th><th>Config Date</th><th>Status</th></b></tr></thead>";
+            tContent += "<tbody style='border: 1px solid black;'>";
             foreach (var parts in notification)
             {
-                tContent += "<tr><td>" + parts.tComponent + "-" + parts.tVendor + "</td><td>" + parts.dDeliveryDate + "</td><td>" + parts.dInstallDate + "</td><td>" + parts.dConfigDate + "</td><td>" + parts.tStatus + "</td></tr>";
+                foreach (var reqTech in request.lstItems)
+                    if (reqTech.isSelected && reqTech.tComponent == parts.tComponent)
+                    {
+                        string dDeliver = parts.dDeliveryDate!=null?Convert.ToDateTime(parts.dDeliveryDate).ToString("MM/dd/yyyy").Replace('-', '/'):"";
+                        string dCongDate = parts.dConfigDate != null ? Convert.ToDateTime(parts.dConfigDate).ToString("MM/dd/yyyy").Replace('-', '/') : "";
+                        //tContent += "<tr><td>" + parts.tComponent + "-" + parts.tVendor + "</td><td>" + parts.dDeliveryDate + "</td><td>" + parts.dInstallDate + "</td><td>" + parts.dConfigDate + "</td><td>" + parts.tStatus + "</td></tr>";
 
+                        tContent += "<tr><td>" + parts.tComponent + "-" + parts.tVendor + "</td><td>" + dDeliver + "</td><td>" + dCongDate + "</td><td>" + parts.tStatus + "</td></tr>";
+                    }
             }
             tContent += "</tbody>";
             tContent += "</table></div></br>";
@@ -612,7 +568,7 @@ namespace DeploymentTool.Controller
             {
             }
 
-            return Ok("Sent Successfully!");
+            return Ok("");
         }
 
 
