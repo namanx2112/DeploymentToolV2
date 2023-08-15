@@ -1,8 +1,8 @@
 <div class="SearchPart whiteGrayTheme">
-    <!-- <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-      </mat-form-field> -->
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)"
+            placeholder="Search by Store number or Franchise or Project Manager or Project type" #input>
+    </mat-form-field>
 </div>
 <div class="tablePart">
     <table mat-table *ngIf="dataSource != undefined" [dataSource]="dataSource" multiTemplateDataRows
@@ -10,8 +10,8 @@
         <ng-container matColumnDef="{{column.columnDef}}" *ngFor="let column of columnsToDisplay;let index = index;">
             <th mat-header-cell *matHeaderCellDef> {{column.header}} </th>
             <td mat-cell *matCellDef="let element">
-                <app-project-portfolio-cell [jObject]="element[column.columnDef]"
-                    [tColumn]="column.columnDef" (openStore)="openStoreClicked($event)"></app-project-portfolio-cell>
+                <app-project-portfolio-cell [jObject]="element[column.columnDef]" [tColumn]="column.columnDef"
+                    (openStore)="openStoreClicked($event)"></app-project-portfolio-cell>
             </td>
         </ng-container>
         <ng-container matColumnDef="expand">
@@ -34,8 +34,10 @@
                             <span>Type: <span> {{element.store.tProjectType}}</span> </span>
                             <span>Franchise Name:<span> {{element.store.tFranchise}} </span></span>
                             <span>Project Cost:<span> ${{element.store.cCost}}</span></span>
-                            <button class="notesButon noBorderButton lightGray" mat-raised-button (click)="ShowNotes(element);"
-                            *ngIf="access.hasAccess('home.sonic.project.notes', 1)"><mat-icon>notes</mat-icon>View Notes</button>
+                            <button class="notesButon noBorderButton lightGray" mat-raised-button
+                                (click)="ShowNotes(element);"
+                                *ngIf="access.hasAccess('home.sonic.project.notes', 1)"><mat-icon>notes</mat-icon>View
+                                Notes</button>
                         </h4>
                         <app-store-tech-components
                             [request]="{element: element, needEdit: true}"></app-store-tech-components>

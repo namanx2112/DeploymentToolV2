@@ -48,6 +48,7 @@
     }
   }
   let Zone = /*#__PURE__*/(() => {
+    var _class;
     class Zone {
       static assertZonePatched() {
         if (global['Promise'] !== patches['ZoneAwarePromise']) {
@@ -270,8 +271,9 @@
         }
       }
     }
+    _class = Zone;
     // tslint:disable-next-line:require-internal-with-underscore
-    Zone.__symbol__ = __symbol__;
+    _class.__symbol__ = __symbol__;
     return Zone;
   })();
   const DELEGATE_ZS = {

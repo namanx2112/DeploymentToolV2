@@ -1,7 +1,25 @@
 table {
-    width: 100%;
-  }
-  
-  th.mat-sort-header-sorted {
-    color: black;
-  }
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.reportHeader {
+  height: 50px;
+  margin-top: 10px;
+}
+
+.reportBody {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  height: calc(100% - 75px);
+  overflow: auto;
+}
+
+.exportButton{
+  float: right;
+  margin: 5px 20px 5px 0px;
+  cursor: pointer;
+}

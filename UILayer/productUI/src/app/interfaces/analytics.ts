@@ -40,6 +40,7 @@ export interface ProjectPorfolioNotes{
 }
 
 export interface ReportModel{
+    tReportName: string,
     titles: string[]
     headers: string[],
     data: any

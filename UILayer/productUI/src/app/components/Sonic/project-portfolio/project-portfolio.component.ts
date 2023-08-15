@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NotesListComponent } from '../notes-list/notes-list.component';
 import { AccessService } from 'src/app/services/access.service';
 import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface TableColumnDef {
   columnDef: string,
@@ -31,7 +32,7 @@ export class ProjectPortfolioComponent {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   columnsToDisplay: TableColumnDef[] = [];
   @Output() openStore = new EventEmitter<StoreSearchModel>();
-  dataSource: any[];
+  dataSource: MatTableDataSource<any>;;
   expandedElement: any;
   columnsToDisplayWithExpand: any;
   constructor(private dialog: MatDialog, private analyticsService: AnalyticsService, public access: AccessService) {
@@ -42,7 +43,7 @@ export class ProjectPortfolioComponent {
 
   }
 
-  openStoreClicked(item: any){
+  openStoreClicked(item: any) {
     this.openStore.emit(item);
   }
 
@@ -93,7 +94,12 @@ export class ProjectPortfolioComponent {
 
   getRecord() {
     this.analyticsService.Get(null).subscribe(x => {
-      this.dataSource = x;
+      this.dataSource = new MatTableDataSource(x);
+      this.dataSource.filterPredicate = (data: any, filter: string) => {
+        filter = filter.toLocaleLowerCase();
+        return (data["store"].tStoreNumber.toLowerCase().indexOf(filter) > -1 || data["store"].tFranchise.toLowerCase().indexOf(filter) > -1
+          || data["store"].tProjectManager.toLowerCase().indexOf(filter) > -1 || data["store"].tProjectType.toLowerCase().indexOf(filter) > -1)
+      };
     });
   }
 

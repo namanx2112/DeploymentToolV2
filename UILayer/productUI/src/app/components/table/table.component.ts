@@ -47,6 +47,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   cService: any;
   initVal: Date;
+  responseData: any;
   constructor(private _liveAnnouncer: LiveAnnouncer, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService,
     private storeService: StoreService, public access: AccessService, private noteService: NotesService) {
@@ -85,6 +86,18 @@ export class TableComponent implements OnChanges, AfterViewInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+
+    var compare = function (a: any, b: any) {
+      if (a[sortState.active].toLowerCase() < b[sortState.active].toLowerCase()) {
+        return -1;
+      }
+      if (a[sortState.active].toLowerCase() > b[sortState.active].toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    }
+    this.dataSource = new MatTableDataSource(this.responseData.sort(compare));
+    this.dataSource.sort = this.sort;
   }
 
 
@@ -139,6 +152,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
 
   getTable() {
     this.cService.Get(this.searchFields, this.curTab).subscribe((resp: any[]) => {
+      this.responseData = resp;
       this.dataSource = new MatTableDataSource(resp);
       this.dataSource.sort = this.sort;
       let fColumns = this.cService.GetTableVisibleColumns(this.curTab);
