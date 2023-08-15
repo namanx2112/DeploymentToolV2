@@ -39,11 +39,10 @@ h5{
     border-radius: 10px;
 }
 
-.filterButton button {
-    background-color: #fff;
+.buttonGroup {
     border-radius: 10px;
-    height: 40px;
-    width: 100px;
-    border-color: lightgray;
-    margin: 0px 10px 10px 0px;
+}
+
+.filterButton{
+    margin-bottom: 5px;
 }

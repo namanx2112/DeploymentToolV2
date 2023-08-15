@@ -14,10 +14,13 @@ export class NotificationComponent {
   @Input()
   fullView: boolean;
   @Output() openStore = new EventEmitter<StoreSearchModel>();
+  allNotifications: NotificationModel[];
   news: NotificationModel[];
   olds: NotificationModel[];
   firstFew: NotificationModel[];
+  filter: string;
   constructor(private service: NotificationService, private sonicService: SonicService) {
+    this.filter = "All";
     this.getNotifcation();
   }
 
@@ -26,10 +29,32 @@ export class NotificationComponent {
       for (var tItem in x) {
         x[tItem].tIcon = "check_circle_outline";
       }
-      this.news = x.filter(x => x.nReadStatus == 0);
-      this.firstFew = this.news.slice(0, 5);
-      this.olds = x.filter(x => x.nReadStatus == 1);
+      this.allNotifications = x;
+      this.getFilteredItems(0);
     })
+  }
+
+  filterChange(ev: any) {
+    if (this.filter == "All")
+      this.getFilteredItems(0);
+    else if (this.filter == "Unread")
+      this.getFilteredItems(1);
+    else
+      this.getFilteredItems(2);
+  }
+
+  getFilteredItems(readUnread: number) {
+    let items = this.allNotifications;
+    if (readUnread == 1) {
+      items = items.filter(x => x.nReadStatus == 0);
+    }
+    else if (readUnread == 2) {
+      items = items.filter(x => x.nReadStatus == 1);
+    }
+    var last7DayStart = moment().startOf('day').subtract(1, 'week');
+    this.news = items.filter(x => moment(x.dCreatedOn).isAfter(last7DayStart));
+    this.firstFew = this.news.slice(0, 5);
+    this.olds = items.filter(x => moment(x.dCreatedOn).isBefore(last7DayStart));
   }
 
   openItem(item: any) {

@@ -24,6 +24,7 @@ import { NewEditObjectComponent } from './components/new-edit-object/new-edit-ob
 import { HomeDashboardComponent } from './components/home-dashboard/home-dashboard.component';
 import { AdminConfigComponent } from './components/admin-config/admin-config.component';
 import { NotImplementedComponent } from './components/not-implemented/not-implemented.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { AdminDashboardShortcutsComponent } from './components/admin-dashboard-shortcuts/admin-dashboard-shortcuts.component';
 import { ManageDropdownsComponent } from './components/manage-dropdowns/manage-dropdowns.component';
@@ -169,7 +170,8 @@ import { NotificationComponent } from './components/notification/notification.co
         MatProgressSpinnerModule,
         MatDatepickerModule,
         DragDropModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatButtonToggleModule
     ]
 })
 export class AppModule { }
