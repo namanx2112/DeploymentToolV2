@@ -4,9 +4,9 @@ export interface NotificationModel {
     nNotificationType: NotificationType,
     tFromUserId: string,
     dCreatedOn: Date,
-    isNew: boolean,
+    nReadStatus: number,
     tNotification: string,
-    relatedInstances: any,
+    arrInstances: any,
     tIcon:string
 }
 

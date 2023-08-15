@@ -29,8 +29,8 @@
                     <span class="lText">{{item.tDropdownText}}</span>
                     <span class="dragHelp">Drag and drop this item to rearrange</span>
                     <div class="cAction" *ngIf="(selectedModule.editable == undefined || selectedModule.editable == true)">
-                        <span title="Edit" (click)="edit(item)"><mat-icon>edit</mat-icon></span>
-                        <span title="Remove" (click)="remove(item)" style="margin-left: 2px;"><mat-icon>cancel</mat-icon></span>
+                        <span matTooltip="Edit" (click)="edit(item)"><mat-icon>edit</mat-icon></span>
+                        <span matTooltip="Remove" (click)="remove(item)" style="margin-left: 2px;"><mat-icon>cancel</mat-icon></span>
                     </div>
                 </div>
             </div>

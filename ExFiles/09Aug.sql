@@ -841,3 +841,5 @@ else
 select  aNoteID,nProjectID,nNoteType,nStoreID,tSource,tNoteDesc as tNotesDesc,dtCreatedOn,nCreatedBy,nUpdateBy,dtCreatedOn,(select tName from tbluser with (nolock) where aUserID=A.nCreatedBy) as tNotesOwner,dtUpdatedOn,bDeleted
 from tblProjectNotes A with (nolock)
 END
+
+GO

@@ -1,4 +1,5 @@
-﻿using DeploymentTool.Model;
+﻿using DeploymentTool.Misc;
+using DeploymentTool.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -24,29 +25,11 @@ namespace DeploymentTool.Controller
             try
             {
                 var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-                //securityContext.nUserID
-                //  var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-                //Nullable<int> lUserId = securityContext.nUserID;
-                int nUserID = 2;
-                items = db.Database.SqlQuery<Notifications>("exec sproc_getAllNotificationSummary @nUserID", new SqlParameter("@nUserID", nUserID)).ToList();
-
-                //new Notifications()
-                //    {
-                //        aNotificationId = 1,
-                //        dCreatedOn = DateTime.Now.AddDays(-110),
-                //        isNew = false,
-                //        nNotificationType  = NotificationType.QuoteRequestNotification,
-                //        nUserId = 1,
-                //        tNotification = "2 Qutote request sent",
-                //        relatedInstances = new List<string>()
-                //        {
-                //            "32313", "21312"
-                //        }
-                //    }
-                //};
+                items = db.Database.SqlQuery<Notifications>("exec sproc_getAllNotificationSummary @nUserID", new SqlParameter("@nUserID", securityContext.nUserID)).ToList();
             }
             catch (Exception ex)
-            { 
+            {
+                TraceUtility.ForceWriteException("NotificationsController", HttpContext.Current, ex);
             }
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -60,6 +43,18 @@ namespace DeploymentTool.Controller
         [Route("api/Store/ReadNotification")]
         public HttpResponseMessage ReadNotification(int notificationId)
         {
+            try
+            {
+                db.Database.ExecuteSqlCommand("exec sproc_updateNotificationReadStatus @nNotificationId", new SqlParameter("@nNotificationId", notificationId));
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("NotificationsController", HttpContext.Current, ex);
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<string>("Some exception occured", new JsonMediaTypeFormatter())
+                };
+            }            
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<string>(string.Empty, new JsonMediaTypeFormatter())

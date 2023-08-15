@@ -22,7 +22,7 @@
                     </button>
                 </mat-menu>
             </div>
-            <span class="tName" *ngIf="access.hasAccess('home.dashboard.po', 1)" title="Click to Open"
+            <span class="tName" *ngIf="access.hasAccess('home.dashboard.po', 1)" matTooltip="Click to Open"
                 (click)="OpenView(item.aPurchaseOrderTemplateID)">{{item.tTemplateName}}</span>
             <span *ngIf="!access.hasAccess('home.dashboard.po', 1)" class="tName">{{item.tTemplateName}}</span>
         </div>

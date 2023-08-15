@@ -4,13 +4,13 @@
 
         <!-- table dynamic columns -->
         <ng-container *ngFor="let column of columns;let index = index;" [matColumnDef]="column.columnDef">
-            <mat-header-cell *matHeaderCellDef class="headerClass" mat-sort-header title="{{ column.header }}">{{
+            <mat-header-cell *matHeaderCellDef class="headerClass" mat-sort-header matTooltip="{{ column.header }}">{{
                 column.header }}</mat-header-cell>
             <mat-cell *matCellDef="let row" matTooltip="{{ getCellVal(column.columnDef, row[column.columnDef])}}">
                 {{ getCellVal(column.columnDef, row[column.columnDef])}}
-                <span *ngIf="access.hasAccess('home.configuration.' + curTab.tab_name, 1) && clickCol == '' && index == 0" (click)="cellClick(row)" title="Click to Edit"
+                <span *ngIf="access.hasAccess('home.configuration.' + curTab.tab_name, 1) && clickCol == '' && index == 0" (click)="cellClick(row)" matTooltip="Click to Edit"
                     class="cellEditButton"><mat-icon>edit</mat-icon></span>
-                <span *ngIf="access.hasAccess('home.configuration.' + curTab.tab_name, 1) && clickCol == '' && index == 0" (click)="cellDelete(row)" title="Click to Remove"
+                <span *ngIf="access.hasAccess('home.configuration.' + curTab.tab_name, 1) && clickCol == '' && index == 0" (click)="cellDelete(row)" matTooltip="Click to Remove"
                     class="cellDeleteButton"><mat-icon>delete</mat-icon></span>
             </mat-cell>
         </ng-container>

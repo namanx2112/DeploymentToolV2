@@ -24,7 +24,7 @@
                 </mat-menu>
             </div>
             <span class="tName" *ngIf="!access.hasAccess('home.dashboard.quoterequest', 1)">{{item.tTemplateName}}</span>
-            <span class="tName" title="Click to Open" *ngIf="access.hasAccess('home.dashboard.quoterequest', 1)"
+            <span class="tName" matTooltip="Click to Open" *ngIf="access.hasAccess('home.dashboard.quoterequest', 1)"
                 (click)="OpenView(item.aQuoteRequestTemplateId)">{{item.tTemplateName}}</span>
         </div>
     </div>

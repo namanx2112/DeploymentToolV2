@@ -1,8 +1,8 @@
 <h2 mat-dialog-title class="header" *ngIf="curTemplate != undefined">{{ (partNumber == 1) ? curTemplate.tTemplateName :
     "" }} Purchase Order {{ (partNumber == 1) ? " Preview" : "" }}</h2>
 <div class="pageStep" *ngIf="curTemplate != undefined"><span
-        [className]="(partNumber == 1) ? 'firstPg active': 'firstPg'" title="Step One">1</span><span
-        [className]="(partNumber == 2) ? 'lastPg active': 'lastPg'" title="Last Step">2</span></div>
+        [className]="(partNumber == 1) ? 'firstPg active': 'firstPg'" matTooltip="Step One">1</span><span
+        [className]="(partNumber == 2) ? 'lastPg active': 'lastPg'" matTooltip="Last Step">2</span></div>
 <div class="poRequest" *ngIf="partNumber == 1 && curTemplate != undefined">
     <div class="pLabel"><label>Store No</label><span>{{curTemplate.tStoreNumber}}</span></div>
     <div class="poBody">

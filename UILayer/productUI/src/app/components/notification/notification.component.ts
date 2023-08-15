@@ -26,9 +26,9 @@ export class NotificationComponent {
       for (var tItem in x) {
         x[tItem].tIcon = "check_circle_outline";
       }
-      this.firstFew = x.slice(0, 5);
-      this.news = x.filter(x => x.isNew);
-      this.olds = x.filter(x => !x.isNew);
+      this.news = x.filter(x => x.nReadStatus == 0);
+      this.firstFew = this.news.slice(0, 5);
+      this.olds = x.filter(x => x.nReadStatus == 1);
     })
   }
 

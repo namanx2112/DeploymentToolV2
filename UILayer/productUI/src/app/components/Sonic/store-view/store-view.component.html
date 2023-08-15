@@ -7,7 +7,7 @@
         <div class="projectInfoTabs">
             <div *ngFor="let tItem of _curStore.lstProjectsInfo"
                 [className]="(selectedProject.nProjectId == tItem.nProjectId)? 'storeProject selected': 'storeProject'"
-                title="Click to view this projects's details">
+                matTooltip="Click to view this projects's details">
                 <div (click)="projectClick(tItem)"> {{projectTypeString(tItem.nProjectType)}} Store
                     {{getFormatedDate(tItem.dGoLiveDate)}}
                 </div>

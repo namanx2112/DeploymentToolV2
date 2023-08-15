@@ -14,7 +14,26 @@ namespace DeploymentTool.Model
         public DateTime dCreatedOn { get; set; }
         public bool isNew { get; set; }
         public string tNotification { get; set; }
-        public List<string> relatedInstances { get; set; }// Instance Id key and data to show will be value
+
+        string[] _insArray;
+
+        public string relatedInstances
+        {
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    _insArray = value.Split(',');
+            }
+        }
+        public string[] arrInstances
+        {
+            get
+            {
+                return _insArray;
+            }
+        }// Instance Id key and data to show will be value
+
+        public int nReadStatus { get; set; }
     }
 
     public enum NotificationType
