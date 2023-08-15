@@ -25,6 +25,7 @@ namespace DeploymentTool.Model
 
     public class ProjectPortfolioStore
     {
+        public string tStoreNumber { get; set; }
         public string tStoreDetails { get; set; }
         public DateTime dtGoliveDate { get; set; }
         public string tProjectManager { get; set; }

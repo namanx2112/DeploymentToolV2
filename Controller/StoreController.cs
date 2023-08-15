@@ -299,13 +299,15 @@ namespace DeploymentTool.Controller
 
             List<PurchaseOrderPreviewTemplate> itemPOStore = db.Database.SqlQuery<PurchaseOrderPreviewTemplate>("exec sproc_GetPurchaseOrdeStorerDetails @nStoreId", tModuleparmAdress).ToList();
             List<TechData> notification = db.Database.SqlQuery<TechData>("exec sproc_GetAllTechData @nStoreId", new SqlParameter("@nStoreId", request.nStoreId)).ToList();
-            string tContent = "<div>All,</div>";
+            string strStyle = "<style>td{ border: 0px none!important;} " +
+                    "table{ width: 100%!important;border: 1px solid lightgray!important;border-radius: 5px!important; text-align:left;}</style>";
+            string tContent = strStyle + "<div>All,</div>";
             tContent += "<div>There has been a change in target dates for this project. please update your schedule to reflect </div>";
             tContent += "<div>the following responding to this email chain with confirmation of the change or any issues. </div>";
             tContent += "<div></br>Schedule</div>";
             //tContent += "<div><table style='border: 1px solid black;'><thead style='border: 1px solid black;'><tr><b><th>Components</th><th>Delivery Date</th><th>Install/Support Date</th><th>Config Date</th><th>Status</th></b></tr></thead>";
-            tContent += "<div><table style='border: 1px solid black;width=100%'><thead style='border: 1px solid black;'><tr><b><th>Components</th><th>Delivery Date</th><th>Config Date</th><th>Status</th></b></tr></thead>";
-            tContent += "<tbody style='border: 1px solid black;'>";
+            tContent += "<div><table><thead><tr><b><th>Components</th><th>Delivery Date</th><th>Config Date</th><th>Status</th></b></tr></thead>";
+            tContent += "<tbody>";
             foreach (var parts in notification)
             {
                 foreach (var reqTech in request.lstItems)
@@ -313,9 +315,9 @@ namespace DeploymentTool.Controller
                     {
                         string dDeliver = parts.dDeliveryDate!=null?Convert.ToDateTime(parts.dDeliveryDate).ToString("MM/dd/yyyy").Replace('-', '/'):"";
                         string dCongDate = parts.dConfigDate != null ? Convert.ToDateTime(parts.dConfigDate).ToString("MM/dd/yyyy").Replace('-', '/') : "";
-                        //tContent += "<tr><td>" + parts.tComponent + "-" + parts.tVendor + "</td><td>" + parts.dDeliveryDate + "</td><td>" + parts.dInstallDate + "</td><td>" + parts.dConfigDate + "</td><td>" + parts.tStatus + "</td></tr>";
+                        //tContent += "<tr><td>" + parts.tComponent + " - " + parts.tVendor + "</td><td>" + parts.dDeliveryDate + "</td><td>" + parts.dInstallDate + "</td><td>" + parts.dConfigDate + "</td><td>" + parts.tStatus + "</td></tr>";
 
-                        tContent += "<tr><td>" + parts.tComponent + "-" + parts.tVendor + "</td><td>" + dDeliver + "</td><td>" + dCongDate + "</td><td>" + parts.tStatus + "</td></tr>";
+                        tContent += "<tr><td>" + parts.tComponent + " - " + parts.tVendor + "</td><td>" + dDeliver + "</td><td>" + dCongDate + "</td><td>" + parts.tStatus + "</td></tr>";
                     }
             }
             tContent += "</tbody>";

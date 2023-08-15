@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormGroup } from '@angular/forms';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
@@ -8,6 +8,7 @@ import { AnalyticsService } from 'src/app/services/analytics.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NotesListComponent } from '../notes-list/notes-list.component';
 import { AccessService } from 'src/app/services/access.service';
+import { StoreSearchModel } from 'src/app/interfaces/sonic';
 
 export interface TableColumnDef {
   columnDef: string,
@@ -29,6 +30,7 @@ export interface TableColumnDef {
 export class ProjectPortfolioComponent {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   columnsToDisplay: TableColumnDef[] = [];
+  @Output() openStore = new EventEmitter<StoreSearchModel>();
   dataSource: any[];
   expandedElement: any;
   columnsToDisplayWithExpand: any;
@@ -38,6 +40,10 @@ export class ProjectPortfolioComponent {
 
   ngOnChanges() {
 
+  }
+
+  openStoreClicked(item: any){
+    this.openStore.emit(item);
   }
 
   loadColumns() {

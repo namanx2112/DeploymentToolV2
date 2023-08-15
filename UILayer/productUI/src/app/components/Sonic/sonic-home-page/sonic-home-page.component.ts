@@ -37,6 +37,12 @@ export class SonicHomePageComponent {
     this.configMenu = val;
   }
 
+  showStore(item: any) {
+    this.curStore = item;
+    this.showMode = "storeview";
+    this.configMenu = "dashboard"; 
+  }
+
 
   menuClick(tMode: string, techComp?: string, newOption?: string) {
     if (typeof newOption != 'undefined' && typeof techComp != 'undefined') {

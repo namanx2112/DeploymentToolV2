@@ -291,6 +291,9 @@ export interface NewProjectStore {
 export interface DeliveryStatus{
     tComponent: string,
     dDeliveryDate: Date,
+    dInstallDate: Date,
+    dConfigDate: Date,
+    tVendor: string,
     tStatus: string
 }
 

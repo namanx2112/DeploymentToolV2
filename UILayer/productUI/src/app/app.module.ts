@@ -35,6 +35,7 @@ import { StoreViewComponent } from './components/Sonic/store-view/store-view.com
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogControlsComponent } from './components/dialog-controls/dialog-controls.component';
 import { ProjectTableComponent } from './components/Sonic/project-table/project-table.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { NotesListComponent } from './components/Sonic/notes-list/notes-list.component';
 import { ProjectPortfolioComponent } from './components/Sonic/project-portfolio/project-portfolio.component';
 import { ImportProjectsComponent } from './components/Sonic/import-projects/import-projects.component';
@@ -167,7 +168,8 @@ import { NotificationComponent } from './components/notification/notification.co
         MatChipsModule,
         MatProgressSpinnerModule,
         MatDatepickerModule,
-        DragDropModule
+        DragDropModule,
+        MatTooltipModule
     ]
 })
 export class AppModule { }

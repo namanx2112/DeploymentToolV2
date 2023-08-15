@@ -19,6 +19,7 @@ export interface ProjectPortfolio{
 }
 
 export interface ProjectPortfolioStore{
+    tStoreNumber: string,
     tStoreDetails: string,
     dtGoliveDate: Date,
     tProjectManager: string,

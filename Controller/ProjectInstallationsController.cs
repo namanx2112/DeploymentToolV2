@@ -66,9 +66,12 @@ namespace DeploymentTool.Controller
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> Update(tblProjectInstallation tblProjectInstallation)
         {
-            //tblProjectInstallation.ProjectActiveStatus = 1;Santosh
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectInstallation.nStoreId, tblProjectInstallation);
             db.Entry(tblProjectInstallation).State = EntityState.Modified;
+            //tblProjectInstallation.ProjectActiveStatus = 1;Santosh
+            if (tblProjectInstallation.nProjectID == null || tblProjectInstallation.nProjectID == 0)// Special handling since it can be for individual project
+            {
+                Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectInstallation.nStoreId, tblProjectInstallation);
+            }
 
             try
             {
@@ -95,12 +98,15 @@ namespace DeploymentTool.Controller
         public async Task<IHttpActionResult> Create(tblProjectInstallation tblProjectInstallation)
         {
 
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInstallation set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectInstallation.nStoreId));
+            if (tblProjectInstallation.nProjectID == null || tblProjectInstallation.nProjectID == 0)// Special handling since it can be for individual project
+            {
+                var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectInstallation set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectInstallation.nStoreId));
+                Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectInstallation.nStoreId, tblProjectInstallation);
+            }
 
             //tblProjectInstallation.ProjectActiveStatus = 1;Santosh
 
             tblProjectInstallation.aProjectInstallationID = 0;
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectInstallation.nStoreId, tblProjectInstallation);
             db.tblProjectInstallations.Add(tblProjectInstallation);
             await db.SaveChangesAsync();
 

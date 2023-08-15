@@ -499,7 +499,7 @@ namespace DeploymentTool.Controller
             strBody += "</table></div>";
             strBody += "<div style='text-align:right;'><b> Total:</b> " + request.cTotal.ToString() + "</div>";
             strBody += "<div style='text-align:right;'><b> PO#: </b> @@InspirePOID@@</div>";
-            strBody += "<div style='text-align:right;'><b> Deliver#: </b> @@InspiredDeliver@@</div>";
+            strBody += "<div style='text-align:right;'><b> Delivery Date#: </b> @@InspiredDeliver@@</div>";
             strBody += "</body></html>";
             string sPDFData = strBody + "@@Splitter@@" + request.aPurchaseOrderPreviewTeamplateID.ToString() + "@@Splitter@@" + request.dDeliver.ToShortDateString();
             strBody = strBody.Replace("@@InspirePOID@@", request.aPurchaseOrderPreviewTeamplateID.ToString()).Replace("@@InspiredDeliver@@", request.dDeliver.ToShortDateString());
@@ -515,7 +515,7 @@ namespace DeploymentTool.Controller
                 "<tr><td>Revision/Filename:</td><td>" + fileName + "</td></tr>" +
                 "<tr><td>Type:</td><td>@@InspiretVendorName@@</td></tr>" +
                 "<tr><td>Store:</td><td>@@InspiretStoreNumber@@</td></tr>" +
-                "<tr><td>Delivery:</td><td>@@InspiredDeliver@@ </td></tr>" +
+                "<tr><td>Delivery Date:</td><td>@@InspiredDeliver@@ </td></tr>" +
                 "<tr><td>Project Manager:</td><td>@@InspiretProjectManager@@</td></tr>" +
                 "<table>";
             

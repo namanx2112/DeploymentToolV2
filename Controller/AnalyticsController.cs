@@ -37,12 +37,12 @@ namespace DeploymentTool.Controller
                     obj.nProjectId = parts.nProjectId;
                     obj.notes = portnotes;
                     obj.nStoreId = parts.nStoreId;
-
                     List<TechData> techData = db.Database.SqlQuery<TechData>("exec sproc_GetPortfolioData @nProjectId", new SqlParameter("@nProjectId", parts.nProjectId)).ToList();
 
                     obj.store = new ProjectPortfolioStore()
                     {
-                        tStoreDetails = parts.tStoreNumber + "-" + parts.tStoreDetails,
+                        tStoreNumber = parts.tStoreNumber,
+                        tStoreDetails = parts.tStoreDetails,
                         dtGoliveDate = (DateTime)parts.dProjectGoliveDate,
                         tProjectManager = parts.tProjManager,
                         tProjectType = parts.tProjectType,

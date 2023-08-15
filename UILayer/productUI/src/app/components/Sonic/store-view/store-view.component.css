@@ -81,10 +81,6 @@
     border-bottom: 4px solid chartreuse;
 }
 
-.projTypeOnTabHeader{
-    font-size: 10px;
-}
-
 
 .fullTile {
     height: 300px;
@@ -105,7 +101,25 @@
     text-decoration: underline;
 }
 
+.tileHeaderLeft{
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
 
+.headerLeft{
+    float: left;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+
+.projTypeOnTabHeader{
+    font-size: 10px;
+    display: block;
+    height: 15px;
+    line-height: 10px;
+}
 
 .projectInfoTabs{
     float: left;

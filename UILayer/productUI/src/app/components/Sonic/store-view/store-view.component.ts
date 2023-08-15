@@ -55,9 +55,11 @@ export class StoreViewComponent {
     this.selectedProject = tProject;
     let configTab = this.allTabs.find(x => x.tab_type == TabType.StoreConfiguration);
     let stackeTab = this.allTabs.find(x => x.tab_type == TabType.StoreStackHolder);
-    if (stackeTab && configTab) {
+    let installationTab = this.allTabs.find(x => x.tab_type == TabType.StoreInstallation);
+    if (stackeTab && configTab && installationTab) {
       this.getValues(configTab);
       this.getValues(stackeTab);
+      this.getValues(installationTab);
     }
   }
 
@@ -203,7 +205,7 @@ export class StoreViewComponent {
         });
         break;
       case TabType.StoreInstallation:
-        this.techCompService.GetInstallation(searchField).subscribe((x: StoreInstallation[]) => {
+        this.techCompService.GetInstallation(projIdSearchField).subscribe((x: StoreInstallation[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
         break;
@@ -253,7 +255,20 @@ export class StoreViewComponent {
       curStore: this._curStore
     };
     dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
-    // dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
+  }
+
+  NotImplemented() {
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+
+    dialogConfig.data = {
+      themeClass: "grayWhite",
+      dialogTheme: "lightGrayWhiteTheme",
+      curStore: this._curStore
+    };
+    dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
   }
 
   ShowDailyUpdates() {
@@ -267,8 +282,7 @@ export class StoreViewComponent {
       dialogTheme: "lightGrayWhiteTheme",
       curStore: this._curStore
     };
-    dialogRef = this.dialog.open(NotesListComponent, dialogConfig);
-    //dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
+    dialogRef = this.dialog.open(NotImplementedComponent, dialogConfig);
   }
 
   ShowSignOff() {
@@ -456,11 +470,14 @@ export class StoreViewComponent {
       case TabType.StoreInstallation:
         let aProjectInstallationID = (this.tValues[tab.tab_name]["aProjectInstallationID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectInstallationID"]) : 0;
         if (aProjectInstallationID > 0) {
+          fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.UpdateInstallation(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
           });
         }
         else {
+          fieldValues["nProjectID"] = this.selectedProject.nProjectId;
+          fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.CreateInstallation(fieldValues).subscribe((x: any) => {
             callBack(x);
           });

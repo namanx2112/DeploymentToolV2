@@ -27,3 +27,9 @@
 .greenColor{
     background-color: rgba(0,255,0,0.4);
 }
+
+.clickable {
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: -2px;
+}

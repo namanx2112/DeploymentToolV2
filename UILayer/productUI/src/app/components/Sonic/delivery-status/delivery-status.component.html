@@ -2,8 +2,9 @@
     <table>
         <thead>
             <th>Tech Components</th>
-            <th>Date</th>
+            <th>Vendor</th>
             <th>Status</th>
+            <th>Golive Date</th>
         </thead>
         <tbody>
             <tr *ngFor="let item of allStatus">
@@ -11,10 +12,13 @@
                     {{item.tComponent}}
                 </td>
                 <td>
-                    {{getFormateDate(item.dDeliveryDate)}}
+                    {{item.tVendor}}
                 </td>
                 <td>
                     {{item.tStatus}}
+                </td>
+                <td>
+                    {{getFormateDate(item.dDeliveryDate)}}
                 </td>
             </tr>
         </tbody>

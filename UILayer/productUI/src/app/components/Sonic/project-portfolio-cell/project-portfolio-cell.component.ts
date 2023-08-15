@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { StoreSearchModel } from 'src/app/interfaces/sonic';
 import { CommonService } from 'src/app/services/common.service';
+import { SonicService } from 'src/app/services/sonic.service';
 
 @Component({
   selector: 'app-project-portfolio-cell',
@@ -11,8 +13,13 @@ export class ProjectPortfolioCellComponent {
   jObject: any;
   @Input()
   tColumn: string;
-  constructor() {
+  @Output() openStore = new EventEmitter<StoreSearchModel>();
+  constructor(private sonicService: SonicService) {
 
+  }
+
+  getStoreNumber(item: any){
+    return item.tStoreNumber;
   }
 
   getCellVal(colName: string, colVal: string) {
@@ -26,11 +33,17 @@ export class ProjectPortfolioCellComponent {
     return rVal;
   }
 
+  openItem(item: any) {
+    this.sonicService.SearchStore(item).subscribe((x: StoreSearchModel[]) => {
+      this.openStore.emit(x[0]);
+    });
+  }
+
   getDateClass(val: string) {
-    return "redColor";
+    return "";// "redColor";
   }
 
   getStatusClass(val: string) {
-    return "greenColor";
+    return "";//"greenColor";
   }
 }

@@ -1,5 +1,6 @@
 <div *ngIf="tColumn == 'store'" class="cellDiv">
-    <span>{{ jObject.tStoreDetails}}</span>
+    <span><span (click)="openItem(jObject.tStoreNumber)" class="clickable" matTooltip="Click to view store">{{getStoreNumber(jObject)}}-</span> {{
+        jObject.tStoreDetails}}</span>
     <span>Go live:{{ getCellVal('dtGoliveDate', jObject.dtGoliveDate)}}</span>
     <span>{{ jObject.tProjectManager}}</span>
     <span>{{ jObject.tProjectType}}</span>
@@ -9,7 +10,7 @@
     <span>{{ jObject.tVendor}}</span>
     <span [className]="getDateClass(jObject.dtDate)">{{ getCellVal('dtDate', jObject.dtDate)}}</span>
     <span class="label">Install Date</span>
-    <span  [className]="getStatusClass(jObject.tStatus)">{{ jObject.tStatus}}</span>
+    <span [className]="getStatusClass(jObject.tStatus)">{{ jObject.tStatus}}</span>
     <span class="label">Install Status</span>
 </div>
 <div *ngIf="tColumn == 'notes'" class="cellDiv noteCell">

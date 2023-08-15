@@ -40,8 +40,9 @@
                 (onSubmit)="onSubmit($event, allTabs[0])" [themeClass]="'grayWhite'"></app-controls>
         </div>
         <div class="fullTile tileSelected">
-            <h4>{{allTabs[1].tab_header}} <span class="projTypeOnTabHeader">{{ "(" +
-                    projectTypeString(selectedProject.nProjectType) + ")"}}</span>
+            <h4>
+                <div class="tileHeaderLeft">{{allTabs[1].tab_header}} <span class="projTypeOnTabHeader">{{ "(" +
+                        projectTypeString(selectedProject.nProjectType) + ")"}}</span></div>
                 <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[1].tab_name, 1)"><a
                         (click)="editTab(allTabs[1])">Edit</a></div>
             </h4>
@@ -52,8 +53,11 @@
         </div>
         <div class="tileGroup">
             <div class="halfTile tileSelected">
-                <h4>{{allTabs[2].tab_header}} <span class="projTypeOnTabHeader">{{ "(" +
-                        projectTypeString(selectedProject.nProjectType) + ")"}} </span>
+                <h4>
+                    <div class="tileHeaderLeft">{{allTabs[2].tab_header}}
+                        <span class="projTypeOnTabHeader">{{ "(" +
+                            projectTypeString(selectedProject.nProjectType) + ")"}} </span>
+                    </div>
                     <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[2].tab_name, 1)"><a
                             (click)="editTab(allTabs[2])">Edit</a></div>
                 </h4>
@@ -63,7 +67,7 @@
                     (onSubmit)="onSubmit($event, allTabs[2])" [themeClass]="'grayWhite'"></app-controls>
             </div>
             <div class="tileGroup tileButtonGroup">
-                <button class="noBorderButton lightGray" mat-raised-button (click)="ShowNotes();"
+                <button class="noBorderButton lightGray" mat-raised-button (click)="NotImplemented();"
                     *ngIf="access.hasAccess('home.sonic.project.task', 1)"><mat-icon>event_note</mat-icon>Tasks</button>
                 <button *ngIf="access.hasAccess('home.sonic.project.notes', 1)" class="noBorderButton lightGray"
                     mat-raised-button (click)="ShowNotes();"><mat-icon>
@@ -96,7 +100,14 @@
                 Delivery Status</div>
             <div *ngFor="let tTab of tabForUI;let index = index"
                 [ngClass]="(selectedTab == index) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(index);">
-                {{tTab.tab_header}}
+                <span *ngIf="index != 7">
+                    {{tTab.tab_header}}
+                </span>
+                <span class="headerLeft" *ngIf="index == 7">
+                    {{tTab.tab_header}}
+                </span>
+                <span *ngIf="index == 7" class="projTypeOnTabHeader">{{ "(" +
+                    projectTypeString(selectedProject.nProjectType) + ")"}} </span>
             </div>
             <div [ngClass]="(selectedTab == -11) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-11);"
                 *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)">

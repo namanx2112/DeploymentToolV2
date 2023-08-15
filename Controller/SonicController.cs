@@ -151,7 +151,7 @@ namespace DeploymentTool.Controller
                 var paramProjectId = new SqlParameter("@movedProjectId", nMovedProjectId);
                 paramProjectId.Direction = ParameterDirection.Output;
                 var noOfRowUpdated = db.Database.ExecuteSqlCommand("exec sproc_MoveProjectToHistory @nStoreId, @nProjectType,@movedProjectId OUTPUT", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), paramProjectId);
-                if (noOfRowUpdated != 0)
+               // if (noOfRowUpdated != 0)
                     nMovedProjectId = (paramProjectId.Value == null) ? 0 : Convert.ToInt32(paramProjectId.Value);
                 tblStore ttboStore = newStore.GettblStores();
                 if(ttboStore.aStoreID > 0)
