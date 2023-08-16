@@ -436,8 +436,10 @@ namespace DeploymentTool.Controller
 
                         List<tblPurchaseOrderNotification> itemPOStore = db.Database.SqlQuery<tblPurchaseOrderNotification>("exec sproc_getPreviousPODetails @nStoreId,@nUserID,@nTemplateId", new SqlParameter("@nStoreId", item.nStoreId), new SqlParameter("@nUserID", lUserId), new SqlParameter("@nTemplateId", item.aPurchaseOrderTemplateID)).ToList();
                         List<PurchaseOrderTemplate> itemPOTemplate = db.Database.SqlQuery<PurchaseOrderTemplate>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID,@nStoreId", new SqlParameter("@aPurchaseOrderTemplateID", item.aPurchaseOrderTemplateID), new SqlParameter("@nStoreId", item.nStoreId)).ToList();
-                        DateTime dDeliverTime = itemPOTemplate[0].dDeliveryDate != null ? Convert.ToDateTime(itemPOTemplate[0].dDeliveryDate) : DateTime.Now;
-                        string dDeliver = dDeliverTime.ToShortDateString();
+                        // DateTime dDeliverTime = itemPOTemplate[0].dDeliveryDate != null ? Convert.ToDateTime(itemPOTemplate[0].dDeliveryDate) : DateTime.Now;
+                        // string dDeliver = dDeliverTime.ToShortDateString();
+                        string dDeliver = itemPOTemplate[0].dDeliveryDate != null ? Convert.ToDateTime(itemPOTemplate[0].dDeliveryDate).ToString("MM/dd/yyyy").Replace('-', '/') : "";
+
                         string strBody = itemPOStore[0].tPDFData;
                         strBody = strBody.Split(separators, StringSplitOptions.None)[0];
                         string sPDFData = strBody + "@@Splitter@@" + item.nPOId.ToString() + "@@Splitter@@" + dDeliver;
@@ -448,12 +450,12 @@ namespace DeploymentTool.Controller
 
                         string tContent = itemPOStore[0].tSentHtml.Split(separators, StringSplitOptions.None)[0] ;
                         string tSubject = itemPOStore[0].tSubject;
-                        string tTo = itemPOStore[0].tTo;
-                        string tCC = itemPOStore[0].tCC;
+                        string tTo = itemPOStore[0].tTo;//itemPOTemplate[0].tTo
+                        string tCC = itemPOStore[0].tCC;//itemPOTemplate[0].tCC
                         string tVendorName = itemPOTemplate[0].tVendorName;
                         string tStoreNumber = itemPOStore[0].tStoreNumber;
-                        //string tProjectManager = itemPOStore[0].tProjectManager;
-                        var tProjectManager = db.Database.SqlQuery<string>("select top 1 tITPM as tProjectManager from tblProjectStakeHolders with (nolock) where nMyActiveStatus=1  and nStoreId=@nStoreId", new SqlParameter("@nStoreId", item.nStoreId)).FirstOrDefault();
+                        string tProjectManager = itemPOTemplate[0].tProjectManager;
+                       // var tProjectManager = db.Database.SqlQuery<string>("select top 1 tITPM as tProjectManager from tblProjectStakeHolders with (nolock) where nMyActiveStatus=1  and nStoreId=@nStoreId", new SqlParameter("@nStoreId", item.nStoreId)).FirstOrDefault();
 
                         string sSentHtml = tContent + "@@Splitter@@" + item.nPOId.ToString() + "@@Splitter@@" + tVendorName + "@@Splitter@@" + tStoreNumber + "@@Splitter@@" + dDeliver + "@@Splitter@@" + tProjectManager;
                         tContent = tContent.Replace("@@InspirePOID@@", item.nPOId.ToString()).Replace("@@InspiretVendorName@@", tVendorName).Replace("@@InspiretStoreNumber@@", tStoreNumber).Replace("@@InspiredDeliver@@", dDeliver).Replace("@@InspiretProjectManager@@", tProjectManager);
@@ -487,7 +489,7 @@ namespace DeploymentTool.Controller
                             tShippingEmail = itemPOStore[0].tShippingEmail,
                             tShippingAddress = itemPOStore[0].tShippingAddress,
                             tNotes = itemPOStore[0].tNotes,
-                            dDeliver = dDeliverTime,
+                            dDeliver = itemPOTemplate[0].dDeliveryDate,
                             cTotal = itemPOStore[0].cTotal,
                             tPDFData = sPDFData,
                             tSentHtml = sSentHtml,

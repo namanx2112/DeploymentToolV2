@@ -49,6 +49,23 @@ END
 
 GO
 
+Alter procedure [dbo].[sproc_GetAllTemplate]      
+@nBrandId int      
+AS      
+BEGIN      
+ Select aQuoteRequestTemplateId as nTemplateId,tTemplateName,1 as nTemplateType--QuoteRequest  
+ from tblQuoteRequestMain with (nolock) where nBrandId = @nBrandId  and (bDeleted is null  or bDeleted=0)  
+ union all  
+ select aPurchaseOrderTemplateID as nTemplateId, tTemplateName, 2 as nTemplateType--PurchaseOrder    
+ from tblPurchaseOrderTemplate with (nolock) where nBrandId = @nBrandId    and (bDeleted is null  or bDeleted=0)  
+ union all  
+ select 1  as nTemplateId,'Date Change Notification' as tTemplateName,0 as nTemplateType  
+ --Select aNotificationTemplateId,tTemplateName,0--Notification  
+ --from tblNotificationTemplate with (nolock) where nBrandId = @nBrandId   and (bDeleted is null  or bDeleted=0)  
+END  
+
+
+
 
 sp_helptext sproc_getAllNotificationSummary
 select * from tblProjectInstallation where nStoreId = 2
@@ -56,4 +73,9 @@ update tblProjectInstallation set nProjectId = 9 where aProjectInstallationID = 
 
 sp_depends tblUserNotification
 select * from dbo.tblUserNotification
+update tblUserNotification set dtCreatedOn = dateAdd(day, -20, getdate()) where aUserNotificationId = 1
 
+sproc_getAllNotificationSummary 2
+
+Date Change Notification
+sp_helptext  sproc_GetAllTemplate

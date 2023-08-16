@@ -39,7 +39,7 @@ namespace DeploymentTool.Model
         public List<PurchaseOrderParts> purchaseOrderParts { get; set; }
         public decimal cTotal { get; set; }
         public int nTemplateId { get; set; }
-        public DateTime dDeliver { get; set; }
+        public Nullable<DateTime> dDeliver { get; set; }
         public int nOutgoingEmailID { get; set; }
         public int CreatedBy { get; set; }
         public int UpdateBy { get; set; }
@@ -71,13 +71,15 @@ namespace DeploymentTool.Model
         public int nUpdateBy { get; set; }
         public string tTechnologyComponent { get; set; }
 
-        public DateTime dDeliveryDate { get; set; }
+        public Nullable<DateTime> dDeliveryDate { get; set; }
 
         public string tVendorName { get; set; }
 
         public string tTo { get; set; }
 
         public string tCC { get; set; }
+
+        public string tProjectManager { get; set; }
 
         public List<PurchaseOrderParts> purchaseOrderParts { get; set; }
         public tblPurchaseOrderTemplate GetTblPurchaseOrder(HttpContext context)

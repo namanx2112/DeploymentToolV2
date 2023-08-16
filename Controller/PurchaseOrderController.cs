@@ -357,10 +357,10 @@ namespace DeploymentTool.Controller
                 poRequest.tBillToZip = itemPOStore[0].tBillToZip;// "Newjurcy";
                 poRequest.tTemplateName = itemPOTemplate[0].tTemplateName;
                 poRequest.nTemplateId = nTemplateId;
-                poRequest.dDeliver = itemPOTemplate[0].dDeliveryDate != null ? Convert.ToDateTime(itemPOTemplate[0].dDeliveryDate) : DateTime.Now;
+                poRequest.dDeliver = itemPOTemplate[0].dDeliveryDate?.Date;// != null ? Convert.ToDateTime(itemPOTemplate[0].dDeliveryDate) : DateTime.Now;
                 poRequest.tTo = itemPOTemplate[0].tTo;
                 poRequest.tCC = itemPOTemplate[0].tCC;
-                poRequest.tProjectManager = itemPOStore[0].tProjectManager;
+                poRequest.tProjectManager = itemPOTemplate[0].tProjectManager;
 
                 poRequest.nOutgoingEmailID = 0;
                 decimal cTotal = 0;
@@ -501,8 +501,9 @@ namespace DeploymentTool.Controller
             strBody += "<div style='text-align:right;'><b> PO#: </b> @@InspirePOID@@</div>";
             strBody += "<div style='text-align:right;'><b> Delivery Date#: </b> @@InspiredDeliver@@</div>";
             strBody += "</body></html>";
-            string sPDFData = strBody + "@@Splitter@@" + request.aPurchaseOrderPreviewTeamplateID.ToString() + "@@Splitter@@" + request.dDeliver.ToShortDateString();
-            strBody = strBody.Replace("@@InspirePOID@@", request.aPurchaseOrderPreviewTeamplateID.ToString()).Replace("@@InspiredDeliver@@", request.dDeliver.ToShortDateString());
+            string dDeliver = request.dDeliver != null ? Convert.ToDateTime(request.dDeliver).ToString("MM/dd/yyyy").Replace('-', '/') : "";
+            string sPDFData = strBody + "@@Splitter@@" + request.aPurchaseOrderPreviewTeamplateID.ToString() + "@@Splitter@@" + dDeliver;
+            strBody = strBody.Replace("@@InspirePOID@@", request.aPurchaseOrderPreviewTeamplateID.ToString()).Replace("@@InspiredDeliver@@", dDeliver);
             
             
             string fileName = "PurchaseOrder.pdf";
@@ -519,8 +520,8 @@ namespace DeploymentTool.Controller
                 "<tr><td>Project Manager:</td><td>@@InspiretProjectManager@@</td></tr>" +
                 "<table>";
             
-            string sSentHtml = tContent + "@@Splitter@@" + request.aPurchaseOrderPreviewTeamplateID.ToString() + "@@Splitter@@" + request.tVendorName + "@@Splitter@@" + request.tStoreNumber + "@@Splitter@@" + request.dDeliver.ToShortDateString() + "@@Splitter@@" + request.tProjectManager;
-            tContent = tContent.Replace("@@InspirePOID@@", request.aPurchaseOrderPreviewTeamplateID.ToString()).Replace("@@InspiretVendorName@@", request.tVendorName).Replace("@@InspiretStoreNumber@@", request.tStoreNumber).Replace("@@InspiredDeliver@@", request.dDeliver.ToShortDateString()).Replace("@@InspiretProjectManager@@", request.tProjectManager);
+            string sSentHtml = tContent + "@@Splitter@@" + request.aPurchaseOrderPreviewTeamplateID.ToString() + "@@Splitter@@" + request.tVendorName + "@@Splitter@@" + request.tStoreNumber + "@@Splitter@@" + request.dDeliver.ToString() + "@@Splitter@@" + request.tProjectManager;
+            tContent = tContent.Replace("@@InspirePOID@@", request.aPurchaseOrderPreviewTeamplateID.ToString()).Replace("@@InspiretVendorName@@", request.tVendorName).Replace("@@InspiretStoreNumber@@", request.tStoreNumber).Replace("@@InspiredDeliver@@", dDeliver).Replace("@@InspiretProjectManager@@", request.tProjectManager);
             PurchaseOrderMailMessage message = new PurchaseOrderMailMessage()
             {
                 nProjectId = request.nProjectId,
