@@ -10,6 +10,10 @@ namespace DeploymentTool.Model.Templates
         public int nTemplateId { get; set; }
         public string tTemplateName { get; set; }
         public ProjectTemplateType nTemplateType { get; set; }
+
+        public string tComponent { get; set; }
+
+        
     }
 
     public enum ProjectTemplateType

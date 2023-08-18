@@ -499,7 +499,7 @@ namespace DeploymentTool.Controller
             strBody += "</table></div>";
             strBody += "<div style='text-align:right;'><b> Total:</b> " + request.cTotal.ToString() + "</div>";
             strBody += "<div style='text-align:right;'><b> PO#: </b> @@InspirePOID@@</div>";
-            strBody += "<div style='text-align:right;'><b> Delivery Date#: </b> @@InspiredDeliver@@</div>";
+            strBody += "<div style='text-align:right;'><b> Delivery Date: </b> @@InspiredDeliver@@</div>";
             strBody += "</body></html>";
             string dDeliver = request.dDeliver != null ? Convert.ToDateTime(request.dDeliver).ToString("MM/dd/yyyy").Replace('-', '/') : "";
             string sPDFData = strBody + "@@Splitter@@" + request.aPurchaseOrderPreviewTeamplateID.ToString() + "@@Splitter@@" + dDeliver;

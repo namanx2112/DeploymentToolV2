@@ -28,9 +28,10 @@ export class QuoteRequestWorkflowTemplateComponent {
   techCompControl = new FormControl('');
   constructor(private sonicService: SonicService, private quoteService: QuoteRequestWorkflowConfigService) {
     this.techCompTabs = [this.sonicService.GetStoreContactTab(TabInstanceType.Single), this.sonicService.GetStoreConfigurationTab(TabInstanceType.Single),
-    this.sonicService.GetStoreAudioTab(TabInstanceType.TechComponent), this.sonicService.GetStoreNetworingTab(TabInstanceType.TechComponent), this.sonicService.GetStorePOSTab(TabInstanceType.TechComponent),
-    this.sonicService.GetStoreExteriorMenusTab(TabInstanceType.TechComponent), this.sonicService.GetStoreInteriorMenusTab(TabInstanceType.TechComponent),
-    this.sonicService.GetStorePaymentSystemTab(TabInstanceType.TechComponent)];
+    this.sonicService.GetStoreNetworingTab(TabInstanceType.TechComponent), this.sonicService.GetStorePOSTab(TabInstanceType.TechComponent), this.sonicService.GetStoreAudioTab(TabInstanceType.TechComponent),
+    this.sonicService.GetStoreExteriorMenusTab(TabInstanceType.TechComponent), this.sonicService.GetStorePaymentSystemTab(TabInstanceType.TechComponent),
+    this.sonicService.GetStoreInteriorMenusTab(TabInstanceType.TechComponent)];
+
     this.techCompTabs[0].tab_name = "Store Information";
     this.curTabFields = [];
   }
@@ -61,10 +62,10 @@ export class QuoteRequestWorkflowTemplateComponent {
   //   return items.filter(t => t.completed).length > 0 && !this.allComplete;
   // }
 
-  setAll(check: boolean, items: any[]){}
+  setAll(check: boolean, items: any[]) { }
 
   updateSelectedTabs() {
-    this.selectedTabs = [this.techCompTabs[0], this.techCompTabs[1]];
+    this.selectedTabs = [];
     for (var indx in this.curTemplate.quoteRequestTechComps) {
       let tTab = this.curTemplate.quoteRequestTechComps[indx];
       let sTab = this.techCompTabs.filter(x => x.tab_name == tTab.tTechCompName);

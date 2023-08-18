@@ -100,7 +100,7 @@ export class SonicService {
   }
 
   getPOTechConfigs() {
-    return ["Audio", "Exterior Menus", "Installation", "Interior Menus", "Payment Systems", "Sonic Radio"];
+    return ["Audio", "POS", "Exterior Menus", "Installation", "Interior Menus", "Payment Systems", "Sonic Radio"];
   }
 
   GetTableVisibleColumns(tab: HomeTab) {

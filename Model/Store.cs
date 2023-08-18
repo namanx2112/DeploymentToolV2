@@ -83,6 +83,7 @@ namespace DeploymentTool.Model
     {
         public int nStoreId { get; set; }
         public int nPOId { get; set; }
+        public string tTemplateName { get; set; }
         public string tPONumber { get; set; }
         public bool isSelected { get; set; }
         public int aPurchaseOrderTemplateID { get; set; }

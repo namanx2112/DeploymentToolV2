@@ -228,7 +228,8 @@ export interface DropdownModule{
 export interface ProjectTemplates {
     nTemplateId: number,
     tTemplateName: string,
-    nTemplateType: ProjectTemplateType
+    nTemplateType: ProjectTemplateType,
+    tComponent: string
 }
 
 export enum ProjectTemplateType {

@@ -347,48 +347,57 @@ namespace DeploymentTool.Controller
         [Route("api/Store/SendDateChangeNotification")]
         public async System.Threading.Tasks.Task<IHttpActionResult> SendDateChangeNotification(DateChangeNotificationBody request)
         {
-
-            EMailRequest MailObj = new EMailRequest();
-            MailObj.tSubject = request.tSubject;
-            if (request.tTo != null && request.tTo.Length > 0)
-            {
-                MailObj.tTo = request.tTo;
-                if (request.tCC != null && request.tCC.Length > 0)
-                    MailObj.tCC = request.tCC;
-                MailObj.tContent = request.tContent;
-                //MailObj.FileAttachments = request.FileAttachments;
-                DeploymentTool.Misc.Utilities.SendMail(MailObj);
-                tblOutgoingEmail tblQuoteEmail = MailObj.GettblOutgoingEmail();
-                db.tblOutgoingEmails.Add(tblQuoteEmail);
-                await db.SaveChangesAsync();
-                var aOutgoingEmailID = tblQuoteEmail.aOutgoingEmailID;
-            }
-            int nBrandId = 1;// Sonic
-            SqlParameter tModuleNameParam = new SqlParameter("@nBrandId", nBrandId);
-            List<PurchaseOrderTemplateTemp> tList = db.Database.SqlQuery<PurchaseOrderTemplateTemp>("exec sproc_GetAllPurchaseOrderTemplate @nBrandId", tModuleNameParam).ToList();
-
-            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            Nullable<int> lUserId = securityContext.nUserID;
-
             List<DateChangePOOption> response = new List<DateChangePOOption>();
-            foreach (var item in tList)
+
+            try
             {
-                int ret = 0;
-                List<SqlParameter> tPramList = new List<SqlParameter>();
-                tPramList.Add(new SqlParameter("@nStoreId", request.nStoreId));
-                tPramList.Add(new SqlParameter("@nTemplateId", item.aPurchaseOrderTemplateID));
-                tPramList.Add(new SqlParameter("@nUserID", lUserId));
-                tPramList.Add(new SqlParameter("@ret", ret) { Direction = ParameterDirection.InputOutput });
-                db.Database.ExecuteSqlCommand("exec sproc_getPOID @nStoreId,@nTemplateId,@nUserID,@ret out", tPramList[0], tPramList[1], tPramList[2], tPramList[3]);
-                var aPurchaseOrderID = ((SqlParameter)tPramList[3]).Value == DBNull.Value ? 0 : Convert.ToInt32(((SqlParameter)tPramList[3]).Value);
+
+                EMailRequest MailObj = new EMailRequest();
+                MailObj.tSubject = request.tSubject;
+                if (request.tTo != null && request.tTo.Length > 0)
+                {
+                    MailObj.tTo = request.tTo;
+                    if (request.tCC != null && request.tCC.Length > 0)
+                        MailObj.tCC = request.tCC;
+                    MailObj.tContent = request.tContent;
+                    //MailObj.FileAttachments = request.FileAttachments;
+                    DeploymentTool.Misc.Utilities.SendMail(MailObj);
+                    tblOutgoingEmail tblQuoteEmail = MailObj.GettblOutgoingEmail();
+                    db.tblOutgoingEmails.Add(tblQuoteEmail);
+                    await db.SaveChangesAsync();
+                    var aOutgoingEmailID = tblQuoteEmail.aOutgoingEmailID;
+                }
+                int nBrandId = 1;// Sonic
+                SqlParameter tModuleNameParam = new SqlParameter("@nStoreId", request.nStoreId);
+                List<DateChangePOOption> tList = db.Database.SqlQuery<DateChangePOOption>("exec sproc_getPrevPOIDByStore @nStoreId", tModuleNameParam).ToList();
+
+                //var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+                //Nullable<int> lUserId = securityContext.nUserID;
+
+                 foreach (var item in tList)
+                {
+                    int ret = 0;
+                    //List<SqlParameter> tPramList = new List<SqlParameter>();
+                    //tPramList.Add(new SqlParameter("@nStoreId", request.nStoreId));
+                    //tPramList.Add(new SqlParameter("@nTemplateId", item.aPurchaseOrderTemplateID));
+                    //tPramList.Add(new SqlParameter("@nUserID", lUserId));
+                    //tPramList.Add(new SqlParameter("@ret", ret) { Direction = ParameterDirection.InputOutput });
+                    //db.Database.ExecuteSqlCommand("exec sproc_getPOID @nStoreId,@nTemplateId,@nUserID,@ret out", tPramList[0], tPramList[1], tPramList[2], tPramList[3]);
+                    //var aPurchaseOrderID = ((SqlParameter)tPramList[3]).Value == DBNull.Value ? 0 : Convert.ToInt32(((SqlParameter)tPramList[3]).Value);
 
 
-                DateChangePOOption obj = new DateChangePOOption();
-                obj.aPurchaseOrderTemplateID = item.aPurchaseOrderTemplateID;
-                obj.nStoreId = request.nStoreId;
-                obj.nPOId = aPurchaseOrderID;
-                obj.tPONumber = item.tTemplateName + " PO #" + aPurchaseOrderID.ToString();
-                response.Add(obj);
+                    DateChangePOOption obj = new DateChangePOOption();
+                    obj.aPurchaseOrderTemplateID = item.aPurchaseOrderTemplateID;
+                    obj.nStoreId = request.nStoreId;
+                    obj.nPOId = 0;
+                    obj.tPONumber = item.tTemplateName + " PO #" + item.nPOId.ToString();
+                    response.Add(obj);
+                }
+            }
+            catch (Exception ex)
+            {
+
+
             }
 
             //{
@@ -433,6 +442,18 @@ namespace DeploymentTool.Controller
                 {
                     if (item.isSelected)
                     {
+                        if (item.nPOId <= 0)
+                        {
+                            int ret=0;
+                            List<SqlParameter> tPramList = new List<SqlParameter>();
+                            tPramList.Add(new SqlParameter("@nStoreId", item.nStoreId));
+                            tPramList.Add(new SqlParameter("@nTemplateId", item.aPurchaseOrderTemplateID));
+                            tPramList.Add(new SqlParameter("@nUserID", lUserId));
+                            tPramList.Add(new SqlParameter("@ret", ret) { Direction = ParameterDirection.InputOutput });
+                            db.Database.ExecuteSqlCommand("exec sproc_getPOID @nStoreId,@nTemplateId,@nUserID,@ret out", tPramList[0], tPramList[1], tPramList[2], tPramList[3]);
+                            var aPOID = ((SqlParameter)tPramList[3]).Value == DBNull.Value ? 0 : Convert.ToInt32(((SqlParameter)tPramList[3]).Value);
+                            item.nPOId = aPOID;
+                        }
 
                         List<tblPurchaseOrderNotification> itemPOStore = db.Database.SqlQuery<tblPurchaseOrderNotification>("exec sproc_getPreviousPODetails @nStoreId,@nUserID,@nTemplateId", new SqlParameter("@nStoreId", item.nStoreId), new SqlParameter("@nUserID", lUserId), new SqlParameter("@nTemplateId", item.aPurchaseOrderTemplateID)).ToList();
                         List<PurchaseOrderTemplate> itemPOTemplate = db.Database.SqlQuery<PurchaseOrderTemplate>("exec sproc_GetPurchaseOrderTemplate @aPurchaseOrderTemplateID,@nStoreId", new SqlParameter("@aPurchaseOrderTemplateID", item.aPurchaseOrderTemplateID), new SqlParameter("@nStoreId", item.nStoreId)).ToList();
