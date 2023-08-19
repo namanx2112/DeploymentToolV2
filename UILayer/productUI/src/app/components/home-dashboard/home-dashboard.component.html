@@ -1,7 +1,7 @@
 <div class="leftPart floatLeft">
     <div class="chips">
         <div class="chipsHeader">Brands</div>
-        <div class="chipsBody">
+        <div class="chipsBody brandChip">
             <span class="brands" *ngFor="let brand of brands|forFilter:filterBrand" (click)="showBrand(brand)"
                 title="{{brand.tBrandName}}">
                 <img src="{{brand.tIconURL}}" />

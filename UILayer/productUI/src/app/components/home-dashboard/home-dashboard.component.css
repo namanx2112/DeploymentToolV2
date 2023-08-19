@@ -54,8 +54,20 @@
     display: inline-block;
     background-color: #fff;
     cursor: pointer;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
 }
 .brands img{
     width: 100px;
-    height: 60px;
+    margin: auto;
+    display: block;
+}
+
+.brandChip{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }

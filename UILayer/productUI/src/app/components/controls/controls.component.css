@@ -44,7 +44,7 @@
 
 .closeButtonClass{
     float: left;
-    width: 150px;
+    min-width: 150px;
 }
 
 .dollarSymbol{
