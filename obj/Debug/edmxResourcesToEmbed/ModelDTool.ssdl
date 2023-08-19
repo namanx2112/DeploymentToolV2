@@ -657,7 +657,11 @@ warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key def
     <Property Name="nFileSie" Type="int" />
     <Property Name="fBase64" Type="nvarchar(max)" />
     <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="tTicketStatus" Type="varchar" MaxLength="100" />
+    <Property Name="tFixComment" Type="nvarchar(max)" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblTechComponent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->

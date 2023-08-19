@@ -7,7 +7,7 @@ END
 
 GO
 
-Alter procedure sproc_getAllNotificationSummary  
+create procedure sproc_getAllNotificationSummary  
 @nUserID int=0    
 as    
 BEGIN  
@@ -79,3 +79,21 @@ sproc_getAllNotificationSummary 2
 
 Date Change Notification
 sp_helptext  sproc_GetAllTemplate
+
+GO
+
+Alter procedure [dbo].[sproc_GetAllTemplate]        
+@nBrandId int        
+AS        
+BEGIN        
+ Select aQuoteRequestTemplateId as nTemplateId,tTemplateName,1 as nTemplateType /*QuoteRequest */, '' as tComponent   
+ from tblQuoteRequestMain with (nolock) where nBrandId = @nBrandId  and (bDeleted is null  or bDeleted=0)    
+ union all    
+ select aPurchaseOrderTemplateID as nTemplateId, tTemplateName, 2 as nTemplateType /*PurchaseOrder     */,tTechnologyComponent as tComponent 
+ 
+ from tblPurchaseOrderTemplate with (nolock) where nBrandId = @nBrandId    and (bDeleted is null  or bDeleted=0)    
+ union all    
+ select 1  as nTemplateId,'Date Change Notification' as tTemplateName,0 as nTemplateType,'' as tComponent
+ --Select aNotificationTemplateId,tTemplateName,0--Notification    
+ --from tblNotificationTemplate with (nolock) where nBrandId = @nBrandId   and (bDeleted is null  or bDeleted=0)    
+END 

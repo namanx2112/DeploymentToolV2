@@ -769,6 +769,10 @@
           <ScalarProperty Name="tContent" ColumnName="tContent" />
           <ScalarProperty Name="nPriority" ColumnName="nPriority" />
           <ScalarProperty Name="aTicketId" ColumnName="aTicketId" />
+          <ScalarProperty Name="tTicketStatus" ColumnName="tTicketStatus" />
+          <ScalarProperty Name="tFixComment" ColumnName="tFixComment" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

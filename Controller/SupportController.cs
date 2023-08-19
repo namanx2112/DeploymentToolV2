@@ -1,6 +1,7 @@
 ﻿using DeploymentTool.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -18,9 +19,18 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<HttpResponseMessage> Log(tblSupportTicket request)
         {
-            Misc.Utilities.SetHousekeepingFields(true, HttpContext.Current, request);
-            db.tblSupportTickets.Add(request);
-            await db.SaveChangesAsync();
+            if(request.aTicketId > 0)
+            {
+                Misc.Utilities.SetHousekeepingFields(false, HttpContext.Current, request);
+                db.Entry(request).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+            else
+            {
+                Misc.Utilities.SetHousekeepingFields(true, HttpContext.Current, request);
+                db.tblSupportTickets.Add(request);
+                await db.SaveChangesAsync();
+            }
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<int>(0, new JsonMediaTypeFormatter())
@@ -28,9 +38,9 @@ namespace DeploymentTool.Controller
         }
 
         [HttpGet]
-        public IQueryable<tblSupportTicket> GetAll()
+        public IQueryable<SupportTicketModel> GetAll()
         {
-            return db.tblSupportTickets;
+            return db.Database.SqlQuery<SupportTicketModel>("exec sproc_getSupportTicket").AsQueryable();
         }
 
         [HttpGet]
@@ -42,5 +52,20 @@ namespace DeploymentTool.Controller
                 Content = new ObjectContent<tblSupportTicket>(request, new JsonMediaTypeFormatter())
             };
         }
+    }
+
+    public class SupportTicketModel
+    {
+        public int aTicketId { get; set; }
+        public Nullable<int> nPriority { get; set; }
+        public string tContent { get; set; }
+        public Nullable<int> nFileSie { get; set; }
+        public string fBase64 { get; set; }
+        public string tTicketStatus { get; set; }
+        public string tFixComment { get; set; }
+        public string tCreatedBy { get; set; }
+        public Nullable<int> nCreatedBy { get; set; }
+        public Nullable<System.DateTime> dtCreatedOn { get; set; }
+
     }
 }

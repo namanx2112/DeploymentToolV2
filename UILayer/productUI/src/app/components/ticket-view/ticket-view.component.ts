@@ -6,6 +6,8 @@ import { SupportContent } from 'src/app/interfaces/models';
 import { SupportService } from 'src/app/services/support.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import html2canvas from 'html2canvas';
+import { SupportPageComponent } from '../support-page/support-page.component';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-ticket-view',
@@ -16,17 +18,67 @@ export class TicketViewComponent implements AfterViewInit {
   allTickets: SupportContent[];
   dataSource: MatTableDataSource<SupportContent>;
   init: boolean;
-  displayedColumns: string[] = ['aTicketId', 'nPriority', 'tContent', 'nCreatedBy', 'dtCreatedOn'];
+  displayedColumns: string[] = ['aTicketId', 'nPriority', 'tTicketStatus', 'tContent', 'tFixComment', 'tCreatedBy', 'dtCreatedOn'];
   @ViewChild(MatSort) sort: MatSort;
+  respValue: any;
   constructor(private dialog: MatDialog, public dialogRef: MatDialogRef<TicketViewComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private supportService: SupportService, private _liveAnnouncer: LiveAnnouncer) {
     this.init = false;
   }
 
   getTickets() {
     this.supportService.GetAll().subscribe((x: SupportContent[]) => {
+      this.respValue = x;
       this.dataSource = new MatTableDataSource(x);
+      this.dataSource.filterPredicate = (data: any, filter: string) => {
+        filter = filter.toLocaleLowerCase();
+        return ((data["tContent"] && data["tContent"].toLowerCase().indexOf(filter) > -1) || (data["tTicketStatus"] && data["tTicketStatus"].toLowerCase().indexOf(filter) > -1)
+          || (data["tFixComment"] && data["tFixComment"].toLowerCase().indexOf(filter) > -1))
+      };
       this.dataSource.sort = this.sort;
       this.init = true;
+    });
+  }
+
+  getPriority(nPriority: number) {
+    let tVal = "";
+    switch (nPriority) {
+      case 0:
+        tVal = "Low"
+        break;
+      case 1:
+        tVal = "Medium";
+        break;
+      case 2:
+        tVal = "High";
+        break;
+      case 3:
+        tVal = "Show Stopper";
+        break;
+    }
+    return tVal;
+  }
+
+  getDateCellVal(colVal: string) {
+    let rVal = CommonService.getFormatedDateString(colVal);
+    return rVal;
+  }
+
+
+  rowClick(item: SupportContent) {
+    let cThis = this;
+    this.getScreenshot(function (bytes: any) {
+      const dialogConfig = new MatDialogConfig();
+      let dialogRef: any;
+      dialogConfig.autoFocus = true;
+      dialogConfig.height = '80%';
+      dialogConfig.width = '60%';
+      dialogConfig.data = {
+        nTicketId: item.aTicketId,
+        onSubmit: function (data: any) {
+          dialogRef.close();
+        }
+      };
+      dialogRef = cThis.dialog.open(SupportPageComponent, dialogConfig);
     });
   }
 
@@ -44,7 +96,7 @@ export class TicketViewComponent implements AfterViewInit {
           dialogRef.close();
         }
       };
-      dialogRef = cThis.dialog.open(TicketViewComponent, dialogConfig);
+      dialogRef = cThis.dialog.open(SupportPageComponent, dialogConfig);
     });
   }
 
@@ -64,11 +116,10 @@ export class TicketViewComponent implements AfterViewInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    let filterValue: any;
+    filterValue = (event.target as HTMLInputElement).value;
+    if (this.dataSource)
+      this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 
@@ -89,5 +140,17 @@ export class TicketViewComponent implements AfterViewInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+
+    var compare = function (a: any, b: any) {
+      if (a[sortState.active].toLowerCase() < b[sortState.active].toLowerCase()) {
+        return -1;
+      }
+      if (a[sortState.active].toLowerCase() > b[sortState.active].toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    }
+    this.dataSource = new MatTableDataSource(this.respValue.sort(compare));
+    this.dataSource.sort = this.sort;
   }
 }

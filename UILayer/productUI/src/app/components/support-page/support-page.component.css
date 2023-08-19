@@ -40,3 +40,23 @@ select{
     bottom: 20px;
     right: 20px;
 }
+
+.contentArea{
+    width: 100%;
+    height: 200px;
+    resize: none;
+    border-radius: 10px;
+    border: 1px solid darkgray;
+}
+.commentArea{
+    width: 100%;
+    height: 100px;
+    resize: none;
+    border-radius: 10px;
+    border: 1px solid darkgray;
+}
+
+.logButton{
+    float: right;
+    margin-bottom: -30px;
+}

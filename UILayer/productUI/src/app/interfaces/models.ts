@@ -245,7 +245,10 @@ export interface SupportContent {
     nPriority: number,
     tContent: string,
     nFileSie: number,
+    tTicketStatus: string,
+    tFixComment: string,
     fBase64: string,
     nCreatedBy: number,
+    tCreatedBy?: string,
     dtCreatedOn: Date
 }

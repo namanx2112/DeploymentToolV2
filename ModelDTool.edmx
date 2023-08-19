@@ -662,7 +662,11 @@ warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key def
           <Property Name="nFileSie" Type="int" />
           <Property Name="fBase64" Type="nvarchar(max)" />
           <Property Name="nCreatedBy" Type="int" />
-          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="nUpdateBy" Type="int" />
+			<Property Name="dtUpdatedOn" Type="datetime" />
+			<Property Name="dtCreatedOn" Type="datetime" />
+		  <Property Name="tTicketStatus" Type="varchar" MaxLength="100" />
+		  <Property Name="tFixComment" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblTechComponent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1837,8 +1841,12 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="tContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="nFileSie" Type="Int32" />
 					<Property Name="fBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+					<Property Name="tTicketStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+					<Property Name="tFixComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
 					<Property Name="nCreatedBy" Type="Int32" />
 					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+					<Property Name="nUpdateBy" Type="Int32" />
+					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 				</EntityType>
 				<EntityType Name="tblRole">
 					<Key>
@@ -2728,6 +2736,10 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 								<ScalarProperty Name="tContent" ColumnName="tContent" />
 								<ScalarProperty Name="nPriority" ColumnName="nPriority" />
 								<ScalarProperty Name="aTicketId" ColumnName="aTicketId" />
+								<ScalarProperty Name="tTicketStatus" ColumnName="tTicketStatus" />
+								<ScalarProperty Name="tFixComment" ColumnName="tFixComment" />
+								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+								<ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
 							</MappingFragment>
 						</EntityTypeMapping>
 					</EntitySetMapping>

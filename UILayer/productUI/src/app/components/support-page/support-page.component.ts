@@ -22,6 +22,8 @@ export class SupportPageComponent {
       this.tRequest = {
         nPriority: 2,
         aTicketId: 0,
+        tFixComment: "",
+        tTicketStatus: "New",
         dtCreatedOn : new Date(),
         nCreatedBy: 1,
         tContent: "",

@@ -802,8 +802,12 @@
     <Property Name="tContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nFileSie" Type="Int32" />
     <Property Name="fBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tTicketStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tFixComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nCreatedBy" Type="Int32" />
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="tblRole">
     <Key>

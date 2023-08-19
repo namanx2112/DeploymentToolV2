@@ -113,3 +113,10 @@
     position: absolute;
     bottom: 10px;
 }
+
+.supportButton{
+    position: absolute;
+    z-index: 1001;
+    top: 0px;
+    right: 0px;
+}
