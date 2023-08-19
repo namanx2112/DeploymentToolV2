@@ -23,8 +23,76 @@ namespace DeploymentTool.Model
         public bool bDeleted { get; set; }
         public int? nPageSize { get; set; }
         public int? nPageNumber { get; set; }
-        public int? nTotalCount { get; set; }       
+        public int? nTotalCount { get; set; }
 
 
+    }
+
+    public class BrandModel
+    {
+        public int aBrandId { get; set; }
+
+        string _tBrandName { get; set; }
+        public string tBrandName
+        {
+            get
+            {
+                return _tBrandName;
+            }
+            set
+            {
+                _tBrandName = value;
+                this.SetBrandURL();
+            }
+        }
+        public string tBrandDomain { get; set; }
+        public string tBrandAddressLine1 { get; set; }
+        public string tBrandAddressLine2 { get; set; }
+        public string tBrandCity { get; set; }
+        public Nullable<int> nBrandState { get; set; }
+        public Nullable<int> nBrandCountry { get; set; }
+        public string tBrandZipCode { get; set; }
+        public Nullable<int> nBrandLogoAttachmentID { get; set; }
+        public Nullable<int> nCreatedBy { get; set; }
+        public Nullable<int> nUpdateBy { get; set; }
+        public Nullable<System.DateTime> dtCreatedOn { get; set; }
+        public Nullable<System.DateTime> dtUpdatedOn { get; set; }
+        public Nullable<bool> bDeleted { get; set; }
+        public byte[] BrandFile { get; set; }
+        public string tIconURL { get; set; }
+
+        public void SetBrandURL()
+        {
+            string tURL = string.Empty;
+            if (this.tBrandName.ToLower().IndexOf("sonic") > -1)
+            {
+                tURL = "https://upload.wikimedia.org/wikipedia/commons/f/ff/SONIC_New_Logo_2020.svg";
+            }
+            else if (this.tBrandName.ToLower().IndexOf("dunkin") > -1)
+            {
+                tURL = "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png";
+            }
+            else if (this.tBrandName.ToLower().IndexOf("baskin") > -1)
+            {
+                tURL = "https://1000logos.net/wp-content/uploads/2016/10/Baskin-Robbins-Logo-2020.png";
+            }
+            else if (this.tBrandName.ToLower().IndexOf("buffa") > -1)
+            {
+                tURL = "https://logos-world.net/wp-content/uploads/2022/01/Buffalo-Wild-Wings-Logo.png";
+            }
+            else if (this.tBrandName.ToLower().IndexOf("arby") > -1)
+            {
+                tURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Arby%27s_logo.svg/2394px-Arby%27s_logo.svg.png";
+            }
+            else if (this.tBrandName.ToLower().IndexOf("jim") > -1)
+            {
+                tURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Jimmy_Johns_logo.svg/1200px-Jimmy_Johns_logo.svg.png";
+            }
+            else
+            {
+                tURL = "https://s3-ap-southeast-1.amazonaws.com/assets.limetray.com/assets/user_images/logos/original/1602742091_DUNKINLogo.png";
+            }
+            this.tIconURL = tURL;
+        }
     }
 }

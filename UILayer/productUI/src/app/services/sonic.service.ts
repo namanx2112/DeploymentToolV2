@@ -30,8 +30,8 @@ export class SonicService {
     return this.http.post<string>(CommonService.ConfigUrl + "Sonic/CreateNewStores", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
-  SearchStore(request: string) {
-    return this.http.get<StoreSearchModel[]>(CommonService.ConfigUrl + "Sonic/SearchStore?searchText=" + request, { headers: this.cacheService.getHttpHeaders() });
+  SearchStore(request: string, nBrandId: number) {
+    return this.http.get<StoreSearchModel[]>(CommonService.ConfigUrl + "Sonic/SearchStore?searchText=" + request + "&nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
   }
 
 
@@ -351,212 +351,212 @@ export class SonicService {
         mandatory: false,
         hidden: false
       }, {
-        field_name: "Address Line2",
-        field_group: "Store Contact",
-        fieldUniqeName: "tStoreAddressLine2",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store Address2",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store City",
-        field_group: "Store Contact",
-        fieldUniqeName: "tCity",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store City",
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store State",
-        field_group: "Store Contact",
-        fieldUniqeName: "nStoreState",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.dropdown,
-        field_placeholder: "Enter Store State",
-        options: this.commonService.GetDropdown("State"),
-        validator: [Validators.required],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store Zip",
-        field_group: "Store Contact",
-        fieldUniqeName: "tStoreZip",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.number,
-        field_placeholder: "Enter Store Zip",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store Manager",
-        field_group: "Store Contact",
-        fieldUniqeName: "tStoreManager",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store Manager",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store POC",
-        field_group: "Store Contact",
-        fieldUniqeName: "tPOC",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store POC",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store POC Phone",
-        field_group: "Store Contact",
-        fieldUniqeName: "tPOCPhone",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store POC Phone",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Store POC Email",
-        field_group: "Store Contact",
-        fieldUniqeName: "tPOCEmail",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.email,
-        field_placeholder: "Enter Store POC Email",
-        validator: [Validators.email],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "General Contractor",
-        field_group: "Store Contact",
-        fieldUniqeName: "tGC",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store GC",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "General Contractor Phone",
-        field_group: "Store Contact",
-        fieldUniqeName: "tGCPhone",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Store GC Phone",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "General Contractor Email",
-        field_group: "Store Contact",
-        fieldUniqeName: "tGCEMail",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.email,
-        field_placeholder: "Enter GC Email",
-        validator: [Validators.email],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Company",
-        field_group: "Bill to",
-        fieldUniqeName: "tBillToCompany",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Company",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Address",
-        field_group: "Bill to",
-        fieldUniqeName: "tBillToAddress",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter GC Email",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "City",
-        field_group: "Bill to",
-        fieldUniqeName: "tBillToCity",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter City",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "State",
-        field_group: "Bill to",
-        fieldUniqeName: "nBillToState",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.dropdown,
-        options: this.commonService.GetDropdown("State"),
-        field_placeholder: "Enter State",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Zip",
-        field_group: "Bill to",
-        fieldUniqeName: "tBillToZip",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Zip",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Email",
-        field_group: "Bill to",
-        fieldUniqeName: "tBillToEmail",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Email",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
+      field_name: "Address Line2",
+      field_group: "Store Contact",
+      fieldUniqeName: "tStoreAddressLine2",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store Address2",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store City",
+      field_group: "Store Contact",
+      fieldUniqeName: "tCity",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store City",
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store State",
+      field_group: "Store Contact",
+      fieldUniqeName: "nStoreState",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.dropdown,
+      field_placeholder: "Enter Store State",
+      options: this.commonService.GetDropdown("State"),
+      validator: [Validators.required],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store Zip",
+      field_group: "Store Contact",
+      fieldUniqeName: "tStoreZip",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter Store Zip",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store Manager",
+      field_group: "Store Contact",
+      fieldUniqeName: "tStoreManager",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store Manager",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store POC",
+      field_group: "Store Contact",
+      fieldUniqeName: "tPOC",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store POC",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store POC Phone",
+      field_group: "Store Contact",
+      fieldUniqeName: "tPOCPhone",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store POC Phone",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Store POC Email",
+      field_group: "Store Contact",
+      fieldUniqeName: "tPOCEmail",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.email,
+      field_placeholder: "Enter Store POC Email",
+      validator: [Validators.email],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "General Contractor",
+      field_group: "Store Contact",
+      fieldUniqeName: "tGC",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store GC",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "General Contractor Phone",
+      field_group: "Store Contact",
+      fieldUniqeName: "tGCPhone",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Store GC Phone",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "General Contractor Email",
+      field_group: "Store Contact",
+      fieldUniqeName: "tGCEMail",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.email,
+      field_placeholder: "Enter GC Email",
+      validator: [Validators.email],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Company",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToCompany",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Company",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Address",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToAddress",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter GC Email",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "City",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToCity",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter City",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "State",
+      field_group: "Bill to",
+      fieldUniqeName: "nBillToState",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.dropdown,
+      options: this.commonService.GetDropdown("State"),
+      field_placeholder: "Enter State",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Zip",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToZip",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Zip",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Email",
+      field_group: "Bill to",
+      fieldUniqeName: "tBillToEmail",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Email",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    },
       {
         field_name: "DMAID",
         fieldUniqeName: "nDMAID",
@@ -1309,7 +1309,7 @@ export class SonicService {
         options: this.commonService.GetDropdown("NetworkingStatus"),
         mandatory: false,
         hidden: false
-      },      
+      },
       {
         field_name: "dDateFor_nPrimaryStatus",
         field_group: "Primary",
@@ -1322,7 +1322,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },           
+      },
       {
         field_name: "dDateFor_nBackupStatus",
         field_group: "Primary",
@@ -1335,7 +1335,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },           
+      },
       {
         field_name: "dDateFor_nTempStatus",
         field_group: "Primary",
@@ -1603,7 +1603,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: false
-      },        
+      },
       {
         field_name: "dDateFor_nStatus",
         field_group: "Primary",
@@ -1616,7 +1616,7 @@ export class SonicService {
         validator: [],
         mandatory: false,
         hidden: true
-      },             
+      },
       {
         field_name: "dDateFor_nPaperworkStatus",
         field_group: "Primary",

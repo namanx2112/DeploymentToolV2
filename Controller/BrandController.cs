@@ -26,11 +26,11 @@ namespace DeploymentTool.Controller
         // GET: api/tblBrand
         [Authorize]
         [HttpPost]
-        public IQueryable<tblBrand> Get(Dictionary<string, string> searchFields)
+        public IQueryable<BrandModel> Get(Dictionary<string, string> searchFields)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             if (searchFields == null)
-                return db.Database.SqlQuery<tblBrand>("Exec sproc_getAccesibleBrand @nUserId", new SqlParameter("@nUserId", securityContext.nUserID)).AsQueryable();
+                return db.Database.SqlQuery<BrandModel>("Exec sproc_getAccesibleBrand @nUserId", new SqlParameter("@nUserId", securityContext.nUserID)).AsQueryable();
             else
             {
                 StringBuilder sBuilder = new StringBuilder();
@@ -40,7 +40,7 @@ namespace DeploymentTool.Controller
                         sBuilder.Append(" and ");
                     sBuilder.AppendFormat("x.{0}.ToLower().Contains(\"{1}\".ToLower())", keyVal.Key, keyVal.Value);
                 }
-                return db.Database.SqlQuery<tblBrand>("Exec sproc_getAccesibleBrand @nUserId", new SqlParameter("@nUserId", securityContext.nUserID)).AsQueryable().Where("x=>" + sBuilder.ToString());
+                return db.Database.SqlQuery<BrandModel>("Exec sproc_getAccesibleBrand @nUserId", new SqlParameter("@nUserId", securityContext.nUserID)).AsQueryable().Where("x=>" + sBuilder.ToString());
             }
         }
 

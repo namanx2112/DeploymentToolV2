@@ -1,0 +1,8 @@
+<div class="outer lightGrayWhiteTheme">
+    <div mat-dialog-title style="text-align: center;">Notes<button mat-raised-button class="createButton"
+            (click)="createNotes()">Create</button></div>
+    <div mat-dialog-content>
+        <app-table [curTab]="curTab" [searchFields]="searchFields" class="tableOuter" (rowClicked)="rowClicked($event)" [clickCol]="'all'"
+            [refreshMe]="refreshFlag"></app-table>
+    </div>
+</div>

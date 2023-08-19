@@ -79,7 +79,7 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public HttpResponseMessage SearchStore(string searchText)
+        public HttpResponseMessage SearchStore(string searchText, int nBrandId)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try

@@ -58,7 +58,7 @@ export class NotificationComponent {
   }
 
   openItem(item: any) {
-    this.sonicService.SearchStore(item).subscribe((x: StoreSearchModel[]) => {
+    this.sonicService.SearchStore(item, -1).subscribe((x: StoreSearchModel[]) => {
       this.openStore.emit(x[0]);
     });
   }

@@ -22,6 +22,7 @@ export class HomeComponent {
   tTabName: string;
   userName: string;
   directStore: StoreSearchModel;
+  _curBrand: BrandModel;
   constructor(private homeService: HomeService, private commonService: CommonService, private authService: AuthService, private dialog: MatDialog, public access: AccessService) {
     this.viewName = "Dashboard";
     this.tTabName = "Dashboard";
@@ -56,6 +57,11 @@ export class HomeComponent {
       }
       this.viewName = item.view;
     }
+  }
+
+  brandSelect(item: BrandModel) {
+    this._curBrand = item;
+    this.viewName = "brandhome";
   }
 
   changeView(vName: string) {

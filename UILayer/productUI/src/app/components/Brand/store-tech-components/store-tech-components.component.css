@@ -1,0 +1,261 @@
+.projectHeader {
+    float: left;
+    height: 55px;
+    width: 95%;
+    z-index: 4;
+    background-color: #fff;
+    position: absolute;
+}
+
+.projectHeader h4 {
+    display: inline-block;
+}
+
+.projectHeader button {
+    float: right;
+    margin-right: 90px;
+    margin-top: 5px;
+}
+
+.projHeader {
+    float: left;
+    margin-top: 13px;
+}
+
+.backIcon {
+    float: left;
+    margin-top: 10px;
+}
+
+.storeView {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.storeView>div {
+    float: left;
+    display: block;
+    width: 95%;
+}
+
+.right {
+    float: right;
+    margin: 10px 10px 0px 0px;
+}
+
+.storeTitle {
+    height: 50px;
+    margin-top: 60px;
+}
+
+.tHeader a {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+
+.storeStatus {
+    float: left;
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+.fullTile {
+    height: 300px;
+    border-radius: 10px;
+}
+
+.fullTile,
+.halfTile {
+    overflow: auto;
+    font-size: 14px;
+}
+
+.fullTile a,
+.halfTile a {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.projectInfoTabs {
+    float: left;
+    margin-top: 60px;
+    height: 50px;
+}
+
+.storeTiles h4,
+.tabBody h4 {
+    font-size: 17px;
+    padding: 5px 20px;
+    margin: 0px;
+}
+
+.storeTiles>div:not(:last-child) {
+    margin-right: 5%;
+}
+
+.storeTiles>div {
+    float: left;
+    width: 30%;
+}
+
+.tileGroup>div,
+.tileGroup>button {
+    float: left;
+}
+
+.tileButtonGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 150px;
+    width: 100%;
+}
+
+.halfTile {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.tileGroup button {
+    width: 40%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.TechAreaTitleBar {
+    min-height: 80px;
+}
+
+.TechAreaTitleBar h3 {
+    float: left;
+}
+
+.TechAreaTitleBar a {
+    margin-left: 20px;
+    font-size: 18px;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+
+.TechAreaTitleBar a.selected {
+    text-decoration: underline;
+}
+
+.TechAreaTabBar {
+    width: 100%;
+    float: left;
+}
+
+.TechAreaTabBar>div {
+    float: left;
+}
+
+.tabHeader {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.tabBody {
+    width: calc(100% - 280px);
+    padding: 30px;
+}
+
+.noBorderButton {
+    border-radius: 10px;
+    cursor: pointer;
+    width: 80px!important;
+    height: 35px!important;
+}
+
+.tabBody h4 {
+    float: left;
+    line-height: 24px;
+}
+
+.tabBody button {
+    float: right;
+}
+
+.tabHeader>div,
+.tabBody {
+    border-radius: 10px;
+}
+
+.TechAreaTabBar .tHeader {
+    float: left;
+    width: 100%;
+    height: 100px;
+}
+
+.tabForm {
+    float: left;
+    width: calc(100% - 40px);
+    padding: 0px 20px 20px 20px;
+    border-radius: 10px;
+}
+
+.tabHeader>div {
+    height: 50px;
+    width: 200px;
+    margin-bottom: 20px;
+    line-height: 48px;
+    text-align: center;
+    border: 1px solid transparent;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.selectedTab {
+    border: 1px solid #525252 !important;
+}
+
+
+.fullView {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 5px 0;
+}
+
+.fullView::before {
+    content: "";
+}
+
+.fullView::after {
+    content: "";
+}
+
+.fullView .tHeader {
+    width: calc(100% - 2px);
+    height: 40px;
+}
+
+.fullView .tHeader h4 {
+    float: left;
+    text-indent: 20px;
+    margin: 10px 0px 0px 0px;
+}
+
+.fullView .tBody {
+    width: 100%;
+    float: left;
+}
+
+.fullTab {
+    width: 400px;
+    border-radius: 10px;
+    margin: 15px;
+}

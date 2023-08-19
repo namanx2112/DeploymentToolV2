@@ -1,0 +1,35 @@
+.cellDiv span{
+    float: left;
+    padding: 2px 4px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.label{
+    font-size: 10px;
+}
+
+.nHeader{
+    font-weight: bold;
+}
+
+.nBody{
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.redColor{
+    background-color: rgba(255,0,0,0.4);
+}
+
+.greenColor{
+    background-color: rgba(0,255,0,0.4);
+}
+
+.clickable {
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: -2px;
+}
