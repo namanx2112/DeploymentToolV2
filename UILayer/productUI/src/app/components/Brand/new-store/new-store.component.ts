@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, OptionType, TabInstanceType, TabType } from 'src/app/interfaces/home-tab';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class NewStoreComponent {
   tValues: Dictionary<Dictionary<string>>;
   SubmitLabel: string;
   curTabIndex: number;
-  constructor(private service: SonicService, private storeSerice: StoreService, private techCompService: AllTechnologyComponentsService) {
+  constructor(private service: ExStoreService, private storeSerice: StoreService, private techCompService: AllTechnologyComponentsService) {
     this.curTabIndex = 0;
     this.SubmitLabel = "Next";
     this.tValues = {};

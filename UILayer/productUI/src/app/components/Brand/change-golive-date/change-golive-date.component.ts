@@ -2,7 +2,7 @@ import { Component, Inject, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
-import { ProjectInfo, ProjectTypes } from 'src/app/interfaces/sonic';
+import { ProjectInfo, ProjectTypes } from 'src/app/interfaces/store';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({

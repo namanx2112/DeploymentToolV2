@@ -4,7 +4,7 @@ import { Dictionary, checkboxItems } from 'src/app/interfaces/commons';
 import { Fields, HomeTab, TabInstanceType } from 'src/app/interfaces/home-tab';
 import { QuoteRequestTechAreas, QuoteRequestTemplate } from 'src/app/interfaces/models';
 import { QuoteRequestWorkflowConfigService } from 'src/app/services/quote-request-workflow-config.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 
 @Component({
   selector: 'app-quote-request-workflow-template',
@@ -26,11 +26,11 @@ export class QuoteRequestWorkflowTemplateComponent {
   selectedTabs: HomeTab[];
   curTabFields: checkboxItems[];
   techCompControl = new FormControl('');
-  constructor(private sonicService: SonicService, private quoteService: QuoteRequestWorkflowConfigService) {
-    this.techCompTabs = [this.sonicService.GetStoreContactTab(TabInstanceType.Single), this.sonicService.GetStoreConfigurationTab(TabInstanceType.Single),
-    this.sonicService.GetStoreNetworingTab(TabInstanceType.TechComponent), this.sonicService.GetStorePOSTab(TabInstanceType.TechComponent), this.sonicService.GetStoreAudioTab(TabInstanceType.TechComponent),
-    this.sonicService.GetStoreExteriorMenusTab(TabInstanceType.TechComponent), this.sonicService.GetStorePaymentSystemTab(TabInstanceType.TechComponent),
-    this.sonicService.GetStoreInteriorMenusTab(TabInstanceType.TechComponent)];
+  constructor(private exService: ExStoreService, private quoteService: QuoteRequestWorkflowConfigService) {
+    this.techCompTabs = [this.exService.GetStoreContactTab(TabInstanceType.Single), this.exService.GetStoreConfigurationTab(TabInstanceType.Single),
+    this.exService.GetStoreNetworingTab(TabInstanceType.TechComponent), this.exService.GetStorePOSTab(TabInstanceType.TechComponent), this.exService.GetStoreAudioTab(TabInstanceType.TechComponent),
+    this.exService.GetStoreExteriorMenusTab(TabInstanceType.TechComponent), this.exService.GetStorePaymentSystemTab(TabInstanceType.TechComponent),
+    this.exService.GetStoreInteriorMenusTab(TabInstanceType.TechComponent)];
 
     this.techCompTabs[0].tab_name = "Store Information";
     this.curTabFields = [];

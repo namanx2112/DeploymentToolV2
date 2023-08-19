@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BrandModel } from 'src/app/interfaces/models';
-import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 import { CommonService } from 'src/app/services/common.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 
 @Component({
   selector: 'app-project-portfolio-cell',
@@ -20,7 +20,7 @@ export class ProjectPortfolioCellComponent {
   jObject: any;
   tColumn: string;
   @Output() openStore = new EventEmitter<StoreSearchModel>();
-  constructor(private sonicService: SonicService) {
+  constructor(private service: ExStoreService) {
 
   }
 
@@ -40,7 +40,7 @@ export class ProjectPortfolioCellComponent {
   }
 
   openItem(item: any) {
-    this.sonicService.SearchStore(item, this.curBrand.aBrandId).subscribe((x: StoreSearchModel[]) => {
+    this.service.SearchStore(item, this.curBrand.aBrandId).subscribe((x: StoreSearchModel[]) => {
       this.openStore.emit(x[0]);
     });
   }

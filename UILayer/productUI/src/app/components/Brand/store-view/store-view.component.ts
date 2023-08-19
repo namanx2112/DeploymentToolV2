@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { Fields, HomeTab, TabType } from 'src/app/interfaces/home-tab';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 import { ControlsComponent } from '../../controls/controls.component';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { NotesListComponent } from '../notes-list/notes-list.component';
-import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/sonic';
+import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { NotImplementedComponent } from '../../not-implemented/not-implemented.component';
 import { ChangeGoliveDateComponent } from '../change-golive-date/change-golive-date.component';
@@ -33,7 +33,7 @@ export class StoreViewComponent {
   viewName: string;
   @Output() ChangeFromStoreView = new EventEmitter<any>();
   selectedProject: ProjectInfo;
-  constructor(private service: SonicService, private dialog: MatDialog, private techCompService: AllTechnologyComponentsService, public access: AccessService) {
+  constructor(private service: ExStoreService, private dialog: MatDialog, private techCompService: AllTechnologyComponentsService, public access: AccessService) {
     this.viewName = "tabview";
   }
 

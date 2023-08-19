@@ -32,7 +32,8 @@
                 (click)="menuClick('importproject')"><mat-icon>attach_file</mat-icon>Import Project</button>
         </div>
         <div class="ConfigList tabSelectionOption">
-            <span (click)="clickOption('dashboard')" [className]="configMenu=='dashboard'?'selected':''">Sonic
+            <span (click)="clickOption('dashboard')"
+                [className]="configMenu=='dashboard'?'selected':''">{{_curBrand.tBrandName}}
                 Homepage</span>
             <span (click)="clickOption('Project Portfolio')" *ngIf="access.hasAccess('home.sonic.projectportfolio', 0)"
                 [className]="configMenu=='Project Portfolio'?'selected':''">Project Portfolio</span>
@@ -59,7 +60,7 @@
             (ChangeView)="ChangeView($event)" [curStore]="curStore"></app-project-table>
         <app-project-table *ngIf="showMode == 'projecthistoricalview'" [tabName]="'Historical'"
             (ChangeView)="ChangeView($event)" [curStore]="curStore"></app-project-table>
-        <app-import-projects *ngIf="showMode == 'importproject'"
+        <app-import-projects *ngIf="showMode == 'importproject'" [curBrand]="_curBrand"
             (ChangeView)="ChangeView($event)"></app-import-projects>
         <app-pos-installation *ngIf="showMode == 'posinstallation'"
             (ChangeView)="ChangeView($event)"></app-pos-installation>

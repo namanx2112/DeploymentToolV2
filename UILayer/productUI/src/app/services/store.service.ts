@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommonService } from './common.service';
 import { AuthService } from './auth.service';
-import { ActiveProject, DateChangeBody, DateChangeNotificationBody, DateChangeNotitication, DateChangePOOption, DeliveryStatus, DocumentsTabTable, HistoricalProjects, NewProjectStore } from '../interfaces/sonic';
+import { ActiveProject, DateChangeBody, DateChangeNotificationBody, DateChangeNotitication, DateChangePOOption, DeliveryStatus, DocumentsTabTable, HistoricalProjects, NewProjectStore } from '../interfaces/store';
 import { ProjectTemplates } from '../interfaces/models';
 import { Fields, HomeTab, TabType } from '../interfaces/home-tab';
 import { Observable } from 'rxjs';
@@ -16,19 +16,19 @@ export class StoreService {
   }
 
   CreateNewStores(request: any) {
-    return this.http.post<any>(CommonService.ConfigUrl + "Sonic/NewStore", request, { headers: this.cacheService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "ExStore/NewStore", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   UpdateStore(request: any) {
-    return this.http.post<any>(CommonService.ConfigUrl + "Sonic/UpdateStore", request, { headers: this.cacheService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "ExStore/UpdateStore", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   getStoreDetails(nStoreId: number, nProjectType: number) {
-    return this.http.get<any>(CommonService.ConfigUrl + "Sonic/getStoreDetails?nStoreId=" + nStoreId, { headers: this.cacheService.getHttpHeaders() });
+    return this.http.get<any>(CommonService.ConfigUrl + "ExStore/getStoreDetails?nStoreId=" + nStoreId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetProjectTemplates(nBrandId: number) {
-    return this.http.get<ProjectTemplates[]>(CommonService.ConfigUrl + "Sonic/GetProjectTemplates?nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
+    return this.http.get<ProjectTemplates[]>(CommonService.ConfigUrl + "ExStore/GetProjectTemplates?nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetDeliveryStatus(nStoreId: number) {

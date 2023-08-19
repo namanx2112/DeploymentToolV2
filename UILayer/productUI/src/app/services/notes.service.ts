@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
-import { ProjectNotes } from '../interfaces/sonic';
+import { ProjectNotes } from '../interfaces/store';
 import { CommonService } from './common.service';
 import { FieldType, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';

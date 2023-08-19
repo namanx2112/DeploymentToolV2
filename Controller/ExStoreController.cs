@@ -19,7 +19,7 @@ using static System.Data.Entity.Infrastructure.Design.Executor;
 
 namespace DeploymentTool.Controller
 {
-    public class SonicController : ApiController
+    public class ExStoreController : ApiController
     {
         private dtDBEntities db = new dtDBEntities();
 

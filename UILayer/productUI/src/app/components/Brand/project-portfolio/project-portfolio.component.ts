@@ -8,7 +8,7 @@ import { AnalyticsService } from 'src/app/services/analytics.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NotesListComponent } from '../notes-list/notes-list.component';
 import { AccessService } from 'src/app/services/access.service';
-import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 import { MatTableDataSource } from '@angular/material/table';
 import { BrandModel } from 'src/app/interfaces/models';
 

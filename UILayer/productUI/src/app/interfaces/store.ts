@@ -1,9 +1,5 @@
 import { Dictionary } from "./commons"
 
-export interface Sonic {
-}
-
-
 export interface StoreContact {
     aStoreID: number,
     tStoreNumber: string,
@@ -216,12 +212,13 @@ export interface ProjectNotes {
     nCreatedBy: number
 }
 
-export interface SonicNotification {
+export interface StoreNotification {
     aNotification: number,
     tHeader: string
 }
 
-export interface SonicProjectExcel {
+export interface ProjectExcel {
+    nBrandId: number,
     tProjectType: string,
     tStoreNumber: string,
     tAddress: string,

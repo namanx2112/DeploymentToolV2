@@ -40,6 +40,6 @@ export class HomeDashboardComponent {
   }
 
   openStoreFromNotification(item: any) {
-    this.changeView.emit({ view: "sonic", instance: item });
+    this.changeView.emit({ view: "brandhome", instance: item });
   }
 }

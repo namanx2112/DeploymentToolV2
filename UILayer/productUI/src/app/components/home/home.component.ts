@@ -10,7 +10,7 @@ import { AccessService } from 'src/app/services/access.service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { NotImplementedComponent } from '../not-implemented/not-implemented.component';
 import { TicketViewComponent } from '../ticket-view/ticket-view.component';
-import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 
 @Component({
   selector: 'app-home',
@@ -52,7 +52,7 @@ export class HomeComponent {
     if (typeof item == 'string')
       this, this.viewName = item;
     else {
-      if (item.view == "sonic") {
+      if (item.view == "brandhome") {
         this.directStore = item.instance;
       }
       this.viewName = item.view;

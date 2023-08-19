@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType, Fields, HomeTab } from 'src/app/interfaces/home-tab';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 
 @Component({
   selector: 'app-audio-installation',
@@ -16,7 +16,7 @@ export class AudioInstallationComponent {
   searchFields: Fields[];
   searchValue: Dictionary<string>;
   fieldValues: Dictionary<Dictionary<string>>;
-  constructor(private service: SonicService) {
+  constructor(private service: ExStoreService) {
     this.getAudioInstallationTabs();
     this.activeTabName = "searchstore";
     this.searchValue = {};

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { DateChangeBody, DateChangeNotificationBody, DateChangeNotitication, DateChangePOOption, StoreSearchModel } from 'src/app/interfaces/sonic';
+import { DateChangeBody, DateChangeNotificationBody, DateChangeNotitication, DateChangePOOption, StoreSearchModel } from 'src/app/interfaces/store';
 import { CommonService } from 'src/app/services/common.service';
 import { StoreService } from 'src/app/services/store.service';
 import { DateChangeRevisedPOComponent } from '../date-change-revised-po/date-change-revised-po.component';

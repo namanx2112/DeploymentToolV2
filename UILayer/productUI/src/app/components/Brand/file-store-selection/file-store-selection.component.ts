@@ -1,8 +1,8 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { SonicProjectExcel } from 'src/app/interfaces/sonic';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ProjectExcel } from 'src/app/interfaces/store';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 
 @Component({
   selector: 'app-file-store-selection',
@@ -10,22 +10,22 @@ import { SonicService } from 'src/app/services/sonic.service';
   styleUrls: ['./file-store-selection.component.css']
 })
 export class FileStoreSelectionComponent {
-  _excelData: SonicProjectExcel[];
-  @Input() set excelData(value: SonicProjectExcel[]) {
+  _excelData: ProjectExcel[];
+  @Input() set excelData(value: ProjectExcel[]) {
     this._excelData = value;
-    this.dataSource = new MatTableDataSource<SonicProjectExcel>(value);
+    this.dataSource = new MatTableDataSource<ProjectExcel>(value);
   }
   @Output()
-  SelectionChange = new EventEmitter<SonicProjectExcel[]>();
+  SelectionChange = new EventEmitter<ProjectExcel[]>();
   displayedColumns: string[] = ['select', 'nStoreExistStatus', 'tProjectType', 'tStoreNumber', 'tAddress',
     'tCity', 'tState', 'nDMAID', 'tDMA', 'tRED', 'tCM', 'tANE', 'tRVP', 'tPrincipalPartner',
     'dStatus', 'dOpenStore', 'tProjectStatus'];
   displayedColumnTitles: string[] = ['nRowIndex', 'Store Exist', 'Project Type', 'Store Number', 'Address',
     'City', 'State', 'DMA', 'ID', 'DMA', 'RED', 'CM', 'A&E', 'RVP', 'Principal Partner',
     'Status', 'Open Store', 'Project Status'];
-  dataSource = new MatTableDataSource<SonicProjectExcel>(this.excelData);
-  selection = new SelectionModel<SonicProjectExcel>(true, []);
-  constructor(private service: SonicService) {
+  dataSource = new MatTableDataSource<ProjectExcel>(this.excelData);
+  selection = new SelectionModel<ProjectExcel>(true, []);
+  constructor(private service: ExStoreService) {
 
   }
 
@@ -52,7 +52,7 @@ export class FileStoreSelectionComponent {
     this.SelectionChange.emit(this.selection.selected);
   }
 
-  checkboxLabel(row?: SonicProjectExcel): string {
+  checkboxLabel(row?: ProjectExcel): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }

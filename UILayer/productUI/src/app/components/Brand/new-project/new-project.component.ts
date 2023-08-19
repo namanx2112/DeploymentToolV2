@@ -4,9 +4,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, OptionType, TabInstanceType, TabType } from 'src/app/interfaces/home-tab';
-import { ProjectInfo, ProjectTypes, StoreSearchModel } from 'src/app/interfaces/sonic';
+import { ProjectInfo, ProjectTypes, StoreSearchModel } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class NewProjectComponent {
   curStore: StoreSearchModel;
   loadingData: boolean;
   nProjectType: ProjectTypes;
-  constructor(private service: SonicService, private storeSerice: StoreService, private techCompService: AllTechnologyComponentsService) {
+  constructor(private service: ExStoreService, private storeSerice: StoreService, private techCompService: AllTechnologyComponentsService) {
     this.curTabIndex = 0;
     this.SubmitLabel = "Next";
     this.loadingData = false;

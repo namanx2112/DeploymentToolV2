@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { OptionType } from 'src/app/interfaces/home-tab';
 import { BrandModel } from 'src/app/interfaces/models';
-import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 import { AccessService } from 'src/app/services/access.service';
 import { CommonService } from 'src/app/services/common.service';
 

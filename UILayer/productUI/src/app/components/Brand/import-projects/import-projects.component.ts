@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { SonicService } from 'src/app/services/sonic.service';
-import { SonicProjectExcel } from '../../../interfaces/sonic';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ExStoreService } from 'src/app/services/ex-store.service';
+import { ProjectExcel } from '../../../interfaces/store';
+import { BrandModel } from 'src/app/interfaces/models';
 
 @Component({
   selector: 'app-import-projects',
@@ -9,11 +10,16 @@ import { SonicProjectExcel } from '../../../interfaces/sonic';
 })
 export class ImportProjectsComponent {
   @Output() ChangeView = new EventEmitter<any>();
-  excelData: SonicProjectExcel[];
-  selectedItems: SonicProjectExcel[];
+  @Input()
+  set curBrand(val: BrandModel) {
+    this._curBrand = val;
+  }
+  _curBrand: BrandModel;
+  excelData: ProjectExcel[];
+  selectedItems: ProjectExcel[];
   fileToUpload: File | null = null;
   dragAreaClass: string;
-  constructor(private service: SonicService) {
+  constructor(private service: ExStoreService) {
     this.dragAreaClass = "uploadDiv blackBorder lightGray";
     this.excelData = [];
     this.selectedItems = [];
@@ -32,19 +38,27 @@ export class ImportProjectsComponent {
   uploadFileToActivity() {
     if (this.fileToUpload != null) {
       if (this.fileToUpload.name.toLowerCase().endsWith("xlsx")) {
-        this.service.UploadStore({ fileToUpload: this.fileToUpload }).subscribe((data: SonicProjectExcel[]) => {
-          this.excelData = data;
+        this.service.UploadStore({ fileToUpload: this.fileToUpload }).subscribe((data: ProjectExcel[]) => {
+          this.addRecords(data);
           // do something, if upload success
         }, error => {
           console.log(error);
         });
       }
       else
-      alert("Please upload valid xlsx file only!");
+        alert("Please upload valid xlsx file only!");
     }
   }
 
-  SelectionChange(items: SonicProjectExcel[]) {
+  addRecords(data: ProjectExcel[]) {
+    this.excelData = [];
+    for (var indx in data) {
+      data[indx].nBrandId = this._curBrand.aBrandId;
+      this.excelData.push(data[indx]);
+    }
+  }
+
+  SelectionChange(items: ProjectExcel[]) {
     this.selectedItems = items;
   }
 

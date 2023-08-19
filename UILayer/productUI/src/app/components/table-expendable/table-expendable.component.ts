@@ -12,7 +12,7 @@ import { BrandModel, FranchiseModel, TechComponentModel, VendorModel, UserModel 
 import { BrandServiceService } from 'src/app/services/brand-service.service';
 import { FranchiseService } from 'src/app/services/frenchise.service';
 import { PartsService } from 'src/app/services/parts.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 import { StoreService } from 'src/app/services/store.service';
 import { TechComponenttService } from 'src/app/services/tech-component.service';
 import { UserService } from 'src/app/services/user.service';
@@ -56,7 +56,7 @@ export class TableExpendableComponent {
   expandedElement: any;
   columnsToDisplayWithExpand: any;
   constructor(private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
-    private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService,
+    private franchiseSerice: FranchiseService, private userSerice: UserService, private exService: ExStoreService, private partsService: PartsService,
     private storeService: StoreService) {
     this.initVal = new Date();
   }
@@ -98,7 +98,7 @@ export class TableExpendableComponent {
         this.cService = this.storeService;
       }
       else if (this.curTab.tab_type == TabType.StoreNotes) {
-        this.cService = this.sonicService;
+        this.cService = this.exService;
       }
       else if (this.curTab.tab_type == TabType.VendorParts) {
         this.cService = this.partsService;

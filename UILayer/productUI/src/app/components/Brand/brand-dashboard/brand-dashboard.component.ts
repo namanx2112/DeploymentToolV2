@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
-import { SonicProjectHighlights } from 'src/app/interfaces/commons';
+import { ProjectHighlights } from 'src/app/interfaces/commons';
 import { BrandModel } from 'src/app/interfaces/models';
-import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 import { AccessService } from 'src/app/services/access.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 
 @Component({
   selector: 'app-brand-dashboard',
@@ -15,10 +15,10 @@ import { SonicService } from 'src/app/services/sonic.service';
 export class BrandDashboardComponent {
   @Input()
   curBrand: BrandModel;
-  projects: SonicProjectHighlights[];
+  projects: ProjectHighlights[];
   @Output() SearchedResult = new EventEmitter<string>();
   @Output() ChangeView = new EventEmitter<string>();
-  constructor(private service: SonicService, public access: AccessService) {
+  constructor(private service: ExStoreService, public access: AccessService) {
     this.getProjectHoghlights();
   }
 
@@ -27,12 +27,12 @@ export class BrandDashboardComponent {
 
 
   getProjectHoghlights() {
-    this.service.GetProjecthighlights().subscribe((resp: SonicProjectHighlights[]) => {
+    this.service.GetProjecthighlights().subscribe((resp: ProjectHighlights[]) => {
       this.projects = resp;
     });
   }
 
-  showReport(cur: SonicProjectHighlights) {
+  showReport(cur: ProjectHighlights) {
     this.ChangeView.emit("viewreport");
   }
 

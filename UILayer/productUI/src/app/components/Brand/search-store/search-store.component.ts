@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { BrandModel } from 'src/app/interfaces/models';
-import { StoreSearchModel } from 'src/app/interfaces/sonic';
-import { SonicService } from 'src/app/services/sonic.service';
+import { StoreSearchModel } from 'src/app/interfaces/store';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 
 @Component({
   selector: 'app-search-store',
@@ -21,7 +21,7 @@ export class SearchStoreComponent {
     this.getAllStores();
   }
   @Output() SearchedResult = new EventEmitter<string>();
-  constructor(private service: SonicService) {
+  constructor(private service: ExStoreService) {
 
   }
 

@@ -1,7 +1,7 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MergedQuoteRequest, ProjectTemplates } from 'src/app/interfaces/models';
-import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 import { CommonService } from 'src/app/services/common.service';
 import { QuoteRequestWorkflowConfigService } from 'src/app/services/quote-request-workflow-config.service';
 import { StoreService } from 'src/app/services/store.service';

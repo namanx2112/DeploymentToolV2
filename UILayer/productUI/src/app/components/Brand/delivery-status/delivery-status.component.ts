@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DeliveryStatus, StoreSearchModel } from 'src/app/interfaces/sonic';
+import { DeliveryStatus, StoreSearchModel } from 'src/app/interfaces/store';
 import { CommonService } from 'src/app/services/common.service';
 import { StoreService } from 'src/app/services/store.service';
 

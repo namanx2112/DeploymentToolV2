@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { Fields, HomeTab, TabType } from 'src/app/interfaces/home-tab';
-import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/sonic';
+import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { AccessService } from 'src/app/services/access.service';
 
@@ -24,7 +24,7 @@ export class StoreTechComponentsComponent {
   needEdit: boolean;
   allTabs: HomeTab[];
   tValues: Dictionary<Dictionary<string>>;
-  constructor(private dialog: MatDialog, private service: SonicService, private techCompService: AllTechnologyComponentsService, public access: AccessService) {
+  constructor(private dialog: MatDialog, private service: ExStoreService, private techCompService: AllTechnologyComponentsService, public access: AccessService) {
 
   }
   initTab() {

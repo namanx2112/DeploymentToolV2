@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import moment from 'moment';
 import { NotificationModel } from 'src/app/interfaces/notification';
-import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 import { NotificationService } from 'src/app/services/notification.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 
 @Component({
   selector: 'app-notification',
@@ -19,7 +19,7 @@ export class NotificationComponent {
   olds: NotificationModel[];
   firstFew: NotificationModel[];
   filter: string;
-  constructor(private service: NotificationService, private sonicService: SonicService) {
+  constructor(private service: NotificationService, private exService: ExStoreService) {
     this.filter = "All";
     this.getNotifcation();
   }
@@ -58,7 +58,7 @@ export class NotificationComponent {
   }
 
   openItem(item: any) {
-    this.sonicService.SearchStore(item, -1).subscribe((x: StoreSearchModel[]) => {
+    this.exService.SearchStore(item, -1).subscribe((x: StoreSearchModel[]) => {
       this.openStore.emit(x[0]);
     });
   }

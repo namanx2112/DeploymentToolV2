@@ -11,7 +11,7 @@ export class ControlsErrorMessages {
     public static Range = "Range is not proper";
 }
 
-export interface SonicProjectHighlights {
+export interface ProjectHighlights {
     title: string,
     count: number
 }

@@ -980,7 +980,7 @@
     <Compile Include="Controller\StoreContactsController.cs" />
     <Compile Include="Controller\PurchaseOrderController.cs" />
     <Compile Include="Controller\QuoteRequestController.cs" />
-    <Compile Include="Controller\SonicController.cs" />
+    <Compile Include="Controller\ExStoreController.cs" />
     <Compile Include="Controller\StoreScreenConfigController.cs" />
     <Compile Include="Controller\SupportController.cs" />
     <Compile Include="Controller\TableController.cs" />

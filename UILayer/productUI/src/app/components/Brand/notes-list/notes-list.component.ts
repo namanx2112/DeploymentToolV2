@@ -1,10 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { HomeTab, TabInstanceType } from 'src/app/interfaces/home-tab';
-import { SonicService } from 'src/app/services/sonic.service';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { NotesService } from 'src/app/services/notes.service';
-import { StoreSearchModel } from 'src/app/interfaces/sonic';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 import { Dictionary } from 'src/app/interfaces/commons';
 
 @Component({

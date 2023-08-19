@@ -11,7 +11,7 @@
             <th mat-header-cell *matHeaderCellDef> {{column.header}} </th>
             <td mat-cell *matCellDef="let element">
                 <app-project-portfolio-cell
-                    [request]="{jObject: element[column.columnDef], tColumn: column.columnDef, curBrand: curBrand}"
+                    [request]="{jObject: element[column.columnDef], tColumn: column.columnDef, curBrand: _curBrand}"
                     (openStore)="openStoreClicked($event)"></app-project-portfolio-cell>
             </td>
         </ng-container>

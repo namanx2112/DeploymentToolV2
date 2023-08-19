@@ -11,7 +11,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { FranchiseService } from 'src/app/services/frenchise.service';
 import { NotesService } from 'src/app/services/notes.service';
 import { PartsService } from 'src/app/services/parts.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 import { StoreService } from 'src/app/services/store.service';
 import { TechComponenttService } from 'src/app/services/tech-component.service';
 import { UserService } from 'src/app/services/user.service';
@@ -49,7 +49,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
   initVal: Date;
   responseData: any;
   constructor(private _liveAnnouncer: LiveAnnouncer, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
-    private franchiseSerice: FranchiseService, private userSerice: UserService, private sonicService: SonicService, private partsService: PartsService,
+    private franchiseSerice: FranchiseService, private userSerice: UserService, private exService: ExStoreService, private partsService: PartsService,
     private storeService: StoreService, public access: AccessService, private noteService: NotesService) {
     this.initVal = new Date();
   }

@@ -5,7 +5,7 @@ import { OptionType, TabInstanceType } from 'src/app/interfaces/home-tab';
 import { POConfigPart, POConfigTemplate, PartsModel, VendorModel } from 'src/app/interfaces/models';
 import { PartsService } from 'src/app/services/parts.service';
 import { POWorkflowConfigService } from 'src/app/services/poworklow-config.service';
-import { SonicService } from 'src/app/services/sonic.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 import { VendorService } from 'src/app/services/vendor.service';
 
 @Component({
@@ -32,7 +32,7 @@ export class PurchaseOrderWorkflowTemplateComponent {
   allCompAndFields: any[];
   allCompNames: any[];
   curQuantityFields: any[];
-  constructor(private poService: POWorkflowConfigService, private vendorService: VendorService, private partsService: PartsService, private sonicService: SonicService) {
+  constructor(private poService: POWorkflowConfigService, private vendorService: VendorService, private partsService: PartsService, private exService: ExStoreService) {
 
   }
 
@@ -59,8 +59,8 @@ export class PurchaseOrderWorkflowTemplateComponent {
   }
 
   getQuantityFields() {
-    this.allCompAndFields = this.sonicService.GetPOQuantityFields();
-    this.allCompNames = this.sonicService.getPOTechConfigs();
+    this.allCompAndFields = this.exService.GetPOQuantityFields();
+    this.allCompNames = this.exService.getPOTechConfigs();
   }
 
   getOptionsFromVendors(vendors: VendorModel[]): OptionType[] {

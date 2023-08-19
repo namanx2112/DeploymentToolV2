@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProjectTemplateType, ProjectTemplates } from 'src/app/interfaces/models';
-import { ProjectTypes, StoreSearchModel } from 'src/app/interfaces/sonic';
+import { ProjectTypes, StoreSearchModel } from 'src/app/interfaces/store';
 import { StoreService } from 'src/app/services/store.service';
 import { RenderQuoteRequestComponent } from '../render-quote-request/render-quote-request.component';
 import { RenderPurchaseOrderComponent } from '../render-purchase-order/render-purchase-order.component';

@@ -7,6 +7,7 @@ namespace DeploymentTool.Model
 {
     public class ProjectExcelFields
     {
+        public int nBrandId {  get; set; }
         public string tProjectType { get; set; }
         public string tStoreNumber { get; set; }
         public string tAddress { get; set; }

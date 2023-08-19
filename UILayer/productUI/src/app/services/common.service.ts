@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Fields, OptionType } from '../interfaces/home-tab';
 import { DropdownServiceService } from './dropdown-service.service';
 import { BrandModel, DropwDown } from '../interfaces/models';
-import { ProjectTypes } from '../interfaces/sonic';
+import { ProjectTypes } from '../interfaces/store';
 import moment from 'moment';
 import { BrandServiceService } from './brand-service.service';
 import { HttpClient } from '@angular/common/http';

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { SonicProjectHighlights } from '../interfaces/commons';
+import { ProjectHighlights } from '../interfaces/commons';
 import { Observable } from 'rxjs';
 import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
-import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, SonicProjectExcel, StoreSearchModel } from '../interfaces/sonic';
+import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, ProjectExcel, StoreSearchModel } from '../interfaces/store';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CacheService } from './cache.service';
@@ -12,7 +12,7 @@ import { CacheService } from './cache.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SonicService {
+export class ExStoreService {
   constructor(private http: HttpClient, private commonService: CommonService, private cacheService: CacheService) {
   }
 
@@ -23,15 +23,15 @@ export class SonicService {
     let httpHeader = new HttpHeaders({
       "Authorization": "Bearer " + this.cacheService.getToken()
     });
-    return this.http.post<SonicProjectExcel[]>(CommonService.ConfigUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
+    return this.http.post<ProjectExcel[]>(CommonService.ConfigUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
   }
 
-  CreateNewStores(request: SonicProjectExcel[]) {
-    return this.http.post<string>(CommonService.ConfigUrl + "Sonic/CreateNewStores", request, { headers: this.cacheService.getHttpHeaders() });
+  CreateNewStores(request: ProjectExcel[]) {
+    return this.http.post<string>(CommonService.ConfigUrl + "ExStore/CreateNewStores", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   SearchStore(request: string, nBrandId: number) {
-    return this.http.get<StoreSearchModel[]>(CommonService.ConfigUrl + "Sonic/SearchStore?searchText=" + request + "&nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
+    return this.http.get<StoreSearchModel[]>(CommonService.ConfigUrl + "ExStore/SearchStore?searchText=" + request + "&nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
   }
 
 
@@ -133,7 +133,7 @@ export class SonicService {
   }
 
   GetProjecthighlights() {
-    return new Observable<SonicProjectHighlights[]>((obj) => {
+    return new Observable<ProjectHighlights[]>((obj) => {
       let items = [{
         title: "New project opening in next month",
         count: 0
@@ -2996,5 +2996,5 @@ export class SonicService {
         hidden: false
       }]
     };
-  }
+  }  
 }
