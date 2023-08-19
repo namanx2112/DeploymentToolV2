@@ -51,7 +51,7 @@
                 <app-home-dashboard (brandSelect)="brandSelect($event);" *ngIf="viewName=='Dashboard'"></app-home-dashboard>
                 <app-admin-config *ngIf="viewName=='Configurations'"></app-admin-config>
                 <app-not-implemented *ngIf="viewName!='Dashboard' && viewName!='notifications' && viewName!='Configurations' && viewName  != 'brandhome'"></app-not-implemented>
-                <app-sonic-home-page *ngIf="viewName == 'brandhome'" [curBrand]="_curBrand" [openStore]="directStore"></app-sonic-home-page>
+                <app-brand-home-page *ngIf="viewName == 'brandhome'" [curBrand]="_curBrand" [openStore]="directStore"></app-brand-home-page>
                 <app-notification *ngIf="viewName.toLowerCase().indexOf('notifications') > -1" [fullView]="true" (openStore)="openStoreFromNotification($event)"></app-notification>
             </div>
         </div>

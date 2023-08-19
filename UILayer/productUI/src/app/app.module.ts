@@ -29,8 +29,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { AdminDashboardShortcutsComponent } from './components/admin-dashboard-shortcuts/admin-dashboard-shortcuts.component';
 import { ManageDropdownsComponent } from './components/manage-dropdowns/manage-dropdowns.component';
 import {MatMenuModule} from '@angular/material/menu';
-import { SonicHomePageComponent } from './components/Brand/sonic-home-page/sonic-home-page.component';
-import { SonicDashboardComponent } from './components/Brand/sonic-dashboard/sonic-dashboard.component';
+import { BrandHomePageComponent } from './components/Brand/brand-home-page/brand-home-page.component';
+import { BrandDashboardComponent } from './components/Brand/brand-dashboard/brand-dashboard.component';
 import { NewProjectComponent } from './components/Brand/new-project/new-project.component';
 import { StoreViewComponent } from './components/Brand/store-view/store-view.component'
 import {MatDialogModule} from '@angular/material/dialog';
@@ -94,8 +94,8 @@ import { NotificationComponent } from './components/notification/notification.co
         NotImplementedComponent,
         AdminDashboardShortcutsComponent,
         ManageDropdownsComponent,
-        SonicHomePageComponent,
-        SonicDashboardComponent,
+        BrandHomePageComponent,
+        BrandDashboardComponent,
         NewProjectComponent,
         StoreViewComponent,
         DialogControlsComponent,
