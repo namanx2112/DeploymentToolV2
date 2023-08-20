@@ -8,9 +8,10 @@
         </div>
         <div class="loginControl">
             <div class="loginBox">
-                <app-controls class="tabForm" *ngIf="dtField.length > 0" [numberOfControlsInARow]="1" [fields]="dtField"
-                    [needButton]="true" [readOnlyForm]="false" [controlValues]="{}" [themeClass]="'grayWhite'"
-                    [SubmitLabel]="'Login'" (onSubmit)="logMeIn($event)" [CloseLabel]="'Forgot Password'" (onClose)="forgotPasswordClick()"></app-controls>
+                <app-controls class="tabForm" *ngIf="dtField.length > 0" [request]="{fields: dtField, needButton: true, themeClass: 'grayWhite', 
+                    numberOfControlsInARow: 1, controlValues: {}, SubmitLabel: 'Login',
+                    readOnlyForm: false, CloseLabel: 'Forgot Password', nBrandId: 0}" (onSubmit)="logMeIn($event)"
+                    (onClose)="forgotPasswordClick()"></app-controls>
             </div>
         </div>
     </div>

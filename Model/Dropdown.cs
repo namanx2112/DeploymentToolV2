@@ -20,7 +20,7 @@ namespace DeploymentTool.Model
     public class DropdownModule
     {
         public int aModuleId { get; set; }
-        public int nBrnadId { get; set; }
+        public int nBrandId { get; set; }
         public string tModuleName { get; set; }
         public string tModuleDisplayName { get; set; }
         public string tModuleGroup { get; set; }

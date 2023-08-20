@@ -56,7 +56,7 @@ export class AuthService {
     sessionStorage.clear();
     AccessService.userAccessList = [];
     CommonService.allBrands = [];
-    CommonService.allItems = [];
+    CommonService.dropdownCache = [];
     this.router.navigate(['./login'], { skipLocationChange: true, relativeTo: this.route });
   }
 

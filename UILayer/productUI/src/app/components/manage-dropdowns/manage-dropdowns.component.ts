@@ -26,37 +26,71 @@ export class ManageDropdownsComponent {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   moduleGroupList: any;
   modules: string[];
+  allModules: DropdownModule[];
   constructor(private dialog: MatDialog, private service: DropdownServiceService, private commonService: CommonService) {
     this.loadBrands();
   }
 
   loadModules() {
     this.service.GetModules(1).subscribe((x: DropdownModule[]) => {
-      this.loadGroup(x);
-      this.selectedModule = x[0];
-      this.getLis();
+      this.allModules = x;
+      this.loadGroup();
     });
   }
 
-  loadGroup(all: DropdownModule[]) {
+  loadGroup() {
     this.moduleGroupList = {};
     this.modules = [];
-    for (var indxi in all) {
-      let tModule = all[indxi];
-      if (this.moduleGroupList[tModule.tModuleGroup])
-        this.moduleGroupList[tModule.tModuleGroup].push(tModule);
-      else {
-        this.modules.push(tModule.tModuleGroup);
-        this.moduleGroupList[tModule.tModuleGroup] = [tModule];
+    let first = true;
+    this.selectedModule = {
+      aModuleId: -1,
+      nBrandId: 0,
+      tModuleName: '',
+      tModuleDisplayName: '',
+      tModuleGroup: '',
+      editable: false
+    };
+    for (var indxi in this.allModules) {
+      let tModule = this.allModules[indxi];
+      if (tModule.nBrandId == this.selectedBrand.aBrandId) {
+        if (first)
+          this.selectedModule = tModule;
+        first = false;
+        if (this.moduleGroupList[tModule.tModuleGroup])
+          this.moduleGroupList[tModule.tModuleGroup].push(tModule);
+        else {
+          this.modules.push(tModule.tModuleGroup);
+          this.moduleGroupList[tModule.tModuleGroup] = [tModule];
+        }
       }
     }
+    this.getLis();
   }
 
   loadBrands() {
     let cThis = this;
     this.commonService.getBrands(function (x: any) {
       cThis.allBrands = x;
-      cThis.selectedBrand = cThis.allBrands[0];
+      cThis.selectedBrand = {
+        aBrandId: 0,
+        tBrandIdentifier: "",
+        tBrandName: 'None',
+        tBrandDomain: '',
+        tBrandAddressLine1: '',
+        tBrandAddressLine2: '',
+        tBrandCity: '',
+        nBrandState: 0,
+        nBrandCountry: 0,
+        tBrandZipCode: '',
+        nBrandLogoAttachmentID: 0,
+        nCreatedBy: 0,
+        nUpdateBy: 0,
+        dtCreatedOn: new Date(),
+        dtUpdatedOn: new Date(),
+        bDeleted: false,
+        tIconURL: '',
+        access: true
+      };
       cThis.loadModules();
     });
   }
@@ -67,9 +101,11 @@ export class ManageDropdownsComponent {
 
   getLis() {
     this.ddList = [];
-    this.service.Get(this.selectedModule.tModuleName).subscribe((resp: DropwDown[]) => {
-      this.ddList = (resp.length > 0) ? resp.filter(x => x.bDeleted != true) : [];
-    });
+    if (this.selectedModule.aModuleId > -1) {
+      this.service.Get(this.selectedModule.tModuleName).subscribe((resp: DropwDown[]) => {
+        this.ddList = (resp != null && resp.length > 0) ? resp.filter(x => x.bDeleted != true) : [];
+      });
+    }
   }
 
   add(event: any): void {
@@ -92,7 +128,7 @@ export class ManageDropdownsComponent {
           else {
             tItem.aDropdownId = x.aDropdownId;
             this.ddList.push(tItem);
-            this.commonService.refreshDropdownValue(this.selectedModule.tModuleName, this.ddList);
+            this.commonService.refreshDropdownValue(this.selectedModule.tModuleName, this.ddList, this.selectedBrand.aBrandId);
             event.target.value = "";
           }
         });
@@ -112,7 +148,7 @@ export class ManageDropdownsComponent {
         if (index >= 0) {
           this.ddList.splice(index, 1);
         }
-        this.commonService.refreshDropdownValue(this.selectedModule.tModuleName, this.ddList);
+        this.commonService.refreshDropdownValue(this.selectedModule.tModuleName, this.ddList, this.selectedBrand.aBrandId);
       });
     }
   }
@@ -124,7 +160,7 @@ export class ManageDropdownsComponent {
       this.ddList[indx].nOrder = parseInt(indx);
     }
     this.service.UpdateOrder(this.ddList).subscribe(x => {
-      this.commonService.refreshDropdownValue(this.selectedModule.tModuleName, this.ddList);
+      this.commonService.refreshDropdownValue(this.selectedModule.tModuleName, this.ddList, this.selectedBrand.aBrandId);
     });
   }
 
@@ -146,7 +182,7 @@ export class ManageDropdownsComponent {
               cThis.ddList[index] = item;
               //item.tDropdownText = event.value;
               callBackClose();
-              cThis.commonService.refreshDropdownValue(cThis.selectedModule.tModuleName, cThis.ddList);
+              cThis.commonService.refreshDropdownValue(cThis.selectedModule.tModuleName, cThis.ddList, cThis.selectedBrand.aBrandId);
             }
           }
         });
@@ -181,6 +217,7 @@ export class ManageDropdownsComponent {
       needButton: true,
       controlValues: tVals,
       SubmitLabel: "Save",
+      curBrandId: this.selectedBrand.aBrandId,
       onSubmit: function (data: any) {
         let eText = data.value["tDropdownText"];
         if (eText.trim() == "")

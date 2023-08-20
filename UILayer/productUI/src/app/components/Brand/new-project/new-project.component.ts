@@ -19,12 +19,14 @@ export class NewProjectComponent {
   _NeedTechComponent: string;
   @Input() set ProjectParam(val: any) {
     this._ProjectType = val.ProjectType;
-    this.nProjectType = parseInt(this._ProjectType.optionIndex);
+    this.nProjectType = parseInt(this._ProjectType.aDropdownId);
     this._NeedTechComponent = val.TechCompType;
     this.getTabs();
     this.loadCurTab();
   }
   @Output() ChangeView = new EventEmitter<string>();
+  @Input()
+  curBrandId: number;
   allTabs: HomeTab[];
   curTab: HomeTab;
   tValues: Dictionary<Dictionary<any>>;

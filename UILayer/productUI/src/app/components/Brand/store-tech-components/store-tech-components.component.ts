@@ -15,10 +15,12 @@ import { AccessService } from 'src/app/services/access.service';
 })
 export class StoreTechComponentsComponent {
   _curStore: any;
+  curBrandId: number;
   @Input()
   public set request(value: any) {
     this._curStore = value.element;
     this.needEdit = value.needEdit;
+    this.curBrandId = value.curBrandId;
     this.initTab();
   }
   needEdit: boolean;
@@ -135,6 +137,7 @@ export class StoreTechComponentsComponent {
       needButton: true,
       controlValues: this.tValues[cTab.tab_name],
       SubmitLabel: "Save",
+      curBrandId: this._curStore.nBrandId,
       onSubmit: function (data: any) {
         cthis.SaveTechComp(cTab, data, function (val: any) {
           cthis.tValues[cTab.tab_name] = data.value;

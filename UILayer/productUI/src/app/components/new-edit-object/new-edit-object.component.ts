@@ -45,6 +45,7 @@ export class NewEditObjectComponent {
   cService: any;
   childSearchFields: any = {};
   refreshChildTable: any = {};
+  nBrandId: number = 0;
   constructor(private dialog: MatDialog, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseService: FranchiseService, private userSerice: UserService, private partsService: PartsService, public access: AccessService, private commonService: CommonService) {
     this.SubmitLabel = "Save";
@@ -136,19 +137,19 @@ export class NewEditObjectComponent {
         vals["nVendorId"] = this._controlValues["aVendorId"];
         break;
       case TabType.Users:
-        let tOptions = this.commonService.GetDropdown("UserRole");
-        let brandOptions = this.commonService.GetDropdown("Brand");
+        let tOptions = this.commonService.GetDropdownOptions(this.nBrandId, "UserRole");
+        let brandOptions = this.commonService.GetDropdownOptions(this.nBrandId, "Brand");
         vals["rBrandID"] = [1,2,3,4,5,6];
         if (this.curTab.tab_type == TabType.Vendor) {
-          let cOption = tOptions.find(x => x.optionDisplayName == "Vendor");
+          let cOption = tOptions.find(x => x.tDropdownText == "Vendor");
           if (cOption)
-            vals["nRole"] = cOption.optionIndex;
+            vals["nRole"] = cOption.aDropdownId;
           vals["nVendorId"] = this._controlValues["aVendorId"];
         }
         else if (this.curTab.tab_type == TabType.Franchise) {
-          let cOption = tOptions.find(x => x.optionDisplayName == "Franchise");
+          let cOption = tOptions.find(x => x.tDropdownText == "Franchise");
           if (cOption)
-            vals["nRole"] = cOption.optionIndex;
+            vals["nRole"] = cOption.aDropdownId;
           vals["nFranchiseId"] = this._controlValues["aFranchiseId"];
         }
         break;
@@ -201,6 +202,7 @@ export class NewEditObjectComponent {
       needButton: true,
       controlValues: tVals,
       SubmitLabel: "Save",
+      curBrandId: 0,//NeedToChange
       onSubmit: function (data: any) {
         cthis.saveThisTab(data, cTab, function (val: any) {
           delete cthis._controlValues[cTab.tab_name];

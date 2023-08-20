@@ -87,7 +87,8 @@ namespace DeploymentTool.Controller
                 if (searchText == null)
                     searchText = string.Empty;
                 SqlParameter tModuleNameParam = new SqlParameter("@tText", searchText);
-                List<StoreSearchModel> items = db.Database.SqlQuery<StoreSearchModel>("exec sproc_SearchStore @tText", tModuleNameParam).ToList();
+                SqlParameter nBrand = new SqlParameter("@nBrandID", nBrandId);
+                List<StoreSearchModel> items = db.Database.SqlQuery<StoreSearchModel>("exec sproc_SearchStore @tText,@nBrandID", tModuleNameParam, nBrand).ToList();
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<List<StoreSearchModel>>(items, new JsonMediaTypeFormatter())

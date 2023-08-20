@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType, Fields, HomeTab } from 'src/app/interfaces/home-tab';
@@ -11,6 +11,8 @@ import { ExStoreService } from 'src/app/services/ex-store.service';
 })
 export class PosInstallationComponent {
   @Output() ChangeView = new EventEmitter<any>();
+  @Input()
+  curBrandId: number;
   activeTabName: string;
   allTabs: HomeTab[];
   searchFields: Fields[];

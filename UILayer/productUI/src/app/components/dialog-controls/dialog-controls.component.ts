@@ -20,6 +20,7 @@ export class DialogControlsComponent {
   onClose: any;
   title: string;
   dialogTheme: string;
+  curBrandId: number;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     if (typeof data != 'undefined') {
       this.numberOfControlsInARow = data.numberOfControlsInARow;
@@ -33,6 +34,7 @@ export class DialogControlsComponent {
       this.onClose = data.onClose;
       this.title = data.title;
       this.dialogTheme = data.dialogTheme;
+      this.curBrandId = data.curBrandId;
     }
   }
 

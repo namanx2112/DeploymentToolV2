@@ -8,6 +8,7 @@ namespace DeploymentTool.Model
     public class StoreSearchModel
     {
         public int nStoreId { get; set; }
+        public int nBrandId { get; set; }
         //public int nProjectId { get; set; }
         public string tStoreName { get; set; }
         //public string tProjectName { get; set; }

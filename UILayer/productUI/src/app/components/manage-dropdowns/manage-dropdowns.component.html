@@ -3,8 +3,8 @@
     <div class="filters">
         <mat-form-field class="dropDownField whiteDropdown">
             <mat-label>Select Brand</mat-label>
-            <mat-select [(value)]="selectedBrand">
-                <mat-option>None</mat-option>
+            <mat-select [(value)]="selectedBrand" (selectionChange)="loadGroup()">
+                <mat-option value="0">None</mat-option>
                 <mat-option *ngFor="let item of allBrands" [value]="item">{{item.tBrandName}}</mat-option>
             </mat-select>
         </mat-form-field>

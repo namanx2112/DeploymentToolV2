@@ -38,36 +38,44 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
-export class ControlsComponent implements AfterViewChecked {
-  private _controlValues: Dictionary<string>;
-  @Input() fields: Fields[];
-  @Input() needButton: boolean;
-  @Input() themeClass: string;
-  @Input() numberOfControlsInARow: number;
-  @Input() set controlValues(value: Dictionary<string>) {
-    this._controlValues = value;
-    this.checkBlankAndSet();
-    this.valueChanged();
-  };
-  get controlValues(): Dictionary<any> {
-    return this._controlValues;
+export class ControlsComponent implements AfterViewChecked {  
+  @Input()
+  set request(val: any) {
+    this.fields = val.fields;
+    this.needButton = val.needButton;
+    this.themeClass = val.themeClass;
+    this.numberOfControlsInARow = val.numberOfControlsInARow;
+    this.controlValues = val.controlValues;
+    this.SubmitLabel = val.SubmitLabel;
+    this.readOnlyForm = val.readOnlyForm;
+    this.CloseLabel = val.CloseLabel;
+    this.nBrandId = val.nBrandId;
+    this.loadFields();
+    this.loadValues();
   }
-  @Input() SubmitLabel: string;
-  @Input() readOnlyForm: boolean;
+  fields: Fields[];  
+  needButton: boolean;
+  themeClass: string;
+  numberOfControlsInARow: number;
+  controlValues:Dictionary<string>;
+  SubmitLabel: string;
+  readOnlyForm: boolean;
   @Output() onSubmit = new EventEmitter<any>();
   @Output() onClose = new EventEmitter<FormGroup>();
-  @Input() CloseLabel?: string;
+  CloseLabel?: string;
   formGroup = new FormGroup({});
   fieldClass: string;
   groupLabel: string;
   formControls: Dictionary<FormControl>;
   regexPattern =
     /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/gi;
-  constructor(private readonly changeDetectorRef: ChangeDetectorRef, private datePipe: DatePipe, private dateAdapter: DateAdapter<Date>) {
+  nBrandId: number;
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef, private datePipe: DatePipe, private dateAdapter: DateAdapter<Date>, public commonService: CommonService) {
     this.formControls = {};
     this.fieldClass = "curField";
     this.groupLabel = "";
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
+    this.nBrandId = 1;
   }
 
   ngAfterViewChecked(): void {
@@ -75,7 +83,7 @@ export class ControlsComponent implements AfterViewChecked {
   }
 
   ngAfterContentInit(): void {
-    this.valueChanged();
+    // this.valueChanged();
   }
 
   compareDropDown(o1: any, o2: any) {
@@ -84,22 +92,36 @@ export class ControlsComponent implements AfterViewChecked {
     else return false
   }
 
-  checkBlankAndSet() {
-    for (const formField of this.fields) {
-      if (typeof this._controlValues[formField.fieldUniqeName] == 'undefined') {
-        this._controlValues[formField.fieldUniqeName] = "";
+  loadFields() {
+    for (var indx in this.fields) {
+      let tField = this.fields[indx];
+      if (tField.field_type == FieldType.dropdown || tField.field_type == FieldType.multidropdown) {
+        if (typeof tField.dropDownOptions == 'undefined') {
+          tField.dropDownOptions = this.commonService.GetDropdownOptions(this.nBrandId, tField.options);
+        }
       }
     }
+  }
+
+  loadValues() {
+    if (typeof this.controlValues == 'undefined' || this.controlValues == null) {
+      this.controlValues = {};
+      for (var indx in this.fields) {
+        let tField = this.fields[indx];
+        this.controlValues[tField.fieldUniqeName] = "";
+      }
+    }
+    this.valueChanged();
   }
 
   valueChanged() {
     this.formGroup = new FormGroup({});
     for (const formField of this.fields) {
-      let tmpVal = (formField.field_type == FieldType.date) ? (typeof this._controlValues[formField.fieldUniqeName] == 'undefined' || this._controlValues[formField.fieldUniqeName] == null) ? null : this._controlValues[formField.fieldUniqeName] : (typeof this._controlValues[formField.fieldUniqeName] == 'undefined') ? formField.defaultVal : this._controlValues[formField.fieldUniqeName];
+      let tmpVal = (formField.field_type == FieldType.date) ? (typeof this.controlValues[formField.fieldUniqeName] == 'undefined' || this.controlValues[formField.fieldUniqeName] == null) ? null : this.controlValues[formField.fieldUniqeName] : (typeof this.controlValues[formField.fieldUniqeName] == 'undefined') ? formField.defaultVal : this.controlValues[formField.fieldUniqeName];
       let tFormControl = new FormControl(
         tmpVal, formField.validator);
-      if (typeof this._controlValues[formField.fieldUniqeName] == 'undefined')
-        this._controlValues[formField.fieldUniqeName] = formField.defaultVal;
+      if (typeof this.controlValues[formField.fieldUniqeName] == 'undefined')
+        this.controlValues[formField.fieldUniqeName] = formField.defaultVal;
       if (formField.field_type == FieldType.date)
         tFormControl.addValidators(dateRegexValidator);
       this.formGroup.addControl(formField.fieldUniqeName, tFormControl);
@@ -117,7 +139,7 @@ export class ControlsComponent implements AfterViewChecked {
     let sVal = val;
     if (field.field_type == FieldType.dropdown) {
       if (typeof field.options != 'undefined') {
-        sVal = CommonService.GetDropDownValueFromControl(field, val, this._controlValues);
+        sVal = CommonService.GetDropDownValueFromControl(field, val, this.controlValues, this.nBrandId);
       }
     }
     else if (field.field_type == FieldType.date) {
@@ -176,13 +198,13 @@ export class ControlsComponent implements AfterViewChecked {
   }
 
   dropdownChange(val: any, curControl: Fields) {
-    let tItem = curControl.options?.filter(x => x.optionIndex == val);
+    let tItem = curControl.dropDownOptions?.filter(x => x.aDropdownId == val);
     if (tItem && tItem[0].nFunction == 1) {
       let dFieldName = CommonService.GetDropdownDMonthFieldName(curControl);
       this.formGroup.get(dFieldName)?.setValue(new Date());
     }
     else {
-      if (curControl.options?.filter(x => x.nFunction == 1)) {
+      if (curControl.dropDownOptions?.filter(x => x.nFunction == 1)) {
         let dFieldName = CommonService.GetDropdownDMonthFieldName(curControl);
         this.formGroup.get(dFieldName)?.setValue(null);
       }
@@ -190,7 +212,7 @@ export class ControlsComponent implements AfterViewChecked {
   }
 
   getOptionValue(curControl: Fields, opt: OptionType) {
-    return CommonService.GetDropDownValueFromControlOption(curControl, opt, this._controlValues);
+    return CommonService.GetDropDownValueFromControlOption(curControl, opt, this.controlValues);
   }
 
   onSubmitClick(): void {

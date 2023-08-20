@@ -15,6 +15,7 @@ export class BrandHomePageComponent {
   @Input()
   set curBrand(val: BrandModel) {
     this._curBrand = val;
+    this.GetAllProjectTypes();
   }
   @Input()
   set openStore(val: StoreSearchModel) {
@@ -33,10 +34,9 @@ export class BrandHomePageComponent {
     this.configMenu = "dashboard";
     this.showMode = "dashboard";
     this.techCompType = "all";
-    this.GetAllProjectTypes();
   }
   GetAllProjectTypes() {
-    this.ProjectTypes = this.commonService.GetDropdown("ProjectType");
+    this.ProjectTypes = this.commonService.GetDropdownOptions(this._curBrand.aBrandId, "ProjectType");
   }
   clickOption(val: any) {
     this.showMode = val;
@@ -53,7 +53,7 @@ export class BrandHomePageComponent {
   menuClick(tMode: string, techComp?: string, newOption?: string) {
     if (typeof newOption != 'undefined' && typeof techComp != 'undefined') {
       this.techCompType = techComp;
-      this.projectType = this.ProjectTypes.filter(x => x.optionDisplayName.toLocaleLowerCase() == newOption.toLocaleLowerCase())[0];
+      this.projectType = this.ProjectTypes.filter(x => x.tDropdownText.toLocaleLowerCase() == newOption.toLocaleLowerCase())[0];
     }
     this.showMode = tMode;
   }

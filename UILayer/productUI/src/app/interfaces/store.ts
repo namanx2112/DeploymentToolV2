@@ -239,6 +239,7 @@ export interface ProjectExcel {
 
 export interface StoreSearchModel {
     nStoreId: number,
+    nBrandId: number,
     tStoreName: string,
     tStoreNumber: string,
     lstProjectsInfo: ProjectInfo[]

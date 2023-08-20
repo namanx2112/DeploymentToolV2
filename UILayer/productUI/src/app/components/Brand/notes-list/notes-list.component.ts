@@ -45,6 +45,7 @@ export class NotesListComponent {
       needButton: true,
       controlValues: pFillData,
       SubmitLabel: "Post",
+      curBrandId: this.curStore.nBrandId,
       onSubmit: function (data: any) {
         cThis.service.Create(data.value).subscribe((x: any) => {
           cThis.refreshFlag = new Date();

@@ -1,9 +1,10 @@
 <div class="tabsBody" *ngIf="nTemplateId == -1">
     <div class="header">PO Worflow Configurations</div>
     <div class="SearchPart whiteGrayTheme">
-        <app-controls [themeClass]="'whiteGray'" [numberOfControlsInARow]="1" [needButton]="false"
-            [fields]="searchField" [controlValues]="{}" [SubmitLabel]="'Search'" class="searchControls"></app-controls>
-        <button mat-raised-button class="searchButton" (click)="OpenView(0)" *ngIf="access.hasAccess('home.dashboard.po', 1)">Create New Workflow</button>
+        <app-controls *ngIf="access.hasAccess('home.dashboard.po', 1)" [request]="{fields: searchField, needButton: false, themeClass: 'whiteGray', numberOfControlsInARow: 1, 
+        controlValues: {}, SubmitLabel: 'button',
+            readOnlyForm: false, nBrandId: 0}" class="searchControls"></app-controls>
+        <button mat-raised-button class="searchButton" (click)="OpenView(0)">Create New Workflow</button>
     </div>
     <div class="tablePart">
         <div *ngFor="let item of allPO" class="lightGray requestTile">

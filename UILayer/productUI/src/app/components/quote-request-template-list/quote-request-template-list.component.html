@@ -1,9 +1,11 @@
 <div class="tabsBody" *ngIf="nTemplateId == -1">
     <div class="header">Quote Request Worflow Configurations</div>
     <div class="SearchPart whiteGrayTheme">
-        <app-controls [themeClass]="'whiteGray'" [numberOfControlsInARow]="1" [needButton]="false"
-            [fields]="searchField" [controlValues]="{}" [SubmitLabel]="'Search'" class="searchControls"></app-controls>
-        <button *ngIf="access.hasAccess('home.dashboard.quoterequest', 1)" mat-raised-button class="searchButton" (click)="OpenView(0)">Create New Workflow</button>
+        <app-controls [request]="{fields: searchField, needButton: false, themeClass: 'whiteGray', numberOfControlsInARow: 1, 
+        controlValues: {}, SubmitLabel: 'Search',
+            readOnlyForm: false, nBrandId: 0}" class="searchControls"></app-controls>
+        <button *ngIf="access.hasAccess('home.dashboard.quoterequest', 1)" mat-raised-button class="searchButton"
+            (click)="OpenView(0)">Create New Workflow</button>
     </div>
     <div class="tablePart">
         <div *ngFor="let item of allQuotes" class="lightGray requestTile">
@@ -20,10 +22,11 @@
                     <button mat-menu-item (click)="deleteMe(item.aQuoteRequestTemplateId)">
                         <mat-icon>delete</mat-icon>
                         <span>Delete</span>
-                    </button>                    
+                    </button>
                 </mat-menu>
             </div>
-            <span class="tName" *ngIf="!access.hasAccess('home.dashboard.quoterequest', 1)">{{item.tTemplateName}}</span>
+            <span class="tName"
+                *ngIf="!access.hasAccess('home.dashboard.quoterequest', 1)">{{item.tTemplateName}}</span>
             <span class="tName" matTooltip="Click to Open" *ngIf="access.hasAccess('home.dashboard.quoterequest', 1)"
                 (click)="OpenView(item.aQuoteRequestTemplateId)">{{item.tTemplateName}}</span>
         </div>

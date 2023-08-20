@@ -20,8 +20,8 @@
             <input type="text" placeholder="Search Vendor" aria-label="Number" matInput [formControl]="myControl"
                 [matAutocomplete]="auto">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='onVendorChange($event)'>
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.optionDisplayName">
-                    {{option.optionDisplayName}}
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.tDropdownText">
+                    {{option.tDropdownText}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>

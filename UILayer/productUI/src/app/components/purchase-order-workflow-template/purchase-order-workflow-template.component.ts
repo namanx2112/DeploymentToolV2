@@ -68,8 +68,8 @@ export class PurchaseOrderWorkflowTemplateComponent {
     for (var indx in vendors) {
       let tVendor = vendors[indx];
       oArr.push({
-        optionDisplayName: tVendor.tVendorName,
-        optionIndex: tVendor.aVendorId.toString(),
+        tDropdownText: tVendor.tVendorName,
+        aDropdownId: tVendor.aVendorId.toString(),
         optionOrder: 1,
         bDeleted: false,
         nFunction: 0

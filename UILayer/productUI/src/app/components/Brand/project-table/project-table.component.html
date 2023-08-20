@@ -9,8 +9,8 @@
 <div class="tabBody">
     <div class="projectView">
         <app-table *ngIf="tabName == 'Active'" [curTab]="curTab" [searchFields]="tableCondition" (rowClicked)="rowClicked($event)"
-            [clickCol]="'all'"></app-table>
+            [clickCol]="'all'" [nBrandId]="_curStore.nBrandId"></app-table>
         <app-table-expendable *ngIf="tabName == 'Historical'" [curTab]="historProj" [searchFields]="tableCondition" (rowClicked)="rowClicked($event)"
-            [clickCol]="'all'"></app-table-expendable>
+            [clickCol]="'all'" [curBrandId]="_curStore.nBrandId"></app-table-expendable>
     </div>
 </div>

@@ -26,6 +26,8 @@ export class StoreViewComponent {
     this.selectedProject = value.lstProjectsInfo[0];
     this.initTab();
   }
+  @Input()
+  curBrandId: number;
   allTabs: HomeTab[];
   tabForUI: HomeTab[];
   tValues: Dictionary<Dictionary<string>>;
@@ -85,6 +87,7 @@ export class StoreViewComponent {
 
     dialogConfig.data = {
       projInfo: projInfo,
+      curBrand: this._curStore.nBrandId,
       onSave: function (data: any) {
         projInfo.dGoLiveDate = data.toLocaleDateString();
         dialogRef.close();

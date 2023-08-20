@@ -218,7 +218,7 @@ export interface DropwDown {
 
 export interface DropdownModule{
     aModuleId: number,
-    nBrnadId: number,
+    nBrandId: number,
     tModuleName: string,
     tModuleDisplayName: string,
     tModuleGroup: string,

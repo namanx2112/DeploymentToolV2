@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType, Fields, HomeTab } from 'src/app/interfaces/home-tab';
+import { BrandModel } from 'src/app/interfaces/models';
 import { ExStoreService } from 'src/app/services/ex-store.service';
 
 @Component({
@@ -11,6 +12,8 @@ import { ExStoreService } from 'src/app/services/ex-store.service';
 })
 export class AudioInstallationComponent {
   @Output() ChangeView = new EventEmitter<any>();
+  @Input()
+  curBrandId: number;
   activeTabName: string;
   allTabs: HomeTab[];
   searchFields: Fields[];

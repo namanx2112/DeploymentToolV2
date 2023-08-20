@@ -36,7 +36,8 @@ export interface Fields {
     mandatory: boolean,
     defaultVal: string,
     conditional_mandatory?: ConditionalOption,
-    options?: OptionType[],
+    options?: string,
+    dropDownOptions?: OptionType[],
     hidden: boolean,
     relations?: HomeTab[]
 }
@@ -46,8 +47,8 @@ export enum FieldType {
 }
 
 export interface OptionType {
-    optionDisplayName: string,
-    optionIndex: string,
+    tDropdownText: string,
+    aDropdownId: string,
     optionOrder: number,
     nFunction: number,
     bDeleted: boolean

@@ -13,7 +13,7 @@ import { CacheService } from './cache.service';
   providedIn: 'root'
 })
 export class CommonService {
-  static allItems: any;
+  static dropdownCache: any;
   static ddMonthString: string = "[Day/Month]";
   static allBrands: any;
   noNeedBlankDropDown: string[] = ["UserRole", "Brand"];
@@ -33,20 +33,24 @@ export class CommonService {
   }
 
   loadDropdownArray(x: DropwDown[]) {
-    CommonService.allItems = {};
+    CommonService.dropdownCache = {};
     for (let indx in x) {
       let tItem = x[indx];
-      if (CommonService.allItems[tItem.tModuleName])
-        CommonService.allItems[tItem.tModuleName].push(tItem);
+      let cItem = [];
+      if (typeof CommonService.dropdownCache[tItem.nBrandId] == 'undefined')
+        CommonService.dropdownCache[tItem.nBrandId] = [];
+      cItem = CommonService.dropdownCache[tItem.nBrandId];
+      if (cItem[tItem.tModuleName])
+        cItem[tItem.tModuleName].push(tItem);
       else {
-        CommonService.allItems[tItem.tModuleName] = [];
-        CommonService.allItems[tItem.tModuleName].push(tItem);
+        cItem[tItem.tModuleName] = [];
+        cItem[tItem.tModuleName].push(tItem);
       }
     }
   }
 
   public getAllDropdowns(callBack?: any) {
-    if (typeof CommonService.allItems == 'undefined' || CommonService.allItems.length == 0) {
+    if (typeof CommonService.dropdownCache == 'undefined' || CommonService.dropdownCache.length == 0) {
       let cThis = this;
       this.ddService.Get("").subscribe((x: DropwDown[]) => {
         cThis.loadDropdownArray(x);
@@ -58,8 +62,8 @@ export class CommonService {
       callBack();
   }
 
-  public refreshDropdownValue(module: string, ddVal: DropwDown[]) {
-    CommonService.allItems[module] = ddVal;
+  public refreshDropdownValue(module: string, ddVal: DropwDown[], nBrandId: number) {
+    CommonService.dropdownCache[nBrandId][module] = ddVal;
   }
 
   static getFormatedDateString(dString: any) {
@@ -130,18 +134,18 @@ export class CommonService {
   // GetCountryDropdowns(): OptionType[] {
   //   let contries = [
   //     {
-  //       optionDisplayName: "India",
-  //       optionIndex: "India",
+  //       tDropdownText: "India",
+  //       aDropdownId: "India",
   //       optionOrder: 1
   //     },
   //     {
-  //       optionDisplayName: "USA",
-  //       optionIndex: "USA",
+  //       tDropdownText: "USA",
+  //       aDropdownId: "USA",
   //       optionOrder: 2
   //     },
   //     {
-  //       optionDisplayName: "UAE",
-  //       optionIndex: "UAE",
+  //       tDropdownText: "UAE",
+  //       aDropdownId: "UAE",
   //       optionOrder: 3
   //     }
   //   ];
@@ -157,133 +161,145 @@ export class CommonService {
     return 0;
   }
 
-  GetDropdown(columnName: string): OptionType[] {
+  public GetDropdownOptions(nBrandId: number, columnName?: string): OptionType[] {
     let ddItems: OptionType[] = [];
-    if (columnName == "ProjectType") {
-      //  , , , , , , , 
-      ddItems = [{
-        optionDisplayName: "New",
-        optionIndex: ProjectTypes.New.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }, {
-        optionDisplayName: "Rebuild",
-        optionIndex: ProjectTypes.Rebuild.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }, {
-        optionDisplayName: "Remodel",
-        optionIndex: ProjectTypes.Remodel.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }, {
-        optionDisplayName: "Relocation",
-        optionIndex: ProjectTypes.Relocation.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }, {
-        optionDisplayName: "Acquisition",
-        optionIndex: ProjectTypes.Acquisition.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }, {
-        optionDisplayName: "POSInstallation",
-        optionIndex: ProjectTypes.POSInstallation.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }, {
-        optionDisplayName: "AudioInstallation",
-        optionIndex: ProjectTypes.AudioInstallation.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }, {
-        optionDisplayName: "MenuInstallation",
-        optionIndex: ProjectTypes.MenuInstallation.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }, {
-        optionDisplayName: "PaymentTerminalInstallation",
-        optionIndex: ProjectTypes.PaymentTerminalInstallation.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }, {
-        optionDisplayName: "PartsReplacement",
-        optionIndex: ProjectTypes.PartsReplacement.toString(),
-        optionOrder: 1,
-        bDeleted: false,
-        nFunction: 0
-      }];
-    }
-    else {
-      if (CommonService.allItems[columnName]) {
-        var tItem = CommonService.allItems[columnName];
-        for (var item in tItem) {
-          ddItems.push({
-            optionDisplayName: tItem[item].tDropdownText,
-            optionIndex: tItem[item].aDropdownId.toString(),
-            optionOrder: tItem[item].nOrder,
-            bDeleted: tItem[item].bDeleted,
-            nFunction: tItem[item].nFunction
-          });
-        }
-        ddItems.sort(this.compare);
-        if (this.noNeedBlankDropDown.indexOf(columnName) == -1)
-          ddItems.unshift({
-            optionDisplayName: "",
-            optionIndex: "0",
-            optionOrder: 1,
-            bDeleted: false,
-            nFunction: 0
-          });
-        else {
-          if (columnName == "UserRole")
-            ddItems = ddItems.filter(x => x.optionDisplayName.indexOf("Vendor") == -1 && x.optionDisplayName.indexOf("Franchise") == -1)
-        }
-      }
-    }
-    if (ddItems.length == 0) {
-      if (columnName == "YesNo") {
+    if (columnName) {
+      if (columnName == "ProjectType") {
+        //  , , , , , , , 
         ddItems = [{
-          optionDisplayName: "No",
-          optionIndex: "0",
+          tDropdownText: "New",
+          aDropdownId: ProjectTypes.New.toString(),
           optionOrder: 1,
           bDeleted: false,
           nFunction: 0
-        },
-        {
-          optionDisplayName: "Yes",
-          optionIndex: "1",
-          optionOrder: 2,
+        }, {
+          tDropdownText: "Rebuild",
+          aDropdownId: ProjectTypes.Rebuild.toString(),
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }, {
+          tDropdownText: "Remodel",
+          aDropdownId: ProjectTypes.Remodel.toString(),
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }, {
+          tDropdownText: "Relocation",
+          aDropdownId: ProjectTypes.Relocation.toString(),
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }, {
+          tDropdownText: "Acquisition",
+          aDropdownId: ProjectTypes.Acquisition.toString(),
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }, {
+          tDropdownText: "POSInstallation",
+          aDropdownId: ProjectTypes.POSInstallation.toString(),
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }, {
+          tDropdownText: "AudioInstallation",
+          aDropdownId: ProjectTypes.AudioInstallation.toString(),
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }, {
+          tDropdownText: "MenuInstallation",
+          aDropdownId: ProjectTypes.MenuInstallation.toString(),
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }, {
+          tDropdownText: "PaymentTerminalInstallation",
+          aDropdownId: ProjectTypes.PaymentTerminalInstallation.toString(),
+          optionOrder: 1,
+          bDeleted: false,
+          nFunction: 0
+        }, {
+          tDropdownText: "PartsReplacement",
+          aDropdownId: ProjectTypes.PartsReplacement.toString(),
+          optionOrder: 1,
           bDeleted: false,
           nFunction: 0
         }];
       }
       else {
-        ddItems = [{
-          optionDisplayName: "None",
-          optionIndex: "0",
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          optionDisplayName: "Dummy",
-          optionIndex: "1",
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }];
+        if (columnName == "Franchise" || columnName == "Vendor")// Since Franchise and Vendor is shared
+          nBrandId = 0;
+        if (CommonService.dropdownCache[nBrandId][columnName]) {
+          var tItem = CommonService.dropdownCache[nBrandId][columnName];
+          for (var item in tItem) {
+            ddItems.push({
+              tDropdownText: tItem[item].tDropdownText,
+              aDropdownId: tItem[item].aDropdownId.toString(),
+              optionOrder: tItem[item].nOrder,
+              bDeleted: tItem[item].bDeleted,
+              nFunction: tItem[item].nFunction
+            });
+          }
+          ddItems.sort(this.compare);
+          if (this.noNeedBlankDropDown.indexOf(columnName) == -1)
+            ddItems.unshift({
+              tDropdownText: "",
+              aDropdownId: "0",
+              optionOrder: 1,
+              bDeleted: false,
+              nFunction: 0
+            });
+          else {
+            if (columnName == "UserRole")
+              ddItems = ddItems.filter(x => x.tDropdownText.indexOf("Vendor") == -1 && x.tDropdownText.indexOf("Franchise") == -1)
+          }
+        }
+      }
+      if (ddItems.length == 0) {
+        if (columnName == "YesNo") {
+          ddItems = [{
+            tDropdownText: "No",
+            aDropdownId: "0",
+            optionOrder: 1,
+            bDeleted: false,
+            nFunction: 0
+          },
+          {
+            tDropdownText: "Yes",
+            aDropdownId: "1",
+            optionOrder: 2,
+            bDeleted: false,
+            nFunction: 0
+          }];
+        }
+        else {
+          ddItems = CommonService.getDefaultOptions();
+        }
       }
     }
     return ddItems;
+  }
+
+  static getDefaultOptions(): OptionType[] {
+    return [{
+      tDropdownText: "None",
+      aDropdownId: "0",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Dummy",
+      aDropdownId: "1",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }];
+  }
+
+  GetDropdown(columnName: string): string {
+    return columnName;
   }
 
   static GetDropdownDMonthFieldName(field: Fields) {
@@ -291,20 +307,29 @@ export class CommonService {
     return tPrefix + field.fieldUniqeName;
   }
 
-  static GetDropDownValueFromControl(curControl: Fields, optVal: string, _controlValues: any) {
+  static GetDropDownValueFromControl(curControl: Fields, optVal: string, _controlValues: any, nBrandId: number) {
     let outputVal = optVal;
-    let tOpton = curControl.options?.find(x => x.optionIndex == optVal);
-    if (tOpton) {
-      outputVal = CommonService.GetDropDownValueFromControlOption(curControl, tOpton, _controlValues);
+    if (curControl.options) {
+      if (curControl.options == "Vendor" || curControl.options == "Franchise")
+        nBrandId = 0;
+      let opArr: OptionType[] = CommonService.dropdownCache[nBrandId][curControl.options];
+      if (typeof opArr == 'undefined')
+        opArr = CommonService.getDefaultOptions();
+      if (opArr) {
+        let tOpton = opArr.find(x => x.aDropdownId == optVal);
+        if (tOpton) {
+          outputVal = CommonService.GetDropDownValueFromControlOption(curControl, tOpton, _controlValues);
+        }
+      }
     }
     return outputVal;
   }
 
   static GetDropDownValueFromControlOption(curControl: Fields, opt: OptionType, _controlValues: any) {
-    let val = opt.optionDisplayName;
+    let val = opt.tDropdownText;
     if (opt.nFunction == 1) {
       let newVal = val;
-      if (_controlValues[curControl.fieldUniqeName] && _controlValues[curControl.fieldUniqeName] == opt.optionIndex) {
+      if (_controlValues[curControl.fieldUniqeName] && _controlValues[curControl.fieldUniqeName] == opt.aDropdownId) {
         let dString = _controlValues[CommonService.GetDropdownDMonthFieldName(curControl)];
         if (dString) {
           let momentVal = (typeof dString == 'object') ? moment(dString) : (dString.indexOf("-") > -1) ? moment(dString, 'YYYY-MM-DD') : moment(dString, 'DD/MM/YYYY');

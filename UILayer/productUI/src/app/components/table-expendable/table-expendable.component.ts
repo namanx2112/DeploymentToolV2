@@ -45,6 +45,8 @@ export class TableExpendableComponent {
   @Input() set refreshMe(val: Date) {
     this._refreshMe = val;
   }
+  @Input()
+  curBrandId: number;
   @Output() rowClicked = new EventEmitter<MatRow>();
   columnsToDisplay: TableColumnDef[] = [];
   clickedRows = new Set<any>();

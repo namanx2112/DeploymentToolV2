@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ReportModel } from 'src/app/interfaces/analytics';
@@ -14,6 +14,8 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./report-table.component.css'],
 })
 export class ReportTableComponent implements OnInit {
+  @Input()
+  curBrandId: number;
   @ViewChild('TABLE', { read: ElementRef }) table: ElementRef;
   tReport: ReportModel;
   dataSource: MatTableDataSource<any>;// = new MatTableDataSource(ELEMENT_DATA);

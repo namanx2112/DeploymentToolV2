@@ -15,15 +15,18 @@
 <div class="tabBody">
     <div *ngIf="activeTabName == 'searchstore'">
         <h3 class="tabName">Select Store</h3>
-        <app-controls class="tabForm" [numberOfControlsInARow]="1" [fields]="searchFields" [needButton]="true"
-            [controlValues]="searchValue" [SubmitLabel]="'Next'" (onSubmit)="onSearch($event)"
-            [themeClass]="'grayWhite'"></app-controls>
+        <app-controls class="tabForm" [request]="{fields: searchFields, needButton: true, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+        controlValues: searchValue, SubmitLabel: 'Next',
+            readOnlyForm: false, nBrandId: curBrandId}" (onSubmit)="onSearch($event)"></app-controls>
     </div>
     <div *ngFor="let tTab of allTabs">
         <h3 *ngIf="activeTabName == tTab.tab_name" class="tabName">{{tTab.tab_header}}</h3>
         <app-controls class="tabForm" *ngIf="activeTabName == tTab.tab_name"
-            [readOnlyForm]="tTab.tab_name == 'Store Details'" [numberOfControlsInARow]="1" [fields]="tTab.fields"
-            [needButton]="true" [controlValues]="fieldValues[tTab.tab_name]" [SubmitLabel]="'Next'"
-            (onSubmit)="onNext($event, tTab)" [themeClass]="'grayWhite'"></app-controls>
+        [request]="{fields: tTab.fields, needButton: true, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+        controlValues: fieldValues[tTab.tab_name], SubmitLabel: 'Next',
+            readOnlyForm: tTab.tab_name == 'Store Details', nBrandId: curBrandId}"
+
+            
+            (onSubmit)="onNext($event, tTab)"></app-controls>
     </div>
 </div>

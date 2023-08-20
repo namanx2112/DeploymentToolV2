@@ -21,6 +21,8 @@ export class NewStoreComponent {
     this.loadCurTab();
   }
   @Output() ChangeView = new EventEmitter<string>();
+  @Input()
+  curBrandId: number;
   allTabs: HomeTab[];
   curTab: HomeTab;
   tValues: Dictionary<Dictionary<string>>;
@@ -43,7 +45,7 @@ export class NewStoreComponent {
   getTabs() {
     this.allTabs = [];
     this.allTabs.push(this.service.GetNewStoresTab(TabInstanceType.Single));
-    this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = { "nProjectType": this._ProjectType.optionIndex };
+    this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = { "nProjectType": this._ProjectType.aDropdownId };
     this.allTabs.push(this.service.GetStoreConfigurationTab(TabInstanceType.Single));
     this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     this.allTabs.push(this.service.GetStoreStackholderTab(TabInstanceType.Single));
@@ -94,11 +96,11 @@ export class NewStoreComponent {
     for (var indx in this.allTabs) {
       if (typeof this.tValues[this.allTabs[indx].tab_name] != 'undefined') {
         this.tValues[this.allTabs[indx].tab_name]["nStoreId"] = nStoreId;
-        this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.optionIndex;
+        this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.aDropdownId;
       }
       else {
         this.tValues[this.allTabs[indx].tab_name] = { "nStoreId": nStoreId };
-        this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.optionIndex;
+        this.tValues[this.allTabs[indx].tab_name]["nProjectType"] = this._ProjectType.aDropdownId;
       }
     }
   }

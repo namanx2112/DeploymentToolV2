@@ -34,10 +34,9 @@
                 <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[0].tab_name, 1)"><a
                         (click)="editTab(allTabs[0])">Edit</a></div>
             </h4>
-            <app-controls *ngIf="tValues[allTabs[0].tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"
-                [fields]="allTabs[0].fields" [readOnlyForm]="true" [needButton]="false"
-                [controlValues]="tValues[allTabs[0].tab_name]" [SubmitLabel]="'None'"
-                (onSubmit)="onSubmit($event, allTabs[0])" [themeClass]="'grayWhite'"></app-controls>
+            <app-controls *ngIf="tValues[allTabs[0].tab_name] != undefined" class="tabForm" [request]="{fields: allTabs[0].fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
+    readOnlyForm: true, nBrandId: curBrandId}" (onSubmit)="onSubmit($event, allTabs[0])"></app-controls>
         </div>
         <div class="fullTile tileSelected">
             <h4>
@@ -46,10 +45,9 @@
                 <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[1].tab_name, 1)"><a
                         (click)="editTab(allTabs[1])">Edit</a></div>
             </h4>
-            <app-controls *ngIf="tValues[allTabs[1].tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"
-                [fields]="allTabs[1].fields" [readOnlyForm]="true" [needButton]="false"
-                [controlValues]="tValues[allTabs[1].tab_name]" [SubmitLabel]="'None'"
-                (onSubmit)="onSubmit($event, allTabs[1])" [themeClass]="'grayWhite'"></app-controls>
+            <app-controls *ngIf="tValues[allTabs[1].tab_name] != undefined" class="tabForm" [request]="{fields: allTabs[1].fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+            controlValues: tValues[allTabs[1].tab_name], SubmitLabel: 'None',
+                readOnlyForm: true, nBrandId: curBrandId}" (onSubmit)="onSubmit($event, allTabs[1])"></app-controls>
         </div>
         <div class="tileGroup">
             <div class="halfTile tileSelected">
@@ -61,10 +59,9 @@
                     <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[2].tab_name, 1)"><a
                             (click)="editTab(allTabs[2])">Edit</a></div>
                 </h4>
-                <app-controls *ngIf="tValues[allTabs[2].tab_name] != undefined" class="tabForm"
-                    [numberOfControlsInARow]="1" [fields]="allTabs[2].fields" [readOnlyForm]="true" [needButton]="false"
-                    [controlValues]="tValues[allTabs[2].tab_name]" [SubmitLabel]="'None'"
-                    (onSubmit)="onSubmit($event, allTabs[2])" [themeClass]="'grayWhite'"></app-controls>
+                <app-controls *ngIf="tValues[allTabs[2].tab_name] != undefined" class="tabForm" [request]="{fields: allTabs[2].fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+            controlValues: tValues[allTabs[2].tab_name], SubmitLabel: 'None',
+                readOnlyForm: true, nBrandId: curBrandId}" (onSubmit)="onSubmit($event, allTabs[2])"></app-controls>
             </div>
             <div class="tileGroup tileButtonGroup">
                 <button class="noBorderButton lightGray" mat-raised-button (click)="NotImplemented();"
@@ -131,10 +128,10 @@
                     <button class="noBorderButton white" (click)="editTab(tabForUI[selectedTab])">Edit</button>
                 </div>
             </div>
-            <app-controls *ngIf="canShowTab(allTabs[selectedTab])" class="tabForm white" [numberOfControlsInARow]="1"
-                [fields]="tabForUI[selectedTab].fields" [readOnlyForm]="true" [needButton]="false"
-                [controlValues]="tValues[tabForUI[selectedTab].tab_name]" [SubmitLabel]="'None'"
-                (onSubmit)="onSubmit($event, tabForUI[selectedTab])" [themeClass]="'whiteGray'"></app-controls>
+
+            <app-controls *ngIf="canShowTab(allTabs[selectedTab])" class="tabForm white" [request]="{fields: tabForUI[selectedTab].fields, needButton: false, themeClass: 'whiteGray', numberOfControlsInARow: 1, 
+controlValues: tValues[tabForUI[selectedTab].tab_name], SubmitLabel: 'None',
+    readOnlyForm: true, nBrandId: curBrandId}" (onSubmit)="onSubmit($event, tabForUI[selectedTab])"></app-controls>
         </div>
     </div>
     <div class="fullView" *ngIf="tabForUI.length > 0 && viewName == 'fullview'">
@@ -145,10 +142,9 @@
                         class="noBorderButton white" (click)="editTab(tTab)">Edit</button></div>
             </div>
             <div class="tBody">
-                <app-controls *ngIf="tValues[tTab.tab_name] != undefined" class="tabForm" [numberOfControlsInARow]="1"
-                    [fields]="tTab.fields" [readOnlyForm]="true" [needButton]="false"
-                    [controlValues]="tValues[tTab.tab_name]" [SubmitLabel]="'None'" (onSubmit)="onSubmit($event, tTab)"
-                    [themeClass]="'grayWhite'"></app-controls>
+                <app-controls *ngIf="tValues[tTab.tab_name] != undefined" class="tabForm" [request]="{fields: tTab.fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+controlValues: tValues[tTab.tab_name], SubmitLabel: 'None',
+    readOnlyForm: true, nBrandId: curBrandId}" (onSubmit)="onSubmit($event, tTab)"></app-controls>
             </div>
         </div>
     </div>

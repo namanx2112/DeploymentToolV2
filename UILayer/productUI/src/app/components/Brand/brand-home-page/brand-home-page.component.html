@@ -49,13 +49,13 @@
         </span>
         <app-brand-dashboard *ngIf="showMode == 'dashboard'" [curBrand]="_curBrand" (ChangeView)="ChangeView($event)"
             (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>
-        <app-report-table *ngIf="showMode == 'viewreport'"></app-report-table>
+        <app-report-table *ngIf="showMode == 'viewreport'" [curBrandId]="_curBrand.aBrandId"></app-report-table>
         <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)"
-            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-store>
+            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}" [curBrandId]="_curBrand.aBrandId"></app-new-store>
         <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)"
-            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"></app-new-project>
+            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}" [curBrandId]="_curBrand.aBrandId"></app-new-project>
         <app-store-view *ngIf="showMode == 'storeview'" (ChangeFromStoreView)="ChangeFromStoreView($event)"
-            [curStore]="curStore"></app-store-view>
+            [curStore]="curStore" [curBrandId]="_curBrand.aBrandId"></app-store-view>
         <app-project-table *ngIf="showMode == 'projectactiveview'" [tabName]="'Active'"
             (ChangeView)="ChangeView($event)" [curStore]="curStore"></app-project-table>
         <app-project-table *ngIf="showMode == 'projecthistoricalview'" [tabName]="'Historical'"
@@ -63,13 +63,13 @@
         <app-import-projects *ngIf="showMode == 'importproject'" [curBrand]="_curBrand"
             (ChangeView)="ChangeView($event)"></app-import-projects>
         <app-pos-installation *ngIf="showMode == 'posinstallation'"
-            (ChangeView)="ChangeView($event)"></app-pos-installation>
+            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-pos-installation>
         <app-payment-terminal-installation *ngIf="showMode == 'paymentterminalinstllation'"
-            (ChangeView)="ChangeView($event)"></app-payment-terminal-installation>
+            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-payment-terminal-installation>
         <app-menu-installation *ngIf="showMode == 'menuinstallation'"
-            (ChangeView)="ChangeView($event)"></app-menu-installation>
+            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-menu-installation>
         <app-audio-installation *ngIf="showMode == 'audioinstallation'"
-            (ChangeView)="ChangeView($event)"></app-audio-installation>
+            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-audio-installation>
         <app-project-template-list *ngIf="showMode == 'projecttemplatelist'" (BackToStoreView)="BackToStoreView($event)"
             [curStore]="curStore"></app-project-template-list>
         <app-project-portfolio *ngIf="showMode == 'Project Portfolio'" [curBrand]="_curBrand"

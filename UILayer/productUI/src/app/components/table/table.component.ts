@@ -3,7 +3,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Outpu
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatRow, MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { FieldType, HomeTab, TabType } from 'src/app/interfaces/home-tab';
+import { FieldType, HomeTab, OptionType, TabType } from 'src/app/interfaces/home-tab';
 import { BrandModel, FranchiseModel, TechComponentModel, VendorModel, UserModel } from 'src/app/interfaces/models';
 import { AccessService } from 'src/app/services/access.service';
 import { BrandServiceService } from 'src/app/services/brand-service.service';
@@ -38,6 +38,8 @@ export class TableComponent implements OnChanges, AfterViewInit {
   @Input() set refreshMe(val: Date) {
     this._refreshMe = val;
   }
+  @Input()
+  nBrandId: number;
   @Output() rowClicked = new EventEmitter<MatRow>();
   displayedColumns: string[] = [];
   columns: TableColumnDef[] = [];
@@ -50,7 +52,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
   responseData: any;
   constructor(private _liveAnnouncer: LiveAnnouncer, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseSerice: FranchiseService, private userSerice: UserService, private exService: ExStoreService, private partsService: PartsService,
-    private storeService: StoreService, public access: AccessService, private noteService: NotesService) {
+    private storeService: StoreService, public access: AccessService, private noteService: NotesService, private commonService: CommonService) {
     this.initVal = new Date();
   }
 
@@ -68,7 +70,8 @@ export class TableComponent implements OnChanges, AfterViewInit {
     else {
       let tField = this.curTab.fields.find(x => x.fieldUniqeName == colName)
       if (tField && tField.field_type == FieldType.dropdown && tField.options) {
-        let dVal = tField.options.find(x => x.optionIndex == colVal)?.optionDisplayName;
+        let opArr: OptionType[] = this.commonService.GetDropdownOptions(this.nBrandId, tField.options);
+        let dVal =  opArr.find(x => x.aDropdownId == colVal)?.tDropdownText;
         if (dVal)
           rVal = dVal;
       }

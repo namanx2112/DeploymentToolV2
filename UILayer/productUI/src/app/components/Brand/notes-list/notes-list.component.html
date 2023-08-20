@@ -3,6 +3,6 @@
             (click)="createNotes()">Create</button></div>
     <div mat-dialog-content>
         <app-table [curTab]="curTab" [searchFields]="searchFields" class="tableOuter" (rowClicked)="rowClicked($event)" [clickCol]="'all'"
-            [refreshMe]="refreshFlag"></app-table>
+            [refreshMe]="refreshFlag" [nBrandId]="curStore.nBrandId"></app-table>
     </div>
 </div>
