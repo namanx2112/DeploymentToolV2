@@ -23,6 +23,7 @@ Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 0, aModuleId fr
 select * from tblBrand
 
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 2, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor','All')
+Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 6, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor','All')
 
 update tblDropdownModuleBrandRel set nBrandId = 6 where nModuleId in (select aModuleId from tblDropdownModule where tModuleGroup in('All'))
 
@@ -334,3 +335,6 @@ select * from tblDropdownMain where tModuleName = 'UserRole'
 select * from tblDropdowns where 
 
 sproc_SearchStore '', 6
+
+select * from tblDropdowns order by 1 desc
+delete from tblDropdowns where aDropdownId >= 130 tModuleName
