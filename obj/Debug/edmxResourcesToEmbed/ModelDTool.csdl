@@ -29,7 +29,6 @@
     <EntitySet Name="tblTechComponents" EntityType="dtDBModel.tblTechComponent" />
     <EntitySet Name="tblUserBrandRels" EntityType="dtDBModel.tblUserBrandRel" />
     <EntitySet Name="tblUserFunctionRels" EntityType="dtDBModel.tblUserFunctionRel" />
-    <EntitySet Name="tblDropdownMains" EntityType="dtDBModel.tblDropdownMain" />
     <EntitySet Name="tblDropdowns" EntityType="dtDBModel.tblDropdown" />
     <FunctionImport Name="sproc_CreateStoreFromExcel">
       <Parameter Name="tStoreName" Mode="In" Type="String" />
@@ -427,6 +426,7 @@
     <Property Name="nBillToState" Type="Int32" />
     <Property Name="tBillToZip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="tBillToEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nBrandID" Type="Int32" />
   </EntityType>
   <EntityType Name="tblUser1">
     <Key>
@@ -561,20 +561,6 @@
     <Property Name="nUserID" Type="Int32" />
     <Property Name="nFunctionID" Type="Int32" />
   </EntityType>
-  <EntityType Name="tblDropdownMain">
-    <Key>
-      <PropertyRef Name="aMainId" />
-    </Key>
-    <Property Name="aMainId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nBrandId" Type="Int32" />
-    <Property Name="tModuleName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="nDropdownId" Type="Int32" />
-    <Property Name="nCreatedBy" Type="Int32" />
-    <Property Name="nUpdateBy" Type="Int32" />
-    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
-    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
-    <Property Name="bDeleted" Type="Boolean" />
-  </EntityType>
   <EntityType Name="tblDropdown">
     <Key>
       <PropertyRef Name="aDropdownId" />
@@ -587,6 +573,8 @@
     <Property Name="bDeleted" Type="Boolean" />
     <Property Name="nOrder" Type="Int32" />
     <Property Name="nFunction" Type="Int32" />
+    <Property Name="nBrandId" Type="Int32" />
+    <Property Name="nModuleId" Type="Int32" />
   </EntityType>
   <ComplexType Name="sproc_SearchStore_Result">
     <Property Type="Int32" Name="nProjectId" Nullable="true" />

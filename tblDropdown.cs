@@ -22,5 +22,7 @@ namespace DeploymentTool
         public Nullable<bool> bDeleted { get; set; }
         public Nullable<int> nOrder { get; set; }
         public Nullable<int> nFunction { get; set; }
+        public int nBrandId { get; set; }
+        public int nModuleId { get; set; }
     }
 }

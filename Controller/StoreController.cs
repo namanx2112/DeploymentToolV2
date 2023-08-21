@@ -44,46 +44,7 @@ namespace DeploymentTool.Controller
             //        tProjectType = "Audio",
             //        tProjManager = "Garry Gram",
             //        tStatus = "On Track"
-            //    },
-            //    new ActiveProjectModel()
-            //    {
-            //        nProjectId = 16,
-            //        tStoreNo = "1030",
-            //        dProjectGoliveDate = DateTime.Now,
-            //        dProjEndDate = DateTime.Now,
-            //        tNewVendor = "OOPP Vendor",
-            //        tOldVendor = "GGG Vendor",
-            //        tPrevProjManager = "Harry Gartner",
-            //        tProjectType = "Audio",
-            //        tProjManager = "Garry Gram",
-            //        tStatus = "On Track"
-            //    },
-            //    new ActiveProjectModel()
-            //    {
-            //        nProjectId = 62,
-            //        tStoreNo = "8500",
-            //        dProjectGoliveDate = DateTime.Now,
-            //        dProjEndDate = DateTime.Now,
-            //        tNewVendor = "SDSD Vendor",
-            //        tOldVendor = "XDSZ Vendor",
-            //        tPrevProjManager = "Harry Gartner",
-            //        tProjectType = "Audio",
-            //        tProjManager = "Garry Gram",
-            //        tStatus = "Delay Track"
-            //    },
-            //    new ActiveProjectModel()
-            //    {
-            //        nProjectId = 12,
-            //        tStoreNo = "5000",
-            //        dProjectGoliveDate = DateTime.Now,
-            //        dProjEndDate = DateTime.Now,
-            //        tNewVendor = "A54dfg Vendor",
-            //        tOldVendor = "FDSDS Vendor",
-            //        tPrevProjManager = "DSSDDD Gartner",
-            //        tProjectType = "Audio",
-            //        tProjManager = "GaDD Gram",
-            //        tStatus = "On Track"
-            //    }
+            //    }           
             //};
             return items;
         }
@@ -106,36 +67,6 @@ namespace DeploymentTool.Controller
             //            tVendor = "ABCD Vendor",
             //            tProjectType = "Audio",
             //            tProjManager = "Garry Gram"
-            //        },
-            //        new HistoricalProjectModel()
-            //        {
-            //            nProjectId = 12,
-            //            tStoreNo = "1030",
-            //            dProjectGoliveDate = DateTime.Now,
-            //            dProjEndDate = DateTime.Now,
-            //            tVendor = "OOPP Vendor",
-            //            tProjectType = "Audio",
-            //            tProjManager = "Garry Gram"
-            //        },
-            //        new HistoricalProjectModel()
-            //        {
-            //            nProjectId = 52,
-            //            tStoreNo = "8500",
-            //            dProjectGoliveDate = DateTime.Now,
-            //            dProjEndDate = DateTime.Now,
-            //            tVendor = "XDSZ Vendor",
-            //            tProjectType = "Audio",
-            //            tProjManager = "Garry Gram"
-            //        },
-            //        new HistoricalProjectModel()
-            //        {
-            //            nProjectId = 72,
-            //            tStoreNo = "5000",
-            //            dProjectGoliveDate = DateTime.Now,
-            //            dProjEndDate = DateTime.Now,
-            //            tVendor = "A54dfg Vendor",
-            //            tProjectType = "Audio",
-            //            tProjManager = "GaDD Gram"
             //        }
             //    };
             //    return new HttpResponseMessage(HttpStatusCode.OK)

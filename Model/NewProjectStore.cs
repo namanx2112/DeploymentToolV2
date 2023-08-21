@@ -144,7 +144,8 @@ namespace DeploymentTool.Model
                 tBillToCity = this.tBillToCity,
                 nBillToState = this.nBillToState,
                 tBillToZip = this.tBillToZip,
-                tBillToEmail = this.tBillToEmail
+                tBillToEmail = this.tBillToEmail,
+                nBrandID = this.nBrandID
             };
             return tObj;
         }

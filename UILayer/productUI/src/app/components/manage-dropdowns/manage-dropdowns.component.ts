@@ -103,7 +103,7 @@ export class ManageDropdownsComponent {
     this.ddList = [];
     if (this.selectedModule.aModuleId > -1) {
       this.service.Get(this.selectedModule.tModuleName).subscribe((resp: DropwDown[]) => {
-        this.ddList = (resp != null && resp.length > 0) ? resp.filter(x => x.bDeleted != true) : [];
+        this.ddList = (resp != null && resp.length > 0) ? resp.filter(x => x.bDeleted != true && x.nBrandId == this.selectedBrand.aBrandId) : [];
       });
     }
   }
@@ -116,6 +116,7 @@ export class ManageDropdownsComponent {
         let tItem = {
           aDropdownId: -1,
           nBrandId: this.selectedBrand.aBrandId,
+          nModuleId: this.selectedModule.aModuleId,
           tModuleName: this.selectedModule.tModuleName,
           tDropdownText: value,
           bDeleted: false,

@@ -177,7 +177,7 @@ export class NewProjectComponent {
             cThis.onSubmit(cThis.tValues[tTab.tab_name], tTab, saveCallback);
         }
       }
-      if(tIndex == 1){
+      if (tIndex == 1) {
         cThis.tValues[tTab.tab_name]["tStakeHolder"] = cThis.tValues[cThis.allTabs[2].tab_name];// to take latest stakeholder data
       }
       this.onSubmit(cThis.tValues[tTab.tab_name], tTab, saveCallback);
@@ -197,6 +197,7 @@ export class NewProjectComponent {
         //   });
         // }
         // else {
+        fieldValues["nBrandID"] = this.curBrandId;
         this.storeSerice.CreateNewStores(fieldValues).subscribe((x: any) => {
           callBack(x, tab);
         });

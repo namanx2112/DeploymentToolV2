@@ -126,6 +126,7 @@ export class NewStoreComponent {
           });
         }
         else {
+          fieldValues["nBrandID"] = this.curBrandId;
           this.storeSerice.CreateNewStores(fieldValues).subscribe((x: any) => {
             this.tValues[tab.tab_name] = x;
             this.setStoreId(x.aStoreId);

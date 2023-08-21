@@ -93,20 +93,6 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
   </EntityType>
-  <EntityType Name="tblDropdownMain">
-    <Key>
-      <PropertyRef Name="aMainId" />
-    </Key>
-    <Property Name="aMainId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nBrandId" Type="int" />
-    <Property Name="tModuleName" Type="varchar" MaxLength="500" />
-    <Property Name="nDropdownId" Type="int" />
-    <Property Name="nCreatedBy" Type="int" />
-    <Property Name="nUpdateBy" Type="int" />
-    <Property Name="dtCreatedOn" Type="datetime" />
-    <Property Name="dtUpdatedOn" Type="datetime" />
-    <Property Name="bDeleted" Type="bit" />
-  </EntityType>
   <EntityType Name="tblDropdownModule">
     <Key>
       <PropertyRef Name="aModuleId" />
@@ -130,6 +116,8 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
     <Property Name="bDeleted" Type="bit" />
     <Property Name="nOrder" Type="int" />
     <Property Name="nFunction" Type="int" />
+    <Property Name="nBrandId" Type="int" />
+    <Property Name="nModuleId" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblEnum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -646,6 +634,7 @@ warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key def
     <Property Name="nBillToState" Type="int" />
     <Property Name="tBillToZip" Type="varchar" MaxLength="100" />
     <Property Name="tBillToEmail" Type="varchar" MaxLength="500" />
+    <Property Name="nBrandID" Type="int" />
   </EntityType>
   <EntityType Name="tblSupportTicket">
     <Key>
@@ -888,7 +877,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDropdownModule" EntityType="Self.tblDropdownModule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />

@@ -55,7 +55,6 @@ namespace DeploymentTool
         public virtual DbSet<tblTechComponent> tblTechComponents { get; set; }
         public virtual DbSet<tblUserBrandRel> tblUserBrandRels { get; set; }
         public virtual DbSet<tblUserFunctionRel> tblUserFunctionRels { get; set; }
-        public virtual DbSet<tblDropdownMain> tblDropdownMains { get; set; }
         public virtual DbSet<tblDropdown> tblDropdowns { get; set; }
         public virtual DbSet<tblDocument> tblDocuments { get; set; }
         public virtual DbSet<tblApplicationTrace> tblApplicationTraces { get; set; }

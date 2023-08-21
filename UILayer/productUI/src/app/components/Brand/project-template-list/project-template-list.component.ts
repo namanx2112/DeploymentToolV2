@@ -18,6 +18,10 @@ export class ProjectTemplateListComponent {
   @Input()
   public set curStore(value: StoreSearchModel) {
     this._curStore = value;
+
+
+     1
+    this.getAllTemplates();
   }
   @Output() BackToStoreView = new EventEmitter<any>();
   nBrandId: number = 1;
@@ -25,7 +29,7 @@ export class ProjectTemplateListComponent {
   quoteRequestTemplates: ProjectTemplates[];
   poTemplates: ProjectTemplates[];
   constructor(private service: StoreService, private dialog: MatDialog, public access: AccessService) {
-    this.getAllTemplates();
+    
   }
 
   getAllTemplates() {

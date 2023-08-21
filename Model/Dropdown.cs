@@ -9,8 +9,10 @@ namespace DeploymentTool.Model
     public class Dropdown : ModelParent
     {
         public int nBrandId { get; set; }
-        public string tModuleName { get; set; }
+        public int nModuleId { get; set; }
         public int aDropdownId { get; set; }
+
+        public string tModuleName { get; set; }
         public string tDropdownText { get; set; }
         public Nullable<int> nOrder { get; set; }
         public Nullable<int> nFunction { get; set; }

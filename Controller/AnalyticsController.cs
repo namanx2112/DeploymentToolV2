@@ -21,11 +21,12 @@ namespace DeploymentTool.Controller
         public HttpResponseMessage GetProjectPortfolio(Dictionary<string, string> searchFields)
         {
             int nStoreId = 0;// (searchFields == null || searchFields["nStoreId"] == null) ? 0 : Convert.ToInt32(searchFields["nStoreId"]);
+            int nBrandId =  (searchFields == null || searchFields["nBrandId"] == null) ? 0 : Convert.ToInt32(searchFields["nBrandId"]);
 
             List<ProjectPortfolio> items = new List<ProjectPortfolio>();
             try
             {
-                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nStoreId", new SqlParameter("@nStoreId", nStoreId)).ToList();
+                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId", new SqlParameter("@nBrandId", nBrandId)).ToList();
 
                 foreach (var parts in activeProj)
                 {

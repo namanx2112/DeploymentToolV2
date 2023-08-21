@@ -361,6 +361,7 @@
           <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
           <ScalarProperty Name="tStoreNumber" ColumnName="tStoreNumber" />
           <ScalarProperty Name="aStoreID" ColumnName="aStoreID" />
+          <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -505,21 +506,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblDropdownMains">
-      <EntityTypeMapping TypeName="dtDBModel.tblDropdownMain">
-        <MappingFragment StoreEntitySet="tblDropdownMain">
-          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
-          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
-          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
-          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
-          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-          <ScalarProperty Name="nDropdownId" ColumnName="nDropdownId" />
-          <ScalarProperty Name="tModuleName" ColumnName="tModuleName" />
-          <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
-          <ScalarProperty Name="aMainId" ColumnName="aMainId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tblDropdowns">
       <EntityTypeMapping TypeName="dtDBModel.tblDropdown">
         <MappingFragment StoreEntitySet="tblDropdowns">
@@ -531,6 +517,8 @@
           <ScalarProperty Name="tDropdownText" ColumnName="tDropdownText" />
           <ScalarProperty Name="aDropdownId" ColumnName="aDropdownId" />
           <ScalarProperty Name="nFunction" ColumnName="nFunction" />
+          <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
+          <ScalarProperty Name="nModuleId" ColumnName="nModuleId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

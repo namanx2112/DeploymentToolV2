@@ -70,7 +70,6 @@ namespace DeploymentTool.Controller
         public async Task<IHttpActionResult> GettblDropdown(int id)
         {
             tblDropdown tblDropdown = await db.tblDropdowns.FindAsync(id);
-            tblDropdownMain tblMain = await db.tblDropdownMains.FindAsync(id);
             if (tblDropdown == null)
             {
                 return NotFound();
@@ -114,7 +113,7 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public HttpResponseMessage Update(Dropdown request)
         {
-            var alredyExist = db.Database.SqlQuery<int>("select top 1 1 from tblDropDownMain with(nolock) where tModuleName = '" + request.tModuleName + "' and nDropdownID in(select aDropdownId from tblDropDowns with(nolock) where UPPER(tDropDownText) = '" + request.tDropdownText.ToUpper() + "' and aDropdownId<>" + request.aDropdownId + ")").FirstOrDefault();
+            var alredyExist = db.Database.SqlQuery<int>("select top 1 1 from tblDropDowns with(nolock) where aDropdownId <>" + request.aDropdownId + " and nModuleId=" + request.nModuleId + " and nBrandId = " + request.nBrandId + " and UPPER(tDropDownText)='" + request.tDropdownText.ToUpper() + "'").FirstOrDefault();
             if (alredyExist == null || alredyExist == 0)
             {
                 tblDropdown ddObj = new tblDropdown()
@@ -163,28 +162,19 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public HttpResponseMessage Create(Dropdown request)
         {
-            var alredyExist = db.Database.SqlQuery<int>("select top 1 1 from tblDropDownMain with(nolock) where tModuleName = '" + request.tModuleName + "' and nDropdownID in(select aDropdownId from tblDropDowns with(nolock) where UPPER(tDropDownText)='" + request.tDropdownText.ToUpper() + "')").FirstOrDefault();
+            var alredyExist = db.Database.SqlQuery<int>("select top 1 1 from tblDropDowns with(nolock) where nModuleId = " + request.nModuleId + " and nBrandId = " + request.nBrandId + " and UPPER(tDropDownText)='" + request.tDropdownText.ToUpper() + "'").FirstOrDefault();
             if (alredyExist == null || alredyExist == 0)
             {
                 tblDropdown ddObj = new tblDropdown()
                 {
-                    nFunction  = request.nFunction,
+                    nFunction = request.nFunction,
                     tDropdownText = request.tDropdownText,
+                    nModuleId = request.nModuleId,
+                    nBrandId = request.nBrandId
                 };
 
                 Utilities.SetHousekeepingFields(true, HttpContext.Current, ddObj);
                 db.tblDropdowns.Add(ddObj);
-                db.SaveChanges();
-
-                tblDropdownMain mainObj = new tblDropdownMain()
-                {
-                    nBrandId = request.nBrandId,
-                    nDropdownId = ddObj.aDropdownId,
-                    tModuleName = request.tModuleName,
-                };
-
-                Utilities.SetHousekeepingFields(true, HttpContext.Current, mainObj);
-                db.tblDropdownMains.Add(mainObj);
                 db.SaveChanges();
 
                 return new HttpResponseMessage(HttpStatusCode.OK)

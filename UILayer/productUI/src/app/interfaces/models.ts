@@ -210,6 +210,7 @@ export interface DropwDown {
     aDropdownId: number,
     nBrandId: number,
     tModuleName: string,
+    nModuleId: number,
     tDropdownText: string,
     nOrder: number,
     nFunction: number,

@@ -1081,9 +1081,6 @@
     <Compile Include="tblDropdown.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblDropdownMain.cs">
-      <DependentUpon>ModelDTool.tt</DependentUpon>
-    </Compile>
     <Compile Include="tblDropdownModule.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>

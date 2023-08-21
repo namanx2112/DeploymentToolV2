@@ -16,13 +16,14 @@ namespace DeploymentTool.Model
         public string tNotification { get; set; }
 
         string[] _insArray;
+        char[] separators = new char[] {','};
 
         public string relatedInstances
         {
             set
             {
                 if (!string.IsNullOrEmpty(value))
-                    _insArray = value.Split(',');
+                    _insArray = value.Split(separators, StringSplitOptions.RemoveEmptyEntries);
             }
         }
         public string[] arrInstances

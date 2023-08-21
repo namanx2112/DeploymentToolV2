@@ -8,6 +8,7 @@ namespace DeploymentTool.Model
     public class Store
     {
         public int aStoreId { get; set; }
+        public int nBrandID { get; set; }
         public string tStoreName { get; set; }
         public int? nFranchiseID { get; set; }
         public string tStoreDescription { get; set; }

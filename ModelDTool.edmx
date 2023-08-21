@@ -97,21 +97,7 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
-        </EntityType>
-        <EntityType Name="tblDropdownMain">
-          <Key>
-            <PropertyRef Name="aMainId" />
-          </Key>
-          <Property Name="aMainId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nBrandId" Type="int" />
-          <Property Name="tModuleName" Type="varchar" MaxLength="500" />
-          <Property Name="nDropdownId" Type="int" />
-          <Property Name="nCreatedBy" Type="int" />
-          <Property Name="nUpdateBy" Type="int" />
-          <Property Name="dtCreatedOn" Type="datetime" />
-          <Property Name="dtUpdatedOn" Type="datetime" />
-          <Property Name="bDeleted" Type="bit" />
-        </EntityType>
+        </EntityType>        
         <EntityType Name="tblDropdownModule">
           <Key>
             <PropertyRef Name="aModuleId" />
@@ -135,6 +121,8 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
           <Property Name="bDeleted" Type="bit" />
           <Property Name="nOrder" Type="int" />
           <Property Name="nFunction" Type="int" />
+			<Property Name="nBrandId" Type="int" />
+			<Property Name="nModuleId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblEnum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -651,6 +639,7 @@ warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key def
           <Property Name="nBillToState" Type="int" />
           <Property Name="tBillToZip" Type="varchar" MaxLength="100" />
           <Property Name="tBillToEmail" Type="varchar" MaxLength="500" />
+			<Property Name="nBrandID" Type="int" />
         </EntityType>
         <EntityType Name="tblSupportTicket">
           <Key>
@@ -893,7 +882,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblDropdownMain" EntityType="Self.tblDropdownMain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDropdownModule" EntityType="Self.tblDropdownModule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
@@ -1068,7 +1056,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<EntitySet Name="tblTechComponents" EntityType="dtDBModel.tblTechComponent" />
 					<EntitySet Name="tblUserBrandRels" EntityType="dtDBModel.tblUserBrandRel" />
 					<EntitySet Name="tblUserFunctionRels" EntityType="dtDBModel.tblUserFunctionRel" />
-					<EntitySet Name="tblDropdownMains" EntityType="dtDBModel.tblDropdownMain" />
 					<EntitySet Name="tblDropdowns" EntityType="dtDBModel.tblDropdown" />
 					<FunctionImport Name="sproc_CreateStoreFromExcel">
             <Parameter Name="tStoreName" Mode="In" Type="String" />
@@ -1466,6 +1453,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nBillToState" Type="Int32" />
 					<Property Name="tBillToZip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
 					<Property Name="tBillToEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+					<Property Name="nBrandID" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblUser1">
 					<Key>
@@ -1600,20 +1588,6 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nUserID" Type="Int32" />
 					<Property Name="nFunctionID" Type="Int32" />
 				</EntityType>
-				<EntityType Name="tblDropdownMain">
-					<Key>
-						<PropertyRef Name="aMainId" />
-					</Key>
-					<Property Name="aMainId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-					<Property Name="nBrandId" Type="Int32" />
-					<Property Name="tModuleName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-					<Property Name="nDropdownId" Type="Int32" />
-					<Property Name="nCreatedBy" Type="Int32" />
-					<Property Name="nUpdateBy" Type="Int32" />
-					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
-					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
-					<Property Name="bDeleted" Type="Boolean" />
-				</EntityType>
 				<EntityType Name="tblDropdown">
 					<Key>
 						<PropertyRef Name="aDropdownId" />
@@ -1626,6 +1600,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="bDeleted" Type="Boolean" />
 					<Property Name="nOrder" Type="Int32" />
 					<Property Name="nFunction" Type="Int32"/>
+					<Property Name="nBrandId" Type="Int32"/>
+					<Property Name="nModuleId" Type="Int32"/>
 				</EntityType>
 				<ComplexType Name="sproc_SearchStore_Result">
 					<Property Type="Int32" Name="nProjectId" Nullable="true" />
@@ -2328,6 +2304,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 								<ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
 								<ScalarProperty Name="tStoreNumber" ColumnName="tStoreNumber" />
 								<ScalarProperty Name="aStoreID" ColumnName="aStoreID" />
+								<ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
 							</MappingFragment>
 						</EntityTypeMapping>
 					</EntitySetMapping>
@@ -2471,22 +2448,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 								<ScalarProperty Name="aUserFunctionRelID" ColumnName="aUserFunctionRelID" />
 							</MappingFragment>
 						</EntityTypeMapping>
-					</EntitySetMapping>
-					<EntitySetMapping Name="tblDropdownMains">
-						<EntityTypeMapping TypeName="dtDBModel.tblDropdownMain">
-							<MappingFragment StoreEntitySet="tblDropdownMain">
-								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
-								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
-								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
-								<ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
-								<ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-								<ScalarProperty Name="nDropdownId" ColumnName="nDropdownId" />
-								<ScalarProperty Name="tModuleName" ColumnName="tModuleName" />
-								<ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
-								<ScalarProperty Name="aMainId" ColumnName="aMainId" />
-							</MappingFragment>
-						</EntityTypeMapping>
-					</EntitySetMapping>
+					</EntitySetMapping>					
 					<EntitySetMapping Name="tblDropdowns">
 						<EntityTypeMapping TypeName="dtDBModel.tblDropdown">
 							<MappingFragment StoreEntitySet="tblDropdowns">
@@ -2498,6 +2460,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 								<ScalarProperty Name="tDropdownText" ColumnName="tDropdownText" />
 								<ScalarProperty Name="aDropdownId" ColumnName="aDropdownId" />
 								<ScalarProperty Name="nFunction" ColumnName="nFunction"/>
+								<ScalarProperty Name="nBrandId" ColumnName="nBrandId"/>
+								<ScalarProperty Name="nModuleId" ColumnName="nModuleId"/>
 							</MappingFragment>
 						</EntityTypeMapping>
 					</EntitySetMapping>

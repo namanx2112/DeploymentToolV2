@@ -40,5 +40,7 @@ namespace DeploymentTool
         public Nullable<int> nBillToState { get; set; }
         public string tBillToZip { get; set; }
         public string tBillToEmail { get; set; }
+
+        public int nBrandID { get; set; }
     }
 }
