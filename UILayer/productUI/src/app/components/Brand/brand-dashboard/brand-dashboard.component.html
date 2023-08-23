@@ -1,6 +1,6 @@
 <h2 class="headerPart">{{curBrand.tBrandName}} Homepage</h2>
 <div class="searchPart">
-    <app-search-store [curBrand]="curBrand" (SearchedResult)="storeSelect($event)"
+    <app-search-store [curBrandId]="curBrand.aBrandId" (SearchedResult)="storeSelect($event)"
         *ngIf="access.hasAccess('home.sonic.viewstore', 0)"></app-search-store>
 </div>
 <div class="tilesPart" *ngIf="access.hasAccess('home.sonic.storehighlight', 0)">

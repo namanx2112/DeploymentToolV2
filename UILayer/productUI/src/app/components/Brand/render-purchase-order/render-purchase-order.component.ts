@@ -101,9 +101,8 @@ export class RenderPurchaseOrderComponent {
   cannotNext() {
     let cant = false;
     if (typeof this.curTemplate != 'undefined') {
-      if (this.curTemplate.tName == "" || this.curTemplate.tAddress == "" || this.curTemplate.tBillToAddress == "" || this.curTemplate.tBillToCity == "" || this.curTemplate.tBillToCompany == ""
-        || this.curTemplate.tBillToEmail == "" || this.curTemplate.tBillToState == "" || this.curTemplate.tCity == "" || this.curTemplate.tEmail == "" ||
-        this.curTemplate.tPhone == "")
+      if (this.curTemplate.tName == "" || this.curTemplate.tAddress == "" || this.curTemplate.tBillToAddress == ""
+        || this.curTemplate.tBillToEmail == "" || this.curTemplate.tPhone == "")
         cant = true;
       else if (this.curTemplate.purchaseOrderParts.length == 0)
         cant = true;

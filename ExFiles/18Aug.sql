@@ -14,18 +14,22 @@ update tblDropdownModule set nBrandID = 0 where tModuleGroup in('User','Vendor')
 
 select * from tblDropdownModule
 
+delete from tblDropDownModule where tModuleName = 'StackHolderCD'--- this is not required since CD is text Property
+
 create table tblDropdownModuleBrandRel(aRelId int identity primary key, nBrandId int not null, nModuleId int not null)
 
 alter table tblDropdownModule drop column nBrandId
 
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 0, aModuleId from tblDropdownModule where tModuleGroup in('User','Vendor')
 
-select * from tblBrand
+select * from tblBrand-- Get Brand Id's
 
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 2, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor','All')
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 6, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor','All')
 
-update tblDropdownModuleBrandRel set nBrandId = 6 where nModuleId in (select aModuleId from tblDropdownModule where tModuleGroup in('All'))
+
+
+--update tblDropdownModuleBrandRel set nBrandId = 6 where nModuleId in (select aModuleId from tblDropdownModule where tModuleGroup in('All'))
 
 GO
 
@@ -312,29 +316,31 @@ BEGIN
 END 
 
 
-sp_tables '%modul%'
+--sp_tables '%modul%'
 
-Select * from tblDropdownModule
+--Select * from tblDropdownModule
 
- Select tblDropdownModuleBrandRel.nBrandId, tblDropdownMain.tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdownMain  with(nolock) join tblDropdowns with(nolock) on            
-  aDropdownId = nDropdownId join tblDropdownModule with(nolock) on tblDropdownMain.tModuleName = tblDropdownModule.tModuleName join tblDropdownModuleBrandRel with(nolock) on aModuleId = nModuleId
+-- Select tblDropdownModuleBrandRel.nBrandId, tblDropdownMain.tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdownMain  with(nolock) join tblDropdowns with(nolock) on            
+--  aDropdownId = nDropdownId join tblDropdownModule with(nolock) on tblDropdownMain.tModuleName = tblDropdownModule.tModuleName join tblDropdownModuleBrandRel with(nolock) on aModuleId = nModuleId
 
-select * from tblDropdownMain where tModuleName = 'VendorType'
+--select * from tblDropdownMain where tModuleName = 'VendorType'
 
-sp_helptext sproc_GetDropdown
+--sp_helptext sproc_GetDropdown
 
-sproc_GetDropdown 'NetworkingTempStatus',2
+--sproc_GetDropdown 'NetworkingTempStatus',2
 
-select * from tblBrand
+--select * from tblBrand
 
-sproc_getDropdownModules 2
+--sproc_getDropdownModules 2
 
-select * from tblDropdownModule where tModuleName like '%state%'
+--select * from tblDropdownModule where tModuleName like '%state%'
 
-select * from tblDropdownMain where tModuleName = 'UserRole'
-select * from tblDropdowns where 
+--select * from tblDropdownMain where tModuleName = 'UserRole'
+--select * from tblDropdowns where 
 
-sproc_SearchStore '', 6
+--sproc_SearchStore '', 6
 
-select * from tblDropdowns order by 1 desc
-delete from tblDropdowns where aDropdownId >= 130 tModuleName
+--select * from tblDropdowns order by 1 desc
+--delete from tblDropdowns where aDropdownId >= 130 tModuleName
+
+select * from tbl

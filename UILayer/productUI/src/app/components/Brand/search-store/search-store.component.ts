@@ -14,10 +14,10 @@ export class SearchStoreComponent {
   myControl = new FormControl('');
   ddOptions: StoreSearchModel[];
   filteredOptions: Observable<StoreSearchModel[]>;
-  _curBrand: BrandModel;
+  _curBrandId: number;
   @Input()
-  set curBrand(val: BrandModel) {
-    this._curBrand = val;
+  set curBrandId(val: number) {
+    this._curBrandId = val;
     this.getAllStores();
   }
   @Output() SearchedResult = new EventEmitter<string>();
@@ -37,7 +37,7 @@ export class SearchStoreComponent {
   }
 
   getAllStores() {
-    this.service.SearchStore('', this._curBrand.aBrandId).subscribe((x: StoreSearchModel[]) => {
+    this.service.SearchStore('', this._curBrandId).subscribe((x: StoreSearchModel[]) => {
       this.ddOptions = x;
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
