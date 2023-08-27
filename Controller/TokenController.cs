@@ -12,6 +12,7 @@ using System.Net.Http.Formatting;
 using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Http;
+using System.Web.Services.Description;
 
 
 namespace DeploymentTool.Controller
@@ -22,10 +23,9 @@ namespace DeploymentTool.Controller
         [AllowAnonymous]
         [HttpPost]
         [Route("api/Token/Get")]
-
         public HttpResponseMessage Get(UserForAuthentication request)
         {
-            var user = CheckUser(request.UserName, request.Password);
+            var user = CheckUser(request.UserName, request.Password, HttpContext.Current, Request);
             if (user == null)
                 return Request.CreateResponse(HttpStatusCode.OK, "Wrong password or user name. Try again!");
             else
@@ -37,6 +37,16 @@ namespace DeploymentTool.Controller
                 }
                 return Request.CreateResponse(HttpStatusCode.Unauthorized);
             }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage Logout()
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            if (securityContext != null)
+                LogoutMe(securityContext);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         [Authorize]
@@ -94,9 +104,15 @@ namespace DeploymentTool.Controller
             };
         }
 
-        User CheckUser(string username, string password)
+        void LogoutMe(User user)
         {
-            User objUser = db.Database.SqlQuery<User>("Exec sproc_UserLogin @tUserName, @tPassword", new SqlParameter("@tUserName", username), new SqlParameter("@tPassword", password)).FirstOrDefault();
+            db.Database.ExecuteSqlCommand("Exec sproc_UserLogout @nUserId", new SqlParameter("@nUserId", user.nUserID));
+        }
+
+        User CheckUser(string username, string password, HttpContext context, HttpRequestMessage request)
+        {
+            string device = string.Format("IP:{0}, Browser:{1}", Utilities.GetClientIp(request), context.Request.Browser.Browser);
+            User objUser = db.Database.SqlQuery<User>("Exec sproc_UserLogin @tUserName, @tPassword, @tDevice", new SqlParameter("@tUserName", username), new SqlParameter("@tPassword", password), new SqlParameter("@tDevice", device)).FirstOrDefault();
             if (objUser != null && objUser.isFirstTime == 1)
             {
                 db.Database.ExecuteSqlCommand("update tblUser set isFirstTime = 0 where aUserID=" + objUser.nUserID);

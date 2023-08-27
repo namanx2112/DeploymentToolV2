@@ -44,7 +44,7 @@
                         <tr *ngFor="let item of vendorParts;let index = index">
                             <td>{{item.tPartDesc}}</td>
                             <td>{{item.tPartNumber}}</td>
-                            <td>{{item.cPrice}}$</td>
+                            <td>${{item.cPrice}}</td>
                             <td> <mat-select (selectionChange)="fieldChanged($event, item, index)" [(ngModel)]="curQuantityFields[index]" [compareWith]="customQuantityCompare">
                                     <mat-optgroup *ngFor="let comp of allCompAndFields" [label]="comp.name">
                                         <mat-option *ngFor="let field of comp.fields" [value]="field">

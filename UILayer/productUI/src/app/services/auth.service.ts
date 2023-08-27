@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   ForgotPassword(request: any) {
-    return this.http.post<any>(CommonService.ConfigUrl + "token/ForgotPassword", request,  { headers: this.headers });
+    return this.http.post<any>(CommonService.ConfigUrl + "token/ForgotPassword", request, { headers: this.headers });
   }
 
   getAccess() {
@@ -52,12 +52,27 @@ export class AuthService {
       this.router.navigate(['./home'], { skipLocationChange: true, relativeTo: this.route });
   }
 
-  loggedOut() {
-    sessionStorage.clear();
-    AccessService.userAccessList = [];
-    CommonService.allBrands = [];
-    CommonService.dropdownCache = [];
-    this.router.navigate(['./login'], { skipLocationChange: true, relativeTo: this.route });
+  loggedOut(call: boolean) {
+    if (call) {
+      this.LogMeOut().subscribe(x => {
+        sessionStorage.clear();
+        AccessService.userAccessList = [];
+        CommonService.allBrands = [];
+        CommonService.dropdownCache = [];
+        this.router.navigate(['./login'], { skipLocationChange: true, relativeTo: this.route });
+      });
+    }
+    else {
+      sessionStorage.clear();
+      AccessService.userAccessList = [];
+      CommonService.allBrands = [];
+      CommonService.dropdownCache = [];
+      this.router.navigate(['./login'], { skipLocationChange: true, relativeTo: this.route });
+    }
+  }
+
+  LogMeOut() {
+    return this.http.get<any>(CommonService.ConfigUrl + "token/Logout", { headers: this.cacheService.getHttpHeaders() });
   }
 
   isFirstTime() {

@@ -1,7 +1,7 @@
 alter table tblSupportTicket add tTicketStatus varchar(100), tFixComment NVARCHAR(MAX), dtUpdatedOn datetime, nUpdateBy int
 
 
-Alter proc sproc_getSupportTicket
+Create proc sproc_getSupportTicket
 AS
 BEGIN
 	select aTicketId,nPriority,tContent,nFileSie,fBase64,tName as tCreatedBy,tblSupportTicket.nCreatedBy, tblSupportTicket.dtCreatedOn,tTicketStatus,tFixComment from  tblSupportTicket with(nolock) join tblUser with(nolock) on tblSupportTicket.nCreatedBy = aUserID
@@ -10,7 +10,7 @@ END
 
 GO
 
-update tblDropdownModule set nBrandID = 0 where tModuleGroup in('User','Vendor')
+--update tblDropdownModule set nBrandID = 0 where tModuleGroup in('User','Vendor')
 
 select * from tblDropdownModule
 
@@ -24,10 +24,27 @@ Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 0, aModuleId fr
 
 select * from tblBrand-- Get Brand Id's
 
-Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 2, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor','All')
-Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 6, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor','All')
+Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 1, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')
+Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 2, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')
+Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 3, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')
+Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 4, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')
+Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 5, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')
+Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 6, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')
+
+update tblDropdowns set nBrandId =1 where nbrandId = 6
 
 
+
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,2 from tblDropdowns where nbrandId = 1
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,3from tblDropdowns where nbrandId = 1
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,4 from tblDropdowns where nbrandId = 1
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,5 from tblDropdowns where nbrandId = 1
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,6 from tblDropdowns where nbrandId = 1
 
 --update tblDropdownModuleBrandRel set nBrandId = 6 where nModuleId in (select aModuleId from tblDropdownModule where tModuleGroup in('All'))
 
@@ -41,44 +58,67 @@ BEGIN
 END
 
 GO
+Alter table tblStore add nBrandID int
+GO
 
-ALTER procedure sproc_SearchStore            
-@tText as VARCHAR(500),  
-@nBrandID int=0  
-AS            
-BEGIN    
-    
-Select nStoreId, tStoreName,tStoreNumber,tProjectsInfo, @nBrandID nBrandId  
-from(    
- select aStoreId nStoreId, tStoreName,tStoreNumber, tProjectsInfo
- from tblStore with(nolock)  Join    
- (select nStoreId, STRING_AGG(CAST(aProjectId as varchar) + '_' + CAST(nProjectType as varchar) + '_' + CAST(dGoLiveDate as varchar) , ', ') tProjectsInfo from tblProject with(nolock) where  nBrandID=@nBrandID and nProjectActiveStatus = 1    
- --where ProjectActiveStatus = 1     
- group by nStoreID) tblProj on aStoreID = nStoreID     
- where   nBrandID=@nBrandID and  
- tStoreNumber like ('%' + @tText + '%') OR    
- tStoreName like ('%' + @tText + '%')    
- ) as tmpTable order by tStoreNumber    
- --Select nProjectId, tStoreName,tProjectName,tStoreNumber, tDropdownText tProjectType, dGoLiveDate       
- --from tblProjectStore projstore with(nolock) join tblProject proj with(nolock) on           
- --proj.aProjectId = projstore.nProjectId join  tblStore store with(nolock) on       
- --store.aStoreID = proj.nStoreID FULL OUTER JOIN          
- --tblDropdowns pType with(nolock) on pType.aDropDownId =          
- --(case when nProjectType is null then 4          
- --else nProjectType END)           
- --where proj.projectActiveStatus=1 and (tStoreName like ('%' + @tText + '%') OR proj.tProjectName like ('%' + @tText + '%') OR            
- --store.tStoreNumber like ('%' + @tText + '%'))) tProject where          
- --tProjectType like ('%' + @tText + '%')          
-        
- --order by nProjectID desc        
+  
+Alter procedure sproc_SearchStore              
+@tText as VARCHAR(500),    
+@nBrandID int=0    
+AS              
+BEGIN      
+      
+Select nStoreId, tStoreName,tStoreNumber,tProjectsInfo, @nBrandID nBrandId    
+from(      
+ select aStoreId nStoreId, tStoreName,tStoreNumber, tProjectsInfo  
+ from tblStore with(nolock)  Join      
+ (select nStoreId, STRING_AGG(CAST(aProjectId as varchar) + '_' + CAST(nProjectType as varchar) + '_' + CAST(dGoLiveDate as varchar) , ', ') tProjectsInfo from tblProject with(nolock) where  nBrandID=@nBrandID and nProjectActiveStatus = 1      
+ --where ProjectActiveStatus = 1       
+ group by nStoreID) tblProj on aStoreID = nStoreID       
+ where   nBrandID=@nBrandID and    
+ tStoreNumber like ('%' + @tText + '%') OR      
+ tStoreName like ('%' + @tText + '%')      
+ ) as tmpTable order by tStoreNumber      
+ --Select nProjectId, tStoreName,tProjectName,tStoreNumber, tDropdownText tProjectType, dGoLiveDate         
+ --from tblProjectStore projstore with(nolock) join tblProject proj with(nolock) on             
+ --proj.aProjectId = projstore.nProjectId join  tblStore store with(nolock) on         
+ --store.aStoreID = proj.nStoreID FULL OUTER JOIN            
+ --tblDropdowns pType with(nolock) on pType.aDropDownId =            
+ --(case when nProjectType is null then 4            
+ --else nProjectType END)             
+ --where proj.projectActiveStatus=1 and (tStoreName like ('%' + @tText + '%') OR proj.tProjectName like ('%' + @tText + '%') OR              
+ --store.tStoreNumber like ('%' + @tText + '%'))) tProject where            
+ --tProjectType like ('%' + @tText + '%')            
+          
+ --order by nProjectID desc          
 END 
+Insert into tblDropdowns (tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId) values('On Track',getdate(),0,0,0,29,1)
+Insert into tblDropdowns (tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId) values('Action Required',getdate(),0,0,0,29,1)
+Insert into tblDropdowns (tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId) values('Complete',getdate(),0,0,0,29,1)
+Insert into tblDropdowns (tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId) values('At Risk',getdate(),0,0,0,29,1)
+update tblDropdowns set nBrandId =1, nModuleId = 29 where aDropdownId = 216
+
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,2 from tblDropdowns where nbrandId = 1 and nModuleId =29
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,3from tblDropdowns where nbrandId = 1 and nModuleId =29
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,4 from tblDropdowns where nbrandId = 1 and nModuleId =29
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,5 from tblDropdowns where nbrandId = 1 and nModuleId =29
+insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,6 from tblDropdowns where nbrandId = 1 and nModuleId =29
+
+--Insert into tblDropdowns (tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId) values('Under Construction',getdate(),0,0,0,29,1)
+
 
 GO
-alter table tblDropdownMain drop column nBrandId
+select * from tblDropdowns where nModuleId is null
+select * from tblDropdownModule where aModuleId not in (select nModuleId from tblDropdowns where nModuleId is not null)
 alter table tblDropDowns add nModuleId int, nBrandId int
 update tblDropdowns set nModuleId = aModuleId from tblDropdowns join tblDropDownMain on aDropdownId = nDropdownId  join tblDropdownModule on tblDropdownModule.tModuleName = tblDropDownMain.tModuleName
 drop table tblDropdownMain
-drop table tblDropdownModuleBrandRel
+--drop table tblDropdownModuleBrandRel
 --update tblDropdowns set tblDropdowns.nBrandId = tblDropdownModuleBrandRel.nBrandId from tblDropdownModuleBrandRel where tblDropdownModuleBrandRel.nModuleId = tblDropdowns.nModuleId
 
 
@@ -87,48 +127,16 @@ where tblDropdownModule.tModuleName = 'ExteriorMenuStatus'
 and nBrandId = 6
 select * from tblDropdownModule
 select * from tblDropdownMain
-select * from tblDropDowns
+select * from tblDropDowns where tDropdownText like '%under%'
+select * from tblProject
 select * from tblDropdownModuleBrandRel
 GO
-Alter Procedure [dbo].[sproc_GetDropdown]            
-@tModuleName as VARCHAR(500),  
-@nUserId int        
-as            
-BEGIN            
- IF(@tModuleName is null OR @tModuleName = '')            
- BEGIN            
-  Select nBrandId, tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdowns  with(nolock) join tblDropdownModule with(nolock) on 
-  nModuleId = aModuleId UNION            
- Select 0, 'Vendor', aVendorId, tVendorName, bDeleted, 1, 0 from tblVendor with(nolock)  UNION        
- Select 0, 'Franchise', aFranchiseId, tFranchiseName,bDeleted,1, 0 from tblFranchise  with(nolock) UNION    
- select 0, 'UserRole', aRoleID, tRoleName, CONVERT(bit, 0),1, 0 from tblRole with(nolock) UNION    
- select 0, 'Brand', aBrandId, tBrandName, bDeleted,1, 0 from tblBrand with(nolock) join tblUserBrandRel with(nolock) on nBrandID = aBrandID where nUserID = @nUserID          
- END            
- ELSE             
- BEGIN            
- IF(@tModuleName = 'Vendor')          
- BEGIN          
- Select nBrand, @tModuleName, aVendorId, tVendorName, bDeleted,1, 0 from tblVendor with(nolock) order by tVendorName     
- END          
- ELSE IF(@tModuleName = 'UserRole')          
- BEGIN          
- select 0, 'UserRole' tModuleName, aRoleID aDropdownId, tRoleName tDropdownText, CONVERT(bit, 0),1 nFunction, 0 nFunction from tblRole with(nolock)
- END          
- ELSE          
- BEGIN          
- Select nBrandId, tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdowns  with(nolock) join tblDropdownModule with(nolock) on 
-  nModuleId = aModuleId
-  where tModuleName = @tModuleName and (tblDropdowns.bDeleted is null or tblDropdowns.bDeleted = 0)  order by nOrder         
-  END          
- END            
-END 
-
 GO
 
 -------------------------------Multiple Brands-------------------------------
 
 
-Alter table tblStore add nBrandID int
+
 --update tblProject set nBrandID=2 where nstoreid in (5,10,11)
 Go
 Alter procedure sproc_SearchStore          
@@ -282,15 +290,16 @@ GO
 
 
   
-Alter Procedure [dbo].[sproc_GetDropdown]              
+  
+ALTER Procedure [dbo].[sproc_GetDropdown]              
 @tModuleName as VARCHAR(500),    
 @nUserId int          
 as              
 BEGIN              
  IF(@tModuleName is null OR @tModuleName = '')              
  BEGIN              
-  Select tblDropdownModuleBrandRel.nBrandId, tblDropdownMain.tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdownMain  with(nolock) join tblDropdowns with(nolock) on              
-  aDropdownId = nDropdownId join tblDropdownModule with(nolock) on tblDropdownMain.tModuleName = tblDropdownModule.tModuleName join tblDropdownModuleBrandRel with(nolock) on aModuleId = nModuleId  UNION              
+  Select nBrandId, tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdowns  with(nolock) join tblDropdownModule with(nolock) on   
+  nModuleId = aModuleId UNION              
  Select 0, 'Vendor', aVendorId, tVendorName, bDeleted, 1, 0 from tblVendor with(nolock)  UNION          
  Select 0, 'Franchise', aFranchiseId, tFranchiseName,bDeleted,1, 0 from tblFranchise  with(nolock) UNION      
  select 0, 'UserRole', aRoleID, tRoleName, CONVERT(bit, 0),1, 0 from tblRole with(nolock) UNION      
@@ -308,13 +317,52 @@ BEGIN
  END            
  ELSE            
  BEGIN            
- Select tblDropdownModuleBrandRel.nBrandId, tblDropdownMain.tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdownMain  with(nolock) join tblDropdowns with(nolock) on              
-  aDropdownId = nDropdownId join tblDropdownModule with(nolock) on tblDropdownMain.tModuleName = tblDropdownModule.tModuleName join tblDropdownModuleBrandRel with(nolock) on aModuleId = nModuleId   and tblDropdownModuleBrandRel.nBrandId=tblDropdownMain.nBrandId
-  where tblDropdownMain.tModuleName = @tModuleName and (tblDropdowns.bDeleted is null or tblDropdowns.bDeleted = 0)  order by nOrder           
+ Select nBrandId, tModuleName, aDropDownId, tDropdownText, tblDropdowns.bDeleted, nOrder, nFunction from tblDropdowns  with(nolock) join tblDropdownModule with(nolock) on   
+  nModuleId = aModuleId  
+  where tModuleName = @tModuleName and (tblDropdowns.bDeleted is null or tblDropdowns.bDeleted = 0)  order by nOrder           
   END            
  END              
+END   
+GO
+
+create table tblLoginSessions(aSessionId int identity primary key, nUserId int not null, tSessionId VARCHAR(1000), nStatus int, tDevice VARCHAR(MAX), dtLoginTime dateTime, dtLogoutTime datetime)
+
+GO
+
+ALTER PROC sproc_UserLogin                 
+(                
+@tUserName NVARCHAR(255),                
+@tPassword NVARCHAR(255),
+@tDevice VARCHAR(MAX)
+)                
+AS                
+BEGIN
+	declare @aUserId int
+	select @aUserId = aUserId from tblUser with(nolock) where UPPER(tUserName) = UPPER(@tUserName) and tPassword = @tPassword       
+   Insert into tblLoginSessions(nUserId, tSessionId, nStatus, tDevice, dtLoginTime) values(@aUserId, '', 1, @tDevice, getdate())
+   select tName, tUserName, tEmail, case when(nRole is null) then 0 else nRole end, aUserID nUserID, isFirstTime from tblUser with(nolock) where aUserID = @aUserId
 END 
 
+GO
+
+CREATE PROC sproc_UserLogout
+@nUserId int
+AS
+BEGIN
+	Update tblLoginSessions set dtLogoutTime = getDate(), nStatus = 0 where nUserId = @nUserId and nStatus =1
+END
+
+GO
+
+Select * from tblStore
+update tblStore set nBrandId = 1
+select * from tblbrand
+--select * from tblLoginSessions
+
+--select @aUserId from tblUser with(nolock) where UPPER(tUserName) = UPPER(@tUserName) and tPassword = @tPassword   
+
+--sproc_UserLogin 'admin', 'YWRtaW4=', 'IP:::1, Browser:Chrome'
+--GO
 
 --sp_tables '%modul%'
 
@@ -343,4 +391,28 @@ END
 --select * from tblDropdowns order by 1 desc
 --delete from tblDropdowns where aDropdownId >= 130 tModuleName
 
-select * from tbl
+select * from tbPermission where tPermissionName = 'home.configuration.users'
+select * from tblUserPermissionRel where nPermissionId = 3 and nUserId = 2
+update tblUserPermissionRel set nPermVal = 2 where nPermissionId = 3 and nUserId = 2
+sp_tables '%perm%'
+
+select * from tblDropdowns
+
+
+sproc_SearchStore '', 1
+
+
+      
+--Select nStoreId, tStoreName,tStoreNumber,tProjectsInfo    
+--from(      
+-- select aStoreId nStoreId, tStoreName,tStoreNumber, tProjectsInfo  
+-- from tblStore with(nolock)  Join      
+-- (select nStoreId, STRING_AGG(CAST(aProjectId as varchar) + '_' + CAST(nProjectType as varchar) + '_' + CAST(dGoLiveDate as varchar) , ', ') tProjectsInfo from tblProject with(nolock) where  nBrandID=1 and nProjectActiveStatus = 1      
+-- --where ProjectActiveStatus = 1       
+-- group by nStoreID) tblProj on aStoreID = nStoreID       
+-- where   nBrandID=1 and    
+-- tStoreNumber like '' OR      
+-- tStoreName like '' 
+-- ) as tmpTable order by tStoreNumber   
+
+ select * from tblProject

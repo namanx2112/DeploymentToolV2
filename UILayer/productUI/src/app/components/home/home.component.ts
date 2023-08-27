@@ -69,7 +69,7 @@ export class HomeComponent {
   }
 
   LogOut() {
-    this.authService.loggedOut();
+    this.authService.loggedOut(true);
   }
 
   supportPage() {

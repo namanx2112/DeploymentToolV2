@@ -17,6 +17,9 @@ using System.Web.UI;
 using System.Web.DynamicData;
 using System.Xml.Linq;
 using System.Collections;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System.Net.Http;
+using System.ServiceModel.Channels;
 
 namespace DeploymentTool.Misc
 {
@@ -274,6 +277,27 @@ namespace DeploymentTool.Misc
             sPassword = res.ToString();
             string sEncoded = EncodeString(sPassword);
             return sEncoded.ToString();
+        }
+
+        public static string GetClientIp(HttpRequestMessage request)
+        {
+            if (request.Properties.ContainsKey("MS_HttpContext"))
+            {
+                return ((HttpContextWrapper)request.Properties["MS_HttpContext"]).Request.UserHostAddress;
+            }
+            else if (request.Properties.ContainsKey(RemoteEndpointMessageProperty.Name))
+            {
+                RemoteEndpointMessageProperty prop = (RemoteEndpointMessageProperty)request.Properties[RemoteEndpointMessageProperty.Name];
+                return prop.Address;
+            }
+            else if (HttpContext.Current != null)
+            {
+                return HttpContext.Current.Request.UserHostAddress;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

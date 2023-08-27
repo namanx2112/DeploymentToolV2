@@ -33,8 +33,8 @@ export class LoadingInterceptorService {
                 }
             }),
             catchError(err => {
-                if (err.status === 401) {
-                    this.authService.loggedOut();
+                if (err.status === 401 && err.url.indexOf("Logout") == -1) {
+                    this.authService.loggedOut(false);
                 }
                 const error = err.error.message || err.statusText;
                     return throwError(error);
