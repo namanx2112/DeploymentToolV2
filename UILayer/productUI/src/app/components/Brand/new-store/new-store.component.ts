@@ -105,17 +105,24 @@ export class NewStoreComponent {
     }
   }
 
-  onSubmit(controlVals: FormGroup, tab: HomeTab) {
+  onSubmit(controlVals: any, tab: HomeTab) {
     let fieldValues = controlVals.value;
+    let butttonText = controlVals.butttonText;
     let cThis = this;
     let callBack = function (respValues: any) {
-      cThis.tValues[tab.tab_name] = respValues;
-      if (cThis.curTabIndex + 1 == cThis.allTabs.length) {
+      if (butttonText == "Finish") {
         alert("Created Successfully");
         cThis.ChangeView.emit("dashboard");
       }
-      cThis.curTabIndex++;
-      cThis.loadCurTab();
+      else {
+        cThis.tValues[tab.tab_name] = respValues;
+        if (cThis.curTabIndex + 1 == cThis.allTabs.length) {
+          alert("Created Successfully");
+          cThis.ChangeView.emit("dashboard");
+        }
+        cThis.curTabIndex++;
+        cThis.loadCurTab();
+      }
     }
     switch (tab.tab_type) {
       case TabType.NewStore:
@@ -128,10 +135,16 @@ export class NewStoreComponent {
         else {
           fieldValues["nBrandID"] = this.curBrandId;
           this.storeSerice.CreateNewStores(fieldValues).subscribe((x: any) => {
-            this.tValues[tab.tab_name] = x;
-            this.setStoreId(x.aStoreId);
-            this.curTabIndex++;
-            this.loadCurTab();
+            if (butttonText == "Finish") {
+              alert("Created Successfully");
+              cThis.ChangeView.emit("dashboard");
+            }
+            else {
+              this.tValues[tab.tab_name] = x;
+              this.setStoreId(x.aStoreId);
+              this.curTabIndex++;
+              this.loadCurTab();
+            }
           });
         }
         break;

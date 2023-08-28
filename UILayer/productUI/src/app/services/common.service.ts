@@ -161,72 +161,85 @@ export class CommonService {
     return 0;
   }
 
+  compareByText(a: OptionType, b: OptionType) {
+    if (a.tDropdownText.toLocaleLowerCase() < b.tDropdownText.toLocaleLowerCase()) {
+      return -1;
+    }
+    if (a.tDropdownText.toLocaleLowerCase() > b.tDropdownText.toLocaleLowerCase()) {
+      return 1;
+    }
+    return 0;
+  }
+
+  static getProjectTypeOptions() {
+    return [{
+      tDropdownText: "New",
+      aDropdownId: ProjectTypes.New.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Rebuild",
+      aDropdownId: ProjectTypes.Rebuild.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Remodel",
+      aDropdownId: ProjectTypes.Remodel.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Relocation",
+      aDropdownId: ProjectTypes.Relocation.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Acquisition",
+      aDropdownId: ProjectTypes.Acquisition.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "POSInstallation",
+      aDropdownId: ProjectTypes.POSInstallation.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "AudioInstallation",
+      aDropdownId: ProjectTypes.AudioInstallation.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "MenuInstallation",
+      aDropdownId: ProjectTypes.MenuInstallation.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "PaymentTerminalInstallation",
+      aDropdownId: ProjectTypes.PaymentTerminalInstallation.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "PartsReplacement",
+      aDropdownId: ProjectTypes.PartsReplacement.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }];;
+  }
+
   public GetDropdownOptions(nBrandId: number, columnName?: string): OptionType[] {
     let ddItems: OptionType[] = [];
     if (columnName) {
       if (columnName == "ProjectType") {
-        //  , , , , , , , 
-        ddItems = [{
-          tDropdownText: "New",
-          aDropdownId: ProjectTypes.New.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          tDropdownText: "Rebuild",
-          aDropdownId: ProjectTypes.Rebuild.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          tDropdownText: "Remodel",
-          aDropdownId: ProjectTypes.Remodel.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          tDropdownText: "Relocation",
-          aDropdownId: ProjectTypes.Relocation.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          tDropdownText: "Acquisition",
-          aDropdownId: ProjectTypes.Acquisition.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          tDropdownText: "POSInstallation",
-          aDropdownId: ProjectTypes.POSInstallation.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          tDropdownText: "AudioInstallation",
-          aDropdownId: ProjectTypes.AudioInstallation.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          tDropdownText: "MenuInstallation",
-          aDropdownId: ProjectTypes.MenuInstallation.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          tDropdownText: "PaymentTerminalInstallation",
-          aDropdownId: ProjectTypes.PaymentTerminalInstallation.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }, {
-          tDropdownText: "PartsReplacement",
-          aDropdownId: ProjectTypes.PartsReplacement.toString(),
-          optionOrder: 1,
-          bDeleted: false,
-          nFunction: 0
-        }];
+        ddItems = CommonService.getProjectTypeOptions();
       }
       else {
         if (columnName == "Franchise" || columnName == "Vendor")// Since Franchise and Vendor is shared
@@ -242,7 +255,10 @@ export class CommonService {
               nFunction: tItem[item].nFunction
             });
           }
-          ddItems.sort(this.compare);
+          if (columnName == "Franchise" || columnName == "Vendor")
+            ddItems.sort(this.compareByText);
+          else
+            ddItems.sort(this.compare);
           if (this.noNeedBlankDropDown.indexOf(columnName) == -1)
             ddItems.unshift({
               tDropdownText: "",
@@ -312,13 +328,18 @@ export class CommonService {
     if (curControl.options) {
       if (curControl.options == "Vendor" || curControl.options == "Franchise")
         nBrandId = 0;
-      let opArr: OptionType[] = CommonService.dropdownCache[nBrandId][curControl.options];
-      if (typeof opArr == 'undefined')
-        opArr = CommonService.getDefaultOptions();
-      if (opArr) {
-        let tOpton = opArr.find(x => x.aDropdownId == optVal);
-        if (tOpton) {
-          outputVal = CommonService.GetDropDownValueFromControlOption(curControl, tOpton, _controlValues);
+      else if (curControl.options == "ProjectType") {
+        outputVal = this.getProjectTypeOptions().filter(x => x.aDropdownId == optVal)[0].tDropdownText;
+      }
+      else {
+        let opArr: OptionType[] = CommonService.dropdownCache[nBrandId][curControl.options];
+        if (typeof opArr == 'undefined')
+          opArr = CommonService.getDefaultOptions();
+        if (opArr) {
+          let tOpton = opArr.find(x => x.aDropdownId == optVal);
+          if (tOpton) {
+            outputVal = CommonService.GetDropDownValueFromControlOption(curControl, tOpton, _controlValues);
+          }
         }
       }
     }

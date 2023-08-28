@@ -38,7 +38,7 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
-export class ControlsComponent implements AfterViewChecked {  
+export class ControlsComponent implements AfterViewChecked {
   @Input()
   set request(val: any) {
     this.fields = val.fields;
@@ -50,14 +50,16 @@ export class ControlsComponent implements AfterViewChecked {
     this.readOnlyForm = val.readOnlyForm;
     this.CloseLabel = val.CloseLabel;
     this.nBrandId = val.nBrandId;
+    this.exButtonLabel = val.exButtonLabel;
     this.loadFields();
     this.loadValues();
   }
-  fields: Fields[];  
+  fields: Fields[];
   needButton: boolean;
   themeClass: string;
   numberOfControlsInARow: number;
-  controlValues:Dictionary<string>;
+  controlValues: Dictionary<string>;
+  exButtonLabel: string;
   SubmitLabel: string;
   readOnlyForm: boolean;
   @Output() onSubmit = new EventEmitter<any>();
@@ -215,9 +217,9 @@ export class ControlsComponent implements AfterViewChecked {
     return CommonService.GetDropDownValueFromControlOption(curControl, opt, this.controlValues);
   }
 
-  onSubmitClick(): void {
+  onSubmitClick(event: any): void {
     if (this.formGroup.valid) {
-      this.onSubmit.emit({ value: this.getFieldControlValues() });
+      this.onSubmit.emit({ value: this.getFieldControlValues(), butttonText: event.submitter.innerText });
     }
   }
 

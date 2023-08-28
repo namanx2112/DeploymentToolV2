@@ -4,7 +4,7 @@
         [matAutocomplete]="auto">
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='projectSelect($event)'>
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{"Store Name:" + option.tStoreName + ", Store Number:" + option.tStoreNumber}}
+            {{"Store Number:" + option.tStoreNumber + ", Address:" + option.tAddress}}
         </mat-option>
     </mat-autocomplete>
 </mat-form-field>

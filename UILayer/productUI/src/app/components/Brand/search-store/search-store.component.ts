@@ -29,8 +29,8 @@ export class SearchStoreComponent {
     if (typeof value == 'string') {
       const filterValue = value.toLowerCase();
 
-      return this.ddOptions.filter(option => option.tStoreName?.toString().toLowerCase().includes(filterValue) ||
-        option.tStoreNumber.toString().toLowerCase().includes(filterValue));
+      return this.ddOptions.filter(option => option.tStoreNumber?.toString().toLowerCase().includes(filterValue) ||
+        option.tAddress.toString().toLowerCase().includes(filterValue));
     }
     else
       return [];

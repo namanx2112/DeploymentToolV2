@@ -11,6 +11,8 @@ namespace DeploymentTool.Model
         public int nBrandId { get; set; }
         //public int nProjectId { get; set; }
         public string tStoreName { get; set; }
+
+        public string tAddress { get; set; }
         //public string tProjectName { get; set; }
         public string tStoreNumber { get; set; }
         //public string tProjectType { get; set; }

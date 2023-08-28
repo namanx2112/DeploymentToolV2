@@ -7,7 +7,7 @@ Select @nRoleID = aRoleID from tblRole where tRoleName  = 'Super Admin'
 insert into tblRolePermissionRel (nRoleID, nPermissionID, nPermVal) select @nRoleID, aPermissionlID, 2 from tbPermission where tPermissionName in ('home.sonic.projectportfolio','home.sonic.project.documentstab','home.sonic.project.deliverystatus')
 Select @nRoleID = aRoleID from tblRole where tRoleName  = 'Admin'
 insert into tblRolePermissionRel (nRoleID, nPermissionID, nPermVal) select @nRoleID, aPermissionlID, 2 from tbPermission where tPermissionName in ('home.sonic.projectportfolio','home.sonic.project.documentstab','home.sonic.project.deliverystatus')
-Select @nRoleID = aRoleID from tblRole where tRoleName  = 'Project Manage'
+Select @nRoleID = aRoleID from tblRole where tRoleName  = 'Project Manager'
 insert into tblRolePermissionRel (nRoleID, nPermissionID, nPermVal) select @nRoleID, aPermissionlID, 2 from tbPermission where tPermissionName in ('home.sonic.projectportfolio','home.sonic.project.documentstab','home.sonic.project.deliverystatus')
 
 select * from tbPermission order by 1 desc
@@ -843,3 +843,5 @@ from tblProjectNotes A with (nolock)
 END
 
 GO
+
+select * from tblPermission

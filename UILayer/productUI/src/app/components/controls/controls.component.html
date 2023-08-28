@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSubmitClick()" class="{{'form ' + themeClass}}">
+<form [formGroup]="formGroup" (ngSubmit)="onSubmitClick($event)" class="{{'form ' + themeClass}}">
     <ng-container *ngFor="let curControl of fields; let index = index">
         <h4 *ngIf="showGroupHeader(curControl)" class="fieldGroup">{{groupLabel}}</h4>
         <div [ngClass]="getLabelClass(curControl)">
@@ -11,8 +11,7 @@
             <mat-form-field appearance="outline" *ngIf="!(curControl.readOnly || readOnlyForm) && (curControl.field_type == 0 || curControl.field_type == 1 || 
             curControl.field_type == 3 || 
                 curControl.field_type == 5 || curControl.field_type == 8 || curControl.field_type == 9)">
-                <input matInput *ngIf="!curControl.readOnly" placeholder="{{curControl.field_placeholder}}"
-                    [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 3) ? 'time' : 
+                <input matInput *ngIf="!curControl.readOnly" placeholder="{{curControl.field_placeholder}}" [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 3) ? 'time' : 
                     (curControl.field_type == 5 || curControl.field_type == 8)? 'number' : 'password'"
                     formControlName="{{curControl.fieldUniqeName}}" [ngModel]="controlValues[curControl.fieldUniqeName]"
                     (keydown)="onKeydown($event)">
@@ -43,7 +42,8 @@
             <mat-form-field appearance="outline"
                 *ngIf="!(curControl.readOnly || readOnlyForm) && curControl.field_type == 4">
                 <mat-select [compareWith]="compareDropDown" formControlName="{{curControl.fieldUniqeName}}"
-                    [(value)]="controlValues[curControl.fieldUniqeName]" (selectionChange)="dropdownChange($event.value, curControl)">
+                    [(value)]="controlValues[curControl.fieldUniqeName]"
+                    (selectionChange)="dropdownChange($event.value, curControl)">
                     <mat-option *ngFor="let opt of curControl.dropDownOptions|forFilter:filterOption"
                         [value]="opt.aDropdownId">{{getOptionValue(curControl, opt)}}</mat-option>
                 </mat-select>
@@ -64,6 +64,9 @@
     </ng-container>
     <div *ngIf="needButton" class="controlButton">
         <!-- <button type="submit" mat-raised-button [disabled]="!formGroup.valid" -->
+        <button type="submit" *ngIf="exButtonLabel != undefined" mat-raised-button class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">            
+            {{exButtonLabel}}
+        </button>
         <button type="submit" mat-raised-button
             [className]="SubmitLabel == 'Search' ? 'btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base buttonClass' : 'buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base'">
             <mat-icon *ngIf="SubmitLabel == 'Search'">search</mat-icon>

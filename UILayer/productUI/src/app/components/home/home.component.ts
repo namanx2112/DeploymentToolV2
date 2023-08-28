@@ -60,8 +60,13 @@ export class HomeComponent {
   }
 
   brandSelect(item: BrandModel) {
-    this._curBrand = item;
-    this.viewName = "brandhome";
+    if (item.nEnabled == 0) { 
+      this.viewName = "notimplemented";
+    }
+    else {
+      this._curBrand = item;
+      this.viewName = "brandhome";
+    }
   }
 
   changeView(vName: string) {

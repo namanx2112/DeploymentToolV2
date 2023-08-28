@@ -13,7 +13,7 @@
         <h3 *ngIf="tTab.tab_type == curTab.tab_type" class="tabName">{{tTab.tab_header}}</h3>
         <app-controls class="tabForm" *ngIf="tTab.tab_type == curTab.tab_type" [request]="{fields: tTab.fields, needButton: true, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
 controlValues: tValues[tTab.tab_name], SubmitLabel: SubmitLabel,
-    readOnlyForm: false, closeLabl: (index > 0) ? 'Back' : '', nBrandId: curBrandId}" (onSubmit)="onSubmit($event, tTab)"
+    readOnlyForm: false, closeLabl: (index > 0) ? 'Back' : '', nBrandId: curBrandId, exButtonLabel: 'Finish'}" (onSubmit)="onSubmit($event, tTab)"
             (onClose)="backClicked($event, tTab)"></app-controls>
     </div>
 </div>

@@ -242,6 +242,7 @@ export interface StoreSearchModel {
     nBrandId: number,
     tStoreName: string,
     tStoreNumber: string,
+    tAddress: string,
     lstProjectsInfo: ProjectInfo[]
 }
 

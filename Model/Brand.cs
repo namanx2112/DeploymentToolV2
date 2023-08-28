@@ -60,6 +60,7 @@ namespace DeploymentTool.Model
         public Nullable<bool> bDeleted { get; set; }
         public byte[] BrandFile { get; set; }
         public string tIconURL { get; set; }
+        public int nEnabled { get; set; }
 
         public void SetBrandURL()
         {

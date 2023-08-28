@@ -146,10 +146,11 @@ export class NewProjectComponent {
     }
   }
 
-  onNext(controlVals: FormGroup, tab: HomeTab) {
+  onNext(controlVals: any, tab: HomeTab) {
     this.tValues[tab.tab_name] = controlVals.value;
+    let butttonText = controlVals.butttonText;
     var cThis = this;
-    if (this.curTabIndex + 1 == this.allTabs.length) {
+    if (this.curTabIndex + 1 == this.allTabs.length || butttonText == "Finish") {
       let tIndex = 1;
       let tTab = this.allTabs[tIndex];
       var saveCallback = function (resp: any, tab: HomeTab) {

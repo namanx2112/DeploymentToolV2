@@ -114,7 +114,7 @@ export class ProjectPortfolioComponent {
     let dialogRef: any;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
-
+    element.nBrandId = this._curBrand.aBrandId;
     dialogConfig.data = {
       themeClass: "grayWhite",
       dialogTheme: "lightGrayWhiteTheme",

@@ -89,7 +89,8 @@ export class ManageDropdownsComponent {
         dtUpdatedOn: new Date(),
         bDeleted: false,
         tIconURL: '',
-        access: true
+        access: true,
+        nEnabled: 0
       };
       cThis.loadModules();
     });

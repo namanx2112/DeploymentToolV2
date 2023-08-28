@@ -18,7 +18,8 @@ export interface BrandModel {
     dtUpdatedOn: Date,
     bDeleted: boolean,
     tIconURL: string,
-    access: boolean | true
+    access: boolean | true,
+    nEnabled: number
 }
 
 

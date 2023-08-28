@@ -1,0 +1,49 @@
+alter table tblBrand add nEnabled int
+
+update tblBrand set nEnabled =0
+update tblBrand set nEnabled =1 where tBrandName like '%Sonic%'
+update tblBrand set nEnabled =1 where tBrandName like '%Buffalo%'
+select * from tblBrand
+GO
+  
+Alter procedure sproc_SearchStore              
+@tText as VARCHAR(500),    
+@nBrandID int=0    
+AS              
+BEGIN      
+      
+Select nStoreId, tStoreName,tStoreNumber,tProjectsInfo, @nBrandID nBrandId , case when(tAddress is null) then '' else tAddress end tAddress
+from(      
+ select aStoreId nStoreId, tStoreName,tStoreNumber, tProjectsInfo , (tStoreAddressLine1 + ',' + tCity + ' ' + tStoreZip) tAddress
+ from tblStore with(nolock)  Join      
+ (select nStoreId, STRING_AGG(CAST(aProjectId as varchar) + '_' + CAST(nProjectType as varchar) + '_' + CAST(dGoLiveDate as varchar) , ', ') tProjectsInfo from tblProject with(nolock) where  nBrandID=@nBrandID and nProjectActiveStatus = 1      
+ --where ProjectActiveStatus = 1       
+ group by nStoreID) tblProj on aStoreID = nStoreID       
+ where   nBrandID=@nBrandID and    
+ tStoreNumber like ('%' + @tText + '%') OR      
+ tStoreName like ('%' + @tText + '%')      
+ ) as tmpTable order by tStoreNumber      
+ --Select nProjectId, tStoreName,tProjectName,tStoreNumber, tDropdownText tProjectType, dGoLiveDate         
+ --from tblProjectStore projstore with(nolock) join tblProject proj with(nolock) on             
+ --proj.aProjectId = projstore.nProjectId join  tblStore store with(nolock) on         
+ --store.aStoreID = proj.nStoreID FULL OUTER JOIN            
+ --tblDropdowns pType with(nolock) on pType.aDropDownId =            
+ --(case when nProjectType is null then 4            
+ --else nProjectType END)             
+ --where proj.projectActiveStatus=1 and (tStoreName like ('%' + @tText + '%') OR proj.tProjectName like ('%' + @tText + '%') OR              
+ --store.tStoreNumber like ('%' + @tText + '%'))) tProject where            
+ --tProjectType like ('%' + @tText + '%')            
+          
+ --order by nProjectID desc          
+END 
+
+GO
+
+select aStoreId nStoreId, tStoreName,tStoreNumber, tProjectsInfo , (tCity  + ',' + tStoreAddressLine1)
+ from tblStore with(nolock)  Join      
+ (select nStoreId, STRING_AGG(CAST(aProjectId as varchar) + '_' + CAST(nProjectType as varchar) + '_' + CAST(dGoLiveDate as varchar) , ', ') tProjectsInfo from tblProject with(nolock) where  nProjectActiveStatus = 1      
+ --where ProjectActiveStatus = 1       
+ group by nStoreID) tblProj on aStoreID = nStoreID       
+
+
+ 

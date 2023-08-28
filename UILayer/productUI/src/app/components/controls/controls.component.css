@@ -65,6 +65,10 @@
     width: 150px;
 }
 
+.exButton{
+    margin-left: 10px;
+}
+
 .readOnlyControl {
     float: right;
     width: 50%;

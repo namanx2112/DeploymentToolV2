@@ -17,7 +17,7 @@
         </div>
         <app-controls class="tabForm" *ngIf="index > 1 && tTab.tab_type == curTab.tab_type" [request]="{fields: tTab.fields, needButton: true, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
         controlValues: tValues[tTab.tab_name], SubmitLabel: SubmitLabel,
-            readOnlyForm: false, CloseLabel: 'Back', nBrandId: curBrandId}" (onSubmit)="onNext($event, tTab)"
+            readOnlyForm: false, CloseLabel: 'Back', nBrandId: curBrandId, exButtonLabel: 'Finish'}" (onSubmit)="onNext($event, tTab)"
             (onClose)="backClicked($event, tTab)"></app-controls>
 
         <app-controls class="tabForm" *ngIf="index == 1 && tTab.tab_type == curTab.tab_type" [request]="{fields: tTab.fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
