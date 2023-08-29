@@ -17,9 +17,9 @@ export class ExStoreService {
   }
 
 
-  UploadStore({ fileToUpload }: { fileToUpload: File; }) {
+  UploadStore( fileToUpload: File, nBrandId: number ) {
     const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    formData.append('fileKey', fileToUpload, fileToUpload.name + String.fromCharCode(1000) + nBrandId);
     let httpHeader = new HttpHeaders({
       "Authorization": "Bearer " + this.cacheService.getToken()
     });

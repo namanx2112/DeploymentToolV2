@@ -88,42 +88,44 @@ namespace DeploymentTool.Controller
 
                     foreach (var stream in filesReadToProvider.Contents)
                     {
-                        string FileName = stream.Headers.ContentDisposition.FileName.Replace("\"","");
-                        var fileBytes = await stream.ReadAsByteArrayAsync();
-                        string URL = HttpRuntime.AppDomainAppPath;
-                      
-                        string strFilePath = URL+@"Attachments\" + FileName;
-                        //string strFilePath = "C:\\Code\\namanx2112\\new\\Attachments\\store.xlsx";
-                        string connString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strFilePath + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-
-                        TraceUtility.WriteTrace("AttachmentController", "UploadStore:strFilePath:" + strFilePath);
-                        //using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(@"../Attachments/" + FileName, FileMode.Create)))
-                        using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
+                        string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
+                        if (fRequest.Length == 2)
                         {
-                            bw.Write(fileBytes);
-                            bw.Close();
-                        }
+                            string FileName = fRequest[0];
+                            int nBrandId = Convert.ToInt32(fRequest[1]);
+                            var fileBytes = await stream.ReadAsByteArrayAsync();
+                            string URL = HttpRuntime.AppDomainAppPath;
 
-                        TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
-                        ImportExceltoDatabase(fields,strFilePath, connString);
-                        /* fields.Add(new ProjectExcelFields() {
-                             tProjectType = "RELOCATION",
-                             tStoreNumber = "6937",
-                             tAddress = "461 Columbia Ave",
-                             tCity = "Lexington",
-                             tState = "SC",
-                             nDMAID = 546,
-                             tDMA = "COLUMBIA SC",
-                             tRED = "Michael Landru",
-                             tCM = "Kevin Dalpiaz",
-                             tANE = "",
-                             tRVP = "Linda Wiseley",
-                             tPrincipalPartner = "MICHAEL IRONS",
-                             dStatus = DateTime.Now,
-                             dOpenStore = DateTime.Now,
-                             tProjectStatus = "Under Construction"
-                         });*/
-                         
+                            string strFilePath = URL + @"Attachments\" + FileName;
+
+                            TraceUtility.WriteTrace("AttachmentController", "UploadStore:strFilePath:" + strFilePath);
+                            using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
+                            {
+                                bw.Write(fileBytes);
+                                bw.Close();
+                            }
+
+                            TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
+                            ImportExceltoDatabase(fields, strFilePath, nBrandId);
+                            /* fields.Add(new ProjectExcelFields() {
+                                 tProjectType = "RELOCATION",
+                                 tStoreNumber = "6937",
+                                 tAddress = "461 Columbia Ave",
+                                 tCity = "Lexington",
+                                 tState = "SC",
+                                 nDMAID = 546,
+                                 tDMA = "COLUMBIA SC",
+                                 tRED = "Michael Landru",
+                                 tCM = "Kevin Dalpiaz",
+                                 tANE = "",
+                                 tRVP = "Linda Wiseley",
+                                 tPrincipalPartner = "MICHAEL IRONS",
+                                 dStatus = DateTime.Now,
+                                 dOpenStore = DateTime.Now,
+                                 tProjectStatus = "Under Construction"
+                             });*/
+
+                        }
                     }
                     TraceUtility.WriteTrace("AttachmentController", "UploadStore:Returing");
                     return new HttpResponseMessage(HttpStatusCode.OK)
@@ -143,16 +145,14 @@ namespace DeploymentTool.Controller
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
-        void ImportExceltoDatabase(List<ProjectExcelFields> fields, string strFilePath, string connString)
+        void ImportExceltoDatabase(List<ProjectExcelFields> fields, string strFilePath, int nBrandId)
         {
-          //  
+            //  
 
             try
             {
                 TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
                 ProjectExcelFields objProjectExcel = new ProjectExcelFields();
-
-               //OleDbConnection oledbConn = new OleDbConnection(connString);
                 DataTable dt = new DataTable();
                 try
                 {
@@ -182,23 +182,22 @@ namespace DeploymentTool.Controller
                                 {
 
                                     // reader.GetDouble(0);
-                                    string Name = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
-                                    string ProjectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type"))  != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
+                                    string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
+                                    string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
 
-                                    SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", Name);
-                                    var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber", new SqlParameter("@tStoreNumber", Name)).FirstOrDefault();
-
-                                    if (ProjectType != "")
+                                    if (projectType != "" && storeNumber != "")
                                     {
+                                        SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", storeNumber);
+                                        var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber", new SqlParameter("@tStoreNumber", storeNumber)).FirstOrDefault();
                                         objProjectExcel = new ProjectExcelFields();
 
-                                        if (Name != output)
+                                        if (storeNumber != output)
                                             objProjectExcel.nStoreExistStatus = 0;
                                         else
                                             objProjectExcel.nStoreExistStatus = 1;
 
-                                        objProjectExcel.tProjectType = ProjectType;
-                                        objProjectExcel.tStoreNumber = Name;
+                                        objProjectExcel.tProjectType = projectType;
+                                        objProjectExcel.tStoreNumber = storeNumber;
                                         objProjectExcel.tAddress = reader.GetValue(dtNew.Columns.IndexOf("Address")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Address")).ToString() : "";
                                         objProjectExcel.tCity = reader.GetValue(dtNew.Columns.IndexOf("City")) != null ? reader.GetValue(dtNew.Columns.IndexOf("City")).ToString() : "";
                                         objProjectExcel.tState = reader.GetValue(dtNew.Columns.IndexOf("State")) != null ? reader.GetValue(dtNew.Columns.IndexOf("State")).ToString() : "";
@@ -221,12 +220,12 @@ namespace DeploymentTool.Controller
                             } while (reader.NextResult());
 
                             // 2. Use the AsDataSet extension method
-                          //  var result = reader.AsDataSet();
+                            //  var result = reader.AsDataSet();
 
                             // The result of each spreadsheet is in result.Tables
                         }
                     }
-                   
+
                 }
                 catch (Exception ex)
                 {
@@ -242,10 +241,10 @@ namespace DeploymentTool.Controller
             {
                 TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
             }
-           // return ip;
+            // return ip;
             // return result;
         }
-      
+
         [HttpPost]
         [Route("api/Attachment/UpdateAttachment")]
         public IHttpActionResult UpdateAttachment()
@@ -256,7 +255,7 @@ namespace DeploymentTool.Controller
 
                 var attachment = new Attachment
                 {
-                    AttachmentId = Convert.ToInt32(httpRequest.Form["AttachmentId"]) ,
+                    AttachmentId = Convert.ToInt32(httpRequest.Form["AttachmentId"]),
                     FileName = httpRequest.Form["tfileName"],
                     FileExt = httpRequest.Form["tFileExt"],
                     FileType = httpRequest.Form["tfileType"],
@@ -282,7 +281,7 @@ namespace DeploymentTool.Controller
                 return BadRequest(ex.Message);
             }
         }
-       
+
 
         [HttpPost]
         [Route("api/Attachment/DeleteAttachment/{attachmentId}")]

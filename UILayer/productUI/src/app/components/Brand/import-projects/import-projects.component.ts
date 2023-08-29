@@ -38,7 +38,7 @@ export class ImportProjectsComponent {
   uploadFileToActivity() {
     if (this.fileToUpload != null) {
       if (this.fileToUpload.name.toLowerCase().endsWith("xlsx")) {
-        this.service.UploadStore({ fileToUpload: this.fileToUpload }).subscribe((data: ProjectExcel[]) => {
+        this.service.UploadStore(this.fileToUpload, this._curBrand.aBrandId ).subscribe((data: ProjectExcel[]) => {
           this.addRecords(data);
           // do something, if upload success
         }, error => {
