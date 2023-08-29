@@ -31,7 +31,6 @@
     width: 208px;
     border: 1px solid black;
     height: calc(100% - 57px);
-    cursor: pointer;
     position: absolute;
     margin-top: 55px;
 }
@@ -43,6 +42,10 @@
     position: relative;
     font-weight: bold;
     font-size: 14px;
+}
+
+.tabHeader.clickable{
+    cursor: pointer;
 }
 
 .tabName{

@@ -28,6 +28,7 @@ export class NewStoreComponent {
   tValues: Dictionary<Dictionary<string>>;
   SubmitLabel: string;
   curTabIndex: number;
+  canMove: boolean = false;
   constructor(private service: ExStoreService, private storeSerice: StoreService, private techCompService: AllTechnologyComponentsService) {
     this.curTabIndex = 0;
     this.SubmitLabel = "Next";
@@ -40,6 +41,32 @@ export class NewStoreComponent {
 
   goBack() {
     this.ChangeView.emit("dashboard");
+  }
+
+  selectTab(index: number) {
+    if (this.canMove) {
+      this.curTabIndex = index;
+      this.loadCurTab();
+    }
+  }
+
+  checkMandatory() {
+    let yes = true;
+    let firstTab = this.allTabs[0];
+    let tabValues = this.tValues[firstTab.tab_name];
+    for (var indx in firstTab.fields) {
+      if (firstTab.fields[indx].mandatory) {
+        if (typeof tabValues[firstTab.fields[indx].fieldUniqeName] == 'undefined' || tabValues[firstTab.fields[indx].fieldUniqeName] == "") {
+          yes = false;
+          break;
+        }
+      }
+    }
+    if (yes)
+      this.canMove = true;
+    else
+      this.canMove = false;
+    return yes;
   }
 
   getTabs() {
@@ -109,12 +136,15 @@ export class NewStoreComponent {
     let fieldValues = controlVals.value;
     let butttonText = controlVals.butttonText;
     let cThis = this;
-    let callBack = function (respValues: any) {
+    let callBack = function (respValues: any, isNew: boolean) {
       if (butttonText == "Finish") {
         alert("Created Successfully");
         cThis.ChangeView.emit("dashboard");
       }
       else {
+        if (tab.tab_type == TabType.NewStore && isNew) {
+          cThis.setStoreId(respValues.aStoreId);
+        }
         cThis.tValues[tab.tab_name] = respValues;
         if (cThis.curTabIndex + 1 == cThis.allTabs.length) {
           alert("Created Successfully");
@@ -122,29 +152,25 @@ export class NewStoreComponent {
         }
         cThis.curTabIndex++;
         cThis.loadCurTab();
+        //cThis.checkMandatory();
       }
     }
+    this.saveMe(tab, fieldValues, callBack);
+  }
+
+  saveMe(tab: HomeTab, fieldValues: any, callBack: any) {
     switch (tab.tab_type) {
       case TabType.NewStore:
         let aStoreId = parseInt(this.tValues[tab.tab_name]["aStoreId"]);
         if (aStoreId > 0) {
           this.storeSerice.UpdateStore(fieldValues).subscribe((nStoreId: string) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           fieldValues["nBrandID"] = this.curBrandId;
           this.storeSerice.CreateNewStores(fieldValues).subscribe((x: any) => {
-            if (butttonText == "Finish") {
-              alert("Created Successfully");
-              cThis.ChangeView.emit("dashboard");
-            }
-            else {
-              this.tValues[tab.tab_name] = x;
-              this.setStoreId(x.aStoreId);
-              this.curTabIndex++;
-              this.loadCurTab();
-            }
+            callBack(x, true);
           });
         }
         break;
@@ -152,12 +178,12 @@ export class NewStoreComponent {
         let aProjectConfigID = (this.tValues[tab.tab_name]["aProjectConfigID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectConfigID"]) : 0;
         if (aProjectConfigID > 0) {
           this.techCompService.UpdateStoreConfig(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreateStoreConfig(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;
@@ -165,12 +191,12 @@ export class NewStoreComponent {
         let aProjectStakeHolderID = (this.tValues[tab.tab_name]["aProjectStakeHolderID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectStakeHolderID"]) : 0;
         if (aProjectStakeHolderID > 0) {
           this.techCompService.UpdateStackholders(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreateStackholders(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;
@@ -178,12 +204,12 @@ export class NewStoreComponent {
         let aProjectNetworkingID = (this.tValues[tab.tab_name]["aProjectNetworkingID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectNetworkingID"]) : 0;
         if (aProjectNetworkingID > 0) {
           this.techCompService.UpdateNetworking(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreateNetworking(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;
@@ -191,12 +217,12 @@ export class NewStoreComponent {
         let aProjectPOSID = (this.tValues[tab.tab_name]["aProjectPOSID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectPOSID"]) : 0;
         if (aProjectPOSID > 0) {
           this.techCompService.UpdatePOS(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreatePOS(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;
@@ -204,12 +230,12 @@ export class NewStoreComponent {
         let aProjectAudioID = (this.tValues[tab.tab_name]["aProjectAudioID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectAudioID"]) : 0;
         if (aProjectAudioID > 0) {
           this.techCompService.UpdateAudio(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreateAudio(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;
@@ -217,12 +243,12 @@ export class NewStoreComponent {
         let aProjectExteriorMenuID = (this.tValues[tab.tab_name]["aProjectExteriorMenuID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectExteriorMenuID"]) : 0;
         if (aProjectExteriorMenuID > 0) {
           this.techCompService.UpdateExteriorMenus(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreateExteriorMenus(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;
@@ -230,12 +256,12 @@ export class NewStoreComponent {
         let aProjectPaymentSystemID = (this.tValues[tab.tab_name]["aProjectPaymentSystemID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectPaymentSystemID"]) : 0;
         if (aProjectPaymentSystemID > 0) {
           this.techCompService.UpdatePaymentSystem(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreatePaymentSystem(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;
@@ -243,12 +269,12 @@ export class NewStoreComponent {
         let aProjectInteriorMenuID = (this.tValues[tab.tab_name]["aProjectInteriorMenuID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectInteriorMenuID"]) : 0;
         if (aProjectInteriorMenuID > 0) {
           this.techCompService.UpdateInteriorMenus(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreateInteriorMenus(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;
@@ -256,12 +282,12 @@ export class NewStoreComponent {
         let aProjectSonicRadioID = (this.tValues[tab.tab_name]["aProjectSonicRadioID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectSonicRadioID"]) : 0;
         if (aProjectSonicRadioID > 0) {
           this.techCompService.UpdateSonicRadio(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreateSonicRadio(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;
@@ -269,12 +295,12 @@ export class NewStoreComponent {
         let aProjectInstallationID = (this.tValues[tab.tab_name]["aProjectInstallationID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectInstallationID"]) : 0;
         if (aProjectInstallationID > 0) {
           this.techCompService.UpdateInstallation(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
+            callBack(fieldValues, false);
           });
         }
         else {
           this.techCompService.CreateInstallation(fieldValues).subscribe((x: any) => {
-            callBack(x);
+            callBack(x, true);
           });
         }
         break;

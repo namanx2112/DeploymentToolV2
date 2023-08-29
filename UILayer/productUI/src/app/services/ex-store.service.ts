@@ -298,7 +298,7 @@ export class ExStoreService {
         field_type: FieldType.text,
         field_placeholder: "Enter StoreNumber",
         validator: [Validators.required],
-        mandatory: false,
+        mandatory: true,
         hidden: false
       },
       {
@@ -323,7 +323,7 @@ export class ExStoreService {
         field_type: FieldType.date,
         field_placeholder: "Enter Golive Date",
         validator: [Validators.required],
-        mandatory: false,
+        mandatory: true,
         hidden: false
       },
       {
@@ -372,7 +372,7 @@ export class ExStoreService {
       field_type: FieldType.text,
       field_placeholder: "Enter Store City",
       validator: [Validators.required],
-      mandatory: false,
+      mandatory: true,
       hidden: false
     }, {
       field_name: "Store State",
@@ -385,7 +385,7 @@ export class ExStoreService {
       field_placeholder: "Enter Store State",
       options: this.commonService.GetDropdown("State"),
       validator: [Validators.required],
-      mandatory: false,
+      mandatory: true,
       hidden: false
     }, {
       field_name: "Store Zip",

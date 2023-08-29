@@ -3,7 +3,7 @@
     <h4 class="projHeader" *ngIf="_ProjectType != undefined">Project - {{_ProjectType.tDropdownText}} Store</h4>
 </div>
 <div class="tabs">
-    <div class="tabHeader" *ngFor="let tmpTab of allTabs;let index = index">
+    <div class="tabHeader" *ngFor="let tmpTab of allTabs;let index = index" (click)="selectTab(index)" [ngClass]="(canMove) ? 'tabHeader clickable' : 'tabHeader'">
         <div>{{tmpTab.tab_name}} <mat-icon class="activeTabIcon"
                 *ngIf="tmpTab.tab_type == curTab.tab_type">play_arrow</mat-icon></div>
     </div>
