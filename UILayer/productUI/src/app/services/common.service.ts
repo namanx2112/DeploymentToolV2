@@ -326,12 +326,12 @@ export class CommonService {
   static GetDropDownValueFromControl(curControl: Fields, optVal: string, _controlValues: any, nBrandId: number) {
     let outputVal = optVal;
     if (curControl.options) {
-      if (curControl.options == "Vendor" || curControl.options == "Franchise")
-        nBrandId = 0;
-      else if (curControl.options == "ProjectType") {
+      if (curControl.options == "ProjectType") {
         outputVal = this.getProjectTypeOptions().filter(x => x.aDropdownId == optVal)[0].tDropdownText;
       }
       else {
+        if (curControl.options == "Vendor" || curControl.options == "Franchise")
+          nBrandId = 0;
         let opArr: OptionType[] = CommonService.dropdownCache[nBrandId][curControl.options];
         if (typeof opArr == 'undefined')
           opArr = CommonService.getDefaultOptions();

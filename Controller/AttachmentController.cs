@@ -188,7 +188,7 @@ namespace DeploymentTool.Controller
                                     if (projectType != "" && storeNumber != "")
                                     {
                                         SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", storeNumber);
-                                        var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber", new SqlParameter("@tStoreNumber", storeNumber)).FirstOrDefault();
+                                        var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber  and nBrandID=@nBrandId ", new SqlParameter("@tStoreNumber", storeNumber), new SqlParameter("@nBrandId", nBrandId)).FirstOrDefault();
                                         objProjectExcel = new ProjectExcelFields();
 
                                         if (storeNumber != output)

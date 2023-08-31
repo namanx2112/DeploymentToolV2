@@ -30,7 +30,9 @@ namespace DeploymentTool.Controller
 
                 foreach (var parts in activeProj)
                 {
-                    List<ProjectPorfolioNotes> portnotes = db.Database.SqlQuery<ProjectPorfolioNotes>("exec sproc_getProjectPortfolioNotes @nStoreId,@nProjectId", new SqlParameter("@nStoreId", parts.nStoreId), new SqlParameter("@nProjectId", parts.nProjectId)).ToList();
+                    int nProjectId = parts.nProjectId;
+                    nProjectId = 0;//ignore project and get store notes
+                    List<ProjectPorfolioNotes> portnotes = db.Database.SqlQuery<ProjectPorfolioNotes>("exec sproc_getProjectPortfolioNotes @nStoreId,@nProjectId", new SqlParameter("@nStoreId", parts.nStoreId), new SqlParameter("@nProjectId", nProjectId)).ToList();
 
                     ProjectPortfolio obj = new ProjectPortfolio();
                     obj.nProjectType = parts.nProjectType;
@@ -48,7 +50,8 @@ namespace DeploymentTool.Controller
                         tProjectManager = parts.tProjManager,
                         tProjectType = parts.tProjectType,
                         tFranchise = parts.tFranchise,
-                        cCost = parts.cCost != null ? (decimal)parts.cCost : 0
+                        cCost = parts.cCost != null ? (decimal)parts.cCost : 0,
+                        dInstallDate = parts.dInstallDate?.Date,
                     };
                     foreach (var techparts in techData)
                     {
@@ -67,7 +70,8 @@ namespace DeploymentTool.Controller
                             {
                                 dtDate = techparts.dDeliveryDate?.Date,
                                 tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                tVendor = techparts.tVendor,
+                                dSupportDate = techparts.dSupportDate?.Date
                             };
                         }
                         else if (techparts.tComponent == "Audio")
@@ -76,7 +80,9 @@ namespace DeploymentTool.Controller
                             {
                                 dtDate = techparts.dDeliveryDate?.Date,
                                 tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                tVendor = techparts.tVendor,
+                                tLoopType=techparts.tLoopType,
+                                tLoopStatus=techparts.tLoopStatus
                             };
                         }
                         else if (techparts.tComponent == "Sonic Radio")
@@ -94,7 +100,9 @@ namespace DeploymentTool.Controller
                             {
                                 dtDate = techparts.dDeliveryDate?.Date,
                                 tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                tVendor = techparts.tVendor,
+                                tBuyPassID = techparts.tBuyPassID,
+                                tServerEPS = techparts.tServerEPS
                             };
                         }
                         else if (techparts.tComponent == "Interior Menus")
@@ -121,7 +129,10 @@ namespace DeploymentTool.Controller
                             {
                                 dtDate = techparts.dDeliveryDate?.Date,
                                 tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                tVendor = techparts.tVendor,
+                                dInstallEndDate = techparts.dInstallEndDate?.Date,
+                                tSignoffs = techparts.tSignoffs,
+                                tTestTransactions = techparts.tTestTransactions
                             };
                         }
                     }

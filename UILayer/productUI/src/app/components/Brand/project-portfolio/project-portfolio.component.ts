@@ -35,7 +35,7 @@ export class ProjectPortfolioComponent {
   @Output() openStore = new EventEmitter<StoreSearchModel>();
   _curBrand: BrandModel;
   @Input()
-  set curBrand(val: BrandModel){
+  set curBrand(val: BrandModel) {
     this._curBrand = val;
     this.loadColumns();
   }
@@ -103,8 +103,10 @@ export class ProjectPortfolioComponent {
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.filterPredicate = (data: any, filter: string) => {
         filter = filter.toLocaleLowerCase();
-        return (data["store"].tStoreNumber.toLowerCase().indexOf(filter) > -1 || data["store"].tFranchise.toLowerCase().indexOf(filter) > -1
-          || data["store"].tProjectManager.toLowerCase().indexOf(filter) > -1 || data["store"].tProjectType.toLowerCase().indexOf(filter) > -1)
+        return ((data["store"].tStoreNumber != null && data["store"].tStoreNumber.toLowerCase().indexOf(filter) > -1) ||
+          (data["store"].tFranchise && data["store"].tFranchise.toLowerCase().indexOf(filter) > -1)
+          || (data["store"].tProjectManager && data["store"].tProjectManager.toLowerCase().indexOf(filter) > -1)
+          || (data["store"].tProjectType && data["store"].tProjectType.toLowerCase().indexOf(filter) > -1))
       };
     });
   }

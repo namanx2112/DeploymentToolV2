@@ -239,6 +239,8 @@ namespace DeploymentTool.Controller
             //tContent += "<div><table style='border: 1px solid black;'><thead style='border: 1px solid black;'><tr><b><th>Components</th><th>Delivery Date</th><th>Install/Support Date</th><th>Config Date</th><th>Status</th></b></tr></thead>";
             tContent += "<div><table><thead><tr><b><th>Components</th><th>Delivery Date</th><th>Config Date</th><th>Status</th></b></tr></thead>";
             tContent += "<tbody>";
+            string tTo = "";
+            //int nVendorID = 0;
             foreach (var parts in notification)
             {
                 foreach (var reqTech in request.lstItems)
@@ -247,18 +249,38 @@ namespace DeploymentTool.Controller
                         string dDeliver = parts.dDeliveryDate!=null?Convert.ToDateTime(parts.dDeliveryDate).ToString("MM/dd/yyyy").Replace('-', '/'):"";
                         string dCongDate = parts.dConfigDate != null ? Convert.ToDateTime(parts.dConfigDate).ToString("MM/dd/yyyy").Replace('-', '/') : "";
                         //tContent += "<tr><td>" + parts.tComponent + " - " + parts.tVendor + "</td><td>" + parts.dDeliveryDate + "</td><td>" + parts.dInstallDate + "</td><td>" + parts.dConfigDate + "</td><td>" + parts.tStatus + "</td></tr>";
-
+                        if (parts.nVendorID != null && parts.nVendorID > 0)
+                        {
+                            var output = db.Database.SqlQuery<string>("select  dbo.gettToByVendor(@nVendorID) ", new SqlParameter("@nVendorID", parts.nVendorID)).FirstOrDefault();
+                            if (!String.IsNullOrEmpty(output))
+                                tTo = tTo + output;// + ";";
+                        }
                         tContent += "<tr><td>" + parts.tComponent + " - " + parts.tVendor + "</td><td>" + dDeliver + "</td><td>" + dCongDate + "</td><td>" + parts.tStatus + "</td></tr>";
                     }
             }
             tContent += "</tbody>";
             tContent += "</table></div></br>";
+            int nBrandId = 0;
+            List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@nStoreID", new SqlParameter("@nBrandId", nBrandId),  new SqlParameter("@nStoreID", request.nStoreId)).ToList();
+            tContent += "<div><table><thead><tr><b><th>Project type</th><th>Go-live Date</th></b></tr></thead>";
+            tContent += "<tbody>";
+            foreach (var part in activeProj)
+            {
+                string GoliveDate = part.dProjectGoliveDate != null ? Convert.ToDateTime(part.dProjectGoliveDate).ToString("MM/dd/yyyy").Replace('-', '/') : "";
+
+                tContent += "<tr><td>" + part.tProjectType + "</td><td>" + GoliveDate + "</td></tr>";
+
+                ;
+            }
+            tContent += "</tbody>";
+            tContent += "</table></div></br>";
+
             tContent += "<div>Respectfully,</div>";
             tContent += "<div>"+tUserName+"</div>";
             tContent += "<div>New Store Team</div>";
             DateChangeNotificationBody reeponse = new DateChangeNotificationBody()
             {
-                tTo = "",
+                tTo = tTo,
                 tCC = "",
                 nStoreId = request.nStoreId,
                 tContent = tContent,
@@ -402,8 +424,8 @@ namespace DeploymentTool.Controller
 
                         string tContent = itemPOStore[0].tSentHtml.Split(separators, StringSplitOptions.None)[0] ;
                         string tSubject = itemPOStore[0].tSubject;
-                        string tTo = itemPOStore[0].tTo;//itemPOTemplate[0].tTo
-                        string tCC = itemPOStore[0].tCC;//itemPOTemplate[0].tCC
+                        string tTo = itemPOTemplate[0].tTo; //itemPOStore[0].tTo;//
+                        string tCC = itemPOTemplate[0].tCC;// itemPOStore[0].tCC;//
                         string tVendorName = itemPOTemplate[0].tVendorName;
                         string tStoreNumber = itemPOStore[0].tStoreNumber;
                         string tProjectManager = itemPOTemplate[0].tProjectManager;

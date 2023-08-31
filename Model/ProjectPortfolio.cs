@@ -32,13 +32,27 @@ namespace DeploymentTool.Model
         public string tProjectType { get; set; }
         public string tFranchise { get; set; }
         public decimal cCost { get; set; }
+
+        public Nullable<DateTime> dInstallDate { get; set; }
     }
 
     public class ProjectPortfolioItems
     {
         public string tVendor { get; set; }
         public Nullable<DateTime> dtDate { get; set; }
-        public string tStatus { get; set; } 
+        public string tStatus { get; set; }
+
+        public Nullable<DateTime> dSupportDate { get; set; }
+
+        public string tLoopType { get; set; }
+
+        public string tLoopStatus { get; set; }
+        public string tBuyPassID { get; set; }
+
+        public string tServerEPS { get; set; }
+        public Nullable<DateTime> dInstallEndDate { get; set; }
+        public string tSignoffs { get; set; }
+        public string tTestTransactions { get; set; }
     }
 
     public class ProjectPorfolioNotes
@@ -73,6 +87,7 @@ namespace DeploymentTool.Model
         public string tFranchise { get; set; }
         public Nullable<decimal> cCost { get; set; }
         //public decimal cCost { get; set; }
+        public Nullable<DateTime> dInstallDate { get; set; }
 
     }
 }

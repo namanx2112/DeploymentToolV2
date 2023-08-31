@@ -1,5 +1,4 @@
 .cellDiv span{
-    float: left;
     padding: 2px 4px;
     border-radius: 5px;
     font-size: 12px;
@@ -32,4 +31,31 @@
     text-decoration: underline;
     cursor: pointer;
     margin-top: -2px;
+}
+
+.storeDetails td{
+    padding: 0px 2px 0px 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.storeDetails th{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+td{
+    white-space: nowrap;
+}
+
+table{
+    width: 100%;
+}
+
+.noteCell{
+    width: 150px;
+}
+
+.labelTD{
+    color: rgba(0,0,0,0.4)
 }

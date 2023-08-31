@@ -61,6 +61,19 @@ namespace DeploymentTool.Model
         public Nullable<DateTime> dInstallDate { get; set; }
         public Nullable<DateTime> dConfigDate { get; set; }
         public string tStatus { get; set; }
+		public Nullable<int> nVendorID { get; set; }
+        public Nullable<DateTime> dSupportDate { get; set; }
+
+        public string tLoopType { get; set; }
+
+        public string tLoopStatus { get; set; }
+        public string tBuyPassID { get; set; }
+
+        public string tServerEPS { get; set; }
+        public Nullable<DateTime> dInstallEndDate { get; set; }
+        public string tSignoffs { get; set; }
+        public string tTestTransactions { get; set; }
+
 
     }
     public class DateChangeBody
