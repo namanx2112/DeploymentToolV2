@@ -84,8 +84,7 @@
 .action {
     display: block;
     width: 28px;
-    border-radius: 5px;   
-    background-color: #696969;
+    border-radius: 5px;
     padding: 10px;
     margin: 0px 0px 20px 15px;
     cursor: pointer;
@@ -96,6 +95,14 @@
     font-size: 28px;
     width: 28px;
     height: 28px;
+}
+
+.action:hover, .action.selected {
+    background-color: #fff;
+}
+
+.action:hover .mat-icon, .action.selected .mat-icon{
+    color: #262626;
 }
 
 .action.selected span{

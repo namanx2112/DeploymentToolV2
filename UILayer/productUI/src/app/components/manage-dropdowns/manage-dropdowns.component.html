@@ -2,9 +2,9 @@
 <div class="outerDiv grayBackground roundedCorner">
     <div class="filters">
         <mat-form-field class="dropDownField whiteDropdown">
-            <mat-label>Select Brand</mat-label>
+            <mat-label value="0">Select Brand</mat-label>
             <mat-select [(value)]="selectedBrand" (selectionChange)="loadGroup()">
-                <mat-option value="0">None</mat-option>
+                <mat-option [value]="genBrand">General</mat-option>
                 <mat-option *ngFor="let item of allBrands" [value]="item">{{item.tBrandName}}</mat-option>
             </mat-select>
         </mat-form-field>

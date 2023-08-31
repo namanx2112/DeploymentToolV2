@@ -137,7 +137,7 @@ export class NewStoreComponent {
     let butttonText = controlVals.butttonText;
     let cThis = this;
     let callBack = function (respValues: any, isNew: boolean) {
-      if (butttonText == "Finish") {
+      if (butttonText == "Submit") {
         alert("Created Successfully");
         cThis.ChangeView.emit("dashboard");
       }

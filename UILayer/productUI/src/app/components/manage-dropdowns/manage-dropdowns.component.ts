@@ -27,7 +27,29 @@ export class ManageDropdownsComponent {
   moduleGroupList: any;
   modules: string[];
   allModules: DropdownModule[];
+  genBrand: BrandModel;
   constructor(private dialog: MatDialog, private service: DropdownServiceService, private commonService: CommonService) {
+    this.genBrand = {
+      aBrandId: 0,
+      tBrandIdentifier: "",
+      tBrandName: 'General',
+      tBrandDomain: '',
+      tBrandAddressLine1: '',
+      tBrandAddressLine2: '',
+      tBrandCity: '',
+      nBrandState: 0,
+      nBrandCountry: 0,
+      tBrandZipCode: '',
+      nBrandLogoAttachmentID: 0,
+      nCreatedBy: 0,
+      nUpdateBy: 0,
+      dtCreatedOn: new Date(),
+      dtUpdatedOn: new Date(),
+      bDeleted: false,
+      tIconURL: '',
+      access: true,
+      nEnabled: 0
+    };
     this.loadBrands();
   }
 
@@ -71,27 +93,7 @@ export class ManageDropdownsComponent {
     let cThis = this;
     this.commonService.getBrands(function (x: any) {
       cThis.allBrands = x;
-      cThis.selectedBrand = {
-        aBrandId: 0,
-        tBrandIdentifier: "",
-        tBrandName: 'None',
-        tBrandDomain: '',
-        tBrandAddressLine1: '',
-        tBrandAddressLine2: '',
-        tBrandCity: '',
-        nBrandState: 0,
-        nBrandCountry: 0,
-        tBrandZipCode: '',
-        nBrandLogoAttachmentID: 0,
-        nCreatedBy: 0,
-        nUpdateBy: 0,
-        dtCreatedOn: new Date(),
-        dtUpdatedOn: new Date(),
-        bDeleted: false,
-        tIconURL: '',
-        access: true,
-        nEnabled: 0
-      };
+      cThis.selectedBrand = cThis.genBrand;
       cThis.loadModules();
     });
   }
