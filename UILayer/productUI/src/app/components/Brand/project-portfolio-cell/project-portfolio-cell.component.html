@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <td class="labelTD">Poject Cost:</td>
-                <td>{{jObject.cCost}}</td>
+                <td>${{jObject.cCost}}</td>
             </tr>
         </tbody>
     </table>
@@ -116,6 +116,7 @@
 <div *ngIf="tColumn == 'notes'" class="cellDiv noteCell">
     <div *ngFor="let item of jObject">
         <span class="nHeader">{{ item.tNotesOwner}}</span>
-        <span class="nBody">{{ item.tNotesDesc}}</span>
+        <span class="nBody" [matTooltip]="item.tNotesDesc">{{ (item.tNotesDesc.length > 80)?
+            item.tNotesDesc.substring(0, 80) + "..." : item.tNotesDesc}} </span>
     </div>
 </div>

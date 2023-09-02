@@ -40,7 +40,7 @@ namespace DeploymentTool.Controller
                     obj.nProjectId = parts.nProjectId;
                     obj.notes = portnotes;
                     obj.nStoreId = parts.nStoreId;
-                    List<TechData> techData = db.Database.SqlQuery<TechData>("exec sproc_GetPortfolioData @nProjectId", new SqlParameter("@nProjectId", parts.nProjectId)).ToList();
+                    List<TechData> techData = db.Database.SqlQuery<TechData>("exec sproc_GetPortfolioData @nProjectId, @nStoreId", new SqlParameter("@nProjectId", parts.nProjectId), new SqlParameter("@nStoreId", parts.nStoreId)).ToList();
 
                     obj.store = new ProjectPortfolioStore()
                     {

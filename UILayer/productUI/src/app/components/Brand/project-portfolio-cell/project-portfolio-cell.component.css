@@ -57,5 +57,6 @@ table{
 }
 
 .labelTD{
-    color: rgba(0,0,0,0.4)
+    color: rgba(0,0,0,0.4);
+    width: 100px;
 }

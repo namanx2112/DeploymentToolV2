@@ -30,7 +30,7 @@ export class ProjectPortfolioCellComponent {
 
   getCellVal(colName: string, colVal: string) {
     let rVal = colVal;
-    if (colName.indexOf("c") == 0) {
+    if (colName.indexOf("c") == 0 || colName.toLowerCase().indexOf("cost") > -1) {
       rVal = "$" + colVal;
     }
     else if (colName.indexOf("d") == 0) {

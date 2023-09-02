@@ -188,16 +188,20 @@ export class ExStoreService {
     switch (projectType) {
       case 5://POS
         tabs.push(this.GetStorePOSTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
       case 6://Audio
         tabs.push(this.GetStoreAudioTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
       case 7://Menu
         tabs.push(this.GetStoreExteriorMenusTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInteriorMenusTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
       case 8://Payment
         tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
       default:
         tabs.push(this.GetStoreAudioTab(TabInstanceType.Single));
