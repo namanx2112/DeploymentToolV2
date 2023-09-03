@@ -280,7 +280,7 @@ namespace DeploymentTool.Controller
             tContent += "<div>New Store Team</div>";
             DateChangeNotificationBody reeponse = new DateChangeNotificationBody()
             {
-                tTo = tTo,
+                tTo = tTo.TrimEnd(';'),
                 tCC = "",
                 nStoreId = request.nStoreId,
                 tContent = tContent,

@@ -525,7 +525,7 @@ namespace DeploymentTool.Controller
             PurchaseOrderMailMessage message = new PurchaseOrderMailMessage()
             {
                 nProjectId = request.nProjectId,
-                tTo = request.tTo,
+                tTo = request.tTo.TrimEnd(';'),
                 tCC = request.tCC,
                 tContent= tContent,
                 tFileName = fileName,
