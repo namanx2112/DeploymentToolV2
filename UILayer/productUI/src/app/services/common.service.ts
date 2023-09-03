@@ -126,7 +126,9 @@ export class CommonService {
       case ProjectTypes.PartsReplacement:
         pString = "Parts Replacement";
         break;
-
+      case ProjectTypes.ServerHandheldInstallation:
+        pString = "Server Handheld Installation";
+        break;
     }
     return pString;
   }
@@ -229,6 +231,12 @@ export class CommonService {
     }, {
       tDropdownText: "PartsReplacement",
       aDropdownId: ProjectTypes.PartsReplacement.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "ServerHandheldInstallation",
+      aDropdownId: ProjectTypes.ServerHandheldInstallation.toString(),
       optionOrder: 1,
       bDeleted: false,
       nFunction: 0

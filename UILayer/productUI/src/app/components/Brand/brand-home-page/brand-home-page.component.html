@@ -25,6 +25,9 @@
                     Installation</button>
                 <button mat-menu-item (click)="menuClick('newproject', 'all', 'PartsReplacement');">Parts
                     Replacement</button>
+                <button mat-menu-item *ngIf="_curBrand.tBrandName.toLowerCase().indexOf('buffalo') > -1"
+                    (click)="menuClick('newproject', 'serverhandheld', 'ServerHandheldInstallation');">Server
+                    Handheld Installation</button>
             </mat-menu>
             <button mat-button *ngIf="access.hasAccess('home.sonic.searchproject', 1)"
                 (click)="menuClick('search')"><mat-icon>search</mat-icon>Search Project</button>
@@ -51,9 +54,10 @@
             (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>
         <app-report-table *ngIf="showMode == 'viewreport'" [curBrandId]="_curBrand.aBrandId"></app-report-table>
         <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)"
-            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}" [curBrandId]="_curBrand.aBrandId"></app-new-store>
+            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"
+            [curBrandId]="_curBrand.aBrandId"></app-new-store>
         <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)"
-            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}" [curBrandId]="_curBrand.aBrandId"></app-new-project>
+            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType, curBrandId: _curBrand.aBrandId}"></app-new-project>
         <app-store-view *ngIf="showMode == 'storeview'" (ChangeFromStoreView)="ChangeFromStoreView($event)"
             [curStore]="curStore" [curBrandId]="_curBrand.aBrandId"></app-store-view>
         <app-project-table *ngIf="showMode == 'projectactiveview'" [tabName]="'Active'"
@@ -62,14 +66,14 @@
             (ChangeView)="ChangeView($event)" [curStore]="curStore"></app-project-table>
         <app-import-projects *ngIf="showMode == 'importproject'" [curBrand]="_curBrand"
             (ChangeView)="ChangeView($event)"></app-import-projects>
-        <app-pos-installation *ngIf="showMode == 'posinstallation'"
-            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-pos-installation>
+        <app-pos-installation *ngIf="showMode == 'posinstallation'" (ChangeView)="ChangeView($event)"
+            [curBrandId]="_curBrand.aBrandId"></app-pos-installation>
         <app-payment-terminal-installation *ngIf="showMode == 'paymentterminalinstllation'"
             (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-payment-terminal-installation>
-        <app-menu-installation *ngIf="showMode == 'menuinstallation'"
-            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-menu-installation>
-        <app-audio-installation *ngIf="showMode == 'audioinstallation'"
-            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-audio-installation>
+        <app-menu-installation *ngIf="showMode == 'menuinstallation'" (ChangeView)="ChangeView($event)"
+            [curBrandId]="_curBrand.aBrandId"></app-menu-installation>
+        <app-audio-installation *ngIf="showMode == 'audioinstallation'" (ChangeView)="ChangeView($event)"
+            [curBrandId]="_curBrand.aBrandId"></app-audio-installation>
         <app-project-template-list *ngIf="showMode == 'projecttemplatelist'" (BackToStoreView)="BackToStoreView($event)"
             [curStore]="curStore"></app-project-template-list>
         <app-project-portfolio *ngIf="showMode == 'Project Portfolio'" [curBrand]="_curBrand"

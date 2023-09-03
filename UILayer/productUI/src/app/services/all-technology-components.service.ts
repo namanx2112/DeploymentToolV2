@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
-import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSonicRadio, StoreStackholders } from '../interfaces/store';
+import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSonicRadio, StoreStackholders, StoreServerHandheld } from '../interfaces/store';
 import { Dictionary } from '../interfaces/commons';
 import { CommonService } from './common.service';
 import { CacheService } from './cache.service';
@@ -130,5 +130,15 @@ export class AllTechnologyComponentsService {
   }
   UpdateInstallation(request: StoreInstallation){
     return this.http.post<StoreInstallation>(CommonService.ConfigUrl + "ProjectInstallations/update", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  GetServerHandheld(request: Dictionary<string>){
+    return this.http.post<StoreServerHandheld[]>(CommonService.ConfigUrl + "ProjectServerHandheld/Get", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+  CreateServerHandheld(request: StoreServerHandheld){
+    return this.http.post<StoreServerHandheld>(CommonService.ConfigUrl + "ProjectServerHandheld/Create", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+  UpdateServerHandheld(request: StoreServerHandheld){
+    return this.http.post<StoreServerHandheld>(CommonService.ConfigUrl + "ProjectServerHandheld/update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 }

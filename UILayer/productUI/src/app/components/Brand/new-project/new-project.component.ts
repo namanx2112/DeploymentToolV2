@@ -4,8 +4,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, OptionType, TabInstanceType, TabType } from 'src/app/interfaces/home-tab';
+import { BrandModel } from 'src/app/interfaces/models';
 import { ProjectInfo, ProjectTypes, StoreSearchModel } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
+import { CommonService } from 'src/app/services/common.service';
 import { ExStoreService } from 'src/app/services/ex-store.service';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -21,11 +23,11 @@ export class NewProjectComponent {
     this._ProjectType = val.ProjectType;
     this.nProjectType = parseInt(this._ProjectType.aDropdownId);
     this._NeedTechComponent = val.TechCompType;
-    this.getTabs();
+    this.curBrandId = val.curBrandId;
+    this.getTabs(this.curBrandId);
     this.loadCurTab();
   }
   @Output() ChangeView = new EventEmitter<string>();
-  @Input()
   curBrandId: number;
   allTabs: HomeTab[];
   curTab: HomeTab;
@@ -80,7 +82,9 @@ export class NewProjectComponent {
     return tType;
   }
 
-  getTabs() {
+  getTabs(nBrandId: number) {
+    let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == nBrandId);
+    let tabs: HomeTab[];
     this.allTabs = [];
     this.allTabs.push(this.service.GetSearchStoresTab(TabInstanceType.Single));
     this.allTabs.push(this.getChangedStoreTab());
@@ -101,6 +105,13 @@ export class NewProjectComponent {
       this.allTabs.push(this.service.GetStoreAudioTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
+    if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") > -1) {
+      if (this._NeedTechComponent == "all" || this._NeedTechComponent == "serverhandheld") {
+        this.allTabs.push(this.service.GetStoreServerHandheldTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+    }
+
     if (this._NeedTechComponent == "all" || this._NeedTechComponent == "menu") {
       this.allTabs.push(this.service.GetStoreExteriorMenusTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
@@ -160,7 +171,8 @@ export class NewProjectComponent {
             case ProjectTypes.AudioInstallation:
             case ProjectTypes.POSInstallation:
             case ProjectTypes.MenuInstallation:
-            case ProjectTypes.PartsReplacement:
+            case ProjectTypes.PaymentTerminalInstallation:
+            case ProjectTypes.ServerHandheldInstallation:
               cThis.tValues[cThis.allTabs[3].tab_name]["nProjectID"] = resp.nProjectID;
               break;
           }
@@ -330,6 +342,19 @@ export class NewProjectComponent {
         }
         else {
           this.techCompService.CreateInstallation(fieldValues).subscribe((x: any) => {
+            callBack(x, tab);
+          });
+        }
+        break;
+      case TabType.StoreProjectServerHandheld:
+        let aServerHandheldId = (this.tValues[tab.tab_name]["aServerHandheldId"]) ? parseInt(this.tValues[tab.tab_name]["aServerHandheldId"]) : 0;
+        if (aServerHandheldId > 0) {
+          this.techCompService.UpdateServerHandheld(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues, tab);
+          });
+        }
+        else {
+          this.techCompService.CreateServerHandheld(fieldValues).subscribe((x: any) => {
             callBack(x, tab);
           });
         }

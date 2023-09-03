@@ -30,10 +30,17 @@ Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 3, aModuleId fr
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 4, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 5, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 6, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')
+select * from tblDropdowns
+select * from tblDropdownModuleBrandRel
 
+update tblDropdowns set nBrandId = 1 from tblDropdownModuleBrandRel where tblDropdownModuleBrandRel.nModuleId = tblDropdowns.nModuleId
+
+select * from tblDropdownModuleBrandRel
+alter table tblDropdowns add nModuleId int
+alter table tblDropdowns add nBrandId int
 update tblDropdowns set nBrandId =1 where nbrandId = 6
 
-
+select * from tblDropdownMain
 
 insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
 select tDropdownText,getDate(),0,0,nFunction,nModuleId,2 from tblDropdowns where nbrandId = 1
@@ -98,8 +105,14 @@ Insert into tblDropdowns (tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nM
 Insert into tblDropdowns (tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId) values('At Risk',getdate(),0,0,0,29,1)
 update tblDropdowns set nBrandId =1, nModuleId = 29 where aDropdownId = 216
 
+select * from tblDropdowns where nBrandId = 4
+select * from tblBrand
+
 insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
-select tDropdownText,getDate(),0,0,nFunction,nModuleId,2 from tblDropdowns where nbrandId = 1 and nModuleId =29
+select tDropdownText,getDate(),0,0,nFunction,nModuleId,6 from tblDropdowns where nbrandId = 1 
+
+
+and nModuleId =29
 insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)
 select tDropdownText,getDate(),0,0,nFunction,nModuleId,3from tblDropdowns where nbrandId = 1 and nModuleId =29
 insert into tblDropdowns(tDropdownText,dtCreatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId)

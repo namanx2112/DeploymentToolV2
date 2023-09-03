@@ -304,6 +304,19 @@ export class NewStoreComponent {
           });
         }
         break;
+      case TabType.StoreProjectServerHandheld:
+        let aServerHandheldId = (this.tValues[tab.tab_name]["aServerHandheldId"]) ? parseInt(this.tValues[tab.tab_name]["aServerHandheldId"]) : 0;
+        if (aServerHandheldId > 0) {
+          this.techCompService.UpdateServerHandheld(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues, false);
+          });
+        }
+        else {
+          this.techCompService.CreateServerHandheld(fieldValues).subscribe((x: any) => {
+            callBack(x, true);
+          });
+        }
+        break;
     }
   }
 

@@ -52,6 +52,7 @@
     </FunctionImport>
     <FunctionImport Name="sproc_SearchStore" ReturnType="Collection(dtDBModel.sproc_SearchStore_Result)">
       <Parameter Name="tText" Mode="In" Type="String" />
+      <Parameter Name="nBrandID" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="tblDocuments" EntityType="dtDBModel.tblDocument" />
     <EntitySet Name="tblApplicationTraces" EntityType="dtDBModel.tblApplicationTrace" />
@@ -80,6 +81,7 @@
     <EntitySet Name="tblUserFranchiseRels" EntityType="dtDBModel.tblUserFranchiseRel" />
     <EntitySet Name="tblNoteTypes" EntityType="dtDBModel.tblNoteType" />
     <EntitySet Name="tblProjectNote1" EntityType="dtDBModel.tblProjectNote1" />
+    <EntitySet Name="tblProjectServerHandhelds" EntityType="dtDBModel.tblProjectServerHandheld" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -101,6 +103,7 @@
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
     <Property Name="BrandFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="nEnabled" Type="Int32" />
   </EntityType>
   <EntityType Name="tblUser">
     <Key>
@@ -308,7 +311,7 @@
     <Property Name="nStoreID" Type="Int32" />
     <Property Name="nNoteType" Type="Int32" />
     <Property Name="tSource" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tNoteDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tNoteDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nCreatedBy" Type="Int32" />
     <Property Name="nUpdateBy" Type="Int32" />
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
@@ -790,7 +793,7 @@
     <Property Name="tContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nFileSie" Type="Int32" />
     <Property Name="fBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="tTicketStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tTicketStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="tFixComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nCreatedBy" Type="Int32" />
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
@@ -869,7 +872,6 @@
       <PropertyRef Name="aModuleId" />
     </Key>
     <Property Name="aModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nBrandId" Type="Int32" />
     <Property Name="tModuleName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="tModuleDisplayName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <Property Name="tModuleGroup" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -910,5 +912,21 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblProjectServerHandheld">
+    <Key>
+      <PropertyRef Name="aServerHandheldId" />
+    </Key>
+    <Property Name="aServerHandheldId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="nStoreId" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="nNumberOfTabletsPerStore" Type="Int32" />
+    <Property Name="dRevisitDate" Type="DateTime" Precision="0" />
+    <Property Name="cCost" Type="Decimal" Precision="18" Scale="0" />
   </EntityType>
 </Schema>

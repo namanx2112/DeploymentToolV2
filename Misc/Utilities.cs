@@ -80,6 +80,7 @@ namespace DeploymentTool.Misc
                     case ProjectType.POSInstallation:
                     case ProjectType.MenuInstallation:
                     case ProjectType.PaymentTerminalInstallation:
+                    case ProjectType.ServerHandheld:
                         nProjectId = db.Database.SqlQuery<int>($"select nProjectId from dbo.fn_GetProjectIdForThisTechOrAnyProjectType({nStoreId},{(int)pType},1)").FirstOrDefault();
                         //query = db.tblProjects.Where(x => x.nStoreID == nStoreId && x.nProjectActiveStatus == 1 && (x.nProjectType == (int)pType || x.aProjectID > 0));
                         break;

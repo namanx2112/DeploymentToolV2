@@ -975,6 +975,7 @@
     <Compile Include="Controller\ProjectNetworkingsController.cs" />
     <Compile Include="Controller\ProjectPaymentSystemsController.cs" />
     <Compile Include="Controller\ProjectPOSController.cs" />
+    <Compile Include="Controller\ProjectServerHandheldController.cs" />
     <Compile Include="Controller\ProjectSonicRadiosController.cs" />
     <Compile Include="Controller\ProjectStakeHoldersController.cs" />
     <Compile Include="Controller\RoleController.cs" />
@@ -1140,6 +1141,9 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProjectPOS.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblProjectServerHandheld.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProjectSonicRadio.cs">

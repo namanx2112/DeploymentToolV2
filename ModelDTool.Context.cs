@@ -71,7 +71,6 @@ namespace DeploymentTool
         public virtual DbSet<tblPurchaseOrderTemplatePart> tblPurchaseOrderTemplateParts { get; set; }
         public virtual DbSet<tblVendorPartRel> tblVendorPartRels { get; set; }
         public virtual DbSet<tblUserVendorRel> tblUserVendorRels { get; set; }
-        public virtual DbSet<tblUserFranchiseRel> tblUserFranchiseRel { get; set; }
         public virtual DbSet<tblSupportTicket> tblSupportTickets { get; set; }
         public virtual DbSet<tblRole> tblRoles { get; set; }
         public virtual DbSet<tblRolePermissionRel> tblRolePermissionRels { get; set; }
@@ -81,9 +80,10 @@ namespace DeploymentTool
         public virtual DbSet<tblUserType> tblUserTypes { get; set; }
         public virtual DbSet<tbPermission> tbPermissions { get; set; }
         public virtual DbSet<tblDropdownModule> tblDropdownModules { get; set; }
-        public virtual DbSet<tblUserFranchiseRel> tblUserFranchiseRels { get; set; }
+        public virtual DbSet<tblUserFranchiseRel> tblUserFranchiseRel { get; set; }
         public virtual DbSet<tblNoteType> tblNoteTypes { get; set; }
         public virtual DbSet<tblProjectNote1> tblProjectNote1 { get; set; }
+        public virtual DbSet<tblProjectServerHandheld> tblProjectServerHandhelds { get; set; }
     
         public virtual int sproc_CreateStoreFromExcel(string tStoreName, Nullable<int> nProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
         {
@@ -162,13 +162,17 @@ namespace DeploymentTool
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sproc_CreateStoreFromExcel", tStoreNameParameter, nProjectTypeParameter, tStoreNumberParameter, tAddressParameter, tCityParameter, tStateParameter, nDMAIDParameter, tDMAParameter, tREDParameter, tCMParameter, tANEParameter, tRVPParameter, tPrincipalPartnerParameter, dStatusParameter, dOpenStoreParameter, tProjectStatusParameter, nCreatedByParameter, nBrandIdParameter);
         }
     
-        public virtual ObjectResult<sproc_SearchStore_Result> sproc_SearchStore(string tText)
+        public virtual ObjectResult<sproc_SearchStore_Result> sproc_SearchStore(string tText, Nullable<int> nBrandID)
         {
             var tTextParameter = tText != null ?
                 new ObjectParameter("tText", tText) :
                 new ObjectParameter("tText", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sproc_SearchStore_Result>("sproc_SearchStore", tTextParameter);
+            var nBrandIDParameter = nBrandID.HasValue ?
+                new ObjectParameter("nBrandID", nBrandID) :
+                new ObjectParameter("nBrandID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sproc_SearchStore_Result>("sproc_SearchStore", tTextParameter, nBrandIDParameter);
         }
     }
 }

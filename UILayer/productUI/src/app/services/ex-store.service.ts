@@ -8,16 +8,18 @@ import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, ProjectE
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CacheService } from './cache.service';
+import { BrandModel } from '../interfaces/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExStoreService {
+  brands: BrandModel[];
   constructor(private http: HttpClient, private commonService: CommonService, private cacheService: CacheService) {
   }
 
 
-  UploadStore( fileToUpload: File, nBrandId: number ) {
+  UploadStore(fileToUpload: File, nBrandId: number) {
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name + String.fromCharCode(1000) + nBrandId);
     let httpHeader = new HttpHeaders({
@@ -51,9 +53,12 @@ export class ExStoreService {
       case TabType.StorePaymetSystem:
         type = ProjectTypes.PaymentTerminalInstallation;
         break;
+      case TabType.StoreProjectServerHandheld:
+        type = ProjectTypes.ServerHandheldInstallation;
+        break;
       default:
         let indx = curStore.lstProjectsInfo.findIndex(x => x.nProjectType != ProjectTypes.POSInstallation && x.nProjectType != ProjectTypes.AudioInstallation &&
-          x.nProjectType != ProjectTypes.MenuInstallation && x.nProjectType != ProjectTypes.PartsReplacement)
+          x.nProjectType != ProjectTypes.MenuInstallation && x.nProjectType != ProjectTypes.PartsReplacement && x.nProjectType != ProjectTypes.ServerHandheldInstallation)
         if (indx > -1) {
           type = curStore.lstProjectsInfo[indx].nProjectType;
         }
@@ -166,20 +171,40 @@ export class ExStoreService {
     });
   }
 
-  GetStoretabs(): HomeTab[] {
-    let tabs = [
-      this.GetStoreContactTab(TabInstanceType.Single),
-      this.GetStoreConfigurationTab(TabInstanceType.Single),
-      this.GetStoreStackholderTab(TabInstanceType.Single),
-      this.GetStoreNetworingTab(TabInstanceType.Single),
-      this.GetStorePOSTab(TabInstanceType.Single),
-      this.GetStoreAudioTab(TabInstanceType.Single),
-      this.GetStoreExteriorMenusTab(TabInstanceType.Single),
-      this.GetStorePaymentSystemTab(TabInstanceType.Single),
-      this.GetStoreInteriorMenusTab(TabInstanceType.Single),
-      this.GetStoreSonicRadioTab(TabInstanceType.Single),
-      this.GetStoreInsallationTab(TabInstanceType.Single)
-    ];
+  GetStoretabs(nBrandId: number): HomeTab[] {
+    let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == nBrandId);
+    let tabs: HomeTab[];
+    if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") > -1) {
+      tabs = [
+        this.GetStoreContactTab(TabInstanceType.Single),
+        this.GetStoreConfigurationTab(TabInstanceType.Single),
+        this.GetStoreStackholderTab(TabInstanceType.Single),
+        this.GetStoreNetworingTab(TabInstanceType.Single),
+        this.GetStorePOSTab(TabInstanceType.Single),
+        this.GetStoreAudioTab(TabInstanceType.Single),
+        this.GetStoreExteriorMenusTab(TabInstanceType.Single),
+        this.GetStorePaymentSystemTab(TabInstanceType.Single),
+        this.GetStoreInteriorMenusTab(TabInstanceType.Single),
+        this.GetStoreSonicRadioTab(TabInstanceType.Single),
+        this.GetStoreInsallationTab(TabInstanceType.Single),
+        this.GetStoreServerHandheldTab(TabInstanceType.Single)
+      ];
+    }
+    else {
+      tabs = [
+        this.GetStoreContactTab(TabInstanceType.Single),
+        this.GetStoreConfigurationTab(TabInstanceType.Single),
+        this.GetStoreStackholderTab(TabInstanceType.Single),
+        this.GetStoreNetworingTab(TabInstanceType.Single),
+        this.GetStorePOSTab(TabInstanceType.Single),
+        this.GetStoreAudioTab(TabInstanceType.Single),
+        this.GetStoreExteriorMenusTab(TabInstanceType.Single),
+        this.GetStorePaymentSystemTab(TabInstanceType.Single),
+        this.GetStoreInteriorMenusTab(TabInstanceType.Single),
+        this.GetStoreSonicRadioTab(TabInstanceType.Single),
+        this.GetStoreInsallationTab(TabInstanceType.Single)
+      ];
+    }
     return tabs;
   }
 
@@ -201,6 +226,10 @@ export class ExStoreService {
         break;
       case 8://Payment
         tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
+        break;
+      case 10://Payment
+        tabs.push(this.GetStoreServerHandheldTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
       default:
@@ -3000,5 +3029,149 @@ export class ExStoreService {
         hidden: false
       }]
     };
-  }  
+  }
+
+  GetStoreServerHandheldTab(instType: TabInstanceType): HomeTab {
+    return {
+      tab_name: "ServerHandheld",
+      tab_header: "ServerHandheld",
+      tTableName: "tblProjectServerHandheld",
+      tab_type: TabType.StoreProjectServerHandheld,
+      tab_unique_name: "",
+      instanceType: instType,
+      childTabs: [],
+      search_fields: [{
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }],
+      fields: [{
+        field_name: "aServerHandheldId",
+        fieldUniqeName: "aServerHandheldId",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter ServerHandheldId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "ProjectID",
+        fieldUniqeName: "nProjectID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter ProjectID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "Vendor",
+        field_group: "Primary",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        options: this.commonService.GetDropdown("Vendor"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Status",
+        fieldUniqeName: "nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Status",
+        validator: [],
+        options: this.commonService.GetDropdown("AudioStatus"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "#of Tablets Per Store",
+        fieldUniqeName: "nNumberOfTabletsPerStore",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Tablets Per Store",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Delivery Date",
+        fieldUniqeName: "dDeliveryDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Delivery Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Revisit Date",
+        fieldUniqeName: "dRevisitDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Revisit Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Cost",
+        fieldUniqeName: "cCost",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.currency,
+        field_placeholder: "Enter Cost",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "dDateFor_nStatus",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }]
+    };
+  }
 }

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { Fields, HomeTab, TabType } from 'src/app/interfaces/home-tab';
-import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
+import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreServerHandheld, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { ExStoreService } from 'src/app/services/ex-store.service';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
@@ -33,7 +33,7 @@ export class StoreTechComponentsComponent {
     if (typeof this._curStore.nProjectType != 'undefined')
       this.allTabs = this.service.GetStoreTabsForProjectType(this._curStore.nProjectType);
     else
-      this.allTabs = this.service.GetStoretabs();
+      this.allTabs = this.service.GetStoretabs(this.curBrandId);
     this.tValues = {};
     for (var tIndx in this.allTabs) {
       let tTab = this.allTabs[tIndx];
@@ -97,6 +97,11 @@ export class StoreTechComponentsComponent {
         break;
       case TabType.StoreInstallation:
         this.techCompService.GetInstallation(searchField).subscribe((x: StoreInstallation[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreProjectServerHandheld:
+        this.techCompService.GetServerHandheld(searchField).subscribe((x: StoreServerHandheld[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
         break;
@@ -298,6 +303,19 @@ export class StoreTechComponentsComponent {
         }
         else {
           this.techCompService.CreateInstallation(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
+      case TabType.StoreProjectServerHandheld:
+        let aServerHandheldId = (this.tValues[tab.tab_name]["aServerHandheldId"]) ? parseInt(this.tValues[tab.tab_name]["aServerHandheldId"]) : 0;
+        if (aServerHandheldId > 0) {
+          this.techCompService.UpdateServerHandheld(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateServerHandheld(fieldValues).subscribe((x: any) => {
             callBack(x);
           });
         }

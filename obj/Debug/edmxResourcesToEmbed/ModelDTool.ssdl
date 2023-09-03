@@ -47,6 +47,7 @@
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
     <Property Name="BrandFile" Type="image" />
+    <Property Name="nEnabled" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblBrandBKP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -98,7 +99,6 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
       <PropertyRef Name="aModuleId" />
     </Key>
     <Property Name="aModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nBrandId" Type="int" />
     <Property Name="tModuleName" Type="varchar" MaxLength="500" />
     <Property Name="tModuleDisplayName" Type="varchar" MaxLength="1000" />
     <Property Name="tModuleGroup" Type="varchar" MaxLength="500" />
@@ -116,8 +116,8 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
     <Property Name="bDeleted" Type="bit" />
     <Property Name="nOrder" Type="int" />
     <Property Name="nFunction" Type="int" />
-    <Property Name="nBrandId" Type="int" />
     <Property Name="nModuleId" Type="int" />
+    <Property Name="nBrandId" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblEnum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -375,7 +375,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nStoreID" Type="int" />
     <Property Name="nNoteType" Type="int" />
     <Property Name="tSource" Type="nvarchar" MaxLength="255" />
-    <Property Name="tNoteDesc" Type="nvarchar" MaxLength="255" />
+    <Property Name="tNoteDesc" Type="nvarchar(max)" />
     <Property Name="nCreatedBy" Type="int" />
     <Property Name="nUpdateBy" Type="int" />
     <Property Name="dtCreatedOn" Type="datetime" />
@@ -425,6 +425,22 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nMyActiveStatus" Type="int" />
     <Property Name="dDateFor_nStatus" Type="date" />
     <Property Name="dDateFor_nPaperworkStatus" Type="date" />
+  </EntityType>
+  <EntityType Name="tblProjectServerHandheld">
+    <Key>
+      <PropertyRef Name="aServerHandheldId" />
+    </Key>
+    <Property Name="aServerHandheldId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nVendor" Type="int" />
+    <Property Name="nProjectID" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="nStoreId" Type="int" />
+    <Property Name="dDeliveryDate" Type="date" />
+    <Property Name="dDateFor_nStatus" Type="date" />
+    <Property Name="nStatus" Type="int" />
+    <Property Name="nNumberOfTabletsPerStore" Type="int" />
+    <Property Name="dRevisitDate" Type="date" />
+    <Property Name="cCost" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">
     <Key>
@@ -646,11 +662,11 @@ warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key def
     <Property Name="nFileSie" Type="int" />
     <Property Name="fBase64" Type="nvarchar(max)" />
     <Property Name="nCreatedBy" Type="int" />
-    <Property Name="nUpdateBy" Type="int" />
-    <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="tTicketStatus" Type="varchar" MaxLength="100" />
     <Property Name="tFixComment" Type="nvarchar(max)" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="nUpdateBy" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblTechComponent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -871,6 +887,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
   </Function>
   <Function Name="sproc_SearchStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tText" Type="varchar" Mode="In" />
+    <Parameter Name="nBrandID" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="dtDBModelStoreContainer">
     <EntitySet Name="tblApplicationTrace" EntityType="Self.tblApplicationTrace" Schema="dbo" store:Type="Tables" />
@@ -895,6 +912,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblProjectNotes" EntityType="Self.tblProjectNotes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectPaymentSystem" EntityType="Self.tblProjectPaymentSystem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectPOS" EntityType="Self.tblProjectPOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectServerHandheld" EntityType="Self.tblProjectServerHandheld" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPurchaseOrder" EntityType="Self.tblPurchaseOrder" Schema="dbo" store:Type="Tables" />

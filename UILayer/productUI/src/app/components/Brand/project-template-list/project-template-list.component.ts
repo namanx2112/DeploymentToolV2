@@ -64,6 +64,9 @@ export class ProjectTemplateListComponent {
         case ProjectTypes.MenuInstallation:
           addToArray(arr.filter(x => x.tComponent.toLocaleLowerCase().indexOf("menu") > -1));
           break;
+        case ProjectTypes.ServerHandheldInstallation:
+          addToArray(arr.filter(x => x.tComponent.toLocaleLowerCase().indexOf("server") > -1));
+          break;
         default:
           addToArray(arr);
           break;

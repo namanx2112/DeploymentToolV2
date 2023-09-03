@@ -95,6 +95,18 @@ export interface StoreAudio {
     dDateFor_nStatus: Date,
     dDateFor_nLoopStatus:Date
 }
+export interface StoreServerHandheld {
+    aServerHandheldId: number,
+    nStoreId: number,
+    nProjectID: number,
+    nVendor: number,
+    nStatus: number,
+    nNumberOfTabletsPerStore: number,
+    dDeliveryDate: Date,
+    dRevisitDate: Date,
+    cCost: number,
+    dDateFor_nStatus: Date
+}
 export interface StoreExteriorMenus {
     aProjectExteriorMenuID: number,
     nStoreId: number,
@@ -253,7 +265,8 @@ export interface ProjectInfo {
 }
 
 export enum ProjectTypes {
-    New, Rebuild, Remodel, Relocation, Acquisition, POSInstallation, AudioInstallation, MenuInstallation, PaymentTerminalInstallation, PartsReplacement
+    New, Rebuild, Remodel, Relocation, Acquisition, POSInstallation, AudioInstallation, MenuInstallation, PaymentTerminalInstallation, PartsReplacement,
+    ServerHandheldInstallation
 }
 
 export interface NewProjectStore {

@@ -22,8 +22,8 @@ namespace DeploymentTool
         public string tTicketStatus { get; set; }
         public string tFixComment { get; set; }
         public Nullable<int> nCreatedBy { get; set; }
-        public Nullable<int> nUpdateBy { get; set; }
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
+        public Nullable<int> nUpdateBy { get; set; }
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
     }
 }

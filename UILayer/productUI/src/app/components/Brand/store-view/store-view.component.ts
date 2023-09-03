@@ -6,7 +6,7 @@ import { ExStoreService } from 'src/app/services/ex-store.service';
 import { ControlsComponent } from '../../controls/controls.component';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { NotesListComponent } from '../notes-list/notes-list.component';
-import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
+import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreServerHandheld, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { NotImplementedComponent } from '../../not-implemented/not-implemented.component';
 import { ChangeGoliveDateComponent } from '../change-golive-date/change-golive-date.component';
@@ -40,7 +40,7 @@ export class StoreViewComponent {
   }
 
   initTab() {
-    this.allTabs = this.service.GetStoretabs();
+    this.allTabs = this.service.GetStoretabs(this._curStore.nBrandId);
     this.tValues = {};
     this.tabForUI = [];
     for (var tIndx in this.allTabs) {
@@ -209,6 +209,11 @@ export class StoreViewComponent {
         break;
       case TabType.StoreInstallation:
         this.techCompService.GetInstallation(projIdSearchField).subscribe((x: StoreInstallation[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreProjectServerHandheld:
+        this.techCompService.GetServerHandheld(projIdSearchField).subscribe((x: StoreServerHandheld[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
         break;
@@ -482,6 +487,22 @@ export class StoreViewComponent {
           fieldValues["nProjectID"] = this.selectedProject.nProjectId;
           fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.CreateInstallation(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
+      case TabType.StoreProjectServerHandheld:
+        let aServerHandheldId = (this.tValues[tab.tab_name]["aServerHandheldId"]) ? parseInt(this.tValues[tab.tab_name]["aServerHandheldId"]) : 0;
+        if (aServerHandheldId > 0) {
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.UpdateServerHandheld(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          fieldValues["nProjectID"] = this.selectedProject.nProjectId;
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.CreateServerHandheld(fieldValues).subscribe((x: any) => {
             callBack(x);
           });
         }
