@@ -30,7 +30,7 @@ export class QuoteRequestWorkflowTemplateComponent {
     this.techCompTabs = [this.exService.GetStoreContactTab(TabInstanceType.Single), this.exService.GetStoreConfigurationTab(TabInstanceType.Single),
     this.exService.GetStoreNetworingTab(TabInstanceType.TechComponent), this.exService.GetStorePOSTab(TabInstanceType.TechComponent), this.exService.GetStoreAudioTab(TabInstanceType.TechComponent),
     this.exService.GetStoreExteriorMenusTab(TabInstanceType.TechComponent), this.exService.GetStorePaymentSystemTab(TabInstanceType.TechComponent),
-    this.exService.GetStoreInteriorMenusTab(TabInstanceType.TechComponent)];
+    this.exService.GetStoreInteriorMenusTab(TabInstanceType.TechComponent),this.exService.GetStoreServerHandheldTab(TabInstanceType.TechComponent)];
 
     this.techCompTabs[0].tab_name = "Store Information";
     this.curTabFields = [];

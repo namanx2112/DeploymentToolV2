@@ -37,6 +37,7 @@ export class NewProjectComponent {
   curStore: StoreSearchModel;
   loadingData: boolean;
   nProjectType: ProjectTypes;
+  allValues: any;
   constructor(private service: ExStoreService, private storeSerice: StoreService, private techCompService: AllTechnologyComponentsService) {
     this.curTabIndex = 0;
     this.SubmitLabel = "Next";
@@ -164,202 +165,35 @@ export class NewProjectComponent {
     if (this.curTabIndex + 1 == this.allTabs.length || butttonText == "Submit") {
       let tIndex = 1;
       let tTab = this.allTabs[tIndex];
-      var saveCallback = function (resp: any, tab: HomeTab) {
-        if (tIndex == 1) {
-          cThis.setStoreId(resp.aStoreId);
-          switch (cThis.nProjectType) {
-            case ProjectTypes.AudioInstallation:
-            case ProjectTypes.POSInstallation:
-            case ProjectTypes.MenuInstallation:
-            case ProjectTypes.PaymentTerminalInstallation:
-            case ProjectTypes.ServerHandheldInstallation:
-              cThis.tValues[cThis.allTabs[3].tab_name]["nProjectID"] = resp.nProjectID;
-              break;
-          }
-        }
-        if (tIndex + 1 == cThis.allTabs.length) {// Last Tab
-          alert("Created Successfully");
-          cThis.ChangeView.emit("dashboard");
-        }
-        else {
-          tIndex++;
-          let tTab = cThis.allTabs[tIndex];
-          if (tTab.tab_type == TabType.StoreStackHolder) // No need to save again as stakeholder has been save through newProject API
-            saveCallback({}, tTab);
-          else
-            cThis.onSubmit(cThis.tValues[tTab.tab_name], tTab, saveCallback);
-        }
+      var saveCallback = function (resp: any) {
+        alert("Created Successfully");
+        cThis.ChangeView.emit("dashboard");
       }
-      if (tIndex == 1) {
-        cThis.tValues[tTab.tab_name]["tStakeHolder"] = cThis.tValues[cThis.allTabs[2].tab_name];// to take latest stakeholder data
+      // if (tIndex == 1) {
+      //   cThis.tValues[tTab.tab_name]["tStakeHolder"] = cThis.tValues[cThis.allTabs[2].tab_name];// to take latest stakeholder data
+      // }
+      let allValues: any = {};
+      for (var indx in cThis.allTabs) {
+        if (parseInt(indx) <= 1)
+          continue;
+        let tmpTab = cThis.allTabs[indx];
+        allValues[tmpTab.tTableName] = cThis.tValues[tmpTab.tab_name];
+        allValues[tmpTab.tTableName].nBrandID = cThis.curBrandId;
       }
-      this.onSubmit(cThis.tValues[tTab.tab_name], tTab, saveCallback);
+      this.onSubmit(allValues, saveCallback);
     }
     else {
       cThis.moveNext();
     }
   }
 
-  onSubmit(fieldValues: any, tab: HomeTab, callBack: any) {
-    switch (tab.tab_type) {
-      case TabType.NewStore:
-        // let nStoreId = parseInt(this.tValues[tab.tab_name]["aStoreId"]);
-        // if (nStoreId > 0) {
-        //   this.storeSerice.UpdateStore(fieldValues).subscribe((nStoreId: string) => {
-        //     callBack(fieldValues, tab);
-        //   });
-        // }
-        // else {
-        fieldValues["nBrandID"] = this.curBrandId;
-        this.storeSerice.CreateNewStores(fieldValues).subscribe((x: any) => {
-          callBack(x, tab);
-        });
-        //}
-        break;
-      case TabType.StoreConfiguration:
-        let aProjectConfigID = (this.tValues[tab.tab_name]["aProjectConfigID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectConfigID"]) : 0;
-        if (aProjectConfigID > 0) {
-          this.techCompService.UpdateStoreConfig(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreateStoreConfig(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StoreStackHolder:
-        let aProjectStakeHolderID = (this.tValues[tab.tab_name]["aProjectStakeHolderID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectStakeHolderID"]) : 0;
-        if (aProjectStakeHolderID > 0) {
-          this.techCompService.UpdateStackholders(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreateStackholders(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StoreNetworking:
-        let aProjectNetworkingID = (this.tValues[tab.tab_name]["aProjectNetworkingID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectNetworkingID"]) : 0;
-        if (aProjectNetworkingID > 0) {
-          this.techCompService.UpdateNetworking(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreateNetworking(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StorePOS:
-        let aProjectPOSID = (this.tValues[tab.tab_name]["aProjectPOSID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectPOSID"]) : 0;
-        if (aProjectPOSID > 0) {
-          this.techCompService.UpdatePOS(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreatePOS(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StoreAudio:
-        let aProjectAudioID = (this.tValues[tab.tab_name]["aProjectAudioID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectAudioID"]) : 0;
-        if (aProjectAudioID > 0) {
-          this.techCompService.UpdateAudio(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues);
-          });
-        }
-        else {
-          this.techCompService.CreateAudio(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StoreExteriorMenus:
-        let aProjectExteriorMenuID = (this.tValues[tab.tab_name]["aProjectExteriorMenuID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectExteriorMenuID"]) : 0;
-        if (aProjectExteriorMenuID > 0) {
-          this.techCompService.UpdateExteriorMenus(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreateExteriorMenus(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StorePaymetSystem:
-        let aProjectPaymentSystemID = (this.tValues[tab.tab_name]["aProjectPaymentSystemID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectPaymentSystemID"]) : 0;
-        if (aProjectPaymentSystemID > 0) {
-          this.techCompService.UpdatePaymentSystem(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreatePaymentSystem(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StoreInteriorMenus:
-        let aProjectInteriorMenuID = (this.tValues[tab.tab_name]["aProjectInteriorMenuID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectInteriorMenuID"]) : 0;
-        if (aProjectInteriorMenuID > 0) {
-          this.techCompService.UpdateInteriorMenus(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreateInteriorMenus(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StoreSonicRadio:
-        let aProjectSonicRadioID = (this.tValues[tab.tab_name]["aProjectSonicRadioID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectSonicRadioID"]) : 0;
-        if (aProjectSonicRadioID > 0) {
-          this.techCompService.UpdateSonicRadio(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreateSonicRadio(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StoreInstallation:
-        let aProjectInstallationID = (this.tValues[tab.tab_name]["aProjectInstallationID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectInstallationID"]) : 0;
-        if (aProjectInstallationID > 0) {
-          this.techCompService.UpdateInstallation(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreateInstallation(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-      case TabType.StoreProjectServerHandheld:
-        let aServerHandheldId = (this.tValues[tab.tab_name]["aServerHandheldId"]) ? parseInt(this.tValues[tab.tab_name]["aServerHandheldId"]) : 0;
-        if (aServerHandheldId > 0) {
-          this.techCompService.UpdateServerHandheld(fieldValues).subscribe((x: any) => {
-            callBack(fieldValues, tab);
-          });
-        }
-        else {
-          this.techCompService.CreateServerHandheld(fieldValues).subscribe((x: any) => {
-            callBack(x, tab);
-          });
-        }
-        break;
-    }
+  onSubmit(fieldValues: any, callBack: any) {
+    fieldValues.nProjectType = this.nProjectType;
+    fieldValues.nStoreId = this.curStore.nStoreId;
+    fieldValues.nBrandID = this.curBrandId;
+    this.storeSerice.NewProject(fieldValues).subscribe((x: any) => {
+      callBack(x);
+    });
   }
 
   backClicked(ev: any, tab: HomeTab) {

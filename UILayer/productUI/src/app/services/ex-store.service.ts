@@ -100,12 +100,13 @@ export class ExStoreService {
         { title: "Zones", field: "nZones", tableName: "tblProjectSonicRadio" }, { title: "Server Racks", field: "nServerRacks", tableName: "tblProjectSonicRadio" }]
       },
       { name: "Installation", fields: [{ title: "Lead Tech", field: "tLeadTech", tableName: "tblProjectInstallation" }] },
+      { name: "Server Handheld", fields: [{ title: "#Of Tablets Per Store", field: "nNumberOfTabletsPerStore", tableName: "tblProjectServerHandheld" }] },
     ];
     return items;
   }
 
   getPOTechConfigs() {
-    return ["Audio", "POS", "Exterior Menus", "Installation", "Interior Menus", "Payment Systems", "Sonic Radio"];
+    return ["Audio", "POS", "Exterior Menus", "Installation", "Interior Menus", "Payment Systems", "Sonic Radio", "Server Handheld"];
   }
 
   GetTableVisibleColumns(tab: HomeTab) {
@@ -3033,8 +3034,8 @@ export class ExStoreService {
 
   GetStoreServerHandheldTab(instType: TabInstanceType): HomeTab {
     return {
-      tab_name: "ServerHandheld",
-      tab_header: "ServerHandheld",
+      tab_name: "Server Handheld",
+      tab_header: "Server Handheld",
       tTableName: "tblProjectServerHandheld",
       tab_type: TabType.StoreProjectServerHandheld,
       tab_unique_name: "",

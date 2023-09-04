@@ -19,6 +19,10 @@ export class StoreService {
     return this.http.post<any>(CommonService.ConfigUrl + "ExStore/NewStore", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  NewProject(request: any) {
+    return this.http.post<any>(CommonService.ConfigUrl + "ExStore/NewProject", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
   UpdateStore(request: any) {
     return this.http.post<any>(CommonService.ConfigUrl + "ExStore/UpdateStore", request, { headers: this.cacheService.getHttpHeaders() });
   }

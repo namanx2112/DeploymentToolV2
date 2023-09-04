@@ -8,6 +8,23 @@ using System.Web.Http.ModelBinding;
 
 namespace DeploymentTool.Model
 {
+    public class NewProjectModel
+    {
+        public int nProjectType {  get; set; }
+        public int nStoreId { get; set; }
+        public int nBrandID { get; set; }
+        public tblProjectInstallation tblProjectInstallation { get; set; }
+        public tblProjectServerHandheld tblProjectServerHandheld { get; set; }
+        public tblProjectStakeHolder tblProjectStakeHolders { get; set; }
+        public tblProjectConfig tblProjectConfig { get; set; }
+        public tblProjectNetworking tblProjectNetworking { get; set; }
+        public tblProjectPOS tblProjectPOS { get; set; }
+        public tblProjectAudio tblProjectAudio { get; set; }
+        public tblProjectExteriorMenu tblProjectExteriorMenus { get; set; }
+        public tblProjectPaymentSystem tblProjectPaymentSystem { get; set; }
+        public tblProjectInteriorMenu tblProjectInteriorMenus { get; set; }
+        public tblProjectSonicRadio tblProjectSonicRadio { get; set; }
+    }
     public class NewProjectStore : ModelParent
     {
         public int nProjectType { get; set; }

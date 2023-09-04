@@ -140,7 +140,18 @@ namespace DeploymentTool.Controller
             };
         }
 
+
         [Authorize]
+        [HttpPost]
+        public HttpResponseMessage NewProject(NewProjectModel newStore)
+        {
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<NewProjectModel>(newStore, new JsonMediaTypeFormatter())
+            };
+        }
+
+            [Authorize]
         [HttpPost]
         public HttpResponseMessage NewStore(NewProjectStore newStore)
         {
