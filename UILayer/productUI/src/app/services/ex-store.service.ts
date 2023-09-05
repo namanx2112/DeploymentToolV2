@@ -186,9 +186,8 @@ export class ExStoreService {
         this.GetStoreExteriorMenusTab(TabInstanceType.Single),
         this.GetStorePaymentSystemTab(TabInstanceType.Single),
         this.GetStoreInteriorMenusTab(TabInstanceType.Single),
-        this.GetStoreSonicRadioTab(TabInstanceType.Single),
-        this.GetStoreInsallationTab(TabInstanceType.Single),
-        this.GetStoreServerHandheldTab(TabInstanceType.Single)
+        this.GetStoreServerHandheldTab(TabInstanceType.Single),
+        this.GetStoreInsallationTab(TabInstanceType.Single)
       ];
     }
     else {
@@ -3109,7 +3108,7 @@ export class ExStoreService {
         field_type: FieldType.dropdown,
         field_placeholder: "Enter Status",
         validator: [],
-        options: this.commonService.GetDropdown("AudioStatus"),
+        options: this.commonService.GetDropdown("SeverHandheldStatus"),
         mandatory: false,
         hidden: false
       },

@@ -54,8 +54,7 @@
             (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>
         <app-report-table *ngIf="showMode == 'viewreport'" [curBrandId]="_curBrand.aBrandId"></app-report-table>
         <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)"
-            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType}"
-            [curBrandId]="_curBrand.aBrandId"></app-new-store>
+            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType, curBrandId:_curBrand.aBrandId}"></app-new-store>
         <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)"
             [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType, curBrandId: _curBrand.aBrandId}"></app-new-project>
         <app-store-view *ngIf="showMode == 'storeview'" (ChangeFromStoreView)="ChangeFromStoreView($event)"

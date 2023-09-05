@@ -157,69 +157,79 @@ namespace DeploymentTool.Controller
         {
             try
             {
-                ProjectType pType = (ProjectType)newStore.nProjectType;
-                Utilities.SetHousekeepingFields(true, HttpContext.Current, newStore);
-                int nMovedProjectId = 0;
-                var paramProjectId = new SqlParameter("@movedProjectId", nMovedProjectId);
-                paramProjectId.Direction = ParameterDirection.Output;
-                var noOfRowUpdated = db.Database.ExecuteSqlCommand("exec sproc_MoveProjectToHistory @nStoreId, @nProjectType,@movedProjectId OUTPUT", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), paramProjectId);
-               // if (noOfRowUpdated != 0)
-                    nMovedProjectId = (paramProjectId.Value == null) ? 0 : Convert.ToInt32(paramProjectId.Value);
-                tblStore ttboStore = newStore.GettblStores();
-                if(ttboStore.aStoreID > 0)
+                var tId = db.Database.SqlQuery<int>("select top 1 1 from tblStore with(nolock) where tStoreNumber='" + newStore.tStoreNumber + "' and nBrandId=" + newStore.nBrandID).FirstOrDefault();
+                if (tId == 0)
                 {
-                    db.Entry(ttboStore).State = EntityState.Modified;
+                    ProjectType pType = (ProjectType)newStore.nProjectType;
+                    Utilities.SetHousekeepingFields(true, HttpContext.Current, newStore);
+                    int nMovedProjectId = 0;
+                    var paramProjectId = new SqlParameter("@movedProjectId", nMovedProjectId);
+                    paramProjectId.Direction = ParameterDirection.Output;
+                    var noOfRowUpdated = db.Database.ExecuteSqlCommand("exec sproc_MoveProjectToHistory @nStoreId, @nProjectType,@movedProjectId OUTPUT", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), paramProjectId);
+                    // if (noOfRowUpdated != 0)
+                    nMovedProjectId = (paramProjectId.Value == null) ? 0 : Convert.ToInt32(paramProjectId.Value);
+                    tblStore ttboStore = newStore.GettblStores();
+                    if (ttboStore.aStoreID > 0)
+                    {
+                        db.Entry(ttboStore).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        newStore.nProjectID = 0;
+                        db.tblStores.Add(ttboStore);
+                        db.SaveChanges();
+                    }
+                    //switch (pType)
+                    //{
+                    //    case ProjectType.AudioInstallation:
+                    //    case ProjectType.POSInstallation:
+                    //    case ProjectType.MenuInstallation:
+                    //    case ProjectType.PaymentTerminalInstallation:
+                    //        db.Entry(ttboStore).State = EntityState.Modified;
+                    //        db.SaveChanges();
+                    //        break;
+                    //    default:
+                    //        newStore.nProjectID = 0;
+                    //        db.tblStores.Add(ttboStore);
+                    //        db.SaveChanges();
+                    //        break;
+                    //}
+                    tblProject tProjectModel = newStore.GettblProject();
+                    tProjectModel.nProjectActiveStatus = 1;
+                    tProjectModel.nStoreID = ttboStore.aStoreID;
+                    newStore.aStoreId = ttboStore.aStoreID;
+                    db.tblProjects.Add(tProjectModel);
                     db.SaveChanges();
+                    newStore.nProjectID = tProjectModel.aProjectID;
+                    if (nMovedProjectId > 0)
+                    {
+                        var CopyTechIfRequired = db.Database.ExecuteSqlCommand("exec sproc_CopyTechnologyToCurrentProject @nStoreId, @nProjectType, @nProjectID, @nFromProjectId", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), new SqlParameter("@nProjectID", newStore.nProjectID), new SqlParameter("@nFromProjectId", nMovedProjectId));
+                    }
+
+                    // Update Config Data
+                    db.Database.ExecuteSqlCommand("exec sproc_copyProjectsConfig @nStoreId, @nProjectId", new SqlParameter("@nProjectId", tProjectModel.aProjectID), new SqlParameter("@nStoreId", newStore.aStoreId));
+                    if (newStore.tStakeHolder != null)// Add stakeholder data to get it copied
+                    {
+                        db.Database.ExecuteSqlCommand("update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", newStore.aStoreId));
+                        newStore.tStakeHolder.nProjectID = tProjectModel.aProjectID;
+                        newStore.tStakeHolder.nMyActiveStatus = 1;
+                        newStore.tStakeHolder.aProjectStakeHolderID = 0;
+                        db.tblProjectStakeHolders.Add(newStore.tStakeHolder);
+                        db.SaveChangesAsync();
+                    }
+                    return new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new ObjectContent<NewProjectStore>(newStore, new JsonMediaTypeFormatter())
+                    };
                 }
                 else
                 {
-                    newStore.nProjectID = 0;
-                    db.tblStores.Add(ttboStore);
-                    db.SaveChanges();
+                    return new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new ObjectContent<int>(-1, new JsonMediaTypeFormatter())
+                    };
                 }
-                //switch (pType)
-                //{
-                //    case ProjectType.AudioInstallation:
-                //    case ProjectType.POSInstallation:
-                //    case ProjectType.MenuInstallation:
-                //    case ProjectType.PaymentTerminalInstallation:
-                //        db.Entry(ttboStore).State = EntityState.Modified;
-                //        db.SaveChanges();
-                //        break;
-                //    default:
-                //        newStore.nProjectID = 0;
-                //        db.tblStores.Add(ttboStore);
-                //        db.SaveChanges();
-                //        break;
-                //}
-                tblProject tProjectModel = newStore.GettblProject();
-                tProjectModel.nProjectActiveStatus = 1;
-                tProjectModel.nStoreID = ttboStore.aStoreID;
-                newStore.aStoreId = ttboStore.aStoreID;
-                db.tblProjects.Add(tProjectModel);
-                db.SaveChanges();
-                newStore.nProjectID = tProjectModel.aProjectID;
-                if (nMovedProjectId > 0)
-                {
-                    var CopyTechIfRequired = db.Database.ExecuteSqlCommand("exec sproc_CopyTechnologyToCurrentProject @nStoreId, @nProjectType, @nProjectID, @nFromProjectId", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), new SqlParameter("@nProjectID", newStore.nProjectID), new SqlParameter("@nFromProjectId", nMovedProjectId));
-                }
-
-                // Update Config Data
-                db.Database.ExecuteSqlCommand("exec sproc_copyProjectsConfig @nStoreId, @nProjectId", new SqlParameter("@nProjectId", tProjectModel.aProjectID), new SqlParameter("@nStoreId", newStore.aStoreId));
-                if (newStore.tStakeHolder != null)// Add stakeholder data to get it copied
-                {
-                    db.Database.ExecuteSqlCommand("update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", newStore.aStoreId));
-                    newStore.tStakeHolder.nProjectID = tProjectModel.aProjectID;
-                    newStore.tStakeHolder.nMyActiveStatus = 1;
-                    newStore.tStakeHolder.aProjectStakeHolderID = 0;
-                    db.tblProjectStakeHolders.Add(newStore.tStakeHolder);
-                    db.SaveChangesAsync();
-                }
-
-                return new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new ObjectContent<NewProjectStore>(newStore, new JsonMediaTypeFormatter())
-                };
             }
             catch (Exception ex)
             {

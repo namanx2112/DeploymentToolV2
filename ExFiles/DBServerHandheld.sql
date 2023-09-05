@@ -11,6 +11,9 @@ insert into tblProjectTypeConfig values(3, 'tblProjectServerHandheld', 0)
 insert into tblProjectTypeConfig values(4, 'tblProjectServerHandheld', 0)
 insert into tblProjectTypeConfig values(9, 'tblProjectServerHandheld', 0)
 
+GO
+
+select * from tblDropdowns
 
 
 select * from tblProjectTypeConfig

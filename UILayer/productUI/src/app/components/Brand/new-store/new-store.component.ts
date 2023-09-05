@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, OptionType, TabInstanceType, TabType } from 'src/app/interfaces/home-tab';
+import { BrandModel } from 'src/app/interfaces/models';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
+import { CommonService } from 'src/app/services/common.service';
 import { ExStoreService } from 'src/app/services/ex-store.service';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -17,11 +19,11 @@ export class NewStoreComponent {
   @Input() set ProjectParam(val: any) {
     this._ProjectType = val.ProjectType;
     this._NeedTechComponent = val.TechCompType;
-    this.getTabs();
+    this.curBrandId = val.curBrandId;
+    this.getTabs(this.curBrandId);
     this.loadCurTab();
   }
   @Output() ChangeView = new EventEmitter<string>();
-  @Input()
   curBrandId: number;
   allTabs: HomeTab[];
   curTab: HomeTab;
@@ -69,7 +71,8 @@ export class NewStoreComponent {
     return yes;
   }
 
-  getTabs() {
+  getTabs(nBrandId: number) {
+    let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == nBrandId);
     this.allTabs = [];
     this.allTabs.push(this.service.GetNewStoresTab(TabInstanceType.Single));
     this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = { "nProjectType": this._ProjectType.aDropdownId };
@@ -107,8 +110,14 @@ export class NewStoreComponent {
     }
 
     if (this._NeedTechComponent == "all") {
-      this.allTabs.push(this.service.GetStoreSonicRadioTab(TabInstanceType.Single));
-      this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") > -1) {
+        this.allTabs.push(this.service.GetStoreServerHandheldTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+      else {
+        this.allTabs.push(this.service.GetStoreSonicRadioTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
       this.allTabs.push(this.service.GetStoreInsallationTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
@@ -133,29 +142,46 @@ export class NewStoreComponent {
   }
 
   onSubmit(controlVals: any, tab: HomeTab) {
-    let fieldValues = controlVals.value;
+    this.tValues[tab.tab_name] = controlVals.value;
     let butttonText = controlVals.butttonText;
+    if (butttonText == "Submit")
+      this.saveAll();
+    else {
+      if (this.curTabIndex == this.allTabs.length - 1)
+        this.saveAll();
+      else {
+        this.curTabIndex++;
+        this.loadCurTab();
+      }
+    }
+  }
+
+  saveAll() {
     let cThis = this;
-    let callBack = function (respValues: any, isNew: boolean) {
-      if (butttonText == "Submit") {
-        alert("Created Successfully");
+    let tIndx = 0;
+    let tab = this.allTabs[tIndx];
+    let tmpVal = cThis.tValues[tab.tab_name];
+    let tStoreNumber = tmpVal["tStoreNumber"];
+    let callBack = function (respValues: any) {
+      if (tab.tab_type == TabType.NewStore) {
+        if (typeof respValues == 'number') {
+          alert("The store number " + cThis.tValues[tab.tab_name]["tStoreNumber"] + " already exists!");
+          return;
+        }
+        cThis.setStoreId(respValues.aStoreId);
+      }
+      if (tIndx + 1 == cThis.allTabs.length) {
+        alert("The store number " + tStoreNumber + " created Successfully!");
         cThis.ChangeView.emit("dashboard");
       }
       else {
-        if (tab.tab_type == TabType.NewStore && isNew) {
-          cThis.setStoreId(respValues.aStoreId);
-        }
-        cThis.tValues[tab.tab_name] = respValues;
-        if (cThis.curTabIndex + 1 == cThis.allTabs.length) {
-          alert("Created Successfully");
-          cThis.ChangeView.emit("dashboard");
-        }
-        cThis.curTabIndex++;
-        cThis.loadCurTab();
-        //cThis.checkMandatory();
+        tIndx++;
+        tab = cThis.allTabs[tIndx];
+        cThis.saveMe(tab, cThis.tValues[tab.tab_name], callBack);
       }
+      //cThis.checkMandatory();
     }
-    this.saveMe(tab, fieldValues, callBack);
+    this.saveMe(tab, tmpVal, callBack);
   }
 
   saveMe(tab: HomeTab, fieldValues: any, callBack: any) {
