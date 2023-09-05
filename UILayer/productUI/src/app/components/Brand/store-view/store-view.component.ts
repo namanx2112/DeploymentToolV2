@@ -213,7 +213,7 @@ export class StoreViewComponent {
         });
         break;
       case TabType.StoreProjectServerHandheld:
-        this.techCompService.GetServerHandheld(projIdSearchField).subscribe((x: StoreServerHandheld[]) => {
+        this.techCompService.GetServerHandheld(searchField).subscribe((x: StoreServerHandheld[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
         break;

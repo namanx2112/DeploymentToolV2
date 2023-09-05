@@ -13,6 +13,13 @@ insert into tblProjectTypeConfig values(9, 'tblProjectServerHandheld', 0)
 
 GO
 
+insert into tblDropdownModule(tModuleName,tModuleDisplayName,tModuleGroup,editable) values('SeverHandheldStatus', 'Status', 'Sever Handheld', 1)
+select * from tblDropdownModule order by 1 desc
+select * from tblBrand
+insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) values(2,38)
+
+GO
+
 select * from tblDropdowns
 
 
