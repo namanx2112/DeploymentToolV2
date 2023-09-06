@@ -80,11 +80,6 @@ label {
     position: relative;
 }
 
-.quillEditor {
-    width: 100%;
-    height: 100%;
-}
-
 .partsTable table {
     width: 100%;
     border-collapse: collapse;

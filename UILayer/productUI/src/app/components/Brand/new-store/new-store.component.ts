@@ -163,6 +163,7 @@ export class NewStoreComponent {
     let tmpVal = cThis.tValues[tab.tab_name];
     let tStoreNumber = tmpVal["tStoreNumber"];
     let callBack = function (respValues: any) {
+      tab.done = true;
       if (tab.tab_type == TabType.NewStore) {
         if (typeof respValues == 'number') {
           alert("The store number " + cThis.tValues[tab.tab_name]["tStoreNumber"] + " already exists!");

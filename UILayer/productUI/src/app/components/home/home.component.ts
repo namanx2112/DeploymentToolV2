@@ -77,6 +77,10 @@ export class HomeComponent {
     this.authService.loggedOut(true);
   }
 
+  getGreeting(){
+    return CommonService.generateGreetings();
+  }
+
   supportPage() {
     let cThis = this;
     const dialogConfig = new MatDialogConfig();

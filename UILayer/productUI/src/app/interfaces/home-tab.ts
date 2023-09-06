@@ -9,7 +9,8 @@ export interface HomeTab {
     search_fields: Fields[],
     fields: Fields[],
     childTabs: HomeTab[],
-    instanceType: TabInstanceType
+    instanceType: TabInstanceType,
+    done?:boolean
 }
 
 export enum TabInstanceType {

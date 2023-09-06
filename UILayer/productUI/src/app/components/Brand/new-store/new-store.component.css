@@ -29,19 +29,35 @@
 .tabs{
     float: left;
     width: 208px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.12);
     height: calc(100% - 57px);
     position: absolute;
     margin-top: 55px;
 }
 
+.savedIcon .statusIcon{
+    position: absolute;
+    font-size: 18px;
+    right: 4px;
+    color: lightgreen;
+    opacity: 1;
+}
+
+.unsavedIcon .statusIcon{
+    position: absolute;
+    font-size: 18px;
+    right: 4px;
+    opacity: 0;
+}
+
 .tabHeader{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     text-align: center;
     padding: 10px  0px;
     position: relative;
     font-weight: bold;
     font-size: 14px;
+    position: relative;
 }
 
 .tabHeader.clickable{
