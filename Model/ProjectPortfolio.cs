@@ -19,6 +19,7 @@ namespace DeploymentTool.Model
         public ProjectPortfolioItems paymentsystem { get; set; }
         public ProjectPortfolioItems interiormenu { get; set; }
         public ProjectPortfolioItems sonicradio { get; set; }
+        public ProjectPortfolioItems serverhandheld { get; set; }
         public ProjectPortfolioItems installation { get; set; }
         public List<ProjectPorfolioNotes> notes { get; set; }
     }

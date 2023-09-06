@@ -54,41 +54,81 @@ export class ProjectPortfolioComponent {
   }
 
   loadColumns() {
-    this.columnsToDisplay = [
-      {
-        columnDef: "store",
-        header: ""
-      },
-      {
-        columnDef: "networking",
-        header: "Netorking"
-      }
-      , {
-        columnDef: "pos",
-        header: "POS"
-      }, {
-        columnDef: "audio",
-        header: "Audio"
-      }, {
-        columnDef: "exteriormenu",
-        header: "Exterior Menu"
-      }, {
-        columnDef: "paymentsystem",
-        header: "Payment System"
-      }, {
-        columnDef: "interiormenu",
-        header: "Interior Menu"
-      }, {
-        columnDef: "sonicradio",
-        header: "Sonic Radio"
-      }, {
-        columnDef: "installation",
-        header: "Installation"
-      }, {
-        columnDef: "notes",
-        header: "Notes"
-      }
-    ];
+    let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == this._curBrand.aBrandId);
+    if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") > -1) {
+      this.columnsToDisplay = [
+        {
+          columnDef: "store",
+          header: ""
+        },
+        {
+          columnDef: "networking",
+          header: "Netorking"
+        }
+        , {
+          columnDef: "pos",
+          header: "POS"
+        }, {
+          columnDef: "audio",
+          header: "Audio"
+        }, {
+          columnDef: "exteriormenu",
+          header: "Exterior Menu"
+        }, {
+          columnDef: "paymentsystem",
+          header: "Payment System"
+        }, {
+          columnDef: "interiormenu",
+          header: "Interior Menu"
+        }, {
+          columnDef: "serverhandheld",
+          header: "Server Handheld"
+        }, {
+          columnDef: "installation",
+          header: "Installation"
+        }, {
+          columnDef: "notes",
+          header: "Notes"
+        }
+      ];
+    }
+    else {
+      this.columnsToDisplay = [
+        {
+          columnDef: "store",
+          header: ""
+        },
+        {
+          columnDef: "networking",
+          header: "Netorking"
+        }
+        , {
+          columnDef: "pos",
+          header: "POS"
+        }, {
+          columnDef: "audio",
+          header: "Audio"
+        }, {
+          columnDef: "exteriormenu",
+          header: "Exterior Menu"
+        }, {
+          columnDef: "paymentsystem",
+          header: "Payment System"
+        }, {
+          columnDef: "interiormenu",
+          header: "Interior Menu"
+        }, {
+          columnDef: "sonicradio",
+          header: "Sonic Radio"
+        }, {
+          columnDef: "installation",
+          header: "Installation"
+        }, {
+          columnDef: "notes",
+          header: "Notes"
+        }
+      ];
+    }
     let tCols: string[] = [];
     for (var indx in this.columnsToDisplay) {
       tCols.push(this.columnsToDisplay[indx].columnDef);

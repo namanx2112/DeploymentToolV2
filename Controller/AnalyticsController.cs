@@ -135,6 +135,15 @@ namespace DeploymentTool.Controller
                                 tTestTransactions = techparts.tTestTransactions
                             };
                         }
+                        else if (techparts.tComponent == "Server Handheld")
+                        {
+                            obj.serverhandheld = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
                     }
                     items.Add(obj);
 

@@ -143,12 +143,164 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpPost]
-        public HttpResponseMessage NewProject(NewProjectModel newStore)
+        public async Task<HttpResponseMessage> NewProject(NewProjectModel newStore)
         {
-            return new HttpResponseMessage(HttpStatusCode.OK)
+
+            try
             {
-                Content = new ObjectContent<NewProjectModel>(newStore, new JsonMediaTypeFormatter())
-            };
+                ProjectType pType = (ProjectType)newStore.nProjectType;
+                //Utilities.SetHousekeepingFields(true, HttpContext.Current, newStore.);
+                int nMovedProjectId = 0;
+                //var paramProjectId = new SqlParameter("@movedProjectId", nMovedProjectId);
+                //paramProjectId.Direction = ParameterDirection.Output;
+                //var noOfRowUpdated = db.Database.ExecuteSqlCommand(" select top 1 @movedProjectId = aProjectID  from tblProject with(nolock) where nStoreID = @nStoreId order by aProjectID desc @movedProjectId OUTPUT", new SqlParameter("@nStoreId", newStore.nStoreId), paramProjectId);
+                //nMovedProjectId = (paramProjectId.Value == null) ? 0 : Convert.ToInt32(paramProjectId.Value);
+                nMovedProjectId = db.Database.SqlQuery<int>("select top 1  aProjectID  from tblProject with(nolock) where nStoreID = @nStoreId order by aProjectID desc ", new SqlParameter("@nStoreId", newStore.nStoreId)).FirstOrDefault();
+
+
+                var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+                Nullable<int> lUserId = securityContext.nUserID;
+                tblProject tProjectModel = new tblProject();
+                tProjectModel.nProjectActiveStatus = 1;
+                tProjectModel.nProjectType = newStore.nProjectType;
+                if(newStore.tblProjectInstallation!=null && newStore.tblProjectInstallation.dInstallEnd != null)
+                tProjectModel.dGoLiveDate = newStore.tblProjectInstallation.dInstallEnd;
+                tProjectModel.nStoreID = newStore.nStoreId;
+                tProjectModel.nBrandID = newStore.nBrandID;
+                tProjectModel.nCreatedBy = lUserId;
+                tProjectModel.dtCreatedOn = DateTime.Now;
+                //tProjectModel.nProjectStatus = nProjectStatus;
+                //tProjectModel.nDMAID = nDMAID;
+                //tProjectModel.tDMA = tDMA;
+               // tProjectModel.dProjEndDate = dProjEndDate;
+                db.tblProjects.Add(tProjectModel);
+                await db.SaveChangesAsync();
+                int aProjectID=tProjectModel.aProjectID;
+                if (nMovedProjectId > 0)
+                {
+                    var CopyTechIfRequired = db.Database.ExecuteSqlCommand("exec sproc_CopyTechnologyToCurrentProject_new @nStoreId, @nProjectType, @nProjectID, @nFromProjectId", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectType", (int)pType), new SqlParameter("@nProjectID", aProjectID), new SqlParameter("@nFromProjectId", nMovedProjectId));
+                }
+
+                // Update Config Data
+                //db.Database.ExecuteSqlCommand("exec sproc_copyProjectsConfig @nStoreId, @nProjectId", new SqlParameter("@nProjectId", aProjectID), new SqlParameter("@nStoreId", newStore.nStoreId));
+                if (newStore.tblProjectConfig != null)// Add tblProjectConfig data to get it copied
+                {
+                    var aProjectConfigID = db.Database.SqlQuery<int>("select top 1  aProjectConfigID  from tblProjectConfig with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+
+                    // db.Database.ExecuteSqlCommand("update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", newStore.nStoreId));
+                    newStore.tblProjectConfig.nProjectID = aProjectID;
+                    newStore.tblProjectConfig.nMyActiveStatus = 1;
+                    newStore.tblProjectConfig.aProjectConfigID = aProjectConfigID;
+                    db.Entry(newStore.tblProjectConfig).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectStakeHolders != null)// Add stakeholder data to get it copied
+                {
+                    var aProjectStakeHolderID = db.Database.SqlQuery<int>("select top 1  aProjectStakeHolderID  from tblProjectStakeHolders with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectStakeHolders.nProjectID = aProjectID;
+                    newStore.tblProjectStakeHolders.nMyActiveStatus = 1;
+                    newStore.tblProjectStakeHolders.aProjectStakeHolderID = aProjectStakeHolderID;
+                    db.Entry(newStore.tblProjectStakeHolders).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectExteriorMenus != null)
+                {
+                    var aProjectExteriorMenuID = db.Database.SqlQuery<int>("select top 1  aProjectExteriorMenuID  from tblProjectExteriorMenus with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+
+                    newStore.tblProjectExteriorMenus.nProjectID = aProjectID;
+                    newStore.tblProjectExteriorMenus.nMyActiveStatus = 1;
+                    newStore.tblProjectExteriorMenus.aProjectExteriorMenuID = aProjectExteriorMenuID;
+                    db.Entry(newStore.tblProjectExteriorMenus).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectInteriorMenus != null)
+                {
+                    var aProjectInteriorMenuID = db.Database.SqlQuery<int>("select top 1  aProjectInteriorMenuID  from tblProjectInteriorMenus with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectInteriorMenus.nProjectID = aProjectID;
+                    newStore.tblProjectInteriorMenus.nMyActiveStatus = 1;
+                    newStore.tblProjectInteriorMenus.aProjectInteriorMenuID = aProjectInteriorMenuID;
+                    db.Entry(newStore.tblProjectInteriorMenus).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectPaymentSystem != null)
+                {
+                    var aProjectPaymentSystemID = db.Database.SqlQuery<int>("select top 1  aProjectPaymentSystemID  from tblProjectPaymentSystem with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectPaymentSystem.nProjectID = aProjectID;
+                    newStore.tblProjectPaymentSystem.nMyActiveStatus = 1;
+                    newStore.tblProjectPaymentSystem.aProjectPaymentSystemID = aProjectPaymentSystemID;
+                    db.Entry(newStore.tblProjectPaymentSystem).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectAudio != null)
+                {
+                    var aProjectAudioID = db.Database.SqlQuery<int>("select top 1  aProjectAudioID  from tblProjectAudio with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectAudio.nProjectID = aProjectID;
+                    newStore.tblProjectAudio.nMyActiveStatus = 1;
+                    newStore.tblProjectAudio.aProjectAudioID = aProjectAudioID;
+                    db.Entry(newStore.tblProjectAudio).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectPOS != null)
+                {
+                    var aProjectPOSID = db.Database.SqlQuery<int>("select top 1  aProjectPOSID  from tblProjectPOS with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectPOS.nProjectID = aProjectID;
+                    newStore.tblProjectPOS.nMyActiveStatus = 1;
+                    newStore.tblProjectPOS.aProjectPOSID = aProjectPOSID;
+                    db.Entry(newStore.tblProjectPOS).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectNetworking != null)
+                {
+                    var aProjectNetworkingID = db.Database.SqlQuery<int>("select top 1  aProjectNetworkingID  from tblProjectNetworking with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectNetworking.nProjectID = aProjectID;
+                    newStore.tblProjectNetworking.nMyActiveStatus = 1;
+                    newStore.tblProjectNetworking.aProjectNetworkingID = aProjectNetworkingID;
+                    db.Entry(newStore.tblProjectNetworking).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectSonicRadio != null)
+                {
+                    var aProjectSonicRadioID = db.Database.SqlQuery<int>("select top 1  aProjectSonicRadioID  from tblProjectSonicRadio with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectSonicRadio.nProjectID = aProjectID;
+                    newStore.tblProjectSonicRadio.nMyActiveStatus = 1;
+                    newStore.tblProjectSonicRadio.aProjectSonicRadioID = aProjectSonicRadioID;
+                    db.Entry(newStore.tblProjectSonicRadio).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectServerHandheld != null)
+                {
+                    var aServerHandheldId = db.Database.SqlQuery<int>("select top 1  aServerHandheldId  from tblProjectServerHandheld with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectServerHandheld.nProjectID = aProjectID;
+                    newStore.tblProjectServerHandheld.nMyActiveStatus = 1;
+                    newStore.tblProjectServerHandheld.aServerHandheldId = aServerHandheldId;
+                    db.Entry(newStore.tblProjectServerHandheld).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectInstallation != null)
+                {
+                    var aProjectInstallationID = db.Database.SqlQuery<int>("select top 1  aProjectInstallationID  from tblProjectInstallation with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectInstallation.nProjectID = aProjectID;
+                    newStore.tblProjectInstallation.nMyActiveStatus = 1;
+                    newStore.tblProjectInstallation.aProjectInstallationID = aProjectInstallationID;
+                    db.Entry(newStore.tblProjectInstallation).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<NewProjectModel>(newStore, new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("Sonic.NewStore", HttpContext.Current, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+
+            //return new HttpResponseMessage(HttpStatusCode.OK)
+            //{
+            //    Content = new ObjectContent<NewProjectModel>(newStore, new JsonMediaTypeFormatter())
+            //};
         }
 
             [Authorize]
