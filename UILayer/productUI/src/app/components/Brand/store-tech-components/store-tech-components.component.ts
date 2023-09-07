@@ -31,7 +31,7 @@ export class StoreTechComponentsComponent {
   }
   initTab() {
     if (typeof this._curStore.nProjectType != 'undefined')
-      this.allTabs = this.service.GetStoreTabsForProjectType(this._curStore.nProjectType);
+      this.allTabs = this.service.GetStoreTabsForProjectType(this._curStore.nProjectType, this.curBrandId);
     else
       this.allTabs = this.service.GetStoretabs(this.curBrandId);
     this.tValues = {};

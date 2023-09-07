@@ -219,7 +219,7 @@ export class ControlsComponent implements AfterViewChecked {
 
   onSubmitClick(event: any): void {
     if (this.formGroup.valid) {
-      this.onSubmit.emit({ value: this.getFieldControlValues(), butttonText: event.submitter.innerText });
+      this.onSubmit.emit({ value: this.getFieldControlValues(), butttonText: (event.submitter != null) ? event.submitter.innerText : "" });
     }
   }
 

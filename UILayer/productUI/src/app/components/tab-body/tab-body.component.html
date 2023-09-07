@@ -11,7 +11,7 @@
   </div>
   <div class="tablePart" *ngIf="secondPart != 'newEdit'">
     <app-table *ngIf="secondPart == 'table'" [curTab]="curTab" [searchFields]="searchFields"
-      (rowClicked)="rowClicked($event)" [nBrandId]="0"></app-table>
+      (rowClicked)="rowClicked($event)" [nBrandId]="0" [refreshMe]="refreshMe"></app-table>
   </div>
   <div class="newEditPart" *ngIf="secondPart == 'newEdit'">
     <app-new-edit-object [controlValues]="curControlVals" [curTab]="curTab"

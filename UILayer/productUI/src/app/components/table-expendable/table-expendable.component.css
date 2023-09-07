@@ -9,6 +9,7 @@
   
   table {
     width: auto;
+    box-shadow: none;
   }
   
   table td, table th {

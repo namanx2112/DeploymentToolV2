@@ -151,10 +151,6 @@ namespace DeploymentTool.Controller
                 ProjectType pType = (ProjectType)newStore.nProjectType;
                 //Utilities.SetHousekeepingFields(true, HttpContext.Current, newStore.);
                 int nMovedProjectId = 0;
-                //var paramProjectId = new SqlParameter("@movedProjectId", nMovedProjectId);
-                //paramProjectId.Direction = ParameterDirection.Output;
-                //var noOfRowUpdated = db.Database.ExecuteSqlCommand(" select top 1 @movedProjectId = aProjectID  from tblProject with(nolock) where nStoreID = @nStoreId order by aProjectID desc @movedProjectId OUTPUT", new SqlParameter("@nStoreId", newStore.nStoreId), paramProjectId);
-                //nMovedProjectId = (paramProjectId.Value == null) ? 0 : Convert.ToInt32(paramProjectId.Value);
                 nMovedProjectId = db.Database.SqlQuery<int>("select top 1  aProjectID  from tblProject with(nolock) where nStoreID = @nStoreId order by aProjectID desc ", new SqlParameter("@nStoreId", newStore.nStoreId)).FirstOrDefault();
 
 
@@ -165,11 +161,13 @@ namespace DeploymentTool.Controller
                 tProjectModel.nProjectType = newStore.nProjectType;
                 if(newStore.tblProjectInstallation!=null && newStore.tblProjectInstallation.dInstallEnd != null)
                 tProjectModel.dGoLiveDate = newStore.tblProjectInstallation.dInstallEnd;
+                else
+                    tProjectModel.dGoLiveDate = DateTime.Now;  //to load store item view date is must hence adding today date
                 tProjectModel.nStoreID = newStore.nStoreId;
                 tProjectModel.nBrandID = newStore.nBrandID;
                 tProjectModel.nCreatedBy = lUserId;
                 tProjectModel.dtCreatedOn = DateTime.Now;
-                //tProjectModel.nProjectStatus = nProjectStatus;
+                //tProjectModel.nProjectStatus = nProjectStatus;// Need to do this pending
                 //tProjectModel.nDMAID = nDMAID;
                 //tProjectModel.tDMA = tDMA;
                // tProjectModel.dProjEndDate = dProjEndDate;
@@ -191,7 +189,10 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectConfig.nProjectID = aProjectID;
                     newStore.tblProjectConfig.nMyActiveStatus = 1;
                     newStore.tblProjectConfig.aProjectConfigID = aProjectConfigID;
-                    db.Entry(newStore.tblProjectConfig).State = EntityState.Modified;
+                    if (aProjectConfigID > 0)
+                        db.Entry(newStore.tblProjectConfig).State = EntityState.Modified;
+                    else
+                        db.tblProjectConfigs.Add(newStore.tblProjectConfig);
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectStakeHolders != null)// Add stakeholder data to get it copied
@@ -200,7 +201,11 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectStakeHolders.nProjectID = aProjectID;
                     newStore.tblProjectStakeHolders.nMyActiveStatus = 1;
                     newStore.tblProjectStakeHolders.aProjectStakeHolderID = aProjectStakeHolderID;
-                    db.Entry(newStore.tblProjectStakeHolders).State = EntityState.Modified;
+                    if (aProjectStakeHolderID > 0)
+                        db.Entry(newStore.tblProjectStakeHolders).State = EntityState.Modified;
+                    else
+                        db.tblProjectStakeHolders.Add(newStore.tblProjectStakeHolders);
+                    
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectExteriorMenus != null)
@@ -210,7 +215,12 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectExteriorMenus.nProjectID = aProjectID;
                     newStore.tblProjectExteriorMenus.nMyActiveStatus = 1;
                     newStore.tblProjectExteriorMenus.aProjectExteriorMenuID = aProjectExteriorMenuID;
-                    db.Entry(newStore.tblProjectExteriorMenus).State = EntityState.Modified;
+                   
+                    if (aProjectExteriorMenuID > 0)
+                        db.Entry(newStore.tblProjectExteriorMenus).State = EntityState.Modified;
+                    else
+                        db.tblProjectExteriorMenus.Add(newStore.tblProjectExteriorMenus);
+
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectInteriorMenus != null)
@@ -219,7 +229,11 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectInteriorMenus.nProjectID = aProjectID;
                     newStore.tblProjectInteriorMenus.nMyActiveStatus = 1;
                     newStore.tblProjectInteriorMenus.aProjectInteriorMenuID = aProjectInteriorMenuID;
-                    db.Entry(newStore.tblProjectInteriorMenus).State = EntityState.Modified;
+
+                    if (aProjectInteriorMenuID > 0)
+                        db.Entry(newStore.tblProjectInteriorMenus).State = EntityState.Modified;
+                    else
+                        db.tblProjectInteriorMenus.Add(newStore.tblProjectInteriorMenus);
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectPaymentSystem != null)
@@ -228,7 +242,10 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectPaymentSystem.nProjectID = aProjectID;
                     newStore.tblProjectPaymentSystem.nMyActiveStatus = 1;
                     newStore.tblProjectPaymentSystem.aProjectPaymentSystemID = aProjectPaymentSystemID;
-                    db.Entry(newStore.tblProjectPaymentSystem).State = EntityState.Modified;
+                    if (aProjectPaymentSystemID > 0)
+                        db.Entry(newStore.tblProjectPaymentSystem).State = EntityState.Modified;
+                    else
+                        db.tblProjectPaymentSystems.Add(newStore.tblProjectPaymentSystem);
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectAudio != null)
@@ -237,7 +254,10 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectAudio.nProjectID = aProjectID;
                     newStore.tblProjectAudio.nMyActiveStatus = 1;
                     newStore.tblProjectAudio.aProjectAudioID = aProjectAudioID;
-                    db.Entry(newStore.tblProjectAudio).State = EntityState.Modified;
+                    if (aProjectAudioID > 0)
+                        db.Entry(newStore.tblProjectAudio).State = EntityState.Modified;
+                    else
+                        db.tblProjectAudios.Add(newStore.tblProjectAudio);
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectPOS != null)
@@ -246,7 +266,10 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectPOS.nProjectID = aProjectID;
                     newStore.tblProjectPOS.nMyActiveStatus = 1;
                     newStore.tblProjectPOS.aProjectPOSID = aProjectPOSID;
-                    db.Entry(newStore.tblProjectPOS).State = EntityState.Modified;
+                    if (aProjectPOSID > 0)
+                        db.Entry(newStore.tblProjectPOS).State = EntityState.Modified;
+                    else
+                        db.tblProjectPOS.Add(newStore.tblProjectPOS);
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectNetworking != null)
@@ -255,7 +278,10 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectNetworking.nProjectID = aProjectID;
                     newStore.tblProjectNetworking.nMyActiveStatus = 1;
                     newStore.tblProjectNetworking.aProjectNetworkingID = aProjectNetworkingID;
-                    db.Entry(newStore.tblProjectNetworking).State = EntityState.Modified;
+                    if (aProjectNetworkingID > 0)
+                        db.Entry(newStore.tblProjectNetworking).State = EntityState.Modified;
+                    else
+                        db.tblProjectNetworkings.Add(newStore.tblProjectNetworking);
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectSonicRadio != null)
@@ -264,7 +290,10 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectSonicRadio.nProjectID = aProjectID;
                     newStore.tblProjectSonicRadio.nMyActiveStatus = 1;
                     newStore.tblProjectSonicRadio.aProjectSonicRadioID = aProjectSonicRadioID;
-                    db.Entry(newStore.tblProjectSonicRadio).State = EntityState.Modified;
+                    if (aProjectSonicRadioID > 0)
+                        db.Entry(newStore.tblProjectSonicRadio).State = EntityState.Modified;
+                    else
+                        db.tblProjectSonicRadios.Add(newStore.tblProjectSonicRadio);
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectServerHandheld != null)
@@ -273,7 +302,10 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectServerHandheld.nProjectID = aProjectID;
                     newStore.tblProjectServerHandheld.nMyActiveStatus = 1;
                     newStore.tblProjectServerHandheld.aServerHandheldId = aServerHandheldId;
-                    db.Entry(newStore.tblProjectServerHandheld).State = EntityState.Modified;
+                    if (aServerHandheldId > 0)
+                        db.Entry(newStore.tblProjectServerHandheld).State = EntityState.Modified;
+                    else
+                        db.tblProjectServerHandhelds.Add(newStore.tblProjectServerHandheld);
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectInstallation != null)
@@ -282,7 +314,10 @@ namespace DeploymentTool.Controller
                     newStore.tblProjectInstallation.nProjectID = aProjectID;
                     newStore.tblProjectInstallation.nMyActiveStatus = 1;
                     newStore.tblProjectInstallation.aProjectInstallationID = aProjectInstallationID;
-                    db.Entry(newStore.tblProjectInstallation).State = EntityState.Modified;
+                    if (aProjectInstallationID > 0)
+                        db.Entry(newStore.tblProjectInstallation).State = EntityState.Modified;
+                    else
+                        db.tblProjectInstallations.Add(newStore.tblProjectInstallation);
                     await db.SaveChangesAsync();
                 }
 
@@ -314,12 +349,7 @@ namespace DeploymentTool.Controller
                 {
                     ProjectType pType = (ProjectType)newStore.nProjectType;
                     Utilities.SetHousekeepingFields(true, HttpContext.Current, newStore);
-                    int nMovedProjectId = 0;
-                    var paramProjectId = new SqlParameter("@movedProjectId", nMovedProjectId);
-                    paramProjectId.Direction = ParameterDirection.Output;
-                    var noOfRowUpdated = db.Database.ExecuteSqlCommand("exec sproc_MoveProjectToHistory @nStoreId, @nProjectType,@movedProjectId OUTPUT", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), paramProjectId);
-                    // if (noOfRowUpdated != 0)
-                    nMovedProjectId = (paramProjectId.Value == null) ? 0 : Convert.ToInt32(paramProjectId.Value);
+                    
                     tblStore ttboStore = newStore.GettblStores();
                     if (ttboStore.aStoreID > 0)
                     {
@@ -332,21 +362,7 @@ namespace DeploymentTool.Controller
                         db.tblStores.Add(ttboStore);
                         db.SaveChanges();
                     }
-                    //switch (pType)
-                    //{
-                    //    case ProjectType.AudioInstallation:
-                    //    case ProjectType.POSInstallation:
-                    //    case ProjectType.MenuInstallation:
-                    //    case ProjectType.PaymentTerminalInstallation:
-                    //        db.Entry(ttboStore).State = EntityState.Modified;
-                    //        db.SaveChanges();
-                    //        break;
-                    //    default:
-                    //        newStore.nProjectID = 0;
-                    //        db.tblStores.Add(ttboStore);
-                    //        db.SaveChanges();
-                    //        break;
-                    //}
+                   
                     tblProject tProjectModel = newStore.GettblProject();
                     tProjectModel.nProjectActiveStatus = 1;
                     tProjectModel.nStoreID = ttboStore.aStoreID;
@@ -354,22 +370,7 @@ namespace DeploymentTool.Controller
                     db.tblProjects.Add(tProjectModel);
                     db.SaveChanges();
                     newStore.nProjectID = tProjectModel.aProjectID;
-                    if (nMovedProjectId > 0)
-                    {
-                        var CopyTechIfRequired = db.Database.ExecuteSqlCommand("exec sproc_CopyTechnologyToCurrentProject @nStoreId, @nProjectType, @nProjectID, @nFromProjectId", new SqlParameter("@nStoreId", newStore.aStoreId), new SqlParameter("@nProjectType", (int)pType), new SqlParameter("@nProjectID", newStore.nProjectID), new SqlParameter("@nFromProjectId", nMovedProjectId));
-                    }
-
-                    // Update Config Data
-                    db.Database.ExecuteSqlCommand("exec sproc_copyProjectsConfig @nStoreId, @nProjectId", new SqlParameter("@nProjectId", tProjectModel.aProjectID), new SqlParameter("@nStoreId", newStore.aStoreId));
-                    if (newStore.tStakeHolder != null)// Add stakeholder data to get it copied
-                    {
-                        db.Database.ExecuteSqlCommand("update tblProjectStakeHolders set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", newStore.aStoreId));
-                        newStore.tStakeHolder.nProjectID = tProjectModel.aProjectID;
-                        newStore.tStakeHolder.nMyActiveStatus = 1;
-                        newStore.tStakeHolder.aProjectStakeHolderID = 0;
-                        db.tblProjectStakeHolders.Add(newStore.tStakeHolder);
-                        db.SaveChangesAsync();
-                    }
+                    
                     return new HttpResponseMessage(HttpStatusCode.OK)
                     {
                         Content = new ObjectContent<NewProjectStore>(newStore, new JsonMediaTypeFormatter())

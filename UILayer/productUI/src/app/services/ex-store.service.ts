@@ -208,7 +208,8 @@ export class ExStoreService {
     return tabs;
   }
 
-  GetStoreTabsForProjectType(projectType: number): HomeTab[] {
+  GetStoreTabsForProjectType(projectType: number, nBrandId: number): HomeTab[] {
+    let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == nBrandId);
     let tabs: HomeTab[] = [];
     switch (projectType) {
       case 5://POS
@@ -228,7 +229,7 @@ export class ExStoreService {
         tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
-      case 10://Payment
+      case 10://Server Handheld
         tabs.push(this.GetStoreServerHandheldTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
@@ -239,7 +240,10 @@ export class ExStoreService {
         tabs.push(this.GetStoreExteriorMenusTab(TabInstanceType.Single));
         tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInteriorMenusTab(TabInstanceType.Single));
-        tabs.push(this.GetStoreSonicRadioTab(TabInstanceType.Single));
+        if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") == -1)
+          tabs.push(this.GetStoreSonicRadioTab(TabInstanceType.Single));
+        else
+          tabs.push(this.GetStoreServerHandheldTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
     }

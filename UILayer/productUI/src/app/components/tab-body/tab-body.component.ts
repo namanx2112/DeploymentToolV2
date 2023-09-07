@@ -36,6 +36,7 @@ export class TabBodyComponent {
   searchFields: any | null;
   NewInstanceName: string;
   isNew: boolean;
+  refreshMe: Date;
   constructor(private route: ActivatedRoute, public router: Router, public access: AccessService) {
     this.searchControlVals = {};
     this.curControlVals = {};
@@ -51,7 +52,13 @@ export class TabBodyComponent {
   }
 
   onSubmit(controlVals: FormGroup) {
-    this.searchFields = controlVals.value;
+    let hasBlank = true;
+    for (var indx in controlVals.value) {
+      if (controlVals.value[indx] != "")
+        hasBlank = false;
+    }
+    this.searchFields = (hasBlank) ? null : controlVals.value;
+    this.refreshMe = new Date();
   }
 
   rowClicked(row: any) {
