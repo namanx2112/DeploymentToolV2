@@ -83,7 +83,8 @@ namespace DeploymentTool.Controller
                 TraceUtility.WriteTrace("AttachmentController", "UploadStore:Multipart:");
                 try
                 {
-                    List<ProjectExcelFields> fields = new List<ProjectExcelFields>();
+
+                    int nBrandIdTemp = 0;
                     var filesReadToProvider = await request.Content.ReadAsMultipartAsync();
 
                     foreach (var stream in filesReadToProvider.Contents)
@@ -92,46 +93,115 @@ namespace DeploymentTool.Controller
                         if (fRequest.Length == 2)
                         {
                             string FileName = fRequest[0];
-                            int nBrandId = Convert.ToInt32(fRequest[1]);
-                            var fileBytes = await stream.ReadAsByteArrayAsync();
-                            string URL = HttpRuntime.AppDomainAppPath;
-
-                            string strFilePath = URL + @"Attachments\" + FileName;
-
-                            TraceUtility.WriteTrace("AttachmentController", "UploadStore:strFilePath:" + strFilePath);
-                            using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
-                            {
-                                bw.Write(fileBytes);
-                                bw.Close();
-                            }
-
-                            TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
-                            ImportExceltoDatabase(fields, strFilePath, nBrandId);
-                            /* fields.Add(new ProjectExcelFields() {
-                                 tProjectType = "RELOCATION",
-                                 tStoreNumber = "6937",
-                                 tAddress = "461 Columbia Ave",
-                                 tCity = "Lexington",
-                                 tState = "SC",
-                                 nDMAID = 546,
-                                 tDMA = "COLUMBIA SC",
-                                 tRED = "Michael Landru",
-                                 tCM = "Kevin Dalpiaz",
-                                 tANE = "",
-                                 tRVP = "Linda Wiseley",
-                                 tPrincipalPartner = "MICHAEL IRONS",
-                                 dStatus = DateTime.Now,
-                                 dOpenStore = DateTime.Now,
-                                 tProjectStatus = "Under Construction"
-                             });*/
-
+                            nBrandIdTemp = Convert.ToInt32(fRequest[1]);
+                            break;
                         }
                     }
-                    TraceUtility.WriteTrace("AttachmentController", "UploadStore:Returing");
-                    return new HttpResponseMessage(HttpStatusCode.OK)
+                    var output = db.Database.SqlQuery<string>("select top 1 tBrandName from tblBrand with (nolock) where aBrandId=@aBrandId ",new SqlParameter("@aBrandId", nBrandIdTemp)).FirstOrDefault();
+
+                    if (output.Contains("Buffalo Wild Wings"))
                     {
-                        Content = new ObjectContent<List<ProjectExcelFields>>(fields, new JsonMediaTypeFormatter())
-                    };
+                        List<ProjectExcelFields> fields = new List<ProjectExcelFields>();
+
+
+                        foreach (var stream in filesReadToProvider.Contents)
+                        {
+                            string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
+                            if (fRequest.Length == 2)
+                            {
+                                string FileName = fRequest[0];
+                                int nBrandId = Convert.ToInt32(fRequest[1]);
+                                var fileBytes = await stream.ReadAsByteArrayAsync();
+                                string URL = HttpRuntime.AppDomainAppPath;
+
+                                string strFilePath = URL + @"Attachments\" + FileName;
+
+                                TraceUtility.WriteTrace("AttachmentController", "UploadStore:strFilePath:" + strFilePath);
+                                using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
+                                {
+                                    bw.Write(fileBytes);
+                                    bw.Close();
+                                }
+
+                                TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
+                                ImportExceltoDatabase(fields, strFilePath, nBrandId);
+                                /* fields.Add(new ProjectExcelFields() {
+                                     tProjectType = "RELOCATION",
+                                     tStoreNumber = "6937",
+                                     tAddress = "461 Columbia Ave",
+                                     tCity = "Lexington",
+                                     tState = "SC",
+                                     nDMAID = 546,
+                                     tDMA = "COLUMBIA SC",
+                                     tRED = "Michael Landru",
+                                     tCM = "Kevin Dalpiaz",
+                                     tANE = "",
+                                     tRVP = "Linda Wiseley",
+                                     tPrincipalPartner = "MICHAEL IRONS",
+                                     dStatus = DateTime.Now,
+                                     dOpenStore = DateTime.Now,
+                                     tProjectStatus = "Under Construction"
+                                 });*/
+
+                            }
+                        }
+                        TraceUtility.WriteTrace("AttachmentController", "UploadStore:Returing");
+                        return new HttpResponseMessage(HttpStatusCode.OK)
+                        {
+                            Content = new ObjectContent<List<ProjectExcelFields>>(fields, new JsonMediaTypeFormatter())
+                        };
+                    }
+                    else
+                    {
+                        List<ProjectExcelFieldsSonic> fields = new List<ProjectExcelFieldsSonic>();
+
+                        foreach (var stream in filesReadToProvider.Contents)
+                        {
+                            string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
+                            if (fRequest.Length == 2)
+                            {
+                                string FileName = fRequest[0];
+                                int nBrandId = Convert.ToInt32(fRequest[1]);
+                                var fileBytes = await stream.ReadAsByteArrayAsync();
+                                string URL = HttpRuntime.AppDomainAppPath;
+
+                                string strFilePath = URL + @"Attachments\" + FileName;
+
+                                TraceUtility.WriteTrace("AttachmentController", "UploadStore:strFilePath:" + strFilePath);
+                                using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
+                                {
+                                    bw.Write(fileBytes);
+                                    bw.Close();
+                                }
+
+                                TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
+                                ImportExceltoDatabaseSonic(fields, strFilePath, nBrandId);
+                                /* fields.Add(new ProjectExcelFields() {
+                                     tProjectType = "RELOCATION",
+                                     tStoreNumber = "6937",
+                                     tAddress = "461 Columbia Ave",
+                                     tCity = "Lexington",
+                                     tState = "SC",
+                                     nDMAID = 546,
+                                     tDMA = "COLUMBIA SC",
+                                     tRED = "Michael Landru",
+                                     tCM = "Kevin Dalpiaz",
+                                     tANE = "",
+                                     tRVP = "Linda Wiseley",
+                                     tPrincipalPartner = "MICHAEL IRONS",
+                                     dStatus = DateTime.Now,
+                                     dOpenStore = DateTime.Now,
+                                     tProjectStatus = "Under Construction"
+                                 });*/
+
+                            }
+                        }
+                        TraceUtility.WriteTrace("AttachmentController", "UploadStore:Returing");
+                        return new HttpResponseMessage(HttpStatusCode.OK)
+                        {
+                            Content = new ObjectContent<List<ProjectExcelFieldsSonic>>(fields, new JsonMediaTypeFormatter())
+                        };
+                    }
                 }
                 catch (System.Exception ex)
                 {
@@ -213,6 +283,15 @@ namespace DeploymentTool.Controller
 
                                         objProjectExcel.tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
 
+                                        objProjectExcel.nNumberOfTabletsPerStore = reader.GetValue(dtNew.Columns.IndexOf("# of tablets per store")) != null && reader.GetValue(dtNew.Columns.IndexOf("# of tablets per store")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("# of tablets per store"))) : 0;
+                                        //objProjectExcel.tEquipmentVendor = reader.GetValue(dtNew.Columns.IndexOf("Equipment Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Equipment Vendor")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("Equipment Vendor"))) : 0;
+                                        objProjectExcel.dDeliveryDate = reader.GetValue(dtNew.Columns.IndexOf("Ship Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Ship Date")).ToString() != "" ? Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Ship Date"))) : new DateTime(2001, 1, 1);//default value
+                                        objProjectExcel.dRevisitDate = reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")).ToString() != "" ? Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Revisit Date"))) : new DateTime(2001, 1, 1);//default value
+
+                                        objProjectExcel.dInstallDate = reader.GetValue(dtNew.Columns.IndexOf("Scheduled Install Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Scheduled Install Date")).ToString() != "" ? Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Scheduled Install Date"))) : new DateTime(2001, 1, 1);//default value
+                                        //objProjectExcel.nEquipmentVendor = reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Equipment Vendor")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("Equipment Vendor"))) : 0;
+                                        //objProjectExcel.nInstallStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Status")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : 0;
+                                        
 
                                         fields.Add(objProjectExcel);
                                     }
@@ -244,7 +323,105 @@ namespace DeploymentTool.Controller
             // return ip;
             // return result;
         }
+        void ImportExceltoDatabaseSonic(List<ProjectExcelFieldsSonic> fields, string strFilePath, int nBrandId)
+        {
+            //  
 
+            try
+            {
+                TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
+                ProjectExcelFieldsSonic objProjectExcel = new ProjectExcelFieldsSonic();
+                DataTable dt = new DataTable();
+                try
+                {
+                    DataTable dtNew = new DataTable();
+                    // oledbConn.Open();
+                    using (var stream = File.Open(strFilePath, FileMode.Open, FileAccess.Read))
+                    {
+                        // Auto-detect format, supports:
+                        //  - Binary Excel files (2.0-2003 format; *.xls)
+                        //  - OpenXml Excel files (2007 format; *.xlsx, *.xlsb)
+                        using (var reader = ExcelReaderFactory.CreateReader(stream))
+                        {
+                            // Choose one of either 1 or 2:
+
+                            // 1. Use the reader methods
+                            do
+                            {
+                                reader.Read();
+                                int ColumnCount = reader.FieldCount;
+                                for (int i = 0; i < ColumnCount; i++)
+                                {
+                                    string ColumnName = reader.GetValue(i).ToString();
+                                    if (!dtNew.Columns.Contains(ColumnName))
+                                    { dtNew.Columns.Add(ColumnName); }
+                                }
+                                while (reader.Read())
+                                {
+
+                                    // reader.GetDouble(0);
+                                    string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
+                                    string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
+
+                                    if (projectType != "" && storeNumber != "")
+                                    {
+                                        SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", storeNumber);
+                                        var output = db.Database.SqlQuery<string>("Select tstoreNumber from tblstore with (nolock) where tstoreNumber= @tStoreNumber  and nBrandID=@nBrandId ", new SqlParameter("@tStoreNumber", storeNumber), new SqlParameter("@nBrandId", nBrandId)).FirstOrDefault();
+                                        objProjectExcel = new ProjectExcelFieldsSonic();
+
+                                        if (storeNumber != output)
+                                            objProjectExcel.nStoreExistStatus = 0;
+                                        else
+                                            objProjectExcel.nStoreExistStatus = 1;
+
+                                        objProjectExcel.tProjectType = projectType;
+                                        objProjectExcel.tStoreNumber = storeNumber;
+                                        objProjectExcel.tAddress = reader.GetValue(dtNew.Columns.IndexOf("Address")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Address")).ToString() : "";
+                                        objProjectExcel.tCity = reader.GetValue(dtNew.Columns.IndexOf("City")) != null ? reader.GetValue(dtNew.Columns.IndexOf("City")).ToString() : "";
+                                        objProjectExcel.tState = reader.GetValue(dtNew.Columns.IndexOf("State")) != null ? reader.GetValue(dtNew.Columns.IndexOf("State")).ToString() : "";
+                                        objProjectExcel.nDMAID = reader.GetValue(dtNew.Columns.IndexOf("DMA ID")) != null && reader.GetValue(dtNew.Columns.IndexOf("DMA ID")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("DMA ID"))) : 0;
+                                        objProjectExcel.tDMA = reader.GetValue(dtNew.Columns.IndexOf("DMA")) != null ? reader.GetValue(dtNew.Columns.IndexOf("DMA")).ToString() : "";
+                                        objProjectExcel.tRED = reader.GetValue(dtNew.Columns.IndexOf("RED")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RED")).ToString() : "";
+                                        objProjectExcel.tCM = reader.GetValue(dtNew.Columns.IndexOf("CM")) != null ? reader.GetValue(dtNew.Columns.IndexOf("CM")).ToString() : "";
+                                        objProjectExcel.tANE = reader.GetValue(dtNew.Columns.IndexOf("A&E")) != null ? reader.GetValue(dtNew.Columns.IndexOf("A&E")).ToString() : "";
+                                        objProjectExcel.tRVP = reader.GetValue(dtNew.Columns.IndexOf("RVP")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RVP")).ToString() : "";
+                                        objProjectExcel.tPrincipalPartner = reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")).ToString() : "";
+                                        objProjectExcel.dStatus = reader.GetValue(dtNew.Columns.IndexOf("Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Status")).ToString() != "" ? Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Status"))) : new DateTime(2001, 1, 1); //default value
+                                        objProjectExcel.dOpenStore = reader.GetValue(dtNew.Columns.IndexOf("Open Store")) != null && reader.GetValue(dtNew.Columns.IndexOf("Open Store")).ToString() != "" ? Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store"))) : new DateTime(2001, 1, 1);//default value
+
+                                        objProjectExcel.tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
+
+
+                                        fields.Add(objProjectExcel);
+                                    }
+                                }
+                            } while (reader.NextResult());
+
+                            // 2. Use the AsDataSet extension method
+                            //  var result = reader.AsDataSet();
+
+                            // The result of each spreadsheet is in result.Tables
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    TraceUtility.ForceWriteException("ImportExceltoDatabase", HttpContext.Current, ex);
+                    //result = false;
+                }
+                finally
+                {
+                    //oledbConn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
+            }
+            // return ip;
+            // return result;
+        }
         [HttpPost]
         [Route("api/Attachment/UpdateAttachment")]
         public IHttpActionResult UpdateAttachment()

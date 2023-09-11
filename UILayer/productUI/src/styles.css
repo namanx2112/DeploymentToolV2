@@ -5,9 +5,13 @@ body {
     height: 100%;
 }
 
+*:not(.mat-icon) {
+    font-family: "Segoe UI VSS (Regular)", "Segoe UI", "-apple-system", BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Ubuntu, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif!important;
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
 }
 
 .mdc-data-table__cell {
@@ -204,7 +208,50 @@ button {
     stroke: #6495ED;
 }
 
-.example-element-diagram{
-    height: auto!important;
-    border: 0px none!important;
+.example-element-diagram {
+    height: auto !important;
+    border: 0px none !important;
+}
+
+.ib_title1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    letter-spacing: -.04em;
+}
+
+.ib_title2 {
+    font-size: 1.3125rem;
+    font-weight: 600;
+    letter-spacing: -.02em;
+}
+
+.ib_decription {
+    font-size: .875rem;
+}
+
+.ib_count {
+    font-size: .9375rem;
+}
+
+.ib_countText {
+    font-size: .75rem;
+}
+
+.ib_text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ib_bgPlatelate {
+    background-color: rgba(var(--palette-neutral-2, 248, 248, 248), 1);
+}
+
+.ib_chips {
+    box-shadow: 0 3.2px 7.2px 0 var(--callout-shadow-color, rgba(0, 0, 0, .132)), 0 .6px 1.8px 0 var(--callout-shadow-secondary-color, rgba(0, 0, 0, .108));
+    background-color: #fff;
+}
+
+.ib_brands{
+    box-shadow: 0 3.2px 7.2px 0 var(--callout-shadow-color,rgba(0, 0, 0, .132)),0 .6px 1.8px 0 var(--callout-shadow-secondary-color,rgba(0, 0, 0, .108));
 }

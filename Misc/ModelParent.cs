@@ -8,5 +8,6 @@ namespace DeploymentTool.Misc
 {
     public interface ModelParent
     {
+
     }
 }

@@ -16,7 +16,7 @@ GO
 insert into tblDropdownModule(tModuleName,tModuleDisplayName,tModuleGroup,editable) values('SeverHandheldStatus', 'Status', 'Sever Handheld', 1)
 select * from tblDropdownModule order by 1 desc
 select * from tblBrand
-insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) values(2,38)
+insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) values(6,37)
 
 GO
 
@@ -241,75 +241,82 @@ END
 go
 
 
-alter procedure sproc_getActivePortFolioProjects      
-@nBrandId int=0,  
-@nStoreId int=0
-as      
-BEGIN     
+  
+    
+ALTER procedure sproc_getActivePortFolioProjects        
+@nBrandId int=0,    
+@nStoreId int=0  
+as        
+BEGIN       
   create table #tmpTable(nStoreId int,nProjectId int,nProjectType int,tProjectType varchar(100), tStoreNumber varchar(100), tStoreDetails VARCHAR(500),dProjectGoliveDate date,  dProjEndDate date, tProjManager varchar(500), tStatus varchar(100), tNewVendor
   
- varchar(500),tTableName VARCHAR(100),tFranchise VARCHAR(100),cCost decimal,dInstallDate date)      
     
+ varchar(500),tTableName VARCHAR(100),tFranchise VARCHAR(100),cCost decimal,dInstallDate date)        
       
+        
+    
+ if(@nStoreId>0)  
+ begin  
+ Insert into #tmpTable(nStoreId,nProjectId,nProjectType,tProjectType,tStatus,dProjectGoliveDate,dProjEndDate,tTableName)-- , tStatus, tPrevProjManager, tProjManager, dProjectGoliveDate, dProjEndDate, tOldVendor, tNewVendor)        
   
- if(@nStoreId>0)
- begin
- Insert into #tmpTable(nStoreId,nProjectId,nProjectType,tProjectType,tStatus,dProjectGoliveDate,dProjEndDate,tTableName)-- , tStatus, tPrevProjManager, tProjManager, dProjectGoliveDate, dProjEndDate, tOldVendor, tNewVendor)      
-
- select nStoreId,aProjectId,nProjectType, dbo.fn_getProjectType(nProjectType) tProjectType, dbo.fn_getDropdownText(nProjectStatus) tStatus,dGoLiveDate as dProjectGoliveDate,dProjEndDate ,tTableName    
- from tblProject with(nolock)      
- left join tblProjectTypeConfig with(nolock) on tblProjectTypeConfig.aTypeId = case when (tblProject.nProjectType < 5 OR  tblProject.nProjectType = 9)    
- then -1 else tblProject.nProjectType end      
- where    nStoreId=@nStoreId and
- nProjectActiveStatus = 1  --and dGoLiveDate >=getdate()   
- end
- else
- begin
- Insert into #tmpTable(nStoreId,nProjectId,nProjectType,tProjectType,tStatus,dProjectGoliveDate,dProjEndDate,tTableName)-- , tStatus, tPrevProjManager, tProjManager, dProjectGoliveDate, dProjEndDate, tOldVendor, tNewVendor)      
-
-  select nStoreId,aProjectId,nProjectType, dbo.fn_getProjectType(nProjectType) tProjectType, dbo.fn_getDropdownText(nProjectStatus) tStatus,dGoLiveDate as dProjectGoliveDate,dProjEndDate ,tTableName    
- from tblProject with(nolock)      
- left join tblProjectTypeConfig with(nolock) on tblProjectTypeConfig.aTypeId = case when (tblProject.nProjectType < 5 OR  tblProject.nProjectType = 9)    
- then -1 else tblProject.nProjectType end      
- where nBrandId = @nBrandId and    
- nProjectActiveStatus = 1  and dGoLiveDate >=getdate()  
- End
- declare @tQuery NVARCHAR(MAX), @tmpProjectId int, @tmpTableName VARCHAR(100),@TempnStoreId int    
-      
- DECLARE db_cursor CURSOR FOR       
- SELECT nStoreId,nProjectId,tTableName from #tmpTable      
-      
- OPEN db_cursor        
- FETCH NEXT FROM db_cursor INTO @TempnStoreId,@tmpProjectId, @tmpTableName      
-      
- WHILE @@FETCH_STATUS = 0        
- BEGIN        
-  Set @tQuery  = N'update #tmpTable set tNewVendor=dbo.fn_getVendorName(nVendor) from [dbo].['+ @tmpTableName +'] Where #tmpTable.nProjectId = [dbo].['+ @tmpTableName +'].nProjectId and nMyActiveStatus = 1 and #tmpTable.nProjectId = ' + CAST(@tmpProjectId as VARCHAR) -- update NewVendor      
- print @tQuery
- EXEC sp_executesql @tQuery     
- print @TempnStoreId    
-  update #tmpTable set tStoreNumber = tblStore.tStoreNumber,tStoreDetails=tblStore.tCity +' '+dbo.fn_getDropdownText(tblStore.nStoreState) from tblStore with(nolock) where aStoreID = @TempnStoreId    and nStoreId=@TempnStoreId    
-   
-    update #tmpTable set tProjManager = tITPM, tFranchise=(select tFranchiseName from tblFranchise with (nolock) where aFranchiseId=nFranchisee) from tblProjectStakeHolders with(nolock) 
-  where tblProjectStakeHolders.nStoreId = @TempnStoreId and  tblProjectStakeHolders.nProjectId =@tmpProjectId  and tITPM is not null    and #tmpTable.nProjectId=@tmpProjectId  
-   update #tmpTable set cCost = tblProjectConfig.cProjectCost from tblProjectConfig with(nolock) where tblProjectConfig.nStoreId = @TempnStoreId  and  tblProjectConfig.nProjectId =@tmpProjectId and nMyActiveStatus = 1 and tblProjectConfig.cProjectCost is not null    and #tmpTable.nProjectId=@tmpProjectId 
+ select nStoreId,aProjectId,nProjectType, dbo.fn_getProjectType(nProjectType) tProjectType, dbo.fn_getDropdownText(nProjectStatus) tStatus,dGoLiveDate as dProjectGoliveDate,dProjEndDate ,tTableName      
+ from tblProject with(nolock)        
+ left join tblProjectTypeConfig with(nolock) on tblProjectTypeConfig.aTypeId = case when (tblProject.nProjectType < 5 OR  tblProject.nProjectType = 9)      
+ then -1 else tblProject.nProjectType end        
+ where    nStoreId=@nStoreId and  
+ nProjectActiveStatus = 1  --and dGoLiveDate >=getdate()     
+ end  
+ else  
+ begin  
+ Insert into #tmpTable(nStoreId,nProjectId,nProjectType,tProjectType,tStatus,dProjectGoliveDate,dProjEndDate,tTableName)-- , tStatus, tPrevProjManager, tProjManager, dProjectGoliveDate, dProjEndDate, tOldVendor, tNewVendor)        
   
-     update #tmpTable set #tmpTable.dInstallDate =tblProjectInstallation.dInstallDate  from tblProjectInstallation with(nolock) where tblProjectInstallation.nStoreId = @TempnStoreId and  tblProjectInstallation.nProjectId =@tmpProjectId    and #tmpTable.nProjectId=@tmpProjectId       
-	
-
+  select nStoreId,aProjectId,nProjectType, dbo.fn_getProjectType(nProjectType) tProjectType, dbo.fn_getDropdownText(nProjectStatus) tStatus,dGoLiveDate as dProjectGoliveDate,dProjEndDate ,tTableName      
+ from tblProject with(nolock)        
+ left join tblProjectTypeConfig with(nolock) on tblProjectTypeConfig.aTypeId = case when (tblProject.nProjectType < 5 OR  tblProject.nProjectType = 9)      
+ then -1 else tblProject.nProjectType end        
+ where nBrandId = @nBrandId and      
+ nProjectActiveStatus = 1  and dGoLiveDate >=getdate()    
+ End  
+ declare @tQuery NVARCHAR(MAX), @tmpProjectId int, @tmpTableName VARCHAR(100),@TempnStoreId int      
+        
+ DECLARE db_cursor CURSOR FOR         
+ SELECT nStoreId,nProjectId,tTableName from #tmpTable        
+        
+ OPEN db_cursor          
+ FETCH NEXT FROM db_cursor INTO @TempnStoreId,@tmpProjectId, @tmpTableName        
+        
+ WHILE @@FETCH_STATUS = 0          
+ BEGIN          
+  Set @tQuery  = N'update #tmpTable set tNewVendor=dbo.fn_getVendorName(nVendor) from [dbo].['+ @tmpTableName +'] Where #tmpTable.nProjectId = [dbo].['+ @tmpTableName +'].nProjectId and nMyActiveStatus = 1 and #tmpTable.nProjectId = ' + CAST(@tmpProjectId
+ as VARCHAR) -- update NewVendor        
+ print @tQuery  
+ EXEC sp_executesql @tQuery       
+ print @TempnStoreId      
+  update #tmpTable set tStoreNumber = tblStore.tStoreNumber,tStoreDetails=tblStore.tCity +' '+dbo.fn_getDropdownText(tblStore.nStoreState) from tblStore with(nolock) where aStoreID = @TempnStoreId    and nStoreId=@TempnStoreId      
      
-  FETCH NEXT FROM db_cursor INTO @TempnStoreId,@tmpProjectId, @tmpTableName      
- END       
-       
-       
- CLOSE db_cursor        
- DEALLOCATE db_cursor      
-      
- select * from #tmpTable   order by dProjectGoliveDate     
-      
-  drop table #tmpTable    
+    update #tmpTable set tProjManager = tITPM, tFranchise=(select tFranchiseName from tblFranchise with (nolock) where aFranchiseId=nFranchisee) from tblProjectStakeHolders with(nolock)   
+  where tblProjectStakeHolders.nStoreId = @TempnStoreId and  tblProjectStakeHolders.nProjectId =@tmpProjectId  and tITPM is not null    and #tmpTable.nProjectId=@tmpProjectId    
+   update #tmpTable set cCost = tblProjectConfig.cProjectCost from tblProjectConfig with(nolock) where tblProjectConfig.nStoreId = @TempnStoreId  and  tblProjectConfig.nProjectId =@tmpProjectId and nMyActiveStatus = 1 and tblProjectConfig.cProjectCost is 
+not null    and #tmpTable.nProjectId=@tmpProjectId   
     
-END    
+     update #tmpTable set #tmpTable.dInstallDate =tblProjectInstallation.dInstallDate  from tblProjectInstallation with(nolock) where tblProjectInstallation.nStoreId = @TempnStoreId and  tblProjectInstallation.nProjectId =@tmpProjectId    and #tmpTable.nProjectId=@tmpProjectId         
+   
+  
+       
+  FETCH NEXT FROM db_cursor INTO @TempnStoreId,@tmpProjectId, @tmpTableName        
+ END         
+         
+         
+ CLOSE db_cursor          
+ DEALLOCATE db_cursor        
+        
+ select * from #tmpTable   order by dProjectGoliveDate       
+        
+  drop table #tmpTable      
+      
+END      
+    
+     
   
 
   Go
@@ -527,7 +534,7 @@ END
 Go
 
 
-alter Procedure sproc_CopyTechnologyToCurrentProject_new             
+create Procedure sproc_CopyTechnologyToCurrentProject_new             
 @nStoreId int,              
 @nProjectType int,            
 @nProjectID int,          
@@ -644,3 +651,37 @@ BEGIN
 	End
 END
 Go
+
+  
+ALTER procedure sproc_getPMFromPreviousProject  
+@nProjectId int,  
+@nStoreId int,  
+@tPM VARCHAR(500) OUTPUT  
+as  
+BEGIN   
+ declare @projType int, @newProjectId int
+ select @projType = nProjectType from tblProject with(nolock) where aProjectId = @nProjectId
+ select @newProjectId = aProjectId from tblProject with(nolock) where nProjectType = @projType and nStoreId = @nStoreId and aProjectId != @nProjectId
+ if(@newProjectId is not null)
+ BEGIN
+	select top 1 @tPM= tITPM from tblProjectStakeHolders with(nolock) where nProjectId = @newProjectId order by 1 desc
+ END
+ ELSE
+ BEGIN
+	select top 1 @tPM= tITPM from tblProjectStakeHolders with(nolock) where nStoreId = @nStoreId and nProjectId < @nProjectId order by 1 desc
+ END
+ if(@tPM is null)  
+  SET @tPM = ''  
+END
+
+GO
+
+
+
+--declare @tPM as varchar(500)
+--exec sproc_getPMFromPreviousProject 101, 38,  @tPM output
+--select @tPM 
+
+
+
+--sproc_getActiveProjects 38

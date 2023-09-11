@@ -82,6 +82,34 @@
         <th mat-header-cell *matHeaderCellDef> Project Status </th>
         <td mat-cell *matCellDef="let element"> {{element.tProjectStatus}} </td>
     </ng-container>
+    <ng-container matColumnDef="nNumberOfTabletsPerStore" *ngIf="isBuffaloBrand">
+        <th mat-header-cell *matHeaderCellDef> #Of Tablets per Store </th>
+        <td mat-cell *matCellDef="let element"> {{element.nNumberOfTabletsPerStore}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tEquipmentVendor" *ngIf="isBuffaloBrand">
+        <th mat-header-cell *matHeaderCellDef> Equipment Vendor </th>
+        <td mat-cell *matCellDef="let element"> {{element.tEquipmentVendor}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dDeliveryDate" *ngIf="isBuffaloBrand">
+        <th mat-header-cell *matHeaderCellDef> Delivery Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.dDeliveryDate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dRevisitDate" *ngIf="isBuffaloBrand">
+        <th mat-header-cell *matHeaderCellDef> Revisit Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.dRevisitDate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dInstallDate" *ngIf="isBuffaloBrand">
+        <th mat-header-cell *matHeaderCellDef> Install Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.dInstallDate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tInstallationVendor" *ngIf="isBuffaloBrand">
+        <th mat-header-cell *matHeaderCellDef> Installation Vendor </th>
+        <td mat-cell *matCellDef="let element"> {{element.tInstallationVendor}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tInstallStatus" *ngIf="isBuffaloBrand">
+        <th mat-header-cell *matHeaderCellDef> Install Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.tInstallStatus}} </td>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
     </tr>

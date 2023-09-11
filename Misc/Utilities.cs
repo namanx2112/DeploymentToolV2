@@ -20,6 +20,7 @@ using System.Collections;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System.Net.Http;
 using System.ServiceModel.Channels;
+using System.Data.Entity;
 
 namespace DeploymentTool.Misc
 {
@@ -244,7 +245,7 @@ namespace DeploymentTool.Misc
         }
 
         internal static string CreatePassword(string sUserName, int length, out string sPassword)
-        {            
+        {
             const string lower = "abcdefghijklmnopqrstuvwxyz";
             const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const string number = "1234567890";

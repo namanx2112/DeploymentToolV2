@@ -21,7 +21,8 @@ export interface StoreContact {
     tBillToCity: string,
     nBillToState: number,
     tBillToZip: string,
-    tBillToEmail: string
+    tBillToEmail: string,
+    nBrandID: number
 }
 export interface StoreConfiguration {
     aProjectConfigID: number,
@@ -246,7 +247,14 @@ export interface ProjectExcel {
     dStatus: Date,
     dOpenStore: Date,
     tProjectStatus: string,
-    nStoreExistStatus: number
+    nStoreExistStatus: number,
+    nNumberOfTabletsPerStore: number,
+    tEquipmentVendor: string,
+    dDeliveryDate: Date,
+    dRevisitDate: Date,
+    dInstallDate: Date,
+    tInstallationVendor: string,
+    tInstallStatus: string
 }
 
 export interface StoreSearchModel {

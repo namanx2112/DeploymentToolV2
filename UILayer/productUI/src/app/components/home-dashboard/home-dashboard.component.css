@@ -30,11 +30,6 @@
 }
 
 .chipsHeader {
-    font-size: 18px;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     width: 100%;
     height: 40px;
 }

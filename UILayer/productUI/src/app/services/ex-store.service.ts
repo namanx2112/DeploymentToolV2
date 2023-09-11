@@ -702,6 +702,18 @@ export class ExStoreService {
       validator: [],
       mandatory: false,
       hidden: true
+    },
+    {
+      field_name: "nBrandID",
+      fieldUniqeName: "nBrandID",
+      defaultVal: "0",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.number,
+      field_placeholder: "Enter Brand Id",
+      validator: [],
+      mandatory: false,
+      hidden: true
     }, {
       field_name: "Store Number",
       fieldUniqeName: "tStoreNumber",

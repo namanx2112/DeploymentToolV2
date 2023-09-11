@@ -10,6 +10,7 @@
 
 .nHeader{
     font-weight: bold;
+    display: block;
 }
 
 .nBody{

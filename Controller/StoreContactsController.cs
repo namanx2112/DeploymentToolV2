@@ -7,9 +7,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
+using DeploymentTool.Misc;
+using DeploymentTool.Model;
 
 namespace DeploymentTool.Controller
 {
@@ -46,9 +49,12 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Update(tblStore tblStore)
         {
-
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             db.Entry(tblStore).State = EntityState.Modified;
 
+            db.Entry(tblStore).Property(p => p.nCreatedBy).IsModified = false;
+            db.Entry(tblStore).Property(p => p.dtCreatedOn).IsModified = false;
+            Utilities.SetHousekeepingFields(false, HttpContext.Current, tblStore);
             try
             {
                 await db.SaveChangesAsync();
