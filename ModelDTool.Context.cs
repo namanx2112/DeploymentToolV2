@@ -85,7 +85,15 @@ namespace DeploymentTool
         public virtual DbSet<tblProjectNote1> tblProjectNote1 { get; set; }
         public virtual DbSet<tblProjectServerHandheld> tblProjectServerHandhelds { get; set; }
     
-        public virtual int sproc_CreateStoreFromExcel(string tStoreName, Nullable<int> nProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId)
+        public virtual int sproc_CreateStoreFromExcel(string tStoreName, Nullable<int> nProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy,
+            Nullable<int> nBrandId,
+            Nullable<int> nNumberOfTabletsPerStore,
+            string tEquipmentVendor,
+             Nullable<System.DateTime> dDeliveryDate,
+             Nullable<System.DateTime> dRevisitDate,
+             Nullable<System.DateTime> dInstallDate,
+            string tInstallationVendor,
+            string tInstallStatus)
         {
             var tStoreNameParameter = tStoreName != null ?
                 new ObjectParameter("tStoreName", tStoreName) :
@@ -158,8 +166,43 @@ namespace DeploymentTool
             var nBrandIdParameter = nBrandId.HasValue ?
                 new ObjectParameter("nBrandId", nBrandId) :
                 new ObjectParameter("nBrandId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sproc_CreateStoreFromExcel", tStoreNameParameter, nProjectTypeParameter, tStoreNumberParameter, tAddressParameter, tCityParameter, tStateParameter, nDMAIDParameter, tDMAParameter, tREDParameter, tCMParameter, tANEParameter, tRVPParameter, tPrincipalPartnerParameter, dStatusParameter, dOpenStoreParameter, tProjectStatusParameter, nCreatedByParameter, nBrandIdParameter);
+
+            var nNumberOfTabletsPerStoreParameter = nNumberOfTabletsPerStore.HasValue ?
+                new ObjectParameter("nNumberOfTabletsPerStore", nNumberOfTabletsPerStore) :
+                new ObjectParameter("nNumberOfTabletsPerStore", typeof(int));
+
+            var tEquipmentVendorParameter = tEquipmentVendor != null ?
+                new ObjectParameter("tEquipmentVendor", tEquipmentVendor) :
+                new ObjectParameter("tEquipmentVendor", typeof(string));
+
+            var dDeliveryDateParameter = dDeliveryDate.HasValue ?
+             new ObjectParameter("dDeliveryDate", dDeliveryDate) :
+             new ObjectParameter("dDeliveryDate", typeof(System.DateTime));
+
+            var dRevisitDateParameter = dRevisitDate.HasValue ?
+               new ObjectParameter("dRevisitDate", dRevisitDate) :
+               new ObjectParameter("dRevisitDate", typeof(System.DateTime));
+          
+            var dInstallDateParameter = dInstallDate.HasValue ?
+           new ObjectParameter("dInstallDate", dInstallDate) :
+               new ObjectParameter("dInstallDate", typeof(System.DateTime));
+
+            var tInstallationVendorParameter = tInstallationVendor !=null ?
+            new ObjectParameter("tInstallationVendor", tInstallationVendor) :
+            new ObjectParameter("tInstallationVendor", typeof(string));
+
+            var tInstallStatusParameter = tInstallStatus !=null ?
+                new ObjectParameter("tInstallStatus", tInstallStatus) :
+                new ObjectParameter("tInstallStatus", typeof(string));
+
+            //Nullable<System.DateTime> dRevisitDate,
+            //Nullable< System.DateTime > dDeliveryDate,
+            //Nullable<System.DateTime> dInstallDate
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sproc_CreateStoreFromExcel", tStoreNameParameter, nProjectTypeParameter, tStoreNumberParameter, tAddressParameter, tCityParameter, tStateParameter, nDMAIDParameter, tDMAParameter, tREDParameter, tCMParameter, tANEParameter, tRVPParameter, tPrincipalPartnerParameter, dStatusParameter, dOpenStoreParameter, tProjectStatusParameter, nCreatedByParameter
+                , nBrandIdParameter, nNumberOfTabletsPerStoreParameter, tEquipmentVendorParameter, dDeliveryDateParameter, dRevisitDateParameter,
+                dInstallDateParameter, tInstallationVendorParameter,
+                tInstallStatusParameter);
         }
     
         public virtual ObjectResult<sproc_SearchStore_Result> sproc_SearchStore(string tText, Nullable<int> nBrandID)

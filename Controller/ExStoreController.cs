@@ -37,7 +37,9 @@ namespace DeploymentTool.Controller
                     {
                         int nProjectType = (int)pType;
                         db.sproc_CreateStoreFromExcel(string.Empty, nProjectType, request.tStoreNumber, request.tAddress, request.tCity, request.tState, request.nDMAID, request.tDMA,
-                            request.tRED, request.tCM, request.tANE, request.tRVP, request.tPrincipalPartner, request.dStatus, request.dOpenStore, request.tProjectStatus, securityContext.nUserID, request.nBrandId);
+                            request.tRED, request.tCM, request.tANE, request.tRVP, request.tPrincipalPartner, request.dStatus, request.dOpenStore, request.tProjectStatus, securityContext.nUserID, 
+                            request.nBrandId, request.nNumberOfTabletsPerStore, request.tEquipmentVendor, request.dShipDate, request.dRevisitDate, request.dInstallDate, request.tInstallationVendor, request.tInstallStatus
+                            );
 
                         //List<SqlParameter> tPramList = new List<SqlParameter>();
                         //tPramList.Add(new SqlParameter("@tStoreName", "Dont Know"));

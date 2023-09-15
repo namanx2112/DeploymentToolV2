@@ -676,6 +676,109 @@ END
 
 GO
 
+ALTER Procedure sproc_CreateStoreFromExcel                          
+@tStoreName as VARCHAR(500),                          
+@nProjectType as int,                          
+@tStoreNumber as VARCHAR(20),                          
+@tAddress as VARCHAR(4000),                          
+@tCity as VARCHAR(500),                          
+@tState as VARCHAR(500),                          
+@nDMAID as INT,                          
+@tDMA as VARCHAR(500),                          
+@tRED as VARCHAR(500),                          
+@tCM as VARCHAR(500),                          
+@tANE as VARCHAR(500),                          
+@tRVP as VARCHAR(500),                          
+@tPrincipalPartner  as VARCHAR(500),                          
+@dStatus as datetime,                          
+@dOpenStore as dateTIME,                         
+@tProjectStatus as VARCHAR(100),                          
+@nCreatedBy int=0,                          
+@nBrandId int=0,           
+@nNumberOfTabletsPerStore int=0,    
+@tEquipmentVendor VARCHAR(500)='',    
+@dDeliveryDate datetime =null,    
+@dRevisitDate datetime = null,    
+@dInstallDate datetime=null,    
+@tInstallationVendor VARCHAR(500)='',    
+@tInstallStatus VARCHAR(500)=''    
+    
+    
+as                          
+BEGIN                          
+               
+        
+  
+ declare @nStoreId int, @nProjectStatus INT, @nProjectId INT, @nStoreState INT                                
+ Select @nProjectStatus = aDropDownId from tblDropdowns WHERE tDropdownText = @tProjectStatus                          
+ Select @nStoreState = aDropDownId from tblDropdowns WHERE tDropdownText = @tState                     
+ declare @aFranchiseId int      
+ select top 1 @aFranchiseId=aFranchiseId  from tblfranchise with (nolock)  where LOWER(tFranchiseName)=LOWER(@tPrincipalPartner)       
+       
+ select @nStoreId=aStoreID from tblStore with(nolock) where tStoreNumber=@tStoreNumber  and nBrandID=@nBrandId              
+     
+ if(@nBrandId=6)    
+ Begin    
+    
+  declare @nEquipmentVendorId int      
+ select top 1 @nEquipmentVendorId=aVendorId  from tblVendor with (nolock)  where LOWER(tVendorName)=LOWER(@tEquipmentVendor)  -- and nBrandID=@nBrandId        
+   declare @nInstallationVendorId int      
+ select top 1 @nInstallationVendorId=aVendorId  from tblVendor with (nolock)  where LOWER(tVendorName)=LOWER(@tInstallationVendor) --and nBrandID=@nBrandId        
+     declare @nInstallnStatusId int   
+  declare @nModuleId int
+  select @nModuleId = aModuleId from tblDropdownModule where tModuleName ='InstallationStatus'
+  Select @nInstallnStatusId = aDropDownId from tblDropdowns with (nolock)  WHERE LOWER(tDropdownText) =LOWER(@tInstallStatus)  and nBrandID=@nBrandId  and nModuleId = @nModuleId   
+  End    
+    
+ if (@nStoreId>0)                        
+ begin                        
+  update tblProject set tProjectName=@tStoreName,dGoLiveDate=@dOpenStore,nProjectType=@nProjectType,nProjectStatus=@nProjectStatus,              
+  nDMAID=@nDMAID,tDMA=@tDMA,nBrandID=@nBrandId,dtUpdatedOn=GETDATE(),@nProjectId=aProjectID              
+  where nStoreID=@nStoreId             
+               
+  update tblStore set tStoreName=@tStoreName,tStoreAddressLine1=@tAddress,tCity=@tCity,nStoreState=@nStoreState,dtUpdatedOn=GETDATE(),nBrandID=@nBrandId              
+  where aStoreID=@nStoreId            
+              
+  update tblProjectStakeHolders set tRVP=@tRVP,tRED=@tRED,tCM=@tCM,tAandE=@tANE,tPrincipalPartner=@tPrincipalPartner,nFranchisee=@aFranchiseId             
+  where nStoreId=@nStoreId            
+    
+   update tblProjectServerHandheld set nVendor=@nEquipmentVendorId,dDeliveryDate=@dDeliveryDate,nNumberOfTabletsPerStore=@nNumberOfTabletsPerStore,dRevisitDate=@dRevisitDate             
+  where nStoreId=@nStoreId     and nProjectId=@nProjectId    
+    
+   update tblProjectinstallation set dInstallDate=@dInstallDate,nVendor=@nInstallationVendorId,nStatus=@nInstallnStatusId             
+  where nStoreId=@nStoreId     and nProjectId=@nProjectId    
+ end                        
+ else                         
+ begin                        
+   INSERT INTO tblStore(tStoreNumber, nCreatedBy, dtCreatedOn, tStoreName, tStoreAddressLine1, tCity, nStoreState,nBrandID) VALUES(@tStoreNumber, @nCreatedBy, GETDATE(), @tStoreName, @tAddress, @tCity,@nStoreState,@nBrandID)                          
+   SET @nStoreId = @@IDENTITY              
+                        
+   INSERT INTO tblProject(tProjectName,nStoreID,dGoLiveDate,nProjectType,nProjectStatus,nDMAID,tDMA,nBrandID,nCreatedBy,dtCreatedOn, nProjectActiveStatus)                          
+   VALUES(@tStoreName, @nStoreId, @dOpenStore,@nProjectType,  @nProjectStatus, @nDMAID, @tDMA, @nBrandId, @nCreatedBy,GETDATE(),1)                          
+                          
+   SET @nProjectId = @@IDENTITY      
+         
+   insert into tblProjectStakeHolders(nProjectID,tRVP,tRED,tCM,tAandE,tPrincipalPartner, nStoreId, nFranchisee)                
+   values(@nProjectId,@tRVP,@tRED,@tCM,@tANE,@tPrincipalPartner, @nStoreId,@aFranchiseId)      
+    
+       
+          
+  if(@nBrandId=6)    
+  Begin    
+    
+   insert into tblProjectServerHandheld (nProjectID,nVendor,dDeliveryDate,nNumberOfTabletsPerStore,dRevisitDate,nMyActiveStatus,nStoreId)                
+   values( @nProjectID,@nEquipmentVendorId,@dDeliveryDate,@nNumberOfTabletsPerStore,@dRevisitDate,1,@nStoreId )         
+     
+  insert into tblProjectinstallation (nProjectID,dInstallDate,nVendor, nStatus,nMyActiveStatus,nStoreId)                           
+   values(@nProjectID,@dInstallDate,@nInstallationVendorId,@nInstallnStatusId,1,@nStoreId )         
+       
+  End    
+  End              
+END  
+  
+  
+  
+  
 
 
 --declare @tPM as varchar(500)
@@ -685,3 +788,8 @@ GO
 
 
 --sproc_getActiveProjects 38
+-----------------15 Sep
+Alter table tblProjectInstallation add dRevisitDate date
+
+GO
+EXEC sp_rename 'dbo.tblProjectServerHandheld.dRevisitDate', 'dShipDate', 'COLUMN';

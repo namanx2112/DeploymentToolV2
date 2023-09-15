@@ -72,11 +72,11 @@
     </ng-container>
     <ng-container matColumnDef="dStatus">
         <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let element"> {{element.dStatus}} </td>
+        <td mat-cell *matCellDef="let element"> {{getFormatedDate(element.dStatus)}} </td>
     </ng-container>
     <ng-container matColumnDef="dOpenStore">
         <th mat-header-cell *matHeaderCellDef> OpenStore </th>
-        <td mat-cell *matCellDef="let element"> {{element.dOpenStore}} </td>
+        <td mat-cell *matCellDef="let element"> {{getFormatedDate(element.dOpenStore)}} </td>
     </ng-container>
     <ng-container matColumnDef="tProjectStatus">
         <th mat-header-cell *matHeaderCellDef> Project Status </th>
@@ -90,17 +90,17 @@
         <th mat-header-cell *matHeaderCellDef> Equipment Vendor </th>
         <td mat-cell *matCellDef="let element"> {{element.tEquipmentVendor}} </td>
     </ng-container>
-    <ng-container matColumnDef="dDeliveryDate" *ngIf="isBuffaloBrand">
-        <th mat-header-cell *matHeaderCellDef> Delivery Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.dDeliveryDate}} </td>
+    <ng-container matColumnDef="dShipDate" *ngIf="isBuffaloBrand">
+        <th mat-header-cell *matHeaderCellDef> Ship Date </th>
+        <td mat-cell *matCellDef="let element"> {{getFormatedDate(element.dShipDate)}} </td>
     </ng-container>
     <ng-container matColumnDef="dRevisitDate" *ngIf="isBuffaloBrand">
         <th mat-header-cell *matHeaderCellDef> Revisit Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.dRevisitDate}} </td>
+        <td mat-cell *matCellDef="let element"> {{getFormatedDate(element.dRevisitDate)}} </td>
     </ng-container>
     <ng-container matColumnDef="dInstallDate" *ngIf="isBuffaloBrand">
         <th mat-header-cell *matHeaderCellDef> Install Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.dInstallDate}} </td>
+        <td mat-cell *matCellDef="let element"> {{getFormatedDate(element.dInstallDate)}} </td>
     </ng-container>
     <ng-container matColumnDef="tInstallationVendor" *ngIf="isBuffaloBrand">
         <th mat-header-cell *matHeaderCellDef> Installation Vendor </th>

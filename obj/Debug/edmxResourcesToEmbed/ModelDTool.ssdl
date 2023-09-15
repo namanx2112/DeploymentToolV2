@@ -312,6 +312,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nMyActiveStatus" Type="int" />
     <Property Name="dDateFor_nStatus" Type="date" />
     <Property Name="dDateFor_nProjectStatus" Type="date" />
+    <Property Name="dRevisitDate" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenus">
     <Key>
@@ -439,7 +440,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dDateFor_nStatus" Type="date" />
     <Property Name="nStatus" Type="int" />
     <Property Name="nNumberOfTabletsPerStore" Type="int" />
-    <Property Name="dRevisitDate" Type="date" />
+    <Property Name="dShipDate" Type="date" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">

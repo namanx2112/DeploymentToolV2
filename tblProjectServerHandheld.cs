@@ -23,7 +23,7 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dDateFor_nStatus { get; set; }
         public Nullable<int> nStatus { get; set; }
         public Nullable<int> nNumberOfTabletsPerStore { get; set; }
-        public Nullable<System.DateTime> dRevisitDate { get; set; }
+        public Nullable<System.DateTime> dShipDate { get; set; }
         public Nullable<decimal> cCost { get; set; }
     }
 }

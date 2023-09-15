@@ -38,10 +38,10 @@ export class FileStoreSelectionComponent {
       this.isBuffaloBrand = true;
       this.displayedColumns = ['select', 'nStoreExistStatus', 'tProjectType', 'tStoreNumber', 'tAddress',
         'tCity', 'tState', 'nDMAID', 'tDMA', 'tRED', 'tCM', 'tANE', 'tRVP', 'tPrincipalPartner',
-        'dStatus', 'dOpenStore', 'tProjectStatus', 'nNumberOfTabletsPerStore', 'tEquipmentVendor', 'dDeliveryDate', 'dRevisitDate', 'dInstallDate', 'tInstallationVendor', 'tInstallStatus'];
+        'dStatus', 'dOpenStore', 'tProjectStatus', 'nNumberOfTabletsPerStore', 'tEquipmentVendor', 'dShipDate', 'dRevisitDate', 'dInstallDate', 'tInstallationVendor', 'tInstallStatus'];
       this.displayedColumnTitles = ['nRowIndex', 'Store Exist', 'Project Type', 'Store Number', 'Address',
         'City', 'State', 'DMA ID', 'DMA', 'RED', 'CM', 'A&E', 'RVP', 'Principal Partner',
-        'Status', 'Open Store', 'Project Status', '#of Teblets per Store', 'Equipment Vendor', 'Delivery Date', 'Revisit Date', 'Install Date', 'Installation Vendor', 'Install Status'];
+        'Status', 'Open Store', 'Project Status', '#of Teblets per Store', 'Equipment Vendor', 'Ship Date', 'Revisit Date', 'Install Date', 'Installation Vendor', 'Install Status'];
     }
     else {
       this.isBuffaloBrand = false;
@@ -52,6 +52,10 @@ export class FileStoreSelectionComponent {
         'City', 'State', 'DMA ID', 'DMA', 'RED', 'CM', 'A&E', 'RVP', 'Principal Partner',
         'Status', 'Open Store', 'Project Status'];
     }
+  }
+
+  getFormatedDate(colVal: string){
+    return CommonService.getFormatedDateString(colVal);
   }
 
   checkboxChange(event: any, row: any) {

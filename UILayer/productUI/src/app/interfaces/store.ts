@@ -104,7 +104,7 @@ export interface StoreServerHandheld {
     nStatus: number,
     nNumberOfTabletsPerStore: number,
     dDeliveryDate: Date,
-    dRevisitDate: Date,
+    dShipDate: Date,
     cCost: number,
     dDateFor_nStatus: Date
 }
@@ -187,7 +187,8 @@ export interface StoreInstallation {
     nProjectStatus: number,
     cCost: number,
     dDateFor_nStatus: Date,
-    dDateFor_nProjectStatus: Date
+    dDateFor_nProjectStatus: Date,
+    dRevisitDate: Date
 }
 
 export interface HistoricalProjects {

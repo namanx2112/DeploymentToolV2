@@ -264,6 +264,7 @@
     <Property Name="nMyActiveStatus" Type="Int32" />
     <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
     <Property Name="dDateFor_nProjectStatus" Type="DateTime" Precision="0" />
+    <Property Name="dRevisitDate" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenu">
     <Key>
@@ -926,7 +927,7 @@
     <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="nStatus" Type="Int32" />
     <Property Name="nNumberOfTabletsPerStore" Type="Int32" />
-    <Property Name="dRevisitDate" Type="DateTime" Precision="0" />
+    <Property Name="dShipDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="0" />
   </EntityType>
 </Schema>

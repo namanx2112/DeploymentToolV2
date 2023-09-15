@@ -28,11 +28,11 @@ namespace DeploymentTool.Model
         public int nNumberOfTabletsPerStore { get; set; }
         public string tEquipmentVendor { get; set; }
 
-        public DateTime dDeliveryDate { get; set; }
+        public Nullable<DateTime> dShipDate { get; set; }
 
-        public DateTime dRevisitDate { get; set; }
+        public Nullable<DateTime> dRevisitDate { get; set; }
         
-        public DateTime dInstallDate { get; set; }
+        public Nullable<DateTime> dInstallDate { get; set; }
 
         public string tInstallationVendor { get; set; }
 

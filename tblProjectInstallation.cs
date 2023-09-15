@@ -29,5 +29,6 @@ namespace DeploymentTool
         public Nullable<int> nMyActiveStatus { get; set; }
         public Nullable<System.DateTime> dDateFor_nStatus { get; set; }
         public Nullable<System.DateTime> dDateFor_nProjectStatus { get; set; }
+        public Nullable<System.DateTime> dRevisitDate { get; set; }
     }
 }

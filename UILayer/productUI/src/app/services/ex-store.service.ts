@@ -2795,6 +2795,18 @@ export class ExStoreService {
         hidden: false
       },
       {
+        field_name: "Revisit Date",
+        fieldUniqeName: "dRevisitDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Revisit Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
         field_name: "Cost",
         fieldUniqeName: "cCost",
         defaultVal: "",
@@ -3153,13 +3165,13 @@ export class ExStoreService {
         hidden: false
       },
       {
-        field_name: "Revisit Date",
-        fieldUniqeName: "dRevisitDate",
+        field_name: "Ship Date",
+        fieldUniqeName: "dShipDate",
         defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.date,
-        field_placeholder: "Enter Revisit Date",
+        field_placeholder: "Enter Ship Date",
         validator: [],
         mandatory: false,
         hidden: false

@@ -189,6 +189,7 @@
           <ScalarProperty Name="aProjectInstallationID" ColumnName="aProjectInstallationID" />
           <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
           <ScalarProperty Name="dDateFor_nProjectStatus" ColumnName="dDateFor_nProjectStatus" />
+          <ScalarProperty Name="dRevisitDate" ColumnName="dRevisitDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -893,7 +894,7 @@
       <EntityTypeMapping TypeName="dtDBModel.tblProjectServerHandheld">
         <MappingFragment StoreEntitySet="tblProjectServerHandheld">
           <ScalarProperty Name="cCost" ColumnName="cCost" />
-          <ScalarProperty Name="dRevisitDate" ColumnName="dRevisitDate" />
+          <ScalarProperty Name="dShipDate" ColumnName="dShipDate" />
           <ScalarProperty Name="nNumberOfTabletsPerStore" ColumnName="nNumberOfTabletsPerStore" />
           <ScalarProperty Name="nStatus" ColumnName="nStatus" />
           <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />

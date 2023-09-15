@@ -130,7 +130,7 @@ button {
 }
 
 .fleidLabel {
-    font-weight: 900;
+    font-weight: 600;
     word-wrap: break-word;
     white-space: nowrap;
     text-overflow: ellipsis;
