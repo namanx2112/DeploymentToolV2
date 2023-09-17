@@ -11,7 +11,7 @@
 .left {
     width: 80px;
     height: 100%;
-    background-color: gray;
+    background-color: #c8252c;
 }
 
 .right {
@@ -29,7 +29,7 @@
     height: 59px;
     width: 100%;
     overflow: hidden;    
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .tButton{
@@ -56,14 +56,15 @@
 }
 
 .topHeaderTitle{
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;      
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #c8252c;
 }
 
 .header {
-    background-color: #E8E8E8;
+    background-color: #fff;
 }
 
 .rightHeader {
@@ -98,7 +99,7 @@
 }
 
 .action:hover .mat-icon, .action.selected .mat-icon{
-    color: #262626;
+    color: #c8252c;
 }
 
 .action.selected span{
@@ -108,7 +109,7 @@
     width: 0;
 	height: 0;
 	border-top: 10px solid transparent;
-	border-right: 10px solid lightgray;
+	border-right: 10px solid #fff;
 	border-bottom: 10px solid transparent;
 }
 
@@ -120,6 +121,10 @@
 .supportButton{
     position: absolute;
     z-index: 1001;
-    top: 0px;
+    top: 5px;
     right: 0px;
+    background-color: #c8252c;
+    color: #fff;
+    height: 40px;
+    border: 0px none;
 }

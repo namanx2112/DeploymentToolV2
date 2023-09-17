@@ -19,7 +19,8 @@ export interface BrandModel {
     bDeleted: boolean,
     tIconURL: string,
     access: boolean | true,
-    nEnabled: number
+    nEnabled: number,
+    tMyClass: string
 }
 
 

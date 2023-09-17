@@ -1,6 +1,6 @@
 .example-container {
     width: calc(100% - 2px);
-    height: calc(100% - 2px);
+    height: 100%;
 }
 
 .mat-drawer-content{
@@ -16,7 +16,6 @@
 
 .sideNav {
     padding: 20px 0px;
-    background-color: #E8E8E8;
     display: flex;
     width: 300px;
 }

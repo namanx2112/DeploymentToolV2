@@ -48,7 +48,8 @@ export class ManageDropdownsComponent {
       bDeleted: false,
       tIconURL: '',
       access: true,
-      nEnabled: 0
+      nEnabled: 0,
+      tMyClass: ""
     };
     this.loadBrands();
   }

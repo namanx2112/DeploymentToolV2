@@ -62,31 +62,39 @@ namespace DeploymentTool.Model
         public string tIconURL { get; set; }
         public int nEnabled { get; set; }
 
+        public string tMyClass { get; set; }
+
         public void SetBrandURL()
         {
             string tURL = string.Empty;
             if (this.tBrandName.ToLower().IndexOf("sonic") > -1)
             {
+                this.tMyClass = "sonic_theme";
                 tURL = "./BrandIcons/sonic.png";
             }
             else if (this.tBrandName.ToLower().IndexOf("dunkin") > -1)
             {
+                this.tMyClass = "dunkin_theme";
                 tURL = "./BrandIcons/dunkin.png";
             }
             else if (this.tBrandName.ToLower().IndexOf("baskin") > -1)
             {
+                this.tMyClass = "baskin_theme";
                 tURL = "./BrandIcons/baskin.png";
             }
             else if (this.tBrandName.ToLower().IndexOf("buffa") > -1)
             {
+                this.tMyClass = "buffalo_theme";
                 tURL = "./BrandIcons/buffalo.png";
             }
             else if (this.tBrandName.ToLower().IndexOf("arby") > -1)
             {
+                this.tMyClass = "arby_theme";
                 tURL = "./BrandIcons/arby.png";
             }
             else if (this.tBrandName.ToLower().IndexOf("jim") > -1)
             {
+                this.tMyClass = "jj_theme";
                 tURL = "./BrandIcons/jj.png";
             }
             else

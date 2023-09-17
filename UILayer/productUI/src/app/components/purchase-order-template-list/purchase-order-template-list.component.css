@@ -10,7 +10,6 @@
     line-height: 35px;
     float: left;
     font-size: 15px;    
-    color: #444;
     font-weight: bold;
 }
 .mat-icon{
@@ -69,7 +68,7 @@
 .requestTile .exButton {
     float: right;
     width: 25px;
-    height: 25px;
+    height: 30px;
     padding: 0px;
-    margin-top: -2px;
+    margin-top: -8px;
 }

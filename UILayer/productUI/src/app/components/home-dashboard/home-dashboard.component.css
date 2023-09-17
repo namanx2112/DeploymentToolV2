@@ -26,12 +26,13 @@
     padding: 10px;
     margin: 20px auto;
     border-radius: 10px;
-    background-color: #E8E8E8;
+    box-shadow: 0 3.2px 7.2px 0 var(--callout-shadow-color,rgba(0, 0, 0, .432)),0 .6px 1.8px 0 var(--callout-shadow-secondary-color,rgba(255, 0, 0, 0.108));
 }
 
 .chipsHeader {
     width: 100%;
     height: 40px;
+    color: #c8252c;
 }
 
 .whiteBG{
@@ -53,6 +54,8 @@
     height: 100px;
     display: flex;
     justify-content: center;
+    box-shadow: 1px 3.2px 7.2px 0 var(--callout-shadow-color,rgba(255, 0, 0, .432)),0 .6px 1.8px 0 var(--callout-shadow-secondary-color,rgba(255, 0, 0, 0.108));
+    border-bottom: 4px solid #c8252c;
 }
 .brands img{
     width: 100px;

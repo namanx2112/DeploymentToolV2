@@ -11,13 +11,14 @@
 
 .sideNav {
     padding: 20px;
-    background-color: #E8E8E8;
+    background-color: #f0f0f0;
 }
 
 .ConfigList span {
     display: block;
     margin: 10px auto;
     background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
     padding: 8px;
     height: 20px;
     border-radius: 5px;
