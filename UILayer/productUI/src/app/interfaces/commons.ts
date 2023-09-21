@@ -1,3 +1,5 @@
+import { ChartType } from "chart.js";
+
 export interface Commons {
 }
 
@@ -12,8 +14,19 @@ export class ControlsErrorMessages {
 }
 
 export interface ProjectHighlights {
+    reportId: number,
     title: string,
-    count: number
+    count: number,
+    compareWith?: number,
+    compareWithText?: string,
+    type: DashboardTileType,
+    chartType?: ChartType,
+    chartValues?: number[],
+    chartLabels?: string[]
+}
+
+export enum DashboardTileType {
+    Text, Chart
 }
 
 export interface checkboxItems {

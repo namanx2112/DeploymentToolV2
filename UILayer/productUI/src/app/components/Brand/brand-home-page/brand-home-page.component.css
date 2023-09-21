@@ -10,7 +10,7 @@
 .sideNavContent {
     height: 100%;
     width: 95%;
-    margin-left: 5%;
+    padding-left: 5%;
     overflow: auto;
 }
 

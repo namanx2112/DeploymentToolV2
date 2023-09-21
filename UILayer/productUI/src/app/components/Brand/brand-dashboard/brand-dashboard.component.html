@@ -3,11 +3,32 @@
     <app-search-store [curBrandId]="curBrand.aBrandId" (SearchedResult)="storeSelect($event)"
         *ngIf="access.hasAccess('home.sonic.viewstore', 0)"></app-search-store>
 </div>
-<div class="tilesPart" *ngIf="access.hasAccess('home.sonic.storehighlight', 0)">
-    <div class="tileShortcut" *ngFor="let cur of projects">
-        <span class="count">{{cur.count}}</span>
-        <span class="title">{{cur.title}}</span>
-    </div>
+<div class="tilHeader">
+    <mat-chip-listbox aria-label="Fish selection">
+        <mat-chip-option>POS</mat-chip-option>
+        <mat-chip-option>Audio</mat-chip-option>
+        <mat-chip-option>Menu</mat-chip-option>
+        <mat-chip-option>Payment</mat-chip-option>
+        <mat-chip-option>Server handheld</mat-chip-option>
+    </mat-chip-listbox>
+</div>
+<div class="tilesPart" *ngIf="access.hasAccess('home.sonic.storehighlight', 0)">    
+    <app-dashboard *ngFor="let cur of projects| forFilter:filterNotChart" [record]="cur" (ChartClicked)="chartClicked($event)"></app-dashboard>
+    <app-dashboard-chart *ngFor="let cur of projects| forFilter:filterChart" [record]="cur" (ChartClicked)="chartClicked($event)"></app-dashboard-chart>
+    <!-- <mat-menu #menu="matMenu">
+            <button mat-menu-item class="tMenu" (click)="filterClick('audio');">
+                <span>Audio</span>
+            </button>
+            <button mat-menu-item class="tMenu" (click)="filterClick('pos')">
+                <span>POS</span>
+            </button>
+            <button mat-menu-item class="tMenu" (click)="filterClick('menu');">
+                <span>Menu</span>
+            </button>
+            <button mat-menu-item class="tMenu" (click)="filterClick('payment');">
+                <span>Payment Terminal</span>
+            </button>
+        </mat-menu> -->
 </div>
 <h3 class="headerPart">Store Geographical Map</h3>
 <div class="mapPart">

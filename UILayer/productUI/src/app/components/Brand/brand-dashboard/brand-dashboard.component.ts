@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
-import { ProjectHighlights } from 'src/app/interfaces/commons';
+import { DashboardTileType, ProjectHighlights } from 'src/app/interfaces/commons';
 import { BrandModel } from 'src/app/interfaces/models';
 import { StoreSearchModel } from 'src/app/interfaces/store';
 import { AccessService } from 'src/app/services/access.service';
@@ -23,6 +23,25 @@ export class BrandDashboardComponent {
   }
 
   ngOnInit() {
+  }
+
+  chartClicked(label: string) {
+    this.ChangeView.emit("viewreport");
+  }
+
+  filterNotChart(part: ProjectHighlights) {
+    return (part.type != DashboardTileType.Chart);
+  }
+
+  filterChart(part: ProjectHighlights) {
+    return (part.type == DashboardTileType.Chart);
+  }
+
+  filterClick(filter: string) {}
+
+  viewReports(ev: any, report: ProjectHighlights) {
+    if (ev.target.className.indexOf("tMenu") == -1)
+      this.ChangeView.emit("viewreport");
   }
 
 

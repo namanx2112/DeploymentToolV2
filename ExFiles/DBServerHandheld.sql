@@ -16,7 +16,7 @@ GO
 insert into tblDropdownModule(tModuleName,tModuleDisplayName,tModuleGroup,editable) values('SeverHandheldStatus', 'Status', 'Sever Handheld', 1)
 select * from tblDropdownModule order by 1 desc
 select * from tblBrand
-insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) values(6,37)
+insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) values(6,36)
 
 GO
 

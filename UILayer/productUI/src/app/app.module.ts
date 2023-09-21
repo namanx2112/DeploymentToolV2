@@ -79,6 +79,8 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { ProjectPortfolioCellComponent } from './components/Brand/project-portfolio-cell/project-portfolio-cell.component';
 import { ReportTableComponent } from './components/report-table/report-table.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { DashboardComponent } from './components/Brand/dashboard/dashboard.component';
+import { DashboardChartComponent } from './components/Brand/dashboard-chart/dashboard-chart.component';
 
 @NgModule({
     declarations: [
@@ -134,7 +136,9 @@ import { NotificationComponent } from './components/notification/notification.co
         ForgetPasswordComponent,
         ProjectPortfolioCellComponent,
         ReportTableComponent,
-        NotificationComponent
+        NotificationComponent,
+        DashboardComponent,
+        DashboardChartComponent
     ],
     providers: [
         {
