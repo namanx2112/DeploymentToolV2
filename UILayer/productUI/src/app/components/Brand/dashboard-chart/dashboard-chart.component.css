@@ -1,8 +1,21 @@
 .tileShortcut {
-    width: 500px;
+    width: 450px;
+    height: 350px;
     position: relative;
-    /* border: 1px solid lightgray; */
     border-radius: 10px;
     cursor: pointer;
-    background-color: #fff;
+    border: 1px solid lightgray;
+}
+
+.tileShortcut .title {
+    font-weight: 500;
+    text-align: left;
+    font-size: 14px;
+    display: block;
+    padding: 5px;
+}
+
+.canvas{
+    width: 300px;
+    margin: 20px auto;
 }

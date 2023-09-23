@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Chart, { ChartType, ChartTypeRegistry } from 'chart.js/auto';
 import { Colors } from 'chart.js';
-import { DashboardTileType, ProjectHighlights } from 'src/app/interfaces/commons';
+import { DashboardTileType, DahboardTile } from 'src/app/interfaces/commons';
 
 
 
@@ -15,13 +15,13 @@ import { DashboardTileType, ProjectHighlights } from 'src/app/interfaces/commons
 export class DashboardComponent implements OnInit {
   chart: any;
   @Input()
-  set record(val: ProjectHighlights) {
+  set record(val: DahboardTile) {
     this._record = val;
     if (this._record.type != DashboardTileType.Chart){
       this.generageTextHighlight();
     }
   }
-  _record: ProjectHighlights;
+  _record: DahboardTile;
   @Output() ChartClicked = new EventEmitter<string>();
   compareText: string;
   compareIcon: string;

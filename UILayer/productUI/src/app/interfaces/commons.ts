@@ -13,7 +13,7 @@ export class ControlsErrorMessages {
     public static Range = "Range is not proper";
 }
 
-export interface ProjectHighlights {
+export interface DahboardTile {
     reportId: number,
     title: string,
     count: number,

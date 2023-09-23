@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DashboardTileType, ProjectHighlights } from '../interfaces/commons';
+import { DashboardTileType, DahboardTile } from '../interfaces/commons';
 import { Observable } from 'rxjs';
 import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
@@ -143,61 +143,6 @@ export class ExStoreService {
     }
     else
       return [];
-  }
-
-  GetProjecthighlights() {
-    return new Observable<ProjectHighlights[]>((obj) => {
-      let items = [{
-        title: "Number of prjetcs live",
-        count: 10,
-        reportId: 1,
-        type: DashboardTileType.Text
-      },
-      {
-        title: "Project going live in 10 days",
-        count: 44,
-        reportId: 2,
-        type: DashboardTileType.Text,
-        compareWith: 30,
-        compareWithText: "vs in last 10 days"
-      },
-      {
-        title: "Project going live in next 30 days",
-        count: 9,
-        reportId: 3,
-        type: DashboardTileType.Text
-      },
-      {
-        title: "Projects already deployed",
-        count: 12,
-        reportId: 4,
-        type: DashboardTileType.Text
-      },
-      {
-        title: "Revist date changed",
-        count: 48,
-        reportId: 5,
-        type: DashboardTileType.Text
-      },
-      {
-        title: "Project opened last month",
-        count: 50,
-        reportId: 7,
-        type: DashboardTileType.Text,
-        compareWith: 90,
-        compareWithText: "vs previous year"
-      },
-      {
-        title: "Number of projects not cpmpleted ",
-        count: 7,
-        reportId: 6,
-        type: DashboardTileType.Chart,
-        chartType: this.chartTypes["doughnut"],
-        chartValues: [10, 50],
-        chartLabels: ["POS", "Audio"]
-      }];
-      obj.next(items);
-    });
   }
 
   GetStoretabs(nBrandId: number): HomeTab[] {

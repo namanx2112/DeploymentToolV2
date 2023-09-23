@@ -11,8 +11,11 @@
 .tilesPart {
     display: flex;
     flex-flow: wrap;
-    gap: 20px;
-    justify-content: space-between;
+    gap: 50px;
+}
+
+.tilesPart > *{
+    
 }
 
 .searchField {

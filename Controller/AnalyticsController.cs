@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Web;
 using System.Web.Http;
 using System.Web.Security;
 
@@ -21,7 +22,7 @@ namespace DeploymentTool.Controller
         public HttpResponseMessage GetProjectPortfolio(Dictionary<string, string> searchFields)
         {
             int nStoreId = 0;// (searchFields == null || searchFields["nStoreId"] == null) ? 0 : Convert.ToInt32(searchFields["nStoreId"]);
-            int nBrandId =  (searchFields == null || searchFields["nBrandId"] == null) ? 0 : Convert.ToInt32(searchFields["nBrandId"]);
+            int nBrandId = (searchFields == null || searchFields["nBrandId"] == null) ? 0 : Convert.ToInt32(searchFields["nBrandId"]);
 
             List<ProjectPortfolio> items = new List<ProjectPortfolio>();
             try
@@ -81,8 +82,8 @@ namespace DeploymentTool.Controller
                                 dtDate = techparts.dDeliveryDate?.Date,
                                 tStatus = techparts.tStatus,
                                 tVendor = techparts.tVendor,
-                                tLoopType=techparts.tLoopType,
-                                tLoopStatus=techparts.tLoopStatus
+                                tLoopType = techparts.tLoopType,
+                                tLoopStatus = techparts.tLoopStatus
                             };
                         }
                         else if (techparts.tComponent == "Sonic Radio")
@@ -341,6 +342,78 @@ namespace DeploymentTool.Controller
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<ReportModel>(reportModel, new JsonMediaTypeFormatter())
+            };
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/Store/GetDashboards")]
+        public HttpResponseMessage GetDashboards(int nBrandId, string tProjectTypes)
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            //securityContext.nUserID
+            List<DahboardTile> tils = new List<DahboardTile>()
+            {
+                new DahboardTile()
+                {
+                     title = "Number of prjetcs live",
+                    count = 10,
+                    reportId = 1,
+                    type = DashboardTileType.Text
+                },
+                new DahboardTile()
+                {
+                    title = "Project going live in 10 days",
+                    count = 44,
+                    reportId = 2,
+                    type = DashboardTileType.Text,
+                    compareWith = 30,
+                    compareWithText = "vs in last 10 days"
+                },
+                new DahboardTile()
+                {
+                    title = "Project going live in next 30 days",
+                    count = 9,
+                    reportId = 3,
+                    type = DashboardTileType.Text
+                },
+                new DahboardTile()
+        {
+                    title = "Projects already deployed",
+                    count = 12,
+                    reportId = 4,
+                    type = DashboardTileType.Text
+                },
+                new DahboardTile()
+                {
+                    title = "Revist date changed",
+                    count = 48,
+                    reportId = 5,
+                    type = DashboardTileType.Text
+                },
+                new DahboardTile()
+                {
+                    title = "Project opened last month",
+                    count = 50,
+                    reportId = 7,
+                    type = DashboardTileType.Text,
+                    compareWith = 90,
+                    compareWithText = "vs previous year"
+                },
+                new DahboardTile()
+                {
+                    title = "Number of projects not cpmpleted ",
+                    count = 7,
+                    reportId = 6,
+                    type = DashboardTileType.Chart,
+                    chartType = "doughnut",
+                    chartValues = new int[] {10, 50 },
+                    chartLabels = new string[] {"POS", "Audio" }
+                }
+            };
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<DahboardTile>>(tils, new JsonMediaTypeFormatter())
             };
         }
     }

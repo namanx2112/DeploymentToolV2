@@ -281,12 +281,12 @@ button {
     box-shadow: 0 3.2px 7.2px 0 var(--callout-shadow-color, rgba(0, 0, 0, .132)), 0 .6px 1.8px 0 var(--callout-shadow-secondary-color, rgba(0, 0, 0, .108));
 }
 
-.headerPart,
+/* .headerPart,
 .projectHeader h4,
 .TechAreaTitleBar h3,
 .templateHeader {
     color: #c8252c;
-}
+} */
 
 .sonic_theme .sideNav {
     background-color: rgb(0, 137, 216);
@@ -317,9 +317,9 @@ button {
     color: #fff;
 }
 
-.sonic_theme .sideNavContent{
+/* .sonic_theme .sideNavContent{
     background-color: #E6F6F7;
-}
+} */
 
 .sonic_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary{
     background-color: rgb(0, 137, 216)!important;
@@ -340,9 +340,6 @@ button {
     background-color: #f0f0f0;
 }
 
-.buffalo_theme .sideNavConten {
-    background-color: #fff;
-}
 
 .buffalo_theme .selectedTab {
     background-color: #382E2C;
@@ -353,9 +350,9 @@ button {
     background-color: #FFC600!important;
 }
 
-.buffalo_theme .sideNavContent{
+/* .buffalo_theme .sideNavContent{
     background-color: #E3E1DB;
-}
+} */
 
 .buffalo_theme a.active {
     border-bottom: 5px solid #382E2C;

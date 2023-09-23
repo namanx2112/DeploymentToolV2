@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Chart, { ChartType, ChartTypeRegistry } from 'chart.js/auto';
 import { Colors } from 'chart.js';
-import { DashboardTileType, ProjectHighlights } from 'src/app/interfaces/commons';
+import { DashboardTileType, DahboardTile } from 'src/app/interfaces/commons';
 
 @Component({
   selector: 'app-dashboard-chart',
@@ -11,16 +11,17 @@ import { DashboardTileType, ProjectHighlights } from 'src/app/interfaces/commons
 export class DashboardChartComponent {
   chart: any;
   @Input()
-  set record(val: ProjectHighlights) {
+  set record(val: DahboardTile) {
     this._record = val;
     if (this._record.type == DashboardTileType.Chart){
       this.createChart();
     }
   }
-  _record: ProjectHighlights;
+  _record: DahboardTile;
   @Output() ChartClicked = new EventEmitter<string>();
   constructor(private elementRef: ElementRef) {
     Chart.register(Colors);
+    Chart.overrides.doughnut.cutout = '75%';
   }
   ngOnInit(): void {
 
@@ -37,7 +38,7 @@ export class DashboardChartComponent {
           labels: this._record.chartLabels,
           datasets: [{
             label: this._record.title,
-            data: this._record.chartValues,
+            data: this._record.chartValues,            
             // backgroundColor: bgColors,
             // hoverOffset: 4
           }],

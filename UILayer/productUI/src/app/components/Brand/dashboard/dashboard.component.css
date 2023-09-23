@@ -2,10 +2,9 @@
     width: 200px;
     height: 200px;
     position: relative;
-    /* border: 1px solid lightgray; */
     border-radius: 10px;
     cursor: pointer;
-    background-color: #fff;
+    border: 1px solid lightgray;
 }
 
 .tileShortcut .count {

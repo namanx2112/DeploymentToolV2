@@ -1,20 +1,22 @@
-<h2 class="headerPart">{{curBrand.tBrandName}} Homepage</h2>
+<h2 class="headerPart">{{_curBrand.tBrandName}} Homepage</h2>
 <div class="searchPart">
-    <app-search-store [curBrandId]="curBrand.aBrandId" (SearchedResult)="storeSelect($event)"
+    <app-search-store [curBrandId]="_curBrand.aBrandId" (SearchedResult)="storeSelect($event)"
         *ngIf="access.hasAccess('home.sonic.viewstore', 0)"></app-search-store>
 </div>
 <div class="tilHeader">
-    <mat-chip-listbox aria-label="Fish selection">
-        <mat-chip-option>POS</mat-chip-option>
-        <mat-chip-option>Audio</mat-chip-option>
-        <mat-chip-option>Menu</mat-chip-option>
-        <mat-chip-option>Payment</mat-chip-option>
-        <mat-chip-option>Server handheld</mat-chip-option>
-    </mat-chip-listbox>
+    <mat-form-field>
+        <mat-label>Project Type</mat-label>
+        <mat-select multiple>
+            <mat-option *ngFor="let proj of allProjectTypes" [value]="proj.aDropdownId"
+                (click)="changeSelected(proj)">{{proj.tDropdownText}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
-<div class="tilesPart" *ngIf="access.hasAccess('home.sonic.storehighlight', 0)">    
-    <app-dashboard *ngFor="let cur of projects| forFilter:filterNotChart" [record]="cur" (ChartClicked)="chartClicked($event)"></app-dashboard>
-    <app-dashboard-chart *ngFor="let cur of projects| forFilter:filterChart" [record]="cur" (ChartClicked)="chartClicked($event)"></app-dashboard-chart>
+<div class="tilesPart" *ngIf="access.hasAccess('home.sonic.storehighlight', 0)">
+    <app-dashboard *ngFor="let cur of projects| forFilter:filterNotChart" [record]="cur"
+        (ChartClicked)="chartClicked($event)"></app-dashboard>
+    <app-dashboard-chart *ngFor="let cur of projects| forFilter:filterChart" [record]="cur"
+        (ChartClicked)="chartClicked($event)"></app-dashboard-chart>
     <!-- <mat-menu #menu="matMenu">
             <button mat-menu-item class="tMenu" (click)="filterClick('audio');">
                 <span>Audio</span>
