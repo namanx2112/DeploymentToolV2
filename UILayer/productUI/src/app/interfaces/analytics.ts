@@ -1,3 +1,5 @@
+import { Dictionary } from "./commons"
+
 export interface Analytics {
 }
 
@@ -41,7 +43,5 @@ export interface ProjectPorfolioNotes{
 
 export interface ReportModel{
     tReportName: string,
-    titles: string[]
-    headers: string[],
-    data: any
+    reportTable: Dictionary<string>[];
 }

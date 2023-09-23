@@ -20,7 +20,7 @@ namespace DeploymentTool
         public dtDBEntities()
             : base("name=dtDBEntities")
         {
-        }
+        }   
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

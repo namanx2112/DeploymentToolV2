@@ -8,6 +8,10 @@
     float: left;
 }
 
+.tilHeader{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
 .tilesPart {
     display: flex;
     flex-flow: wrap;

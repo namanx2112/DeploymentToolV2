@@ -17,7 +17,7 @@ export interface DahboardTile {
     reportId: number,
     title: string,
     count: number,
-    compareWith?: number,
+    compareWith: number,
     compareWithText?: string,
     type: DashboardTileType,
     chartType?: ChartType,
@@ -26,7 +26,7 @@ export interface DahboardTile {
 }
 
 export enum DashboardTileType {
-    Text, Chart
+    Text, TextWithCompare, Chart
 }
 
 export interface checkboxItems {

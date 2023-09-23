@@ -30,6 +30,7 @@ export class BrandHomePageComponent {
   techCompType: string;
   projectType: OptionType;
   configMenu: string;
+  reportParam: any;
   constructor(private commonService: CommonService, public access: AccessService) {
     this.configMenu = "dashboard";
     this.showMode = "dashboard";
@@ -65,6 +66,18 @@ export class BrandHomePageComponent {
 
   ChangeView(view: any) {
     this.showMode = view;
+  }
+
+  ChangeViewBrand(request: any) {
+    this.showMode = request.viewName;
+    if (request.viewName == "viewreport") {
+      this.reportParam = {};
+      this.reportParam.reportId = request.reportId;
+      if (request.tParam != "")
+        this.reportParam.tParam = "nProjectType in (" + request.tParam + ")";
+      else
+        this.reportParam.tParam = "";
+    }
   }
 
   ChangeFromStoreView(param: any) {

@@ -3,6 +3,7 @@
     <app-search-store [curBrandId]="_curBrand.aBrandId" (SearchedResult)="storeSelect($event)"
         *ngIf="access.hasAccess('home.sonic.viewstore', 0)"></app-search-store>
 </div>
+<h3 class="headerPart">Dashboard</h3>
 <div class="tilHeader">
     <mat-form-field>
         <mat-label>Project Type</mat-label>
@@ -14,9 +15,9 @@
 </div>
 <div class="tilesPart" *ngIf="access.hasAccess('home.sonic.storehighlight', 0)">
     <app-dashboard *ngFor="let cur of projects| forFilter:filterNotChart" [record]="cur"
-        (ChartClicked)="chartClicked($event)"></app-dashboard>
+        (ChartClicked)="chartClicked(cur)"></app-dashboard>
     <app-dashboard-chart *ngFor="let cur of projects| forFilter:filterChart" [record]="cur"
-        (ChartClicked)="chartClicked($event)"></app-dashboard-chart>
+        (ChartClicked)="chartClicked(cur)"></app-dashboard-chart>
     <!-- <mat-menu #menu="matMenu">
             <button mat-menu-item class="tMenu" (click)="filterClick('audio');">
                 <span>Audio</span>

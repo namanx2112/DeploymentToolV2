@@ -24,7 +24,7 @@ export class BrandDashboardComponent {
   _curBrand: BrandModel;
   projects: DahboardTile[];
   @Output() SearchedResult = new EventEmitter<string>();
-  @Output() ChangeView = new EventEmitter<string>();
+  @Output() ChangeView = new EventEmitter<any>();
   selectedProjects: any[] = [];
   allProjectTypes: OptionType[] = [];
   constructor(private service: ExStoreService, public access: AccessService, private analyticsService: AnalyticsService, private commonService: CommonService) {
@@ -38,8 +38,9 @@ export class BrandDashboardComponent {
   ngOnInit() {
   }
 
-  chartClicked(label: string) {
-    this.ChangeView.emit("viewreport");
+  chartClicked(request: DahboardTile) {
+    let tProjParam = (this.selectedProjects.length > 0) ? this.selectedProjects.join(",") : "";
+    this.ChangeView.emit({ viewName: "viewreport", reportId: request.reportId, tParam: tProjParam });
   }
 
   filterNotChart(part: DahboardTile) {
@@ -51,11 +52,6 @@ export class BrandDashboardComponent {
   }
 
   filterClick(filter: string) { }
-
-  viewReports(ev: any, report: DahboardTile) {
-    if (ev.target.className.indexOf("tMenu") == -1)
-      this.ChangeView.emit("viewreport");
-  }
 
   changeSelected(val: OptionType) {
     const index = this.selectedProjects.indexOf(val.aDropdownId);
@@ -73,10 +69,6 @@ export class BrandDashboardComponent {
     this.analyticsService.GetDashboards(this._curBrand.aBrandId, tProjTypes).subscribe((resp: DahboardTile[]) => {
       this.projects = resp;
     });
-  }
-
-  showReport(cur: DahboardTile) {
-    this.ChangeView.emit("viewreport");
   }
 
   storeSelect(evt: any) {

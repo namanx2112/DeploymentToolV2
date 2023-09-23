@@ -7,15 +7,15 @@
   <table *ngIf="tReport != undefined" mat-table [dataSource]="dataSource" matSort
     (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" #TABLE>
 
-    <ng-container *ngFor="let column of tReport.headers;let index = index;" matColumnDef="{{column}}">
+    <ng-container *ngFor="let column of columns;let index = index;" matColumnDef="{{column}}">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
-        {{tReport.titles[index]}}
+        {{columns[index]}}
       </th>
       <td mat-cell *matCellDef="let element" matTooltip="{{getCellVal(column, element[column])}}"> {{getCellVal(column,
         element[column])}} </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="tReport.headers;sticky: true;"></tr>
-    <tr mat-row *matRowDef="let row; columns: tReport.headers;"></tr>
+    <tr mat-header-row *matHeaderRowDef="columns;sticky: true;"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
   </table>
 </div>

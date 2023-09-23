@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
   }
 
   generageTextHighlight() {
-    if (typeof this._record.compareWith != 'undefined') {
+    if (this._record.type == DashboardTileType.TextWithCompare) {
       this.compareIcon = (this._record.count < this._record.compareWith) ? "arrow_downward" : "arrow_upward";
       this.compareClass = (this._record.count < this._record.compareWith) ? "compare down" : "compare up";
       let tPercentage = Math.round((this._record.count < this._record.compareWith) ? (this._record.count / this._record.compareWith) * 100 : (this._record.compareWith / this._record.count) * 100);
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
   }
 
   reportClicked(){
-    this.ChartClicked.emit("clicked");
+    this.ChartClicked.emit(this._record.reportId.toString());
   }
 
   onclick(points: any, evt: any) {

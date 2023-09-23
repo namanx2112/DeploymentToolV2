@@ -3,6 +3,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ReportModel } from 'src/app/interfaces/analytics';
+import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType } from 'src/app/interfaces/home-tab';
 import { AnalyticsService } from 'src/app/services/analytics.service';
 import { CommonService } from 'src/app/services/common.service';
@@ -15,8 +16,11 @@ import * as XLSX from 'xlsx';
 })
 export class ReportTableComponent implements OnInit {
   @Input()
-  curBrandId: number;
+  set reportParam(val: any){
+    this.getReport(val.reportId, val.tParam);
+  }
   @ViewChild('TABLE', { read: ElementRef }) table: ElementRef;
+  columns: string[];
   tReport: ReportModel;
   dataSource: MatTableDataSource<any>;// = new MatTableDataSource(ELEMENT_DATA);
   constructor(private _liveAnnouncer: LiveAnnouncer, private analyticsService: AnalyticsService) {
@@ -27,11 +31,11 @@ export class ReportTableComponent implements OnInit {
 
   ngOnInit() {
     // get data from API 
-    this.getReport();
+    
   }
 
-  getReport() {
-    this.analyticsService.GetReport(1).subscribe(x => {
+  getReport(reportId: number, tParam: string) {
+    this.analyticsService.GetReport(reportId, tParam).subscribe(x => {
       this.tReport = x;
       this.loadTable();
     });
@@ -39,17 +43,21 @@ export class ReportTableComponent implements OnInit {
 
   getCellVal(colName: string, colVal: string) {
     let rVal = colVal;
-    if (colName.indexOf("c") == 0) {
+    if (colName.toLocaleLowerCase().indexOf("cost") > -1) {
       rVal = "$" + colVal;
     }
-    else if (colName.indexOf("d") == 0) {
+    else if (colName.toLocaleLowerCase().indexOf("date") > -1) {
       rVal = CommonService.getFormatedDateString(colVal);
     }
     return rVal;
   }
 
   loadTable() {
-    this.dataSource = new MatTableDataSource(this.tReport.data);
+    this.columns = [];
+    for (var indx in this.tReport.reportTable[0]) {
+      this.columns.push(indx);
+    }
+    this.dataSource = new MatTableDataSource(this.tReport.reportTable);
     this.dataSource.sort = this.sort;
   }
 
@@ -73,7 +81,7 @@ export class ReportTableComponent implements OnInit {
       }
       return 0;
     }
-    this.dataSource = new MatTableDataSource(this.tReport.data.sort(compare));
+    this.dataSource = new MatTableDataSource(this.tReport.reportTable.sort(compare));
     this.dataSource.sort = this.sort;
   }
 

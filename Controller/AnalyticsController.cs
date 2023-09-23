@@ -1,6 +1,9 @@
 ﻿using DeploymentTool.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -162,183 +165,38 @@ namespace DeploymentTool.Controller
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         [Route("api/Store/GetReport")]
-        public HttpResponseMessage GetReport(int reportId)
+        public HttpResponseMessage GetReport(ReportRequest request)
         {
             ReportModel reportModel = new ReportModel()
             {
-                tReportName = "Monthly report",
-                titles = new List<string>() {
-                    "Store Number", "Status","Franchise", "Delivery Date"
-                },
-                headers = new List<string>()
-                {
-                    "tStoreNumber",
-                    "tStatus",
-                    "tFranchise",
-                    "dDeliveryDate"
-                },
-                data = new List<Dictionary<string, string>>()
-                {
-                    new Dictionary<string, string>(){
-                    { "tStoreNumber" , "111" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "222" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "2321" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "434" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                },new Dictionary<string, string>(){
-                    { "tStoreNumber" , "423432" },
-                    {"tStatus", "Completed" },
-                    {"tFranchise", "Bruce Banner" },
-                    {"dDeliveryDate", DateTime.Now.ToString() }
-                }
-                }
+                reportTable = new DataTable(),
+                tReportName = string.Empty
             };
+            DbConnection connection = db.Database.Connection;
+            DbProviderFactory dbFactory = DbProviderFactories.GetFactory(connection);
+            using (var cmd = dbFactory.CreateCommand())
+            {
+                string strName = string.Empty;
+                cmd.Connection = connection;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "sproc_getReportData";
+                var reportIdParam = new SqlParameter("@nReportId", request.reportId);
+                var reportParameters = new SqlParameter("@tParameters", request.tParam);
+                var reportNameParam = new SqlParameter("@tReportName", strName);
+                reportNameParam.Direction = ParameterDirection.Output;
+                reportNameParam.Size = 500;
+                cmd.Parameters.Add(reportIdParam);
+                cmd.Parameters.Add(reportParameters);
+                cmd.Parameters.Add(reportNameParam);
+                using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
+                {
+                    adapter.SelectCommand = cmd;
+                    adapter.Fill(reportModel.reportTable);
+                    reportModel.tReportName = reportNameParam.Value.ToString();
+                }
+            }
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<ReportModel>(reportModel, new JsonMediaTypeFormatter())

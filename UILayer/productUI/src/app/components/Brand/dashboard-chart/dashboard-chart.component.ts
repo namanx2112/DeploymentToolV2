@@ -49,16 +49,12 @@ export class DashboardChartComponent {
             // if (array[0]) {
             //   let item = event;
             // }
-            cThis.ChartClicked.emit("clicked");
+            cThis.ChartClicked.emit(cThis._record.reportId.toString());
           }
         }
 
       });
     }
-  }
-
-  reportClicked(){
-    this.ChartClicked.emit("clicked");
   }
 
   onclick(points: any, evt: any) {
