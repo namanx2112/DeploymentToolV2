@@ -1007,6 +1007,7 @@
     <Compile Include="Helpers\StoreDAL.cs" />
     <Compile Include="Helpers\TechComponentDAL.cs" />
     <Compile Include="Helpers\VendorDAL.cs" />
+    <Compile Include="Misc\AESEncryption.cs" />
     <Compile Include="Misc\Constants.cs" />
     <Compile Include="Misc\ModelParent.cs" />
     <Compile Include="Misc\TraceUtility.cs" />

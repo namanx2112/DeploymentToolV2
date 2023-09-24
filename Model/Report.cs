@@ -9,7 +9,11 @@ namespace DeploymentTool.Model
     public class ReportRequest
     {
         public int reportId { get; set; }
-        public string tParam { get; set; }
+        public string tParam1 { get; set; }
+        public string tParam2 { get; set; }
+        public string tParam3 { get; set; }
+        public string tParam4 { get; set; }
+        public string tParam5 { get; set; }
     }
     public class ReportModel
     {
@@ -49,8 +53,43 @@ namespace DeploymentTool.Model
 
         public DashboardTileType type { get; set; }
         public string chartType { get; set; }
-        public int[] chartValues { get; set; }
-        public string[] chartLabels { get; set; }
+
+        string[] _insArray;
+        char[] separators = new char[] { ',' };
+        int[] _inschartArray;
+        public int[] chartValues
+        {
+            get
+            {
+                return _inschartArray;
+            }
+        }
+        public string chartValuesTemp
+        {
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    _inschartArray = value.Split(separators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray(); ;
+            }
+        }
+        public string chartLabelsTemp
+        {
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    _insArray = value.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            }
+        }
+
+        public string[] chartLabels
+        {
+            get
+            {
+                return _insArray;
+            }
+        }
+
+        public string tProjectIDs { get; set; }
     }
 
     public enum DashboardTileType

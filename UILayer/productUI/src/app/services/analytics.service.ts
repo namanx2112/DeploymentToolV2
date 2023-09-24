@@ -16,8 +16,9 @@ export class AnalyticsService {
     return this.http.post<ProjectPortfolio[]>(CommonService.ConfigUrl + "Analytics/GetProjectPortfolio", searchFields, { headers: this.cacheService.getHttpHeaders() });
   }
 
-  GetReport(reportId: number, tParam: string) {
-    return this.http.post<ReportModel>(CommonService.ConfigUrl + "Analytics/GetReport",{reportId: reportId, tParam: tParam}, { headers: this.cacheService.getHttpHeaders() });
+  GetReport(reportId: number, tParam1: string, tParam2: string, tParam3: string, tParam4: string, tParam5: string) {
+    return this.http.post<ReportModel>(CommonService.ConfigUrl + "Analytics/GetReport",{reportId: reportId, tParam1: tParam1, tParam2: tParam2,
+      tParam3: tParam3, tParam4: tParam4, tParam5: tParam5}, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetDashboards(nBrandId: number, tProjectTypes: string) {

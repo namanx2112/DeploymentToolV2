@@ -52,7 +52,7 @@
         </span>
         <app-brand-dashboard *ngIf="showMode == 'dashboard'" [curBrand]="_curBrand" (ChangeView)="ChangeViewBrand($event)"
             (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>
-        <app-report-table *ngIf="showMode == 'viewreport'" [reportParam]="reportParam"></app-report-table>
+        <app-report-table *ngIf="showMode == 'viewreport'" [reportParam]="reportParam" (openStore)="showStore($event)"></app-report-table>
         <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)"
             [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType, curBrandId:_curBrand.aBrandId}"></app-new-store>
         <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)"

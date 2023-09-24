@@ -40,7 +40,7 @@ export class BrandDashboardComponent {
 
   chartClicked(request: DahboardTile) {
     let tProjParam = (this.selectedProjects.length > 0) ? this.selectedProjects.join(",") : "";
-    this.ChangeView.emit({ viewName: "viewreport", reportId: request.reportId, tParam: tProjParam });
+    this.ChangeView.emit({ viewName: "viewreport", request: request, tParam: tProjParam });
   }
 
   filterNotChart(part: DahboardTile) {

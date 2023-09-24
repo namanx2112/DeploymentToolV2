@@ -1,4 +1,5 @@
-﻿using DeploymentTool.Model;
+﻿using DeploymentTool.Misc;
+using DeploymentTool.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -181,15 +182,23 @@ namespace DeploymentTool.Controller
                 string strName = string.Empty;
                 cmd.Connection = connection;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "sproc_getReportData";
-                var reportIdParam = new SqlParameter("@nReportId", request.reportId);
-                var reportParameters = new SqlParameter("@tParameters", request.tParam);
+                cmd.CommandText = "sproc_getReportData_new";
+                var reportIdParam = new SqlParameter("@nReportId", request.reportId);                
                 var reportNameParam = new SqlParameter("@tReportName", strName);
+                var reportParameters1 = new SqlParameter("@pm1", request.tParam1.Trim(','));
+                var reportParameters2= new SqlParameter("@pm2", request.tParam2);
+                var reportParameters3 = new SqlParameter("@pm3", request.tParam3);
+                var reportParameters4 = new SqlParameter("@pm4", request.tParam4);
+                var reportParameters5 = new SqlParameter("@pm5", request.tParam5);
                 reportNameParam.Direction = ParameterDirection.Output;
                 reportNameParam.Size = 500;
-                cmd.Parameters.Add(reportIdParam);
-                cmd.Parameters.Add(reportParameters);
+                cmd.Parameters.Add(reportIdParam);                
                 cmd.Parameters.Add(reportNameParam);
+                cmd.Parameters.Add(reportParameters1);
+                cmd.Parameters.Add(reportParameters2);
+                cmd.Parameters.Add(reportParameters3);
+                cmd.Parameters.Add(reportParameters4);
+                cmd.Parameters.Add(reportParameters5);
                 using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
                 {
                     adapter.SelectCommand = cmd;
@@ -208,71 +217,88 @@ namespace DeploymentTool.Controller
         [Route("api/Store/GetDashboards")]
         public HttpResponseMessage GetDashboards(int nBrandId, string tProjectTypes)
         {
+          
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            //securityContext.nUserID
-            List<DahboardTile> tils = new List<DahboardTile>()
+            List<DahboardTile> items = new List<DahboardTile>();
+            try
             {
-                new DahboardTile()
-                {
-                     title = "Number of prjetcs live",
-                    count = 10,
-                    reportId = 1,
-                    type = DashboardTileType.Text
-                },
-                new DahboardTile()
-                {
-                    title = "Project going live in 10 days",
-                    count = 44,
-                    reportId = 2,
-                    type = DashboardTileType.Text,
-                    compareWith = 30,
-                    compareWithText = "vs in last 10 days"
-                },
-                new DahboardTile()
-                {
-                    title = "Project going live in next 30 days",
-                    count = 9,
-                    reportId = 3,
-                    type = DashboardTileType.Text
-                },
-                new DahboardTile()
-        {
-                    title = "Projects already deployed",
-                    count = 12,
-                    reportId = 4,
-                    type = DashboardTileType.Text
-                },
-                new DahboardTile()
-                {
-                    title = "Revist date changed",
-                    count = 48,
-                    reportId = 5,
-                    type = DashboardTileType.Text
-                },
-                new DahboardTile()
-                {
-                    title = "Project opened last month",
-                    count = 50,
-                    reportId = 7,
-                    type = DashboardTileType.Text,
-                    compareWith = 90,
-                    compareWithText = "vs previous year"
-                },
-                new DahboardTile()
-                {
-                    title = "Number of projects not cpmpleted ",
-                    count = 7,
-                    reportId = 6,
-                    type = DashboardTileType.Chart,
-                    chartType = "doughnut",
-                    chartValues = new int[] {10, 50 },
-                    chartLabels = new string[] {"POS", "Audio" }
-                }
-            };
+                // var nBrandID = 2;
+                var tProjectTypesTemp = tProjectTypes == null ? "" : tProjectTypes;
+
+                items = db.Database.SqlQuery<DahboardTile>("exec sproc_GetDashboardReports @nBrandID, @tProjectTypes,@nUserID", new SqlParameter("@nBrandID", nBrandId), new SqlParameter("@tProjectTypes", tProjectTypesTemp), new SqlParameter("@nUserID", securityContext.nUserID)).ToList();
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("GetDashboards", HttpContext.Current, ex);
+            }
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<List<DahboardTile>>(tils, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<List<DahboardTile>>(items, new JsonMediaTypeFormatter())
             };
+            //securityContext.nUserID
+            //    List<DahboardTile> tils = new List<DahboardTile>()
+            //    {
+            //        new DahboardTile()
+            //        {
+            //             title = "Number of prjetcs live",
+            //            count = 10,
+            //            reportId = 1,
+            //            type = DashboardTileType.Text
+            //        },
+            //        new DahboardTile()
+            //        {
+            //            title = "Project going live in 10 days",
+            //            count = 44,
+            //            reportId = 2,
+            //            type = DashboardTileType.Text,
+            //            compareWith = 30,
+            //            compareWithText = "vs in last 10 days"
+            //        },
+            //        new DahboardTile()
+            //        {
+            //            title = "Project going live in next 30 days",
+            //            count = 9,
+            //            reportId = 3,
+            //            type = DashboardTileType.Text
+            //        },
+            //        new DahboardTile()
+            //{
+            //            title = "Projects already deployed",
+            //            count = 12,
+            //            reportId = 4,
+            //            type = DashboardTileType.Text
+            //        },
+            //        new DahboardTile()
+            //        {
+            //            title = "Revist date changed",
+            //            count = 48,
+            //            reportId = 5,
+            //            type = DashboardTileType.Text
+            //        },
+            //        new DahboardTile()
+            //        {
+            //            title = "Project opened last month",
+            //            count = 50,
+            //            reportId = 7,
+            //            type = DashboardTileType.Text,
+            //            compareWith = 90,
+            //            compareWithText = "vs previous year"
+            //        },
+            //        new DahboardTile()
+            //        {
+            //            title = "Number of projects cpmpleted vs Not Completed",
+            //            count = 7,
+            //            reportId = 6,
+            //            type = DashboardTileType.Chart,
+            //            chartType = "doughnut",
+            //            chartValues =  new int[] {10, 50 },
+            //            chartLabels = new string[] {"POS", "Audio" }
+            //        }
+        //};
+            //return new HttpResponseMessage(HttpStatusCode.OK)
+            //{
+            //    Content = new ObjectContent<List<DahboardTile>>(tils, new JsonMediaTypeFormatter())
+            //};
         }
     }
 

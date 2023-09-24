@@ -72,11 +72,8 @@ export class BrandHomePageComponent {
     this.showMode = request.viewName;
     if (request.viewName == "viewreport") {
       this.reportParam = {};
-      this.reportParam.reportId = request.reportId;
-      if (request.tParam != "")
-        this.reportParam.tParam = "nProjectType in (" + request.tParam + ")";
-      else
-        this.reportParam.tParam = "";
+      request.nBrandId = this._curBrand.aBrandId;
+      this.reportParam = request;
     }
   }
 

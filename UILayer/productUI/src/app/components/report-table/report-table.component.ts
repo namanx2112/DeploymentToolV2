@@ -1,12 +1,14 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ReportModel } from 'src/app/interfaces/analytics';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType } from 'src/app/interfaces/home-tab';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 import { AnalyticsService } from 'src/app/services/analytics.service';
 import { CommonService } from 'src/app/services/common.service';
+import { ExStoreService } from 'src/app/services/ex-store.service';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -16,14 +18,17 @@ import * as XLSX from 'xlsx';
 })
 export class ReportTableComponent implements OnInit {
   @Input()
-  set reportParam(val: any){
-    this.getReport(val.reportId, val.tParam);
+  set reportParam(val: any) {
+    this.getReport(val.request.reportId, val.request.tProjectIDs, val.tParam);
+    this._nBrandId = val.nBrandId;
   }
+  @Output() openStore = new EventEmitter<StoreSearchModel>();
   @ViewChild('TABLE', { read: ElementRef }) table: ElementRef;
   columns: string[];
   tReport: ReportModel;
   dataSource: MatTableDataSource<any>;// = new MatTableDataSource(ELEMENT_DATA);
-  constructor(private _liveAnnouncer: LiveAnnouncer, private analyticsService: AnalyticsService) {
+  _nBrandId: number;
+  constructor(private _liveAnnouncer: LiveAnnouncer, private analyticsService: AnalyticsService, private service: ExStoreService) {
 
   }
 
@@ -31,11 +36,17 @@ export class ReportTableComponent implements OnInit {
 
   ngOnInit() {
     // get data from API 
-    
+
   }
 
-  getReport(reportId: number, tParam: string) {
-    this.analyticsService.GetReport(reportId, tParam).subscribe(x => {
+  openItem(item: any) {
+    this.service.SearchStore(item, this._nBrandId).subscribe((x: StoreSearchModel[]) => {
+      this.openStore.emit(x[0]);
+    });
+  }
+
+  getReport(reportId: number, tParam1: string, tParam2: string) {
+    this.analyticsService.GetReport(reportId, tParam1, tParam2, "", "", "").subscribe(x => {
       this.tReport = x;
       this.loadTable();
     });
