@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   @Input()
   set record(val: DahboardTile) {
     this._record = val;
-    if (this._record.type != DashboardTileType.Chart){
+    if (this._record.type != DashboardTileType.Chart) {
       this.generageTextHighlight();
     }
   }
@@ -38,12 +38,14 @@ export class DashboardComponent implements OnInit {
     if (this._record.type == DashboardTileType.TextWithCompare) {
       this.compareIcon = (this._record.count < this._record.compareWith) ? "arrow_downward" : "arrow_upward";
       this.compareClass = (this._record.count < this._record.compareWith) ? "compare down" : "compare up";
-      let tPercentage = Math.round((this._record.count < this._record.compareWith) ? (this._record.count / this._record.compareWith) * 100 : (this._record.compareWith / this._record.count) * 100);
+      let tPercentage = (this._record.count > 0) ? Math.round((this._record.count < this._record.compareWith) ? (this._record.count / this._record.compareWith) * 100 : (this._record.compareWith / this._record.count) * 100) : 0;
+      if (this._record.count > 0 && this._record.compareWith == 0)
+        tPercentage = 100;
       this.compareText = tPercentage.toString() + "%";
     }
   }
 
-  reportClicked(){
+  reportClicked() {
     this.ChartClicked.emit(this._record.reportId.toString());
   }
 

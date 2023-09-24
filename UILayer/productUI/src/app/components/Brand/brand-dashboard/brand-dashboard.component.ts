@@ -39,6 +39,10 @@ export class BrandDashboardComponent {
   }
 
   chartClicked(request: DahboardTile) {
+    if(request.count == 0){
+      alert("There is no record to display");
+      return;
+    }
     let tProjParam = (this.selectedProjects.length > 0) ? this.selectedProjects.join(",") : "";
     this.ChangeView.emit({ viewName: "viewreport", request: request, tParam: tProjParam });
   }

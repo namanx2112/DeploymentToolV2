@@ -182,7 +182,7 @@ namespace DeploymentTool.Controller
                 string strName = string.Empty;
                 cmd.Connection = connection;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "sproc_getReportData_new";
+                cmd.CommandText = "sproc_getReportData";
                 var reportIdParam = new SqlParameter("@nReportId", request.reportId);                
                 var reportNameParam = new SqlParameter("@tReportName", strName);
                 var reportParameters1 = new SqlParameter("@pm1", request.tParam1.Trim(','));

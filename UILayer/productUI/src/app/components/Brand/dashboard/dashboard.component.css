@@ -28,6 +28,10 @@
     left: 0px;
 }
 
+.tileShortcut .compare mat-icon{
+    line-height: 32px;
+}
+
 .compareText{
     text-align: center;
     font-size: 10px;
