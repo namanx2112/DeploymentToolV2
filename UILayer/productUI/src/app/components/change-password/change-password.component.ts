@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { AuthService } from 'src/app/services/auth.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-change-password',
@@ -62,8 +63,8 @@ export class ChangePasswordComponent {
   changePassword(item: any) {
     if (item.value["tNewPassword"] == item.value["tConfirmPassword"]) {
       let request = {
-        tNewPassword: btoa(item.value["tNewPassword"]),
-        tCurrentPassword: btoa(item.value["tCurrentPassword"]),
+        tNewPassword: CommonService.getHashed(item.value["tNewPassword"]),
+        tCurrentPassword: CommonService.getHashed(item.value["tCurrentPassword"]),
       };
       this.service.ChangePassword(request).subscribe(x => {
         if (x == "")

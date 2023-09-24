@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { CacheService } from './cache.service';
 import { AES } from 'crypto-js';
+import { sha256, sha224 } from 'js-sha256';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CommonService {
   static dropdownCache: any;
   static ddMonthString: string = "[Day/Month]";
   static allBrands: any;
-  static pKey = [61,61,61,61,61,61,61,100,101,112,108,117,116,105,111,110,61,61,61,61,61,61,61,6];
+  static pKey = [100,101,112,108,117,116,105,111,110];
   noNeedBlankDropDown: string[] = ["UserRole", "Brand"];
   constructor(private cacheService: CacheService, private ddService: DropdownServiceService) {
 
@@ -47,6 +48,10 @@ export class CommonService {
 
   static getKey(){
     return new TextDecoder().decode(new Uint8Array(CommonService.pKey)).toString()
+  }
+  
+  static getHashed(strVal: string){
+    return sha256.hmac(CommonService.getKey(), strVal);
   }
 
   static encrypt(msg: string) {

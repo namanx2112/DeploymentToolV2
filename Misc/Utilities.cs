@@ -21,6 +21,7 @@ using Org.BouncyCastle.Asn1.Ocsp;
 using System.Net.Http;
 using System.ServiceModel.Channels;
 using System.Data.Entity;
+using System.Security.Cryptography;
 
 namespace DeploymentTool.Misc
 {
@@ -229,7 +230,6 @@ namespace DeploymentTool.Misc
             MailObj.tContent = tContent;
             DeploymentTool.Misc.Utilities.SendMail(MailObj);
         }
-
         public static string EncodeString(string str)
         {
             string sResp = string.Empty;
@@ -277,7 +277,7 @@ namespace DeploymentTool.Misc
                 }
             }
             sPassword = res.ToString();
-            string sEncoded = EncodeString(sPassword);
+            string sEncoded = Hashing.GenerateHash(sPassword);
             return sEncoded.ToString();
         }
 
@@ -302,4 +302,25 @@ namespace DeploymentTool.Misc
             }
         }
     }
+    public class Hashing
+    {
+        static string salt = "deplution";
+        public static string GenerateHash(string password)
+        {
+            string _finalHash = string.Empty;
+            try
+            {
+                byte[] keyByte = new ASCIIEncoding().GetBytes(salt);
+                byte[] messageBytes = new ASCIIEncoding().GetBytes(password);
+                byte[] hashmessage = new HMACSHA256(keyByte).ComputeHash(messageBytes);
+                _finalHash = String.Concat(Array.ConvertAll(hashmessage, x => x.ToString("x2")));
+            }
+            catch (Exception ex)
+            {
+                _finalHash = string.Empty;
+            }
+            return _finalHash;
+        }
+    }
+
 }

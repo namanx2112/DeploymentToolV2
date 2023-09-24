@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ForgetPasswordComponent } from '../../forget-password/forget-password.component';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-login',
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit {
     else {
       let request = {
         UserName: resp.value["UserName"],
-        Password: btoa(resp.value["Password"])
+        Password: CommonService.getHashed(resp.value["Password"])
       }
       this.authService.signIn(request);
     }

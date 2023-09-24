@@ -26,6 +26,7 @@
     "ckeditor4-angular": "^4.0.1",
     "crypto-js": "^4.1.1",
     "html2canvas": "^1.4.1",
+    "js-sha256": "^0.10.1",
     "moment": "^2.29.4",
     "node-sass": "^9.0.0",
     "primeng": "^16.0.2",
