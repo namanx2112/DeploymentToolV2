@@ -1,4 +1,4 @@
-<div class="tileShortcut" (click)="reportClicked()">
+<div [className]="tClass" (click)="reportClicked()">
     <span class="title">{{_record.title}}</span>
     <span class="count">{{_record.count}}
         <span [className]="compareClass" *ngIf="compareText"><mat-icon>{{compareIcon}}</mat-icon>{{compareText}}</span>

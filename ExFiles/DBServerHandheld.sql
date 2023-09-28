@@ -793,3 +793,16 @@ Alter table tblProjectInstallation add dRevisitDate date
 
 GO
 EXEC sp_rename 'dbo.tblProjectServerHandheld.dRevisitDate', 'dShipDate', 'COLUMN';
+
+select * from tblUser
+
+update tblUser set tPassword = 'ead80544f2c30beb739bba6624e0dd1fa6581f6c002dfb789ce9999f1c3c541c', isFirstTime = 1 where aUserID = 26
+update tblUser set tPassword = '6abcef75a6936ce91c735e5bcc86fffc5f76f36d2504ff025a066290c1402663' where aUserID = 27
+
+3a22f2e1cfb2b846177afdfa6069b562b2b86abbb8d1939e83b36c6b1b299250
+3edd95db47988ca4c8a2799ad555f4ae7741ca4b68b06cf657d227c90e16adff
+3a22f2e1cfb2b846177afdfa6069b562b2b86abbb8d1939e83b36c6b1b299250
+
+dgehlbach - NtL4!tPu
+asurti - JjU2^oDs
+

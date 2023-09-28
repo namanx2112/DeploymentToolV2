@@ -2,6 +2,20 @@ table {
   width: 100%;
 }
 
+.header {
+  height: 40px;
+  width: 100%;
+  line-height: 35px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.header .mat-icon {
+  height: auto;
+  line-height: 16px;
+  cursor: pointer;
+}
+
 th.mat-sort-header-sorted {
   color: black;
 }

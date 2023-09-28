@@ -21,9 +21,31 @@ namespace DeploymentTool.Model
         public DataTable reportTable { get; set; }
     }
 
+    public class DashboardRequest
+    {
+        public string tProjectTypes { get; set; }
+        public int nBrandId { get; set; }
+        public Nullable<DateTime> dStart { get; set; }
+        public Nullable<DateTime> dEnd { get; set; }
+    }
+
     public class DahboardTile
     {
         public int reportId { get; set; }
+
+        Random tRandom = new Random(4);
+
+        int _size;
+        public int size
+        {
+            get
+            {
+                return tRandom.Next();
+            }
+            set {
+                _size = value;
+            }
+        }
         public string title { get; set; }
         public int count { get; set; }
         public Nullable<int> compareWith { get; set; }

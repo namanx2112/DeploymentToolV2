@@ -1,6 +1,4 @@
 .tileShortcut {
-    width: 450px;
-    height: 350px;
     position: relative;
     border-radius: 10px;
     cursor: pointer;
@@ -16,6 +14,22 @@
 }
 
 .canvas{
-    width: 300px;
+    width: 400px;
     margin: 20px auto;
+}
+
+.X1{
+    width: 200px;
+}
+
+.X2{
+    width: 400px;
+}
+
+.X3{
+    width: 600px;
+}
+
+.X4{
+    width: 800px;
 }

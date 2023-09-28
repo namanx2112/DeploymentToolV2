@@ -149,7 +149,7 @@ export class ControlsComponent implements AfterViewChecked {
     }
     return sVal;
   }
-
+ 
   hasEror(cControl: Fields): boolean {
     let has = false;
     let control = this.formGroup.get(cControl.fieldUniqeName);

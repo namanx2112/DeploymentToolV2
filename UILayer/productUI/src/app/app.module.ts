@@ -81,6 +81,8 @@ import { ReportTableComponent } from './components/report-table/report-table.com
 import { NotificationComponent } from './components/notification/notification.component';
 import { DashboardComponent } from './components/Brand/dashboard/dashboard.component';
 import { DashboardChartComponent } from './components/Brand/dashboard-chart/dashboard-chart.component';
+import { DashboardPaneComponent } from './components/Brand/dashboard-pane/dashboard-pane.component';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
     declarations: [
@@ -138,7 +140,8 @@ import { DashboardChartComponent } from './components/Brand/dashboard-chart/dash
         ReportTableComponent,
         NotificationComponent,
         DashboardComponent,
-        DashboardChartComponent
+        DashboardChartComponent,
+        DashboardPaneComponent
     ],
     providers: [
         {
@@ -175,7 +178,8 @@ import { DashboardChartComponent } from './components/Brand/dashboard-chart/dash
         MatDatepickerModule,
         DragDropModule,
         MatTooltipModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
+        MatNativeDateModule
     ]
 })
 export class AppModule { }

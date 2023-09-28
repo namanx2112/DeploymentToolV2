@@ -21,10 +21,13 @@ export class ReportTableComponent implements OnInit {
   set reportParam(val: any) {
     this.getReport(val.request.reportId, val.request.tProjectIDs, val.tParam);
     this._nBrandId = val.nBrandId;
+    this._fromView = val.fromView;
   }
   @Output() openStore = new EventEmitter<StoreSearchModel>();
+  @Output() goBack = new EventEmitter<string>();
   @ViewChild('TABLE', { read: ElementRef }) table: ElementRef;
   columns: string[];
+  _fromView: string;
   tReport: ReportModel;
   dataSource: MatTableDataSource<any>;// = new MatTableDataSource(ELEMENT_DATA);
   _nBrandId: number;
@@ -37,6 +40,10 @@ export class ReportTableComponent implements OnInit {
   ngOnInit() {
     // get data from API 
 
+  }
+
+  goBackClicked() {
+    this.goBack.emit(this._fromView);
   }
 
   openItem(item: any) {

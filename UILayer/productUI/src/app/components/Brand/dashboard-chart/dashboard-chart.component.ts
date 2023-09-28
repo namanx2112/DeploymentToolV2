@@ -20,6 +20,7 @@ export class DashboardChartComponent {
   }
   _record: DahboardTile;
   @Output() ChartClicked = new EventEmitter<string>();
+  tClass: string;
   constructor(private elementRef: ElementRef) {
     Chart.register(Colors);
     Chart.overrides.doughnut.cutout = '75%';
@@ -29,8 +30,26 @@ export class DashboardChartComponent {
 
   }
 
+  setSizeClass() {
+    switch (this._record.size) {
+      case 1:
+        this.tClass = "canvas X1";
+        break;
+      case 2:
+        this.tClass = "canvas X2";
+        break;
+      case 3:
+        this.tClass = "canvas X3";
+        break;
+      case 4:
+        this.tClass = "canvas X4";
+        break;
+    }
+  }
+
   createChart() {
     if (typeof this._record.chartType != 'undefined' && typeof this._record.chartLabels != 'undefined') {
+      this.setSizeClass();
       let htmlRef = this.elementRef.nativeElement.querySelector("#MyChartId");
       let cThis = this;
       this.chart = new Chart(htmlRef, {
@@ -52,7 +71,7 @@ export class DashboardChartComponent {
             },
             datalabels: {
               color: 'white',
-              display: function(context) {
+              display: function (context) {
                 var dataset = context.dataset;
                 var count = dataset.data.length;
                 var value = dataset.data[context.dataIndex];

@@ -23,7 +23,8 @@ export interface DahboardTile {
     chartType?: ChartType,
     chartValues?: number[],
     chartLabels?: string[],
-    tProjectIDs: string
+    tProjectIDs: string,
+    size: number
 }
 
 export enum DashboardTileType {

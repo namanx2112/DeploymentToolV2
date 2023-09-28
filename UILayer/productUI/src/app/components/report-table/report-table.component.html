@@ -1,5 +1,6 @@
 <div class="reportHeader">
-  <h4>{{tReport.tReportName}}</h4>
+  <div class="header"><mat-icon class="tIcon" (click)="goBackClicked()">arrow_back_ios</mat-icon>{{tReport.tReportName}}
+  </div>
 </div>
 <div class="reportBody">
   <span class="exportButton" matTooltip="Click to download"

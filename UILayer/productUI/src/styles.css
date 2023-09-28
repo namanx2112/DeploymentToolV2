@@ -171,7 +171,7 @@ button {
 .deployit .header,
 .deployit button,
 .deployit .tableHeader h4 {
-    color: #c8252c !important;
+    color:black!important;
 }
 
 .mdc-checkbox__native-control:checked~.mdc-checkbox__background {

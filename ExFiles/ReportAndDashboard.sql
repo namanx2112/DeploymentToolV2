@@ -28,4 +28,6 @@ BEGIN
 END 
 GO
 
-update tblUser set tPassword = '260d23baeb73c2451f00f4a30ea4eb9ccad81b7f0c7dc23f58de70fd1426ab9d'
+update tblUser set tPassword = '260d23baeb73c2451f00f4a30ea4eb9ccad81b7f0c7dc23f58de70fd1426ab9d' where aUserId = 2
+
+select * from tblUser

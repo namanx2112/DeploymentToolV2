@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   compareIcon: string;
   compareClass: string;
   isChartType: boolean;
+  tClass: string;
   constructor(private elementRef: ElementRef) {
     Chart.register(Colors);
   }
@@ -34,7 +35,26 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  setSizeClass() {
+    switch (this._record.size) {
+      case 1:
+        this.tClass = "tileShortcut X1";
+        break;
+      case 2:
+        this.tClass = "tileShortcut X2";
+        break;
+      case 3:
+        this.tClass = "tileShortcut X3";
+        break;
+      case 4:
+        this.tClass = "tileShortcut X4";
+        break;
+    }
+  }
+
+
   generageTextHighlight() {
+    this.setSizeClass();
     if (this._record.type == DashboardTileType.TextWithCompare) {
       this.compareIcon = (this._record.count < this._record.compareWith) ? "arrow_downward" : "arrow_upward";
       this.compareClass = (this._record.count < this._record.compareWith) ? "compare down" : "compare up";

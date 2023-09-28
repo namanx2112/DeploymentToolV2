@@ -213,9 +213,9 @@ namespace DeploymentTool.Controller
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         [Route("api/Store/GetDashboards")]
-        public HttpResponseMessage GetDashboards(int nBrandId, string tProjectTypes)
+        public HttpResponseMessage GetDashboards(DashboardRequest request)
         {
           
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
@@ -223,9 +223,11 @@ namespace DeploymentTool.Controller
             try
             {
                 // var nBrandID = 2;
-                var tProjectTypesTemp = tProjectTypes == null ? "" : tProjectTypes;
+                var tProjectTypesTemp = request.tProjectTypes == null ? "" : request.tProjectTypes;
 
-                items = db.Database.SqlQuery<DahboardTile>("exec sproc_GetDashboardReports @nBrandID, @tProjectTypes,@nUserID", new SqlParameter("@nBrandID", nBrandId), new SqlParameter("@tProjectTypes", tProjectTypesTemp), new SqlParameter("@nUserID", securityContext.nUserID)).ToList();
+                items = db.Database.SqlQuery<DahboardTile>("exec sproc_GetDashboardReports_New @nBrandID, @tProjectTypes,@nUserID", new SqlParameter("@nBrandID", request.nBrandId), 
+                    new SqlParameter("@tProjectTypes", tProjectTypesTemp), new SqlParameter("@nUserID", securityContext.nUserID),
+                    new SqlParameter("@dStarDate", request.dStart), new SqlParameter("@dEndDate", request.dStart)).ToList();
             }
             catch (Exception ex)
             {

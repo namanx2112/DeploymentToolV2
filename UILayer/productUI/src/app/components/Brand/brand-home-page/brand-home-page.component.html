@@ -44,15 +44,21 @@
                 [className]="configMenu=='Report Generator'?'selected':''">Report Generator</span>
             <span (click)="clickOption('Saved Reports')" *ngIf="access.hasAccess('home.sonic.report', 0)"
                 [className]="configMenu=='Saved Reports'?'selected':''">Saved Reports</span>
+            <span (click)="clickOption('dashboardpane')" *ngIf="access.hasAccess('home.sonic.report', 0)"
+                [className]="configMenu=='dashboardpane'?'selected':''">Dashboard</span>
+
         </div>
     </mat-drawer>
     <div class="sideNavContent">
         <span [ngClass]="drawer.opened ? 'toggleIcon opened' : 'toggleIcon'" (click)="drawer.toggle()">
             <mat-icon>play_arrow</mat-icon>
         </span>
-        <app-brand-dashboard *ngIf="showMode == 'dashboard'" [curBrand]="_curBrand" (ChangeView)="ChangeViewBrand($event)"
-            (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>
-        <app-report-table *ngIf="showMode == 'viewreport'" [reportParam]="reportParam" (openStore)="showStore($event)"></app-report-table>
+        <app-brand-dashboard *ngIf="showMode == 'dashboard'" [curBrand]="_curBrand"
+            (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>
+        <app-dashboard-pane *ngIf="showMode == 'dashboardpane'" [curBrand]="_curBrand"
+            (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-dashboard-pane>
+        <app-report-table *ngIf="showMode == 'viewreport'" [reportParam]="reportParam"
+            (openStore)="showStore($event)" (goBack)="ChangeView($event)"></app-report-table>
         <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)"
             [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType, curBrandId:_curBrand.aBrandId}"></app-new-store>
         <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)"
@@ -81,6 +87,6 @@
         <app-not-implemented
             *ngIf="showMode != 'Project Portfolio' && showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'menuinstallation' && 
         showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && 
-        showMode != 'newstore' && showMode != 'dashboard' && showMode != 'viewreport' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
+        showMode != 'newstore' && showMode != 'dashboard' && showMode != 'dashboardpane' && showMode != 'viewreport' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
     </div>
 </mat-drawer-container>

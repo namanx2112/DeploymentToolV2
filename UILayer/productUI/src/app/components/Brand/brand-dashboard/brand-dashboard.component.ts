@@ -70,9 +70,9 @@ export class BrandDashboardComponent {
 
   getProjectHoghlights() {
     let tProjTypes = this.selectedProjects.join(",");
-    this.analyticsService.GetDashboards(this._curBrand.aBrandId, tProjTypes).subscribe((resp: DahboardTile[]) => {
-      this.projects = resp;
-    });
+    // this.analyticsService.GetDashboards(this._curBrand.aBrandId, tProjTypes).subscribe((resp: DahboardTile[]) => {
+    //   this.projects = resp;
+    // });
   }
 
   storeSelect(evt: any) {
