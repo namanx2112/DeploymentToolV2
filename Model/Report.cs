@@ -40,9 +40,10 @@ namespace DeploymentTool.Model
         {
             get
             {
-                return tRandom.Next();
+                return tRandom.Next(1, 4);
             }
-            set {
+            set
+            {
                 _size = value;
             }
         }
