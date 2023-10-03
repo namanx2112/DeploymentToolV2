@@ -225,7 +225,7 @@ namespace DeploymentTool.Controller
                 // var nBrandID = 2;
                 var tProjectTypesTemp = request.tProjectTypes == null ? "" : request.tProjectTypes;
 
-                items = db.Database.SqlQuery<DahboardTile>("exec sproc_GetDashboardReports_new @nBrandID, @tProjectTypes,@nUserID,@dStarDate,@dEndDate", new SqlParameter("@nBrandID", request.nBrandId),
+                items = db.Database.SqlQuery<DahboardTile>("exec sproc_GetDashboardReports @nBrandID, @tProjectTypes,@nUserID,@dStarDate,@dEndDate", new SqlParameter("@nBrandID", request.nBrandId),
                     new SqlParameter("@tProjectTypes", tProjectTypesTemp), new SqlParameter("@nUserID", securityContext.nUserID),
                     new SqlParameter("@dStarDate", request.dStart), new SqlParameter("@dEndDate", request.dEnd)).ToList();
             }
