@@ -312,10 +312,10 @@ button {
     color: #fff;
 }
 
-.sonic_theme .tileShortcut:hover {
+/* .sonic_theme .tileShortcut:hover {
     background-color:  rgb(0, 137, 216);
     color: #fff;
-}
+} */
 
 /* .sonic_theme .sideNavContent{
     background-color: #E6F6F7;
@@ -358,7 +358,7 @@ button {
     border-bottom: 5px solid #382E2C;
 }
 
-.buffalo_theme .tileShortcut:hover {
+/* .buffalo_theme .tileShortcut:hover {
     background-color: #E3E1DB;
     color: #fff;
-}
+} */

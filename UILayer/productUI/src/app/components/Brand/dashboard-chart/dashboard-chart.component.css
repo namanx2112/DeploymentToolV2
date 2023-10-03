@@ -1,8 +1,6 @@
 .tileShortcut {
     position: relative;
-    border-radius: 10px;
     cursor: pointer;
-    border: 1px solid rgba(0,0,0,.06);
 }
 
 .tileShortcut .title {
@@ -14,22 +12,11 @@
 }
 
 .canvas{
-    width: 400px;
     margin: 20px auto;
 }
 
-.X1{
-    width: 200px;
-}
-
-.X2{
-    width: 400px;
-}
-
-.X3{
-    width: 600px;
-}
-
-.X4{
-    width: 800px;
+.canvas canvas{
+    width: 90%!important;
+    height: auto!important;
+    margin: auto;
 }

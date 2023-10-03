@@ -14,11 +14,38 @@
 .tilesPart {
     display: flex;
     flex-flow: wrap;
-    gap: 50px;
+    justify-content: space-between;
+    width: calc(100% - 20px);
 }
 
 .tilesPart > *{
-    
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,.06);
+}
+
+.tilesPart > *{
+    margin: 30px 0px;
+}
+
+.notChart{
+    height: 200px!important;
+}
+
+
+.X1{
+    width: 20%;
+}
+
+.X2{
+    width: 50%;
+}
+
+.X3{
+    width: 75%;
+}
+
+.X4{
+    width: 100%;
 }
 
 .searchField {

@@ -23,7 +23,7 @@ export class DashboardChartComponent {
   tClass: string;
   constructor(private elementRef: ElementRef) {
     Chart.register(Colors);
-    Chart.overrides.doughnut.cutout = '75%';
+    // Chart.overrides.doughnut.cutout = '75%';
     Chart.register(ChartDataLabels);
   }
   ngOnInit(): void {
@@ -57,7 +57,7 @@ export class DashboardChartComponent {
         data: {// values on X-Axis
           labels: this._record.chartLabels,
           datasets: [{
-            label: this._record.title,
+            label: "",
             data: this._record.chartValues,
             // backgroundColor: bgColors,
             // hoverOffset: 4
@@ -65,9 +65,10 @@ export class DashboardChartComponent {
         },
         options: {
           responsive: true,
+          aspectRatio: 4/1,
           plugins: {
             legend: {
-              position: 'right'
+              display: false
             },
             datalabels: {
               color: 'white',

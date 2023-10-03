@@ -24,6 +24,7 @@ export class DashboardPaneComponent {
   @Input()
   set curBrand(val: BrandModel) {
     this._curBrand = val;
+    this.loadProjectTYpes();
     this.getProjectHoghlights();
   };
   _curBrand: BrandModel;
@@ -33,16 +34,26 @@ export class DashboardPaneComponent {
   selectedProjects: any[] = [];
   allProjectTypes: OptionType[] = [];
   campaignOne: FormGroup;
-  constructor(private service: ExStoreService, public access: AccessService, private analyticsService: AnalyticsService, private commonService: CommonService) {
-    this.loadProjectTYpes();
+  constructor(private service: ExStoreService, public access: AccessService, private analyticsService: AnalyticsService, private commonService: CommonService) {    
     this.campaignOne = new FormGroup({
-      start: new FormControl(new Date(year, month, 13)),
-      end: new FormControl(new Date(year, month, 16)),
+      start: new FormControl(new Date(new Date().getFullYear(), 0, 1)),
+      end: new FormControl(new Date(new Date().getFullYear(), 11, 31)),
     });
+  }
+
+  getClassName(curItem: any, isChart: boolean) {
+    let tClass = (isChart) ? 'X' : 'notChart X';
+    tClass += curItem.size;
+    return tClass;
   }
 
   loadProjectTYpes() {
     this.allProjectTypes = this.commonService.GetDropdownOptions(-1, "ProjectType");
+    if (this._curBrand.tBrandName.toLocaleLowerCase().indexOf("sonic") > -1)
+      this.allProjectTypes = this.allProjectTypes.filter(x => x.tDropdownText.toLocaleLowerCase().indexOf("server") == -1)
+    this.allProjectTypes.filter(x=> x.tDropdownText.toLocaleLowerCase() == "new")[0].tDropdownText = "New Store Opening (NRO)";
+    // else
+    //   this.allProjectTypes = this.allProjectTypes.filter(x => x.tDropdownText.toLocaleLowerCase().indexOf("server") > -1)
   }
 
   ngOnInit() {

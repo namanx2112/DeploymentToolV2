@@ -35,18 +35,7 @@ namespace DeploymentTool.Model
 
         Random tRandom = new Random(4);
 
-        int _size;
-        public int size
-        {
-            get
-            {
-                return tRandom.Next(1, 4);
-            }
-            set
-            {
-                _size = value;
-            }
-        }
+        public int size { get; set; }
         public string title { get; set; }
         public int count { get; set; }
         public Nullable<int> compareWith { get; set; }
