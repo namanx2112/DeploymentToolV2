@@ -34,7 +34,7 @@ export class FileStoreSelectionComponent {
 
   setColumnHeaders(nBrandId: number) {
     let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == nBrandId);
-    if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") > -1) {
+    if (tBrand.nBrandType == 2) {
       this.isBuffaloBrand = true;
       this.displayedColumns = ['select', 'nStoreExistStatus', 'tProjectType', 'tStoreNumber', 'tAddress',
         'tCity', 'tState', 'nDMAID', 'tDMA', 'tRED', 'tCM', 'tANE', 'tRVP', 'tPrincipalPartner',

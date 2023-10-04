@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { BrandModel, DropdownModule, DropwDown } from 'src/app/interfaces/models';
+import { BrandModel, Brands, DropdownModule, DropwDown } from 'src/app/interfaces/models';
 import { DropdownServiceService } from 'src/app/services/dropdown-service.service';
 // import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { Dictionary } from 'src/app/interfaces/commons';
@@ -49,7 +49,8 @@ export class ManageDropdownsComponent {
       tIconURL: '',
       access: true,
       nEnabled: 0,
-      tMyClass: ""
+      tMyClass: "",
+      nBrandType: Brands.Sonic
     };
     this.loadBrands();
   }

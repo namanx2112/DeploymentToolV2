@@ -48,6 +48,7 @@
     <Property Name="bDeleted" Type="bit" />
     <Property Name="BrandFile" Type="image" />
     <Property Name="nEnabled" Type="int" />
+    <Property Name="nBrandType" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblBrandBKP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->

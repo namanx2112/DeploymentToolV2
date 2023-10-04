@@ -31,5 +31,6 @@ namespace DeploymentTool
         public Nullable<bool> bDeleted { get; set; }
         public byte[] BrandFile { get; set; }
         public Nullable<int> nEnabled { get; set; }
+        public Nullable<int> nBrandType { get; set; }
     }
 }

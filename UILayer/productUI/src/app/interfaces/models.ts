@@ -20,7 +20,12 @@ export interface BrandModel {
     tIconURL: string,
     access: boolean | true,
     nEnabled: number,
-    tMyClass: string
+    tMyClass: string,
+    nBrandType: Brands
+}
+
+export enum Brands {
+    Sonic = 1, Buffalo, Arby, Dunkin, Rusty, Jimmy
 }
 
 

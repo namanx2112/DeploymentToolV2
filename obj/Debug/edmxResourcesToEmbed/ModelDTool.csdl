@@ -104,6 +104,7 @@
     <Property Name="bDeleted" Type="Boolean" />
     <Property Name="BrandFile" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="nEnabled" Type="Int32" />
+    <Property Name="nBrandType" Type="Int32" />
   </EntityType>
   <EntityType Name="tblUser">
     <Key>

@@ -53,7 +53,8 @@
           <Property Name="bDeleted" Type="bit" />
           <Property Name="BrandFile" Type="image" />
           <Property Name="nEnabled" Type="int" />
-        </EntityType>
+		  <Property Name="nBrandType" Type="int" />			
+		</EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblBrandBKP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblBrandBKP">
@@ -1149,7 +1150,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
 					<Property Name="BrandFile" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="nEnabled" Type="Int32" />
+					<Property Name="nEnabled" Type="Int32" />
+					<Property Name="nBrandType" Type="Int32" />					
 				</EntityType>
 				<EntityType Name="tblUser">
 					<Key>
@@ -1986,7 +1988,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 						<EntityTypeMapping TypeName="dtDBModel.tblBrand">
 							<MappingFragment StoreEntitySet="tblBrand">
 								<ScalarProperty Name="nEnabled" ColumnName="nEnabled" />
-                <ScalarProperty Name="BrandFile" ColumnName="BrandFile" />
+								<ScalarProperty Name="nBrandType" ColumnName="nBrandType" />
+								<ScalarProperty Name="BrandFile" ColumnName="BrandFile" />
 								<ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
 								<ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
 								<ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />

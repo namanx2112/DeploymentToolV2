@@ -25,7 +25,7 @@
                     Installation</button>
                 <button mat-menu-item (click)="menuClick('newproject', 'all', 'PartsReplacement');">Parts
                     Replacement</button>
-                <button mat-menu-item *ngIf="_curBrand.tBrandName.toLowerCase().indexOf('buffalo') > -1"
+                <button mat-menu-item *ngIf="_curBrand.nBrandType == 2"
                     (click)="menuClick('newproject', 'serverhandheld', 'ServerHandheldInstallation');">Server
                     Handheld Installation</button>
             </mat-menu>

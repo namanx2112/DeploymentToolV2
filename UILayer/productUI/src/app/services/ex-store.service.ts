@@ -148,7 +148,7 @@ export class ExStoreService {
   GetStoretabs(nBrandId: number): HomeTab[] {
     let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == nBrandId);
     let tabs: HomeTab[];
-    if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") > -1) {
+    if (tBrand.nBrandType == 2) {
       tabs = [
         this.GetStoreContactTab(TabInstanceType.Single),
         this.GetStoreConfigurationTab(TabInstanceType.Single),
@@ -213,7 +213,7 @@ export class ExStoreService {
         tabs.push(this.GetStoreExteriorMenusTab(TabInstanceType.Single));
         tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInteriorMenusTab(TabInstanceType.Single));
-        if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") == -1)
+        if (tBrand.nBrandType == 2)
           tabs.push(this.GetStoreSonicRadioTab(TabInstanceType.Single));
         else
           tabs.push(this.GetStoreServerHandheldTab(TabInstanceType.Single));

@@ -5,6 +5,7 @@
       <EntityTypeMapping TypeName="dtDBModel.tblBrand">
         <MappingFragment StoreEntitySet="tblBrand">
           <ScalarProperty Name="nEnabled" ColumnName="nEnabled" />
+          <ScalarProperty Name="nBrandType" ColumnName="nBrandType" />
           <ScalarProperty Name="BrandFile" ColumnName="BrandFile" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
           <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />

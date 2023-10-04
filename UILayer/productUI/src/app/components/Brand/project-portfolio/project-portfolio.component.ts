@@ -55,7 +55,7 @@ export class ProjectPortfolioComponent {
 
   loadColumns() {
     let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == this._curBrand.aBrandId);
-    if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") > -1) {
+    if (tBrand.nBrandType == 2) {
       this.columnsToDisplay = [
         {
           columnDef: "store",

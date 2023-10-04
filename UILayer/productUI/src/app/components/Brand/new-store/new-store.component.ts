@@ -110,7 +110,7 @@ export class NewStoreComponent {
     }
 
     if (this._NeedTechComponent == "all") {
-      if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") > -1) {
+      if (tBrand.nBrandType == 2) {
         this.allTabs.push(this.service.GetStoreServerHandheldTab(TabInstanceType.Single));
         this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
       }

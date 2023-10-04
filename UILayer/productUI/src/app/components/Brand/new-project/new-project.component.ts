@@ -106,7 +106,7 @@ export class NewProjectComponent {
       this.allTabs.push(this.service.GetStoreAudioTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
-    if (tBrand.tBrandName.toLowerCase().indexOf("buffalo") > -1) {
+    if (tBrand.nBrandType == 2) {
       if (this._NeedTechComponent == "all" || this._NeedTechComponent == "serverhandheld") {
         this.allTabs.push(this.service.GetStoreServerHandheldTab(TabInstanceType.Single));
         this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};

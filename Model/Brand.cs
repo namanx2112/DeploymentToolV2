@@ -28,6 +28,11 @@ namespace DeploymentTool.Model
 
     }
 
+    public enum Brands
+    {
+        Sonic = 1, Buffalo, Arby, Dunkin, Rusty, Jimmy
+    }
+
     public class BrandModel
     {
         public int aBrandId { get; set; }
@@ -61,6 +66,7 @@ namespace DeploymentTool.Model
         public byte[] BrandFile { get; set; }
         public string tIconURL { get; set; }
         public int nEnabled { get; set; }
+        public Nullable<int> nBrandType { get; set; }
 
         public string tMyClass { get; set; }
 

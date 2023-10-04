@@ -362,3 +362,36 @@ button {
     background-color: #E3E1DB;
     color: #fff;
 } */
+
+.arby_theme a.active {
+    border-bottom: 5px solid rgb(0, 137, 216);
+}
+
+.arby_theme .sideNav {
+    background-color: #ECECEC;
+}
+
+.arby_theme .fullTile,
+.arby_theme .halfTile,
+.arby_theme .tabBody,
+.arby_theme .lightGray {
+    background-color: #f0f0f0;
+}
+
+
+.arby_theme .selectedTab {
+    background-color: #382E2C;
+    color: #fff;
+}
+
+.arby_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary{
+    background-color: #ECECEC!important;
+}
+
+/* .buffalo_theme .sideNavContent{
+    background-color: #E3E1DB;
+} */
+
+.arby_theme a.active {
+    border-bottom: 5px solid #382E2C;
+}
