@@ -562,8 +562,180 @@ Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 1,nModuleId fro
 
 If(NOT EXISTS(select top 1 1 from tblDropdowns where nBrandId = 1))
 Insert into tblDropdowns (tDropdownText,nUpdateBy,dtCreatedOn,dtUpdatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId) select  tDropdownText,nUpdateBy,dtCreatedOn,dtUpdatedOn,bDeleted,nOrder,nFunction,nModuleId,1 from tblDropdowns where nBrandId = 2
+
 select * from tblDropdowns where nBrandId = 2
 select * from tblDropdownModuleBrandRel
+
+GO
+
+ALTER procedure sproc_GetAllTechData        
+@nStoreID int=0      
+AS          
+BEGIN          
+      
+DECLARE @ListOfDeliveryStatus TABLE(aID INT,tTechComponent VARCHAR(100) ,tVendor VARCHAR(500), dDeliveryDate date  ,dInstallDate date ,dConfigDate date, tStatus VARCHAR(500),nVendorID int)      
+DECLARE @Brand nvarchar(max)  
+ select top 1 @Brand=tBrandName from tblBrand with (nolock) where aBrandId =(select top 1 nBrandID from tblstore with (nolock) where aStoreID=@nStoreID)  
+  
+INSERT INTO @ListOfDeliveryStatus      
+VALUES     
+  
+(8,'Networking','',NULL,NULL,NULL,'',null),      
+(7,'POS','',NULL,NULL,NULL,'',null),      
+(6,'Audio','',NULL,NULL,NULL,'',null),      
+(2,'Exterior Menus','',NULL,NULL,NULL,'',null),      
+(4,'Payment Systems','',NULL,NULL,NULL,'',null),      
+(3,'Interior Menus','',NULL,NULL,NULL,'',null),      
+(5,'Sonic Radio','',NULL,NULL,NULL,'',null),      
+(1,'Installation','',NULL,NULL,NULL,'',null),      
+(9,'Server Handheld','',NULL,NULL,NULL,'',null)       
+  
+if(@Brand='Buffalo Wild Wings')  
+ delete from @ListOfDeliveryStatus where aID=5  
+ else if(@Brand like 'Sonic%' or @Brand like 'Arby''s')  
+ delete from @ListOfDeliveryStatus where aID=9  
+  
+      
+      
+      
+Declare @tTechName nVARCHAR(100)      
+Declare @dDate VARCHAR(100)      
+Declare @tStatus VARCHAR(500)      
+Declare @tVendor VARCHAR(500)      
+Declare @dInstallDate VARCHAR(100)      
+Declare @dConfigDate VARCHAR(100)      
+Declare @nVendorID int     
+    
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@nVendorID=nVendor, @dDate=dInstallDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus)  
+from tblProjectInstallation  with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1       
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor,nVendorID=@nVendorID where aID=1      
+set @nVendorID=null    
+set @tVendor=''    
+set @dDate=null    
+set  @tStatus=''    
+set @dInstallDate=null    
+set @dConfigDate=null    
+    
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@nVendorID=nVendor,@dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus)   
+from tblProjectExteriorMenus with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1          
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor,nVendorID=@nVendorID where aID=2      
+set @nVendorID=null    
+set @tVendor=''    
+set @dDate=null    
+set  @tStatus=''    
+set @dInstallDate=null    
+set @dConfigDate=null    
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@nVendorID=nVendor, @dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus)   
+from tblProjectInteriorMenus with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1          
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor,nVendorID=@nVendorID where aID=3      
+set @nVendorID=null    
+set @tVendor=''    
+set @dDate=null    
+set  @tStatus=''    
+set @dInstallDate=null    
+set @dConfigDate=null    
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@nVendorID=nVendor,@dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus)   
+from tblProjectPaymentSystem with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1        
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor,nVendorID=@nVendorID where aID=4     
+if(@Brand like 'Sonic%' or @Brand like 'Arby''s')   
+Begin  
+set @nVendorID=null    
+set @tVendor=''    
+set @dDate=null    
+set  @tStatus=''    
+set @dInstallDate=null    
+set @dConfigDate=null    
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@nVendorID=nVendor,@dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus)   
+from tblProjectSonicRadio with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1        
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor,nVendorID=@nVendorID where aID=5      
+End  
+set @nVendorID=null    
+set @tVendor=''    
+set @dDate=null    
+set  @tStatus=''    
+set @dInstallDate=null    
+set @dConfigDate=null    
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@nVendorID=nVendor,@dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus)   
+from tblProjectAudio with (nolock) where nProjectID in  
+(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1      
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,tStatus=@tStatus,tVendor=@tVendor,nVendorID=@nVendorID where aID=6      
+set @nVendorID=null    
+set @tVendor=''    
+set @dDate=null    
+set  @tStatus=''    
+set @dInstallDate=null    
+set @dConfigDate=null    
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@nVendorID=nVendor,@dDate=dDeliveryDate, @dInstallDate=dSupportDate, @dConfigDate=dConfigDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus) 
+  
+from tblProjectPOS with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1          
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,dInstallDate=@dInstallDate,dConfigDate=@dConfigDate,tStatus=@tStatus,tVendor=@tVendor,nVendorID=@nVendorID where aID=7      
+set @nVendorID=null    
+set @tVendor=''    
+set @dDate=null    
+set  @tStatus=''    
+set @dInstallDate=null    
+set @dConfigDate=null    
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@nVendorID=nVendor,@dDate=dPrimaryDate,@dInstallDate=dBackupDate, @tStatus=dbo.geDropDownStatusTextByID(nPrimaryStatus,dDateFor_nPrimaryStatus)   
+from tblProjectNetworking with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1       
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,dInstallDate=@dInstallDate,tStatus=@tStatus,tVendor=@tVendor,nVendorID=@nVendorID where aID=8      
+if(@Brand='Buffalo Wild Wings')  
+Begin  
+set @nVendorID=null    
+set @tVendor=''    
+set @dDate=null    
+set  @tStatus=''    
+set @dInstallDate=null    
+set @dConfigDate=null    
+Select top 1 @tVendor=(select tVendorName from tblVendor with (nolock) where aVendorId=nVendor),@nVendorID=nVendor,@dDate=dDeliveryDate, @tStatus=dbo.geDropDownStatusTextByID(nStatus,dDateFor_nStatus)  
+from tblProjectServerHandheld with (nolock) where nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID=@nStoreId and nProjectActiveStatus=1) and nMyActiveStatus=1       
+update @ListOfDeliveryStatus set dDeliveryDate= @dDate,dInstallDate=@dInstallDate,tStatus=@tStatus,tVendor=@tVendor,nVendorID=@nVendorID where aID=9      
+End  
+select tTechComponent as tComponent,tVendor,dDeliveryDate as dDeliveryDate,dInstallDate,dConfigDate, tStatus,nVendorID from @ListOfDeliveryStatus      
+END   
+
+Go
+
+alter procedure sproc_getDynamicDataFromCompID      
+@nQuoteRequestTechCompid as int,      
+--@nTemplateId as int,      
+@nStoreId as int      
+AS      
+Begin      
+--declare @nQuoteRequestTechCompid int      
+--set @nQuoteRequestTechCompid=11      
+declare @tTechComp nvarchar(Max)      
+declare @tableName nvarchar(Max)      
+declare @ColumnID nvarchar(Max)      
+set @tTechComp='Select top 1 '      
+select @tTechComp=@tTechComp+ dbo.getColumnDataType(tTechCompField)+' as ['+tTechCompFieldName+'], ' from tblQuoteRequestTechCompFields  with (nolock) where nQuoteRequestTechCompid=@nQuoteRequestTechCompid      
+set @tTechComp=LEFT(@tTechComp, LEN(@tTechComp) - 1)      
+print @tTechComp      
+select @tableName=tTableName from  tblQuoteRequestTechComp  with (nolock) where aQuoteRequestTechCompId=@nQuoteRequestTechCompid      
+print @tableName      
+--if(@tableName='tblProjectStore')      
+----select @ColumnID=COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where COLUMNPROPERTY(object_id(@tableName), COLUMN_NAME, 'IsIdentity') = 1      
+--set @ColumnID='aProjectStoreID'      
+--else      
+set @ColumnID='nProjectID'      
+--print @ColumnID      
+--set @tTechComp=@tTechComp +' From '+@tableName +' with (nolock) Where ' +@ColumnID +'='+cast(@nTemplateId as nvarchar(20))    
+print @tTechComp 
+--if(@tTechComp='Select top ')
+--set @tTechComp='Select top 1 * ' 
+--print @tTechComp    
+
+ if(@tableName='tblProjectStore')  
+ set @tableName='tblstore'  
+if (@tableName='tblstore')    
+set @tTechComp=@tTechComp +' From '+@tableName +' with (nolock) Where  aStoreID='+cast(@nStoreId as nvarchar(20))   
+else if (@tableName='tblProjectConfig')    
+set @tTechComp=@tTechComp +' From '+@tableName +' with (nolock) Where   nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID='+cast(@nStoreId as nvarchar(20))+' and nProjectActiveStatus=1)'   
+else    
+set @tTechComp=@tTechComp +' From '+@tableName +' with (nolock) Where    nProjectID in(select aProjectID from tblproject with (nolock) where nStoreID='+cast(@nStoreId as nvarchar(20))+' and nProjectActiveStatus=1) and nMyActiveStatus=1'    
+print @tTechComp      
+ EXEC (@tTechComp)      
+      
+ End  
 
 
   

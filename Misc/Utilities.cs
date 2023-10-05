@@ -164,12 +164,14 @@ namespace DeploymentTool.Misc
                 if (request.tTo != null && request.tTo.Length > 0)
                 {
                     foreach (string toAddress in request.tTo.Split(';'))
-                        mailMessage.To.Add(toAddress.Trim());
+                        if (!String.IsNullOrEmpty(toAddress))
+                            mailMessage.To.Add(toAddress.Trim());
                 }
                 if (request.tCC != null && request.tCC.Length > 0)
                 {
                     foreach (string toAddress in request.tCC.Split(';'))
-                        mailMessage.CC.Add(toAddress.Trim());
+                        if (!String.IsNullOrEmpty(toAddress))
+                            mailMessage.CC.Add(toAddress.Trim());
                 }
                 mailMessage.Subject = request.tSubject;
                 mailMessage.IsBodyHtml = true;

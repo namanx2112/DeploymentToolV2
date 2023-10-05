@@ -89,7 +89,7 @@ namespace DeploymentTool
             Nullable<int> nBrandId,
             Nullable<int> nNumberOfTabletsPerStore,
             string tEquipmentVendor,
-             Nullable<System.DateTime> dDeliveryDate,
+             Nullable<System.DateTime> dShipDate,
              Nullable<System.DateTime> dRevisitDate,
              Nullable<System.DateTime> dInstallDate,
             string tInstallationVendor,
@@ -175,9 +175,9 @@ namespace DeploymentTool
                 new ObjectParameter("tEquipmentVendor", tEquipmentVendor) :
                 new ObjectParameter("tEquipmentVendor", typeof(string));
 
-            var dDeliveryDateParameter = dDeliveryDate.HasValue ?
-             new ObjectParameter("dDeliveryDate", dDeliveryDate) :
-             new ObjectParameter("dDeliveryDate", typeof(System.DateTime));
+            var dShipDateParameter = dShipDate.HasValue ?
+             new ObjectParameter("dShipDate", dShipDate) :
+             new ObjectParameter("dShipDate", typeof(System.DateTime));
 
             var dRevisitDateParameter = dRevisitDate.HasValue ?
                new ObjectParameter("dRevisitDate", dRevisitDate) :
@@ -200,7 +200,7 @@ namespace DeploymentTool
             //Nullable<System.DateTime> dInstallDate
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sproc_CreateStoreFromExcel", tStoreNameParameter, nProjectTypeParameter, tStoreNumberParameter, tAddressParameter, tCityParameter, tStateParameter, nDMAIDParameter, tDMAParameter, tREDParameter, tCMParameter, tANEParameter, tRVPParameter, tPrincipalPartnerParameter, dStatusParameter, dOpenStoreParameter, tProjectStatusParameter, nCreatedByParameter
-                , nBrandIdParameter, nNumberOfTabletsPerStoreParameter, tEquipmentVendorParameter, dDeliveryDateParameter, dRevisitDateParameter,
+                , nBrandIdParameter, nNumberOfTabletsPerStoreParameter, tEquipmentVendorParameter, dShipDateParameter, dRevisitDateParameter,
                 dInstallDateParameter, tInstallationVendorParameter,
                 tInstallStatusParameter);
         }

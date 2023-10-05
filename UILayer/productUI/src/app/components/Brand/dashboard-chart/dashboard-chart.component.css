@@ -14,9 +14,3 @@
 .canvas{
     margin: 20px auto;
 }
-
-.canvas canvas{
-    width: 90%!important;
-    height: auto!important;
-    margin: auto;
-}

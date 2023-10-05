@@ -4,6 +4,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Colors } from 'chart.js';
 import { DashboardTileType, DahboardTile } from 'src/app/interfaces/commons';
 
+
 @Component({
   selector: 'app-dashboard-chart',
   templateUrl: './dashboard-chart.component.html',
@@ -23,8 +24,8 @@ export class DashboardChartComponent {
   tClass: string;
   constructor(private elementRef: ElementRef) {
     Chart.register(Colors);
-    // Chart.overrides.doughnut.cutout = '75%';
-    Chart.register(ChartDataLabels);
+    Chart.overrides.doughnut.cutout = '75%';
+    // Chart.register(ChartDataLabels);
   }
   ngOnInit(): void {
 
@@ -49,6 +50,7 @@ export class DashboardChartComponent {
 
   createChart() {
     if (typeof this._record.chartType != 'undefined' && typeof this._record.chartLabels != 'undefined') {
+      let backgroundColor = ["#ffb3b3", "#800000", "#b3ffec", "#009973", "#d5ff80", "#558000", "#ffdf80", "#997300", "#adadeb", "#24248f", "#6666ff","#000066"];
       this.setSizeClass();
       let htmlRef = this.elementRef.nativeElement.querySelector("#MyChartId");
       let cThis = this;
@@ -59,25 +61,33 @@ export class DashboardChartComponent {
           datasets: [{
             label: "",
             data: this._record.chartValues,
-            // backgroundColor: bgColors,
+             backgroundColor: backgroundColor,
             // hoverOffset: 4
           }],
         },
         options: {
-          responsive: true,
-          aspectRatio: 4/1,
+          scales: {
+            x: {
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              grid: {
+                display: false
+              }
+            }
+          },
+          aspectRatio: 4 / 1,
           plugins: {
+            colors: {
+              forceOverride: true
+            },
             legend: {
               display: false
             },
             datalabels: {
               color: 'white',
-              display: function (context) {
-                var dataset = context.dataset;
-                var count = dataset.data.length;
-                var value = dataset.data[context.dataIndex];
-                return "1000";
-              },
               font: {
                 weight: 'bold'
               },

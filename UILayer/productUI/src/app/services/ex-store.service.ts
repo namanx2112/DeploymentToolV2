@@ -8,7 +8,7 @@ import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, ProjectE
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CacheService } from './cache.service';
-import { BrandModel } from '../interfaces/models';
+import { BrandModel, Brands } from '../interfaces/models';
 import { ChartType } from "chart.js";
 
 @Injectable({
@@ -148,7 +148,7 @@ export class ExStoreService {
   GetStoretabs(nBrandId: number): HomeTab[] {
     let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == nBrandId);
     let tabs: HomeTab[];
-    if (tBrand.nBrandType == 2) {
+    if (tBrand.nBrandType == Brands.Buffalo) {
       tabs = [
         this.GetStoreContactTab(TabInstanceType.Single),
         this.GetStoreConfigurationTab(TabInstanceType.Single),
@@ -160,6 +160,21 @@ export class ExStoreService {
         this.GetStorePaymentSystemTab(TabInstanceType.Single),
         this.GetStoreInteriorMenusTab(TabInstanceType.Single),
         this.GetStoreServerHandheldTab(TabInstanceType.Single),
+        this.GetStoreInsallationTab(TabInstanceType.Single)
+      ];
+    }
+    else if (tBrand.nBrandType == Brands.Arby) {
+      tabs = [
+        this.GetStoreContactTab(TabInstanceType.Single),
+        this.GetStoreConfigurationTab(TabInstanceType.Single),
+        this.GetStoreStackholderTab(TabInstanceType.Single),
+        this.GetStoreNetworingTab(TabInstanceType.Single),
+        this.GetStorePOSTab(TabInstanceType.Single),
+        this.GetStoreAudioTab(TabInstanceType.Single),
+        this.GetStoreExteriorMenusTab(TabInstanceType.Single),
+        this.GetStorePaymentSystemTab(TabInstanceType.Single),
+        this.GetStoreInteriorMenusTab(TabInstanceType.Single),
+        this.GetStoreRadioTab(TabInstanceType.Single),
         this.GetStoreInsallationTab(TabInstanceType.Single)
       ];
     }
@@ -2425,6 +2440,187 @@ export class ExStoreService {
         invalid: false,
         field_type: FieldType.date,
         field_placeholder: "dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }]
+    };
+  }
+
+  GetStoreRadioTab(instType: TabInstanceType): HomeTab {
+    return {
+      tab_name: "Radio",
+      tab_header: "Radio",
+      tTableName: "tblProjectSonicRadio",
+      tab_type: TabType.StoreSonicRadio,
+      tab_unique_name: "",
+      instanceType: instType,
+      childTabs: [],
+      search_fields: [{
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }],
+      fields: [{
+        field_name: "ProjectSonicRadioID",
+        fieldUniqeName: "aProjectSonicRadioID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter ProjectSonicRadioID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "ProjectID",
+        fieldUniqeName: "nProjectID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter ProjectID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "Vendor",
+        field_group: "Primary",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        options: this.commonService.GetDropdown("Vendor"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Outdoor Speakers",
+        fieldUniqeName: "nOutdoorSpeakers",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Outdoor Speakers",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Colors",
+        fieldUniqeName: "nColors",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Colors",
+        validator: [],
+        options: this.commonService.GetDropdown("SonicRaidoColors"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Indoor Speakers",
+        fieldUniqeName: "nIndoorSpeakers",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Indoor Speakers",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Zones",
+        fieldUniqeName: "nZones",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Zones",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Server Racks",
+        fieldUniqeName: "nServerRacks",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Server Racks",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Status",
+        fieldUniqeName: "nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Status",
+        validator: [],
+        options: this.commonService.GetDropdown("SonicRadioStatus"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Delivery Date",
+        fieldUniqeName: "dDeliveryDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Delivery Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Cost",
+        fieldUniqeName: "cCost",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.currency,
+        field_placeholder: "Enter Cost",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "dDateFor_nStatus",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nStatus",
         validator: [],
         mandatory: false,
         hidden: true
