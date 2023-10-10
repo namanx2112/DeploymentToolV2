@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, OptionType, TabInstanceType, TabType } from 'src/app/interfaces/home-tab';
-import { BrandModel } from 'src/app/interfaces/models';
+import { BrandModel, Brands } from 'src/app/interfaces/models';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ExStoreService } from 'src/app/services/ex-store.service';
@@ -110,11 +110,15 @@ export class NewStoreComponent {
     }
 
     if (this._NeedTechComponent == "all") {
-      if (tBrand.nBrandType == 2) {
+      if (tBrand.nBrandType == Brands.Buffalo) {
         this.allTabs.push(this.service.GetStoreServerHandheldTab(TabInstanceType.Single));
         this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
       }
-      else {
+      else if(tBrand.nBrandType == Brands.Arby) {
+        this.allTabs.push(this.service.GetStoreRadioTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+      else{
         this.allTabs.push(this.service.GetStoreSonicRadioTab(TabInstanceType.Single));
         this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
       }

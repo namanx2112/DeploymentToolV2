@@ -554,17 +554,18 @@ update tblBrand set nBrandType = 5 where tBrandName like '%Rusty%'
 update tblBrand set nBrandType = 6 where tBrandName like '%Jimmy%'
 update tblBrand set nEnabled = 1 where tBrandName like '%Arby%'
 
+update tblDropdownModule set tModuleDisplayName = 'Drive Thru' where tModuleDisplayName like '%Drive%'
 
 GO
 select * from tblBrand
-If(NOT EXISTS(select top 1 1 from tblDropdownModuleBrandRel where nBrandId = 1))
+If(NOT EXISTS(select top 1 1 from tblDropdownModuleBrandRel where nBrandId = 3))
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 1,nModuleId from tblDropdownModuleBrandRel where nBrandId =2 
 
-If(NOT EXISTS(select top 1 1 from tblDropdowns where nBrandId = 1))
+If(NOT EXISTS(select top 1 1 from tblDropdowns where nBrandId = 3))
 Insert into tblDropdowns (tDropdownText,nUpdateBy,dtCreatedOn,dtUpdatedOn,bDeleted,nOrder,nFunction,nModuleId,nBrandId) select  tDropdownText,nUpdateBy,dtCreatedOn,dtUpdatedOn,bDeleted,nOrder,nFunction,nModuleId,1 from tblDropdowns where nBrandId = 2
 
-select * from tblDropdowns where nBrandId = 2
-select * from tblDropdownModuleBrandRel
+select * from tblDropdowns where nBrandId = 3
+select * from tblDropdownModuleBrandRel where nBrandId = 3
 
 GO
 

@@ -22,6 +22,7 @@ alter table tblDropdownModule drop column nBrandId
 
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 0, aModuleId from tblDropdownModule where tModuleGroup in('User','Vendor')
 
+select * from tblDropdownModuleBrandRel
 select * from tblBrand-- Get Brand Id's
 
 Insert into tblDropdownModuleBrandRel(nBrandId,nModuleId) select 1, aModuleId from tblDropdownModule where tModuleGroup not in('User','Vendor')

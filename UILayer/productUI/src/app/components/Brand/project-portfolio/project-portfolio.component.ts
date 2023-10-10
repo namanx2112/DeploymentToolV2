@@ -10,7 +10,7 @@ import { NotesListComponent } from '../notes-list/notes-list.component';
 import { AccessService } from 'src/app/services/access.service';
 import { StoreSearchModel } from 'src/app/interfaces/store';
 import { MatTableDataSource } from '@angular/material/table';
-import { BrandModel } from 'src/app/interfaces/models';
+import { BrandModel, Brands } from 'src/app/interfaces/models';
 
 export interface TableColumnDef {
   columnDef: string,
@@ -55,7 +55,7 @@ export class ProjectPortfolioComponent {
 
   loadColumns() {
     let tBrand = CommonService.allBrands.find((x: BrandModel) => x.aBrandId == this._curBrand.aBrandId);
-    if (tBrand.nBrandType == 2) {
+    if (tBrand.nBrandType == Brands.Buffalo) {
       this.columnsToDisplay = [
         {
           columnDef: "store",
@@ -63,7 +63,7 @@ export class ProjectPortfolioComponent {
         },
         {
           columnDef: "networking",
-          header: "Netorking"
+          header: "Networking"
         }
         , {
           columnDef: "pos",
@@ -92,6 +92,43 @@ export class ProjectPortfolioComponent {
         }
       ];
     }
+    else if (tBrand.nBrandType == Brands.Arby) {
+      this.columnsToDisplay = [
+        {
+          columnDef: "store",
+          header: ""
+        },
+        {
+          columnDef: "networking",
+          header: "Networking"
+        }
+        , {
+          columnDef: "pos",
+          header: "POS"
+        }, {
+          columnDef: "audio",
+          header: "Audio"
+        }, {
+          columnDef: "exteriormenu",
+          header: "Exterior Menu"
+        }, {
+          columnDef: "paymentsystem",
+          header: "Payment System"
+        }, {
+          columnDef: "interiormenu",
+          header: "Interior Menu"
+        }, {
+          columnDef: "sonicradio",
+          header: "Radio"
+        }, {
+          columnDef: "installation",
+          header: "Installation"
+        }, {
+          columnDef: "notes",
+          header: "Notes"
+        }
+      ];
+    }
     else {
       this.columnsToDisplay = [
         {
@@ -100,7 +137,7 @@ export class ProjectPortfolioComponent {
         },
         {
           columnDef: "networking",
-          header: "Netorking"
+          header: "Networking"
         }
         , {
           columnDef: "pos",

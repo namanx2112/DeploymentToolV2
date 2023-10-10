@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, OptionType, TabInstanceType, TabType } from 'src/app/interfaces/home-tab';
-import { BrandModel } from 'src/app/interfaces/models';
+import { BrandModel, Brands } from 'src/app/interfaces/models';
 import { ProjectInfo, ProjectTypes, StoreSearchModel } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { CommonService } from 'src/app/services/common.service';
@@ -106,7 +106,7 @@ export class NewProjectComponent {
       this.allTabs.push(this.service.GetStoreAudioTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
-    if (tBrand.nBrandType == 2) {
+    if (tBrand.nBrandType == Brands.Buffalo) {
       if (this._NeedTechComponent == "all" || this._NeedTechComponent == "serverhandheld") {
         this.allTabs.push(this.service.GetStoreServerHandheldTab(TabInstanceType.Single));
         this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
@@ -128,9 +128,17 @@ export class NewProjectComponent {
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
 
-    if (this._NeedTechComponent == "all") {
-      this.allTabs.push(this.service.GetStoreSonicRadioTab(TabInstanceType.Single));
-      this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+    if (tBrand.nBrandType != Brands.Buffalo && tBrand.nBrandType != Brands.Arby) {
+      if (this._NeedTechComponent == "all") {
+        this.allTabs.push(this.service.GetStoreSonicRadioTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+    }
+    else if (tBrand.nBrandType == Brands.Arby) {
+      if (this._NeedTechComponent == "all") {
+        this.allTabs.push(this.service.GetStoreRadioTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
     }
     this.allTabs.push(this.service.GetStoreInsallationTab(TabInstanceType.Single));
     this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};

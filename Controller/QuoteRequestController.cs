@@ -259,32 +259,41 @@ namespace DeploymentTool.Controller
 
                             conn.Open();
 
-                            using (var reader = cmd.ExecuteReader())
+                            try
                             {
-                                bool RowExist = false;
-                                do
+                                using (var reader = cmd.ExecuteReader())
                                 {
-                                    while (reader.Read())
+                                    bool RowExist = false;
+                                    do
                                     {
-                                        for (int i = 0; i < reader.FieldCount; i++)
+                                        while (reader.Read())
                                         {
-                                            strData += "<tr>";
-                                            //strData += reader.GetName(i).ToString() + ":" + reader.GetValue(i).ToString() + "</br>";
-                                            strData += "<td><b> " + reader.GetName(i).ToString() + " </b></td><td>" + reader.GetValue(i).ToString() + "</td>";
-                                            RowExist = true;
-                                            strData += "</tr>";
+                                            for (int i = 0; i < reader.FieldCount; i++)
+                                            {
+                                                strData += "<tr>";
+                                                //strData += reader.GetName(i).ToString() + ":" + reader.GetValue(i).ToString() + "</br>";
+                                                strData += "<td><b> " + reader.GetName(i).ToString() + " </b></td><td>" + reader.GetValue(i).ToString() + "</td>";
+                                                RowExist = true;
+                                                strData += "</tr>";
+                                            }
                                         }
-                                    }
-                                    if (!RowExist)
-                                    {
-                                        for (int i = 0; i < reader.FieldCount; i++)
+                                        if (!RowExist)
                                         {
-                                            strData += "<tr>";
-                                            strData += "<td><b> " + reader.GetName(i).ToString() + " </b></td><td></td>";
-                                            strData += "</tr>";
+                                            for (int i = 0; i < reader.FieldCount; i++)
+                                            {
+                                                strData += "<tr>";
+                                                strData += "<td><b> " + reader.GetName(i).ToString() + " </b></td><td></td>";
+                                                strData += "</tr>";
+                                            }
                                         }
-                                    }
-                                } while (reader.NextResult());
+                                    } while (reader.NextResult());
+                                }
+                            }
+                            catch (Exception e)
+                            {
+
+                                TraceUtility.ForceWriteException("QuoteRequerst.GetMergedQuoteRequest sproc_getDynamicDataFromCompID aQuoteRequestTechCompId="+ RequestTechComp.aQuoteRequestTechCompId.ToString() + " nStoreId="+ nStoreId.ToString(), HttpContext.Current, e);
+
                             }
                         }
                     }

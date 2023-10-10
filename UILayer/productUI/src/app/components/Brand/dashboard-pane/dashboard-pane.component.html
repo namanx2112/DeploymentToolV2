@@ -14,7 +14,6 @@
             <input matStartDate placeholder="Start date" formControlName="start" (change)="dtChanged()">
             <input matEndDate placeholder="End date" formControlName="end" (change)="dtChanged()">
         </mat-date-range-input>
-        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
         <mat-error *ngIf="campaignOne.controls['start'].hasError('matStartDateInvalid')">Invalid start date</mat-error>
         <mat-error *ngIf="campaignOne.controls['end'].hasError('matEndDateInvalid')">Invalid end date</mat-error>

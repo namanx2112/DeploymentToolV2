@@ -228,10 +228,12 @@ export class ExStoreService {
         tabs.push(this.GetStoreExteriorMenusTab(TabInstanceType.Single));
         tabs.push(this.GetStorePaymentSystemTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInteriorMenusTab(TabInstanceType.Single));
-        if (tBrand.nBrandType == 2)
-          tabs.push(this.GetStoreSonicRadioTab(TabInstanceType.Single));
-        else
+        if (tBrand.nBrandType == Brands.Buffalo)
           tabs.push(this.GetStoreServerHandheldTab(TabInstanceType.Single));
+        else if (tBrand.nBrandType == Brands.Arby)
+          tabs.push(this.GetStoreRadioTab(TabInstanceType.Single));
+        else
+          tabs.push(this.GetStoreSonicRadioTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
     }
@@ -583,7 +585,7 @@ export class ExStoreService {
       hidden: false
     },
       {
-        field_name: "DMAID",
+        field_name: "DMA ID",
         fieldUniqeName: "nDMAID",
         defaultVal: "",
         readOnly: false,
