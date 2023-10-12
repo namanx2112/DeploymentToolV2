@@ -18,7 +18,7 @@ export class CommonService {
   static dropdownCache: any;
   static ddMonthString: string = "[Day/Month]";
   static allBrands: any;
-  static pKey = [100,101,112,108,117,116,105,111,110];
+  static pKey = [100, 101, 112, 108, 117, 116, 105, 111, 110];
   noNeedBlankDropDown: string[] = ["UserRole", "Brand"];
   constructor(private cacheService: CacheService, private ddService: DropdownServiceService) {
 
@@ -46,11 +46,11 @@ export class CommonService {
     }
   }
 
-  static getKey(){
+  static getKey() {
     return new TextDecoder().decode(new Uint8Array(CommonService.pKey)).toString()
   }
-  
-  static getHashed(strVal: string){
+
+  static getHashed(strVal: string) {
     return sha256.hmac(CommonService.getKey(), strVal);
   }
 
@@ -151,8 +151,11 @@ export class CommonService {
       case ProjectTypes.AudioInstallation:
         pString = "Audio Installation";
         break;
-      case ProjectTypes.MenuInstallation:
-        pString = "Menu Installation";
+      case ProjectTypes.InteriorMenuInstallation:
+        pString = "Interior Menu Installation";
+        break;
+      case ProjectTypes.ExteriorMenuInstallation:
+        pString = "Exterior Menu Installation";
         break;
       case ProjectTypes.PaymentTerminalInstallation:
         pString = "Payment Terminal Installation";
@@ -251,8 +254,8 @@ export class CommonService {
       bDeleted: false,
       nFunction: 0
     }, {
-      tDropdownText: "MenuInstallation",
-      aDropdownId: ProjectTypes.MenuInstallation.toString(),
+      tDropdownText: "InteriorMenuInstallation",
+      aDropdownId: ProjectTypes.InteriorMenuInstallation.toString(),
       optionOrder: 1,
       bDeleted: false,
       nFunction: 0
@@ -271,6 +274,12 @@ export class CommonService {
     }, {
       tDropdownText: "ServerHandheldInstallation",
       aDropdownId: ProjectTypes.ServerHandheldInstallation.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "ExteriorMenuInstallation",
+      aDropdownId: ProjectTypes.ExteriorMenuInstallation.toString(),
       optionOrder: 1,
       bDeleted: false,
       nFunction: 0

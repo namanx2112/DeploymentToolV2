@@ -20,7 +20,7 @@ export class ProjectTemplateListComponent {
     this._curStore = value;
 
 
-     1
+    1
     this.getAllTemplates();
   }
   @Output() BackToStoreView = new EventEmitter<any>();
@@ -29,7 +29,7 @@ export class ProjectTemplateListComponent {
   quoteRequestTemplates: ProjectTemplates[];
   poTemplates: ProjectTemplates[];
   constructor(private service: StoreService, private dialog: MatDialog, public access: AccessService) {
-    
+
   }
 
   getAllTemplates() {
@@ -61,7 +61,10 @@ export class ProjectTemplateListComponent {
         case ProjectTypes.PaymentTerminalInstallation:
           addToArray(arr.filter(x => x.tComponent.toLocaleLowerCase().indexOf("payment") > -1));
           break;
-        case ProjectTypes.MenuInstallation:
+        case ProjectTypes.InteriorMenuInstallation:
+          addToArray(arr.filter(x => x.tComponent.toLocaleLowerCase().indexOf("menu") > -1));
+          break;
+        case ProjectTypes.ExteriorMenuInstallation:
           addToArray(arr.filter(x => x.tComponent.toLocaleLowerCase().indexOf("menu") > -1));
           break;
         case ProjectTypes.ServerHandheldInstallation:

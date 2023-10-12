@@ -113,7 +113,7 @@ export class NewProjectComponent {
       }
     }
 
-    if (this._NeedTechComponent == "all" || this._NeedTechComponent == "menu") {
+    if (this._NeedTechComponent == "all" || this._NeedTechComponent == "exteriormenu") {
       this.allTabs.push(this.service.GetStoreExteriorMenusTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
@@ -123,7 +123,7 @@ export class NewProjectComponent {
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
 
-    if (this._NeedTechComponent == "all" || this._NeedTechComponent == "menu") {
+    if (this._NeedTechComponent == "all" || this._NeedTechComponent == "interiormenu") {
       this.allTabs.push(this.service.GetStoreInteriorMenusTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }

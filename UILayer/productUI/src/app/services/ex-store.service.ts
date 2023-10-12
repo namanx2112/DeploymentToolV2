@@ -54,8 +54,10 @@ export class ExStoreService {
         type = ProjectTypes.AudioInstallation;
         break;
       case TabType.StoreExteriorMenus:
+        type = ProjectTypes.ExteriorMenuInstallation;
+        break;
       case TabType.StoreInteriorMenus:
-        type = ProjectTypes.MenuInstallation;
+        type = ProjectTypes.InteriorMenuInstallation;
         break;
       case TabType.StorePaymetSystem:
         type = ProjectTypes.PaymentTerminalInstallation;
@@ -65,7 +67,7 @@ export class ExStoreService {
         break;
       default:
         let indx = curStore.lstProjectsInfo.findIndex(x => x.nProjectType != ProjectTypes.POSInstallation && x.nProjectType != ProjectTypes.AudioInstallation &&
-          x.nProjectType != ProjectTypes.MenuInstallation && x.nProjectType != ProjectTypes.PartsReplacement && x.nProjectType != ProjectTypes.ServerHandheldInstallation)
+           x.nProjectType != ProjectTypes.ExteriorMenuInstallation && x.nProjectType != ProjectTypes.InteriorMenuInstallation && x.nProjectType != ProjectTypes.PartsReplacement && x.nProjectType != ProjectTypes.ServerHandheldInstallation)
         if (indx > -1) {
           type = curStore.lstProjectsInfo[indx].nProjectType;
         }

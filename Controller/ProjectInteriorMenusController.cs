@@ -66,7 +66,7 @@ namespace DeploymentTool.Controller
         public async Task<IHttpActionResult> Update(tblProjectInteriorMenu tblProjectInteriorMenu)
         {
             //tblProjectInteriorMenu.ProjectActiveStatus = 1;Santosh
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.MenuInstallation, tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu);
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.InteriorMenuInstallation, tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu);
             db.Entry(tblProjectInteriorMenu).State = EntityState.Modified;
 
             try
@@ -98,7 +98,7 @@ namespace DeploymentTool.Controller
 
             //tblProjectInteriorMenu.ProjectActiveStatus = 1;Santosh
             tblProjectInteriorMenu.aProjectInteriorMenuID = 0;
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.MenuInstallation, tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu);
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.InteriorMenuInstallation, tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu);
             db.tblProjectInteriorMenus.Add(tblProjectInteriorMenu);
             await db.SaveChangesAsync();
 

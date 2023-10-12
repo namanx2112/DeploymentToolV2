@@ -66,7 +66,7 @@ namespace DeploymentTool.Model
         public async Task<IHttpActionResult> Update(tblProjectExteriorMenu tblProjectExteriorMenu)
         {
             // tblProjectExteriorMenu.ProjectActiveStatus = 1;//Santosh
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.MenuInstallation, tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu);
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ExteriorMenuInstallation, tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu);
             db.Entry(tblProjectExteriorMenu).State = EntityState.Modified;
 
             try
@@ -99,7 +99,7 @@ namespace DeploymentTool.Model
                 //tblProjectExteriorMenu.ProjectActiveStatus = 1;Santosh
 
                 tblProjectExteriorMenu.aProjectExteriorMenuID = 0;
-                Misc.Utilities.SetActiveProjectId(Misc.ProjectType.MenuInstallation, tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu);
+                Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ExteriorMenuInstallation, tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu);
                 db.tblProjectExteriorMenus.Add(tblProjectExteriorMenu);
                 await db.SaveChangesAsync();
             }

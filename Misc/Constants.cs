@@ -11,7 +11,7 @@ namespace DeploymentTool.Misc
 
     public enum ProjectType
     {
-        New, Rebuild, Remodel, Relocation, Acquisition, POSInstallation, AudioInstallation, MenuInstallation, PaymentTerminalInstallation, PartsReplacement, ServerHandheld
+        New, Rebuild, Remodel, Relocation, Acquisition, POSInstallation, AudioInstallation, InteriorMenuInstallation, PaymentTerminalInstallation, PartsReplacement, ServerHandheld, ExteriorMenuInstallation
     }
 
     public enum Permission

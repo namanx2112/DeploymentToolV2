@@ -80,7 +80,8 @@ namespace DeploymentTool.Misc
                 {
                     case ProjectType.AudioInstallation:
                     case ProjectType.POSInstallation:
-                    case ProjectType.MenuInstallation:
+                    case ProjectType.InteriorMenuInstallation:
+                    case ProjectType.ExteriorMenuInstallation:
                     case ProjectType.PaymentTerminalInstallation:
                     case ProjectType.ServerHandheld:
                         nProjectId = db.Database.SqlQuery<int>($"select nProjectId from dbo.fn_GetProjectIdForThisTechOrAnyProjectType({nStoreId},{(int)pType},1)").FirstOrDefault();

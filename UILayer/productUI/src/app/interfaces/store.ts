@@ -274,8 +274,8 @@ export interface ProjectInfo {
 }
 
 export enum ProjectTypes {
-    New, Rebuild, Remodel, Relocation, Acquisition, POSInstallation, AudioInstallation, MenuInstallation, PaymentTerminalInstallation, PartsReplacement,
-    ServerHandheldInstallation
+    New, Rebuild, Remodel, Relocation, Acquisition, POSInstallation, AudioInstallation, InteriorMenuInstallation, PaymentTerminalInstallation, PartsReplacement,
+    ServerHandheldInstallation, ExteriorMenuInstallation
 }
 
 export interface NewProjectStore {
