@@ -17,6 +17,9 @@ body {
 .mdc-data-table__cell {
     position: relative;
 }
+.mat-mdc-checkbox{
+    margin-left: -10px;
+}
 
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: transparent !important;

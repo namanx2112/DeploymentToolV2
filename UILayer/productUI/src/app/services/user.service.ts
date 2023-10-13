@@ -134,6 +134,17 @@ export class UserService {
       validator: [],
       mandatory: false,
       hidden: false
+    },{
+      field_name: "Allow login access",
+      fieldUniqeName: "bAllowAccess",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.checkbox,
+      field_placeholder: "Check to allow this user to login and access",
+      validator: [],
+      mandatory: false,
+      hidden: false
     },
     {
       field_name: "Login Name",
