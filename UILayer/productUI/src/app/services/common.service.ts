@@ -286,11 +286,36 @@ export class CommonService {
     }];;
   }
 
+  static getUserAccessTypes() {
+    return [{
+      tDropdownText: "Only login",
+      aDropdownId: "0",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Only alerts",
+      aDropdownId: "1",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Both login and alerts",
+      aDropdownId: "2",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }];
+  }
+
   public GetDropdownOptions(nBrandId: number, columnName?: string): OptionType[] {
     let ddItems: OptionType[] = [];
     if (columnName) {
       if (columnName == "ProjectType") {
         ddItems = CommonService.getProjectTypeOptions();
+      }
+      else if (columnName == "UserAccessTypes") {
+        ddItems = CommonService.getUserAccessTypes();
       }
       else {
         if (columnName == "Franchise" || columnName == "Vendor")// Since Franchise and Vendor is shared

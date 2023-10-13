@@ -135,13 +135,14 @@ export class UserService {
       mandatory: false,
       hidden: false
     },{
-      field_name: "Allow login access",
-      fieldUniqeName: "bAllowAccess",
-      defaultVal: "",
+      field_name: "User access",
+      fieldUniqeName: "nAccess",
+      defaultVal: "2",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.checkbox,
-      field_placeholder: "Check to allow this user to login and access",
+      field_type: FieldType.dropdown,      
+      options: this.commonService.GetDropdown("UserAccessTypes"),
+      field_placeholder: "Select User Access",
       validator: [],
       mandatory: false,
       hidden: false
