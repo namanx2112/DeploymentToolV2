@@ -735,6 +735,7 @@ warning 6002: The table/view 'dtDB.dbo.tblTrace' does not have a primary key def
     <Property Name="nUserTypeID" Type="int" />
     <Property Name="nStatus" Type="int" />
     <Property Name="isFirstTime" Type="int" />
+    <Property Name="nAccess" Type="int" />
   </EntityType>
   <EntityType Name="tblUserAndUserTypeRel">
     <Key>
@@ -806,6 +807,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+    <Property Name="nAccess" Type="int" />
   </EntityType>
   <EntityType Name="tblUserType">
     <Key>

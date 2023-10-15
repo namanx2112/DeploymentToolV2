@@ -67,7 +67,7 @@ export class ExStoreService {
         break;
       default:
         let indx = curStore.lstProjectsInfo.findIndex(x => x.nProjectType != ProjectTypes.POSInstallation && x.nProjectType != ProjectTypes.AudioInstallation &&
-           x.nProjectType != ProjectTypes.ExteriorMenuInstallation && x.nProjectType != ProjectTypes.InteriorMenuInstallation && x.nProjectType != ProjectTypes.PartsReplacement && x.nProjectType != ProjectTypes.ServerHandheldInstallation)
+          x.nProjectType != ProjectTypes.ExteriorMenuInstallation && x.nProjectType != ProjectTypes.InteriorMenuInstallation && x.nProjectType != ProjectTypes.PartsReplacement && x.nProjectType != ProjectTypes.ServerHandheldInstallation)
         if (indx > -1) {
           type = curStore.lstProjectsInfo[indx].nProjectType;
         }
@@ -210,9 +210,12 @@ export class ExStoreService {
         tabs.push(this.GetStoreAudioTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
-      case 7://Menu
-        tabs.push(this.GetStoreExteriorMenusTab(TabInstanceType.Single));
+      case 7://Interior Menu
         tabs.push(this.GetStoreInteriorMenusTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
+        break;
+      case 11://Exterior Menu
+        tabs.push(this.GetStoreExteriorMenusTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
       case 8://Payment

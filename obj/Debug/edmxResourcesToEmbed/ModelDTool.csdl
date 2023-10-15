@@ -128,6 +128,7 @@
     <Property Name="nUserTypeID" Type="Int32" />
     <Property Name="nStatus" Type="Int32" />
     <Property Name="isFirstTime" Type="Int32" />
+    <Property Name="nAccess" Type="Int32" />
   </EntityType>
   <EntityType Name="tblVendor">
     <Key>
@@ -452,6 +453,7 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="nAccess" Type="Int32" />
   </EntityType>
   <EntityType Name="tblBrandBKP">
     <Key>

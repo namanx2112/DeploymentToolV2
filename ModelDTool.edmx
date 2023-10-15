@@ -740,6 +740,7 @@ warning 6002: The table/view 'dtDB.dbo.tblTrace' does not have a primary key def
           <Property Name="nUserTypeID" Type="int" />
           <Property Name="nStatus" Type="int" />
           <Property Name="isFirstTime" Type="int" />
+			<Property Name="nAccess" Type="int" />
         </EntityType>
         <EntityType Name="tblUserAndUserTypeRel">
           <Key>
@@ -811,6 +812,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="dtCreatedOn" Type="datetime" />
           <Property Name="dtUpdatedOn" Type="datetime" />
           <Property Name="bDeleted" Type="bit" />
+			<Property Name="nAccess" Type="int" />
         </EntityType>
         <EntityType Name="tblUserType">
           <Key>
@@ -1175,6 +1177,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="nUserTypeID" Type="Int32" />
 					<Property Name="nStatus" Type="Int32" />
 					<Property Name="isFirstTime" Type="Int32" />
+					<Property Name="nAccess" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblVendor">
 					<Key>
@@ -1499,6 +1502,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
 					<Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
 					<Property Name="bDeleted" Type="Boolean" />
+					<Property Name="nAccess" Type="Int32" />
 				</EntityType>
 				<EntityType Name="tblBrandBKP">
 					<Key>
@@ -2029,6 +2033,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 								<ScalarProperty Name="tName" ColumnName="tName" />
 								<ScalarProperty Name="aUserID" ColumnName="aUserID" />
 								<ScalarProperty Name="isFirstTime" ColumnName="isFirstTime" />
+								<ScalarProperty Name="nAccess" ColumnName="nAccess" />
 							</MappingFragment>
 						</EntityTypeMapping>
 					</EntitySetMapping>
@@ -2369,6 +2374,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 								<ScalarProperty Name="tUserName" ColumnName="tUserName" />
 								<ScalarProperty Name="tName" ColumnName="tName" />
 								<ScalarProperty Name="aUserID" ColumnName="aUserID" />
+								<ScalarProperty Name="nAccess" ColumnName="nAccess" />
 							</MappingFragment>
 						</EntityTypeMapping>
 					</EntitySetMapping>

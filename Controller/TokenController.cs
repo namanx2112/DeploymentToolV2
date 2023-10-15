@@ -69,7 +69,7 @@ namespace DeploymentTool.Controller
         {
             string resp = "";
             //var userObject = db.Database.SqlQuery<User>("select tName, tUserName, tEmail, case when(nRole is null) then 0 else nRole end, aUserID nUserID from tblUser with(nolock) where UPPER(tUserName)='" + tUserNameOrEmail.tContent.ToUpper() + "' or UPPER(tEmail) = '" + tUserNameOrEmail.tContent.ToUpper() + "'").FirstOrDefault();
-            var userObject = db.Database.SqlQuery<User>("select tName, tUserName, tEmail, case when(nRole is null) then 0 else nRole end, aUserID nUserID from tblUser with(nolock) where UPPER(tUserName)='" + tUserNameOrEmail.tContent.ToUpper() + "'").FirstOrDefault();
+            var userObject = db.Database.SqlQuery<User>("select tName, tUserName, tEmail, case when(nRole is null) then 0 else nRole end, aUserID nUserID from tblUser with(nolock) where (nAccess=0  Or nAccess=2)  and UPPER(tUserName)='" + tUserNameOrEmail.tContent.ToUpper() + "'").FirstOrDefault();
             if (userObject != null)
             {
                 string sPassword;

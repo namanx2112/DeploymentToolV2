@@ -32,5 +32,6 @@ namespace DeploymentTool
         public Nullable<int> nUserTypeID { get; set; }
         public Nullable<int> nStatus { get; set; }
         public Nullable<int> isFirstTime { get; set; }
+        public Nullable<int> nAccess { get; set; }  
     }
 }

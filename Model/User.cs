@@ -33,7 +33,7 @@ namespace DeploymentTool.Model
         public string tMobile { get; set; }
         public int nVendorId { get; set; }
         public int nFranchiseId { get; set; }
-
+        public Nullable<int> nAccess { get; set; }
         public List<UserTypeByUser> userAndUsertypeRel { get; set; }
 
 
@@ -51,7 +51,8 @@ namespace DeploymentTool.Model
                 nDepartment = this.nDepartment,
                 nRole = this.nRole,
                 tEmpID = this.tEmpID,
-                tMobile = this.tMobile
+                tMobile = this.tMobile,
+                 nAccess = this.nAccess
             };
         }
         public tblUserVendorRel GetTblUserVendorRel(UserModel userRequest)

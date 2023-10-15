@@ -93,6 +93,7 @@ namespace DeploymentTool.Controller
                 db.Entry(tblUser).Property(x => x.tEmpID).IsModified = true;
                 db.Entry(tblUser).Property(x => x.dtUpdatedOn).IsModified = true;
                 db.Entry(tblUser).Property(x => x.nUpdateBy).IsModified = true;
+                db.Entry(tblUser).Property(x => x.nAccess).IsModified = true;
                 // Update into tblUserVendorRelation
                 try
                 {
@@ -316,7 +317,10 @@ namespace DeploymentTool.Controller
                         db.tblUserBrandRels.AddRange(lstBrandUser);
                     }
                     await db.SaveChangesAsync();
+
+                    if (userRequest.nAccess !=1)
                     Utilities.SendPasswordToEmail(userRequest.tName, userRequest.tUserName, userRequest.tEmail, strPwd, false);
+
                     db.Database.CurrentTransaction.Commit();
                 }
                 catch (Exception ex)

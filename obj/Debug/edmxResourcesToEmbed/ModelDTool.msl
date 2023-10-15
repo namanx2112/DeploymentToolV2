@@ -46,6 +46,7 @@
           <ScalarProperty Name="tName" ColumnName="tName" />
           <ScalarProperty Name="aUserID" ColumnName="aUserID" />
           <ScalarProperty Name="isFirstTime" ColumnName="isFirstTime" />
+          <ScalarProperty Name="nAccess" ColumnName="nAccess" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -386,6 +387,7 @@
           <ScalarProperty Name="tUserName" ColumnName="tUserName" />
           <ScalarProperty Name="tName" ColumnName="tName" />
           <ScalarProperty Name="aUserID" ColumnName="aUserID" />
+          <ScalarProperty Name="nAccess" ColumnName="nAccess" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
