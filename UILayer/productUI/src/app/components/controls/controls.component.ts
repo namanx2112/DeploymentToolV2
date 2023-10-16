@@ -135,6 +135,12 @@ export class ControlsComponent implements AfterViewChecked {
       else if (this.numberOfControlsInARow == 3)
         this.fieldClass = "curThreeField";
     }
+    for (let formField of this.fields) {
+      let tControl = this.formGroup.get(formField.fieldUniqeName);
+      if (typeof formField.conditionals != 'undefined') {
+        this.handleConditionals(tControl?.value.toString(), formField.conditionals);
+      }
+    }
   }
 
   getReadOnlyVal(field: Fields, val: string) {
@@ -209,6 +215,26 @@ export class ControlsComponent implements AfterViewChecked {
       if (curControl.dropDownOptions?.filter(x => x.nFunction == 1)) {
         let dFieldName = CommonService.GetDropdownDMonthFieldName(curControl);
         this.formGroup.get(dFieldName)?.setValue(null);
+      }
+    }
+    if (typeof curControl.conditionals != 'undefined') {
+      this.handleConditionals(val, curControl.conditionals);
+    }
+  }
+
+  handleConditionals(val: string, conditions: any) {
+    if (typeof conditions != 'undefined' && typeof conditions["disable"] != 'undefined') {
+      let onValues = conditions["disable"].onValues;
+      let controls = conditions["disable"].controls;
+      let canDisable = (onValues.indexOf(val) > -1);
+      for (var indx in controls) {
+        let control = this.formGroup.get(controls[indx]);
+        if (control != null) {
+          if (canDisable)
+            control.disable();
+          else
+            control.enable();
+        }
       }
     }
   }

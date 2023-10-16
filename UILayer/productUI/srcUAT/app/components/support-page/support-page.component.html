@@ -1,0 +1,40 @@
+<h2 mat-dialog-title class="header">Support Page</h2>
+<mat-dialog-content>
+    <div class="sBody" *ngIf="tRequest != undefined">
+        <div class="cField">
+            <label>Priority</label>
+            <select class="tableField lightGray" [(ngModel)]="tRequest.nPriority">
+                <option value="3">Show Stopper</option>
+                <option value="2">High</option>
+                <option value="1">Medium</option>
+                <option value="0">Low</option>
+            </select>
+        </div>
+        <div class="cField">
+            <label>Descirption</label>
+            <textarea class="lightGray contentArea" [(ngModel)]="tRequest.tContent"></textarea>
+        </div>
+        <div class="cField">
+            <label>Status</label>
+            <select lass="tableField lightGray" [(ngModel)]="tRequest.tTicketStatus">
+                <option value="New">New</option>
+                <option value="InProgress">In Progress</option>
+                <option value="Fixed">Fixed</option>
+                <option value="Closed">Closed</option>
+            </select>
+        </div>
+        <div class="cField">
+            <label>Fix Comment</label>
+            <textarea class="lightGray commentArea" [(ngModel)]="tRequest.tFixComment"></textarea>
+        </div>
+        <div class="cField">
+            <label>Screen</label>
+            <img class="img" src={{tRequest.fBase64}} alt="Image" />
+        </div>
+    </div>
+</mat-dialog-content>
+<div mat-dialog-actions class="bottom">
+    <div *ngIf="tRequest != undefined">
+        <button class="lightGray aButton logButton" mat-raised-button cdkFocusInitial [disabled]="CantSend()" (click)="LogTicket()">Log</button>
+    </div>
+</div>

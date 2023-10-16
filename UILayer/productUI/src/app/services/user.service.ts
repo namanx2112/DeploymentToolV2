@@ -143,6 +143,12 @@ export class UserService {
       field_type: FieldType.dropdown,      
       options: this.commonService.GetDropdown("UserAccessTypes"),
       field_placeholder: "Select User Access",
+      conditionals: {
+        "disable": {
+          onValues: ["1"],
+          controls: ["tUserName"]
+        }
+      },
       validator: [],
       mandatory: false,
       hidden: false

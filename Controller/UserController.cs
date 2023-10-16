@@ -37,6 +37,11 @@ namespace DeploymentTool.Controller
                 SqlParameter tModuleNameParam = new SqlParameter("@nVendorId", nVendorId);
                 SqlParameter tModuleNameParam2 = new SqlParameter("@nFranchiseId", nFranchiseId);
                 List<UserModel> items = db.Database.SqlQuery<UserModel>("exec sproc_getUserModel @nVendorId, @nFranchiseId", tModuleNameParam, tModuleNameParam2).ToList();
+                string tUserName = (searchFields != null && searchFields.ContainsKey("tUserName")) ? searchFields["tUserName"].ToLower() : "";
+                if (!string.IsNullOrEmpty(tUserName))
+                {
+                    items = items.FindAll(x => x.tName.ToLower().IndexOf(tUserName) > -1);
+                }
                 //await db.SaveChangesAsync();
                 foreach (var UserModel in items)
                 {
@@ -224,11 +229,13 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(UserModel userRequest)
         {
-            var exist = db.Database.SqlQuery<int>("select top 1 1 from tblUser with(nolock) where UPPER(tUserName)='" + userRequest.tUserName.ToUpper() + "'").FirstOrDefault();
+            var exist = (userRequest.nAccess != 1) ? db.Database.SqlQuery<int>("select top 1 1 from tblUser with(nolock) where UPPER(tUserName)='" + userRequest.tUserName.ToUpper() + "'").FirstOrDefault() : 0;
             if (exist == null || exist == 0)
             {
                 try
                 {
+                    if (userRequest.nAccess == 1)
+                        userRequest.tUserName = string.Empty;
                     db.Database.BeginTransaction();
                     string strPwd;
                     userRequest.tPassword = DeploymentTool.Misc.Utilities.CreatePassword(userRequest.tUserName, 8, out strPwd);
@@ -318,8 +325,8 @@ namespace DeploymentTool.Controller
                     }
                     await db.SaveChangesAsync();
 
-                    if (userRequest.nAccess !=1)
-                    Utilities.SendPasswordToEmail(userRequest.tName, userRequest.tUserName, userRequest.tEmail, strPwd, false);
+                    if (userRequest.nAccess != 1)
+                        Utilities.SendPasswordToEmail(userRequest.tName, userRequest.tUserName, userRequest.tEmail, strPwd, false);
 
                     db.Database.CurrentTransaction.Commit();
                 }

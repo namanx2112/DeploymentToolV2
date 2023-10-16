@@ -1,0 +1,48 @@
+.nItem {
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+    font-size: 14px;
+}
+
+h5{
+    text-indent: 14px;
+    margin: 20px 0px 5px 0px;
+}
+
+.clickable {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.nTime{
+    font-size: 10px;
+    margin-right: 10px;
+}
+.icon{
+    display: inline-block;
+    width: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.nBody{
+    display: inline-block;
+}
+
+.outerDiv {
+    width: 90%;
+    margin: auto;
+}
+
+.nTable {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.buttonGroup {
+    border-radius: 10px;
+}
+
+.filterButton{
+    margin-bottom: 5px;
+}

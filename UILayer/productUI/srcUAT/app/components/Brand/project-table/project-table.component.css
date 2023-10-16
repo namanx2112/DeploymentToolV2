@@ -1,0 +1,41 @@
+.projectHeader {
+    float: left;
+    height: 55px;
+    width: 95%;
+    z-index: 4;
+    background-color: #fff;
+    position: absolute;
+}
+
+.projectHeader h4 {
+    display: inline-block;
+}
+
+.projHeader {
+    float: left;
+    margin-top: 13px;
+}
+
+.backIcon {
+    float: left;
+    margin-top: 10px;
+}
+
+.tabHeader {
+    margin-top: 75px;
+    height: 50px;
+    width: 95%;
+    line-height: 75px;
+}
+
+.tabBody {
+    min-height: 100px;
+    width: 95%;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+.tabHeader a{
+    font-size: 18px;
+    padding: 0px 50px;
+    cursor: pointer;
+}

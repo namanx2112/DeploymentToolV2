@@ -1,0 +1,15 @@
+<div class="fullView" *ngIf="allTabs.length > 0">
+    <div class="fullTab white" *ngFor="let tTab of allTabs;let index = index">
+        <div class="tHeader">
+            <h4>{{tTab.tab_header}}</h4>
+            <div class="right" *ngIf="needEdit == true && access.hasAccess('home.sonic.project.' + tTab.tab_name, 1)">
+                <a (click)="editTab(tTab)">Edit</a>
+            </div>
+        </div>
+        <div class="tBody">
+            <app-controls *ngIf="tValues[tTab.tab_name] != undefined" class="tabForm" [request]="{fields: tTab.fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+controlValues: tValues[tTab.tab_name], SubmitLabel: 'None',
+    readOnlyForm: true, nBrandId: curBrandId}"></app-controls>
+        </div>
+    </div>
+</div>
