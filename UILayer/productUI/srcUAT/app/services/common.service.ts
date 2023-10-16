@@ -279,19 +279,19 @@ export class CommonService {
 
   static getUserAccessTypes() {
     return [{
-      tDropdownText: "Only login",
+      tDropdownText: "Login",
       aDropdownId: "0",
       optionOrder: 1,
       bDeleted: false,
       nFunction: 0
     }, {
-      tDropdownText: "Only alerts",
+      tDropdownText: "Alerts",
       aDropdownId: "1",
       optionOrder: 1,
       bDeleted: false,
       nFunction: 0
     }, {
-      tDropdownText: "Both login and alerts",
+      tDropdownText: "Both Login and Alerts",
       aDropdownId: "2",
       optionOrder: 1,
       bDeleted: false,
