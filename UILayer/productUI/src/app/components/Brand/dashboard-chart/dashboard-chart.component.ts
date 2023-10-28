@@ -31,27 +31,9 @@ export class DashboardChartComponent {
 
   }
 
-  setSizeClass() {
-    switch (this._record.size) {
-      case 1:
-        this.tClass = "canvas X1";
-        break;
-      case 2:
-        this.tClass = "canvas X2";
-        break;
-      case 3:
-        this.tClass = "canvas X3";
-        break;
-      case 4:
-        this.tClass = "canvas X4";
-        break;
-    }
-  }
-
   createChart() {
     if (typeof this._record.chartType != 'undefined' && typeof this._record.chartLabels != 'undefined') {
-      let backgroundColor = ["#ffb3b3", "#800000", "#b3ffec", "#009973", "#d5ff80", "#558000", "#ffdf80", "#997300", "#adadeb", "#24248f", "#6666ff","#000066"];
-      this.setSizeClass();
+      let backgroundColor = ["#ffb3b3", "#800000", "#b3ffec", "#009973", "#d5ff80", "#558000", "#ffdf80", "#997300", "#adadeb", "#24248f", "#6666ff", "#000066"];
       let htmlRef = this.elementRef.nativeElement.querySelector("#MyChartId");
       let cThis = this;
       this.chart = new Chart(htmlRef, {
@@ -61,11 +43,15 @@ export class DashboardChartComponent {
           datasets: [{
             label: "",
             data: this._record.chartValues,
-             backgroundColor: backgroundColor,
+            barThickness: 40,
+            backgroundColor: backgroundColor,
             // hoverOffset: 4
           }],
         },
         options: {
+          animation: {
+            duration: 0
+          },
           scales: {
             x: {
               grid: {
@@ -75,9 +61,14 @@ export class DashboardChartComponent {
             y: {
               grid: {
                 display: false
+              },
+              ticks: {
+                precision: 0
               }
             }
           },
+          maintainAspectRatio: true,
+          responsive: true,
           aspectRatio: 4 / 1,
           plugins: {
             colors: {

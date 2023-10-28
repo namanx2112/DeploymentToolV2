@@ -19,7 +19,10 @@ import * as XLSX from 'xlsx';
 export class ReportTableComponent implements OnInit {
   @Input()
   set reportParam(val: any) {
-    this.getReport(val.request.reportId, val.request.tProjectIDs, val.tParam);
+    if (typeof val.request.tProjectIDs != 'undefined')
+      this.getReport(val.request.reportId, val.request.tProjectIDs, val.tParam);
+    else
+      this.getReport(val.request.reportId, val.request.tParam1, val.tParam);
     this._nBrandId = val.nBrandId;
     this._fromView = val.fromView;
   }

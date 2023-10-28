@@ -355,6 +355,32 @@ namespace DeploymentTool.Controller
             //    Content = new ObjectContent<List<DahboardTile>>(tils, new JsonMediaTypeFormatter())
             //};
         }
+
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/Store/GetSavedReportsForMe")]
+        public HttpResponseMessage GetSavedReportsForMe(int nBrandId)
+        {
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            List<MyReport> items = new List<MyReport>();
+            try
+            {
+
+                items = db.Database.SqlQuery<MyReport>("exec sproc_GetMySavedReports @nBrandID, @nUserID", new SqlParameter("@nBrandID", nBrandId),
+                    new SqlParameter("@nUserID", securityContext.nUserID)).ToList();
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("GetDashboards", HttpContext.Current, ex);
+            }
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<MyReport>>(items, new JsonMediaTypeFormatter())
+            };            
+        }
+
     }
 
 }

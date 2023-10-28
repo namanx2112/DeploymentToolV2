@@ -27,6 +27,11 @@ export interface DahboardTile {
     size: number
 }
 
+export interface MyReportModel{
+    aReportId: number,
+    tName: string
+}
+
 export enum DashboardTileType {
     Text, TextWithCompare, Chart
 }

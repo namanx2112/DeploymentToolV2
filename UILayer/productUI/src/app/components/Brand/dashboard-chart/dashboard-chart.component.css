@@ -1,6 +1,7 @@
 .tileShortcut {
     position: relative;
     cursor: pointer;
+    width: 100%;
 }
 
 .tileShortcut .title {
@@ -9,6 +10,12 @@
     font-size: 14px;
     display: block;
     padding: 5px;
+}
+
+.tileShortcut > div{
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .canvas{

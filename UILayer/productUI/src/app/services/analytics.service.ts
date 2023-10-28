@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CacheService } from './cache.service';
 import { ProjectPortfolio, ReportModel } from '../interfaces/analytics';
 import { CommonService } from './common.service';
-import { DahboardTile, Dictionary } from '../interfaces/commons';
+import { DahboardTile, Dictionary, MyReportModel } from '../interfaces/commons';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,9 @@ export class AnalyticsService {
 
   GetDashboards(nBrandId: number, tProjectTypes: string, dStart: string, dEnd: string) {
     return this.http.post<DahboardTile[]>(CommonService.ConfigUrl + "Analytics/GetDashboards", { "nBrandId": nBrandId, "tProjectTypes": tProjectTypes, dStart: dStart, dEnd: dEnd }, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  GetSavedReportsForMe(nBrandId: number) {
+    return this.http.get<MyReportModel[]>(CommonService.ConfigUrl + "Analytics/GetSavedReportsForMe?nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
   }
 }

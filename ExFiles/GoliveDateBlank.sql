@@ -31,3 +31,14 @@ from(
             
  --order by nProjectID desc            
 END   
+
+GO
+
+  
+CREATE  Procedure sproc_GetMySavedReports                          
+@nBrandID int=0,  
+@nUserID int=0   
+as       
+BEGIN  
+	Select top 3 aReportId, tName from tblReport with(nolock)
+End  

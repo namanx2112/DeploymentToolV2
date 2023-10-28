@@ -87,6 +87,7 @@ import { NoItemsComponent } from './components/no-items/no-items.component';
 import { AdvancedSearchComponent } from './components/Brand/advanced-search/advanced-search.component';
 import { AdvancedSearchResultComponent } from './components/Brand/advanced-search-result/advanced-search-result.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { SavedReportsComponent } from './components/Brand/saved-reports/saved-reports.component';
 
 @NgModule({
     declarations: [
@@ -149,6 +150,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
         NoItemsComponent,
         AdvancedSearchComponent,
         AdvancedSearchResultComponent,
+        SavedReportsComponent,
     ],
     providers: [
         {

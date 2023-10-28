@@ -32,12 +32,14 @@ th.mat-sort-header-sorted {
   overflow: auto;
 }
 
-.exportButton{
-  float: right;
-  margin: 5px 20px 5px 0px;
+.exportButton {
+  width: 170px;
+  float: left;
+  margin: 10px 20px 10px 15px;
   cursor: pointer;
 }
-.openItem{
+
+.openItem {
   cursor: pointer;
   text-decoration: underline;
 }

@@ -6,6 +6,12 @@ using System.Web;
 
 namespace DeploymentTool.Model
 {
+    public class MyReport
+    {
+        public int aReportId { get; set; }
+        public string tName { get; set; }
+    }
+
     public class ReportRequest
     {
         public int reportId { get; set; }
