@@ -31,7 +31,7 @@ body {
 }
 
 .grayBackground {
-    background-color: gray;
+    background-color: #f0f0f0;
 }
 
 .grayWhiteTheme .mdc-text-field--filled {
@@ -318,7 +318,7 @@ button {
     background-color: rgb(0, 137, 216)!important;
 }
 
-.buffalo_theme a.active {
+.sonic_theme a.active {
     border-bottom: 5px solid rgb(0, 137, 216);
 }
 

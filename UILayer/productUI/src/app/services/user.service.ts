@@ -86,7 +86,7 @@ export class UserService {
     }]
     return fields;
   }
-  GetFields(): Fields[] {
+  GetFields(needAccess: boolean): Fields[] {
     let fields = [{
       field_name: "User Id",
       fieldUniqeName: "aUserID",
@@ -151,7 +151,7 @@ export class UserService {
       },
       validator: [],
       mandatory: false,
-      hidden: false
+      hidden: !needAccess
     },
     {
       field_name: "Login Name",
@@ -199,7 +199,7 @@ export class UserService {
       field_placeholder: "Enter User Role",
       validator: [],
       mandatory: false,
-      hidden: false
+      hidden: needAccess
     },
     {
       field_name: "Assign Brands",

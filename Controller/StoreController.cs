@@ -281,7 +281,7 @@ namespace DeploymentTool.Controller
             DateChangeNotificationBody reeponse = new DateChangeNotificationBody()
             {
                 tTo = tTo.TrimEnd(';'),
-                tCC = "nsti@sonicdrivein.com",
+                tCC = Constants.CCEmailAddress,
                 nStoreId = request.nStoreId,
                 tContent = tContent,
                 tSubject = itemPOStore[0].tCity + ", " + itemPOStore[0].tStoreState + " #" + itemPOStore[0].tStoreNumber + " - Updated Install & Delivery Dates",

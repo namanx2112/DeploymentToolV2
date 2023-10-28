@@ -1,0 +1,52 @@
+<h3 class="headerPart">Advance Search</h3>
+<div class="bodyPart">
+    <div class="searchFields">
+        <mat-form-field appearance="outline">
+            <mat-label>Project Type</mat-label>
+            <mat-select multiple>
+                <!-- <mat-option value="-1">Select All</mat-option> -->
+                <mat-option *ngFor="let proj of allProjectTypes" [value]="proj.aDropdownId"
+                    (click)="changeSelected(proj, 1)">{{proj.tDropdownText}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="marginLeft" appearance="outline">
+            <mat-label>Vendor</mat-label>
+            <mat-select multiple>
+                <!-- <mat-option value="-1">Select All</mat-option> -->
+                <mat-option *ngFor="let vendor of allVendors" [value]="vendor.aDropdownId"
+                    (click)="changeSelected(vendor, 2)">{{vendor.tDropdownText}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="marginLeft" appearance="outline">
+            <mat-label>Franchise</mat-label>
+            <mat-select multiple>
+                <!-- <mat-option value="-1">Select All</mat-option> -->
+                <mat-option *ngFor="let franchise of allFranchise" [value]="franchise.aDropdownId"
+                    (click)="changeSelected(franchise, 3)">{{franchise.tDropdownText}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="marginLeft" appearance="outline">
+            <mat-label>GoLive Date Between</mat-label>
+            <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="rangePicker">
+                <input matStartDate placeholder="Start date" formControlName="start" (change)="dtChanged()">
+                <input matEndDate placeholder="End date" formControlName="end" (change)="dtChanged()">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
+            <mat-error *ngIf="campaignOne.controls['start'].hasError('matStartDateInvalid')">Invalid start
+                date</mat-error>
+            <mat-error *ngIf="campaignOne.controls['end'].hasError('matEndDateInvalid')">Invalid end
+                date</mat-error>
+            <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions>
+                    <button mat-button matDateRangePickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" (click)="dtChanged()"
+                        matDateRangePickerApply>Apply</button>
+                </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+        </mat-form-field>
+    </div>
+    <div>
+        <app-advanced-search-result [reportParam]="reportParam" (openStore)="showStore($event)"
+            (goBack)="moveMe($event)"></app-advanced-search-result>
+    </div>
+</div>

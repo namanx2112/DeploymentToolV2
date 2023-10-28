@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="utf-8" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <div class="outerLayout floatLeft">
+        <div class="left floatLeft">
+            <div class="logo floatLeft"><svg id="header_logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 514.83 129.74">
+                    <defs></defs>
+                    <title>Inspire - Logo</title>
+                    <path fill="white" class="cls-1"
+                        d="M295.34,65.6c0,12.72-3.7,16.41-15.68,16.41h-7.1V49.2h7.1C291.65,49.2,295.34,52.9,295.34,65.6Zm139.51,0c0,12.72-3.69,16.41-13.6,16.41h-6.51V49.2h6.51C431.16,49.2,434.85,52.9,434.85,65.6ZM125.25,34.38h16.56V141.13h-16L102.48,74.45h-.3v66.68H85.63V34.38h17L125,95.44h.29ZM531.58,124.9v16H480.42V34.12h49.09v16H498.75v27.5h23.66v16H498.75V124.9Zm-305.25-9.65c0,17.59-11.83,27.35-29,27.35-17,0-26.77-13.6-27.5-29.58l17.45-2.5c.74,10.78,5,16.11,10.94,16.11,6.36,0,10.65-3.4,10.65-9.75,0-21.14-37.26-26.76-37.26-57.37,0-17,10.35-26.61,28.38-26.61,14.93,0,23.8,10.8,25.43,25.87L208,60.7c-.74-9.17-5.62-11.83-9.76-11.83-5.91,0-9.16,3.84-9.16,10.5C189.07,77.55,226.33,86.27,226.33,115.25Zm54.23-81.13H254.24V140.87h18.33V97.1h8c22.62,0,33.12-8.71,33.12-31.49S303.17,34.12,280.56,34.12ZM453.19,65.6c0-22.76-10.49-31.49-31-31.49H396.42V140.86h18.33V97.1a89.8,89.8,0,0,0,9.46-.44l13,44.21h18.63L440.32,92.53C446.54,89.71,453.19,82.76,453.19,65.6ZM366.86,29.18c3.33,12.63,2.92,24.58-10.67,31.72l1.62,42.67,2.05,33.6c.17,2.92-3,5.42-6.85,5.45s-7-2.48-6.89-5.4l1.55-33.46,1.2-43c-13.46-7-13.65-18.87-10.71-31.52,2.06-9,6.7-13.23,10.41-15.33a7.8,7.8,0,0,1,7.78,0C360.09,16.14,364.44,20.15,366.86,29.18ZM52,16.39l.17,26.22a5.32,5.32,0,0,1-1.81,4.08l-6,5.65L46,92.55l1.75,44.94c.16,2.75-2.57,5.12-6,5.15s-6.17-2.29-6-5l1-45L37.54,52l-5.95-5.6a5.72,5.72,0,0,1-1.73-4l0-25.82a3.56,3.56,0,0,1,.51-1.71,1.38,1.38,0,0,1,2.62.64L33.1,36.2h3.27l-.14-21.78a1.45,1.45,0,0,1,2.89,0l.14,21.77,3.27,0-.15-21.76a1.45,1.45,0,1,1,2.89,0l.13,21.75,3.29,0-.13-20.84a1.57,1.57,0,0,1,2.74-.93A3.67,3.67,0,0,1,52,16.39Z"
+                        transform="translate(-29.82 -12.9)"></path>
+                    <path class="cls-1"
+                        d="M537.33,137.21a3.66,3.66,0,1,1,3.66,3.66A3.65,3.65,0,0,1,537.33,137.21Zm.55,0a3.11,3.11,0,1,0,3.1-3.1A3.1,3.1,0,0,0,537.88,137.21Zm3,.45h-.72v1.66h-.59v-4.19h1.71a1.28,1.28,0,0,1,1.36,1.28,1.23,1.23,0,0,1-1.07,1.24l1.12,1.67H542Zm-.73-2v1.48h1.12a.73.73,0,0,0,.76-.72.74.74,0,0,0-.76-.76Z"
+                        transform="translate(-29.82 -12.9)"></path>
+                </svg></div>
+            <div class="toolBar floatLeft">
+                <span *ngIf="access.hasAccess('home.dashboard', 0)" [class]="tTabName == 'Dashboard' ? 'action selected' : 'action'" matTooltip="Dashboard" (click)="switchView('Dashboard')"><mat-icon>home</mat-icon><span></span></span>
+                <span *ngIf="access.hasAccess('home.configuration', 0)" [class]="tTabName == 'Configurations' ? 'action selected' : 'action'" matTooltip="Configurations" (click)="switchView('Configurations')"><mat-icon>insert_chart</mat-icon><span></span></span>
+                <span *ngIf="access.hasAccess('home.notification', 0)" [class]="tTabName == 'notifications' ? 'action selected' : 'action'" matTooltip="Notifications" (click)="switchView('notifications')"><mat-icon>notifications_none</mat-icon><span></span></span>
+                <span *ngIf="access.hasAccess('home.mail', 0)" [class]="tTabName == 'Mails' ? 'action selected' : 'action'" matTooltip="Mails" (click)="switchView('Mails')"><mat-icon>email</mat-icon><span></span></span>
+                <span *ngIf="access.hasAccess('home.find', 0)" [class]="tTabName == 'Find' ? 'action selected' : 'action'" matTooltip="Find" (click)="switchView('Find')"><mat-icon>find_in_page</mat-icon><span></span></span>                                                
+                <span *ngIf="access.hasAccess('home.list', 0)" [class]="tTabName == 'List' ? 'action selected' : 'action'" matTooltip="List" (click)="switchView('List')"><mat-icon>list</mat-icon><span></span></span>                
+                <span *ngIf="access.hasAccess('home.setting', 0)" [class]="tTabName == 'Settings' ? 'action selected' : 'action'" matTooltip="Settings" (click)="switchView('Settings')"><mat-icon>settings</mat-icon><span></span></span>
+                <span class="action logout" matTooltip="LogOut" [matMenuTriggerFor]="menu"><mat-icon>person</mat-icon></span>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="ChangePassword();">Change password</button>
+                    <button mat-menu-item (click)="LogOut();">Log out</button>                    
+                </mat-menu>
+            </div>
+        </div>
+        <div class="right floatLeft">
+            <div class="header floatLeft">
+                <div class="leftHeader">
+                    <span class="topHeaderTitle">
+                        {{getGreeting()}}! {{userName}} <br /> Welcome to the Restaurant Technology Deployment Platform
+                    </span>
+                </div>
+                <div class="rightHeader">
+                    <button class="tButton supportButton" (click)="supportPage()">Support</button>
+                </div>
+            </div>
+            <div class="mainBody floatLeft">
+                <app-home-dashboard (brandSelect)="brandSelect($event);" *ngIf="viewName=='Dashboard'"></app-home-dashboard>
+                <app-admin-config *ngIf="viewName=='Configurations'" class="deployit"></app-admin-config>
+                <app-not-implemented *ngIf="viewName!='Dashboard' && viewName!='notifications' && viewName!='Configurations' && viewName  != 'brandhome'"></app-not-implemented>
+                <app-brand-home-page *ngIf="viewName == 'brandhome'" [curBrand]="_curBrand" [openStore]="directStore" [ngClass]="_curBrand.tMyClass"></app-brand-home-page>
+                <app-notification *ngIf="viewName.toLowerCase().indexOf('notifications') > -1" [fullView]="true" (openStore)="openStoreFromNotification($event)"></app-notification>
+            </div>
+        </div>
+    </div>
+    <app-loading style="position: fixed;left: 0%; top: 0%;height: 100%;width: 100%; z-index: 1111;"></app-loading>
+    <!-- <app-home-tab></app-home-tab> -->
+</body>
+
+</html>

@@ -34,14 +34,26 @@ namespace DeploymentTool.Model
                             int tProjId;
                             int tProjType;
                             DateTime dGoLiveDate;
-                            if (int.TryParse(tArr[0], out tProjId) && int.TryParse(tArr[1], out tProjType) && DateTime.TryParse(tArr[2], out dGoLiveDate))
+                            if (int.TryParse(tArr[0], out tProjId) && int.TryParse(tArr[1], out tProjType))
                             {
-                                _nProjectIds.Add(new ProjectInfo()
+                                if (DateTime.TryParse(tArr[2], out dGoLiveDate))
                                 {
-                                    nProjectId = tProjId,
-                                    nProjectType = tProjType,
-                                    dGoLiveDate = dGoLiveDate
-                                });
+                                    _nProjectIds.Add(new ProjectInfo()
+                                    {
+                                        nProjectId = tProjId,
+                                        nProjectType = tProjType,
+                                        dGoLiveDate = dGoLiveDate
+                                    });
+                                }
+                                else
+                                {
+                                    _nProjectIds.Add(new ProjectInfo()
+                                    {
+                                        nProjectId = tProjId,
+                                        nProjectType = tProjType,
+                                        dGoLiveDate = null
+                                    });
+                                }
                             }
                         }
                     }
@@ -64,6 +76,6 @@ namespace DeploymentTool.Model
     {
         public int nProjectId { get; set; }
         public int nProjectType { get; set; }
-        public DateTime dGoLiveDate { get; set; }
+        public Nullable<DateTime> dGoLiveDate { get; set; }
     }
 }

@@ -46,6 +46,8 @@
                 [className]="configMenu=='Saved Reports'?'selected':''">Saved Reports</span>
             <span (click)="clickOption('dashboardpane1')" *ngIf="access.hasAccess('home.sonic.report', 0)"
                 [className]="configMenu=='dashboardpane1'?'selected':''">Dashboard</span>
+            <span (click)="clickOption('dashboardpane1')" *ngIf="access.hasAccess('home.sonic.report', 0)"
+                [className]="configMenu=='dashboardpane1'?'selected':''">Dashboard</span>
 
         </div>
     </mat-drawer>
@@ -57,8 +59,8 @@
             (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>
         <app-dashboard-pane *ngIf="showMode == 'dashboardpane'" [curBrand]="_curBrand"
             (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-dashboard-pane>
-        <app-report-table *ngIf="showMode == 'viewreport'" [reportParam]="reportParam"
-            (openStore)="showStore($event)" (goBack)="ChangeView($event)"></app-report-table>
+        <app-report-table *ngIf="showMode == 'viewreport'" [reportParam]="reportParam" (openStore)="showStore($event)"
+            (goBack)="ChangeView($event)"></app-report-table>
         <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)"
             [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType, curBrandId:_curBrand.aBrandId}"></app-new-store>
         <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)"

@@ -7,6 +7,7 @@ namespace DeploymentTool.Misc
 {
     public class Constants
     {
+        public static string CCEmailAddress = (System.Configuration.ConfigurationManager.AppSettings["CCEmailAddress"] != null) ? System.Configuration.ConfigurationManager.AppSettings["CCEmailAddress"] : string.Empty;
     }
 
     public enum ProjectType

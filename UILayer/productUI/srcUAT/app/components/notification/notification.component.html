@@ -39,4 +39,5 @@
                     *ngIf="index > 0 && index < (item.arrInstances.length - 1)">,</span> {{inst}} </a>
         </div>
     </div>
+    <app-no-items *ngIf="firstFew.length == 0"></app-no-items>
 </div>

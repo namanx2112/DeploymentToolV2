@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
 import { BrandModel } from 'src/app/interfaces/models';
 import { ProjectInfo, ProjectTypes } from 'src/app/interfaces/store';
+import { CommonService } from 'src/app/services/common.service';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -47,7 +48,7 @@ export class ChangeGoliveDateComponent {
 
   Save(val: any) {
     if (val.value["dGoLiveDate"]) {
-      this._curProjInfo.dGoLiveDate = new Date(val.value["dGoLiveDate"].split('T')[0]);
+      this._curProjInfo.dGoLiveDate = new Date(CommonService.getFormatedDateString(val.value["dGoLiveDate"]));
       this.storeService.UpdateGoliveDate(this._curProjInfo).subscribe(x => {
         this.onSave(this._curProjInfo.dGoLiveDate);
       });

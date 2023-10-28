@@ -18,9 +18,11 @@
                     Installation</button>
                 <button mat-menu-item (click)="menuClick('newproject', 'audio', 'AudioInstallation');">Audio
                     Installation</button>
-                <button mat-menu-item (click)="menuClick('newproject', 'interiormenu', 'InteriorMenuInstallation');">Interior Menu
+                <button mat-menu-item
+                    (click)="menuClick('newproject', 'interiormenu', 'InteriorMenuInstallation');">Interior Menu
                     Installation</button>
-                <button mat-menu-item (click)="menuClick('newproject', 'exteriormenu', 'ExteriorMenuInstallation');">Exterior Menu
+                <button mat-menu-item
+                    (click)="menuClick('newproject', 'exteriormenu', 'ExteriorMenuInstallation');">Exterior Menu
                     Installation</button>
                 <button mat-menu-item
                     (click)="menuClick('newproject', 'payment', 'PaymentTerminalInstallation');">Payment Terminal
@@ -77,18 +79,19 @@
             [curBrandId]="_curBrand.aBrandId"></app-pos-installation>
         <app-payment-terminal-installation *ngIf="showMode == 'paymentterminalinstllation'"
             (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-payment-terminal-installation>
-        <app-menu-installation *ngIf="showMode == 'InteriorMenuInstallation' || showMode == 'ExteriorMenuInstallation'" (ChangeView)="ChangeView($event)"
-            [curBrandId]="_curBrand.aBrandId"></app-menu-installation>
+        <app-menu-installation *ngIf="showMode == 'InteriorMenuInstallation' || showMode == 'ExteriorMenuInstallation'"
+            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-menu-installation>
         <app-audio-installation *ngIf="showMode == 'audioinstallation'" (ChangeView)="ChangeView($event)"
             [curBrandId]="_curBrand.aBrandId"></app-audio-installation>
         <app-project-template-list *ngIf="showMode == 'projecttemplatelist'" (BackToStoreView)="BackToStoreView($event)"
             [curStore]="curStore"></app-project-template-list>
         <app-project-portfolio *ngIf="showMode == 'Project Portfolio'" [curBrand]="_curBrand"
             (BackToStoreView)="BackToStoreView($event)" (openStore)="showStore($event)"></app-project-portfolio>
-
+        <app-advanced-search *ngIf="showMode == 'search'" (ChangeView)="ChangeView($event)" (openStore)="showStore($event)"
+        [curBrand]="_curBrand"></app-advanced-search>
         <app-not-implemented
             *ngIf="showMode != 'Project Portfolio' && showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'InteriorMenuInstallation' && showMode != 'ExteriorMenuInstallation' && 
         showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && 
-        showMode != 'newstore' && showMode != 'dashboard' && showMode != 'dashboardpane' && showMode != 'viewreport' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
+        showMode != 'newstore' && showMode != 'search' && showMode != 'dashboard' && showMode != 'dashboardpane' && showMode != 'viewreport' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
     </div>
 </mat-drawer-container>

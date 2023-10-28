@@ -20,8 +20,8 @@ namespace DeploymentTool.Model
         public string tANE { get; set; }
         public string tRVP { get; set; }
         public string tPrincipalPartner { get; set; }
-        public DateTime dStatus { get; set; }
-        public DateTime dOpenStore { get; set; }
+        public Nullable<DateTime> dStatus { get; set; }
+        public Nullable<DateTime> dOpenStore { get; set; }
         public string tProjectStatus { get; set; }
         public int nStoreExistStatus { get; set; }
 

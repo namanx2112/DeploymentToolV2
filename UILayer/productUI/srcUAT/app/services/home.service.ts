@@ -42,7 +42,7 @@ export class HomeService {
     };
   }
 
-  GetUsersTab(instType: TabInstanceType):HomeTab{
+  GetUsersTab(instType: TabInstanceType, needAccess: boolean):HomeTab{
     return {
       tab_name: "Users",
       tab_header: "Users",
@@ -50,7 +50,7 @@ export class HomeService {
       tab_type: TabType.Users,
       tab_unique_name: "",
       search_fields: this.userSerice.GetSearchFields(),
-      fields: this.userSerice.GetFields(),
+      fields: this.userSerice.GetFields(needAccess),
       instanceType: instType,
       childTabs: []
     };
@@ -81,7 +81,7 @@ export class HomeService {
       fields: this.vendorService.GetFields(),
       instanceType: instType,
       childTabs: [
-this.GetUsersTab(TabInstanceType.Table),
+this.GetUsersTab(TabInstanceType.Table, true),
 this.GetPartsTab(TabInstanceType.Table)
       ]
     };
@@ -111,7 +111,7 @@ this.GetPartsTab(TabInstanceType.Table)
       search_fields: this.franchiseSerice.GetSearchFields(),
       fields: this.franchiseSerice.GetFields(),
       instanceType: instType,
-      childTabs: [this.GetUsersTab(TabInstanceType.Table)]
+      childTabs: [this.GetUsersTab(TabInstanceType.Table, true)]
     };
   }
   
@@ -203,7 +203,7 @@ this.GetPartsTab(TabInstanceType.Table)
 
   GetAllTabs():HomeTab[]{
     return [
-      this.GetUsersTab(TabInstanceType.Single),
+      this.GetUsersTab(TabInstanceType.Single, false),
       this.GetBrandsTab(TabInstanceType.Single),
       this.GetVendorsTab(TabInstanceType.Single),
       this.GetTechComponentsTab(TabInstanceType.Single),

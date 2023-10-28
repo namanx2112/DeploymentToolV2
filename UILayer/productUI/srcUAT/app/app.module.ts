@@ -83,6 +83,8 @@ import { DashboardComponent } from './components/Brand/dashboard/dashboard.compo
 import { DashboardChartComponent } from './components/Brand/dashboard-chart/dashboard-chart.component';
 import { DashboardPaneComponent } from './components/Brand/dashboard-pane/dashboard-pane.component';
 import {MatNativeDateModule} from '@angular/material/core';
+import { NoItemsComponent } from './components/no-items/no-items.component';
+import { AdvancedSearchComponent } from './components/Brand/advanced-search/advanced-search.component';
 
 @NgModule({
     declarations: [
@@ -141,7 +143,9 @@ import {MatNativeDateModule} from '@angular/material/core';
         NotificationComponent,
         DashboardComponent,
         DashboardChartComponent,
-        DashboardPaneComponent
+        DashboardPaneComponent,
+        NoItemsComponent,
+        AdvancedSearchComponent,
     ],
     providers: [
         {

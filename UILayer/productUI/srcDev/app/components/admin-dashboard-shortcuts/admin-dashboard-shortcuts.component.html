@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="header">
+        Dashoard
+    </div>
+    <div class="dBody">
+        <div class="searchBar">
+            <input matInput class="searchField" placeholder="Type a name of action" [(ngModel)]="searchText" (keydown)="onKeydown($event)" />
+            <mat-icon matSuffix class="searchIcon">search</mat-icon>
+        </div>
+        <div class="bodyBar">
+            <span *ngFor="let item of tItems| forFilter: filterItem" 
+            (click)="ShortcutClick(item)">
+                <mat-icon class="tIcon">{{item.icon}}</mat-icon>{{item.title}}</span>
+        </div>
+    </div>
+</div>

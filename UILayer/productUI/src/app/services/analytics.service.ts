@@ -23,6 +23,10 @@ export class AnalyticsService {
     }, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  GetStoreTable(params: any) {
+    return this.http.post<ReportModel>(CommonService.ConfigUrl + "Analytics/GetStoreTable", params, { headers: this.cacheService.getHttpHeaders() });
+  }
+
   GetDashboards(nBrandId: number, tProjectTypes: string, dStart: string, dEnd: string) {
     return this.http.post<DahboardTile[]>(CommonService.ConfigUrl + "Analytics/GetDashboards", { "nBrandId": nBrandId, "tProjectTypes": tProjectTypes, dStart: dStart, dEnd: dEnd }, { headers: this.cacheService.getHttpHeaders() });
   }

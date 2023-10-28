@@ -36,7 +36,7 @@ namespace DeploymentTool.Controller
                 int nFranchiseId = (searchFields != null && searchFields.ContainsKey("nFranchiseId")) ? Convert.ToInt32(searchFields["nFranchiseId"]) : 0;
                 SqlParameter tModuleNameParam = new SqlParameter("@nVendorId", nVendorId);
                 SqlParameter tModuleNameParam2 = new SqlParameter("@nFranchiseId", nFranchiseId);
-                List<UserModel> items = db.Database.SqlQuery<UserModel>("exec sproc_getUserModel @nVendorId, @nFranchiseId", tModuleNameParam, tModuleNameParam2).ToList();
+                List<UserModel> items = db.Database.SqlQuery<UserModel>("exec sproc_getUserModel @nVendorId, @nFranchiseId", tModuleNameParam, tModuleNameParam2).OrderBy(x=>x.tName).ToList();
                 string tUserName = (searchFields != null && searchFields.ContainsKey("tUserName")) ? searchFields["tUserName"].ToLower() : "";
                 if (!string.IsNullOrEmpty(tUserName))
                 {

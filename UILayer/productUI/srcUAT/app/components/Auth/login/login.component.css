@@ -73,7 +73,7 @@ form{
     width: 100%;
 }
 
-@media only screen and (min-width: 100px) and (max-width: 900px) {
+@media only screen and (min-width: 100px) and (max-width: 1200px) {
 
     .outerLogin {
         flex-direction: column;
@@ -99,7 +99,7 @@ form{
     }
 }
 
-@media only screen and (min-width: 901px) {
+@media only screen and (min-width: 1201px) {
     .outerLogin>div {
         height: 100%;
     }
@@ -164,14 +164,14 @@ input{
 	font-size: 100px;
 	display: flex;
 	position: absolute;
-	bottom: 20vh;
+	bottom: 30vh;
 	left: 50%;
 	transform: translateX(-50%);
 	user-select: none;
 
 	.wrapper {
-		padding-left: 20px;
-		padding-right: 20px;
+		padding-left: 10px;
+		padding-right: 10px;
 		padding-top: 20px;
 		.letter {
 			transition: ease-out 1s;

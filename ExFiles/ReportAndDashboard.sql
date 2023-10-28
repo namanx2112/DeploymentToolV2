@@ -28,9 +28,9 @@ BEGIN
 END 
 GO
 
-update tblUser set tPassword = '260d23baeb73c2451f00f4a30ea4eb9ccad81b7f0c7dc23f58de70fd1426ab9d' where aUserId = 2
-
 select * from tblUser
+update tblUser set tPassword = '260d23baeb73c2451f00f4a30ea4eb9ccad81b7f0c7dc23f58de70fd1426ab9d', isFirstTime = 1 where aUserId = 2
+
 
 
 --drop table tblReport
@@ -555,6 +555,8 @@ update tblBrand set nBrandType = 6 where tBrandName like '%Jimmy%'
 update tblBrand set nEnabled = 1 where tBrandName like '%Arby%'
 
 update tblDropdownModule set tModuleDisplayName = 'Drive Thru' where tModuleDisplayName like '%Drive%'
+
+select * from tblDropdownModule where tModuleDisplayName like '%Drive%'
 
 GO
 select * from tblBrand

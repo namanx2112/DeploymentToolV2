@@ -89,7 +89,7 @@ export class StoreViewComponent {
       projInfo: projInfo,
       curBrand: this._curStore.nBrandId,
       onSave: function (data: any) {
-        projInfo.dGoLiveDate = data.toLocaleDateString();
+        projInfo.dGoLiveDate = data;
         dialogRef.close();
       },
       onClose: function (data: any) {

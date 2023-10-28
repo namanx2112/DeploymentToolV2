@@ -32,10 +32,12 @@
     min-height: 100px;
     width: 95%;
     border: 1px solid rgba(0,0,0,0.2);
+    margin-top: 4px;
 }
 
 .tabHeader a{
     font-size: 18px;
     padding: 0px 50px;
     cursor: pointer;
+    border-bottom-width: 5px;
 }

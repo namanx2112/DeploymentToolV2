@@ -1,0 +1,72 @@
+.headerPart {
+    width: 95%;
+    margin: 20px auto;
+    float: left;
+}
+
+.bodyPart{
+    height: calc(100% - 65px);
+    width: 100%;
+    overflow-y: auto;
+}
+
+.searchFields{
+    margin-top: 4px;
+}
+
+.tilHeader{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.marginLeft{
+    margin-left: 40px;
+}
+
+.filter-acc, .filter-pane{
+    width: 100%;
+    border-radius: 0px!important;
+    border: 0px none!important;
+    box-shadow: none!important;
+}
+
+.filter-acc{
+
+}
+
+.notChart{
+    height: 200px!important;
+}
+
+
+.X1{
+    width: 20%;
+}
+
+.X2{
+    width: 50%;
+}
+
+.X3{
+    width: 75%;
+}
+
+.X4{
+    width: 100%;
+}
+
+.searchField {
+    width: 100%;
+}
+
+.tileShortcut {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.mapPart iframe {
+    width: 100%;
+    height: 500px;
+}       

@@ -1,0 +1,19 @@
+.bTitle{    
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.brangGray{
+    font-size: 12px;
+    color: lightgray;
+}
+
+.bbleft{
+    float: left;
+    width: 60%;
+}
+
+.bbleft{
+    float: left;
+    width: 40%;
+}

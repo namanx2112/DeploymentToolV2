@@ -1,0 +1,47 @@
+<div class="leftPart floatLeft">
+    <div class="chips">
+        <div class="chipsHeader ib_title2 ib_text-ellipsis">Brands</div>
+        <div class="chipsBody brandChip">
+            <div *ngFor="let brand of brands|forFilter:filterBrand" [ngClass]="brand.tMyClass + ' brandInsight'">
+                <span><img src="{{brand.tIconURL}}" /></span>
+                <app-brand-insights [curBrand]="brand" class="brandItem"></app-brand-insights>
+            </div>
+        </div>
+    </div>
+    <div class="chips">
+        <div class="chipsHeader ib_title2 ib_text-ellipsis">Brands</div>
+        <div class="chipsBody brandChip">
+            <span class="brands" *ngFor="let brand of brands|forFilter:filterBrand" (click)="showBrand(brand)"
+                title="{{brand.tBrandName}}">
+                <img src="{{brand.tIconURL}}" />
+            </span>
+        </div>
+    </div>
+    <div class="chips" *ngIf="access.hasAccess('home.dashboard.priority', 0)">
+        <div class="chipsHeader ib_title2 ib_text-ellipsis">Priorities</div>
+        <div class="chipsBody whiteBG">
+            <app-no-items></app-no-items>
+        </div>
+    </div>
+    <div class="chips" *ngIf="access.hasAccess('home.dashboard.goal', 0)">
+        <div class="chipsHeader ib_title2 ib_text-ellipsis">Goals</div>
+        <div class="chipsBody whiteBG">
+            <app-no-items></app-no-items>
+        </div>
+    </div>
+</div>
+<div class="rightPart floatLeft">
+    <div class="chips" *ngIf="access.hasAccess('home.dashboard.notification', 0)">
+        <div class="chipsHeader ib_title2 ib_text-ellipsis">Notifications <a (click)="showNotification()"
+                class="chipButton">See all</a></div>
+        <div class="chipsBody">
+            <app-notification [fullView]="false" (openStore)="openStoreFromNotification($event)"></app-notification>
+        </div>
+    </div>
+    <div class="chips" *ngIf="access.hasAccess('home.dashboard.request', 0)">
+        <div class="chipsHeader ib_title2 ib_text-ellipsis">Pending Requests</div>
+        <div class="chipsBody">
+            <app-no-items></app-no-items>
+        </div>
+    </div>
+</div>
