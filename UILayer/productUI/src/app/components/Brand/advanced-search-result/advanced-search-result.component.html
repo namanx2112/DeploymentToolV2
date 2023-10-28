@@ -1,6 +1,4 @@
 <div class="reportBody">
-    <button class="exportButton" mat-raised-button matTooltip="Click to download"
-        (click)="exportAsExcel()">Export as Excel<mat-icon>save_alt</mat-icon></button>
     <table *ngIf="tReport != undefined" mat-table [dataSource]="dataSource" matSort
         (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" #TABLE>
 

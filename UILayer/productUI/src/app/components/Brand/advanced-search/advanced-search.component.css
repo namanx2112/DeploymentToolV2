@@ -69,4 +69,22 @@
 .mapPart iframe {
     width: 100%;
     height: 500px;
-}       
+}      
+
+  
+.exButton{
+    float: left;
+    margin: 5px 20px 5px 2px;
+    width: 170px;
+    cursor: pointer;
+  }
+  
+  
+  .searchButton{
+    float: left;
+    color: #fff;
+    margin: 5px 20px 5px 2px;
+    width: 170px;
+    cursor: pointer;
+    background-color: #c8252c;
+  }
