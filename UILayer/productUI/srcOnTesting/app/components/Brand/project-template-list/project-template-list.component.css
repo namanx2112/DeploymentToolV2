@@ -1,0 +1,69 @@
+.projectHeader {
+    height: 55px;
+    width: 95%;
+    z-index: 4;
+    background-color: #fff;
+    position: absolute;
+}
+
+.projectHeader h4 {
+    display: inline-block;
+}
+
+.projectHeader button {
+    float: right;
+    margin-right: 90px;
+    margin-top: 5px;
+}
+
+.projHeader {
+    float: left;
+    margin-top: 13px;
+}
+
+.backIcon {
+    float: left;
+    margin-top: 10px;
+}
+
+.projectBody{
+    float: left;
+    width: 95%;
+    min-height: calc(100% - 55px);
+    margin-top: 55px;
+}
+
+.templateItem{
+    width: 100%;
+    height: 30%;
+    float: left;
+}
+
+.templateHeader{
+    float: left;
+    height: 30px;
+    width: 100%;
+}
+
+.templateBody{
+    float: left;
+    height: calc(100% - 30px);
+    overflow: auto;
+}
+
+.templateTile{
+    width: 200px;
+    cursor: pointer;
+    height: 150px;
+    float: left;
+    margin: 0px 20px 20px 0px;
+    border-radius: 10px;
+}
+
+.templateTile > span{
+    margin: 30% auto;
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+}

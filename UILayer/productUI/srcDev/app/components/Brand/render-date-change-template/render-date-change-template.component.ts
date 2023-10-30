@@ -4,6 +4,7 @@ import { DateChangeBody, DateChangeNotificationBody, DateChangeNotitication, Dat
 import { CommonService } from 'src/app/services/common.service';
 import { StoreService } from 'src/app/services/store.service';
 import { DateChangeRevisedPOComponent } from '../date-change-revised-po/date-change-revised-po.component';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-render-date-change-template',
@@ -17,6 +18,7 @@ export class RenderDateChangeTemplateComponent {
   allItems: DateChangeNotitication[];
   curStep: number;
   dateChangeBody: DateChangeNotificationBody;
+  selection = new SelectionModel<any>(true, []);
   constructor(public dialogRef: MatDialogRef<RenderDateChangeTemplateComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private service: StoreService,
     private commonService: CommonService, private dialog: MatDialog) {
     this.ckConfig = this.commonService.GetCKEditorConfig("256px");
@@ -30,6 +32,28 @@ export class RenderDateChangeTemplateComponent {
     this.service.GetDateChangeTable(this.curStore.nStoreId).subscribe(x => {
       this.allItems = x;
     });
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.allItems.length;
+    return numSelected === numRows;
+  }
+
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.selection.selected);
+  }
+
+  checkboxLabel(row?: DateChangeNotitication): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
   }
 
   GetDateChangeBody() {

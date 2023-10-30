@@ -67,6 +67,80 @@ namespace DeploymentTool.Controller
         }
 
         [HttpPost]
+        [Route("api/Attachment/ImportItems")]
+        public async Task<HttpResponseMessage> ImportItems()
+        {
+            try
+            {
+                TraceUtility.WriteTrace("AttachmentController", "UploadStore:Start:");
+                HttpRequestMessage request = this.Request;
+                if (!request.Content.IsMimeMultipartContent())
+                {
+                    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                }
+
+
+                TraceUtility.WriteTrace("AttachmentController", "UploadStore:Multipart:");
+                try
+                {
+                    IImportables tObject = null;
+                    List<IImportModel> tList = null;
+                    string ItemName = HttpContext.Current.Request.QueryString["objectName"];
+                    switch (ItemName)
+                    {
+                        case "VendorParts":
+                            tObject = new VendorPartsImportable();
+                            break;
+                    }
+                    int nBrandId = 0;
+                    int nInstanceId = 0;
+                    var filesReadToProvider = await request.Content.ReadAsMultipartAsync();
+                    byte[] fileBytes = null;
+                    string FileName = string.Empty;
+                    foreach (var stream in filesReadToProvider.Contents)
+                    {
+                        string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
+                        if (fRequest.Length >= 2)
+                        {
+                            FileName = fRequest[0];
+                            nBrandId = Convert.ToInt32(fRequest[1]);
+                            if (fRequest.Length == 3)
+                                nInstanceId = Convert.ToInt32(fRequest[2]);
+                            fileBytes = await stream.ReadAsByteArrayAsync();
+                            break;
+                        }
+                    }
+                    string URL = HttpRuntime.AppDomainAppPath;
+                    string strFilePath = URL + @"Attachments\" + FileName;
+
+                    TraceUtility.WriteTrace("AttachmentController", "UploadStore:strFilePath:" + strFilePath);
+                    using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
+                    {
+                        bw.Write(fileBytes);
+                        bw.Close();
+                    }
+                    TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
+                    tList = tObject.Import(strFilePath, nBrandId, nInstanceId);
+                    TraceUtility.WriteTrace("AttachmentController", "UploadStore:Returing");
+                    return new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new ObjectContent<List<IImportModel>>(tList, new JsonMediaTypeFormatter())
+                    };
+                }
+                catch (System.Exception ex)
+                {
+                    TraceUtility.ForceWriteException("AttachmentController", HttpContext.Current, ex);
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("AttachmentController2", HttpContext.Current, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpPost]
         [Route("api/Attachment/UploadStore")]
         public async Task<HttpResponseMessage> UploadStore()
         {
@@ -97,7 +171,7 @@ namespace DeploymentTool.Controller
                             break;
                         }
                     }
-                    var output = db.Database.SqlQuery<string>("select top 1 tBrandName from tblBrand with (nolock) where aBrandId=@aBrandId ",new SqlParameter("@aBrandId", nBrandIdTemp)).FirstOrDefault();
+                    var output = db.Database.SqlQuery<string>("select top 1 tBrandName from tblBrand with (nolock) where aBrandId=@aBrandId ", new SqlParameter("@aBrandId", nBrandIdTemp)).FirstOrDefault();
 
                     if (output.Contains("Buffalo Wild Wings"))
                     {
@@ -281,7 +355,7 @@ namespace DeploymentTool.Controller
                                         if (reader.GetValue(dtNew.Columns.IndexOf("Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Status")).ToString() != "")
                                             objProjectExcel.dStatus = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Status")));
                                         if (reader.GetValue(dtNew.Columns.IndexOf("Open Store")) != null && reader.GetValue(dtNew.Columns.IndexOf("Open Store")).ToString() != "")
-                                        objProjectExcel.dOpenStore = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store")));//default value
+                                            objProjectExcel.dOpenStore = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store")));//default value
 
                                         objProjectExcel.tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
 
@@ -296,7 +370,7 @@ namespace DeploymentTool.Controller
                                             objProjectExcel.dInstallDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Scheduled Install Date")));
                                         objProjectExcel.tInstallationVendor = reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor"))) : "";
                                         objProjectExcel.tInstallStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
-                                        
+
 
                                         fields.Add(objProjectExcel);
                                     }

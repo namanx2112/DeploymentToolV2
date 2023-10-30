@@ -170,7 +170,7 @@ button {
 }
 
 
-.deployit .tabSelectionOption>span.selected {
+.deployit .tabSelectionOption>span.selected, .menuPart .selected {
     background-color: #c8252c !important;
     color: #fff;
 }

@@ -1,13 +1,14 @@
 <h4 mat-dialog-title *ngIf="_curTab != undefined" style="text-align: center;">Import {{_curTab.tab_name}}</h4>
 <div mat-dialog-content>
-    <div ngClass="{{dragAreaClass}}" DropZone (onFileDropped)="handleFileInput($event)">
+    <div *ngIf="excelData.length == 0" ngClass="{{dragAreaClass}}" DropZone (onFileDropped)="handleFileInput($event)">
         <span><mat-icon class="uploadIcon">cloud_upload</mat-icon></span>
         <input #file type="file" id="file" (change)="handleOneFile($event)">
         <span class="msg">Drag and drop or <a (click)="file.click()">Choose file</a> to upload</span>
         <span *ngIf="fileToUpload != null" class="fileName">{{fileToUpload.name}}</span>
         <span class="fileType">Excel format only</span>
     </div>
-    <!-- <app-file-store-selection *ngIf="excelData.length > 0"  (SelectionChange)="SelectionChange($event)" [excelData]="excelData"></app-file-store-selection> -->
+    <app-upload-items-selection *ngIf="excelData.length > 0" (SelectionChange)="SelectionChange($event)"
+        [excelData]="{items: excelData, curTab: _curTab}"></app-upload-items-selection>
 </div>
 <div mat-dialog-actions [align]="'end'">
     <button type="submit" class="submitButton" mat-raised-button [disabled]="selectedItems.length == 0"

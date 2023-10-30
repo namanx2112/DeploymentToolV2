@@ -80,6 +80,7 @@ export class PartsService {
     {
       field_name: "Parts Description",
       fieldUniqeName: "tPartDesc",
+      forImport: true,
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -91,6 +92,7 @@ export class PartsService {
     }, {
       field_name: "Parts Number",
       fieldUniqeName: "tPartNumber",
+      forImport: true,
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -103,6 +105,7 @@ export class PartsService {
     {
       field_name: "Parts Price",
       fieldUniqeName: "cPrice",
+      forImport: true,
       defaultVal: "",
       readOnly: false,
       invalid: false,

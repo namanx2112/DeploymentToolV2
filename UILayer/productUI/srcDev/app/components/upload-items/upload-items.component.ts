@@ -13,7 +13,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class UploadItemsComponent {
   _curTab: HomeTab;
   _curBrandId: number;
-  // excelData: ProjectExcel[];
+  excelData: any[];
   selectedItems: any[];
   fileToUpload: File | null = null;
   dragAreaClass: string;
@@ -23,7 +23,7 @@ export class UploadItemsComponent {
       this._curTab = data.curTab;
     }
     this.dragAreaClass = "uploadDiv blackBorder lightGray";
-    // this.excelData = [];
+    this.excelData = [];
     this.selectedItems = [];
   }
   handleFileInput(files: any) {
@@ -37,12 +37,12 @@ export class UploadItemsComponent {
   uploadFileToActivity() {
     if (this.fileToUpload != null) {
       if (this.fileToUpload.name.toLowerCase().endsWith("xlsx")) {
-        // this.service.UploadStore(this.fileToUpload, this._curBrand.aBrandId ).subscribe((data: ProjectExcel[]) => {
-        //  // this.addRecords(data);
-        //   // do something, if upload success
-        // }, error => {
-        //   console.log(error);
-        // });
+        this.service.ImportItems("VendorParts", this.fileToUpload, this._curBrandId, 0).subscribe((data: any[]) => {
+          this.addRecords(data);
+          // do something, if upload success
+        }, error => {
+          console.log(error);
+        });
       }
       else
         alert("Please upload valid xlsx file only!");
@@ -53,17 +53,17 @@ export class UploadItemsComponent {
 
   }
 
-  // addRecords(data: ProjectExcel[]) {
-  //   this.excelData = [];
-  //   for (var indx in data) {
-  //     data[indx].nBrandId = this._curBrand.aBrandId;
-  //     this.excelData.push(data[indx]);
-  //   }
-  // }
+  addRecords(data: any[]) {
+    this.excelData = [];
+    for (var indx in data) {
+      data[indx].nBrandId = this._curBrandId;
+      this.excelData.push(data[indx]);
+    }
+  }
 
-  // SelectionChange(items: ProjectExcel[]) {
-  //   this.selectedItems = items;
-  // }
+  SelectionChange(items: any[]) {
+    this.selectedItems = items;
+  }
 
   // CreateNewStores() {
   //   if (this.selectedItems.length > 0) {

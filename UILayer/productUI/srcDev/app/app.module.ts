@@ -85,6 +85,7 @@ import { DashboardPaneComponent } from './components/Brand/dashboard-pane/dashbo
 import {MatNativeDateModule} from '@angular/material/core';
 import { NoItemsComponent } from './components/no-items/no-items.component';
 import { UploadItemsComponent } from './components/upload-items/upload-items.component';
+import { UploadItemsSelectionComponent } from './components/upload-items-selection/upload-items-selection.component';
 
 @NgModule({
     declarations: [
@@ -145,7 +146,8 @@ import { UploadItemsComponent } from './components/upload-items/upload-items.com
         DashboardChartComponent,
         DashboardPaneComponent,
         NoItemsComponent,
-        UploadItemsComponent
+        UploadItemsComponent,
+        UploadItemsSelectionComponent
     ],
     providers: [
         {

@@ -22,6 +22,8 @@ using System.Net.Http;
 using System.ServiceModel.Channels;
 using System.Data.Entity;
 using System.Security.Cryptography;
+using ExcelDataReader;
+using System.Data.SqlClient;
 
 namespace DeploymentTool.Misc
 {
@@ -303,6 +305,50 @@ namespace DeploymentTool.Misc
             {
                 return null;
             }
+        }
+
+        public static List<IImportModel> ConvertExcelReaderToImportableModel(string strFilePath, IImportModel tModel)
+        {
+            //  
+            List<IImportModel> items = new List<IImportModel>();
+            try
+            {
+                TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
+                try
+                {
+                    using (var stream = File.Open(strFilePath, FileMode.Open, FileAccess.Read))
+                    {
+                        using (var reader = ExcelReaderFactory.CreateReader(stream))
+                        {
+                            do
+                            {
+                                reader.Read();
+                                while (reader.Read())
+                                {
+                                    items.Add(tModel.GetFromExcel(reader));
+                                }
+                            } while (reader.NextResult());
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    TraceUtility.ForceWriteException("ImportExceltoDatabase", HttpContext.Current, ex);
+                    //result = false;
+                }
+                finally
+                {
+                    //oledbConn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
+            }
+            // return ip;
+            // return result;
+            return items;
         }
     }
     public class Hashing

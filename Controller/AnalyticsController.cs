@@ -217,12 +217,12 @@ namespace DeploymentTool.Controller
         [Route("api/Store/GetStoreTable")]
         public HttpResponseMessage GetStoreTable(Dictionary<string, string> searchFields)
         {
-            ReportRequest request = new ReportRequest()
-            {
-                reportId = 4,
-                tParam1 = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,22,33,34,35,36,51,57,72,73,74,85,86,87,88,89,90,91,93,94,95,96,97,98,99,100,101,106,107,108,109,110,111,112,113,114,115,116,117,155,156,157,158,159,160,161,",
+            //ReportRequest request = new ReportRequest()
+            //{
+            //    reportId = 4,
+            //    tParam1 = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,22,33,34,35,36,51,57,72,73,74,85,86,87,88,89,90,91,93,94,95,96,97,98,99,100,101,106,107,108,109,110,111,112,113,114,115,116,117,155,156,157,158,159,160,161,",
 
-            };
+            //};
             ReportModel reportModel = new ReportModel()
             {
                 reportTable = new DataTable(),
@@ -232,31 +232,39 @@ namespace DeploymentTool.Controller
             DbProviderFactory dbFactory = DbProviderFactories.GetFactory(connection);
             using (var cmd = dbFactory.CreateCommand())
             {
+                int nBrandId = (searchFields["nBrandId"] == null) ? 0 : Convert.ToInt32(searchFields["nBrandId"]);
+                var tProjTypes = (searchFields["tProjTypes"] == null) ? "" : Convert.ToString(searchFields["tProjTypes"]);
+
+                var dtStart = (searchFields["dtStart"] == null) ? null : Convert.ToString(searchFields["dtStart"]);
+                //DateTime dtEnd = (searchFields["dtEnd"] == null) ? null : Convert.ToDateTime(searchFields["dtEnd"]);
+                var dtEnd = (searchFields["dtEnd"] == null) ? null : Convert.ToString(searchFields["dtEnd"]);
+                var tVendor = (searchFields["tVendor"] == null) ? "" : Convert.ToString(searchFields["tVendor"]);
+                var tFranchise = (searchFields["tFranchise"] == null) ? "" : Convert.ToString(searchFields["tFranchise"]);
+                var tCity = (searchFields["tCity"] == null) ? null : Convert.ToString(searchFields["tCity"]);
+
                 string strName = string.Empty;
                 cmd.Connection = connection;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "sproc_getReportData";
-                var reportIdParam = new SqlParameter("@nReportId", request.reportId);
-                var reportNameParam = new SqlParameter("@tReportName", strName);
-                var reportParameters1 = new SqlParameter("@pm1", request.tParam1.Trim(','));
-                var reportParameters2 = new SqlParameter("@pm2", request.tParam2);
-                var reportParameters3 = new SqlParameter("@pm3", request.tParam3);
-                var reportParameters4 = new SqlParameter("@pm4", request.tParam4);
-                var reportParameters5 = new SqlParameter("@pm5", request.tParam5);
-                reportNameParam.Direction = ParameterDirection.Output;
-                reportNameParam.Size = 500;
+                cmd.CommandText = "sproc_getAdvanceSearchData";
+                var reportIdParam = new SqlParameter("@nBrandId", nBrandId);
+                var reportParameters1 = new SqlParameter("@tProjectTypes", tProjTypes);
+                var reportParameters2 = new SqlParameter("@dtStart", dtStart);
+                var reportParameters3 = new SqlParameter("@dtEnd", dtEnd);
+                var reportParameters4 = new SqlParameter("@tVendor", tVendor);
+                var reportParameters5 = new SqlParameter("@tFranchise", tFranchise);
+                var reportParameters6 = new SqlParameter("@tCity", tCity);
                 cmd.Parameters.Add(reportIdParam);
-                cmd.Parameters.Add(reportNameParam);
                 cmd.Parameters.Add(reportParameters1);
                 cmd.Parameters.Add(reportParameters2);
                 cmd.Parameters.Add(reportParameters3);
                 cmd.Parameters.Add(reportParameters4);
                 cmd.Parameters.Add(reportParameters5);
+                cmd.Parameters.Add(reportParameters6);
                 using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
                 {
                     adapter.SelectCommand = cmd;
                     adapter.Fill(reportModel.reportTable);
-                    reportModel.tReportName = reportNameParam.Value.ToString();
+                    reportModel.tReportName = "Advance Search Result";
                 }
             }
             return new HttpResponseMessage(HttpStatusCode.OK)

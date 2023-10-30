@@ -22,11 +22,15 @@ export class AdvancedSearchComponent {
   @Output() openStore = new EventEmitter<StoreSearchModel>();
   selectedProjects: any[] = [];
   selectedVendors: any[] = [];
+  selectedInstaller: any[] = [];
   selectedFranchise: any[] = [];
+  selectedState: any[] = [];
   selectedCity: string = "";
+  selectedPM: string = "";
   allProjectTypes: OptionType[] = [];
   allVendors: OptionType[] = [];
   allFranchise: OptionType[] = [];
+  allState: OptionType[] = [];
   campaignOne: FormGroup;
   reportParam: any;
   constructor(private commonService: CommonService) {
@@ -48,6 +52,7 @@ export class AdvancedSearchComponent {
     this.allProjectTypes = this.commonService.GetDropdownOptions(-1, "ProjectType");
     this.allVendors = this.commonService.GetDropdownOptions(-1, "Vendor");
     this.allFranchise = this.commonService.GetDropdownOptions(-1, "Franchise");
+    this.allState = this.commonService.GetDropdownOptions(this._curBrand.aBrandId, "State");
     if (this._curBrand.tBrandName.toLocaleLowerCase().indexOf("sonic") > -1)
       this.allProjectTypes = this.allProjectTypes.filter(x => x.tDropdownText.toLocaleLowerCase().indexOf("server") == -1)
     this.allProjectTypes.filter(x => x.tDropdownText.toLocaleLowerCase() == "new")[0].tDropdownText = "New Store Opening (NRO)";
@@ -59,9 +64,12 @@ export class AdvancedSearchComponent {
     this.selectedProjects = [];
     this.selectedVendors = [];
     this.selectedFranchise = [];
+    this.selectedState = [];
+    this.selectedInstaller = [];
     this.campaignOne.controls['start'].setValue(new Date(new Date().getFullYear(), 0, 1));
     this.campaignOne.controls['end'].setValue(new Date(new Date().getFullYear(), 11, 31));
     this.selectedCity = "";
+    this.selectedPM = "";
     this.getStoreTable();
   }
 
@@ -70,11 +78,12 @@ export class AdvancedSearchComponent {
     let dtStart = (this.campaignOne.controls['start'].valid) ? this.campaignOne.controls['start'].value : null;
     let dtEnd = (this.campaignOne.controls['end'].valid) ? this.campaignOne.controls['end'].value : null;
     let tVendor = this.selectedVendors.join(",");
+    let tInstaller = this.selectedInstaller.join(",");
     let tFranchise = this.selectedFranchise.join(",");
-    let tCity = this.selectedCity;
+    let tState = this.selectedState.join(",");
     this.reportParam = {
       nBrandId: this._curBrand.aBrandId, tProjTypes: tProjTypes, dtStart: dtStart, dtEnd: dtEnd,
-      tVendor: tVendor, tFranchise: tFranchise, tCity: tCity
+      tVendor: tVendor, tFranchise: tFranchise, tCity: this.selectedCity, tITPM: this.selectedPM, tInstaller: tInstaller, tState: tState
     };
   }
 }

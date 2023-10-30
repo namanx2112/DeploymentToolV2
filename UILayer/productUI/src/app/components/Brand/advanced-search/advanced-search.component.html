@@ -10,8 +10,20 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field class="marginLeft" appearance="outline">
-            <mat-label>Vendor</mat-label>
+            <mat-label>PM</mat-label>
+            <input matInput [(ngModel)]="selectedPM">
+        </mat-form-field>
+        <mat-form-field class="marginLeft" appearance="outline">
+            <mat-label>Equipment Vendor</mat-label>
             <mat-select multiple [(ngModel)]="selectedVendors">
+                <!-- <mat-option value="-1">Select All</mat-option> -->
+                <mat-option *ngFor="let vendor of allVendors"
+                    [value]="vendor.aDropdownId">{{vendor.tDropdownText}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="marginLeft" appearance="outline">
+            <mat-label>Installer Vendor</mat-label>
+            <mat-select multiple [(ngModel)]="selectedInstaller">
                 <!-- <mat-option value="-1">Select All</mat-option> -->
                 <mat-option *ngFor="let vendor of allVendors"
                     [value]="vendor.aDropdownId">{{vendor.tDropdownText}}</mat-option>
@@ -28,6 +40,14 @@
         <mat-form-field class="marginLeft" appearance="outline">
             <mat-label>City</mat-label>
             <input matInput [(ngModel)]="selectedCity">
+        </mat-form-field>
+        <mat-form-field class="marginLeft" appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select multiple [(ngModel)]="selectedState">
+                <!-- <mat-option value="-1">Select All</mat-option> -->
+                <mat-option *ngFor="let state of allState"
+                    [value]="state.aDropdownId">{{state.tDropdownText}}</mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field class="marginLeft" appearance="outline">
             <mat-label>GoLive Date Between</mat-label>

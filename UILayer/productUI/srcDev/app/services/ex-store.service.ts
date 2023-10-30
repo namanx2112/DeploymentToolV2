@@ -35,6 +35,15 @@ export class ExStoreService {
     return this.http.post<ProjectExcel[]>(CommonService.ConfigUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
   }
 
+  ImportItems(objectName: string, fileToUpload: File, nBrandId: number, instanceId: number) {
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileToUpload, fileToUpload.name + String.fromCharCode(1000) + nBrandId + String.fromCharCode(1000) + instanceId);
+    let httpHeader = new HttpHeaders({
+      "Authorization": "Bearer " + this.cacheService.getToken()
+    });
+    return this.http.post<any[]>(CommonService.ConfigUrl + "Attachment/ImportItems?objectName=" + objectName, formData, { headers: httpHeader });
+  }
+
   CreateNewStores(request: ProjectExcel[]) {
     return this.http.post<string>(CommonService.ConfigUrl + "ExStore/CreateNewStores", request, { headers: this.cacheService.getHttpHeaders() });
   }

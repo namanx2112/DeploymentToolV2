@@ -1,0 +1,24 @@
+table {
+    width: auto;
+}
+
+table td,
+table th {
+    padding: 5px 10px;
+}
+
+table{
+    width: calc(100% - 40px);
+    padding: 20px;
+    text-align: left;
+    margin: auto;
+}
+.outer{
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.fileName{
+    text-decoration: underline;
+    cursor: pointer;
+}

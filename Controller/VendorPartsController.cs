@@ -13,6 +13,7 @@ using System.Web.Http;
 using System.Data.SqlClient;
 using DeploymentTool.Misc;
 using System.Web;
+using ExcelDataReader;
 
 namespace DeploymentTool.Controller
 {
@@ -66,10 +67,26 @@ namespace DeploymentTool.Controller
             db.tblParts.Add(tParts);
             await db.SaveChangesAsync();
             // Add into tblVendorPartRel
-            partsRequest.aPartID=tParts.aPartID;
+            partsRequest.aPartID = tParts.aPartID;
             db.tblVendorPartRels.Add(partsRequest.GetTblVendorPartRel(partsRequest));
             await db.SaveChangesAsync();
-           
+
+
+            return Json(partsRequest);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IHttpActionResult> Import(VendorParts partsRequest)
+        {
+            tblPart tParts = partsRequest.GetTblParts();
+            db.tblParts.Add(tParts);
+            await db.SaveChangesAsync();
+            // Add into tblVendorPartRel
+            partsRequest.aPartID = tParts.aPartID;
+            db.tblVendorPartRels.Add(partsRequest.GetTblVendorPartRel(partsRequest));
+            await db.SaveChangesAsync();
+
 
             return Json(partsRequest);
         }
@@ -96,6 +113,38 @@ namespace DeploymentTool.Controller
         private bool tblUserExists(int id)
         {
             return db.tblParts.Count(e => e.aPartID == id) > 0;
+        }
+    }
+
+
+    public class VendorPartsImportable : IImportables
+    {
+        public List<IImportModel> Import(string strPath, int nBrandId, int nInstanceId)
+        {
+            List<IImportModel> items = Utilities.ConvertExcelReaderToImportableModel(strPath, new VendorPartsImportModel());
+            return items;
+        }
+    }
+
+    public class VendorPartsImportModel : IImportModel
+    {
+        private List<string> excelColumns = new List<string>()
+        {
+            "Parts Description", "Parts Number", "Parts Price"
+        };
+        public string tPartDesc { get; set; }
+        public string tPartNumber { get; set; }
+        public Nullable<decimal> cPrice { get; set; }
+
+        public bool isExist { get; set; }
+
+        public IImportModel GetFromExcel(IExcelDataReader reader)
+        {
+            tPartDesc = excelColumns.IndexOf("Parts Description") > -1 ? reader.GetValue(excelColumns.IndexOf("Parts Description")).ToString() : "";
+            tPartNumber = excelColumns.IndexOf("Parts Number") > -1 ? reader.GetValue(excelColumns.IndexOf("Parts Number")).ToString() : "";
+            cPrice = excelColumns.IndexOf("Parts Price") > -1 ? Convert.ToDecimal(reader.GetValue(excelColumns.IndexOf("Parts Price")).ToString()) : 0;
+            isExist = false;
+            return this;
         }
     }
 }

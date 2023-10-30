@@ -41,6 +41,7 @@ export interface Fields {
     options?: string,
     dropDownOptions?: OptionType[],
     hidden: boolean,
+    forImport?: boolean,
     relations?: HomeTab[]
 }
 

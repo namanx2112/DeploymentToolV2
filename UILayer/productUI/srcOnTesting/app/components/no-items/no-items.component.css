@@ -1,0 +1,16 @@
+
+.noItem{
+    text-align: center;
+    line-height: 50px;
+    /* background-color: #f0f0f0; */
+    color: gray;
+    height: 180px;
+    padding-top: 15%;
+    position: relative;
+}
+
+.noIcon{
+    margin-left: 5px;
+    position: absolute;
+    margin-top: 14px;
+}
