@@ -20,7 +20,7 @@ export class ProjectTemplateListComponent {
     this._curStore = value;
 
 
-    1
+     1
     this.getAllTemplates();
   }
   @Output() BackToStoreView = new EventEmitter<any>();
@@ -29,7 +29,7 @@ export class ProjectTemplateListComponent {
   quoteRequestTemplates: ProjectTemplates[];
   poTemplates: ProjectTemplates[];
   constructor(private service: StoreService, private dialog: MatDialog, public access: AccessService) {
-
+    
   }
 
   getAllTemplates() {

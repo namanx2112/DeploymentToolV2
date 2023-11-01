@@ -5,7 +5,7 @@ using System.Web;
 
 namespace DeploymentTool.Model
 {
-    public class Vendor: Misc.ModelParent
+    public class Vendor: Misc.IModelParent
     {
         public int aVendorId { get; set; }
         public string tVendorName { get; set; }

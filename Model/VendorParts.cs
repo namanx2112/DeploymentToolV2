@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DeploymentTool.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace DeploymentTool.Model
 {
-    public class VendorParts
+    public class VendorParts: IModelParent
     {
         public int aPartID { get; set; }
         public string tPartDesc { get; set; }

@@ -1,0 +1,390 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+*:not(.mat-icon) {
+    font-family: "Segoe UI VSS (Regular)", "Segoe UI", "-apple-system", BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Ubuntu, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+.mdc-data-table__cell {
+    position: relative;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+}
+
+.whiteDropdown .mdc-text-field--filled {
+    background-color: #fff !important;
+}
+
+.roundedCorner .mdc-text-field--filled {
+    border-radius: 10px !important;
+}
+
+.grayBackground {
+    background-color: #f0f0f0;
+}
+
+.grayWhiteTheme .mdc-text-field--filled {
+    background-color: gray !important;
+}
+
+.backIcon {
+    cursor: pointer;
+}
+
+.whiteGrayTheme {
+    background-color: white;
+}
+
+.whiteGray input {
+    color: #fff;
+}
+
+.deployit .whiteGray .mat-mdc-text-field-wrapper {
+    background-color: #f0f0f0;
+    color: white;
+    border-radius: 5px;
+}
+
+.whiteGray .mdc-floating-label--float-above {
+    background-color: white;
+    color: gray;
+    padding: 5px;
+}
+
+.white {
+    background-color: #fff;
+}
+
+.blackBorder {
+    border-color: black;
+}
+
+.deployit .grayWhiteTheme, .requestTile {
+    background-color: #f0f0f0;
+}
+
+.lightGrayWhiteTheme {
+    background-color: lightgrey;
+}
+
+.grayWhiteTheme .details,
+.grayWhiteTheme .tables,
+.grayWhiteTheme .tBody {
+    background-color: #fff;
+}
+
+.grayWhite .mat-mdc-text-field-wrapper {
+    background-color: white;
+    color: gray;
+    border-radius: 5px;
+}
+
+.grayWhite .mdc-floating-label--float-above {
+    background-color: gray;
+    color: #fff;
+    padding: 5px;
+}
+
+.grayWhite .fleidLabel,
+.grayWhite .fieldGroup {
+    color: black;
+}
+
+.buttonPart {
+    background-color: #fff;
+}
+
+.mailField input {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)!important;
+}
+
+button {
+    width: 120px;
+    height: 50px;
+}
+
+.table-container {
+    /* border-radius: 10px; */
+    box-shadow: none;
+}
+
+.mat-mdc-paginator {
+    border-radius: 0px 0px 10px 10px;
+}
+
+.fleidLabel {
+    font-weight: 600;
+    word-wrap: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.mat-mdc-table {
+    white-space: nowrap !important;
+}
+
+.mdc-data-table__header-cell {
+    overflow: visibles !important;
+}
+
+.form .mat-mdc-form-field-infix {
+    min-height: 40px !important;
+    height: 40px !important;
+    padding: 12px 0px !important;
+}
+
+.noBorderButton {
+    border: 0px none;
+}
+
+.vChips .mdc-evolution-chip-set__chips {
+    flex-direction: column;
+}
+
+.tilHeader  .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+    height: 45px;
+}
+
+.tilHeader .mat-mdc-standard-chip:not(.mat-mdc-chip-selected) {
+    background-color: #fff;
+    color: #fff;
+}
+
+
+.deployit .tabSelectionOption>span.selected, .menuPart .selected {
+    background-color: #c8252c !important;
+    color: #fff;
+}
+
+.deployit .header,
+.deployit button,
+.deployit .tableHeader h4 {
+    color:black!important;
+}
+
+.mdc-checkbox__native-control:checked~.mdc-checkbox__background {
+    background-color: #c8252c !important;
+}
+
+.mdc-checkbox__background {
+    border-color: #c8252c !important;
+}
+
+/* .tabSelectionOption .selected {
+    border-bottom: 4px solid darkgrey !important;
+} */
+
+.mat-drawer-content {
+    background-color: #fff;
+}
+
+.ql-container {
+    height: 235px;
+    overflow: auto;
+}
+
+.poEditor .ql-container {
+    height: calc(100% - 50px) !important;
+}
+
+.toggleIcon {
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    top: 13px;
+    left: 0px;
+    cursor: pointer;
+    background-color: #c8252c;
+    color: #ffff;
+    z-index: 1;
+    line-height: 5px;
+    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+}
+
+.toggleIcon.opened {
+    transform: rotate(180deg);
+}
+
+.mat-mdc-progress-spinner {
+    stroke: #6495ED;
+}
+
+.example-element-diagram {
+    height: auto !important;
+    border: 0px none !important;
+}
+
+.ib_title1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    letter-spacing: -.04em;
+}
+
+.ib_title2 {
+    font-size: 1.3125rem;
+    font-weight: 600;
+    letter-spacing: -.02em;
+}
+
+.ib_decription {
+    font-size: .875rem;
+}
+
+.ib_count {
+    font-size: .9375rem;
+}
+
+.ib_countText {
+    font-size: .75rem;
+}
+
+.ib_text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ib_bgPlatelate {
+    background-color: rgba(var(--palette-neutral-2, 248, 248, 248), 1);
+}
+
+.ib_chips {
+    box-shadow: 0 3.2px 7.2px 0 var(--callout-shadow-color, rgba(0, 0, 0, .132)), 0 .6px 1.8px 0 var(--callout-shadow-secondary-color, rgba(0, 0, 0, .108));
+    background-color: #fff;
+}
+
+.ConfigList span.selected {
+    background-color: #c8252c !important;
+    color: #fff !important;
+}
+
+.ib_brands {
+    box-shadow: 0 3.2px 7.2px 0 var(--callout-shadow-color, rgba(0, 0, 0, .132)), 0 .6px 1.8px 0 var(--callout-shadow-secondary-color, rgba(0, 0, 0, .108));
+}
+
+/* .headerPart,
+.projectHeader h4,
+.TechAreaTitleBar h3,
+.templateHeader {
+    color: #c8252c;
+} */
+
+.sonic_theme .sideNav {
+    background-color: rgb(0, 137, 216);
+}
+
+.sonic_theme .fullTile,
+.sonic_theme .halfTile,
+.sonic_theme .tabBody,
+.sonic_theme .lightGray {
+    background-color: #f0f0f0;
+}
+
+.sonic_theme .sideNavConten {
+    background-color: rgba(116, 210, 231, .15);
+}
+
+.sonic_theme .menuPart button {
+    color: #fff !important;
+}
+
+.sonic_theme .selectedTab {
+    background-color: rgb(0, 137, 216);
+    color: #fff;
+}
+
+/* .sonic_theme .tileShortcut:hover {
+    background-color:  rgb(0, 137, 216);
+    color: #fff;
+} */
+
+/* .sonic_theme .sideNavContent{
+    background-color: #E6F6F7;
+} */
+
+.sonic_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary{
+    background-color: rgb(0, 137, 216)!important;
+}
+
+.sonic_theme a.active {
+    border-bottom: 5px solid rgb(0, 137, 216);
+}
+
+.buffalo_theme .sideNav {
+    background-color: #FFC600;
+}
+
+.buffalo_theme .fullTile,
+.buffalo_theme .halfTile,
+.buffalo_theme .tabBody,
+.buffalo_theme .lightGray {
+    background-color: #f0f0f0;
+}
+
+
+.buffalo_theme .selectedTab {
+    background-color: #382E2C;
+    color: #fff;
+}
+
+.buffalo_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary{
+    background-color: #FFC600!important;
+}
+
+/* .buffalo_theme .sideNavContent{
+    background-color: #E3E1DB;
+} */
+
+.buffalo_theme a.active {
+    border-bottom: 5px solid #382E2C;
+}
+
+/* .buffalo_theme .tileShortcut:hover {
+    background-color: #E3E1DB;
+    color: #fff;
+} */
+
+.arby_theme a.active {
+    border-bottom: 5px solid rgb(0, 137, 216);
+}
+
+.arby_theme .sideNav {
+    background-color: #ECECEC;
+}
+
+.arby_theme .fullTile,
+.arby_theme .halfTile,
+.arby_theme .tabBody,
+.arby_theme .lightGray {
+    background-color: #f0f0f0;
+}
+
+
+.arby_theme .selectedTab {
+    background-color: #DC0032;
+    color: #fff;
+}
+
+.arby_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary{
+    background-color: #ECECEC!important;
+}
+
+/* .buffalo_theme .sideNavContent{
+    background-color: #E3E1DB;
+} */
+
+.arby_theme a.active {
+    border-bottom: 5px solid #382E2C;
+}

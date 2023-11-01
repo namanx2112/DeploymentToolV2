@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DeploymentTool.Model
 {
-    public class Dropdown : ModelParent
+    public class Dropdown : IModelParent
     {
         public int nBrandId { get; set; }
         public int nModuleId { get; set; }

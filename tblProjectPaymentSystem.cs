@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectPaymentSystem : Misc.ModelParent
+    public partial class tblProjectPaymentSystem : Misc.IModelParent
     {
         public int aProjectPaymentSystemID { get; set; }
         public Nullable<int> nProjectID { get; set; }

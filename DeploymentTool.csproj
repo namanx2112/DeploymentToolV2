@@ -1010,7 +1010,7 @@
     <Compile Include="IImportables.cs" />
     <Compile Include="Misc\AESEncryption.cs" />
     <Compile Include="Misc\Constants.cs" />
-    <Compile Include="Misc\ModelParent.cs" />
+    <Compile Include="Misc\IModelParent.cs" />
     <Compile Include="Misc\TraceUtility.cs" />
     <Compile Include="Misc\Utilities.cs" />
     <Compile Include="ModelDTool.Context.cs">

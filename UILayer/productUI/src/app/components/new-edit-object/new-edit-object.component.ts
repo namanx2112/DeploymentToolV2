@@ -13,6 +13,7 @@ import { DialogControlsComponent } from '../dialog-controls/dialog-controls.comp
 import { PartsService } from 'src/app/services/parts.service';
 import { AccessService } from 'src/app/services/access.service';
 import { CommonService } from 'src/app/services/common.service';
+import { UploadItemsComponent } from '../upload-items/upload-items.component';
 
 @Component({
   selector: 'app-new-edit-object',
@@ -139,7 +140,7 @@ export class NewEditObjectComponent {
       case TabType.Users:
         let tOptions = this.commonService.GetDropdownOptions(this.nBrandId, "UserRole");
         let brandOptions = this.commonService.GetDropdownOptions(this.nBrandId, "Brand");
-        vals["rBrandID"] = [1,2,3,4,5,6];
+        vals["rBrandID"] = [1, 2, 3, 4, 5, 6];
         if (this.curTab.tab_type == TabType.Vendor) {
           let cOption = tOptions.find(x => x.tDropdownText == "Vendor");
           if (cOption)
@@ -155,6 +156,17 @@ export class NewEditObjectComponent {
         break;
     }
     return vals;
+  }
+
+  getParentInstanceId(tTab: HomeTab) {
+    let nInstanceId = 0;
+    switch (tTab.tab_type) {
+      case TabType.VendorParts:
+      case TabType.Users:
+        nInstanceId = parseInt(this._controlValues["aVendorId"]);
+        break;
+    }
+    return nInstanceId;
   }
 
   getChildRefreshFlag(tabName: string) {
@@ -182,6 +194,37 @@ export class NewEditObjectComponent {
       }
     }
     return tFields;
+  }
+
+  uploadTab(cTab: HomeTab) {
+    let cthis = this;
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxHeight = '90vh';
+    dialogConfig.width = '60%';
+    let tVals = this.updateChildProperties(cTab, (typeof this._controlValues[cTab.tab_name] != 'undefined') ? this._controlValues[cTab.tab_name] : {});
+    dialogConfig.data = {
+      title: cTab.tab_header,
+      curTab: cTab,
+      curBrandId: 0,//NeedToChange
+      nInstanceId: cthis.getParentInstanceId(cTab),
+      afterImport: function (data: any) {
+        delete cthis._controlValues[cTab.tab_name];
+        cthis.refreshChildTable[cTab.tab_name] = new Date();
+        dialogRef.close();
+      },
+      onClose: function (ev: any) {
+        dialogRef.close();
+      },
+      themeClass: "grayWhite",
+      dialogTheme: "lightGrayWhiteTheme"
+    };
+    dialogRef = this.dialog.open(UploadItemsComponent, dialogConfig);
+    // dialogRef.afterClosed().subscribe(result => {
+    //   //console.log(`Dialog result: ${result}`);
+    //   let t = result;
+    // });
   }
 
   editChildTab(cTab: HomeTab, isNew: boolean) {

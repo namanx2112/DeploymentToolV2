@@ -77,16 +77,27 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Import(VendorParts partsRequest)
+        public async Task<IHttpActionResult> Import(List<VendorPartsImportModel> partsRequest)
         {
-            tblPart tParts = partsRequest.GetTblParts();
-            db.tblParts.Add(tParts);
-            await db.SaveChangesAsync();
-            // Add into tblVendorPartRel
-            partsRequest.aPartID = tParts.aPartID;
-            db.tblVendorPartRels.Add(partsRequest.GetTblVendorPartRel(partsRequest));
-            await db.SaveChangesAsync();
+            try
+            {
+                foreach (VendorPartsImportModel tObject in partsRequest)
+                {
+                    if (tObject.isExist)
+                    {
+                        VendorParts tRequest = (VendorParts)tObject.GetMyTblModel();
+                        //update
+                    }
+                    else
+                    {
+                        //Create
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
 
+            }
 
             return Json(partsRequest);
         }
@@ -121,30 +132,48 @@ namespace DeploymentTool.Controller
     {
         public List<IImportModel> Import(string strPath, int nBrandId, int nInstanceId)
         {
-            List<IImportModel> items = Utilities.ConvertExcelReaderToImportableModel(strPath, new VendorPartsImportModel());
+            List<IImportModel> items = Utilities.ConvertExcelReaderToImportableModel(strPath, new VendorPartsImportModel(), nInstanceId);
             return items;
         }
     }
 
     public class VendorPartsImportModel : IImportModel
     {
+        private dtDBEntities db = new dtDBEntities();
         private List<string> excelColumns = new List<string>()
         {
             "Parts Description", "Parts Number", "Parts Price"
         };
+
+        public int nVendorId { get; set; }
+        public int aPartID { get; set; }
         public string tPartDesc { get; set; }
         public string tPartNumber { get; set; }
         public Nullable<decimal> cPrice { get; set; }
 
         public bool isExist { get; set; }
 
-        public IImportModel GetFromExcel(IExcelDataReader reader)
+        public IImportModel GetFromExcel(IExcelDataReader reader, int instanceId)
         {
             tPartDesc = excelColumns.IndexOf("Parts Description") > -1 ? reader.GetValue(excelColumns.IndexOf("Parts Description")).ToString() : "";
             tPartNumber = excelColumns.IndexOf("Parts Number") > -1 ? reader.GetValue(excelColumns.IndexOf("Parts Number")).ToString() : "";
             cPrice = excelColumns.IndexOf("Parts Price") > -1 ? Convert.ToDecimal(reader.GetValue(excelColumns.IndexOf("Parts Price")).ToString()) : 0;
+            nVendorId = instanceId;
             isExist = false;
+            aPartID = 11;// Get Part Id from DB
             return this;
+        }
+
+        public IModelParent GetMyTblModel()
+        {
+            return new VendorParts()
+            {
+                aPartID = this.aPartID,
+                tPartDesc = this.tPartDesc,
+                tPartNumber = this.tPartNumber,
+                cPrice = this.cPrice,
+                nVendorId = this.nVendorId
+            };
         }
     }
 }

@@ -34,7 +34,7 @@
                     Handheld Installation</button>
             </mat-menu>
             <button mat-button *ngIf="access.hasAccess('home.sonic.searchproject', 1)"
-                (click)="menuClick('search')" [className]="configMenu=='search'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>search</mat-icon>Search Project</button>
+                (click)="menuClick('search')" [className]="configMenu=='search'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>search</mat-icon>Search</button>
             <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)"
                 (click)="menuClick('importproject')" [className]="configMenu=='importproject'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>attach_file</mat-icon>Import Project</button>
         </div>

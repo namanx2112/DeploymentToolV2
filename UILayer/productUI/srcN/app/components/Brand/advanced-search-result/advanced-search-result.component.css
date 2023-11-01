@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid lightgray;
+  }
+  
+  .header {
+    height: 40px;
+    width: 100%;
+    line-height: 35px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .header .mat-icon {
+    height: auto;
+    line-height: 16px;
+    cursor: pointer;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  
+  .reportBody {
+  }
+  .openItem{
+    cursor: pointer;
+    text-decoration: underline;
+  }

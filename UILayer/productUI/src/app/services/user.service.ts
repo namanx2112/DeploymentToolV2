@@ -29,8 +29,8 @@ export class UserService {
     return this.http.get<UserModel>(CommonService.ConfigUrl + "User/Delete?id=" + request.aUserID, { headers: this.cacheService.getHttpHeaders() });
   }
 
-  
-  GetTableVisibleColumns(){
+
+  GetTableVisibleColumns() {
     return [
       "tName",
       "tUserName",
@@ -110,7 +110,7 @@ export class UserService {
       validator: [],
       mandatory: false,
       hidden: true
-    },    
+    },
     {
       field_name: "Franchise Id",
       fieldUniqeName: "nFranchiseId",
@@ -134,13 +134,13 @@ export class UserService {
       validator: [],
       mandatory: false,
       hidden: false
-    },{
+    }, {
       field_name: "User access",
       fieldUniqeName: "nAccess",
       defaultVal: "2",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.dropdown,      
+      field_type: FieldType.dropdown,
       options: this.commonService.GetDropdown("UserAccessTypes"),
       field_placeholder: "Select User Access",
       conditionals: {
@@ -176,25 +176,25 @@ export class UserService {
       validator: [Validators.email],
       mandatory: false,
       hidden: false
-    },{
+    }, {
       field_name: "Department",
       fieldUniqeName: "nDepartment",
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.dropdown,      
+      field_type: FieldType.dropdown,
       options: this.commonService.GetDropdown("UserDepartment"),
       field_placeholder: "Enter User Department",
       validator: [],
       mandatory: false,
       hidden: false
-    },{
+    }, {
       field_name: "Role",
       fieldUniqeName: "nRole",
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.dropdown,      
+      field_type: FieldType.dropdown,
       options: this.commonService.GetDropdown("UserRole"),
       field_placeholder: "Enter User Role",
       validator: [],
@@ -220,7 +220,7 @@ export class UserService {
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.number,      
+      field_type: FieldType.number,
       field_placeholder: "Enter User Emp Id",
       validator: [],
       mandatory: false,
@@ -232,7 +232,7 @@ export class UserService {
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.text,      
+      field_type: FieldType.text,
       field_placeholder: "Enter User Mobile Number",
       validator: [],
       mandatory: false,

@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectSonicRadio : Misc.ModelParent
+    public partial class tblProjectSonicRadio : Misc.IModelParent
     {
         public int aProjectSonicRadioID { get; set; }
         public Nullable<int> nProjectID { get; set; }

@@ -38,7 +38,9 @@ export class HomeService {
       search_fields: this.partsService.GetSearchFields(),
       fields: this.partsService.GetFields(),
       instanceType: instType,
-      childTabs: []
+      childTabs: [],
+      my_service: this.partsService,
+      needImport: true
     };
   }
 
@@ -52,7 +54,9 @@ export class HomeService {
       search_fields: this.userSerice.GetSearchFields(),
       fields: this.userSerice.GetFields(needAccess),
       instanceType: instType,
-      childTabs: []
+      childTabs: [],
+      my_service: this.userSerice,
+      needImport: false
     };
   }
   
@@ -66,7 +70,9 @@ export class HomeService {
       search_fields: this.brandService.GetSearchFields(),
       fields: this.brandService.GetFields(),
       instanceType: instType,
-      childTabs: []
+      childTabs: [],
+      my_service: this.brandService,
+      needImport: false
     };
   }
   
@@ -83,7 +89,9 @@ export class HomeService {
       childTabs: [
 this.GetUsersTab(TabInstanceType.Table, true),
 this.GetPartsTab(TabInstanceType.Table)
-      ]
+      ],
+      my_service: this.vendorService,
+      needImport: false
     };
   }
   
@@ -97,7 +105,9 @@ this.GetPartsTab(TabInstanceType.Table)
       search_fields: this.techComponentService.GetSearchFields(),
       fields: this.techComponentService.GetFields(),
       instanceType: instType,
-      childTabs: []
+      childTabs: [],
+      my_service: this.techComponentService,
+      needImport: false
     };
   }
   
@@ -111,7 +121,9 @@ this.GetPartsTab(TabInstanceType.Table)
       search_fields: this.franchiseSerice.GetSearchFields(),
       fields: this.franchiseSerice.GetFields(),
       instanceType: instType,
-      childTabs: [this.GetUsersTab(TabInstanceType.Table, true)]
+      childTabs: [this.GetUsersTab(TabInstanceType.Table, true)],
+      my_service: this.franchiseSerice,
+      needImport: true
     };
   }
   
@@ -147,7 +159,9 @@ this.GetPartsTab(TabInstanceType.Table)
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      }]
+      }],
+      my_service: "",
+      needImport: true
     };
   }
   
@@ -183,7 +197,9 @@ this.GetPartsTab(TabInstanceType.Table)
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      }]
+      }],
+      my_service: "",
+      needImport: false
     };
   }
   
@@ -197,7 +213,9 @@ this.GetPartsTab(TabInstanceType.Table)
       instanceType: instType,
       search_fields: [],
       fields: [],
-      childTabs: []
+      childTabs: [],
+      my_service: "",
+      needImport: false
     };
   }
 

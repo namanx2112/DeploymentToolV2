@@ -9,6 +9,7 @@
         <div class="tBody grayWhiteTheme" *ngIf="access.hasAccess('home.configuration.' + tTab.tab_name, 0)">
             <div class="tableHeader">
                 <h4>{{tTab.tab_name}}</h4> <button (click)="editChildTab(tTab, true)">Add New</button>
+                <mat-icon *ngIf="tTab.needImport" matTooltip="Upload" class="uploadIcon" (click)="uploadTab(tTab)">cloud_upload</mat-icon>
             </div>
             <div class="tables" *ngIf="childSearchFields != undefined">
                 <app-table [curTab]="tTab" [searchFields]="childSearchFields[tTab.tab_name]"

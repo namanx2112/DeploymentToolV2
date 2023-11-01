@@ -67,8 +67,8 @@ export class AdvancedSearchComponent {
 
   getStoreTable() {
     let tProjTypes = this.selectedProjects.join(",");
-    let dtStart = (this.campaignOne.controls['start'].valid) ? this.campaignOne.controls['start'].value : null;
-    let dtEnd = (this.campaignOne.controls['end'].valid) ? this.campaignOne.controls['end'].value : null;
+    let dtStart = (this.campaignOne.controls['start'].valid) ? CommonService.getFormatedDateStringForDB(this.campaignOne.controls['start'].value) : null;
+    let dtEnd = (this.campaignOne.controls['end'].valid) ? CommonService.getFormatedDateStringForDB(this.campaignOne.controls['end'].value) : null;
     let tVendor = this.selectedVendors.join(",");
     let tFranchise = this.selectedFranchise.join(",");
     let tCity = this.selectedCity;

@@ -10,7 +10,9 @@ export interface HomeTab {
     fields: Fields[],
     childTabs: HomeTab[],
     instanceType: TabInstanceType,
-    done?:boolean
+    done?:boolean,
+    my_service: any,
+    needImport: boolean
 }
 
 export enum TabInstanceType {
@@ -41,6 +43,7 @@ export interface Fields {
     options?: string,
     dropDownOptions?: OptionType[],
     hidden: boolean,
+    forImport?: boolean,
     relations?: HomeTab[]
 }
 

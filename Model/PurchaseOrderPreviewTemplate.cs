@@ -7,7 +7,7 @@ using System.Web;
 
 namespace DeploymentTool.Model
 {
-    public class PurchaseOrderPreviewTemplate : Misc.ModelParent
+    public class PurchaseOrderPreviewTemplate : Misc.IModelParent
     {
         public int nProjectId { get; set; }
         public int aPurchaseOrderPreviewTeamplateID { get; set; }

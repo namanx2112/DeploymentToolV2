@@ -26,6 +26,10 @@ export class PartsService {
     return this.http.post<PartsModel>(CommonService.ConfigUrl + "VendorParts/Create", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  Import(request: any[]) {
+    return this.http.post<any[]>(CommonService.ConfigUrl + "VendorParts/Import", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
   Update(request: any) {
     return this.http.post<PartsModel>(CommonService.ConfigUrl + "VendorParts/Update", request, { headers: this.cacheService.getHttpHeaders() });
   }
@@ -80,6 +84,7 @@ export class PartsService {
     {
       field_name: "Parts Description",
       fieldUniqeName: "tPartDesc",
+      forImport: true,
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -91,6 +96,7 @@ export class PartsService {
     }, {
       field_name: "Parts Number",
       fieldUniqeName: "tPartNumber",
+      forImport: true,
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -103,6 +109,7 @@ export class PartsService {
     {
       field_name: "Parts Price",
       fieldUniqeName: "cPrice",
+      forImport: true,
       defaultVal: "",
       readOnly: false,
       invalid: false,

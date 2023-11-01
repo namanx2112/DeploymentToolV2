@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectInteriorMenu : Misc.ModelParent
+    public partial class tblProjectInteriorMenu : Misc.IModelParent
     {
         public int aProjectInteriorMenuID { get; set; }
         public Nullable<int> nProjectID { get; set; }

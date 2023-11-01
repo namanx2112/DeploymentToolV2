@@ -13,7 +13,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblStore: ModelParent
+    public partial class tblStore: IModelParent
     {
         public int aStoreID { get; set; }
         public string tStoreNumber { get; set; }

@@ -25,7 +25,7 @@ namespace DeploymentTool.Model
         public tblProjectInteriorMenu tblProjectInteriorMenus { get; set; }
         public tblProjectSonicRadio tblProjectSonicRadio { get; set; }
     }
-    public class NewProjectStore : ModelParent
+    public class NewProjectStore : IModelParent
     {
         public int nProjectType { get; set; }
         public tblProjectStakeHolder tStakeHolder { get; set; }

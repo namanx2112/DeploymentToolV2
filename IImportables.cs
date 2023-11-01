@@ -1,4 +1,5 @@
-﻿using ExcelDataReader;
+﻿using DeploymentTool.Misc;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace DeploymentTool
 
     public interface IImportModel
     {
-        IImportModel GetFromExcel(IExcelDataReader reader);
+        IImportModel GetFromExcel(IExcelDataReader reader, int instanceId);
+        IModelParent GetMyTblModel();
     }
 }

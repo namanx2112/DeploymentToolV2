@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectServerHandheld: Misc.ModelParent
+    public partial class tblProjectServerHandheld: Misc.IModelParent
     {
         public int aServerHandheldId { get; set; }
         public Nullable<int> nVendor { get; set; }

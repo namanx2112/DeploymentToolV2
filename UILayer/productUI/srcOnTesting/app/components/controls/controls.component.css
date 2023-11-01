@@ -55,7 +55,7 @@
 .dollarSymbolReadOnly{
     font-size: 14px;
     float: left;
-    margin-top: -1px;
+    margin-top: 0px;
     margin-left: 0px;
     font-weight: bold;
 }
@@ -70,6 +70,7 @@
 }
 
 .readOnlyControl {
+    font-size: 14px;
     float: right;
     width: 50%;
     overflow: hidden;

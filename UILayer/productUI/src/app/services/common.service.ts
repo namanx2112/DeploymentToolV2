@@ -18,7 +18,7 @@ export class CommonService {
   static dropdownCache: any;
   static ddMonthString: string = "[Day/Month]";
   static allBrands: any;
-  static pKey = [100, 101, 112, 108, 117, 116, 105, 111, 110];
+  static pKey = [100,101,112,108,117,116,105,111,110];
   noNeedBlankDropDown: string[] = ["UserRole", "Brand"];
   constructor(private cacheService: CacheService, private ddService: DropdownServiceService) {
 
@@ -46,11 +46,11 @@ export class CommonService {
     }
   }
 
-  static getKey() {
+  static getKey(){
     return new TextDecoder().decode(new Uint8Array(CommonService.pKey)).toString()
   }
-
-  static getHashed(strVal: string) {
+  
+  static getHashed(strVal: string){
     return sha256.hmac(CommonService.getKey(), strVal);
   }
 
@@ -284,6 +284,10 @@ export class CommonService {
       bDeleted: false,
       nFunction: 0
     }];;
+  }
+
+  formatCurrancyString(cuString: string){
+    return cuString.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   static getUserAccessTypes() {

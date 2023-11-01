@@ -147,7 +147,9 @@ export class NotesService {
         validator: [Validators.required],
         mandatory: false,
         hidden: false
-      }]
+      }],
+      my_service: "",
+      needImport: false
     };
   }
 }

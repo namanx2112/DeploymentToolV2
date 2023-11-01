@@ -29,7 +29,7 @@ namespace DeploymentTool.Misc
 {
     public class Utilities
     {
-        public static void SetHousekeepingFields(bool create, HttpContext context, ModelParent objRef)
+        public static void SetHousekeepingFields(bool create, HttpContext context, IModelParent objRef)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace DeploymentTool.Misc
             }
         }
 
-        public static void SetActiveProjectId(ProjectType pType, int? nStoreId, ModelParent objRef)
+        public static void SetActiveProjectId(ProjectType pType, int? nStoreId, IModelParent objRef)
         {
             try
             {
@@ -307,7 +307,7 @@ namespace DeploymentTool.Misc
             }
         }
 
-        public static List<IImportModel> ConvertExcelReaderToImportableModel(string strFilePath, IImportModel tModel)
+        public static List<IImportModel> ConvertExcelReaderToImportableModel(string strFilePath, IImportModel tModel, int instanceId)
         {
             //  
             List<IImportModel> items = new List<IImportModel>();
@@ -325,7 +325,7 @@ namespace DeploymentTool.Misc
                                 reader.Read();
                                 while (reader.Read())
                                 {
-                                    items.Add(tModel.GetFromExcel(reader));
+                                    items.Add(tModel.GetFromExcel(reader, instanceId));
                                 }
                             } while (reader.NextResult());
                         }
