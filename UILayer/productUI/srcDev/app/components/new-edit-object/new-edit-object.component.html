@@ -1,0 +1,22 @@
+<div class="tBody grayWhiteTheme">
+    <app-controls *ngIf="access.hasAccess('home.configuration.' + curTab.tab_name, 1)" [request]="{fields: curTab.fields, needButton: true, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+        controlValues: controlValues, SubmitLabel: SubmitLabel,
+            readOnlyForm: false,CloseLabel: 'Cancel', nBrandId: 0}" (onSubmit)="onSubmit($event, curTab)"
+        (onClose)="onCloseClicked($event)"></app-controls>
+</div>
+<div *ngIf="isEditMode(curTab, controlValues)" class="childItems">
+    <ng-container *ngFor="let tTab of curTab.childTabs; let index = index">
+        <div class="tBody grayWhiteTheme" *ngIf="access.hasAccess('home.configuration.' + tTab.tab_name, 0)">
+            <div class="tableHeader">
+                <h4>{{tTab.tab_name}}</h4> <button (click)="editChildTab(tTab, true)">Add New</button>
+                <mat-icon *ngIf="tTab.needImport" matTooltip="Upload" class="uploadIcon" (click)="uploadTab(tTab)">cloud_upload</mat-icon>
+            </div>
+            <div class="tables" *ngIf="childSearchFields != undefined">
+                <app-table [curTab]="tTab" [searchFields]="childSearchFields[tTab.tab_name]"
+                    [clickCol]="access.hasAccess('home.configuration.' + tTab.tab_name, 1) ? '' : 'not'"
+                    [refreshMe]="getChildRefreshFlag(tTab.tab_name)"
+                    (rowClicked)="rowClicked($event, tTab)" [nBrandId]="0"></app-table>
+            </div>
+        </div>
+    </ng-container>
+</div>

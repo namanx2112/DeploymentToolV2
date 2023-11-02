@@ -1,0 +1,44 @@
+<div *ngIf="fullView" class="outerDiv">
+    <h3>Notification</h3>
+    <div class="filterButton">
+        <mat-button-toggle-group class="buttonGroup" [(ngModel)]="filter" aria-label="Font Style"
+            (change)="filterChange($event)">
+            <mat-button-toggle value="All">All</mat-button-toggle>
+            <mat-button-toggle value="Unread">Unread</mat-button-toggle>
+            <mat-button-toggle value="Read">Read</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div class="nTable lightGray">
+        <h5>New</h5>
+        <div *ngFor="let item of news" class="nItem">
+            <span class="icon" (click)="readMe(item)"
+                matTooltip="Click to read"><mat-icon>{{item.tIcon}}</mat-icon></span>
+            <div class="nBody">
+                <div class="bodyText">{{item.tNotification}}</div>
+                <span class="nTime">{{getTime(item.dCreatedOn)}}</span>
+            </div>
+        </div>
+        <h5>Earlier</h5>
+        <div *ngFor="let item of olds" class="nItem">
+            <span class="icon" (click)="readMe(item)"
+                matTooltip="Click to read"><mat-icon>{{item.tIcon}}</mat-icon></span>
+            <div class="nBody">
+                <div class="bodyText">{{item.tNotification}}</div>
+                <span class="nTime">{{getTime(item.dCreatedOn)}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!fullView">
+    <div *ngFor="let item of firstFew" class="nItem">
+        <span class="icon" (click)="readMe(item)" matTooltip="Click to read"><mat-icon>{{item.tIcon}}</mat-icon></span>
+        <div class="nBody">
+            <div class="bodyText">{{item.tNotification}}</div>
+            <span class="nTime">{{getTime(item.dCreatedOn)}}</span>
+            <a *ngFor="let inst of item.arrInstances;let index = index" (click)="openItem(inst)"
+                matTooltip="Click to view store" class="clickable"><span
+                    *ngIf="index > 0 && index < (item.arrInstances.length - 1)">,</span> {{inst}} </a>
+        </div>
+    </div>
+    <app-no-items *ngIf="firstFew.length == 0"></app-no-items>
+</div>

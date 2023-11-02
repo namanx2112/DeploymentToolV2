@@ -2,8 +2,8 @@
     <ng-container *ngFor="let curControl of fields; let index = index">
         <h4 *ngIf="showGroupHeader(curControl)" class="fieldGroup">{{groupLabel}}</h4>
         <div [ngClass]="getLabelClass(curControl)">
-            <mat-label *ngIf="(curControl.field_type != 11) && (curControl.icon == undefined || curControl.icon == '')"
-                class="fleidLabel" [attr.for]="curControl.field_name">{{curControl.field_name}}</mat-label>
+            <mat-label *ngIf="(curControl.field_type != 11) && (curControl.icon == undefined || curControl.icon == '')" class="fleidLabel"
+                [attr.for]="curControl.field_name">{{curControl.field_name}}</mat-label>
             <span class="readOnlyControl" *ngIf="(readOnlyForm || curControl.readOnly)"><span
                     *ngIf="curControl.field_type == 8" matPrefix
                     class="dollarSymbolReadOnly">$&nbsp;</span>{{getReadOnlyVal(curControl,
@@ -11,13 +11,9 @@
             <mat-form-field appearance="outline" *ngIf="!(curControl.readOnly || readOnlyForm) && (curControl.field_type == 0 || curControl.field_type == 1 || 
             curControl.field_type == 3 || 
                 curControl.field_type == 5 || curControl.field_type == 8 || curControl.field_type == 9)">
-                <input matInput *ngIf="!curControl.readOnly && curControl.field_type != 8"
-                    placeholder="{{curControl.field_placeholder}}" [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 3) ? 'time' : 
-                    (curControl.field_type == 5)? 'number' : 'password'"
+                <input matInput *ngIf="!curControl.readOnly" placeholder="{{curControl.field_placeholder}}" [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 3) ? 'time' : 
+                    (curControl.field_type == 5 || curControl.field_type == 8)? 'number' : 'password'"
                     formControlName="{{curControl.fieldUniqeName}}" [ngModel]="controlValues[curControl.fieldUniqeName]"
-                    (keydown)="onKeydown($event)">
-                <input matInput *ngIf="!curControl.readOnly && curControl.field_type == 8" [inputMask]="currencyInputMask" 
-                    placeholder="$ 0.00" formControlName="{{curControl.fieldUniqeName}}" [ngModel]="controlValues[curControl.fieldUniqeName]"
                     (keydown)="onKeydown($event)">
                 <span *ngIf="curControl.field_type == 8" matPrefix class="dollarSymbol">$&nbsp;</span>
                 <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon>

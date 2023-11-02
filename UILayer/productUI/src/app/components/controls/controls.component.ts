@@ -9,7 +9,6 @@ import { Fields, FieldType, HomeTab, OptionType } from 'src/app/interfaces/home-
 import * as _moment from 'moment';
 import { Moment } from 'moment';
 import { CommonService } from 'src/app/services/common.service';
-import { createMask } from '@ngneat/input-mask';
 
 const moment = _moment;
 
@@ -52,6 +51,7 @@ export class ControlsComponent implements AfterViewChecked {
     this.CloseLabel = val.CloseLabel;
     this.nBrandId = val.nBrandId;
     this.exButtonLabel = val.exButtonLabel;
+    this.fieldRestrictions = val.fieldRestrictions;
     this.loadFields();
     this.loadValues();
   }
@@ -73,14 +73,7 @@ export class ControlsComponent implements AfterViewChecked {
   regexPattern =
     /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/gi;
   nBrandId: number;
-  currencyInputMask = createMask({
-    alias: 'numeric',
-    groupSeparator: ',',
-    digits: 2,
-    digitsOptional: false,
-    prefix: '',
-    placeholder: '0',
-  });
+  fieldRestrictions: any;
   constructor(private readonly changeDetectorRef: ChangeDetectorRef, private datePipe: DatePipe, private dateAdapter: DateAdapter<Date>, public commonService: CommonService) {
     this.formControls = {};
     this.fieldClass = "curField";
@@ -110,6 +103,9 @@ export class ControlsComponent implements AfterViewChecked {
         if (typeof tField.dropDownOptions == 'undefined') {
           tField.dropDownOptions = this.commonService.GetDropdownOptions(this.nBrandId, tField.options);
         }
+      }
+      if (typeof this.fieldRestrictions != 'undefined' && this.fieldRestrictions[tField.fieldUniqeName]) {
+        tField.readOnly = (this.fieldRestrictions[tField.fieldUniqeName] == 1) ? true : false;
       }
     }
   }
@@ -162,12 +158,9 @@ export class ControlsComponent implements AfterViewChecked {
     else if (field.field_type == FieldType.date) {
       sVal = CommonService.getFormatedDateString(val);
     }
-    else if (field.field_type == FieldType.currency) {
-      sVal = this.commonService.formatCurrancyString(val);
-    }
     return sVal;
   }
-
+ 
   hasEror(cControl: Fields): boolean {
     let has = false;
     let control = this.formGroup.get(cControl.fieldUniqeName);

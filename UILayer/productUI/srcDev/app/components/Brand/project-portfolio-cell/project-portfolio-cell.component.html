@@ -1,0 +1,122 @@
+<div *ngIf="tColumn == 'store'" class="cellDiv">
+    <table class="storeDetails">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    <span>{{
+                        jObject.tStoreDetails}}</span><span (click)="openItem(jObject.tStoreNumber)" class="clickable"
+                        matTooltip="Click to view store">#{{getStoreNumber(jObject)}}</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="labelTD">Type:</td>
+                <td>{{jObject.tProjectType}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Franchise:</td>
+                <td>{{jObject.tFranchise}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Project Manager:</td>
+                <td>{{jObject.tProjectManager}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Install:</td>
+                <td>{{getCellVal('dInstallDate', jObject.dInstallDate)}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Go Live:</td>
+                <td>{{getCellVal('dtGoliveDate', jObject.dtGoliveDate)}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Project Cost:</td>
+                <td>${{jObject.cCost}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="jObject &&  (tColumn == 'serverhandheld' || tColumn == 'networking' || tColumn == 'pos' || tColumn == 'audio' || tColumn == 'exteriormenu' || tColumn == 'paymentsystem' || tColumn == 'interiormenu'
+ || tColumn == 'sonicradio' || tColumn == 'installation')" class="cellDiv">
+    <table class="storeDetails" *ngIf="tColumn == 'serverhandheld' || tColumn == 'pos' || tColumn == 'networking' || tColumn == 'exteriormenu' || tColumn == 'paymentsystem' || tColumn == 'interiormenu'
+    || tColumn == 'sonicradio'">
+        <tbody>
+            <tr>
+                <td class="labelTD">Vendor:</td>
+                <td>{{ jObject.tVendor}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Delivery:</td>
+                <td>{{getCellVal('dtDate', jObject.dtDate)}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Status:</td>
+                <td>{{jObject.tStatus}}</td>
+            </tr>
+            <!-- <tr>
+                <td>Cost</td>
+                <td>{{jObject.cCost}}</td>
+            </tr> -->
+        </tbody>
+    </table>
+    <table class="storeDetails" *ngIf="tColumn == 'audio'">
+        <tbody>
+            <tr>
+                <td class="labelTD">Vendor:</td>
+                <td>{{ jObject.tVendor}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Loop Status:</td>
+                <td>{{jObject.tLoopStatus}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Delivery:</td>
+                <td>{{getCellVal('dtDate', jObject.dtDate)}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Loop:</td>
+                <td>{{jObject.tLoopType}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Status:</td>
+                <td>{{jObject.tStatus}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="storeDetails" *ngIf="tColumn == 'installation'">
+        <tbody>
+            <tr>
+                <td class="labelTD">Installer:</td>
+                <td>{{ jObject.tVendor}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Date:</td>
+                <td>{{getCellVal('dtDate', jObject.dtDate)}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">End Date:</td>
+                <td>{{getCellVal('dInstallEndDate', jObject.dInstallEndDate)}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">SignOffs:</td>
+                <td>{{jObject.tSignoffs}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Status:</td>
+                <td>{{jObject.tStatus}}</td>
+            </tr>
+            <tr>
+                <td class="labelTD">Test Transactions:</td>
+                <td>{{jObject.tTestTransactions}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="tColumn == 'notes'" class="cellDiv noteCell">
+    <div *ngFor="let item of jObject">
+        <span class="nHeader">{{ item.tNotesOwner}}</span>
+        <span class="nBody" [matTooltip]="item.tNotesDesc">{{ (item.tNotesDesc.length > 80)?
+            item.tNotesDesc.substring(0, 80) + "..." : item.tNotesDesc}} </span>
+    </div>
+</div>

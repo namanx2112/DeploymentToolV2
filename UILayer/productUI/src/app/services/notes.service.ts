@@ -18,6 +18,7 @@ export class NotesService {
   GetTableVisibleColumns() {
     return [
       "dtCreatedOn",
+       "nCreatedBy",
       "nNoteType",
       "tSource",
       "tNoteDesc"
@@ -100,6 +101,19 @@ export class NotesService {
         hidden: true
       },
       {
+        field_name: "User",
+        fieldUniqeName: "nCreatedBy",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Date",
+        options: this.commonService.GetDropdown("User"),
+        validator: [],
+        mandatory: false,
+        hidden: true
+      },
+      {
         field_name: "Type",
         fieldUniqeName: "nNoteType",
         defaultVal: "",
@@ -149,7 +163,8 @@ export class NotesService {
         hidden: false
       }],
       my_service: "",
-      needImport: false
+      needImport: false,
+      isTechComponent: false
     };
   }
 }

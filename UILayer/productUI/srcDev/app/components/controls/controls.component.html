@@ -1,0 +1,88 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmitClick($event)" class="{{'form ' + themeClass}}">
+    <ng-container *ngFor="let curControl of fields; let index = index">
+        <h4 *ngIf="showGroupHeader(curControl)" class="fieldGroup">{{groupLabel}}</h4>
+        <div [ngClass]="getLabelClass(curControl)">
+            <mat-label *ngIf="(curControl.field_type != 11) && (curControl.icon == undefined || curControl.icon == '')"
+                class="fleidLabel" [attr.for]="curControl.field_name">{{curControl.field_name}}</mat-label>
+            <span class="readOnlyControl" *ngIf="(readOnlyForm || curControl.readOnly)"><span
+                    *ngIf="curControl.field_type == 8" matPrefix
+                    class="dollarSymbolReadOnly">$&nbsp;</span>{{getReadOnlyVal(curControl,
+                controlValues[curControl.fieldUniqeName])}}</span>
+            <mat-form-field appearance="outline" *ngIf="!(curControl.readOnly || readOnlyForm) && (curControl.field_type == 0 || curControl.field_type == 1 || 
+            curControl.field_type == 3 || 
+                curControl.field_type == 5 || curControl.field_type == 8 || curControl.field_type == 9)">
+                <input matInput *ngIf="!curControl.readOnly && curControl.field_type != 8"
+                    placeholder="{{curControl.field_placeholder}}" [type]="(curControl.field_type == 0)? 'text': (curControl.field_type == 1) ? 'email' : (curControl.field_type == 3) ? 'time' : 
+                    (curControl.field_type == 5)? 'number' : 'password'"
+                    formControlName="{{curControl.fieldUniqeName}}" [ngModel]="controlValues[curControl.fieldUniqeName]"
+                    (keydown)="onKeydown($event)">
+                <input matInput *ngIf="!curControl.readOnly && curControl.field_type == 8" [inputMask]="currencyInputMask" 
+                    placeholder="$ 0.00" formControlName="{{curControl.fieldUniqeName}}" [ngModel]="controlValues[curControl.fieldUniqeName]"
+                    (keydown)="onKeydown($event)">
+                <span *ngIf="curControl.field_type == 8" matPrefix class="dollarSymbol">$&nbsp;</span>
+                <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon>
+                <mat-error
+                    *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline"
+                *ngIf="!(curControl.readOnly || readOnlyForm) && curControl.field_type == 2">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" #pickerInput
+                    [formControl]="formControls[curControl.fieldUniqeName]" />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error
+                    *ngIf="formControls[curControl.fieldUniqeName].errors">{{getErrorMessage(curControl)}}</mat-error>
+            </mat-form-field>
+            <mat-checkbox matInput *ngIf="!(curControl.readOnly || readOnlyForm) && curControl.field_type == 11"
+                [formControl]="formControls[curControl.fieldUniqeName]">{{curControl.field_name}}</mat-checkbox>
+            <mat-form-field appearance="outline"
+                *ngIf="!(curControl.readOnly || readOnlyForm) && (curControl.field_type == 6)" class="textAreaField">
+
+                <textarea matInput *ngIf="!curControl.readOnly" placeholder="{{curControl.field_placeholder}}"
+                    formControlName="{{curControl.fieldUniqeName}}" [ngModel]="controlValues[curControl.fieldUniqeName]"
+                    (keydown)="onKeydown($event)"></textarea>
+                <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon>
+                <mat-error
+                    *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline"
+                *ngIf="!(curControl.readOnly || readOnlyForm) && curControl.field_type == 4">
+                <mat-select [compareWith]="compareDropDown" formControlName="{{curControl.fieldUniqeName}}"
+                    [(value)]="controlValues[curControl.fieldUniqeName]"
+                    (selectionChange)="dropdownChange($event.value, curControl)">
+                    <mat-option *ngFor="let opt of curControl.dropDownOptions|forFilter:filterOption"
+                        [value]="opt.aDropdownId">{{getOptionValue(curControl, opt)}}</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline"
+                *ngIf="!(curControl.readOnly || readOnlyForm) && curControl.field_type == 10">
+                <mat-select [compareWith]="compareDropDown" formControlName="{{curControl.fieldUniqeName}}"
+                    [(value)]="controlValues[curControl.fieldUniqeName]" multiple>
+                    <mat-option *ngFor="let opt of curControl.dropDownOptions"
+                        [value]="opt.aDropdownId">{{opt.tDropdownText}}</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
+            </mat-form-field>
+        </div>
+    </ng-container>
+    <div *ngIf="needButton" class="controlButton">
+        <!-- <button type="submit" mat-raised-button [disabled]="!formGroup.valid" -->
+        <button type="submit" *ngIf="exButtonLabel != undefined" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            {{exButtonLabel}}
+        </button>
+        <button type="submit" mat-raised-button
+            [className]="SubmitLabel == 'Search' ? 'btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base buttonClass' : 'buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base'">
+            <mat-icon *ngIf="SubmitLabel == 'Search'">search</mat-icon>
+            {{SubmitLabel}}
+        </button>
+        <button *ngIf="CloseLabel != undefined && CloseLabel != ''" type="button" mat-raised-button
+            class="closeButtonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base"
+            (click)="CloseClicked($event);">
+            {{CloseLabel}}
+        </button>
+    </div>
+</form>

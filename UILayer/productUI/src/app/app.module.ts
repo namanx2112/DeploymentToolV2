@@ -84,13 +84,10 @@ import { DashboardChartComponent } from './components/Brand/dashboard-chart/dash
 import { DashboardPaneComponent } from './components/Brand/dashboard-pane/dashboard-pane.component';
 import {MatNativeDateModule} from '@angular/material/core';
 import { NoItemsComponent } from './components/no-items/no-items.component';
-import { UploadItemsComponent } from './components/upload-items/upload-items.component';
-import { UploadItemsSelectionComponent } from './components/upload-items-selection/upload-items-selection.component';
 import { AdvancedSearchComponent } from './components/Brand/advanced-search/advanced-search.component';
 import { AdvancedSearchResultComponent } from './components/Brand/advanced-search-result/advanced-search-result.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SavedReportsComponent } from './components/Brand/saved-reports/saved-reports.component';
-import { InputMaskModule } from '@ngneat/input-mask';
 
 @NgModule({
     declarations: [
@@ -151,11 +148,9 @@ import { InputMaskModule } from '@ngneat/input-mask';
         DashboardChartComponent,
         DashboardPaneComponent,
         NoItemsComponent,
-	 AdvancedSearchComponent,
+        AdvancedSearchComponent,
         AdvancedSearchResultComponent,
         SavedReportsComponent,
-        UploadItemsComponent,
-        UploadItemsSelectionComponent
     ],
     providers: [
         {
@@ -194,8 +189,7 @@ import { InputMaskModule } from '@ngneat/input-mask';
         MatTooltipModule,
         MatButtonToggleModule,
         MatNativeDateModule,
-        MatExpansionModule,
-        InputMaskModule
+        MatExpansionModule
     ]
 })
 export class AppModule { }

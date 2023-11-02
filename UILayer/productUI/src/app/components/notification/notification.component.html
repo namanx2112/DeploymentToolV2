@@ -1,8 +1,7 @@
 <div *ngIf="fullView" class="outerDiv">
     <h3>Notification</h3>
     <div class="filterButton">
-        <mat-button-toggle-group class="buttonGroup" [(ngModel)]="filter" aria-label="Font Style"
-            (change)="filterChange($event)">
+        <mat-button-toggle-group class="buttonGroup" [(ngModel)]="filter" aria-label="Font Style" (change)="filterChange($event)">
             <mat-button-toggle value="All">All</mat-button-toggle>
             <mat-button-toggle value="Unread">Unread</mat-button-toggle>
             <mat-button-toggle value="Read">Read</mat-button-toggle>

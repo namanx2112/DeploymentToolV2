@@ -35,15 +35,6 @@ export class ExStoreService {
     return this.http.post<ProjectExcel[]>(CommonService.ConfigUrl + "Attachment/UploadStore", formData, { headers: httpHeader });
   }
 
-  ImportItems(objectName: string, fileToUpload: File, nBrandId: number, instanceId: number) {
-    const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name + String.fromCharCode(1000) + nBrandId + String.fromCharCode(1000) + instanceId);
-    let httpHeader = new HttpHeaders({
-      "Authorization": "Bearer " + this.cacheService.getToken()
-    });
-    return this.http.post<any[]>(CommonService.ConfigUrl + "Attachment/ImportItems?objectName=" + objectName, formData, { headers: httpHeader });
-  }
-
   CreateNewStores(request: ProjectExcel[]) {
     return this.http.post<string>(CommonService.ConfigUrl + "ExStore/CreateNewStores", request, { headers: this.cacheService.getHttpHeaders() });
   }
@@ -302,7 +293,8 @@ export class ExStoreService {
       search_fields: [],
       fields: [],
       my_service: "",
-      needImport: false
+      needImport: false,
+      isTechComponent: false
     };
   }
 
@@ -694,7 +686,8 @@ export class ExStoreService {
       }],
       fields: fields,
       my_service: "",
-      needImport: false
+      needImport: false,
+      isTechComponent: false
     };
   }
 
@@ -990,7 +983,8 @@ export class ExStoreService {
       }],
       fields: this.GetStoreContactFields(false),
       my_service: "",
-      needImport: false
+      needImport: false,
+      isTechComponent: false
     };
   }
 
@@ -1003,6 +997,7 @@ export class ExStoreService {
       tab_unique_name: "",
       instanceType: instType,
       childTabs: [],
+      isTechComponent: false,
       search_fields: [{
         field_name: "Stall Count",
         fieldUniqeName: "nStallCount",
@@ -1133,6 +1128,7 @@ export class ExStoreService {
       tab_unique_name: "",
       instanceType: instType,
       childTabs: [],
+      isTechComponent: false,
       search_fields: [{
         field_name: "Franchise",
         fieldUniqeName: "nFranchise",
@@ -1297,6 +1293,7 @@ export class ExStoreService {
       tab_type: TabType.StoreNetworking,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -1534,6 +1531,7 @@ export class ExStoreService {
       tab_type: TabType.StorePOS,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -1708,6 +1706,7 @@ export class ExStoreService {
       tab_type: TabType.StoreAudio,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -1893,6 +1892,7 @@ export class ExStoreService {
       tab_type: TabType.StoreExteriorMenus,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -2098,6 +2098,7 @@ export class ExStoreService {
       tab_type: TabType.StorePaymetSystem,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -2359,6 +2360,7 @@ export class ExStoreService {
       tab_type: TabType.StoreInteriorMenus,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -2493,6 +2495,7 @@ export class ExStoreService {
       tab_type: TabType.StoreSonicRadio,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -2676,6 +2679,7 @@ export class ExStoreService {
       tab_type: TabType.StoreSonicRadio,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -2859,6 +2863,7 @@ export class ExStoreService {
       tab_type: TabType.StoreInstallation,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -3064,6 +3069,7 @@ export class ExStoreService {
       tab_type: TabType.StoreProjects,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: false,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -3186,6 +3192,7 @@ export class ExStoreService {
       tab_type: TabType.HistoricalProjects,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: false,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -3284,6 +3291,7 @@ export class ExStoreService {
       tab_type: TabType.StoreProjectServerHandheld,
       tab_unique_name: "",
       instanceType: instType,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",

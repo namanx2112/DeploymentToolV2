@@ -1,0 +1,19 @@
+<div class="projectHeader">
+    <mat-icon class="backIcon" (click)="goBack()">arrow_back_ios</mat-icon>
+    <h4 class="projHeader" *ngIf="_ProjectType != undefined">Project - {{_ProjectType.tDropdownText}} Store</h4>
+</div>
+<div class="tabs">
+    <div class="tabHeader" *ngFor="let tmpTab of allTabs;let index = index" (click)="selectTab(index)" [ngClass]="(canMove) ? 'tabHeader clickable' : 'tabHeader'">
+        <div [className]="tmpTab.done ? 'savedIcon' : 'unsavedIcon'">{{tmpTab.tab_name}}<mat-icon class="statusIcon">check</mat-icon><mat-icon class="activeTabIcon"
+                *ngIf="tmpTab.tab_type == curTab.tab_type">play_arrow</mat-icon></div>
+    </div>
+</div>
+<div class="tabBody">
+    <div *ngFor="let tTab of allTabs;let index = index">
+        <h3 *ngIf="tTab.tab_type == curTab.tab_type" class="tabName">{{tTab.tab_header}}</h3>
+        <app-controls class="tabForm" *ngIf="tTab.tab_type == curTab.tab_type" [request]="{fields: tTab.fields, needButton: true, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+controlValues: tValues[tTab.tab_name], SubmitLabel: SubmitLabel,
+    readOnlyForm: false, CloseLabel: (index > 0) ? 'Back' : '', nBrandId: curBrandId, exButtonLabel: 'Submit'}" (onSubmit)="onSubmit($event, tTab)"
+            (onClose)="backClicked($event, tTab)"></app-controls>
+    </div>
+</div>

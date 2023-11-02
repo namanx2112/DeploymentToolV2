@@ -12,6 +12,7 @@ import { NotImplementedComponent } from '../../not-implemented/not-implemented.c
 import { ChangeGoliveDateComponent } from '../change-golive-date/change-golive-date.component';
 import { AccessService } from 'src/app/services/access.service';
 import { CommonService } from 'src/app/services/common.service';
+import { UserAccessMeta, UserType } from 'src/app/interfaces/models';
 
 @Component({
   selector: 'app-store-view',
@@ -24,6 +25,7 @@ export class StoreViewComponent {
   public set curStore(value: StoreSearchModel) {
     this._curStore = value;
     this.selectedProject = value.lstProjectsInfo[0];
+    this.getUserMeta();
     this.initTab();
   }
   @Input()
@@ -35,22 +37,61 @@ export class StoreViewComponent {
   viewName: string;
   @Output() ChangeFromStoreView = new EventEmitter<any>();
   selectedProject: ProjectInfo;
-  constructor(private service: ExStoreService, private dialog: MatDialog, private techCompService: AllTechnologyComponentsService, public access: AccessService) {
+  tabAccess: any;
+  userMeta: UserAccessMeta;
+  fieldRestrictions: any;
+  constructor(private service: ExStoreService, private dialog: MatDialog,
+    private techCompService: AllTechnologyComponentsService, public access: AccessService) {
     this.viewName = "tabview";
+    this.fieldRestrictions = {};
+  }
+
+  getUserMeta() {
+    this.userMeta = this.access.getMyUserMeta();
+    this.fieldRestrictions = this.access.getCompFieldAccess();
+    if (this.fieldRestrictions == null)
+      this.fieldRestrictions = {};
   }
 
   initTab() {
     this.allTabs = this.service.GetStoretabs(this._curStore.nBrandId);
     this.tValues = {};
+    this.tabAccess = {};
     this.tabForUI = [];
     for (var tIndx in this.allTabs) {
       let tTab = this.allTabs[tIndx];
+      this.tabAccess[tTab.tab_name] = this.access.hasAccess('home.sonic.project.' + tTab.tab_name, 1);
       // this.tValues[tTab.tab_name] = this.getValues(tTab);
       // tTab = this.changeTab(tTab);
       if (parseInt(tIndx) > 2)
         this.tabForUI.push(tTab);
       this.getValues(tTab);
     }
+  }
+
+  canEditTab(tab: HomeTab) {
+    let can = true;
+    can = this.access.hasAccess('home.sonic.project.' + tab.tab_name, 1);
+    if (!can) {
+      if (tab.isTechComponent) {
+        if (this.userMeta.userType == UserType.EquipmentVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
+          let vendorId = this.tValues[tab.tab_name]["nVendor"];
+          if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
+            can = true;
+          }
+        }
+      }
+      else if (tab.tab_name.toLocaleLowerCase() == "installation") {
+        if (this.userMeta.userType == UserType.InstallationVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
+          let vendorId = this.tValues[tab.tab_name]["nVendor"];
+          if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
+            can = true;
+          }
+        }
+
+      }
+    }
+    return can;
   }
 
   projectClick(tProject: ProjectInfo) {

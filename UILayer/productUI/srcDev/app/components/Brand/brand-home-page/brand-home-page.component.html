@@ -1,0 +1,99 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="sideNav" mode="side" opened="true">
+        <div class="logoPart">
+            <div>
+                <img src="{{_curBrand.tIconURL}}">
+            </div>
+        </div>
+        <div class="menuPart">
+            <button mat-button [matMenuTriggerFor]="menu"
+                *ngIf="access.hasAccess('home.sonic.newproject', 1)"><mat-icon>add</mat-icon>New Project</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="menuClick('newstore', 'all', 'New');">New Store</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all','Remodel');">Remodel Store</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all','Rebuild');">Rebuild Store</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all','Relocation');">Relocation</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all','Acquisition');">Acquisition</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'pos', 'POSInstallation');">POS
+                    Installation</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'audio', 'AudioInstallation');">Audio
+                    Installation</button>
+                <button mat-menu-item
+                    (click)="menuClick('newproject', 'interiormenu', 'InteriorMenuInstallation');">Interior Menu
+                    Installation</button>
+                <button mat-menu-item
+                    (click)="menuClick('newproject', 'exteriormenu', 'ExteriorMenuInstallation');">Exterior Menu
+                    Installation</button>
+                <button mat-menu-item
+                    (click)="menuClick('newproject', 'payment', 'PaymentTerminalInstallation');">Payment Terminal
+                    Installation</button>
+                <button mat-menu-item (click)="menuClick('newproject', 'all', 'PartsReplacement');">Parts
+                    Replacement</button>
+                <button mat-menu-item *ngIf="_curBrand.nBrandType == 2"
+                    (click)="menuClick('newproject', 'serverhandheld', 'ServerHandheldInstallation');">Server
+                    Handheld Installation</button>
+            </mat-menu>
+            <button mat-button *ngIf="access.hasAccess('home.sonic.searchproject', 1)"
+                (click)="menuClick('search')" [className]="configMenu=='search'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>search</mat-icon>Search</button>
+            <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)"
+                (click)="menuClick('importproject')" [className]="configMenu=='importproject'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>attach_file</mat-icon>Import Project</button>
+        </div>
+        <div class="ConfigList tabSelectionOption">
+            <span (click)="clickOption('dashboard')"
+                [className]="configMenu=='dashboard'?'selected':''">{{_curBrand.tBrandName}}
+                Homepage</span>
+            <span (click)="clickOption('Project Portfolio')" *ngIf="access.hasAccess('home.sonic.projectportfolio', 0)"
+                [className]="configMenu=='Project Portfolio'?'selected':''">Project Portfolio</span>
+            <span (click)="clickOption('Report Generator')" *ngIf="access.hasAccess('home.sonic.reportgenerator', 1)"
+                [className]="configMenu=='Report Generator'?'selected':''">Report Generator</span>
+            <span (click)="clickOption('savedreports')" *ngIf="access.hasAccess('home.sonic.report', 0)"
+                [className]="configMenu=='savedreports'?'selected':''">Saved Reports</span>
+            <span (click)="clickOption('dashboardpane')" *ngIf="access.hasAccess('home.sonic.report', 0)"
+                [className]="configMenu=='dashboardpane'?'selected':''">Dashboard</span>
+
+        </div>
+    </mat-drawer>
+    <div class="sideNavContent">
+        <span [ngClass]="drawer.opened ? 'toggleIcon opened' : 'toggleIcon'" (click)="drawer.toggle()">
+            <mat-icon>play_arrow</mat-icon>
+        </span>
+        <app-brand-dashboard *ngIf="showMode == 'dashboard'" [curBrand]="_curBrand"
+            (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>
+        <app-dashboard-pane *ngIf="showMode == 'dashboardpane'" [curBrand]="_curBrand"
+            (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-dashboard-pane>
+        <app-saved-reports *ngIf="showMode == 'savedreports'" [curBrand]="_curBrand"
+            (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-saved-reports>
+        <app-report-table *ngIf="showMode == 'viewreport'" [reportParam]="reportParam" (openStore)="showStore($event)"
+            (goBack)="ChangeView($event)"></app-report-table>
+        <app-new-store *ngIf="showMode == 'newstore'" (ChangeView)="ChangeView($event)"
+            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType, curBrandId:_curBrand.aBrandId}"></app-new-store>
+        <app-new-project *ngIf="showMode == 'newproject'" (ChangeView)="ChangeView($event)"
+            [ProjectParam]="{ ProjectType: projectType, TechCompType: techCompType, curBrandId: _curBrand.aBrandId}"></app-new-project>
+        <app-store-view *ngIf="showMode == 'storeview'" (ChangeFromStoreView)="ChangeFromStoreView($event)"
+            [curStore]="curStore" [curBrandId]="_curBrand.aBrandId"></app-store-view>
+        <app-project-table *ngIf="showMode == 'projectactiveview'" [tabName]="'Active'"
+            (ChangeView)="ChangeView($event)" [curStore]="curStore"></app-project-table>
+        <app-project-table *ngIf="showMode == 'projecthistoricalview'" [tabName]="'Historical'"
+            (ChangeView)="ChangeView($event)" [curStore]="curStore"></app-project-table>
+        <app-import-projects *ngIf="showMode == 'importproject'" [curBrand]="_curBrand"
+            (ChangeView)="ChangeView($event)"></app-import-projects>
+        <app-pos-installation *ngIf="showMode == 'posinstallation'" (ChangeView)="ChangeView($event)"
+            [curBrandId]="_curBrand.aBrandId"></app-pos-installation>
+        <app-payment-terminal-installation *ngIf="showMode == 'paymentterminalinstllation'"
+            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-payment-terminal-installation>
+        <app-menu-installation *ngIf="showMode == 'InteriorMenuInstallation' || showMode == 'ExteriorMenuInstallation'"
+            (ChangeView)="ChangeView($event)" [curBrandId]="_curBrand.aBrandId"></app-menu-installation>
+        <app-audio-installation *ngIf="showMode == 'audioinstallation'" (ChangeView)="ChangeView($event)"
+            [curBrandId]="_curBrand.aBrandId"></app-audio-installation>
+        <app-project-template-list *ngIf="showMode == 'projecttemplatelist'" (BackToStoreView)="BackToStoreView($event)"
+            [curStore]="curStore"></app-project-template-list>
+        <app-project-portfolio *ngIf="showMode == 'Project Portfolio'" [curBrand]="_curBrand"
+            (BackToStoreView)="BackToStoreView($event)" (openStore)="showStore($event)"></app-project-portfolio>
+        <app-advanced-search *ngIf="showMode == 'search'" (ChangeView)="ChangeView($event)"
+            (openStore)="showStore($event)" [curBrand]="_curBrand"></app-advanced-search>
+        <app-not-implemented
+            *ngIf="showMode != 'Project Portfolio' && showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'InteriorMenuInstallation' && showMode != 'ExteriorMenuInstallation' && 
+        showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && 
+        showMode != 'newstore' && showMode != 'savedreports' && showMode != 'search' && showMode != 'dashboard' && showMode != 'dashboardpane' && showMode != 'viewreport' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
+    </div>
+</mat-drawer-container>

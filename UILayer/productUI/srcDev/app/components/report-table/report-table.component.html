@@ -1,0 +1,25 @@
+<div class="reportHeader">
+  <div class="header"><mat-icon class="tIcon" (click)="goBackClicked()">arrow_back_ios</mat-icon>{{tReport.tReportName}}
+  </div>
+</div>
+<div class="reportBody">
+  <button mat-raised-button class="exportButton" matTooltip="Click to download"
+    (click)="exportAsExcel()">Export as Excel<mat-icon>save_alt</mat-icon></button>
+  <table *ngIf="tReport != undefined" mat-table [dataSource]="dataSource" matSort
+    (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" #TABLE>
+
+    <ng-container *ngFor="let column of columns;let index = index;" matColumnDef="{{column}}">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+        {{columns[index]}}
+      </th>
+      <td mat-cell *matCellDef="let element" matTooltip="{{getCellVal(column, element[column])}}">
+        <span *ngIf="(column != 'Store Number' && column != 'StoreNo')"> {{getCellVal(column, element[column])}} </span>
+        <span *ngIf="(column == 'Store Number' || column == 'StoreNo')" (click)="openItem(element[column])" matTooltip="Click to Open Store"
+          class="openItem">{{getCellVal(column, element[column])}}</span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns;sticky: true;"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+</div>

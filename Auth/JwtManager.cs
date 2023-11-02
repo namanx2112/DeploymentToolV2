@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using DeploymentTool.Model;
+using Newtonsoft.Json.Linq;
 
 namespace DeploymentTool.Auth
 {
@@ -109,6 +110,51 @@ namespace DeploymentTool.Auth
 
     public class UserAccessResponse
     {
+        public UserMeta userMeta { get; set; }
         public string tData { get; set; }
+
+        public void SetCompFieldAccess(List<FieldAccess> fieldAccesses)
+        {
+            Dictionary<string, Dictionary<string, int>> _compFieldAccess = new Dictionary<string, Dictionary<string, int>>();
+            foreach (FieldAccess fieldAccess in fieldAccesses)
+            {
+                if (_compFieldAccess.ContainsKey(fieldAccess.tTechCompName))
+                {
+                    if (_compFieldAccess[fieldAccess.tTechCompName].ContainsKey(fieldAccess.tFieldName))
+                    {
+                        _compFieldAccess[fieldAccess.tTechCompName][fieldAccess.tFieldName] = fieldAccess.nAccessVal;
+                    }
+                    else
+                        _compFieldAccess[fieldAccess.tTechCompName].Add(fieldAccess.tFieldName, fieldAccess.nAccessVal);
+                }
+                else
+                {
+                    _compFieldAccess.Add(fieldAccess.tTechCompName, new Dictionary<string, int>());
+                    _compFieldAccess[fieldAccess.tTechCompName].Add(fieldAccess.tFieldName, fieldAccess.nAccessVal);
+                }
+            }
+            compFieldAccess = _compFieldAccess;
+        }
+
+        public Dictionary<string, Dictionary<string, int>> compFieldAccess { get; set; }
+    }
+
+    public class UserMeta
+    {
+        public Nullable<int> nOriginatorId { get; set; }
+
+        public UserType userType { get; set; }
+    }
+
+    public enum UserType
+    {
+        User, FranchiseUser, EquipmentVendor, InstallationVendor, EqupmentAndInstallationVendor
+    }
+
+    public class FieldAccess
+    {
+        public string tTechCompName { get; set; }
+        public string tFieldName { get; set; }
+        public int nAccessVal { get; set; }
     }
 }

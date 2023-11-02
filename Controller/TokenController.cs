@@ -98,6 +98,15 @@ namespace DeploymentTool.Controller
                 string sObject = JsonConvert.SerializeObject(returnList);
                 tObj.tData = Utilities.EncodeString(sObject);
             }
+            tObj.userMeta = db.Database.SqlQuery<UserMeta>("exec sproc_getUserMeta @nUserId", new SqlParameter("@nUserId", securityContext.nUserID)).FirstOrDefault();
+            if (tObj.userMeta != null)
+            {
+                if (tObj.userMeta.userType != UserType.User)
+                {
+                    tObj.SetCompFieldAccess(db.Database.SqlQuery<FieldAccess>("exec sproc_GetMyRestrictedAccess @nUserId",
+               new SqlParameter("@nUserId", securityContext.nUserID)).ToList());
+                }
+            }
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<UserAccessResponse>(tObj, new JsonMediaTypeFormatter())

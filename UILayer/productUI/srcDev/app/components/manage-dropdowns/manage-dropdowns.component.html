@@ -1,0 +1,42 @@
+<div class="header">Manage Dropdowns</div>
+<div class="outerDiv grayBackground roundedCorner">
+    <div class="filters">
+        <mat-form-field class="dropDownField whiteDropdown">
+            <mat-label value="0">Select Brand</mat-label>
+            <mat-select [(value)]="selectedBrand" (selectionChange)="loadGroup()">
+                <mat-option [value]="genBrand">General</mat-option>
+                <mat-option *ngFor="let item of allBrands" [value]="item">{{item.tBrandName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="dropDowns" *ngIf="selectedModule != undefined">
+        <mat-form-field class="dropDownField whiteDropdown roundedCorner">
+            <mat-label>Select a Section</mat-label>
+            <mat-select [(value)]="selectedModule" (selectionChange)="moduleChanged($event)">
+                <mat-optgroup *ngFor="let group of modules" [label]="group">
+                    <mat-option *ngFor="let module of moduleGroupList[group]" [value]="module">
+                        {{module.tModuleDisplayName}}
+                    </mat-option>
+                </mat-optgroup>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="DropdownChips roundedCorner vChips">
+            <span *ngIf="ddList.length > 0" class="ddfieldLabel">Dropwdown Fields</span>
+            <span *ngIf="ddList.length == 0" class="noItem">There are no Dropdown item configured for
+                {{selectedModule.tModuleName}}</span>
+            <div *ngIf="ddList.length > 0" [cdkDropListData]="ddList" cdkDropList class="ddList" (cdkDropListDropped)="drop($event)">
+                <div class="dropdownItem" *ngFor="let item of ddList" cdkDrag>
+                    <span class="lText">{{item.tDropdownText}}</span>
+                    <span class="dragHelp">Drag and drop this item to rearrange</span>
+                    <div class="cAction" *ngIf="(selectedModule.editable == undefined || selectedModule.editable == true)">
+                        <span matTooltip="Edit" (click)="edit(item)"><mat-icon>edit</mat-icon></span>
+                        <span matTooltip="Remove" (click)="remove(item)" style="margin-left: 2px;"><mat-icon>cancel</mat-icon></span>
+                    </div>
+                </div>
+            </div>
+            <input [disabled]="selectedModule.editable == false" class="inpNewItem" matInput placeholder="Type here and press Enter key to add a new Dropdown item"
+                (keydown)="add($event)"/>
+            <mat-hint>You can drag items to rearrange</mat-hint>
+        </mat-form-field>
+    </div>
+</div>

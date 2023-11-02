@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { OptionType } from 'src/app/interfaces/home-tab';
-import { BrandModel } from 'src/app/interfaces/models';
+import { BrandModel, UserType } from 'src/app/interfaces/models';
 import { StoreSearchModel } from 'src/app/interfaces/store';
 import { AccessService } from 'src/app/services/access.service';
 import { CommonService } from 'src/app/services/common.service';
@@ -16,6 +16,7 @@ export class BrandHomePageComponent {
   set curBrand(val: BrandModel) {
     this._curBrand = val;
     this.GetAllProjectTypes();
+    this.loadUserMeta();
   }
   @Input()
   set openStore(val: StoreSearchModel) {
@@ -31,13 +32,29 @@ export class BrandHomePageComponent {
   projectType: OptionType;
   configMenu: string;
   reportParam: any;
+  defaultConditionForSearch: string;
+  showSearchForcefully: boolean;
   constructor(private commonService: CommonService, public access: AccessService) {
     this.configMenu = "dashboard";
     this.showMode = "dashboard";
     this.techCompType = "all";
+    this.defaultConditionForSearch = "";
+    this.showSearchForcefully = false;
   }
   GetAllProjectTypes() {
     this.ProjectTypes = this.commonService.GetDropdownOptions(this._curBrand.aBrandId, "ProjectType");
+  }
+
+  loadUserMeta() {
+    let userMeta = this.access.getMyUserMeta();
+    if (userMeta.userType != UserType.User) {
+      if (userMeta.userType != UserType.FranchiseUser) {
+        this.defaultConditionForSearch = "nVendor=" + userMeta.nOriginatorId;
+        this.showSearchForcefully = true;
+        this.showMode = "search";
+        this.configMenu = "search";
+      }
+    }
   }
   clickOption(val: any) {
     this.showMode = val;
@@ -69,7 +86,12 @@ export class BrandHomePageComponent {
   }
 
   ChangeView(view: any) {
-    this.showMode = view;
+    if (this.showSearchForcefully) {
+      if (view == "dashboard")
+        this.showMode = "search";
+    }
+    else
+      this.showMode = view;
   }
 
   ChangeViewBrand(request: any) {
@@ -82,8 +104,18 @@ export class BrandHomePageComponent {
   }
 
   ChangeFromStoreView(param: any) {
-    this.curStore = param.curStore;
-    this.showMode = param.view;
+    if (this.showSearchForcefully) {
+      if (param.view == "dashboard"){
+        this.showMode = "search";
+        this.configMenu = "search";
+      }
+      else
+        this.showMode = param.view;
+    }
+    else {
+      this.curStore = param.curStore;
+      this.showMode = param.view;
+    }
   }
 
   BackToStoreView(param: any) {

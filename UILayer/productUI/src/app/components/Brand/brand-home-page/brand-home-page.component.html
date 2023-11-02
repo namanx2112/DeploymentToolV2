@@ -33,13 +33,13 @@
                     (click)="menuClick('newproject', 'serverhandheld', 'ServerHandheldInstallation');">Server
                     Handheld Installation</button>
             </mat-menu>
-            <button mat-button *ngIf="access.hasAccess('home.sonic.searchproject', 1)"
+            <button mat-button *ngIf="access.hasAccess('home.sonic.searchproject', 1) || showSearchForcefully"
                 (click)="menuClick('search')" [className]="configMenu=='search'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>search</mat-icon>Search</button>
             <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)"
                 (click)="menuClick('importproject')" [className]="configMenu=='importproject'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>attach_file</mat-icon>Import Project</button>
         </div>
         <div class="ConfigList tabSelectionOption">
-            <span (click)="clickOption('dashboard')"
+            <span *ngIf="!showSearchForcefully" (click)="clickOption('dashboard')"
                 [className]="configMenu=='dashboard'?'selected':''">{{_curBrand.tBrandName}}
                 Homepage</span>
             <span (click)="clickOption('Project Portfolio')" *ngIf="access.hasAccess('home.sonic.projectportfolio', 0)"
@@ -90,7 +90,7 @@
         <app-project-portfolio *ngIf="showMode == 'Project Portfolio'" [curBrand]="_curBrand"
             (BackToStoreView)="BackToStoreView($event)" (openStore)="showStore($event)"></app-project-portfolio>
         <app-advanced-search *ngIf="showMode == 'search'" (ChangeView)="ChangeView($event)"
-            (openStore)="showStore($event)" [curBrand]="_curBrand"></app-advanced-search>
+            (openStore)="showStore($event)" [request]="{curBrand: _curBrand, defaultCondition: defaultConditionForSearch}"></app-advanced-search>
         <app-not-implemented
             *ngIf="showMode != 'Project Portfolio' && showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'InteriorMenuInstallation' && showMode != 'ExteriorMenuInstallation' && 
         showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && 
