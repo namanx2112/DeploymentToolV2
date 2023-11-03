@@ -643,5 +643,151 @@ namespace DeploymentTool.Controller
 
             return response;
         }
+
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetAudits(int nBrandId, int nStoreId)
+        {
+            List<AuditModel> lstItems = new List<AuditModel>();
+
+            lstItems.Add(new AuditModel()
+            {
+                nTotalCount = 10,
+                tComponentName = "Networking"
+            });
+            lstItems.Add(new AuditModel()
+            {
+                nTotalCount = 10,
+                tComponentName = "POS",
+                lItems = new List<AuditFields>()
+            });
+            lstItems[1].lItems.Add(new AuditFields()
+            {
+                dDate = DateTime.Now,
+                tChangeNote = "",
+                tFieldName = "nVendor",
+                tNewValue = "1",
+                tPreviousValue = "4",
+                nUserId = 2
+            });
+
+            lstItems[1].lItems.Add(new AuditFields()
+            {
+                dDate = DateTime.Now.AddDays(-30),
+                tChangeNote = "",
+                tFieldName = "dDeliveryDate",
+                tNewValue = DateTime.Now.AddHours(203).ToString(),
+                tPreviousValue = DateTime.Now.ToString(),
+                nUserId = 2
+            });
+
+            lstItems[1].lItems.Add(new AuditFields()
+            {
+                dDate = DateTime.Now.AddDays(-1),
+                tChangeNote = "",
+                tFieldName = "nStatus",
+                tNewValue = "139",
+                tPreviousValue = "140",
+                nUserId = 2
+            });
+
+            lstItems[1].lItems.Add(new AuditFields()
+            {
+                dDate = DateTime.Now.AddDays(-10),
+                tChangeNote = "",
+                tFieldName = "cCost",
+                tNewValue = "100",
+                tPreviousValue = "122",
+                nUserId = 2
+            });
+
+            lstItems.Add(new AuditModel()
+            {
+                nTotalCount = 10,
+                tComponentName = "Audio"
+            });
+            lstItems.Add(new AuditModel()
+            {
+                nTotalCount = 10,
+                tComponentName = "Interior Menu"
+            });
+            lstItems.Add(new AuditModel()
+            {
+                nTotalCount = 10,
+                tComponentName = "Exterior Menu"
+            });
+            lstItems.Add(new AuditModel()
+            {
+                nTotalCount = 10,
+                tComponentName = "Sonic Radio"
+            });
+            lstItems.Add(new AuditModel()
+            {
+                nTotalCount = 10,
+                tComponentName = "Server Handheld"
+            });
+            lstItems.Add(new AuditModel()
+            {
+                nTotalCount = 10,
+                tComponentName = "Installation"
+            });
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<AuditModel>>(lstItems, new JsonMediaTypeFormatter())
+            };
+            return response;
+        }
+
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetAuditBody(int nBrandId, int nStoreId, string tComponentName)
+        {
+            List<AuditFields> lstItems = new List<AuditFields>();
+            lstItems.Add(new AuditFields()
+            {
+                dDate = DateTime.Now,
+                tChangeNote = "",
+                tFieldName = "nVendor",
+                tNewValue = "1",
+                tPreviousValue = "4",
+                nUserId = 2                
+            });
+
+            lstItems.Add(new AuditFields()
+            {
+                dDate = DateTime.Now.AddDays(-30),
+                tChangeNote = "",
+                tFieldName = "dDeliveryDate",
+                tNewValue = "",
+                tPreviousValue = DateTime.Now.ToString(),
+                nUserId = 2
+            });
+
+            lstItems.Add(new AuditFields()
+            {
+                dDate = DateTime.Now.AddDays(-1),
+                tChangeNote = "",
+                tFieldName = "nMyActiveStatus",
+                tNewValue = "1",
+                tPreviousValue = "4",
+                nUserId = 2
+            });
+
+            lstItems.Add(new AuditFields()
+            {
+                dDate = DateTime.Now.AddDays(-10),
+                tChangeNote = "",
+                tFieldName = "cCost",
+                tNewValue = "100",
+                tPreviousValue = "122",
+                nUserId = 2
+            });
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<AuditFields>>(lstItems, new JsonMediaTypeFormatter())
+            };
+            return response;
+        }
     }
 }

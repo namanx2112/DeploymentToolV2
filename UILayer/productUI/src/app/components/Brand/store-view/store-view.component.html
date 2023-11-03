@@ -31,8 +31,7 @@
     <div class="storeTiles" *ngIf="allTabs.length > 0">
         <div class="fullTile">
             <h4>{{allTabs[0].tab_header}}
-                <div class="right" *ngIf="canEditTab(allTabs[0])"><a
-                        (click)="editTab(allTabs[0])">Edit</a></div>
+                <div class="right" *ngIf="canEditTab(allTabs[0])"><a (click)="editTab(allTabs[0])">Edit</a></div>
             </h4>
             <app-controls *ngIf="tValues[allTabs[0].tab_name] != undefined" class="tabForm" [request]="{fields: allTabs[0].fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
 controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
@@ -109,6 +108,9 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
             <div [ngClass]="(selectedTab == -11) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-11);"
                 *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)">
                 Documents</div>
+            <div [ngClass]="(selectedTab == -12) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-12);"
+                *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)">
+                Audits</div>
         </div>
         <div class="tabBody">
             <div class="tHeader" *ngIf="(selectedTab == -10)">
@@ -121,6 +123,9 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
                 class="tabForm"></app-delivery-status>
 
             <app-documents-tab *ngIf="(selectedTab == -11)" [curStore]="_curStore" class="tabForm"></app-documents-tab>
+            <app-audit-view *ngIf="(selectedTab == -12)"
+                [request]="{nStoreId: _curStore.nStoreId, nBrandId: _curStore.nBrandId}"
+                class="tabForm"></app-audit-view>
 
             <div class="tHeader" *ngIf="tabForUI[selectedTab] != undefined">
                 <h4>{{tabForUI[selectedTab].tab_header}}</h4>
@@ -131,7 +136,8 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
 
             <app-controls *ngIf="canShowTab(allTabs[selectedTab])" class="tabForm white" [request]="{fields: tabForUI[selectedTab].fields, needButton: false, themeClass: 'whiteGray', numberOfControlsInARow: 1, 
 controlValues: tValues[tabForUI[selectedTab].tab_name], SubmitLabel: 'None',
-    readOnlyForm: true, nBrandId: curBrandId, fieldRestrictions: fieldRestrictions[tabForUI[selectedTab].tab_name]}" (onSubmit)="onSubmit($event, tabForUI[selectedTab])"></app-controls>
+    readOnlyForm: true, nBrandId: curBrandId, fieldRestrictions: fieldRestrictions[tabForUI[selectedTab].tab_name]}"
+                (onSubmit)="onSubmit($event, tabForUI[selectedTab])"></app-controls>
         </div>
     </div>
     <div class="fullView" *ngIf="tabForUI.length > 0 && viewName == 'fullview'">

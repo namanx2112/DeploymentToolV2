@@ -1030,6 +1030,7 @@
     </Compile>
     <Compile Include="Model\ActiveProjectModel.cs" />
     <Compile Include="Model\Attachment.cs" />
+    <Compile Include="Model\AuditModel.cs" />
     <Compile Include="Model\Brand.cs" />
     <Compile Include="Model\Dropdown.cs" />
     <Compile Include="Model\Franchise.cs" />

@@ -115,13 +115,29 @@ GO
 select * from tblRole
 
 select * from tblRolePermissionRel where nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
-and nRoleID in (select aRoleID from tblRole where tRoleName = 'Installation Vendor')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
 
 
-update tblRolePermissionRel set nPermVal = 2 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
-and nRoleID in (select aRoleID from tblRole where tRoleName != 'Read Only')
 
---TO Show notes for not read only user
+
+--To show notes for vendor user
 update tblUserPermissionRel set nPermVal = 2 where nUserID in(select nUserID from tblUserVendorRel )
 and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
 
+update tblRolePermissionRel set nPermVal = 2 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
+
+--To not show Active projects for Vendor User
+update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
+and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.activeproject')
+
+
+update tblRolePermissionRel set nPermVal = 0 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.activeproject')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
+
+--To not show Historic projects for Vendor User
+update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
+and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.historicproject')
+
+update tblRolePermissionRel set nPermVal = 0 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.historicproject')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')

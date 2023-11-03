@@ -88,6 +88,7 @@ import { AdvancedSearchComponent } from './components/Brand/advanced-search/adva
 import { AdvancedSearchResultComponent } from './components/Brand/advanced-search-result/advanced-search-result.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SavedReportsComponent } from './components/Brand/saved-reports/saved-reports.component';
+import { AuditViewComponent } from './components/Brand/audit-view/audit-view.component';
 
 @NgModule({
     declarations: [
@@ -151,6 +152,7 @@ import { SavedReportsComponent } from './components/Brand/saved-reports/saved-re
         AdvancedSearchComponent,
         AdvancedSearchResultComponent,
         SavedReportsComponent,
+        AuditViewComponent,
     ],
     providers: [
         {

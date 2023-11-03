@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CommonService } from './common.service';
 import { AuthService } from './auth.service';
-import { ActiveProject, DateChangeBody, DateChangeNotificationBody, DateChangeNotitication, DateChangePOOption, DeliveryStatus, DocumentsTabTable, HistoricalProjects, NewProjectStore } from '../interfaces/store';
+import { ActiveProject, AuditFields, AuditModel, DateChangeBody, DateChangeNotificationBody, DateChangeNotitication, DateChangePOOption, DeliveryStatus, DocumentsTabTable, HistoricalProjects, NewProjectStore } from '../interfaces/store';
 import { ProjectTemplates } from '../interfaces/models';
 import { Fields, HomeTab, TabType } from '../interfaces/home-tab';
 import { Observable } from 'rxjs';
@@ -105,6 +105,10 @@ export class StoreService {
 
   GetDocumentationTab(nStoreId: number) {
     return this.http.get<DocumentsTabTable[]>(CommonService.ConfigUrl + "Store/GetDocumentationTab?nStoreId=" + nStoreId, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  GetAudits(nBrandId: number, nStoreId: number) {
+    return this.http.get<AuditModel[]>(CommonService.ConfigUrl + "Store/GetAudits?nBrandId=" + nBrandId + "&nStoreId=" + nStoreId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   downloadPO(request: DocumentsTabTable) {

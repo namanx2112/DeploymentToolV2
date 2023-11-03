@@ -1,0 +1,36 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let item of _curAudits" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{item.tComponentName}}
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="item.lItems == null || item.lItems.length == 0" class="noLog">
+            No logs to display for this component
+        </div>
+        <table *ngIf="item.lItems != null && item.lItems.length > 0">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Previous Value</th>
+                    <th>Changed Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let changes of item.lItems">
+                    <td>{{getFieldName(item.tComponentName, changes.tFieldName)}}</td>
+                    <td>{{getUserName(changes.nUserId)}}</td>
+                    <td>{{getFormatedDate(changes.dDate)}}</td>
+                    <td>{{getFormatedVal(item.tComponentName, changes.tFieldName,changes.tPreviousValue)}}</td>
+                    <td>{{getFormatedVal(item.tComponentName, changes.tFieldName,changes.tNewValue)}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- <p>This is the primary content of the panel.</p> -->
+    </mat-expansion-panel>
+</mat-accordion>

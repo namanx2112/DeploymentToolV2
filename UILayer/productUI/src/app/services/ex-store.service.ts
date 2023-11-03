@@ -298,6 +298,23 @@ export class ExStoreService {
     };
   }
 
+  GetAuditsTab(): HomeTab {
+    return {
+      tab_name: "Audit",
+      tTableName: "",
+      tab_header: "Audit",
+      tab_type: TabType.AuditChanges,
+      tab_unique_name: "",
+      instanceType: TabInstanceType.Single,
+      childTabs: [],
+      search_fields: [],
+      fields: [],
+      my_service: "",
+      needImport: false,
+      isTechComponent: false
+    };
+  }
+
   GetNewStoresTab(instType: TabInstanceType): HomeTab {
     let fields = [];
     fields.push({

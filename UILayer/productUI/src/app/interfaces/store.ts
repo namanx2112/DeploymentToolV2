@@ -353,3 +353,18 @@ export interface DocumentsTabTable{
     tSentBy: string,
     dtCreatedOn: Date
 }
+
+export interface AuditModel{
+    tComponentName: string,
+    nTotalCount: number,
+    lItems: AuditFields[]
+}
+
+export interface AuditFields{
+    nUserId: number,
+    tFieldName: string,
+    tPreviousValue: string,
+    tNewValue: string,
+    tChangeNote: string,
+    dDate: Date
+}
