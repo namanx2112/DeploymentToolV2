@@ -104,10 +104,10 @@ export class ControlsComponent implements AfterViewChecked {
           tField.dropDownOptions = this.commonService.GetDropdownOptions(this.nBrandId, tField.options);
         }
       }
-      if (typeof this.fieldRestrictions != 'undefined' && this.fieldRestrictions[tField.fieldUniqeName]) {
+      if (typeof this.fieldRestrictions != 'undefined' && typeof this.fieldRestrictions[tField.fieldUniqeName] != 'undefined') {
         if (this.fieldRestrictions[tField.fieldUniqeName] == 1)
           tField.readOnly = true;
-        else
+        else if (this.fieldRestrictions[tField.fieldUniqeName] == 0)
           tField.hidden = true;
       }
     }

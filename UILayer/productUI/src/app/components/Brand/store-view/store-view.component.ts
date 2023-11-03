@@ -364,6 +364,7 @@ export class StoreViewComponent {
       readOnlyForm: false,
       needButton: true,
       controlValues: this.tValues[cTab.tab_name],
+      fieldRestrictions: this.fieldRestrictions[cTab.tab_name],
       SubmitLabel: "Save",
       onSubmit: function (data: any) {
         cthis.SaveTechComp(cTab, data, function (val: any) {

@@ -21,9 +21,11 @@ export class DialogControlsComponent {
   title: string;
   dialogTheme: string;
   curBrandId: number;
+  fieldRestrictions: any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     if (typeof data != 'undefined') {
       this.numberOfControlsInARow = data.numberOfControlsInARow;
+      this.fieldRestrictions = data.fieldRestrictions;
       this.fields = data.fields;
       this.readOnlyForm = data.readOnlyForm;
       this.needButton = data.needButton;
