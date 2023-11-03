@@ -105,7 +105,10 @@ export class ControlsComponent implements AfterViewChecked {
         }
       }
       if (typeof this.fieldRestrictions != 'undefined' && this.fieldRestrictions[tField.fieldUniqeName]) {
-        tField.readOnly = (this.fieldRestrictions[tField.fieldUniqeName] == 1) ? true : false;
+        if (this.fieldRestrictions[tField.fieldUniqeName] == 1)
+          tField.readOnly = true;
+        else
+          tField.hidden = true;
       }
     }
   }
@@ -160,7 +163,7 @@ export class ControlsComponent implements AfterViewChecked {
     }
     return sVal;
   }
- 
+
   hasEror(cControl: Fields): boolean {
     let has = false;
     let control = this.formGroup.get(cControl.fieldUniqeName);

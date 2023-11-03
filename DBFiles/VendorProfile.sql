@@ -1,4 +1,6 @@
+select * from tblUser
 
+update tblUser set tPassword = '260d23baeb73c2451f00f4a30ea4eb9ccad81b7f0c7dc23f58de70fd1426ab9d' where aUserID = 85
 create table tblRoleFieldRestrictedAccess(aAccessId int identity primary key, nRoleId int, tTechCompName varchar(500), tFieldName varchar(500), nAccessVal int default 2)
 
 -------------Sample Date for different Tech Components
@@ -109,9 +111,17 @@ END
 GO
 
 --TO Show notes for not read only user template
+
+select * from tblRole
+
+select * from tblRolePermissionRel where nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Installation Vendor')
+
+
 update tblRolePermissionRel set nPermVal = 2 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
 and nRoleID in (select aRoleID from tblRole where tRoleName != 'Read Only')
 
 --TO Show notes for not read only user
-update tblUserPermissionRel set nPermVal = 2 where nUserID in(select aUserID from tblUser where nRole in(select aRoleId from tblRole where tRoleName != 'Read Only'))
+update tblUserPermissionRel set nPermVal = 2 where nUserID in(select nUserID from tblUserVendorRel )
 and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
+

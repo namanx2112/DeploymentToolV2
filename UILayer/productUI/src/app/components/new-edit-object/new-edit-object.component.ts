@@ -170,9 +170,9 @@ export class NewEditObjectComponent {
           if (tFields[indx].fieldUniqeName == "nRole") {
             tFields[indx].hidden = true;
           }
-          else if (tFields[indx].fieldUniqeName == "rBrandID") {
-            tFields[indx].hidden = true;
-          }
+          // else if (tFields[indx].fieldUniqeName == "rBrandID") {
+          //   tFields[indx].hidden = true;
+          // }
           // if (!isNew) {
           //   if (tFields[indx].fieldUniqeName == "tUserName") {
           //     tFields[indx].readOnly = true;
@@ -264,7 +264,10 @@ export class NewEditObjectComponent {
     this.cService = this.getService(tab);
     if (this.isEditMode(tab, controlVals.value)) {
       this.cService.Update(controlVals.value).subscribe((resp: any) => {
-        if (typeof resp == 'string') {
+        if(resp == null && tab.childTabs.length > 0){
+          alert("Saved successfully");
+        }
+        else if (typeof resp == 'string') {
           alert(resp);
         }
         else
