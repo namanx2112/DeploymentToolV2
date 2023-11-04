@@ -134,7 +134,7 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
                 </div>
             </div>
 
-            <app-controls *ngIf="canShowTab(allTabs[selectedTab])" class="tabForm white" [request]="{fields: tabForUI[selectedTab].fields, needButton: false, themeClass: 'whiteGray', numberOfControlsInARow: 1, 
+            <app-controls *ngIf="canShowTab(tabForUI[selectedTab])" class="tabForm white" [request]="{fields: tabForUI[selectedTab].fields, needButton: false, themeClass: 'whiteGray', numberOfControlsInARow: 1, 
 controlValues: tValues[tabForUI[selectedTab].tab_name], SubmitLabel: 'None',
     readOnlyForm: true, nBrandId: curBrandId, fieldRestrictions: fieldRestrictions[tabForUI[selectedTab].tab_name]}"
                 (onSubmit)="onSubmit($event, tabForUI[selectedTab])"></app-controls>

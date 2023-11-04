@@ -69,6 +69,30 @@ export class StoreViewComponent {
     }
   }
 
+  canShowTabForUser(tab: HomeTab) {
+    let can = true;
+    if (tab.isTechComponent) {
+      if (this.userMeta.userType == UserType.EquipmentVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
+        let vendorId = this.tValues[tab.tab_name]["nVendor"];
+        if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
+          can = true;
+        }
+        else
+          can = false;
+      }
+    }
+    else if (tab.tab_name.toLocaleLowerCase() == "installation") {
+      if (this.userMeta.userType == UserType.InstallationVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
+        let vendorId = this.tValues[tab.tab_name]["nVendor"];
+        if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
+          can = true;
+        } else
+          can = false;
+      }
+    }
+    return can;
+  }
+
   canEditTab(tab: HomeTab) {
     let can = true;
     can = this.access.hasAccess('home.sonic.project.' + tab.tab_name, 1);
@@ -88,7 +112,6 @@ export class StoreViewComponent {
             can = true;
           }
         }
-
       }
     }
     return can;
@@ -153,8 +176,12 @@ export class StoreViewComponent {
   canShowTab(tTab: HomeTab) {
     let can = false;
     if (typeof tTab != 'undefined') {
-      if (typeof this.tValues[tTab.tab_name] != 'undefined')
-        can = true;
+      if (typeof this.tValues[tTab.tab_name] != 'undefined') {
+        if (tTab.isTechComponent)
+          can = this.canShowTabForUser(tTab);
+        else
+          can = true;
+      }
     }
     return can;
   }

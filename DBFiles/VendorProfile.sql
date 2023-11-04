@@ -112,14 +112,7 @@ GO
 
 --TO Show notes for not read only user template
 
-select * from tblRole
-
-select * from tblRolePermissionRel where nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
-and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
-
-
-
-
+----------------------------------------------------------------------Permission Changes for Vendor User
 --To show notes for vendor user
 update tblUserPermissionRel set nPermVal = 2 where nUserID in(select nUserID from tblUserVendorRel )
 and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
@@ -141,3 +134,35 @@ and nPermissionID in(select aPermissionlID from tbPermission where tPermissionNa
 
 update tblRolePermissionRel set nPermVal = 0 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.historicproject')
 and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
+
+
+update tblRolePermissionRel set nPermVal = 0 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.mail')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
+
+update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
+and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.mail')
+
+update tblRolePermissionRel set nPermVal = 0 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.find')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
+
+update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
+and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.find')
+
+update tblRolePermissionRel set nPermVal = 0 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.list')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
+
+update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
+and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.list')
+
+update tblRolePermissionRel set nPermVal = 0 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.setting')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
+
+update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
+and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.setting')
+
+
+update tblRolePermissionRel set nPermVal = 0 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.report')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
+
+update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
+and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.report')
