@@ -95,7 +95,7 @@ export class StoreViewComponent {
 
   canEditTab(tab: HomeTab) {
     let can = true;
-    can = this.access.hasAccess('home.sonic.project.' + tab.tab_name, 1);
+    can = this.access.hasAccess('home.sonic.project.POS', 1);
     if (!can) {
       if (tab.isTechComponent) {
         if (this.userMeta.userType == UserType.EquipmentVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
