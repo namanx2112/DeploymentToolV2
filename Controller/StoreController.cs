@@ -211,7 +211,7 @@ namespace DeploymentTool.Controller
         {
             List<TechData> items = db.Database.SqlQuery<TechData>("exec sproc_GetAllTechData @nStoreID", new SqlParameter("@nStoreID", nStoreId)).ToList();
 
-            
+
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<List<TechData>>(items, new JsonMediaTypeFormatter())
@@ -246,7 +246,7 @@ namespace DeploymentTool.Controller
                 foreach (var reqTech in request.lstItems)
                     if (reqTech.isSelected && reqTech.tComponent == parts.tComponent)
                     {
-                        string dDeliver = parts.dDeliveryDate!=null?Convert.ToDateTime(parts.dDeliveryDate).ToString("MM/dd/yyyy").Replace('-', '/'):"";
+                        string dDeliver = parts.dDeliveryDate != null ? Convert.ToDateTime(parts.dDeliveryDate).ToString("MM/dd/yyyy").Replace('-', '/') : "";
                         string dCongDate = parts.dConfigDate != null ? Convert.ToDateTime(parts.dConfigDate).ToString("MM/dd/yyyy").Replace('-', '/') : "";
                         //tContent += "<tr><td>" + parts.tComponent + " - " + parts.tVendor + "</td><td>" + parts.dDeliveryDate + "</td><td>" + parts.dInstallDate + "</td><td>" + parts.dConfigDate + "</td><td>" + parts.tStatus + "</td></tr>";
                         if (parts.nVendorID != null && parts.nVendorID > 0)
@@ -261,7 +261,7 @@ namespace DeploymentTool.Controller
             tContent += "</tbody>";
             tContent += "</table></div></br>";
             int nBrandId = 0;
-            List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@nStoreID", new SqlParameter("@nBrandId", nBrandId),  new SqlParameter("@nStoreID", request.nStoreId)).ToList();
+            List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@nStoreID", new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@nStoreID", request.nStoreId)).ToList();
             tContent += "<div><table><thead><tr><b><th>Project type</th><th>Go-live Date</th></b></tr></thead>";
             tContent += "<tbody>";
             foreach (var part in activeProj)
@@ -276,7 +276,7 @@ namespace DeploymentTool.Controller
             tContent += "</table></div></br>";
 
             tContent += "<div>Respectfully,</div>";
-            tContent += "<div>"+tUserName+"</div>";
+            tContent += "<div>" + tUserName + "</div>";
             tContent += "<div>New Store Team</div>";
             DateChangeNotificationBody reeponse = new DateChangeNotificationBody()
             {
@@ -327,7 +327,7 @@ namespace DeploymentTool.Controller
                 //var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
                 //Nullable<int> lUserId = securityContext.nUserID;
 
-                 foreach (var item in tList)
+                foreach (var item in tList)
                 {
                     int ret = 0;
                     //List<SqlParameter> tPramList = new List<SqlParameter>();
@@ -397,7 +397,7 @@ namespace DeploymentTool.Controller
                     {
                         if (item.nPOId <= 0)
                         {
-                            int ret=0;
+                            int ret = 0;
                             List<SqlParameter> tPramList = new List<SqlParameter>();
                             tPramList.Add(new SqlParameter("@nStoreId", item.nStoreId));
                             tPramList.Add(new SqlParameter("@nTemplateId", item.aPurchaseOrderTemplateID));
@@ -422,14 +422,14 @@ namespace DeploymentTool.Controller
                         string fileName = "PurchaseOrder.pdf";
                         String strFilePath = DeploymentTool.Misc.Utilities.WriteHTMLToPDF(strBody, fileName);
 
-                        string tContent = itemPOStore[0].tSentHtml.Split(separators, StringSplitOptions.None)[0] ;
+                        string tContent = itemPOStore[0].tSentHtml.Split(separators, StringSplitOptions.None)[0];
                         string tSubject = itemPOStore[0].tSubject;
                         string tTo = itemPOTemplate[0].tTo; //itemPOStore[0].tTo;//
                         string tCC = itemPOTemplate[0].tCC;// itemPOStore[0].tCC;//
                         string tVendorName = itemPOTemplate[0].tVendorName;
                         string tStoreNumber = itemPOStore[0].tStoreNumber;
                         string tProjectManager = itemPOTemplate[0].tProjectManager;
-                       // var tProjectManager = db.Database.SqlQuery<string>("select top 1 tITPM as tProjectManager from tblProjectStakeHolders with (nolock) where nMyActiveStatus=1  and nStoreId=@nStoreId", new SqlParameter("@nStoreId", item.nStoreId)).FirstOrDefault();
+                        // var tProjectManager = db.Database.SqlQuery<string>("select top 1 tITPM as tProjectManager from tblProjectStakeHolders with (nolock) where nMyActiveStatus=1  and nStoreId=@nStoreId", new SqlParameter("@nStoreId", item.nStoreId)).FirstOrDefault();
 
                         string sSentHtml = tContent + "@@Splitter@@" + item.nPOId.ToString() + "@@Splitter@@" + tVendorName + "@@Splitter@@" + tStoreNumber + "@@Splitter@@" + dDeliver + "@@Splitter@@" + tProjectManager;
                         tContent = tContent.Replace("@@InspirePOID@@", item.nPOId.ToString()).Replace("@@InspiretVendorName@@", tVendorName).Replace("@@InspiretStoreNumber@@", tStoreNumber).Replace("@@InspiredDeliver@@", dDeliver).Replace("@@InspiretProjectManager@@", tProjectManager);
@@ -555,7 +555,7 @@ namespace DeploymentTool.Controller
         [Route("api/Store/GetDateChangeBody")]
         public HttpResponseMessage GetDocumentationTab(int nStoreId)
         {
-            
+
 
             List<DocumentationTable> response = db.Database.SqlQuery<DocumentationTable>("exec sproc_GetDocumentation @nStoreId", new SqlParameter("@nStoreId", nStoreId)).ToList();
 
@@ -653,7 +653,19 @@ namespace DeploymentTool.Controller
             lstItems.Add(new AuditModel()
             {
                 nTotalCount = 10,
-                tComponentName = "Networking"
+                tComponentName = "Networking",
+                lItems = new List<AuditFields>()
+                {
+                    new AuditFields()
+                    {
+                        dDate = DateTime.Now.AddDays(-30),
+                tChangeNote = "",
+                tFieldName = "nVendor",
+                tNewValue = "1",
+                tPreviousValue = "4",
+                nUserId = 2
+                    }
+                }
             });
             lstItems.Add(new AuditModel()
             {
@@ -704,32 +716,104 @@ namespace DeploymentTool.Controller
             lstItems.Add(new AuditModel()
             {
                 nTotalCount = 10,
-                tComponentName = "Audio"
+                tComponentName = "Audio",
+                lItems = new List<AuditFields>()
+                {
+                    new AuditFields()
+                    {
+                        dDate = DateTime.Now.AddDays(-30),
+                tChangeNote = "",
+                tFieldName = "nVendor",
+                tNewValue = "1",
+                tPreviousValue = "4",
+                nUserId = 2
+                    }
+                }
             });
             lstItems.Add(new AuditModel()
             {
                 nTotalCount = 10,
-                tComponentName = "Interior Menu"
+                tComponentName = "Interior Menus",
+                lItems = new List<AuditFields>()
+                {
+                    new AuditFields()
+                    {
+                        dDate = DateTime.Now.AddDays(-30),
+                tChangeNote = "",
+                tFieldName = "nVendor",
+                tNewValue = "1",
+                tPreviousValue = "4",
+                nUserId = 2
+                    }
+                }
             });
             lstItems.Add(new AuditModel()
             {
                 nTotalCount = 10,
-                tComponentName = "Exterior Menu"
+                tComponentName = "Exterior Menus",
+                lItems = new List<AuditFields>()
+                {
+                    new AuditFields()
+                    {
+                        dDate = DateTime.Now.AddDays(-30),
+                tChangeNote = "",
+                tFieldName = "nVendor",
+                tNewValue = "1",
+                tPreviousValue = "2",
+                nUserId = 2
+                    }
+            }
             });
             lstItems.Add(new AuditModel()
             {
                 nTotalCount = 10,
-                tComponentName = "Sonic Radio"
+                tComponentName = "Sonic Radio",
+                lItems = new List<AuditFields>()
+                {
+                    new AuditFields()
+                    {
+                        dDate = DateTime.Now.AddDays(-30),
+                tChangeNote = "",
+                tFieldName = "nVendor",
+                tNewValue = "1",
+                tPreviousValue = "4",
+                nUserId = 2
+                    }
+                }
             });
             lstItems.Add(new AuditModel()
             {
                 nTotalCount = 10,
-                tComponentName = "Server Handheld"
+                tComponentName = "Server Handheld",
+                lItems = new List<AuditFields>()
+                {
+                    new AuditFields()
+                    {
+                        dDate = DateTime.Now.AddDays(-30),
+                tChangeNote = "",
+                tFieldName = "nVendor",
+                tNewValue = "1",
+                tPreviousValue = "4",
+                nUserId = 2
+                    }
+                }
             });
             lstItems.Add(new AuditModel()
             {
                 nTotalCount = 10,
-                tComponentName = "Installation"
+                tComponentName = "Installation",
+                lItems = new List<AuditFields>()
+                {
+                    new AuditFields()
+                    {
+                        dDate = DateTime.Now.AddDays(-30),
+                tChangeNote = "",
+                tFieldName = "nVendor",
+                tNewValue = "1",
+                tPreviousValue = "4",
+                nUserId = 2
+                    }
+                }
             });
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -750,7 +834,7 @@ namespace DeploymentTool.Controller
                 tFieldName = "nVendor",
                 tNewValue = "1",
                 tPreviousValue = "4",
-                nUserId = 2                
+                nUserId = 2
             });
 
             lstItems.Add(new AuditFields()

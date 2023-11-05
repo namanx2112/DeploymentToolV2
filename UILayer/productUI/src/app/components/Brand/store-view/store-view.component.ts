@@ -390,6 +390,7 @@ export class StoreViewComponent {
       fields: cTab.fields,
       readOnlyForm: false,
       needButton: true,
+      curBrandId: this.curBrandId,
       controlValues: this.tValues[cTab.tab_name],
       fieldRestrictions: this.fieldRestrictions[cTab.tab_name],
       SubmitLabel: "Save",
