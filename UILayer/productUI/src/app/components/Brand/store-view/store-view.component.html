@@ -91,8 +91,7 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
     </div>
     <div class="TechAreaTabBar" *ngIf="tabForUI.length > 0 && viewName == 'tabview'">
         <div class="tabHeader">
-            <div [ngClass]="(selectedTab == -10) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-10);"
-                *ngIf="access.hasAccess('home.sonic.project.deliverystatus', 1)">
+            <div [ngClass]="(selectedTab == -10) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-10);">
                 Delivery Status</div>
             <div *ngFor="let tTab of tabForUI;let index = index"
                 [ngClass]="(selectedTab == index) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(index);">
@@ -105,8 +104,7 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
                 <span *ngIf="index == 7" class="projTypeOnTabHeader">{{ "(" +
                     projectTypeString(selectedProject.nProjectType) + ")"}} </span>
             </div>
-            <div [ngClass]="(selectedTab == -11) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-11);"
-                *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)">
+            <div [ngClass]="(selectedTab == -11) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-11);">
                 Documents</div>
             <div [ngClass]="(selectedTab == -12) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-12);"
                 *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)">
@@ -148,9 +146,9 @@ controlValues: tValues[tabForUI[selectedTab].tab_name], SubmitLabel: 'None',
                         class="noBorderButton white" (click)="editTab(tTab)">Edit</button></div>
             </div>
             <div class="tBody">
-                <app-controls *ngIf="tValues[tTab.tab_name] != undefined" class="tabForm" [request]="{fields: tTab.fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+                <app-controls *ngIf="canShowTab(tTab)" class="tabForm" [request]="{fields: tTab.fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
 controlValues: tValues[tTab.tab_name], SubmitLabel: 'None',
-    readOnlyForm: true, nBrandId: curBrandId}" (onSubmit)="onSubmit($event, tTab)"></app-controls>
+    readOnlyForm: true, nBrandId: curBrandId, fieldRestrictions: fieldRestrictions[tTab.tab_name]}" (onSubmit)="onSubmit($event, tTab)"></app-controls>
             </div>
         </div>
     </div>

@@ -120,6 +120,7 @@ and nPermissionID in(select aPermissionlID from tbPermission where tPermissionNa
 update tblRolePermissionRel set nPermVal = 2 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.notes')
 and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')
 
+
 --To not show Active projects for Vendor User
 update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
 and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.project.activeproject')
