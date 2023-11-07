@@ -264,7 +264,7 @@ namespace DeploymentTool.Controller
                     //    tVendor = defaultCondition.Replace("nEquipVendor=", "");
                     //else if (defaultCondition.Contains("nInstallVendor"))
                     //    tInstaller = defaultCondition.Replace("nInstallVendor=", "");
-                    tVendor = defaultCondition.Replace("nVendor=", "");
+                    defaultCondition = defaultCondition.Replace("nVendor=", "");
                 }
                 string strName = string.Empty;
                 cmd.Connection = connection;
@@ -280,7 +280,7 @@ namespace DeploymentTool.Controller
                 var reportParameters7 = new SqlParameter("@tITPM", tITPM);
                 var reportParameters8 = new SqlParameter("@tInstaller", tInstaller);
                 var reportParameters9 = new SqlParameter("@tState", tState);
-                //var reportParameters10 = new SqlParameter("@defaultCondition", defaultCondition);
+                var reportParameters10 = new SqlParameter("@defaultCondition", defaultCondition);
                 cmd.Parameters.Add(reportIdParam);
                 cmd.Parameters.Add(reportParameters1);
                 cmd.Parameters.Add(reportParameters2);
@@ -291,7 +291,7 @@ namespace DeploymentTool.Controller
                 cmd.Parameters.Add(reportParameters7);
                 cmd.Parameters.Add(reportParameters8);
                 cmd.Parameters.Add(reportParameters9);
-                //cmd.Parameters.Add(reportParameters10);
+                cmd.Parameters.Add(reportParameters10);
                 using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
                 {
                     adapter.SelectCommand = cmd;
