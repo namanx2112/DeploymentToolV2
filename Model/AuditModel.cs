@@ -9,6 +9,7 @@ namespace DeploymentTool.Model
     {
         public int nUserId { get; set; }
         public string tFieldName { get; set; }
+        public string tTable { get; set; }
         public string tPreviousValue { get; set; }
         public string tNewValue { get; set; }
 

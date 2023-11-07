@@ -100,16 +100,19 @@ export class CommonService {
     CommonService.dropdownCache[nBrandId][module] = ddVal;
   }
 
-  static getFormatedDateString(dString: any) {
+  static getFormatedDateString(dString: any, withTime: boolean = false) {
+    let format = "MM/DD/YYYY";
+    if (withTime)
+      format = "MM/DD/YYYY HH:mm"
     let rString = "";
     if (typeof dString == 'string') {
       if (dString != "") {
-        let momentVal = (dString.indexOf("-") > -1) ? moment(dString, 'YYYY-MM-DD') : moment(dString, 'DD/MM/YYYY');
-        rString = momentVal.format('MM/DD/YYYY');
+        let momentVal = (dString.indexOf("-") > -1) ? moment(dString, 'YYYY-MM-DD hh:mm') : moment(dString, 'DD/MM/YYYY hh:mm');
+        rString = momentVal.format(format);
       }
     }
     else if (dString != null)
-      rString = moment(dString).format('MM/DD/YYYY');
+      rString = moment(dString).format(format);
     return rString;
   }
 
@@ -208,6 +211,28 @@ export class CommonService {
       return 1;
     }
     return 0;
+  }
+
+  static getTechComponentOptions() {
+    return [{
+      tDropdownText: "POS",
+      aDropdownId: "0",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Audio",
+      aDropdownId: "1",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Exterior Menus",
+      aDropdownId: "2",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }];
   }
 
   static getProjectTypeOptions() {

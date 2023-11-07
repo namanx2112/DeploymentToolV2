@@ -211,7 +211,7 @@ namespace DeploymentTool.Controller
         {
             List<TechData> items = db.Database.SqlQuery<TechData>("exec sproc_GetAllTechData @nStoreID", new SqlParameter("@nStoreID", nStoreId)).ToList();
 
-
+            
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<List<TechData>>(items, new JsonMediaTypeFormatter())
@@ -246,7 +246,7 @@ namespace DeploymentTool.Controller
                 foreach (var reqTech in request.lstItems)
                     if (reqTech.isSelected && reqTech.tComponent == parts.tComponent)
                     {
-                        string dDeliver = parts.dDeliveryDate != null ? Convert.ToDateTime(parts.dDeliveryDate).ToString("MM/dd/yyyy").Replace('-', '/') : "";
+                        string dDeliver = parts.dDeliveryDate!=null?Convert.ToDateTime(parts.dDeliveryDate).ToString("MM/dd/yyyy").Replace('-', '/'):"";
                         string dCongDate = parts.dConfigDate != null ? Convert.ToDateTime(parts.dConfigDate).ToString("MM/dd/yyyy").Replace('-', '/') : "";
                         //tContent += "<tr><td>" + parts.tComponent + " - " + parts.tVendor + "</td><td>" + parts.dDeliveryDate + "</td><td>" + parts.dInstallDate + "</td><td>" + parts.dConfigDate + "</td><td>" + parts.tStatus + "</td></tr>";
                         if (parts.nVendorID != null && parts.nVendorID > 0)
@@ -261,7 +261,7 @@ namespace DeploymentTool.Controller
             tContent += "</tbody>";
             tContent += "</table></div></br>";
             int nBrandId = 0;
-            List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@nStoreID", new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@nStoreID", request.nStoreId)).ToList();
+            List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@nStoreID", new SqlParameter("@nBrandId", nBrandId),  new SqlParameter("@nStoreID", request.nStoreId)).ToList();
             tContent += "<div><table><thead><tr><b><th>Project type</th><th>Go-live Date</th></b></tr></thead>";
             tContent += "<tbody>";
             foreach (var part in activeProj)
@@ -276,7 +276,7 @@ namespace DeploymentTool.Controller
             tContent += "</table></div></br>";
 
             tContent += "<div>Respectfully,</div>";
-            tContent += "<div>" + tUserName + "</div>";
+            tContent += "<div>"+tUserName+"</div>";
             tContent += "<div>New Store Team</div>";
             DateChangeNotificationBody reeponse = new DateChangeNotificationBody()
             {
@@ -327,7 +327,7 @@ namespace DeploymentTool.Controller
                 //var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
                 //Nullable<int> lUserId = securityContext.nUserID;
 
-                foreach (var item in tList)
+                 foreach (var item in tList)
                 {
                     int ret = 0;
                     //List<SqlParameter> tPramList = new List<SqlParameter>();
@@ -397,7 +397,7 @@ namespace DeploymentTool.Controller
                     {
                         if (item.nPOId <= 0)
                         {
-                            int ret = 0;
+                            int ret=0;
                             List<SqlParameter> tPramList = new List<SqlParameter>();
                             tPramList.Add(new SqlParameter("@nStoreId", item.nStoreId));
                             tPramList.Add(new SqlParameter("@nTemplateId", item.aPurchaseOrderTemplateID));
@@ -422,14 +422,14 @@ namespace DeploymentTool.Controller
                         string fileName = "PurchaseOrder.pdf";
                         String strFilePath = DeploymentTool.Misc.Utilities.WriteHTMLToPDF(strBody, fileName);
 
-                        string tContent = itemPOStore[0].tSentHtml.Split(separators, StringSplitOptions.None)[0];
+                        string tContent = itemPOStore[0].tSentHtml.Split(separators, StringSplitOptions.None)[0] ;
                         string tSubject = itemPOStore[0].tSubject;
                         string tTo = itemPOTemplate[0].tTo; //itemPOStore[0].tTo;//
                         string tCC = itemPOTemplate[0].tCC;// itemPOStore[0].tCC;//
                         string tVendorName = itemPOTemplate[0].tVendorName;
                         string tStoreNumber = itemPOStore[0].tStoreNumber;
                         string tProjectManager = itemPOTemplate[0].tProjectManager;
-                        // var tProjectManager = db.Database.SqlQuery<string>("select top 1 tITPM as tProjectManager from tblProjectStakeHolders with (nolock) where nMyActiveStatus=1  and nStoreId=@nStoreId", new SqlParameter("@nStoreId", item.nStoreId)).FirstOrDefault();
+                       // var tProjectManager = db.Database.SqlQuery<string>("select top 1 tITPM as tProjectManager from tblProjectStakeHolders with (nolock) where nMyActiveStatus=1  and nStoreId=@nStoreId", new SqlParameter("@nStoreId", item.nStoreId)).FirstOrDefault();
 
                         string sSentHtml = tContent + "@@Splitter@@" + item.nPOId.ToString() + "@@Splitter@@" + tVendorName + "@@Splitter@@" + tStoreNumber + "@@Splitter@@" + dDeliver + "@@Splitter@@" + tProjectManager;
                         tContent = tContent.Replace("@@InspirePOID@@", item.nPOId.ToString()).Replace("@@InspiretVendorName@@", tVendorName).Replace("@@InspiretStoreNumber@@", tStoreNumber).Replace("@@InspiredDeliver@@", dDeliver).Replace("@@InspiretProjectManager@@", tProjectManager);
@@ -555,7 +555,7 @@ namespace DeploymentTool.Controller
         [Route("api/Store/GetDateChangeBody")]
         public HttpResponseMessage GetDocumentationTab(int nStoreId)
         {
-
+            
 
             List<DocumentationTable> response = db.Database.SqlQuery<DocumentationTable>("exec sproc_GetDocumentation @nStoreId", new SqlParameter("@nStoreId", nStoreId)).ToList();
 
@@ -649,172 +649,336 @@ namespace DeploymentTool.Controller
         public HttpResponseMessage GetAudits(int nBrandId, int nStoreId)
         {
             List<AuditModel> lstItems = new List<AuditModel>();
-
-            lstItems.Add(new AuditModel()
+            try
             {
-                nTotalCount = 10,
-                tComponentName = "Networking",
-                lItems = new List<AuditFields>()
+
+                SqlParameter tsqlparama1 = new SqlParameter("@nBrandId", nBrandId);
+
+                SqlParameter tsqlparama2 = new SqlParameter("@nStoreId", nStoreId);
+                List<AuditFields> item = db.Database.SqlQuery<AuditFields>("exec sproc_getAudit @nBrandId,@nStoreId", tsqlparama1, tsqlparama2).ToList();
+                var output = db.Database.SqlQuery<string>("select top 1 tBrandName from tblBrand  with(nolock) where aBrandID=( select TOP 1 nBrandId from tblstore with (nolock) where astoreid=@storeid )", new SqlParameter("@storeid", nStoreId)).FirstOrDefault();
+
+                //lstItems.Add(new AuditModel()
+                //{
+                //    nTotalCount = 10,
+                //    tComponentName = "Networking"
+                //});
+                //lstItems.Add(new AuditModel()
+                //{
+                //    nTotalCount = 10,
+                //    tComponentName = "POS",
+                //    lItems = new List<AuditFields>()
+                //});
+                int i = 0;
+                bool bPos = false;
+                int iPOSposition = -1;
+                bool bAudio = false;
+                int iAudioposition = -1;
+                bool bNetworking = false;
+                int iNetworkingPos = -1;
+                bool bExt = false;
+                int iExtposition = -1;
+                bool bPm = false;
+                int iPmposition = -1;
+                bool bInt = false;
+                int iIntposition = -1;
+                bool bInstaln = false;
+                int iInstalnposition = -1;
+                bool bRadio = false;
+                int iRadioposition = -1;
+                foreach (var techparts in item)
                 {
-                    new AuditFields()
+                    if (techparts.tTable == "tblProjectPOS")
                     {
-                        dDate = DateTime.Now.AddDays(-30),
-                tChangeNote = "",
-                tFieldName = "nVendor",
-                tNewValue = "1",
-                tPreviousValue = "4",
-                nUserId = 2
+                        if (!bPos)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "POS",
+                                lItems = new List<AuditFields>()
+                            });
+                            bPos = true;
+                            iPOSposition = i;
+                            i++;
+
+                        }
+                        lstItems[iPOSposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+                        
+                    }
+                    else if (techparts.tTable == "tblProjectAudio")
+                    {
+                        if (!bAudio)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "Audio",
+                                lItems = new List<AuditFields>()
+                            });
+                            bAudio = true;
+                            iAudioposition = i;
+                            i++;
+                        }
+                        lstItems[iAudioposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+                       
+                    }
+                    else if (techparts.tTable == "tblProjectNetworking")
+                    {
+                        if (!bNetworking)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "Networking",
+                                lItems = new List<AuditFields>()
+                            });
+                            bNetworking = true;
+                            iNetworkingPos = i;
+                            i++;
+                        }
+                        lstItems[iNetworkingPos].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+                    }
+                    else if (techparts.tTable == "tblProjectExteriorMenus")
+                    {
+                        if (!bExt)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "Exterior Menus",
+                                lItems = new List<AuditFields>()
+                            });
+                            bExt = true;
+                            iExtposition = i;
+                            i++;
+                        }
+                        lstItems[iExtposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+
+                    }
+                    else if (techparts.tTable == "tblProjectPaymentSystem")
+                    {
+                        if (!bPm)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "Payment System",
+                                lItems = new List<AuditFields>()
+                            });
+                            bPm = true;
+                            iPmposition = i;
+                            i++;
+                        }
+                        lstItems[iPmposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+
+                    }
+                    else if (techparts.tTable == "tblProjectInteriorMenus")
+                    {
+                        if (!bInt)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "Interior Menus",
+                                lItems = new List<AuditFields>()
+                            });
+                            bInt = true;
+                            iIntposition = i;
+                            i++;
+                        }
+                        lstItems[iIntposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+
+                    }
+                    else if (techparts.tTable == "tblProjectInstallation")
+                    {
+                        if (!bInstaln)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "Installation",
+                                lItems = new List<AuditFields>()
+                            });
+                            bInstaln = true;
+                            iInstalnposition = i;
+                            i++;
+                        }
+                        lstItems[iInstalnposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+
+                    }
+                    else if (techparts.tTable == "tblProjectSonicRadio" || techparts.tTable == "tblProjectServerHandheld")
+                    {
+                        if (!bRadio)
+                        {
+                            
+                            if (output == "Arby's")
+                            {
+                                lstItems.Add(new AuditModel()
+                                {
+                                    // nTotalCount = 10,
+                                    tComponentName = "Radio",
+                                    lItems = new List<AuditFields>()
+                                });
+                            }                            
+                            else if (output == "Buffalo Wild Wings")
+                            {
+                                lstItems.Add(new AuditModel()
+                                {
+                                    // nTotalCount = 10,
+                                    tComponentName = "Server Handheld",
+                                    lItems = new List<AuditFields>()
+                                });
+                            }
+                            else //if (output == "Sonic Drive-In")
+                            {
+                                lstItems.Add(new AuditModel()
+                                {
+                                    // nTotalCount = 10,
+                                    tComponentName = "Sonic Radio",
+                                    lItems = new List<AuditFields>()
+                                });
+                            }
+                            bRadio = true;
+                            iRadioposition = i;
+                            i++;
+                        }
+                        lstItems[iRadioposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+
                     }
                 }
-            });
-            lstItems.Add(new AuditModel()
-            {
-                nTotalCount = 10,
-                tComponentName = "POS",
-                lItems = new List<AuditFields>()
-            });
-            lstItems[1].lItems.Add(new AuditFields()
-            {
-                dDate = DateTime.Now,
-                tChangeNote = "",
-                tFieldName = "nVendor",
-                tNewValue = "1",
-                tPreviousValue = "4",
-                nUserId = 2
-            });
 
-            lstItems[1].lItems.Add(new AuditFields()
-            {
-                dDate = DateTime.Now.AddDays(-30),
-                tChangeNote = "",
-                tFieldName = "dDeliveryDate",
-                tNewValue = DateTime.Now.AddHours(203).ToString(),
-                tPreviousValue = DateTime.Now.ToString(),
-                nUserId = 2
-            });
 
-            lstItems[1].lItems.Add(new AuditFields()
-            {
-                dDate = DateTime.Now.AddDays(-1),
-                tChangeNote = "",
-                tFieldName = "nStatus",
-                tNewValue = "139",
-                tPreviousValue = "140",
-                nUserId = 2
-            });
+                //lstItems[1].lItems.Add(new AuditFields()
+                //{
+                //    dDate = DateTime.Now.AddDays(-30),
+                //    tChangeNote = "",
+                //    tFieldName = "dDeliveryDate",
+                //    tNewValue = DateTime.Now.AddHours(203).ToString(),
+                //    tPreviousValue = DateTime.Now.ToString(),
+                //    nUserId = 2
+                //});
 
-            lstItems[1].lItems.Add(new AuditFields()
-            {
-                dDate = DateTime.Now.AddDays(-10),
-                tChangeNote = "",
-                tFieldName = "cCost",
-                tNewValue = "100",
-                tPreviousValue = "122",
-                nUserId = 2
-            });
+                //lstItems[1].lItems.Add(new AuditFields()
+                //{
+                //    dDate = DateTime.Now.AddDays(-1),
+                //    tChangeNote = "",
+                //    tFieldName = "nStatus",
+                //    tNewValue = "139",
+                //    tPreviousValue = "140",
+                //    nUserId = 2
+                //});
 
-            lstItems.Add(new AuditModel()
-            {
-                nTotalCount = 10,
-                tComponentName = "Audio",
-                lItems = new List<AuditFields>()
-                {
-                    new AuditFields()
-                    {
-                        dDate = DateTime.Now.AddDays(-30),
-                tChangeNote = "",
-                tFieldName = "nVendor",
-                tNewValue = "1",
-                tPreviousValue = "4",
-                nUserId = 2
-                    }
-                }
-            });
-            lstItems.Add(new AuditModel()
-            {
-                nTotalCount = 10,
-                tComponentName = "Interior Menus",
-                lItems = new List<AuditFields>()
-                {
-                    new AuditFields()
-                    {
-                        dDate = DateTime.Now.AddDays(-30),
-                tChangeNote = "",
-                tFieldName = "nVendor",
-                tNewValue = "1",
-                tPreviousValue = "4",
-                nUserId = 2
-                    }
-                }
-            });
-            lstItems.Add(new AuditModel()
-            {
-                nTotalCount = 10,
-                tComponentName = "Exterior Menus",
-                lItems = new List<AuditFields>()
-                {
-                    new AuditFields()
-                    {
-                        dDate = DateTime.Now.AddDays(-30),
-                tChangeNote = "",
-                tFieldName = "nVendor",
-                tNewValue = "1",
-                tPreviousValue = "2",
-                nUserId = 2
-                    }
+                //lstItems[1].lItems.Add(new AuditFields()
+                //{
+                //    dDate = DateTime.Now.AddDays(-10),
+                //    tChangeNote = "",
+                //    tFieldName = "cCost",
+                //    tNewValue = "100",
+                //    tPreviousValue = "122",
+                //    nUserId = 2
+                //});
+
+                //lstItems.Add(new AuditModel()
+                //{
+                //    nTotalCount = 10,
+                //    tComponentName = "Audio"
+                //});
+                //lstItems.Add(new AuditModel()
+                //{
+                //    nTotalCount = 10,
+                //    tComponentName = "Interior Menu"
+                //});
+                //lstItems.Add(new AuditModel()
+                //{
+                //    nTotalCount = 10,
+                //    tComponentName = "Exterior Menu"
+                //});
+                //lstItems.Add(new AuditModel()
+                //{
+                //    nTotalCount = 10,
+                //    tComponentName = "Sonic Radio"
+                //});
+                //lstItems.Add(new AuditModel()
+                //{
+                //    nTotalCount = 10,
+                //    tComponentName = "Server Handheld"
+                //});
+                //lstItems.Add(new AuditModel()
+                //{
+                //    nTotalCount = 10,
+                //    tComponentName = "Installation"
+                //});
             }
-            });
-            lstItems.Add(new AuditModel()
+            catch(Exception ex)
             {
-                nTotalCount = 10,
-                tComponentName = "Sonic Radio",
-                lItems = new List<AuditFields>()
-                {
-                    new AuditFields()
-                    {
-                        dDate = DateTime.Now.AddDays(-30),
-                tChangeNote = "",
-                tFieldName = "nVendor",
-                tNewValue = "1",
-                tPreviousValue = "4",
-                nUserId = 2
-                    }
-                }
-            });
-            lstItems.Add(new AuditModel()
-            {
-                nTotalCount = 10,
-                tComponentName = "Server Handheld",
-                lItems = new List<AuditFields>()
-                {
-                    new AuditFields()
-                    {
-                        dDate = DateTime.Now.AddDays(-30),
-                tChangeNote = "",
-                tFieldName = "nVendor",
-                tNewValue = "1",
-                tPreviousValue = "4",
-                nUserId = 2
-                    }
-                }
-            });
-            lstItems.Add(new AuditModel()
-            {
-                nTotalCount = 10,
-                tComponentName = "Installation",
-                lItems = new List<AuditFields>()
-                {
-                    new AuditFields()
-                    {
-                        dDate = DateTime.Now.AddDays(-30),
-                tChangeNote = "",
-                tFieldName = "nVendor",
-                tNewValue = "1",
-                tPreviousValue = "4",
-                nUserId = 2
-                    }
-                }
-            });
+              //  nTotalCount = 10,
+               // tComponentName = "Installation"
+            }
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new ObjectContent<List<AuditModel>>(lstItems, new JsonMediaTypeFormatter())
@@ -834,7 +998,7 @@ namespace DeploymentTool.Controller
                 tFieldName = "nVendor",
                 tNewValue = "1",
                 tPreviousValue = "4",
-                nUserId = 2
+                nUserId = 2                
             });
 
             lstItems.Add(new AuditFields()

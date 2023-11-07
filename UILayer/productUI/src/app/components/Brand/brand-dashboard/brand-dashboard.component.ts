@@ -17,10 +17,14 @@ import { ExStoreService } from 'src/app/services/ex-store.service';
 })
 export class BrandDashboardComponent {
   @Input()
-  set curBrand(val: BrandModel) {
-    this._curBrand = val;
+  set request(val: any) {
+    this._curBrand = val.curBrand;
+    this._showTiles = val.showTile;
+    this._defaultConditionForSearch = val.defaultConditionForSearch;
     this.getProjectHoghlights();
   };
+  _showTiles: boolean;
+  _defaultConditionForSearch: string;
   _curBrand: BrandModel;
   projects: DahboardTile[];
   @Output() SearchedResult = new EventEmitter<string>();
@@ -47,6 +51,10 @@ export class BrandDashboardComponent {
     this.ChangeView.emit({ viewName: "viewreport", request: request, tParam: tProjParam });
   }
 
+  CallSearchedResult(val: any) {
+    this.SearchedResult.emit(val);
+  }
+
   filterNotChart(part: DahboardTile) {
     return (part.type != DashboardTileType.Chart);
   }
@@ -56,6 +64,10 @@ export class BrandDashboardComponent {
   }
 
   filterClick(filter: string) { }
+
+  GoBack(request: any) {
+    this.ChangeView.emit(request);
+  }
 
   changeSelected(val: OptionType) {
     const index = this.selectedProjects.indexOf(val.aDropdownId);

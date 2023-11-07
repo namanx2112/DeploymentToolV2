@@ -15,14 +15,18 @@ export class SearchStoreComponent {
   ddOptions: StoreSearchModel[];
   filteredOptions: Observable<StoreSearchModel[]>;
   _curBrandId: number;
+  _defaultConditionForSearch: string;
   @Input()
-  set curBrandId(val: number) {
-    this._curBrandId = val;
+  set request(val: any) {
+    this._curBrandId = val.curBrandId;
+    if (typeof val.defaultConditionForSearch != 'undefined')
+      this._defaultConditionForSearch = val.defaultConditionForSearch;
+    else
+      this._defaultConditionForSearch = "";
     this.getAllStores();
   }
   @Output() SearchedResult = new EventEmitter<string>();
   constructor(private service: ExStoreService) {
-
   }
 
   private _filter(value: string): StoreSearchModel[] {
@@ -37,7 +41,7 @@ export class SearchStoreComponent {
   }
 
   getAllStores() {
-    this.service.SearchStore('', this._curBrandId).subscribe((x: StoreSearchModel[]) => {
+    this.service.SearchStore(this._defaultConditionForSearch, this._curBrandId).subscribe((x: StoreSearchModel[]) => {
       this.ddOptions = x;
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),

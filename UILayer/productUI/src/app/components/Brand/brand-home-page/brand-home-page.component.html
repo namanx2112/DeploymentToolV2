@@ -34,12 +34,15 @@
                     Handheld Installation</button>
             </mat-menu>
             <button mat-button *ngIf="access.hasAccess('home.sonic.searchproject', 1) || showSearchForcefully"
-                (click)="menuClick('search')" [className]="configMenu=='search'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>search</mat-icon>Search</button>
+                (click)="menuClick('search')"
+                [className]="configMenu=='search'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>search</mat-icon>Search</button>
             <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)"
-                (click)="menuClick('importproject')" [className]="configMenu=='importproject'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>attach_file</mat-icon>Import Project</button>
+                (click)="menuClick('importproject')"
+                [className]="configMenu=='importproject'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>attach_file</mat-icon>Import
+                Project</button>
         </div>
         <div class="ConfigList tabSelectionOption">
-            <span *ngIf="!showSearchForcefully" (click)="clickOption('dashboard')"
+            <span (click)="clickOption('dashboard')"
                 [className]="configMenu=='dashboard'?'selected':''">{{_curBrand.tBrandName}}
                 Homepage</span>
             <span (click)="clickOption('Project Portfolio')" *ngIf="access.hasAccess('home.sonic.projectportfolio', 0)"
@@ -50,16 +53,18 @@
                 [className]="configMenu=='savedreports'?'selected':''">Saved Reports</span>
             <span (click)="clickOption('dashboardpane')" *ngIf="access.hasAccess('home.sonic.report', 0)"
                 [className]="configMenu=='dashboardpane'?'selected':''">Dashboard</span>
-
+            <!-- <span (click)="clickOption('projectrollout')" *ngIf="access.hasAccess('home.sonic.report', 0)"
+                [className]="configMenu=='projectrollout'?'selected':''">Rollout Projects</span> -->
         </div>
     </mat-drawer>
     <div class="sideNavContent">
         <span [ngClass]="drawer.opened ? 'toggleIcon opened' : 'toggleIcon'" (click)="drawer.toggle()">
             <mat-icon>play_arrow</mat-icon>
         </span>
-        <app-brand-dashboard *ngIf="showMode == 'dashboard'" [curBrand]="_curBrand"
+        <app-tab-body *ngIf="showMode == 'projectrollout'" [curTab]="rolloutTab" [NeedNew]="false"></app-tab-body>
+        <app-brand-dashboard *ngIf="showMode == 'dashboard'" [request]="{curBrand: _curBrand, defaultConditionForSearch: defaultConditionForSearch, showTile: (defaultConditionForSearch != '')}"
             (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>
-        <app-dashboard-pane *ngIf="showMode == 'dashboardpane'" [curBrand]="_curBrand"
+        <app-dashboard-pane *ngIf="showMode == 'dashboardpane'" [request]="{curBrand: _curBrand, needSearch: true}"
             (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-dashboard-pane>
         <app-saved-reports *ngIf="showMode == 'savedreports'" [curBrand]="_curBrand"
             (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-saved-reports>
@@ -90,10 +95,11 @@
         <app-project-portfolio *ngIf="showMode == 'Project Portfolio'" [curBrand]="_curBrand"
             (BackToStoreView)="BackToStoreView($event)" (openStore)="showStore($event)"></app-project-portfolio>
         <app-advanced-search *ngIf="showMode == 'search'" (ChangeView)="ChangeView($event)"
-            (openStore)="showStore($event)" [request]="{curBrand: _curBrand, defaultCondition: defaultConditionForSearch}"></app-advanced-search>
+            (openStore)="showStore($event)"
+            [request]="{curBrand: _curBrand, defaultCondition: defaultConditionForSearch}"></app-advanced-search>
         <app-not-implemented
             *ngIf="showMode != 'Project Portfolio' && showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'InteriorMenuInstallation' && showMode != 'ExteriorMenuInstallation' && 
         showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && 
-        showMode != 'newstore' && showMode != 'savedreports' && showMode != 'search' && showMode != 'dashboard' && showMode != 'dashboardpane' && showMode != 'viewreport' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
+        showMode != 'newstore' && showMode != 'projectrollout' && showMode != 'savedreports' && showMode != 'search' && showMode != 'dashboard' && showMode != 'dashboardpane' && showMode != 'viewreport' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
     </div>
 </mat-drawer-container>

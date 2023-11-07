@@ -8,6 +8,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using DeploymentTool.Model;
+using System.Web;
 
 namespace DeploymentTool.Controller
 {
@@ -66,6 +68,36 @@ namespace DeploymentTool.Controller
 
             //tblProjectServerHandheld.ProjectActiveStatus = 1;//SantoshPP\
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ServerHandheld, tblProjectServerHandheld.nStoreId, tblProjectServerHandheld);
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 2;
+            ////----Vendor Audit field-----------
+            // if (tblProjectServerHandheld.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 1, "tblProjectServerHandheld", "nVendor", tblProjectServerHandheld.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectServerHandheld.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 1, "tblProjectServerHandheld", "nStatus", tblProjectServerHandheld.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nNumberOfTabletsPerStore Audit field-----------
+            //if (tblProjectServerHandheld.nNumberOfTabletsPerStore != null)
+            //    Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 1, "tblProjectServerHandheld", "nNumberOfTabletsPerStore", tblProjectServerHandheld.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectServerHandheld.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectServerHandheld.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 4, "tblProjectServerHandheld", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            } //----dShipDate Audit field-----------
+            if (tblProjectServerHandheld.dShipDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectServerHandheld.dShipDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 4, "tblProjectServerHandheld", "dShipDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }          
+            ////----Cost Audit field-----------
+            //if (tblProjectServerHandheld.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 1, "tblProjectServerHandheld", "cCost", tblProjectServerHandheld.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+           
             db.Entry(tblProjectServerHandheld).State = EntityState.Modified;
 
             try
@@ -98,6 +130,35 @@ namespace DeploymentTool.Controller
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ServerHandheld, tblProjectServerHandheld.nStoreId, tblProjectServerHandheld);
             db.tblProjectServerHandhelds.Add(tblProjectServerHandheld);
             await db.SaveChangesAsync();
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 1;
+            ////----Vendor Audit field-----------
+            //if (tblProjectServerHandheld.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 1, "tblProjectServerHandheld", "nVendor", tblProjectServerHandheld.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectServerHandheld.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 1, "tblProjectServerHandheld", "nStatus", tblProjectServerHandheld.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nNumberOfTabletsPerStore Audit field-----------
+            //if (tblProjectServerHandheld.nNumberOfTabletsPerStore != null)
+            //    Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 1, "tblProjectServerHandheld", "nNumberOfTabletsPerStore", tblProjectServerHandheld.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectServerHandheld.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectServerHandheld.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 4, "tblProjectServerHandheld", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            } //----dShipDate Audit field-----------
+            if (tblProjectServerHandheld.dShipDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectServerHandheld.dShipDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 4, "tblProjectServerHandheld", "dShipDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----Cost Audit field-----------
+            //if (tblProjectServerHandheld.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectServerHandheld.nStoreId, tblProjectServerHandheld.nProjectID, 1, "tblProjectServerHandheld", "cCost", tblProjectServerHandheld.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
 
             return Json(tblProjectServerHandheld);
         }

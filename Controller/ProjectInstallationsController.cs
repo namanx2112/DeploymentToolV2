@@ -8,9 +8,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
+using DeploymentTool.Model;
 
 namespace DeploymentTool.Controller
 {
@@ -72,6 +74,51 @@ namespace DeploymentTool.Controller
             {
                 Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectInstallation.nStoreId, tblProjectInstallation);
             }
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 2;
+            ////----Vendor Audit field-----------
+            //if (tblProjectInstallation.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nVendor", tblProjectInstallation.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectInstallation.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nStatus", tblProjectInstallation.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nSignoffs Audit field-----------
+            if (tblProjectInstallation.nSignoffs != null)
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nSignoffs", tblProjectInstallation.nSignoffs.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nTestTransactions Audit field-----------
+            //if (tblProjectInstallation.nTestTransactions != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nTestTransactions", tblProjectInstallation.nTestTransactions.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nProjectStatus Audit field-----------
+            //if (tblProjectInstallation.nProjectStatus != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nProjectStatus", tblProjectInstallation.nProjectStatus.ToString(), "", lUserId, nCreateOrUpdate);
+
+            //----tLeadTech Audit field-----------
+            if (tblProjectInstallation.tLeadTech != null)
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 2, "tblProjectInstallation", "tLeadTech", tblProjectInstallation.tLeadTech.ToString(), "", lUserId, nCreateOrUpdate);
+            //----dInstallDate Audit field-----------
+            if (tblProjectInstallation.dInstallDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectInstallation.dInstallDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 4, "tblProjectInstallation", "dInstallDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            //----dInstallEnd Audit field-----------
+            if (tblProjectInstallation.dInstallEnd != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectInstallation.dInstallEnd.ToString());
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 4, "tblProjectInstallation", "dInstallEnd", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            //----dRevisitDate Audit field-----------
+            if (tblProjectInstallation.dRevisitDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectInstallation.dRevisitDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 4, "tblProjectInstallation", "dRevisitDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+
+            ////----cCost Audit field-----------
+            //if (tblProjectInstallation.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 3, "tblProjectInstallation", "cCost", tblProjectInstallation.cCost.ToString(), "", lUserId, nCreateOrUpdate);
 
             try
             {
@@ -109,6 +156,52 @@ namespace DeploymentTool.Controller
             tblProjectInstallation.aProjectInstallationID = 0;
             db.tblProjectInstallations.Add(tblProjectInstallation);
             await db.SaveChangesAsync();
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 1;
+            ////----Vendor Audit field-----------
+            //if (tblProjectInstallation.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nVendor", tblProjectInstallation.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectInstallation.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nStatus", tblProjectInstallation.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nSignoffs Audit field-----------
+            if (tblProjectInstallation.nSignoffs != null)
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nSignoffs", tblProjectInstallation.nSignoffs.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nTestTransactions Audit field-----------
+            //if (tblProjectInstallation.nTestTransactions != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nTestTransactions", tblProjectInstallation.nTestTransactions.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nProjectStatus Audit field-----------
+            //if (tblProjectInstallation.nProjectStatus != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 1, "tblProjectInstallation", "nProjectStatus", tblProjectInstallation.nProjectStatus.ToString(), "", lUserId, nCreateOrUpdate);
+
+            //----tLeadTech Audit field-----------
+            if (tblProjectInstallation.tLeadTech != null)
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 2, "tblProjectInstallation", "tLeadTech", tblProjectInstallation.tLeadTech.ToString(), "", lUserId, nCreateOrUpdate);
+            //----dInstallDate Audit field-----------
+            if (tblProjectInstallation.dInstallDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectInstallation.dInstallDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 4, "tblProjectInstallation", "dInstallDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            //----dInstallEnd Audit field-----------
+            if (tblProjectInstallation.dInstallEnd != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectInstallation.dInstallEnd.ToString());
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 4, "tblProjectInstallation", "dInstallEnd", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            //----dRevisitDate Audit field-----------
+            if (tblProjectInstallation.dRevisitDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectInstallation.dRevisitDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 4, "tblProjectInstallation", "dRevisitDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+
+            ////----cCost Audit field-----------
+            //if (tblProjectInstallation.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 3, "tblProjectInstallation", "cCost", tblProjectInstallation.cCost.ToString(), "", lUserId, nCreateOrUpdate);
 
             if (tblProjectInstallation.dInstallEnd != null)
                 db.Database.ExecuteSqlCommand("update tblProject set dGoLiveDate=@dInstallationDate where aProjectID =@aProjectID", new SqlParameter("@dInstallationDate", tblProjectInstallation.dInstallEnd), new SqlParameter("@aProjectID", tblProjectInstallation.nProjectID)); // Update goLive date as installation end date

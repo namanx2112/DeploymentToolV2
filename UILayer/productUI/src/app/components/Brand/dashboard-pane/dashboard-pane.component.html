@@ -1,5 +1,5 @@
-<h3 class="headerPart">Dashboard</h3>
-<div class="tilHeader">
+<h3 class="headerPart" *ngIf="_needSearch">Dashboard</h3>
+<div class="tilHeader" *ngIf="_needSearch">
     <mat-form-field>
         <mat-label>Project Type</mat-label>
         <mat-select multiple>

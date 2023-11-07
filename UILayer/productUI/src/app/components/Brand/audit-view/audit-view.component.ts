@@ -56,7 +56,7 @@ export class AuditViewComponent {
   }
 
   getFormatedDate(sDate: any) {
-    return CommonService.getFormatedDateString(sDate);
+    return CommonService.getFormatedDateString(sDate, true);
   }
 
   getUserName(userId: number) {
@@ -81,7 +81,7 @@ export class AuditViewComponent {
     if (tField) {
       switch (tField.field_type) {
         case FieldType.date:
-          tName = this.getFormatedDate(fieldVal);
+          tName = CommonService.getFormatedDateString(fieldVal);
           break;
         case FieldType.currency:
           tName = "$" + fieldVal;

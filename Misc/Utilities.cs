@@ -24,6 +24,7 @@ using System.Data.Entity;
 using System.Security.Cryptography;
 using ExcelDataReader;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 
 namespace DeploymentTool.Misc
 {
@@ -117,6 +118,32 @@ namespace DeploymentTool.Misc
             }
         }
 
+        public static void AddToAudit( int? nStoreId, int? nProjectID,int nDataType,string tTable,string tField,string tChangeValue,string tChangeNote, int? lUserId,int nCreateOrUpdate)
+        {
+            try
+            {
+                int? nBrandID = 0;//
+                dtDBEntities db = new dtDBEntities();
+                List<SqlParameter> tp1 = new List<SqlParameter>();
+                //tp1.Add(new SqlParameter("@nBrandID", nBrandID));
+                tp1.Add(new SqlParameter("@nStoreID", nStoreId));
+                tp1.Add(new SqlParameter("@nProjectID", nProjectID));
+                tp1.Add(new SqlParameter("@nDataType", nDataType));
+                tp1.Add(new SqlParameter("@tTable", tTable));
+                tp1.Add(new SqlParameter("@tField", tField));
+                tp1.Add(new SqlParameter("@tChangeValue", tChangeValue));
+                tp1.Add(new SqlParameter("@tChangeNote", tChangeNote));
+                tp1.Add(new SqlParameter("@nCreatedBy", lUserId));
+                tp1.Add(new SqlParameter("@nCreateOrUpdate", nCreateOrUpdate));
+                //db.Database.ExecuteSqlCommand("exec sproc_AddAudit @nBrandID,@nStoreID,@nProjectID,@nDataType,@tTable,@tField,@tChangeValue,@tChangeNote,@nCreatedBy ,@nCreateOrUpdate", tp1[0], tp1[1], tp1[2], tp1[3], tp1[4], tp1[5], tp1[6], tp1[7], tp1[8], tp1[9]);
+                db.Database.ExecuteSqlCommand("exec sproc_AddAudit @nStoreID,@nProjectID,@nDataType,@tTable,@tField,@tChangeValue,@tChangeNote,@nCreatedBy ,@nCreateOrUpdate", tp1[0], tp1[1], tp1[2], tp1[3], tp1[4], tp1[5], tp1[6], tp1[7], tp1[8]);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
         public static String WriteHTMLToPDF(String strBody, String fileName)
         {
             string strFilePath = "";

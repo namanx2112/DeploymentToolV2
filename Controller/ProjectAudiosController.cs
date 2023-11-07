@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
@@ -69,6 +70,41 @@ namespace DeploymentTool.Model
 
             //tblProjectAudio.ProjectActiveStatus = 1;//SantoshPP\
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.AudioInstallation, tblProjectAudio.nStoreId, tblProjectAudio);
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            //int nBrandID = 6;
+            int nCreateOrUpdate = 2;
+            ////----Vendor Audit field-----------
+            //if (tblProjectAudio.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 1, "tblProjectAudio", "nVendor", tblProjectAudio.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectAudio.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 1, "tblProjectAudio", "nStatus", tblProjectAudio.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectAudio.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectAudio.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 4, "tblProjectAudio", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----Configuration Audit field-----------
+            //if (tblProjectAudio.nConfiguration != null)
+            //{
+            //    Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 1, "tblProjectAudio", "nConfiguration", tblProjectAudio.nConfiguration.ToString(), "", lUserId, nCreateOrUpdate);
+            //}
+            //----LoopDeliveryDate Audit field-----------
+            if (tblProjectAudio.dLoopDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectAudio.dLoopDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 4, "tblProjectAudio", "dLoopDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----Cost Audit field-----------
+            //if (tblProjectAudio.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 3, "tblProjectAudio", "cCost", tblProjectAudio.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----LoopStatus Audit field-----------
+            //if (tblProjectAudio.nLoopStatus != null)
+            //    Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 1, "tblProjectAudio", "nLoopStatus", tblProjectAudio.nLoopStatus.ToString(), "", lUserId, nCreateOrUpdate);
+
             db.Entry(tblProjectAudio).State = EntityState.Modified;
 
             try
@@ -101,6 +137,41 @@ namespace DeploymentTool.Model
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.AudioInstallation, tblProjectAudio.nStoreId, tblProjectAudio);
             db.tblProjectAudios.Add(tblProjectAudio);
             await db.SaveChangesAsync();
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 1;
+            ////----Vendor Audit field-----------
+            //if (tblProjectAudio.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 1, "tblProjectAudio", "nVendor", tblProjectAudio.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nStatus Audit field-----------
+            if (tblProjectAudio.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 1, "tblProjectAudio", "nStatus", tblProjectAudio.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectAudio.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectAudio.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 4, "tblProjectAudio", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----Configuration Audit field-----------
+            //if (tblProjectAudio.nConfiguration != null)
+            //{
+            //    Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 1, "tblProjectAudio", "nConfiguration", tblProjectAudio.nConfiguration.ToString(), "", lUserId, nCreateOrUpdate);
+            //}
+            //----LoopDeliveryDate Audit field-----------
+            if (tblProjectAudio.dLoopDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectAudio.dLoopDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 4, "tblProjectAudio", "dLoopDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----Cost Audit field-----------
+            //if (tblProjectAudio.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 3, "tblProjectAudio", "cCost", tblProjectAudio.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----LoopStatus Audit field-----------
+            //if (tblProjectAudio.nLoopStatus != null)
+            //    Misc.Utilities.AddToAudit(tblProjectAudio.nStoreId, tblProjectAudio.nProjectID, 1, "tblProjectAudio", "nLoopStatus", tblProjectAudio.nLoopStatus.ToString(), "", lUserId, nCreateOrUpdate);
 
             return Json(tblProjectAudio);
         }

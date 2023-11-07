@@ -8,9 +8,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
+using DeploymentTool.Model;
 
 namespace DeploymentTool.Controller
 {
@@ -66,6 +68,68 @@ namespace DeploymentTool.Controller
         {
             //tblProjectPaymentSystem.ProjectActiveStatus = 1;Santosh
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.PaymentTerminalInstallation, tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem);
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 2;
+            ////----Vendor Audit field-----------
+            //if (tblProjectPaymentSystem.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nVendor", tblProjectPaymentSystem.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectPaymentSystem.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nStatus", tblProjectPaymentSystem.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectPaymentSystem.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectPaymentSystem.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 4, "tblProjectPaymentSystem", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            } 
+            ////----cCost Audit field-----------
+            //if (tblProjectPaymentSystem.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 3, "tblProjectPaymentSystem", "cCost", tblProjectPaymentSystem.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nBuyPassID Audit field-----------
+            //if (tblProjectPaymentSystem.nBuyPassID != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nBuyPassID", tblProjectPaymentSystem.nBuyPassID.ToString(), "", lUserId, nCreateOrUpdate);
+
+
+            ////----nServerEPS Audit field-----------
+            //if (tblProjectPaymentSystem.nServerEPS != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nServerEPS", tblProjectPaymentSystem.nServerEPS.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nPAYSUnits Audit field-----------
+            //if (tblProjectPaymentSystem.nPAYSUnits != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nPAYSUnits", tblProjectPaymentSystem.nPAYSUnits.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----n45Enclosures Audit field-----------
+            //if (tblProjectPaymentSystem.n45Enclosures != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "n45Enclosures", tblProjectPaymentSystem.n45Enclosures.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----n90Enclosures Audit field-----------
+            //if (tblProjectPaymentSystem.n90Enclosures != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "n90Enclosures", tblProjectPaymentSystem.n90Enclosures.ToString(), "", lUserId, nCreateOrUpdate);
+
+
+            ////----nDTEnclosures Audit field-----------
+            //if (tblProjectPaymentSystem.nDTEnclosures != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nDTEnclosures", tblProjectPaymentSystem.nDTEnclosures.ToString(), "", lUserId, nCreateOrUpdate);
+
+
+            ////----n15SunShields Audit field-----------
+            //if (tblProjectPaymentSystem.n15SunShields != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "n15SunShields", tblProjectPaymentSystem.n15SunShields.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nUPS Audit field-----------
+            //if (tblProjectPaymentSystem.nUPS != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nUPS", tblProjectPaymentSystem.nUPS.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nShelf Audit field-----------
+            //if (tblProjectPaymentSystem.nShelf != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nShelf", tblProjectPaymentSystem.nShelf.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nType Audit field-----------
+            //if (tblProjectPaymentSystem.nType != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nType", tblProjectPaymentSystem.nType.ToString(), "", lUserId, nCreateOrUpdate);
+
             db.Entry(tblProjectPaymentSystem).State = EntityState.Modified;
 
             try
@@ -99,6 +163,68 @@ namespace DeploymentTool.Controller
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.PaymentTerminalInstallation, tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem);
             db.tblProjectPaymentSystems.Add(tblProjectPaymentSystem);
             await db.SaveChangesAsync();
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 1;
+            ////----Vendor Audit field-----------
+            //if (tblProjectPaymentSystem.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nVendor", tblProjectPaymentSystem.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectPaymentSystem.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nStatus", tblProjectPaymentSystem.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectPaymentSystem.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectPaymentSystem.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 4, "tblProjectPaymentSystem", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            } //----Configuration Audit field-----------
+
+            ////----cCost Audit field-----------
+            //if (tblProjectPaymentSystem.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 3, "tblProjectPaymentSystem", "cCost", tblProjectPaymentSystem.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nBuyPassID Audit field-----------
+            //if (tblProjectPaymentSystem.nBuyPassID != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nBuyPassID", tblProjectPaymentSystem.nBuyPassID.ToString(), "", lUserId, nCreateOrUpdate);
+
+
+            ////----nServerEPS Audit field-----------
+            //if (tblProjectPaymentSystem.nServerEPS != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nServerEPS", tblProjectPaymentSystem.nServerEPS.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nPAYSUnits Audit field-----------
+            //if (tblProjectPaymentSystem.nPAYSUnits != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nPAYSUnits", tblProjectPaymentSystem.nPAYSUnits.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----n45Enclosures Audit field-----------
+            //if (tblProjectPaymentSystem.n45Enclosures != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "n45Enclosures", tblProjectPaymentSystem.n45Enclosures.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----n90Enclosures Audit field-----------
+            //if (tblProjectPaymentSystem.n90Enclosures != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "n90Enclosures", tblProjectPaymentSystem.n90Enclosures.ToString(), "", lUserId, nCreateOrUpdate);
+
+
+            ////----nDTEnclosures Audit field-----------
+            //if (tblProjectPaymentSystem.nDTEnclosures != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nDTEnclosures", tblProjectPaymentSystem.nDTEnclosures.ToString(), "", lUserId, nCreateOrUpdate);
+
+
+            ////----n15SunShields Audit field-----------
+            //if (tblProjectPaymentSystem.n15SunShields != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "n15SunShields", tblProjectPaymentSystem.n15SunShields.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nUPS Audit field-----------
+            //if (tblProjectPaymentSystem.nUPS != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nUPS", tblProjectPaymentSystem.nUPS.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nShelf Audit field-----------
+            //if (tblProjectPaymentSystem.nShelf != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nShelf", tblProjectPaymentSystem.nShelf.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nType Audit field-----------
+            //if (tblProjectPaymentSystem.nType != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPaymentSystem.nStoreId, tblProjectPaymentSystem.nProjectID, 1, "tblProjectPaymentSystem", "nType", tblProjectPaymentSystem.nType.ToString(), "", lUserId, nCreateOrUpdate);
 
             return Json(tblProjectPaymentSystem);
         }

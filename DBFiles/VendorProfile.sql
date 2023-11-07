@@ -3,7 +3,7 @@ select * from tblUser
 update tblUser set tPassword = '260d23baeb73c2451f00f4a30ea4eb9ccad81b7f0c7dc23f58de70fd1426ab9d' where aUserID = 85
 create table tblRoleFieldRestrictedAccess(aAccessId int identity primary key, nRoleId int, tTechCompName varchar(500), tFieldName varchar(500), nAccessVal int default 2)
 
--------------Sample Date for different Tech Components
+-------------Sample Date for different Tech Components 
 insert into tblRoleFieldRestrictedAccess(nRoleId, tTechCompName, tFieldName, nAccessVal) values(6, 'POS','nVendor', 1)
 insert into tblRoleFieldRestrictedAccess(nRoleId, tTechCompName, tFieldName, nAccessVal) values(6, 'POS','dDeliveryDate', 2)
 insert into tblRoleFieldRestrictedAccess(nRoleId, tTechCompName, tFieldName, nAccessVal) values(6, 'POS','dConfigDate', 1)
@@ -167,3 +167,9 @@ and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor'
 
 update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
 and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.sonic.report')
+
+update tblUserPermissionRel set nPermVal = 0 where nUserID in(select nUserID from tblUserVendorRel )
+and nPermissionID in(select aPermissionlID from tbPermission where tPermissionName = 'home.notification')
+
+update tblRolePermissionRel set nPermVal = 0 where nPermissionID in (select aPermissionlID from tbPermission where tPermissionName = 'home.notification')
+and nRoleID in (select aRoleID from tblRole where tRoleName = 'Equipment Vendor' or tRoleName = 'Installation Vendor')

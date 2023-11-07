@@ -158,9 +158,17 @@ namespace DeploymentTool.Controller
             tPartDesc = excelColumns.IndexOf("Parts Description") > -1 ? reader.GetValue(excelColumns.IndexOf("Parts Description")).ToString() : "";
             tPartNumber = excelColumns.IndexOf("Parts Number") > -1 ? reader.GetValue(excelColumns.IndexOf("Parts Number")).ToString() : "";
             cPrice = excelColumns.IndexOf("Parts Price") > -1 ? Convert.ToDecimal(reader.GetValue(excelColumns.IndexOf("Parts Price")).ToString()) : 0;
+            var output = db.Database.SqlQuery<string>("select nPartID from tblVendorPartRel with (nolock) where nPartID in (select aPartID from tblparts with (nolock) where tPartNumber=@tPartNumber) and nVendorID=@nVendorID", new SqlParameter("@tPartNumber", tPartNumber), new SqlParameter("@nVendorID", nVendorId)).FirstOrDefault();
+
             nVendorId = instanceId;
             isExist = false;
-            aPartID = 11;// Get Part Id from DB
+            aPartID = 0;
+            if (output != null && output != "" && Convert.ToInt32(output) > 0)
+            {
+                isExist = true;
+                aPartID = Convert.ToInt32(output);// Get Part Id from DB
+            }
+            
             return this;
         }
 

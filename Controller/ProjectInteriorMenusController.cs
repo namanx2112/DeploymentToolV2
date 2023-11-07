@@ -8,9 +8,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
+using DeploymentTool.Model;
 
 namespace DeploymentTool.Controller
 {
@@ -67,6 +69,29 @@ namespace DeploymentTool.Controller
         {
             //tblProjectInteriorMenu.ProjectActiveStatus = 1;Santosh
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.InteriorMenuInstallation, tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu);
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 2;
+            ////----Vendor Audit field-----------
+            //if (tblProjectInteriorMenu.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 1, "tblProjectInteriorMenus", "nVendor", tblProjectInteriorMenu.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectInteriorMenu.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 1, "tblProjectInteriorMenus", "nStatus", tblProjectInteriorMenu.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nDMBQuantity Audit field-----------
+            //if (tblProjectInteriorMenu.nDMBQuantity != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 1, "tblProjectInteriorMenus", "nDMBQuantity", tblProjectInteriorMenu.nDMBQuantity.ToString(), "", lUserId, nCreateOrUpdate);
+            //----dDeliveryDate Audit field-----------
+            if (tblProjectInteriorMenu.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectInteriorMenu.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 4, "tblProjectInteriorMenus", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }           
+            ////----cCost Audit field-----------
+            //if (tblProjectInteriorMenu.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 3, "tblProjectInteriorMenus", "cCost", tblProjectInteriorMenu.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
             db.Entry(tblProjectInteriorMenu).State = EntityState.Modified;
 
             try
@@ -101,6 +126,28 @@ namespace DeploymentTool.Controller
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.InteriorMenuInstallation, tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu);
             db.tblProjectInteriorMenus.Add(tblProjectInteriorMenu);
             await db.SaveChangesAsync();
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 1;
+            ////----Vendor Audit field-----------
+            //if (tblProjectInteriorMenu.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 1, "tblProjectInteriorMenus", "nVendor", tblProjectInteriorMenu.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectInteriorMenu.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 1, "tblProjectInteriorMenus", "nStatus", tblProjectInteriorMenu.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nDMBQuantity Audit field-----------
+            //if (tblProjectInteriorMenu.nDMBQuantity != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 1, "tblProjectInteriorMenus", "nDMBQuantity", tblProjectInteriorMenu.nDMBQuantity.ToString(), "", lUserId, nCreateOrUpdate);
+            //----dDeliveryDate Audit field-----------
+            if (tblProjectInteriorMenu.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectInteriorMenu.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 4, "tblProjectInteriorMenus", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----cCost Audit field-----------
+            //if (tblProjectInteriorMenu.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectInteriorMenu.nStoreId, tblProjectInteriorMenu.nProjectID, 3, "tblProjectInteriorMenus", "cCost", tblProjectInteriorMenu.cCost.ToString(), "", lUserId, nCreateOrUpdate);
 
             return Json(tblProjectInteriorMenu);
         }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
@@ -67,6 +68,55 @@ namespace DeploymentTool.Model
         {
             // tblProjectExteriorMenu.ProjectActiveStatus = 1;//Santosh
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ExteriorMenuInstallation, tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu);
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 2;
+            //----Vendor Audit field-----------
+            //if (tblProjectExteriorMenu.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nVendor", tblProjectExteriorMenu.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectExteriorMenu.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nStatus", tblProjectExteriorMenu.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectExteriorMenu.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectExteriorMenu.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 4, "tblProjectExteriorMenus", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----FabConCost Audit field-----------
+            //if (tblProjectExteriorMenu.cFabConCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 3, "tblProjectExteriorMenus", "cFabConCost", tblProjectExteriorMenu.cFabConCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----IDTechCost Audit field-----------
+            //if (tblProjectExteriorMenu.cIDTechCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 3, "tblProjectExteriorMenus", "cIDTechCost", tblProjectExteriorMenu.cIDTechCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----FabConCost Audit field-----------
+            //if (tblProjectExteriorMenu.cTotalCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 3, "tblProjectExteriorMenus", "cTotalCost", tblProjectExteriorMenu.cTotalCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----Stalls Audit field-----------
+            //if (tblProjectExteriorMenu.nStalls != null)
+            //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nStalls", tblProjectExteriorMenu.nStalls.ToString(), "", lUserId, nCreateOrUpdate);
+
+           
+            ////----nPatio Audit field-----------
+            //if (tblProjectExteriorMenu.nPatio != null)
+            //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nPatio", tblProjectExteriorMenu.nPatio.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nFlat Audit field-----------
+            //if (tblProjectExteriorMenu.nFlat != null)
+            //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nFlat", tblProjectExteriorMenu.nFlat.ToString(), "", lUserId, nCreateOrUpdate);
+
+            ////----nDTPops Audit field-----------
+            //if (tblProjectExteriorMenu.nDTPops != null)
+            //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nDTPops", tblProjectExteriorMenu.nDTPops.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nDTMenu Audit field-----------
+            //if (tblProjectExteriorMenu.nDTMenu != null)
+            //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nDTMenu", tblProjectExteriorMenu.nDTMenu.ToString(), "", lUserId, nCreateOrUpdate);
+
             db.Entry(tblProjectExteriorMenu).State = EntityState.Modified;
 
             try
@@ -102,6 +152,55 @@ namespace DeploymentTool.Model
                 Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ExteriorMenuInstallation, tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu);
                 db.tblProjectExteriorMenus.Add(tblProjectExteriorMenu);
                 await db.SaveChangesAsync();
+
+                var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+                Nullable<int> lUserId = securityContext.nUserID;
+                int nBrandID = 6;
+                int nCreateOrUpdate = 1;
+                ////----Vendor Audit field-----------
+                //if (tblProjectExteriorMenu.nVendor != null)
+                //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nVendor", tblProjectExteriorMenu.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+                //----nStatus Audit field-----------
+                if (tblProjectExteriorMenu.nStatus != null)
+                    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nStatus", tblProjectExteriorMenu.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+                //----DeliveryDate Audit field-----------
+                if (tblProjectExteriorMenu.dDeliveryDate != null)
+                {
+                    DateTime dt = DateTime.Parse(tblProjectExteriorMenu.dDeliveryDate.ToString());
+                    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 4, "tblProjectExteriorMenus", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+                } 
+                ////----FabConCost Audit field-----------
+                //if (tblProjectExteriorMenu.cFabConCost != null)
+                //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 3, "tblProjectExteriorMenus", "cFabConCost", tblProjectExteriorMenu.cFabConCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+                ////----IDTechCost Audit field-----------
+                //if (tblProjectExteriorMenu.cIDTechCost != null)
+                //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 3, "tblProjectExteriorMenus", "cIDTechCost", tblProjectExteriorMenu.cIDTechCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+                ////----FabConCost Audit field-----------
+                //if (tblProjectExteriorMenu.cTotalCost != null)
+                //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 3, "tblProjectExteriorMenus", "cTotalCost", tblProjectExteriorMenu.cTotalCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+                ////----Stalls Audit field-----------
+                //if (tblProjectExteriorMenu.nStalls != null)
+                //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nStalls", tblProjectExteriorMenu.nStalls.ToString(), "", lUserId, nCreateOrUpdate);
+
+             
+                ////----nPatio Audit field-----------
+                //if (tblProjectExteriorMenu.nPatio != null)
+                //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nPatio", tblProjectExteriorMenu.nPatio.ToString(), "", lUserId, nCreateOrUpdate);
+
+                ////----nFlat Audit field-----------
+                //if (tblProjectExteriorMenu.nFlat != null)
+                //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nFlat", tblProjectExteriorMenu.nFlat.ToString(), "", lUserId, nCreateOrUpdate);
+
+                ////----nDTPops Audit field-----------
+                //if (tblProjectExteriorMenu.nDTPops != null)
+                //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nDTPops", tblProjectExteriorMenu.nDTPops.ToString(), "", lUserId, nCreateOrUpdate);
+                ////----nDTMenu Audit field-----------
+                //if (tblProjectExteriorMenu.nDTMenu != null)
+                //    Misc.Utilities.AddToAudit(tblProjectExteriorMenu.nStoreId, tblProjectExteriorMenu.nProjectID, 1, "tblProjectExteriorMenus", "nDTMenu", tblProjectExteriorMenu.nDTMenu.ToString(), "", lUserId, nCreateOrUpdate);
+
             }
             catch (Exception ex)
             { }

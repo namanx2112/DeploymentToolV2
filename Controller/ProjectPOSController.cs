@@ -8,9 +8,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
+using DeploymentTool.Model;
 
 namespace DeploymentTool.Controller
 {
@@ -67,7 +69,42 @@ namespace DeploymentTool.Controller
         public async Task<IHttpActionResult> Update( tblProjectPOS tblProjectPOS)
         {
             //tblProjectPOS.ProjectActiveStatus = 1;Santosh
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 2;
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.POSInstallation, tblProjectPOS.nStoreId, tblProjectPOS);
+            ////----Vendor Audit field-----------
+            //if (tblProjectPOS.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 1, "tblProjectPOS", "nVendor", tblProjectPOS.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectPOS.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 1, "tblProjectPOS", "nStatus", tblProjectPOS.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectPOS.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectPOS.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 4, "tblProjectPOS", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            } //----ConfigDate Audit field-----------
+            if (tblProjectPOS.dConfigDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectPOS.dConfigDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 4, "tblProjectPOS", "dConfigDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            //----SupportDate Audit field-----------
+            if (tblProjectPOS.dSupportDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectPOS.dSupportDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 4, "tblProjectPOS", "dSupportDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----Cost Audit field-----------
+            //if (tblProjectPOS.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 3, "tblProjectPOS", "cCost", tblProjectPOS.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+            //----PaperworkStatus Audit field-----------
+            if (tblProjectPOS.nPaperworkStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 1, "tblProjectPOS", "nPaperworkStatus", tblProjectPOS.nPaperworkStatus.ToString(), "", lUserId, nCreateOrUpdate);
+
             db.Entry(tblProjectPOS).State = EntityState.Modified;
 
             try
@@ -101,6 +138,44 @@ namespace DeploymentTool.Controller
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.POSInstallation, tblProjectPOS.nStoreId, tblProjectPOS);
             db.tblProjectPOS.Add(tblProjectPOS);
             await db.SaveChangesAsync();
+
+            //tblProjectPOS.nProjectID = tblProjectPOS.nProjectID;
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 1;
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.POSInstallation, tblProjectPOS.nStoreId, tblProjectPOS);
+            ////----Vendor Audit field-----------
+            //if (tblProjectPOS.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 1, "tblProjectPOS", "nVendor", tblProjectPOS.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectPOS.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 1, "tblProjectPOS", "nStatus", tblProjectPOS.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectPOS.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectPOS.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 4, "tblProjectPOS", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            } //----ConfigDate Audit field-----------
+            if (tblProjectPOS.dConfigDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectPOS.dConfigDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 4, "tblProjectPOS", "dConfigDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            //----SupportDate Audit field-----------
+            if (tblProjectPOS.dSupportDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectPOS.dSupportDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 4, "tblProjectPOS", "dSupportDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----Cost Audit field-----------
+            //if (tblProjectPOS.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 3, "tblProjectPOS", "cCost", tblProjectPOS.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+            //----PaperworkStatus Audit field-----------
+            if (tblProjectPOS.nPaperworkStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectPOS.nStoreId, tblProjectPOS.nProjectID, 1, "tblProjectPOS", "nPaperworkStatus", tblProjectPOS.nPaperworkStatus.ToString(), "", lUserId, nCreateOrUpdate);
 
             return Json(tblProjectPOS);
         }

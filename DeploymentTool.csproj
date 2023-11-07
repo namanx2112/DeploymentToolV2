@@ -975,6 +975,7 @@
     <Compile Include="Controller\ProjectNetworkingsController.cs" />
     <Compile Include="Controller\ProjectPaymentSystemsController.cs" />
     <Compile Include="Controller\ProjectPOSController.cs" />
+    <Compile Include="Controller\ProjectRolloutController.cs" />
     <Compile Include="Controller\ProjectServerHandheldController.cs" />
     <Compile Include="Controller\ProjectSonicRadiosController.cs" />
     <Compile Include="Controller\ProjectStakeHoldersController.cs" />
@@ -1044,6 +1045,7 @@
     <Compile Include="Model\ProjectComponentUpload.cs" />
     <Compile Include="Model\ProjectExcelFields.cs" />
     <Compile Include="Model\ProjectPortfolio.cs" />
+    <Compile Include="Model\ProjectRolloutModel.cs" />
     <Compile Include="Model\PurchaseOrderPreviewTemplate.cs" />
     <Compile Include="Model\QuoteRequestTemplate.cs" />
     <Compile Include="Model\Report.cs" />

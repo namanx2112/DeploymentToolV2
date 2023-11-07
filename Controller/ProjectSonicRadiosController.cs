@@ -8,9 +8,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DeploymentTool;
+using DeploymentTool.Model;
 
 namespace DeploymentTool.Controller
 {
@@ -66,6 +68,44 @@ namespace DeploymentTool.Controller
         {
             //tblProjectSonicRadio.ProjectActiveStatus = 1;Santosh
             Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectSonicRadio.nStoreId, tblProjectSonicRadio);
+
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 2;
+            ////----Vendor Audit field-----------
+            //if (tblProjectSonicRadio.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nVendor", tblProjectSonicRadio.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectSonicRadio.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nStatus", tblProjectSonicRadio.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nOutdoorSpeakers Audit field-----------
+            //if (tblProjectSonicRadio.nOutdoorSpeakers != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nOutdoorSpeakers", tblProjectSonicRadio.nOutdoorSpeakers.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nColors Audit field-----------
+            //if (tblProjectSonicRadio.nColors != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nColors", tblProjectSonicRadio.nColors.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nIndoorSpeakers Audit field-----------
+            //if (tblProjectSonicRadio.nIndoorSpeakers != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nIndoorSpeakers", tblProjectSonicRadio.nIndoorSpeakers.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nZones Audit field-----------
+            //if (tblProjectSonicRadio.nZones != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nZones", tblProjectSonicRadio.nZones.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nServerRacks Audit field-----------
+            //if (tblProjectSonicRadio.nServerRacks != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nServerRacks", tblProjectSonicRadio.nServerRacks.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectSonicRadio.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectSonicRadio.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 4, "tblProjectSonicRadio", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            } 
+            ////----Cost Audit field-----------
+            //if (tblProjectSonicRadio.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 3, "tblProjectSonicRadio", "cCost", tblProjectSonicRadio.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
+
             db.Entry(tblProjectSonicRadio).State = EntityState.Modified;
 
             try
@@ -100,6 +140,42 @@ namespace DeploymentTool.Controller
 
             db.tblProjectSonicRadios.Add(tblProjectSonicRadio);
             await db.SaveChangesAsync();
+
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 1;
+            ////----Vendor Audit field-----------
+            //if (tblProjectSonicRadio.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nVendor", tblProjectSonicRadio.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectSonicRadio.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nStatus", tblProjectSonicRadio.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nOutdoorSpeakers Audit field-----------
+            //if (tblProjectSonicRadio.nOutdoorSpeakers != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nOutdoorSpeakers", tblProjectSonicRadio.nOutdoorSpeakers.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nColors Audit field-----------
+            //if (tblProjectSonicRadio.nColors != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nColors", tblProjectSonicRadio.nColors.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nIndoorSpeakers Audit field-----------
+            //if (tblProjectSonicRadio.nIndoorSpeakers != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nIndoorSpeakers", tblProjectSonicRadio.nIndoorSpeakers.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nZones Audit field-----------
+            //if (tblProjectSonicRadio.nZones != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nZones", tblProjectSonicRadio.nZones.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nServerRacks Audit field-----------
+            //if (tblProjectSonicRadio.nServerRacks != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 1, "tblProjectSonicRadio", "nServerRacks", tblProjectSonicRadio.nServerRacks.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
+            if (tblProjectSonicRadio.dDeliveryDate != null)
+            {
+                DateTime dt = DateTime.Parse(tblProjectSonicRadio.dDeliveryDate.ToString());
+                Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 4, "tblProjectSonicRadio", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            }
+            ////----Cost Audit field-----------
+            //if (tblProjectSonicRadio.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectSonicRadio.nStoreId, tblProjectSonicRadio.nProjectID, 3, "tblProjectSonicRadio", "cCost", tblProjectSonicRadio.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+
 
             return Json(tblProjectSonicRadio);
         }

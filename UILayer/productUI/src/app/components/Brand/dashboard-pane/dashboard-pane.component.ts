@@ -22,11 +22,13 @@ const year = today.getFullYear();
 })
 export class DashboardPaneComponent {
   @Input()
-  set curBrand(val: BrandModel) {
-    this._curBrand = val;
+  set request(val: any) {
+    this._curBrand = val.curBrand;
+    this._needSearch = val.needSearch;
     this.loadProjectTYpes();
     this.getProjectHoghlights();
   };
+  _needSearch: boolean;
   _curBrand: BrandModel;
   projects: DahboardTile[];
   @Output() SearchedResult = new EventEmitter<string>();

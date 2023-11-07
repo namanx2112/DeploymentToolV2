@@ -33,8 +33,8 @@ export class AdvancedSearchComponent {
   reportParam: any;
   constructor(private commonService: CommonService) {
     this.campaignOne = new FormGroup({
-      start: new FormControl(new Date(new Date().getFullYear(), 0, 1)),
-      end: new FormControl(new Date(new Date().getFullYear(), 11, 31)),
+      start: new FormControl(null),
+      end: new FormControl(null),
     });
   }
 

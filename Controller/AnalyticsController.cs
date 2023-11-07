@@ -232,16 +232,40 @@ namespace DeploymentTool.Controller
             DbProviderFactory dbFactory = DbProviderFactories.GetFactory(connection);
             using (var cmd = dbFactory.CreateCommand())
             {
-                int nBrandId = (searchFields["nBrandId"] == null) ? 0 : Convert.ToInt32(searchFields["nBrandId"]);
-                var tProjTypes = (searchFields["tProjTypes"] == null) ? "" : Convert.ToString(searchFields["tProjTypes"]);
+               // int nBrandId = (searchFields["nBrandId"] == null) ? 0 : Convert.ToInt32(searchFields["nBrandId"]);
+                var nBrandId = searchFields.ContainsKey("nBrandId") && (searchFields["nBrandId"] != null) ? Convert.ToInt32(searchFields["nBrandId"]) : 0;
 
-                var dtStart = (searchFields["dtStart"] == null) ? null : Convert.ToString(searchFields["dtStart"]);
+                //  var tProjTypes = (searchFields["tProjTypes"] == null) ? "" : Convert.ToString(searchFields["tProjTypes"]);
+                var tProjTypes = searchFields.ContainsKey("tProjTypes") && (searchFields["tProjTypes"] != null) ? Convert.ToString(searchFields["tProjTypes"]) : "";
+
+                //var dtStart = (searchFields["dtStart"] == null) ? null : Convert.ToString(searchFields["dtStart"]);
+                var dtStart = searchFields.ContainsKey("dtStart") && (searchFields["dtStart"] != null) ? Convert.ToString(searchFields["dtStart"]) : null;
+
                 //DateTime dtEnd = (searchFields["dtEnd"] == null) ? null : Convert.ToDateTime(searchFields["dtEnd"]);
-                var dtEnd = (searchFields["dtEnd"] == null) ? null : Convert.ToString(searchFields["dtEnd"]);
-                var tVendor = (searchFields["tVendor"] == null) ? "" : Convert.ToString(searchFields["tVendor"]);
-                var tFranchise = (searchFields["tFranchise"] == null) ? "" : Convert.ToString(searchFields["tFranchise"]);
-                var tCity = (searchFields["tCity"] == null) ? null : Convert.ToString(searchFields["tCity"]);
+                // var dtEnd = (searchFields["dtEnd"] == null) ? null : Convert.ToString(searchFields["dtEnd"]);
+                var dtEnd = searchFields.ContainsKey("dtEnd") && (searchFields["dtEnd"] != null) ? Convert.ToString(searchFields["dtEnd"]) : null;
 
+                // var tVendor = (searchFields["tVendor"] == null) ? "" : Convert.ToString(searchFields["tVendor"]);
+                var tVendor = searchFields.ContainsKey("tVendor") && (searchFields["tVendor"] != null) ? Convert.ToString(searchFields["tVendor"]) : "";
+
+                // var tFranchise = (searchFields["tFranchise"] == null) ? "" : Convert.ToString(searchFields["tFranchise"]);
+                var tFranchise = searchFields.ContainsKey("tFranchise") && (searchFields["tFranchise"] != null) ? Convert.ToString(searchFields["tFranchise"]) : "";
+
+                //var tCity = (searchFields["tCity"] == null) ? null : Convert.ToString(searchFields["tCity"]);
+                var tCity = searchFields.ContainsKey("tCity") && (searchFields["tCity"] != null) ? Convert.ToString(searchFields["tCity"]) : null;
+                var tITPM = searchFields.ContainsKey("tITPM") && (searchFields["tITPM"] != null) ?  Convert.ToString(searchFields["tITPM"]):null;
+                var tInstaller = searchFields.ContainsKey("tInstaller") && (searchFields["tInstaller"] != null) ? Convert.ToString(searchFields["tInstaller"]) : null;
+                var tState = searchFields.ContainsKey("tState") && (searchFields["tState"] != null) ? Convert.ToString(searchFields["tState"]) : null;
+                //"[defaultCondition, nVendor=6]"
+                var defaultCondition =searchFields.ContainsKey("defaultCondition") && (searchFields["defaultCondition"] != null) ?  Convert.ToString(searchFields["defaultCondition"]):"";
+                if (defaultCondition != "")
+                {
+                    //if(defaultCondition.Contains("nEquipVendor"))
+                    //    tVendor = defaultCondition.Replace("nEquipVendor=", "");
+                    //else if (defaultCondition.Contains("nInstallVendor"))
+                    //    tInstaller = defaultCondition.Replace("nInstallVendor=", "");
+                    tVendor = defaultCondition.Replace("nVendor=", "");
+                }
                 string strName = string.Empty;
                 cmd.Connection = connection;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -253,6 +277,10 @@ namespace DeploymentTool.Controller
                 var reportParameters4 = new SqlParameter("@tVendor", tVendor);
                 var reportParameters5 = new SqlParameter("@tFranchise", tFranchise);
                 var reportParameters6 = new SqlParameter("@tCity", tCity);
+                var reportParameters7 = new SqlParameter("@tITPM", tITPM);
+                var reportParameters8 = new SqlParameter("@tInstaller", tInstaller);
+                var reportParameters9 = new SqlParameter("@tState", tState);
+                //var reportParameters10 = new SqlParameter("@defaultCondition", defaultCondition);
                 cmd.Parameters.Add(reportIdParam);
                 cmd.Parameters.Add(reportParameters1);
                 cmd.Parameters.Add(reportParameters2);
@@ -260,6 +288,10 @@ namespace DeploymentTool.Controller
                 cmd.Parameters.Add(reportParameters4);
                 cmd.Parameters.Add(reportParameters5);
                 cmd.Parameters.Add(reportParameters6);
+                cmd.Parameters.Add(reportParameters7);
+                cmd.Parameters.Add(reportParameters8);
+                cmd.Parameters.Add(reportParameters9);
+                //cmd.Parameters.Add(reportParameters10);
                 using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
                 {
                     adapter.SelectCommand = cmd;

@@ -21,6 +21,7 @@ export class NotificationComponent {
   filter: string;
   constructor(private service: NotificationService, private exService: ExStoreService) {
     this.filter = "All";
+    this.firstFew = [];
     this.getNotifcation();
   }
 

@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { OptionType } from 'src/app/interfaces/home-tab';
+import { HomeTab, OptionType, TabInstanceType } from 'src/app/interfaces/home-tab';
 import { BrandModel, UserType } from 'src/app/interfaces/models';
 import { StoreSearchModel } from 'src/app/interfaces/store';
 import { AccessService } from 'src/app/services/access.service';
 import { CommonService } from 'src/app/services/common.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-brand-home-page',
@@ -15,6 +16,7 @@ export class BrandHomePageComponent {
   @Input()
   set curBrand(val: BrandModel) {
     this._curBrand = val;
+    this.getRolloutTab();
     this.GetAllProjectTypes();
     this.loadUserMeta();
   }
@@ -34,7 +36,8 @@ export class BrandHomePageComponent {
   reportParam: any;
   defaultConditionForSearch: string;
   showSearchForcefully: boolean;
-  constructor(private commonService: CommonService, public access: AccessService) {
+  rolloutTab: HomeTab;
+  constructor(private commonService: CommonService, public access: AccessService, private homeService: HomeService) {
     this.configMenu = "dashboard";
     this.showMode = "dashboard";
     this.techCompType = "all";
@@ -45,14 +48,18 @@ export class BrandHomePageComponent {
     this.ProjectTypes = this.commonService.GetDropdownOptions(this._curBrand.aBrandId, "ProjectType");
   }
 
+  getRolloutTab() {
+    this.rolloutTab = this.homeService.GetProjectRolloutTab(TabInstanceType.Single);
+  }
+
   loadUserMeta() {
     let userMeta = this.access.getMyUserMeta();
     if (userMeta.userType != UserType.User) {
       if (userMeta.userType != UserType.FranchiseUser) {
         this.defaultConditionForSearch = "nVendor=" + userMeta.nOriginatorId;
         this.showSearchForcefully = true;
-        this.showMode = "search";
-        this.configMenu = "search";
+        // this.showMode = "search";
+        // this.configMenu = "search";
       }
     }
   }
@@ -89,6 +96,8 @@ export class BrandHomePageComponent {
     if (this.showSearchForcefully) {
       if (view == "dashboard")
         this.showMode = "search";
+      else if (view == "dashboardpane")// From Report table back
+        this.showMode = "dashboard";
     }
     else
       this.showMode = view;
@@ -105,11 +114,11 @@ export class BrandHomePageComponent {
 
   ChangeFromStoreView(param: any) {
     if (this.showSearchForcefully) {
-      if (param.view == "dashboard"){
-        this.showMode = "search";
-        this.configMenu = "search";
-      }
-      else
+      // if (param.view == "dashboard") {
+      //   this.showMode = "search";
+      //   this.configMenu = "search";
+      // }
+      // else
         this.showMode = param.view;
     }
     else {

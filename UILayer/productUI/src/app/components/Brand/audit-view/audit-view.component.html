@@ -1,5 +1,5 @@
 <mat-accordion>
-    <mat-expansion-panel *ngFor="let item of _curAudits" hideToggle>
+    <mat-expansion-panel *ngFor="let item of _curAudits">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 {{item.tComponentName}}
@@ -14,8 +14,8 @@
             <thead>
                 <tr>
                     <th>Field</th>
-                    <th>User</th>
-                    <th>Date</th>
+                    <th>Changed by</th>
+                    <th>Changed on</th>
                     <th>Previous Value</th>
                     <th>Changed Value</th>
                 </tr>

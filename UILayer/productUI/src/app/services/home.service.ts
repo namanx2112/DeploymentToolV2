@@ -12,6 +12,7 @@ import { PartsService } from './parts.service';
 import { SupportContent } from '../interfaces/models';
 import { CommonService } from './common.service';
 import { CacheService } from './cache.service';
+import { RolloutProjectsService } from './rollout-projects.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class HomeService {
 
   constructor(private http: HttpClient, private cacheService: CacheService, private brandService: BrandServiceService,
     private vendorService: VendorService, private techComponentService: TechComponenttService, private userSerice: UserService, private franchiseSerice: FranchiseService
-    , private partsService: PartsService) {
+    , private partsService: PartsService, private rolloutProjectsService: RolloutProjectsService) {
    }
 
    public loginGet = () => {
@@ -239,6 +240,23 @@ this.GetPartsTab(TabInstanceType.Table)
       this.GetTechToolsTab(TabInstanceType.Single),
       this.GetAnalyticsTab(TabInstanceType.Single)
     ];
+  }
+
+  GetProjectRolloutTab(instType: TabInstanceType):HomeTab{
+    return {
+      tab_name: "Rollout Projects",
+      tab_header: "Rollout Projects",
+      tTableName: "tblProjectRollouts",
+      tab_type: TabType.RolloutProjects,
+      tab_unique_name: "",
+      instanceType: instType,
+      childTabs: [],
+      isTechComponent: false,
+      search_fields: this.rolloutProjectsService.GetSearchFields(),
+      fields: this.rolloutProjectsService.GetFields(),
+      my_service: "",
+      needImport: false
+    };
   }
 }
 
