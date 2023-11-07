@@ -35,8 +35,8 @@
             </button>
         </mat-menu> -->
 <!-- </div> -->
-<h3 class="headerPart">Store Geographical Map</h3>
-<div class="mapPart">
+<h3 class="headerPart" *ngIf="!_showTiles">Store Geographical Map</h3>
+<div class="mapPart" *ngIf="!_showTiles">
     <iframe frameborder="0"
         src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Sonic Drive-In, 3 Glenlake Pkwy NE, Atlanta, Georgia, 30328, United States&t=&z=14&ie=UTF8&iwloc=B&output=embed"></iframe>
 </div>
