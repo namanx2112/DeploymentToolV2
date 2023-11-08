@@ -103,7 +103,7 @@ export class CommonService {
   static getFormatedDateString(dString: any, withTime: boolean = false) {
     let format = "MM/DD/YYYY";
     if (withTime)
-      format = "MM/DD/YYYY HH:mm"
+      return this.getFormatedDateTimeString(dString);
     let rString = "";
     if (typeof dString == 'string') {
       if (dString != "") {
@@ -113,6 +113,20 @@ export class CommonService {
     }
     else if (dString != null)
       rString = moment(dString).format(format);
+    return rString;
+  }
+
+  static getFormatedDateTimeString(dString: any) {
+    let format = "MM/DD/YYYY HH:mm"
+    let rString = "";
+    if (typeof dString == 'string') {
+      if (dString != "") {
+        let momentVal = (dString.indexOf("-") > -1) ? moment(dString, 'YYYY-MM-DD hh:mm').utcOffset('-0500') : moment(dString, 'DD/MM/YYYY hh:mm').utcOffset('-0500');
+        rString = momentVal.format(format);
+      }
+    }
+    else if (dString != null)
+      rString = moment(dString).utcOffset('-0500').format(format);
     return rString;
   }
 

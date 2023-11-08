@@ -80,6 +80,8 @@ export class StoreViewComponent {
         else
           can = false;
       }
+      else if (this.userMeta.userType == UserType.InstallationVendor)
+        can = false;
     }
     else if (tab.tab_name.toLocaleLowerCase() == "installation") {
       if (this.userMeta.userType == UserType.InstallationVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {

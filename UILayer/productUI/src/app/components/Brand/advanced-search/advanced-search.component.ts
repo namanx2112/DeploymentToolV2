@@ -61,8 +61,8 @@ export class AdvancedSearchComponent {
     this.selectedProjects = [];
     this.selectedVendors = [];
     this.selectedFranchise = [];
-    this.campaignOne.controls['start'].setValue(new Date(new Date().getFullYear(), 0, 1));
-    this.campaignOne.controls['end'].setValue(new Date(new Date().getFullYear(), 11, 31));
+    this.campaignOne.controls['start'].setValue(null);
+    this.campaignOne.controls['end'].setValue(null);
     this.selectedCity = "";
     this.getStoreTable();
   }

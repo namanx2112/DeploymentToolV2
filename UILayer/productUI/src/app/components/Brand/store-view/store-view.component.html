@@ -91,7 +91,7 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
     </div>
     <div class="TechAreaTabBar" *ngIf="tabForUI.length > 0 && viewName == 'tabview'">
         <div class="tabHeader">
-            <div [ngClass]="(selectedTab == -10) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-10);">
+            <div *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)" [ngClass]="(selectedTab == -10) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-10);">
                 Delivery Status</div>
             <div *ngFor="let tTab of tabForUI;let index = index"
                 [ngClass]="(selectedTab == index) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(index);">
