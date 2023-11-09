@@ -37,7 +37,6 @@ export class StoreViewComponent {
   viewName: string;
   @Output() ChangeFromStoreView = new EventEmitter<any>();
   selectedProject: ProjectInfo;
-  tabAccess: any;
   userMeta: UserAccessMeta;
   fieldRestrictions: any;
   constructor(private service: ExStoreService, private dialog: MatDialog,
@@ -56,11 +55,9 @@ export class StoreViewComponent {
   initTab() {
     this.allTabs = this.service.GetStoretabs(this._curStore.nBrandId);
     this.tValues = {};
-    this.tabAccess = {};
     this.tabForUI = [];
     for (var tIndx in this.allTabs) {
       let tTab = this.allTabs[tIndx];
-      this.tabAccess[tTab.tab_name] = this.access.hasAccess('home.sonic.project.' + tTab.tab_name, 1);
       // this.tValues[tTab.tab_name] = this.getValues(tTab);
       // tTab = this.changeTab(tTab);
       if (parseInt(tIndx) > 2)
@@ -83,7 +80,7 @@ export class StoreViewComponent {
       else if (this.userMeta.userType == UserType.InstallationVendor)
         can = false;
     }
-    else if (tab.tab_name.toLocaleLowerCase() == "installation") {
+    else if (tab.tab_name == "Installation") {
       if (this.userMeta.userType == UserType.InstallationVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
         let vendorId = this.tValues[tab.tab_name]["nVendor"];
         if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
@@ -107,7 +104,7 @@ export class StoreViewComponent {
           }
         }
       }
-      else if (tab.tab_name.toLocaleLowerCase() == "installation") {
+      else if (tab.tab_name == "Installation") {
         if (this.userMeta.userType == UserType.InstallationVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
           let vendorId = this.tValues[tab.tab_name]["nVendor"];
           if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
@@ -179,10 +176,7 @@ export class StoreViewComponent {
     let can = false;
     if (typeof tTab != 'undefined') {
       if (typeof this.tValues[tTab.tab_name] != 'undefined') {
-        if (tTab.isTechComponent)
-          can = this.canShowTabForUser(tTab);
-        else
-          can = true;
+        can = this.canShowTabForUser(tTab);
       }
     }
     return can;
@@ -280,6 +274,8 @@ export class StoreViewComponent {
       case TabType.StoreInstallation:
         this.techCompService.GetInstallation(projIdSearchField).subscribe((x: StoreInstallation[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+          if (!this.canShowTabForUser(tabType))
+            this.tValues[tabType.tab_name] = {};
         });
         break;
       case TabType.StoreProjectServerHandheld:

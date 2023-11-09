@@ -2880,7 +2880,7 @@ export class ExStoreService {
       tab_type: TabType.StoreInstallation,
       tab_unique_name: "",
       instanceType: instType,
-      isTechComponent: true,
+      isTechComponent: false,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
