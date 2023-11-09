@@ -556,8 +556,6 @@ D:\Projects\InspireBrand\obj\Debug\DeploymentTool.dll
 D:\Projects\InspireBrand\obj\Debug\DeploymentTool.pdb
 D:\Projects\InspireBrand\bin\BouncyCastle.Crypto.dll
 D:\Projects\InspireBrand\bin\itextsharp.dll
-C:\ProjectCode\DeploymentToolV2\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
-C:\ProjectCode\DeploymentToolV2\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
 C:\ProjectCode\DeploymentToolV2\bin\DeploymentTool.dll.config
 C:\ProjectCode\DeploymentToolV2\bin\DeploymentTool.dll
 C:\ProjectCode\DeploymentToolV2\bin\DeploymentTool.pdb
@@ -673,6 +671,8 @@ C:\ProjectCode\DeploymentToolV2\bin\System.Web.WebPages.xml
 C:\ProjectCode\DeploymentToolV2\bin\System.Web.WebPages.Deployment.xml
 C:\ProjectCode\DeploymentToolV2\bin\System.Web.WebPages.Razor.xml
 C:\ProjectCode\DeploymentToolV2\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\ProjectCode\DeploymentToolV2\obj\Debug\DeploymentTool.csproj.AssemblyReference.cache
+C:\ProjectCode\DeploymentToolV2\obj\Debug\DeploymentTool.csproj.CoreCompileInputs.cache
 C:\ProjectCode\DeploymentToolV2\obj\Debug\DeploymentTool.csproj.CopyComplete
 C:\ProjectCode\DeploymentToolV2\obj\Debug\DeploymentTool.dll
 C:\ProjectCode\DeploymentToolV2\obj\Debug\DeploymentTool.pdb

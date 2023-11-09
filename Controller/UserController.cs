@@ -128,7 +128,7 @@ namespace DeploymentTool.Controller
                     {
                         var nUserVendor = db.Database.ExecuteSqlCommand("delete from tblUserFranchiseRel where nUserID =@nUserID ", new SqlParameter("@nUserID", userRequest.aUserID));
 
-                        db.tblUserFranchiseRel.Add(userRequest.GetTblUserFranchiseRel(userRequest));//Need to check 
+                        db.tblUserFranchiseRels.Add(userRequest.GetTblUserFranchiseRel(userRequest));//Need to check 
                         await db.SaveChangesAsync();
                         if (userRequest.userAndUsertypeRel == null)
                         {
@@ -259,7 +259,7 @@ namespace DeploymentTool.Controller
                     }
                     if (userRequest.nFranchiseId > 0)
                     {
-                        db.tblUserFranchiseRel.Add(userRequest.GetTblUserFranchiseRel(userRequest));//Need to check 
+                        db.tblUserFranchiseRels.Add(userRequest.GetTblUserFranchiseRel(userRequest));//Need to check 
                         await db.SaveChangesAsync();
                         if (userRequest.userAndUsertypeRel == null)
                         {

@@ -28,6 +28,7 @@
     <EntitySetMapping Name="tblUser">
       <EntityTypeMapping TypeName="dtDBModel.tblUser">
         <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="nUserAccess" ColumnName="nUserAccess" />
           <ScalarProperty Name="nStatus" ColumnName="nStatus" />
           <ScalarProperty Name="nUserTypeID" ColumnName="nUserTypeID" />
           <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
@@ -176,6 +177,14 @@
     <EntitySetMapping Name="tblProjectInstallations">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectInstallation">
         <MappingFragment StoreEntitySet="tblProjectInstallation">
+          <ScalarProperty Name="tInstallNotes" ColumnName="tInstallNotes" />
+          <ScalarProperty Name="nPhotoDeliverables" ColumnName="nPhotoDeliverables" />
+          <ScalarProperty Name="nManagerCheckout" ColumnName="nManagerCheckout" />
+          <ScalarProperty Name="tManagerNumber" ColumnName="tManagerNumber" />
+          <ScalarProperty Name="tManagerName" ColumnName="tManagerName" />
+          <ScalarProperty Name="tInstallTechNumber" ColumnName="tInstallTechNumber" />
+          <ScalarProperty Name="dInstallTime" ColumnName="dInstallTime" />
+          <ScalarProperty Name="nRevisitDateChanged" ColumnName="nRevisitDateChanged" />
           <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
           <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
           <ScalarProperty Name="cCost" ColumnName="cCost" />
@@ -605,6 +614,14 @@
     <EntitySetMapping Name="tblTraces">
       <EntityTypeMapping TypeName="dtDBModel.tblTrace">
         <MappingFragment StoreEntitySet="tblTrace">
+          <ScalarProperty Name="dShipDate" ColumnName="dShipDate" />
+          <ScalarProperty Name="tInstallStatus" ColumnName="tInstallStatus" />
+          <ScalarProperty Name="tInstallationVendor" ColumnName="tInstallationVendor" />
+          <ScalarProperty Name="dInstallDate" ColumnName="dInstallDate" />
+          <ScalarProperty Name="dRevisitDate" ColumnName="dRevisitDate" />
+          <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
+          <ScalarProperty Name="tEquipmentVendor" ColumnName="tEquipmentVendor" />
+          <ScalarProperty Name="nNumberOfTabletsPerStore" ColumnName="nNumberOfTabletsPerStore" />
           <ScalarProperty Name="BrandId" ColumnName="BrandId" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="ProjectStatus" ColumnName="ProjectStatus" />
@@ -896,6 +913,11 @@
     <EntitySetMapping Name="tblProjectServerHandhelds">
       <EntityTypeMapping TypeName="dtDBModel.tblProjectServerHandheld">
         <MappingFragment StoreEntitySet="tblProjectServerHandheld">
+          <ScalarProperty Name="nProtectiveCase" ColumnName="nProtectiveCase" />
+          <ScalarProperty Name="nShoulderStrap" ColumnName="nShoulderStrap" />
+          <ScalarProperty Name="nFiveBayCharger" ColumnName="nFiveBayCharger" />
+          <ScalarProperty Name="tTrackingNumber" ColumnName="tTrackingNumber" />
+          <ScalarProperty Name="tShippingCarrier" ColumnName="tShippingCarrier" />
           <ScalarProperty Name="cCost" ColumnName="cCost" />
           <ScalarProperty Name="dShipDate" ColumnName="dShipDate" />
           <ScalarProperty Name="nNumberOfTabletsPerStore" ColumnName="nNumberOfTabletsPerStore" />
@@ -907,6 +929,78 @@
           <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
           <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
           <ScalarProperty Name="aServerHandheldId" ColumnName="aServerHandheldId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectImageOrMemories">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectImageOrMemory">
+        <MappingFragment StoreEntitySet="tblProjectImageOrMemory">
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
+          <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+          <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+          <ScalarProperty Name="tReturnShipmentTracking" ColumnName="tReturnShipmentTracking" />
+          <ScalarProperty Name="nReturnShipment" ColumnName="nReturnShipment" />
+          <ScalarProperty Name="tHPShipmentTracking" ColumnName="tHPShipmentTracking" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectImageOrMemoryID" ColumnName="aProjectImageOrMemoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectNetworkSwtiches">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectNetworkSwtich">
+        <MappingFragment StoreEntitySet="tblProjectNetworkSwtich">
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
+          <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+          <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+          <ScalarProperty Name="tOldSerialNumber" ColumnName="tOldSerialNumber" />
+          <ScalarProperty Name="tNewSerialNumber" ColumnName="tNewSerialNumber" />
+          <ScalarProperty Name="nSetupStatus" ColumnName="nSetupStatus" />
+          <ScalarProperty Name="nShipmentToVendor" ColumnName="nShipmentToVendor" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectNetworkSwtichID" ColumnName="aProjectNetworkSwtichID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectOrderAccuracies">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectOrderAccuracy">
+        <MappingFragment StoreEntitySet="tblProjectOrderAccuracy">
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
+          <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+          <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+          <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
+          <ScalarProperty Name="tTrackingNumber" ColumnName="tTrackingNumber" />
+          <ScalarProperty Name="tShippingCarrier" ColumnName="tShippingCarrier" />
+          <ScalarProperty Name="dShipDate" ColumnName="dShipDate" />
+          <ScalarProperty Name="nFCExpo" ColumnName="nFCExpo" />
+          <ScalarProperty Name="nDTExpo" ColumnName="nDTExpo" />
+          <ScalarProperty Name="nDualCupLabel" ColumnName="nDualCupLabel" />
+          <ScalarProperty Name="nBakeryPrinter" ColumnName="nBakeryPrinter" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectOrderAccuracyID" ColumnName="aProjectOrderAccuracyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectOrderStatusBoards">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectOrderStatusBoard">
+        <MappingFragment StoreEntitySet="tblProjectOrderStatusBoard">
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
+          <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+          <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
+          <ScalarProperty Name="dDeliveryDate" ColumnName="dDeliveryDate" />
+          <ScalarProperty Name="tTrackingNumber" ColumnName="tTrackingNumber" />
+          <ScalarProperty Name="tShippingCarrier" ColumnName="tShippingCarrier" />
+          <ScalarProperty Name="dShipDate" ColumnName="dShipDate" />
+          <ScalarProperty Name="nOSB" ColumnName="nOSB" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nVendor" ColumnName="nVendor" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="aProjectOrderStatusBoardID" ColumnName="aProjectOrderStatusBoardID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -30,5 +30,13 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dDateFor_nStatus { get; set; }
         public Nullable<System.DateTime> dDateFor_nProjectStatus { get; set; }
         public Nullable<System.DateTime> dRevisitDate { get; set; }
+        public Nullable<int> nRevisitDateChanged { get; set; }
+        public Nullable<System.DateTime> dInstallTime { get; set; }
+        public string tInstallTechNumber { get; set; }
+        public string tManagerName { get; set; }
+        public string tManagerNumber { get; set; }
+        public Nullable<int> nManagerCheckout { get; set; }
+        public Nullable<int> nPhotoDeliverables { get; set; }
+        public string tInstallNotes { get; set; }
     }
 }

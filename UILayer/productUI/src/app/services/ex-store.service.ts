@@ -3446,4 +3446,211 @@ export class ExStoreService {
       needImport: false
     };
   }
+
+  //#region Arbys
+  GetStoreNetworkSwitchTab(instType: TabInstanceType): HomeTab {
+    return {
+      tab_name: "Network Switch",
+      tab_header: "Network Switch",
+      tTableName: "tblProjectNetworkSwitch",
+      tab_type: TabType.NetworkSwitch,
+      tab_unique_name: "",
+      instanceType: instType,
+      isTechComponent: false,
+      childTabs: [],
+      search_fields: [{
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }],
+      fields: [{
+        field_name: "NetworkSwitchID",
+        fieldUniqeName: "aNetworkSwitchID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter NetworkSwitchID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "ProjectID",
+        fieldUniqeName: "nProjectID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter ProjectID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        options: this.commonService.GetDropdown("Vendor"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Status",
+        fieldUniqeName: "nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Status",
+        validator: [],
+        options: this.commonService.GetDropdown("NetworkSwitchStatus"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Lead Tech",
+        fieldUniqeName: "tLeadTech",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Lead Tech",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }, {
+        field_name: "Install Date",
+        fieldUniqeName: "dInstallDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Install Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }, {
+        field_name: "Install End",
+        fieldUniqeName: "dInstallEnd",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Install End",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Signoffs",
+        fieldUniqeName: "nSignoffs",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Signoffs",
+        options: this.commonService.GetDropdown("InstallationSignOffs"),
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Test Transactions",
+        fieldUniqeName: "nTestTransactions",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Test Transactions",
+        options: this.commonService.GetDropdown("InstallationTestTransactions"),
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Project Status",
+        fieldUniqeName: "nProjectStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Project Status",
+        validator: [],
+        options: this.commonService.GetDropdown("InstallationProjectStatus"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Revisit Date",
+        fieldUniqeName: "dRevisitDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Revisit Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Cost",
+        fieldUniqeName: "cCost",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.currency,
+        field_placeholder: "Enter Cost",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }, {
+        field_name: "dDateFor_nStatus",
+        fieldUniqeName: "dDateFor_nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "dDateFor_nProjectStatus",
+        fieldUniqeName: "dDateFor_nProjectStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter dDateFor_nProjectStatus",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }],
+      my_service: "",
+      needImport: false
+    };
+  }
+  //#endregion
 }

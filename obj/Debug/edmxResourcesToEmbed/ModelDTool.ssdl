@@ -294,6 +294,21 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nMyActiveStatus" Type="int" />
     <Property Name="dDateFor_nStatus" Type="date" />
   </EntityType>
+  <EntityType Name="tblProjectImageOrMemory">
+    <Key>
+      <PropertyRef Name="aProjectImageOrMemoryID" />
+    </Key>
+    <Property Name="aProjectImageOrMemoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nProjectID" Type="int" />
+    <Property Name="nVendor" Type="int" />
+    <Property Name="nStatus" Type="int" />
+    <Property Name="tHPShipmentTracking" Type="nvarchar" MaxLength="255" />
+    <Property Name="nReturnShipment" Type="int" />
+    <Property Name="tReturnShipmentTracking" Type="nvarchar" MaxLength="255" />
+    <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
+  </EntityType>
   <EntityType Name="tblProjectInstallation">
     <Key>
       <PropertyRef Name="aProjectInstallationID" />
@@ -314,6 +329,14 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dDateFor_nStatus" Type="date" />
     <Property Name="dDateFor_nProjectStatus" Type="date" />
     <Property Name="dRevisitDate" Type="date" />
+    <Property Name="nRevisitDateChanged" Type="int" />
+    <Property Name="dInstallTime" Type="datetime" />
+    <Property Name="tInstallTechNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="tManagerName" Type="nvarchar" MaxLength="255" />
+    <Property Name="tManagerNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="nManagerCheckout" Type="int" />
+    <Property Name="nPhotoDeliverables" Type="int" />
+    <Property Name="tInstallNotes" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenus">
     <Key>
@@ -352,6 +375,22 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dDateFor_nBackupStatus" Type="date" />
     <Property Name="dDateFor_nTempStatus" Type="date" />
   </EntityType>
+  <EntityType Name="tblProjectNetworkSwtich">
+    <Key>
+      <PropertyRef Name="aProjectNetworkSwtichID" />
+    </Key>
+    <Property Name="aProjectNetworkSwtichID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nProjectID" Type="int" />
+    <Property Name="nVendor" Type="int" />
+    <Property Name="nStatus" Type="int" />
+    <Property Name="nShipmentToVendor" Type="int" />
+    <Property Name="nSetupStatus" Type="int" />
+    <Property Name="tNewSerialNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="tOldSerialNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
+  </EntityType>
   <EntityType Name="tblProjectNote">
     <Key>
       <PropertyRef Name="aNoteID" />
@@ -383,6 +422,43 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblProjectOrderAccuracy">
+    <Key>
+      <PropertyRef Name="aProjectOrderAccuracyID" />
+    </Key>
+    <Property Name="aProjectOrderAccuracyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nProjectID" Type="int" />
+    <Property Name="nVendor" Type="int" />
+    <Property Name="nStatus" Type="int" />
+    <Property Name="nBakeryPrinter" Type="int" />
+    <Property Name="nDualCupLabel" Type="int" />
+    <Property Name="nDTExpo" Type="int" />
+    <Property Name="nFCExpo" Type="int" />
+    <Property Name="dShipDate" Type="date" />
+    <Property Name="tShippingCarrier" Type="nvarchar" MaxLength="255" />
+    <Property Name="tTrackingNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="dDeliveryDate" Type="date" />
+    <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
+  </EntityType>
+  <EntityType Name="tblProjectOrderStatusBoard">
+    <Key>
+      <PropertyRef Name="aProjectOrderStatusBoardID" />
+    </Key>
+    <Property Name="aProjectOrderStatusBoardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nProjectID" Type="int" />
+    <Property Name="nVendor" Type="int" />
+    <Property Name="nStatus" Type="int" />
+    <Property Name="nOSB" Type="int" />
+    <Property Name="dShipDate" Type="date" />
+    <Property Name="tShippingCarrier" Type="nvarchar" MaxLength="255" />
+    <Property Name="tTrackingNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="dDeliveryDate" Type="date" />
+    <Property Name="nStoreId" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectPaymentSystem">
     <Key>
@@ -433,16 +509,21 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
       <PropertyRef Name="aServerHandheldId" />
     </Key>
     <Property Name="aServerHandheldId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nVendor" Type="int" />
     <Property Name="nProjectID" Type="int" />
-    <Property Name="nMyActiveStatus" Type="int" />
-    <Property Name="nStoreId" Type="int" />
+    <Property Name="nVendor" Type="int" />
     <Property Name="dDeliveryDate" Type="date" />
-    <Property Name="dDateFor_nStatus" Type="date" />
     <Property Name="nStatus" Type="int" />
     <Property Name="nNumberOfTabletsPerStore" Type="int" />
     <Property Name="dShipDate" Type="date" />
     <Property Name="cCost" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="nStoreId" Type="int" />
+    <Property Name="dDateFor_nStatus" Type="date" />
+    <Property Name="tShippingCarrier" Type="nvarchar" MaxLength="255" />
+    <Property Name="tTrackingNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="nFiveBayCharger" Type="int" />
+    <Property Name="nShoulderStrap" Type="int" />
+    <Property Name="nProtectiveCase" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectSonicRadio">
     <Key>
@@ -481,13 +562,6 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'dtDB.dbo.tblProjectTypeConfig' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tblProjectTypeConfig">
-          <Property Name="aTypeId" Type="int" />
-          <Property Name="tTableName" Type="varchar" MaxLength="100" />
-          <Property Name="isTechProjectType" Type="int" />
-        </EntityType>-->
   <EntityType Name="tblPurchaseOrder">
     <Key>
       <PropertyRef Name="aPurchaseOrderID" />
@@ -712,6 +786,14 @@ warning 6002: The table/view 'dtDB.dbo.tblTrace' does not have a primary key def
     <Property Name="ProjectStatus" Type="nvarchar(max)" />
     <Property Name="CreatedBy" Type="int" />
     <Property Name="BrandId" Type="int" />
+    <Property Name="nNumberOfTabletsPerStore" Type="int" />
+    <Property Name="tEquipmentVendor" Type="nvarchar" MaxLength="500" />
+    <Property Name="dDeliveryDate" Type="datetime" />
+    <Property Name="dRevisitDate" Type="datetime" />
+    <Property Name="dInstallDate" Type="datetime" />
+    <Property Name="tInstallationVendor" Type="nvarchar" MaxLength="500" />
+    <Property Name="tInstallStatus" Type="nvarchar" MaxLength="500" />
+    <Property Name="dShipDate" Type="datetime" />
   </EntityType>
   <EntityType Name="tblUser">
     <Key>
@@ -735,6 +817,7 @@ warning 6002: The table/view 'dtDB.dbo.tblTrace' does not have a primary key def
     <Property Name="nUserTypeID" Type="int" />
     <Property Name="nStatus" Type="int" />
     <Property Name="isFirstTime" Type="int" />
+    <Property Name="nUserAccess" Type="int" />
     <Property Name="nAccess" Type="int" />
   </EntityType>
   <EntityType Name="tblUserAndUserTypeRel">
@@ -888,6 +971,13 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <Parameter Name="tProjectStatus" Type="varchar" Mode="In" />
     <Parameter Name="nCreatedBy" Type="int" Mode="In" />
     <Parameter Name="nBrandId" Type="int" Mode="In" />
+    <Parameter Name="nNumberOfTabletsPerStore" Type="int" Mode="In" />
+    <Parameter Name="tEquipmentVendor" Type="varchar" Mode="In" />
+    <Parameter Name="dShipDate" Type="datetime" Mode="In" />
+    <Parameter Name="dRevisitDate" Type="datetime" Mode="In" />
+    <Parameter Name="dInstallDate" Type="datetime" Mode="In" />
+    <Parameter Name="tInstallationVendor" Type="varchar" Mode="In" />
+    <Parameter Name="tInstallStatus" Type="varchar" Mode="In" />
   </Function>
   <Function Name="sproc_SearchStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tText" Type="varchar" Mode="In" />
@@ -909,11 +999,15 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblProjectAudio" EntityType="Self.tblProjectAudio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectConfig" EntityType="Self.tblProjectConfig" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectExteriorMenus" EntityType="Self.tblProjectExteriorMenus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectImageOrMemory" EntityType="Self.tblProjectImageOrMemory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectInstallation" EntityType="Self.tblProjectInstallation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectInteriorMenus" EntityType="Self.tblProjectInteriorMenus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectNetworking" EntityType="Self.tblProjectNetworking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectNetworkSwtich" EntityType="Self.tblProjectNetworkSwtich" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectNote" EntityType="Self.tblProjectNote" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectNotes" EntityType="Self.tblProjectNotes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectOrderAccuracy" EntityType="Self.tblProjectOrderAccuracy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectOrderStatusBoard" EntityType="Self.tblProjectOrderStatusBoard" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectPaymentSystem" EntityType="Self.tblProjectPaymentSystem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectPOS" EntityType="Self.tblProjectPOS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectServerHandheld" EntityType="Self.tblProjectServerHandheld" Schema="dbo" store:Type="Tables" />
@@ -1029,7 +1123,15 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     [tblTrace].[dtUpdatedOn] AS [dtUpdatedOn], 
     [tblTrace].[ProjectStatus] AS [ProjectStatus], 
     [tblTrace].[CreatedBy] AS [CreatedBy], 
-    [tblTrace].[BrandId] AS [BrandId]
+    [tblTrace].[BrandId] AS [BrandId], 
+    [tblTrace].[nNumberOfTabletsPerStore] AS [nNumberOfTabletsPerStore], 
+    [tblTrace].[tEquipmentVendor] AS [tEquipmentVendor], 
+    [tblTrace].[dDeliveryDate] AS [dDeliveryDate], 
+    [tblTrace].[dRevisitDate] AS [dRevisitDate], 
+    [tblTrace].[dInstallDate] AS [dInstallDate], 
+    [tblTrace].[tInstallationVendor] AS [tInstallationVendor], 
+    [tblTrace].[tInstallStatus] AS [tInstallStatus], 
+    [tblTrace].[dShipDate] AS [dShipDate]
     FROM [dbo].[tblTrace] AS [tblTrace]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblUserFunctionRel" EntityType="Self.tblUserFunctionRel" store:Type="Tables" store:Schema="dbo">

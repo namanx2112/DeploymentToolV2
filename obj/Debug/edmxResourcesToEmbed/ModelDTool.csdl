@@ -49,6 +49,13 @@
       <Parameter Name="tProjectStatus" Mode="In" Type="String" />
       <Parameter Name="nCreatedBy" Mode="In" Type="Int32" />
       <Parameter Name="nBrandId" Mode="In" Type="Int32" />
+      <Parameter Name="nNumberOfTabletsPerStore" Mode="In" Type="Int32" />
+      <Parameter Name="tEquipmentVendor" Mode="In" Type="String" />
+      <Parameter Name="dShipDate" Mode="In" Type="DateTime" />
+      <Parameter Name="dRevisitDate" Mode="In" Type="DateTime" />
+      <Parameter Name="dInstallDate" Mode="In" Type="DateTime" />
+      <Parameter Name="tInstallationVendor" Mode="In" Type="String" />
+      <Parameter Name="tInstallStatus" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sproc_SearchStore" ReturnType="Collection(dtDBModel.sproc_SearchStore_Result)">
       <Parameter Name="tText" Mode="In" Type="String" />
@@ -82,6 +89,10 @@
     <EntitySet Name="tblNoteTypes" EntityType="dtDBModel.tblNoteType" />
     <EntitySet Name="tblProjectNote1" EntityType="dtDBModel.tblProjectNote1" />
     <EntitySet Name="tblProjectServerHandhelds" EntityType="dtDBModel.tblProjectServerHandheld" />
+    <EntitySet Name="tblProjectImageOrMemories" EntityType="dtDBModel.tblProjectImageOrMemory" />
+    <EntitySet Name="tblProjectNetworkSwtiches" EntityType="dtDBModel.tblProjectNetworkSwtich" />
+    <EntitySet Name="tblProjectOrderAccuracies" EntityType="dtDBModel.tblProjectOrderAccuracy" />
+    <EntitySet Name="tblProjectOrderStatusBoards" EntityType="dtDBModel.tblProjectOrderStatusBoard" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -129,6 +140,7 @@
     <Property Name="nStatus" Type="Int32" />
     <Property Name="isFirstTime" Type="Int32" />
     <Property Name="nAccess" Type="Int32" />
+    <Property Name="nUserAccess" Type="Int32" />
   </EntityType>
   <EntityType Name="tblVendor">
     <Key>
@@ -267,6 +279,14 @@
     <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
     <Property Name="dDateFor_nProjectStatus" Type="DateTime" Precision="0" />
     <Property Name="dRevisitDate" Type="DateTime" Precision="0" />
+    <Property Name="nRevisitDateChanged" Type="Int32" />
+    <Property Name="dInstallTime" Type="DateTime" Precision="3" />
+    <Property Name="tInstallTechNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tManagerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tManagerNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nManagerCheckout" Type="Int32" />
+    <Property Name="nPhotoDeliverables" Type="Int32" />
+    <Property Name="tInstallNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenu">
     <Key>
@@ -671,6 +691,14 @@
     <Property Name="ProjectStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CreatedBy" Type="Int32" />
     <Property Name="BrandId" Type="Int32" />
+    <Property Name="nNumberOfTabletsPerStore" Type="Int32" />
+    <Property Name="tEquipmentVendor" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="3" />
+    <Property Name="dRevisitDate" Type="DateTime" Precision="3" />
+    <Property Name="dInstallDate" Type="DateTime" Precision="3" />
+    <Property Name="tInstallationVendor" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="tInstallStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dShipDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="tblPurchaseOrderTemplate">
     <Key>
@@ -932,5 +960,78 @@
     <Property Name="nNumberOfTabletsPerStore" Type="Int32" />
     <Property Name="dShipDate" Type="DateTime" Precision="0" />
     <Property Name="cCost" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="tShippingCarrier" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tTrackingNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nFiveBayCharger" Type="Int32" />
+    <Property Name="nShoulderStrap" Type="Int32" />
+    <Property Name="nProtectiveCase" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblProjectImageOrMemory">
+    <Key>
+      <PropertyRef Name="aProjectImageOrMemoryID" />
+    </Key>
+    <Property Name="aProjectImageOrMemoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="tHPShipmentTracking" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nReturnShipment" Type="Int32" />
+    <Property Name="tReturnShipmentTracking" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblProjectNetworkSwtich">
+    <Key>
+      <PropertyRef Name="aProjectNetworkSwtichID" />
+    </Key>
+    <Property Name="aProjectNetworkSwtichID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="nShipmentToVendor" Type="Int32" />
+    <Property Name="nSetupStatus" Type="Int32" />
+    <Property Name="tNewSerialNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tOldSerialNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblProjectOrderAccuracy">
+    <Key>
+      <PropertyRef Name="aProjectOrderAccuracyID" />
+    </Key>
+    <Property Name="aProjectOrderAccuracyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="nBakeryPrinter" Type="Int32" />
+    <Property Name="nDualCupLabel" Type="Int32" />
+    <Property Name="nDTExpo" Type="Int32" />
+    <Property Name="nFCExpo" Type="Int32" />
+    <Property Name="dShipDate" Type="DateTime" Precision="0" />
+    <Property Name="tShippingCarrier" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tTrackingNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblProjectOrderStatusBoard">
+    <Key>
+      <PropertyRef Name="aProjectOrderStatusBoardID" />
+    </Key>
+    <Property Name="aProjectOrderStatusBoardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nVendor" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="nOSB" Type="Int32" />
+    <Property Name="dShipDate" Type="DateTime" Precision="0" />
+    <Property Name="tShippingCarrier" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tTrackingNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dDeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="nStoreId" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
   </EntityType>
 </Schema>

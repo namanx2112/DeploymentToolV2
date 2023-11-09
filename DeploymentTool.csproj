@@ -1127,6 +1127,9 @@
     <Compile Include="tblProjectExteriorMenu.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblProjectImageOrMemory.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblProjectInstallation.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
@@ -1136,10 +1139,19 @@
     <Compile Include="tblProjectNetworking.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblProjectNetworkSwtich.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblProjectNote.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProjectNote1.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblProjectOrderAccuracy.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblProjectOrderStatusBoard.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProjectPaymentSystem.cs">

@@ -33,5 +33,13 @@ namespace DeploymentTool
         public string ProjectStatus { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> BrandId { get; set; }
+        public Nullable<int> nNumberOfTabletsPerStore { get; set; }
+        public string tEquipmentVendor { get; set; }
+        public Nullable<System.DateTime> dDeliveryDate { get; set; }
+        public Nullable<System.DateTime> dRevisitDate { get; set; }
+        public Nullable<System.DateTime> dInstallDate { get; set; }
+        public string tInstallationVendor { get; set; }
+        public string tInstallStatus { get; set; }
+        public Nullable<System.DateTime> dShipDate { get; set; }
     }
 }

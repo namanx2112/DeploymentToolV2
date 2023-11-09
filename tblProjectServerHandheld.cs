@@ -15,15 +15,20 @@ namespace DeploymentTool
     public partial class tblProjectServerHandheld: Misc.IModelParent
     {
         public int aServerHandheldId { get; set; }
-        public Nullable<int> nVendor { get; set; }
         public Nullable<int> nProjectID { get; set; }
         public Nullable<int> nMyActiveStatus { get; set; }
         public Nullable<int> nStoreId { get; set; }
-        public Nullable<System.DateTime> dDeliveryDate { get; set; }
         public Nullable<System.DateTime> dDateFor_nStatus { get; set; }
+        public Nullable<int> nVendor { get; set; }
+        public Nullable<System.DateTime> dDeliveryDate { get; set; }
         public Nullable<int> nStatus { get; set; }
         public Nullable<int> nNumberOfTabletsPerStore { get; set; }
         public Nullable<System.DateTime> dShipDate { get; set; }
         public Nullable<decimal> cCost { get; set; }
+        public string tShippingCarrier { get; set; }
+        public string tTrackingNumber { get; set; }
+        public Nullable<int> nFiveBayCharger { get; set; }
+        public Nullable<int> nShoulderStrap { get; set; }
+        public Nullable<int> nProtectiveCase { get; set; }
     }
 }

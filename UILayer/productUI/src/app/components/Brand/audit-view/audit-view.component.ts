@@ -56,7 +56,7 @@ export class AuditViewComponent {
   }
 
   getFormatedDate(sDate: any) {
-    return CommonService.getFormatedDateString(sDate, true);
+    return CommonService.getFormatedDateString(sDate);
   }
 
   getUserName(userId: number) {
