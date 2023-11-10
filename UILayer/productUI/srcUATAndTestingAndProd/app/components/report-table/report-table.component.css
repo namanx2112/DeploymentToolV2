@@ -1,0 +1,45 @@
+table {
+  width: 100%;
+}
+
+.header {
+  height: 40px;
+  width: 100%;
+  line-height: 35px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.header .mat-icon {
+  height: auto;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.reportHeader {
+  height: 50px;
+  margin-top: 10px;
+}
+
+.reportBody {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  height: calc(100% - 75px);
+  overflow: auto;
+}
+
+.exportButton {
+  width: 170px;
+  float: left;
+  margin: 10px 20px 10px 15px;
+  cursor: pointer;
+}
+
+.openItem {
+  cursor: pointer;
+  text-decoration: underline;
+}

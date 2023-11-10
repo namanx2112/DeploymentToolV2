@@ -1,7 +1,0 @@
-<h4 mat-dialog-title>Change Golive Date for {{projectTypeString(_curProjInfo.nProjectType)}} Project</h4>
-<div mat-dialog-content>
-    <app-controls class="tabForm" *ngIf="dtField.length > 0" [request]="{fields: dtField, needButton: true, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
-        controlValues: {}, SubmitLabel: 'Save',
-            readOnlyForm: false, CloseLabel: 'Close', nBrandId: _curBrandId}" (onSubmit)="Save($event)"
-        (onClose)="Close($event)"></app-controls>
-</div>

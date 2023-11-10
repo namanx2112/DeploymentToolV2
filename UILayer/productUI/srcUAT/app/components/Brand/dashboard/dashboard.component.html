@@ -1,7 +1,0 @@
-<div [className]="tClass" (click)="reportClicked()">
-    <span class="title">{{_record.title}}</span>
-    <span class="count">{{_record.count}}
-        <span [className]="compareClass" *ngIf="compareText"><mat-icon>{{compareIcon}}</mat-icon>{{compareText}}</span>
-        <span class="compareText" *ngIf="_record.type == 1">{{_record.compareWithText}}</span>
-    </span>
-</div>

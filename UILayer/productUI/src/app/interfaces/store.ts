@@ -108,6 +108,27 @@ export interface StoreServerHandheld {
     cCost: number,
     dDateFor_nStatus: Date
 }
+export interface StoreNetworkSwitch {
+    aNetworkSwitchID: number,
+    nStoreId: number,
+    nProjectID: number,
+    nVendor: number,
+    nStatus: number,
+    nShipmenttoVendor: number,
+    nSetupStatus: number,
+    tNewSerialNumber: string,
+    tOldSerialNumber: string
+}
+export interface StoreImageMemory {
+    aImageMemoryId: number,
+    nStoreId: number,
+    nProjectID: number,
+    nVendor: number,
+    nStatus: number,
+    tHPShipmentTracking: string,
+    nReturnShipment: number,
+    tReturnShipmentTracking: string
+}
 export interface StoreExteriorMenus {
     aProjectExteriorMenuID: number,
     nStoreId: number,

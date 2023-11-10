@@ -1,0 +1,67 @@
+.projectHeader{
+    float: left;
+    height: 55px;
+    width: 95%;
+    z-index: 4;
+    background-color: #fff;
+    position: absolute;
+}
+
+.projectHeader h4{
+    display: inline-block;
+}
+.projHeader{
+    float: left;
+    margin-top: 13px;
+}
+
+.backIcon{
+    float: left;
+    margin-top: 10px;
+}
+
+.activeTabIcon{
+    transform: rotate(180deg);
+    position: absolute;
+    right: -8px;
+}
+
+.tabs{
+    float: left;
+    width: 208px;
+    border: 1px solid black;
+    height: calc(100% - 57px);
+    cursor: pointer;
+    position: absolute;
+    margin-top: 55px;
+}
+
+.tabHeader{
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding: 10px  0px;
+    position: relative;
+}
+
+.tabName{
+    float: left;
+    width: 100%;
+    margin: 20px 0px;
+}
+
+.tabBody{
+    float: left;
+    width: calc(80% - 210px);
+    margin-left: 208px;
+    margin-top: 55px;
+    padding: 0px 10% 20px 10%;
+    min-height: calc(100% - 75px);
+    background-color: darkgray;
+}
+
+
+.tabForm{
+    float: left;
+    width: 100%;
+    min-height: 80%;
+}

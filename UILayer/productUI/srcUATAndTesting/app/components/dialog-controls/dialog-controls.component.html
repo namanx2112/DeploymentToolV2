@@ -1,9 +1,0 @@
-<div class="{{dialogTheme}} outerDiv">
-    <h4 mat-dialog-title *ngIf="title != ''">{{title}}</h4>
-    <div mat-dialog-content>
-        <app-controls class="controlComp" [request]="{fields: fields, needButton: needButton, themeClass: themeClass, numberOfControlsInARow: numberOfControlsInARow, 
-controlValues: controlValues, SubmitLabel: SubmitLabel,CloseLabel: 'Close',
-    readOnlyForm: readOnlyForm, nBrandId: curBrandId, fieldRestrictions: fieldRestrictions}" (onSubmit)="onSubmitClicked($event)"
-            (onClose)="onCloseClicked($event)"></app-controls>
-    </div>
-</div>

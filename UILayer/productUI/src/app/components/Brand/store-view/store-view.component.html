@@ -101,7 +101,7 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
                 <span class="headerLeft" *ngIf="index == 7">
                     {{tTab.tab_header}}
                 </span>
-                <span *ngIf="index == 7" class="projTypeOnTabHeader">{{ "(" +
+                <span *ngIf="tTab.tab_name == 'Installation'" class="projTypeOnTabHeader">{{ "(" +
                     projectTypeString(selectedProject.nProjectType) + ")"}} </span>
             </div>
             <div *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)" [ngClass]="(selectedTab == -11) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-11);">

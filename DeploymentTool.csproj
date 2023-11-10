@@ -964,7 +964,9 @@
     <Compile Include="Controller\AttachmentController.cs" />
     <Compile Include="Controller\DropdownController.cs" />
     <Compile Include="Controller\FranchiseController.cs" />
+    <Compile Include="Controller\ProjectImageMemoryController.cs" />
     <Compile Include="Controller\MyApiContext.cs" />
+    <Compile Include="Controller\ProjectNetworkSwitchController.cs" />
     <Compile Include="Controller\NotesController.cs" />
     <Compile Include="Controller\NotificationsController.cs" />
     <Compile Include="Controller\ProjectAudiosController.cs" />

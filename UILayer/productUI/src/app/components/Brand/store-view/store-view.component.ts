@@ -6,7 +6,7 @@ import { ExStoreService } from 'src/app/services/ex-store.service';
 import { ControlsComponent } from '../../controls/controls.component';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { NotesListComponent } from '../notes-list/notes-list.component';
-import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreServerHandheld, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
+import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreImageMemory, StoreInstallation, StoreInteriorMenus, StoreNetworkSwitch, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreServerHandheld, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { NotImplementedComponent } from '../../not-implemented/not-implemented.component';
 import { ChangeGoliveDateComponent } from '../change-golive-date/change-golive-date.component';
@@ -280,6 +280,16 @@ export class StoreViewComponent {
         break;
       case TabType.StoreProjectServerHandheld:
         this.techCompService.GetServerHandheld(searchField).subscribe((x: StoreServerHandheld[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreNetworkSwitch:
+        this.techCompService.GetNetworkSwitch(searchField).subscribe((x: StoreNetworkSwitch[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreImageMemory:
+        this.techCompService.GetImageMemory(searchField).subscribe((x: StoreImageMemory[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
         break;
@@ -571,6 +581,38 @@ export class StoreViewComponent {
           fieldValues["nProjectID"] = this.selectedProject.nProjectId;
           fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.CreateServerHandheld(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
+      case TabType.StoreNetworkSwitch:
+        let aNetworkSwitchId = (this.tValues[tab.tab_name]["aNetworkSwitchId"]) ? parseInt(this.tValues[tab.tab_name]["aNetworkSwitchId"]) : 0;
+        if (aNetworkSwitchId > 0) {
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.UpdateNetworkSwitch(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          fieldValues["nProjectID"] = this.selectedProject.nProjectId;
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.CreateNetworkSwitch(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
+      case TabType.StoreImageMemory:
+        let aImageMemoryId = (this.tValues[tab.tab_name]["aImageMemoryId"]) ? parseInt(this.tValues[tab.tab_name]["aImageMemoryId"]) : 0;
+        if (aImageMemoryId > 0) {
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.UpdateImageMemory(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          fieldValues["nProjectID"] = this.selectedProject.nProjectId;
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.CreateImageMemory(fieldValues).subscribe((x: any) => {
             callBack(x);
           });
         }
