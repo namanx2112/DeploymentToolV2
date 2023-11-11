@@ -129,6 +129,33 @@ export interface StoreImageMemory {
     nReturnShipment: number,
     tReturnShipmentTracking: string
 }
+export interface StoreOrderAccuracy {
+    aProjectOrderAccuracyID: number,
+    nStoreId: number,
+    nProjectID: number,
+    nVendor: number,
+    nStatus: number,
+    nBakeryPrinter: number,
+    nDualCupLabel: number,
+    nDTExpo: number,
+    nFCExpo: null,
+    dShipDate: Date,
+    tShippingCarrier: string,
+    tTrackingNumber: string,
+    dDeliveryDate: Date
+}
+export interface StoreOrderStatusBoard {
+    aProjectOrderStatusBoardID: number,
+    nStoreId: number,
+    nProjectID: number,
+    nVendor: number,
+    nStatus: number,
+    nOSB: number,
+    dShipDate: Date,
+    tShippingCarrier: string,
+    tTrackingNumber: string,
+    dDeliveryDate: Date
+}
 export interface StoreExteriorMenus {
     aProjectExteriorMenuID: number,
     nStoreId: number,
@@ -296,7 +323,7 @@ export interface ProjectInfo {
 
 export enum ProjectTypes {
     New, Rebuild, Remodel, Relocation, Acquisition, POSInstallation, AudioInstallation, InteriorMenuInstallation, PaymentTerminalInstallation, PartsReplacement,
-    ServerHandheldInstallation, ExteriorMenuInstallation
+    ServerHandheldInstallation, ExteriorMenuInstallation, OrderAccuracyInstallation, OrderStatusBoardInstallation, ArbysHPRolloutInstallation
 }
 
 export interface NewProjectStore {

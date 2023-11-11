@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
-import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSonicRadio, StoreStackholders, StoreServerHandheld, StoreNetworkSwitch, StoreImageMemory } from '../interfaces/store';
+import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSonicRadio, StoreStackholders, StoreServerHandheld, StoreNetworkSwitch, StoreImageMemory, StoreOrderAccuracy, StoreOrderStatusBoard } from '../interfaces/store';
 import { Dictionary } from '../interfaces/commons';
 import { CommonService } from './common.service';
 import { CacheService } from './cache.service';
@@ -160,5 +160,25 @@ export class AllTechnologyComponentsService {
   }
   UpdateImageMemory(request: StoreImageMemory) {
     return this.http.post<StoreImageMemory>(CommonService.ConfigUrl + "ProjectImageMemory/update", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  GetOrderAccuracy(request: Dictionary<string>) {
+    return this.http.post<StoreOrderAccuracy[]>(CommonService.ConfigUrl + "ProjectOrderAccuracy/Get", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+  CreateOrderAccuracy(request: StoreOrderAccuracy) {
+    return this.http.post<StoreOrderAccuracy>(CommonService.ConfigUrl + "ProjectOrderAccuracy/Create", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+  UpdateOrderAccuracy(request: StoreOrderAccuracy) {
+    return this.http.post<StoreOrderAccuracy>(CommonService.ConfigUrl + "ProjectOrderAccuracy/update", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  GetOrderStatusBoard(request: Dictionary<string>) {
+    return this.http.post<StoreOrderStatusBoard[]>(CommonService.ConfigUrl + "ProjectOrderStatusBoard/Get", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+  CreateOrderStatusBoard(request: StoreOrderStatusBoard) {
+    return this.http.post<StoreOrderStatusBoard>(CommonService.ConfigUrl + "ProjectOrderStatusBoard/Create", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+  UpdateOrderStatusBoard(request: StoreOrderStatusBoard) {
+    return this.http.post<StoreOrderStatusBoard>(CommonService.ConfigUrl + "ProjectOrderStatusBoard/update", request, { headers: this.cacheService.getHttpHeaders() });
   }
 }

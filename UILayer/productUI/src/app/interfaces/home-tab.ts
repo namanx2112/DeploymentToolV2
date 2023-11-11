@@ -24,7 +24,8 @@ export enum TabType {
     Users, Brands, Franchise, Store, TechComponent, Vendor, TechComponentTools, Analytics,
     StoreContact, StoreConfiguration, StoreStackHolder, StoreNetworking, StorePOS, StoreAudio, StoreExteriorMenus, StorePaymetSystem,
     StoreInteriorMenus, StoreSonicRadio, StoreInstallation, StoreProjects, StoreNotes, NewStore, SearchStore, VendorParts, HistoricalProjects,
-    StoreProjectServerHandheld, AuditChanges, RolloutProjects, StoreNetworkSwitch, StoreImageMemory
+    StoreProjectServerHandheld, AuditChanges, RolloutProjects, StoreNetworkSwitch, StoreImageMemory,
+    StoreOrderAccuracy, StoreOrderStatusBoard
 }
 
 

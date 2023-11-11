@@ -182,6 +182,22 @@ export class ExStoreService {
         this.GetStoreInsallationTab(TabInstanceType.Single)
       ];
     }
+    else if (tBrand.nBrandType == Brands.Dunkin) {
+      tabs = [
+        this.GetStoreContactTab(TabInstanceType.Single),
+        this.GetStoreConfigurationTab(TabInstanceType.Single),
+        this.GetStoreStackholderTab(TabInstanceType.Single),
+        this.GetStoreNetworingTab(TabInstanceType.Single),
+        this.GetStorePOSTab(TabInstanceType.Single),
+        this.GetStoreAudioTab(TabInstanceType.Single),
+        this.GetStoreExteriorMenusTab(TabInstanceType.Single),
+        this.GetStorePaymentSystemTab(TabInstanceType.Single),
+        this.GetStoreInteriorMenusTab(TabInstanceType.Single),
+        this.GetStoreOrderAccuracyTab(TabInstanceType.Single),
+        this.GetStoreOrderStatusBoardTab(TabInstanceType.Single),
+        this.GetStoreInsallationTab(TabInstanceType.Single)
+      ];
+    }
     else {
       tabs = [
         this.GetStoreContactTab(TabInstanceType.Single),
@@ -3729,7 +3745,7 @@ export class ExStoreService {
     return {
       tab_name: "Image Memory",
       tab_header: "Image Memory",
-      tTableName: "tblImageMemory",
+      tTableName: "tblProjectImageMemory",
       tab_type: TabType.StoreImageMemory,
       tab_unique_name: "",
       instanceType: instType,
@@ -3838,6 +3854,335 @@ export class ExStoreService {
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter Return Shipment Tracking",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }],
+      my_service: "",
+      needImport: false
+    };
+  }
+  //#endregion
+
+  //#region Dunkin
+  GetStoreOrderAccuracyTab(instType: TabInstanceType): HomeTab {
+    return {
+      tab_name: "Order Accuracy",
+      tab_header: "Order Accuracy",
+      tTableName: "tblProjectOrderAccuracy",
+      tab_type: TabType.StoreOrderAccuracy,
+      tab_unique_name: "",
+      instanceType: instType,
+      isTechComponent: false,
+      childTabs: [],
+      search_fields: [{
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }],
+      fields: [{
+        field_name: "Order Accuracy ID",
+        fieldUniqeName: "aProjectOrderAccuracyID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Order Accuracy ID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "ProjectID",
+        fieldUniqeName: "nProjectID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter ProjectID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        options: this.commonService.GetDropdown("Vendor"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Status",
+        fieldUniqeName: "nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Status",
+        validator: [],
+        options: this.commonService.GetDropdown("OrderAccuracyStatus"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Bakery Printer",
+        fieldUniqeName: "nBakeryPrinter",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Bakery Printer",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Dual Cup Label",
+        fieldUniqeName: "nDualCupLabel",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Dual Cup Label",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "DT Expo",
+        fieldUniqeName: "nDTExpo",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "DT Expo",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "FC Expo",
+        fieldUniqeName: "nFCExpo",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Dual FC Expo",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Ship Date",
+        fieldUniqeName: "dShipDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Ship Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Shipping Carrier",
+        fieldUniqeName: "tShippingCarrier",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Shipping Carrier",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Tracking Number",
+        fieldUniqeName: "tTrackingNumber",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Tracking Number",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Delivery Date",
+        fieldUniqeName: "dDeliveryDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Delivery Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }],
+      my_service: "",
+      needImport: false
+    };
+  }
+  GetStoreOrderStatusBoardTab(instType: TabInstanceType): HomeTab {
+    return {
+      tab_name: "Order StatusBoard",
+      tab_header: "Order StatusBoard",
+      tTableName: "tblProjectOrderStatusBoard",
+      tab_type: TabType.StoreOrderStatusBoard,
+      tab_unique_name: "",
+      instanceType: instType,
+      isTechComponent: false,
+      childTabs: [],
+      search_fields: [{
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }],
+      fields: [{
+        field_name: "Order Status Board",
+        fieldUniqeName: "aProjectOrderStatusBoardID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter Order Status Board",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "nStoreId",
+        fieldUniqeName: "nStoreId",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter StoreId",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "ProjectID",
+        fieldUniqeName: "nProjectID",
+        defaultVal: "0",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter ProjectID",
+        validator: [],
+        mandatory: false,
+        hidden: true
+      }, {
+        field_name: "Vendor",
+        fieldUniqeName: "nVendor",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        options: this.commonService.GetDropdown("Vendor"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Status",
+        fieldUniqeName: "nStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Status",
+        validator: [],
+        options: this.commonService.GetDropdown("OrderAccuracyStatus"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "OSB",
+        fieldUniqeName: "nOSB",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.number,
+        field_placeholder: "Enter OSB",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Ship Date",
+        fieldUniqeName: "dShipDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Dual Ship Date",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Shipping Carrier",
+        fieldUniqeName: "tShippingCarrier",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Shipping Carrier",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Tracking Number",
+        fieldUniqeName: "tTrackingNumber",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Tracking Number",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Delivery Date",
+        fieldUniqeName: "dDeliveryDate",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Delivery Date",
         validator: [],
         mandatory: false,
         hidden: false

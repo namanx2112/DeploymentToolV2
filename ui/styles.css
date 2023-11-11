@@ -77,7 +77,8 @@ body {
     border-color: black;
 }
 
-.deployit .grayWhiteTheme, .requestTile {
+.deployit .grayWhiteTheme,
+.requestTile {
     background-color: #f0f0f0;
 }
 
@@ -113,7 +114,7 @@ body {
 }
 
 .mailField input {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1)!important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
 button {
@@ -146,10 +147,15 @@ button {
     overflow: visibles !important;
 }
 
-.form .mat-mdc-form-field-infix {
+.form .mat-mdc-form-field:not(.textAreaField) .mat-mdc-form-field-infix {
     min-height: 40px !important;
     height: 40px !important;
     padding: 12px 0px !important;
+}
+
+.textAreaField textarea{
+    height: 155px!important;
+    resize: none;
 }
 
 .noBorderButton {
@@ -160,7 +166,7 @@ button {
     flex-direction: column;
 }
 
-.tilHeader  .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+.tilHeader .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
     height: 45px;
 }
 
@@ -170,7 +176,8 @@ button {
 }
 
 
-.deployit .tabSelectionOption>span.selected, .menuPart .selected {
+.deployit .tabSelectionOption>span.selected,
+.menuPart .selected {
     background-color: #c8252c !important;
     color: #fff;
 }
@@ -178,7 +185,7 @@ button {
 .deployit .header,
 .deployit button,
 .deployit .tableHeader h4 {
-    color:black!important;
+    color: black !important;
 }
 
 .mdc-checkbox__native-control:checked~.mdc-checkbox__background {
@@ -321,8 +328,8 @@ button {
     background-color: #E6F6F7;
 } */
 
-.sonic_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary{
-    background-color: rgb(0, 137, 216)!important;
+.sonic_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary {
+    background-color: rgb(0, 137, 216) !important;
 }
 
 .sonic_theme a.active {
@@ -346,8 +353,8 @@ button {
     color: #fff;
 }
 
-.buffalo_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary{
-    background-color: #FFC600!important;
+.buffalo_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary {
+    background-color: #FFC600 !important;
 }
 
 /* .buffalo_theme .sideNavContent{
@@ -384,8 +391,8 @@ button {
     color: #fff;
 }
 
-.arby_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary{
-    background-color: #ECECEC!important;
+.arby_theme .tilHeader .mat-mdc-standard-chip.mat-mdc-chip-selected.mat-primary {
+    background-color: #ECECEC !important;
 }
 
 /* .buffalo_theme .sideNavContent{
@@ -394,4 +401,28 @@ button {
 
 .arby_theme a.active {
     border-bottom: 5px solid #382E2C;
+}
+
+.dunkin_theme .sideNav {
+    background-color: #653602;
+}
+
+.dunkin_theme .fullTile,
+.dunkin_theme .halfTile,
+.dunkin_theme .tabBody,
+.dunkin_theme .lightGray {
+    background-color: #f0f0f0;
+}
+
+.dunkin_theme .sideNavConten {
+    background-color: #653602;
+}
+
+.dunkin_theme .menuPart button {
+    color: #fff !important;
+}
+
+.dunkin_theme .selectedTab {
+    background-color: #653602;
+    color: #fff;
 }

@@ -6,7 +6,7 @@ import { ExStoreService } from 'src/app/services/ex-store.service';
 import { ControlsComponent } from '../../controls/controls.component';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { NotesListComponent } from '../notes-list/notes-list.component';
-import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreImageMemory, StoreInstallation, StoreInteriorMenus, StoreNetworkSwitch, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreServerHandheld, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
+import { ProjectInfo, ProjectTypes, StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreImageMemory, StoreInstallation, StoreInteriorMenus, StoreNetworkSwitch, StoreNetworkings, StoreOrderAccuracy, StoreOrderStatusBoard, StorePOS, StorePaymentSystem, StoreSearchModel, StoreServerHandheld, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { NotImplementedComponent } from '../../not-implemented/not-implemented.component';
 import { ChangeGoliveDateComponent } from '../change-golive-date/change-golive-date.component';
@@ -290,6 +290,16 @@ export class StoreViewComponent {
         break;
       case TabType.StoreImageMemory:
         this.techCompService.GetImageMemory(searchField).subscribe((x: StoreImageMemory[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreOrderAccuracy:
+        this.techCompService.GetOrderAccuracy(searchField).subscribe((x: StoreOrderAccuracy[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreOrderStatusBoard:
+        this.techCompService.GetOrderStatusBoard(searchField).subscribe((x: StoreOrderStatusBoard[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
         break;
@@ -613,6 +623,38 @@ export class StoreViewComponent {
           fieldValues["nProjectID"] = this.selectedProject.nProjectId;
           fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.CreateImageMemory(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
+      case TabType.StoreOrderAccuracy:
+        let aOrderAccuracyId = (this.tValues[tab.tab_name]["aOrderAccuracyId"]) ? parseInt(this.tValues[tab.tab_name]["aOrderAccuracyId"]) : 0;
+        if (aOrderAccuracyId > 0) {
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.UpdateOrderAccuracy(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          fieldValues["nProjectID"] = this.selectedProject.nProjectId;
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.CreateOrderAccuracy(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
+      case TabType.StoreOrderStatusBoard:
+        let aStoreOrderStatusBoardId = (this.tValues[tab.tab_name]["aStoreOrderStatusBoardId"]) ? parseInt(this.tValues[tab.tab_name]["aStoreOrderStatusBoardId"]) : 0;
+        if (aStoreOrderStatusBoardId > 0) {
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.UpdateOrderStatusBoard(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          fieldValues["nProjectID"] = this.selectedProject.nProjectId;
+          fieldValues["nMyActiveStatus"] = 1;
+          this.techCompService.CreateOrderStatusBoard(fieldValues).subscribe((x: any) => {
             callBack(x);
           });
         }

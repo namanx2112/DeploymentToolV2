@@ -975,6 +975,8 @@
     <Compile Include="Controller\ProjectInstallationsController.cs" />
     <Compile Include="Controller\ProjectInteriorMenusController.cs" />
     <Compile Include="Controller\ProjectNetworkingsController.cs" />
+    <Compile Include="Controller\ProjectOrderAccuracyController.cs" />
+    <Compile Include="Controller\ProjectOrderStatusBoardController.cs" />
     <Compile Include="Controller\ProjectPaymentSystemsController.cs" />
     <Compile Include="Controller\ProjectPOSController.cs" />
     <Compile Include="Controller\ProjectRolloutController.cs" />

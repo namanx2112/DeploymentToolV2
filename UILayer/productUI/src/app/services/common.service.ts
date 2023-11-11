@@ -322,6 +322,24 @@ export class CommonService {
       optionOrder: 1,
       bDeleted: false,
       nFunction: 0
+    }, {
+      tDropdownText: "OrderAccuracyInstallation",
+      aDropdownId: ProjectTypes.OrderAccuracyInstallation.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "OrderStatusBoardInstallation",
+      aDropdownId: ProjectTypes.OrderStatusBoardInstallation.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "ArbysHPRolloutInstallation",
+      aDropdownId: ProjectTypes.ArbysHPRolloutInstallation.toString(),
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
     }];;
   }
 

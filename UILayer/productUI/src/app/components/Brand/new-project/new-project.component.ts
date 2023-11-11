@@ -113,6 +113,29 @@ export class NewProjectComponent {
       }
     }
 
+    if (tBrand.nBrandType == Brands.Dunkin) {
+      if (this._NeedTechComponent == "all" || this._NeedTechComponent == "orderaccuracy") {
+        this.allTabs.push(this.service.GetStoreOrderAccuracyTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+    }
+
+    if (tBrand.nBrandType == Brands.Dunkin) {
+      if (this._NeedTechComponent == "all" || this._NeedTechComponent == "orderstatusboard") {
+        this.allTabs.push(this.service.GetStoreOrderStatusBoardTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+    }
+
+    if (tBrand.nBrandType == Brands.Arby) {
+      if (this._NeedTechComponent == "all" || this._NeedTechComponent == "hprollout") {
+        this.allTabs.push(this.service.GetStoreNetworkSwitchTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+        this.allTabs.push(this.service.GetStoreImageMemoryTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+    }
+
     if (this._NeedTechComponent == "all" || this._NeedTechComponent == "exteriormenu") {
       this.allTabs.push(this.service.GetStoreExteriorMenusTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
@@ -208,6 +231,7 @@ export class NewProjectComponent {
     if (this.curTabIndex > 1) {
       this.tValues[tab.tab_name] = ev.value;
       this.curTabIndex--;
+      this.changeButtonLabel();
       this.loadCurTab();
     }
   }
@@ -217,11 +241,15 @@ export class NewProjectComponent {
 
     }
     this.curTabIndex++;
+    this.changeButtonLabel();
+    this.loadCurTab();
+  }
+
+  changeButtonLabel(){
     if (this.curTabIndex + 1 == this.allTabs.length)
       this.SubmitLabel = "Finish";
     else
       this.SubmitLabel = "Next";
-    this.loadCurTab();
   }
 
 }
