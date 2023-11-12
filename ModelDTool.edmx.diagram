@@ -68,6 +68,9 @@
         <EntityTypeShape EntityType="dtDBModel.tblProjectNetworkSwtich" Width="1.5" PointX="23.375" PointY="19.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectOrderAccuracy" Width="1.5" PointX="23.375" PointY="23.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectOrderStatusBoard" Width="1.5" PointX="24.375" PointY="3.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectsRollout" Width="1.5" PointX="5.375" PointY="24.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectsRolloutStoreRel" Width="1.5" PointX="25.375" PointY="8.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectsRolloutTechRel" Width="1.5" PointX="7.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

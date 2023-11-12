@@ -330,13 +330,13 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dDateFor_nProjectStatus" Type="date" />
     <Property Name="dRevisitDate" Type="date" />
     <Property Name="nRevisitDateChanged" Type="int" />
-    <Property Name="dInstallTime" Type="datetime" />
     <Property Name="tInstallTechNumber" Type="nvarchar" MaxLength="255" />
     <Property Name="tManagerName" Type="nvarchar" MaxLength="255" />
     <Property Name="tManagerNumber" Type="nvarchar" MaxLength="255" />
     <Property Name="nManagerCheckout" Type="int" />
     <Property Name="nPhotoDeliverables" Type="int" />
     <Property Name="tInstallNotes" Type="nvarchar(max)" />
+    <Property Name="dInstallTime" Type="datetime" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenus">
     <Key>
@@ -543,6 +543,49 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
     <Property Name="dDateFor_nStatus" Type="date" />
+  </EntityType>
+  <EntityType Name="tblProjectsRollout">
+    <Key>
+      <PropertyRef Name="aProjectsRolloutID" />
+    </Key>
+    <Property Name="aProjectsRolloutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tProjectsRolloutName" Type="nvarchar" MaxLength="255" />
+    <Property Name="tProjectsRolloutDescription" Type="nvarchar(max)" />
+    <Property Name="nBrandID" Type="int" />
+    <Property Name="nNumberOfStore" Type="int" />
+    <Property Name="nMyActiveStatus" Type="int" />
+    <Property Name="nStatus" Type="int" />
+    <Property Name="dtStartDate" Type="datetime" />
+    <Property Name="dtEndDate" Type="datetime" />
+    <Property Name="tEstimateIstallTImePerStore" Type="nvarchar" MaxLength="255" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
+    <Property Name="dDateFor_nStatus" Type="date" />
+  </EntityType>
+  <EntityType Name="tblProjectsRolloutStoreRel">
+    <Key>
+      <PropertyRef Name="aProjectsRolloutStoreRelID" />
+    </Key>
+    <Property Name="aProjectsRolloutStoreRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nProjectsRolloutID" Type="int" />
+    <Property Name="nStoreID" Type="int" />
+    <Property Name="nLinkedStatus" Type="int" />
+    <Property Name="nProjectID" Type="int" />
+    <Property Name="nLinkedBy" Type="int" />
+    <Property Name="dtLinkedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblProjectsRolloutTechRel">
+    <Key>
+      <PropertyRef Name="aProjectsRolloutTechRelID" />
+    </Key>
+    <Property Name="aProjectsRolloutTechRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nProjectsRolloutID" Type="int" />
+    <Property Name="nTechComponentID" Type="int" />
+    <Property Name="nVendorID" Type="int" />
+    <Property Name="nInstallationID" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectStakeHolders">
     <Key>
@@ -1012,6 +1055,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblProjectPOS" EntityType="Self.tblProjectPOS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectServerHandheld" EntityType="Self.tblProjectServerHandheld" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectsRollout" EntityType="Self.tblProjectsRollout" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectsRolloutStoreRel" EntityType="Self.tblProjectsRolloutStoreRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectsRolloutTechRel" EntityType="Self.tblProjectsRolloutTechRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPurchaseOrder" EntityType="Self.tblPurchaseOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPurchaseOrderParts" EntityType="Self.tblPurchaseOrderParts" Schema="dbo" store:Type="Tables" />

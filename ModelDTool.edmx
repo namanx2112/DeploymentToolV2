@@ -335,13 +335,13 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dDateFor_nProjectStatus" Type="date" />
           <Property Name="dRevisitDate" Type="date" />
           <Property Name="nRevisitDateChanged" Type="int" />
-          <Property Name="dInstallTime" Type="datetime" />
           <Property Name="tInstallTechNumber" Type="nvarchar" MaxLength="255" />
           <Property Name="tManagerName" Type="nvarchar" MaxLength="255" />
           <Property Name="tManagerNumber" Type="nvarchar" MaxLength="255" />
           <Property Name="nManagerCheckout" Type="int" />
           <Property Name="nPhotoDeliverables" Type="int" />
           <Property Name="tInstallNotes" Type="nvarchar(max)" />
+          <Property Name="dInstallTime" Type="datetime" />
         </EntityType>
         <EntityType Name="tblProjectInteriorMenus">
           <Key>
@@ -548,6 +548,49 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="nStoreId" Type="int" />
           <Property Name="nMyActiveStatus" Type="int" />
           <Property Name="dDateFor_nStatus" Type="date" />
+        </EntityType>
+        <EntityType Name="tblProjectsRollout">
+          <Key>
+            <PropertyRef Name="aProjectsRolloutID" />
+          </Key>
+          <Property Name="aProjectsRolloutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tProjectsRolloutName" Type="nvarchar" MaxLength="255" />
+          <Property Name="tProjectsRolloutDescription" Type="nvarchar(max)" />
+          <Property Name="nBrandID" Type="int" />
+          <Property Name="nNumberOfStore" Type="int" />
+          <Property Name="nMyActiveStatus" Type="int" />
+          <Property Name="nStatus" Type="int" />
+          <Property Name="dtStartDate" Type="datetime" />
+          <Property Name="dtEndDate" Type="datetime" />
+          <Property Name="tEstimateIstallTImePerStore" Type="nvarchar" MaxLength="255" />
+          <Property Name="nCreatedBy" Type="int" />
+          <Property Name="nUpdateBy" Type="int" />
+          <Property Name="dtCreatedOn" Type="datetime" />
+          <Property Name="dtUpdatedOn" Type="datetime" />
+          <Property Name="bDeleted" Type="bit" />
+          <Property Name="dDateFor_nStatus" Type="date" />
+        </EntityType>
+        <EntityType Name="tblProjectsRolloutStoreRel">
+          <Key>
+            <PropertyRef Name="aProjectsRolloutStoreRelID" />
+          </Key>
+          <Property Name="aProjectsRolloutStoreRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectsRolloutID" Type="int" />
+          <Property Name="nStoreID" Type="int" />
+          <Property Name="nLinkedStatus" Type="int" />
+          <Property Name="nProjectID" Type="int" />
+          <Property Name="nLinkedBy" Type="int" />
+          <Property Name="dtLinkedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblProjectsRolloutTechRel">
+          <Key>
+            <PropertyRef Name="aProjectsRolloutTechRelID" />
+          </Key>
+          <Property Name="aProjectsRolloutTechRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nProjectsRolloutID" Type="int" />
+          <Property Name="nTechComponentID" Type="int" />
+          <Property Name="nVendorID" Type="int" />
+          <Property Name="nInstallationID" Type="int" />
         </EntityType>
         <EntityType Name="tblProjectStakeHolders">
           <Key>
@@ -1017,6 +1060,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblProjectPOS" EntityType="Self.tblProjectPOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectServerHandheld" EntityType="Self.tblProjectServerHandheld" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectSonicRadio" EntityType="Self.tblProjectSonicRadio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectsRollout" EntityType="Self.tblProjectsRollout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectsRolloutStoreRel" EntityType="Self.tblProjectsRolloutStoreRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectsRolloutTechRel" EntityType="Self.tblProjectsRolloutTechRel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectStakeHolders" EntityType="Self.tblProjectStakeHolders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPurchaseOrder" EntityType="Self.tblPurchaseOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPurchaseOrderParts" EntityType="Self.tblPurchaseOrderParts" Schema="dbo" store:Type="Tables" />
@@ -1244,6 +1290,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblProjectNetworkSwtiches" EntityType="dtDBModel.tblProjectNetworkSwtich" />
           <EntitySet Name="tblProjectOrderAccuracies" EntityType="dtDBModel.tblProjectOrderAccuracy" />
           <EntitySet Name="tblProjectOrderStatusBoards" EntityType="dtDBModel.tblProjectOrderStatusBoard" />
+          <EntitySet Name="tblProjectsRollouts" EntityType="dtDBModel.tblProjectsRollout" />
+          <EntitySet Name="tblProjectsRolloutStoreRels" EntityType="dtDBModel.tblProjectsRolloutStoreRel" />
+          <EntitySet Name="tblProjectsRolloutTechRels" EntityType="dtDBModel.tblProjectsRolloutTechRel" />
 				</EntityContainer>
 				<EntityType Name="tblBrand">
 					<Key>
@@ -2184,6 +2233,49 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="nStoreId" Type="Int32" />
           <Property Name="nMyActiveStatus" Type="Int32" />
           <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblProjectsRollout">
+          <Key>
+            <PropertyRef Name="aProjectsRolloutID" />
+          </Key>
+          <Property Name="aProjectsRolloutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tProjectsRolloutName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tProjectsRolloutDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="nBrandID" Type="Int32" />
+          <Property Name="nNumberOfStore" Type="Int32" />
+          <Property Name="nMyActiveStatus" Type="Int32" />
+          <Property Name="nStatus" Type="Int32" />
+          <Property Name="dtStartDate" Type="DateTime" Precision="3" />
+          <Property Name="dtEndDate" Type="DateTime" Precision="3" />
+          <Property Name="tEstimateIstallTImePerStore" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="nCreatedBy" Type="Int32" />
+          <Property Name="nUpdateBy" Type="Int32" />
+          <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="bDeleted" Type="Boolean" />
+          <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblProjectsRolloutStoreRel">
+          <Key>
+            <PropertyRef Name="aProjectsRolloutStoreRelID" />
+          </Key>
+          <Property Name="aProjectsRolloutStoreRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nProjectsRolloutID" Type="Int32" />
+          <Property Name="nStoreID" Type="Int32" />
+          <Property Name="nLinkedStatus" Type="Int32" />
+          <Property Name="nProjectID" Type="Int32" />
+          <Property Name="nLinkedBy" Type="Int32" />
+          <Property Name="dtLinkedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblProjectsRolloutTechRel">
+          <Key>
+            <PropertyRef Name="aProjectsRolloutTechRelID" />
+          </Key>
+          <Property Name="aProjectsRolloutTechRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nProjectsRolloutID" Type="Int32" />
+          <Property Name="nTechComponentID" Type="Int32" />
+          <Property Name="nVendorID" Type="Int32" />
+          <Property Name="nInstallationID" Type="Int32" />
         </EntityType>
 			</Schema>
 		</edmx:ConceptualModels>
@@ -3191,6 +3283,52 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
                 <ScalarProperty Name="nVendor" ColumnName="nVendor" />
                 <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
                 <ScalarProperty Name="aProjectOrderStatusBoardID" ColumnName="aProjectOrderStatusBoardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjectsRollouts">
+            <EntityTypeMapping TypeName="dtDBModel.tblProjectsRollout">
+              <MappingFragment StoreEntitySet="tblProjectsRollout">
+                <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
+                <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+                <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+                <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+                <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+                <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+                <ScalarProperty Name="tEstimateIstallTImePerStore" ColumnName="tEstimateIstallTImePerStore" />
+                <ScalarProperty Name="dtEndDate" ColumnName="dtEndDate" />
+                <ScalarProperty Name="dtStartDate" ColumnName="dtStartDate" />
+                <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+                <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+                <ScalarProperty Name="nNumberOfStore" ColumnName="nNumberOfStore" />
+                <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
+                <ScalarProperty Name="tProjectsRolloutDescription" ColumnName="tProjectsRolloutDescription" />
+                <ScalarProperty Name="tProjectsRolloutName" ColumnName="tProjectsRolloutName" />
+                <ScalarProperty Name="aProjectsRolloutID" ColumnName="aProjectsRolloutID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjectsRolloutStoreRels">
+            <EntityTypeMapping TypeName="dtDBModel.tblProjectsRolloutStoreRel">
+              <MappingFragment StoreEntitySet="tblProjectsRolloutStoreRel">
+                <ScalarProperty Name="dtLinkedOn" ColumnName="dtLinkedOn" />
+                <ScalarProperty Name="nLinkedBy" ColumnName="nLinkedBy" />
+                <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+                <ScalarProperty Name="nLinkedStatus" ColumnName="nLinkedStatus" />
+                <ScalarProperty Name="nStoreID" ColumnName="nStoreID" />
+                <ScalarProperty Name="nProjectsRolloutID" ColumnName="nProjectsRolloutID" />
+                <ScalarProperty Name="aProjectsRolloutStoreRelID" ColumnName="aProjectsRolloutStoreRelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjectsRolloutTechRels">
+            <EntityTypeMapping TypeName="dtDBModel.tblProjectsRolloutTechRel">
+              <MappingFragment StoreEntitySet="tblProjectsRolloutTechRel">
+                <ScalarProperty Name="nInstallationID" ColumnName="nInstallationID" />
+                <ScalarProperty Name="nVendorID" ColumnName="nVendorID" />
+                <ScalarProperty Name="nTechComponentID" ColumnName="nTechComponentID" />
+                <ScalarProperty Name="nProjectsRolloutID" ColumnName="nProjectsRolloutID" />
+                <ScalarProperty Name="aProjectsRolloutTechRelID" ColumnName="aProjectsRolloutTechRelID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

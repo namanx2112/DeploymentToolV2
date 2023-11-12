@@ -1004,5 +1004,51 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectsRollouts">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectsRollout">
+        <MappingFragment StoreEntitySet="tblProjectsRollout">
+          <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tEstimateIstallTImePerStore" ColumnName="tEstimateIstallTImePerStore" />
+          <ScalarProperty Name="dtEndDate" ColumnName="dtEndDate" />
+          <ScalarProperty Name="dtStartDate" ColumnName="dtStartDate" />
+          <ScalarProperty Name="nStatus" ColumnName="nStatus" />
+          <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
+          <ScalarProperty Name="nNumberOfStore" ColumnName="nNumberOfStore" />
+          <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
+          <ScalarProperty Name="tProjectsRolloutDescription" ColumnName="tProjectsRolloutDescription" />
+          <ScalarProperty Name="tProjectsRolloutName" ColumnName="tProjectsRolloutName" />
+          <ScalarProperty Name="aProjectsRolloutID" ColumnName="aProjectsRolloutID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectsRolloutStoreRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectsRolloutStoreRel">
+        <MappingFragment StoreEntitySet="tblProjectsRolloutStoreRel">
+          <ScalarProperty Name="dtLinkedOn" ColumnName="dtLinkedOn" />
+          <ScalarProperty Name="nLinkedBy" ColumnName="nLinkedBy" />
+          <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
+          <ScalarProperty Name="nLinkedStatus" ColumnName="nLinkedStatus" />
+          <ScalarProperty Name="nStoreID" ColumnName="nStoreID" />
+          <ScalarProperty Name="nProjectsRolloutID" ColumnName="nProjectsRolloutID" />
+          <ScalarProperty Name="aProjectsRolloutStoreRelID" ColumnName="aProjectsRolloutStoreRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectsRolloutTechRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectsRolloutTechRel">
+        <MappingFragment StoreEntitySet="tblProjectsRolloutTechRel">
+          <ScalarProperty Name="nInstallationID" ColumnName="nInstallationID" />
+          <ScalarProperty Name="nVendorID" ColumnName="nVendorID" />
+          <ScalarProperty Name="nTechComponentID" ColumnName="nTechComponentID" />
+          <ScalarProperty Name="nProjectsRolloutID" ColumnName="nProjectsRolloutID" />
+          <ScalarProperty Name="aProjectsRolloutTechRelID" ColumnName="aProjectsRolloutTechRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

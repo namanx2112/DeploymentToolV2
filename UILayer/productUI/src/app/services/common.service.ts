@@ -100,6 +100,10 @@ export class CommonService {
     CommonService.dropdownCache[nBrandId][module] = ddVal;
   }
 
+  static getTimeControlVal(val: any) {
+    return (val == null) ? "" : (val.split("T").length > 1) ? val.split("T")[1] : val;
+  }
+
   static getFormatedDateString(dString: any, withTime: boolean = false) {
     let format = "MM/DD/YYYY";
     if (withTime)
@@ -134,12 +138,12 @@ export class CommonService {
     let rString = "";
     if (typeof dString == 'string') {
       if (dString != "") {
-        let momentVal = moment(dString, 'MM/DD/YYYY')
-        rString = momentVal.format('YYYY-MM-DD');
+        let momentVal = moment(dString, 'MM/DD/YYYY  HH:mm:ss')
+        rString = momentVal.format('YYYY-MM-DD HH:mm:ss');
       }
     }
     else if (dString != null)
-      rString = moment(dString).format('YYYY-MM-DD');
+      rString = moment(dString).format('YYYY-MM-DD HH:mm:ss');
     return rString;
   }
 

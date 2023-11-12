@@ -128,6 +128,9 @@ export class ControlsComponent implements AfterViewChecked {
     this.formGroup = new FormGroup({});
     for (const formField of this.fields) {
       let tmpVal = (formField.field_type == FieldType.date) ? (typeof this.controlValues[formField.fieldUniqeName] == 'undefined' || this.controlValues[formField.fieldUniqeName] == null) ? null : this.controlValues[formField.fieldUniqeName] : (typeof this.controlValues[formField.fieldUniqeName] == 'undefined') ? formField.defaultVal : this.controlValues[formField.fieldUniqeName];
+      if (formField.field_type == FieldType.time) {
+        this.controlValues[formField.fieldUniqeName] = CommonService.getTimeControlVal(tmpVal);
+      }
       let tFormControl = new FormControl(
         tmpVal, formField.validator);
       if (typeof this.controlValues[formField.fieldUniqeName] == 'undefined')
@@ -160,6 +163,9 @@ export class ControlsComponent implements AfterViewChecked {
     }
     else if (field.field_type == FieldType.date) {
       sVal = CommonService.getFormatedDateString(val);
+    }
+    else if (field.field_type == FieldType.time) {
+      sVal = CommonService.getTimeControlVal(val);
     }
     return sVal;
   }

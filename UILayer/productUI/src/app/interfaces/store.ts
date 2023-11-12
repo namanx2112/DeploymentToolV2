@@ -1,3 +1,4 @@
+import { Time } from "@angular/common"
 import { Dictionary } from "./commons"
 
 export interface StoreContact {
@@ -228,6 +229,7 @@ export interface StoreInstallation {
     nVendor: number,
     tLeadTech: string,
     dInstallDate: Date,
+    dInstallTime: Date,
     dInstallEnd: Date,
     nStatus: number,
     nSignoffs: number,

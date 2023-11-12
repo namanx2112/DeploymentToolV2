@@ -2984,7 +2984,7 @@ export class ExStoreService {
         hidden: false
       }, {
         field_name: "Install Time",
-        fieldUniqeName: "tInstallTime",
+        fieldUniqeName: "dInstallTime",
         defaultVal: "",
         readOnly: false,
         invalid: false,
@@ -3726,7 +3726,7 @@ export class ExStoreService {
         hidden: false
       }, {
         field_name: "Old Serial Number ",
-        fieldUniqeName: "tOldSerialNumber ",
+        fieldUniqeName: "tOldSerialNumber",
         defaultVal: "",
         readOnly: false,
         invalid: false,

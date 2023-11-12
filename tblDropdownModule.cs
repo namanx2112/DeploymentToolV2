@@ -15,7 +15,6 @@ namespace DeploymentTool
     public partial class tblDropdownModule
     {
         public int aModuleId { get; set; }
-        public Nullable<int> nBrandId { get; set; }
         public string tModuleName { get; set; }
         public string tModuleDisplayName { get; set; }
         public string tModuleGroup { get; set; }

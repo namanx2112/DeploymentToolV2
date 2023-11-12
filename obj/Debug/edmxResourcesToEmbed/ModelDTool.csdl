@@ -93,6 +93,9 @@
     <EntitySet Name="tblProjectNetworkSwtiches" EntityType="dtDBModel.tblProjectNetworkSwtich" />
     <EntitySet Name="tblProjectOrderAccuracies" EntityType="dtDBModel.tblProjectOrderAccuracy" />
     <EntitySet Name="tblProjectOrderStatusBoards" EntityType="dtDBModel.tblProjectOrderStatusBoard" />
+    <EntitySet Name="tblProjectsRollouts" EntityType="dtDBModel.tblProjectsRollout" />
+    <EntitySet Name="tblProjectsRolloutStoreRels" EntityType="dtDBModel.tblProjectsRolloutStoreRel" />
+    <EntitySet Name="tblProjectsRolloutTechRels" EntityType="dtDBModel.tblProjectsRolloutTechRel" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -1033,5 +1036,48 @@
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />
     <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblProjectsRollout">
+    <Key>
+      <PropertyRef Name="aProjectsRolloutID" />
+    </Key>
+    <Property Name="aProjectsRolloutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tProjectsRolloutName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tProjectsRolloutDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="nBrandID" Type="Int32" />
+    <Property Name="nNumberOfStore" Type="Int32" />
+    <Property Name="nMyActiveStatus" Type="Int32" />
+    <Property Name="nStatus" Type="Int32" />
+    <Property Name="dtStartDate" Type="DateTime" Precision="3" />
+    <Property Name="dtEndDate" Type="DateTime" Precision="3" />
+    <Property Name="tEstimateIstallTImePerStore" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblProjectsRolloutStoreRel">
+    <Key>
+      <PropertyRef Name="aProjectsRolloutStoreRelID" />
+    </Key>
+    <Property Name="aProjectsRolloutStoreRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectsRolloutID" Type="Int32" />
+    <Property Name="nStoreID" Type="Int32" />
+    <Property Name="nLinkedStatus" Type="Int32" />
+    <Property Name="nProjectID" Type="Int32" />
+    <Property Name="nLinkedBy" Type="Int32" />
+    <Property Name="dtLinkedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblProjectsRolloutTechRel">
+    <Key>
+      <PropertyRef Name="aProjectsRolloutTechRelID" />
+    </Key>
+    <Property Name="aProjectsRolloutTechRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nProjectsRolloutID" Type="Int32" />
+    <Property Name="nTechComponentID" Type="Int32" />
+    <Property Name="nVendorID" Type="Int32" />
+    <Property Name="nInstallationID" Type="Int32" />
   </EntityType>
 </Schema>
