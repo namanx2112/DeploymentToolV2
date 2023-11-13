@@ -149,6 +149,33 @@ namespace DeploymentTool.Controller
                                 tVendor = techparts.tVendor
                             };
                         }
+                        else if (techparts.tComponent == "Order Accuracy")
+                        {
+                            obj.serverhandheld = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "Order Status Board")
+                        {
+                            obj.serverhandheld = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "Network Switch")
+                        {
+                            obj.serverhandheld = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
                     }
                     items.Add(obj);
 

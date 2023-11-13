@@ -596,8 +596,8 @@ export class StoreViewComponent {
         }
         break;
       case TabType.StoreNetworkSwitch:
-        let aNetworkSwitchId = (this.tValues[tab.tab_name]["aNetworkSwitchId"]) ? parseInt(this.tValues[tab.tab_name]["aNetworkSwitchId"]) : 0;
-        if (aNetworkSwitchId > 0) {
+        let aProjectNetworkSwtichID = (this.tValues[tab.tab_name]["aProjectNetworkSwtichID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectNetworkSwtichID"]) : 0;
+        if (aProjectNetworkSwtichID > 0) {
           fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.UpdateNetworkSwitch(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -612,8 +612,8 @@ export class StoreViewComponent {
         }
         break;
       case TabType.StoreImageMemory:
-        let aImageMemoryId = (this.tValues[tab.tab_name]["aImageMemoryId"]) ? parseInt(this.tValues[tab.tab_name]["aImageMemoryId"]) : 0;
-        if (aImageMemoryId > 0) {
+        let aProjectImageOrMemoryID = (this.tValues[tab.tab_name]["aProjectImageOrMemoryID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectImageOrMemoryID"]) : 0;
+        if (aProjectImageOrMemoryID > 0) {
           fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.UpdateImageMemory(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -628,8 +628,8 @@ export class StoreViewComponent {
         }
         break;
       case TabType.StoreOrderAccuracy:
-        let aOrderAccuracyId = (this.tValues[tab.tab_name]["aOrderAccuracyId"]) ? parseInt(this.tValues[tab.tab_name]["aOrderAccuracyId"]) : 0;
-        if (aOrderAccuracyId > 0) {
+        let aProjectOrderAccuracyID = (this.tValues[tab.tab_name]["aProjectOrderAccuracyID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectOrderAccuracyID"]) : 0;
+        if (aProjectOrderAccuracyID > 0) {
           fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.UpdateOrderAccuracy(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);
@@ -644,8 +644,8 @@ export class StoreViewComponent {
         }
         break;
       case TabType.StoreOrderStatusBoard:
-        let aStoreOrderStatusBoardId = (this.tValues[tab.tab_name]["aStoreOrderStatusBoardId"]) ? parseInt(this.tValues[tab.tab_name]["aStoreOrderStatusBoardId"]) : 0;
-        if (aStoreOrderStatusBoardId > 0) {
+        let aProjectOrderStatusBoardID = (this.tValues[tab.tab_name]["aProjectOrderStatusBoardID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectOrderStatusBoardID"]) : 0;
+        if (aProjectOrderStatusBoardID > 0) {
           fieldValues["nMyActiveStatus"] = 1;
           this.techCompService.UpdateOrderStatusBoard(fieldValues).subscribe((x: any) => {
             callBack(fieldValues);

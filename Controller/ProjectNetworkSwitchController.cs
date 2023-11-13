@@ -66,23 +66,23 @@ namespace DeploymentTool.Controller
         public async Task<IHttpActionResult> Update(tblProjectNetworkSwtich tblProjectNetworkSwtich)
         {
 
-            ////tblProjectNetworkSwtich.ProjectActiveStatus = 1;//SantoshPP\
-            //Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ServerHandheld, tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich);
+            //tblProjectNetworkSwtich.ProjectActiveStatus = 1;//SantoshPP\
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich);
 
-            //var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            //Nullable<int> lUserId = securityContext.nUserID;
-            //int nBrandID = 6;
-            //int nCreateOrUpdate = 2;
-            //////----Vendor Audit field-----------
-            //// if (tblProjectNetworkSwtich.nVendor != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nVendor", tblProjectNetworkSwtich.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
-            ////----nStatus Audit field-----------
-            //if (tblProjectNetworkSwtich.nStatus != null)
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nStatus", tblProjectNetworkSwtich.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
-            //////----nNumberOfTabletsPerStore Audit field-----------
-            ////if (tblProjectNetworkSwtich.nNumberOfTabletsPerStore != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nNumberOfTabletsPerStore", tblProjectNetworkSwtich.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
-            ////----DeliveryDate Audit field-----------
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 2;
+            ////----Vendor Audit field-----------
+            // if (tblProjectNetworkSwtich.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nVendor", tblProjectNetworkSwtich.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectNetworkSwtich.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nStatus", tblProjectNetworkSwtich.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nNumberOfTabletsPerStore Audit field-----------
+            //if (tblProjectNetworkSwtich.nNumberOfTabletsPerStore != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nNumberOfTabletsPerStore", tblProjectNetworkSwtich.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
             //if (tblProjectNetworkSwtich.dDeliveryDate != null)
             //{
             //    DateTime dt = DateTime.Parse(tblProjectNetworkSwtich.dDeliveryDate.ToString());
@@ -98,23 +98,23 @@ namespace DeploymentTool.Controller
             ////    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "cCost", tblProjectNetworkSwtich.cCost.ToString(), "", lUserId, nCreateOrUpdate);
 
 
-            //db.Entry(tblProjectNetworkSwtich).State = EntityState.Modified;
+            db.Entry(tblProjectNetworkSwtich).State = EntityState.Modified;
 
-            //try
-            //{
-            //    await db.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!tblProjectAudioExists(tblProjectNetworkSwtich.aServerHandheldId))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!tblProjectAudioExists(tblProjectNetworkSwtich.aProjectNetworkSwtichID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -124,27 +124,28 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectNetworkSwtich tblProjectNetworkSwtich)
         {
-            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectNetworkSwtich set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectNetworkSwtich.nStoreId));
-            ////tblProjectNetworkSwtich.ProjectActiveStatus = 1; SantoshPP
-            //tblProjectNetworkSwtich.aServerHandheldId = 0;
-            //Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ServerHandheld, tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich);
-            //db.tblProjectNetworkSwtiches.Add(tblProjectNetworkSwtich);
-            //await db.SaveChangesAsync();
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectNetworkSwtich set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectNetworkSwtich.nStoreId));
+            //tblProjectNetworkSwtich.ProjectActiveStatus = 1; SantoshPP
+            tblProjectNetworkSwtich.aProjectNetworkSwtichID = 0;
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich);
+            db.tblProjectNetworkSwtiches.Add(tblProjectNetworkSwtich);
+            await db.SaveChangesAsync();
 
-            //var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            //Nullable<int> lUserId = securityContext.nUserID;
-            //int nBrandID = 6;
-            //int nCreateOrUpdate = 1;
-            //////----Vendor Audit field-----------
-            ////if (tblProjectNetworkSwtich.nVendor != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nVendor", tblProjectNetworkSwtich.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
-            ////----nStatus Audit field-----------
-            //if (tblProjectNetworkSwtich.nStatus != null)
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nStatus", tblProjectNetworkSwtich.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
-            //////----nNumberOfTabletsPerStore Audit field-----------
-            ////if (tblProjectNetworkSwtich.nNumberOfTabletsPerStore != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nNumberOfTabletsPerStore", tblProjectNetworkSwtich.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
-            ////----DeliveryDate Audit field-----------
+            //tblProjectNetworkSwtiches. = tblProjectNetworkSwtich.aProjectNetworkSwtichID;
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 1;
+            ////----Vendor Audit field-----------
+            //if (tblProjectNetworkSwtich.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nVendor", tblProjectNetworkSwtich.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectNetworkSwtich.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nStatus", tblProjectNetworkSwtich.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nNumberOfTabletsPerStore Audit field-----------
+            //if (tblProjectNetworkSwtich.nNumberOfTabletsPerStore != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nNumberOfTabletsPerStore", tblProjectNetworkSwtich.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
             //if (tblProjectNetworkSwtich.dDeliveryDate != null)
             //{
             //    DateTime dt = DateTime.Parse(tblProjectNetworkSwtich.dDeliveryDate.ToString());
@@ -155,9 +156,9 @@ namespace DeploymentTool.Controller
             //    DateTime dt = DateTime.Parse(tblProjectNetworkSwtich.dShipDate.ToString());
             //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 4, "tblProjectNetworkSwtich", "dShipDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
             //}
-            //////----Cost Audit field-----------
-            ////if (tblProjectNetworkSwtich.cCost != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "cCost", tblProjectNetworkSwtich.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----Cost Audit field-----------
+            //if (tblProjectNetworkSwtich.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "cCost", tblProjectNetworkSwtich.cCost.ToString(), "", lUserId, nCreateOrUpdate);
 
 
             return Json(tblProjectNetworkSwtich);

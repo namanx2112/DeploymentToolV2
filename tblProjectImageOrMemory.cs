@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectImageOrMemory
+    public partial class tblProjectImageOrMemory : Misc.IModelParent
     {
         public int aProjectImageOrMemoryID { get; set; }
         public Nullable<int> nProjectID { get; set; }

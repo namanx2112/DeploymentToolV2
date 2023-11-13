@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectOrderStatusBoard
+    public partial class tblProjectOrderStatusBoard : Misc.IModelParent
     {
         public int aProjectOrderStatusBoardID { get; set; }
         public Nullable<int> nProjectID { get; set; }

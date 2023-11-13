@@ -116,6 +116,11 @@ namespace DeploymentTool.Controller
                 Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 4, "tblProjectInstallation", "dRevisitDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
             }
 
+
+            //----tInstallNotes Audit field-----------
+            if (tblProjectInstallation.tInstallNotes != null)
+                Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 2, "tblProjectInstallation", "tInstallNotes", tblProjectInstallation.tInstallNotes.ToString(), "", lUserId, nCreateOrUpdate);
+
             ////----cCost Audit field-----------
             //if (tblProjectInstallation.cCost != null)
             //    Misc.Utilities.AddToAudit(tblProjectInstallation.nStoreId, tblProjectInstallation.nProjectID, 3, "tblProjectInstallation", "cCost", tblProjectInstallation.cCost.ToString(), "", lUserId, nCreateOrUpdate);

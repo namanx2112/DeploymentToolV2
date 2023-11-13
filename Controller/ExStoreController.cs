@@ -310,6 +310,54 @@ namespace DeploymentTool.Controller
                         db.tblProjectServerHandhelds.Add(newStore.tblProjectServerHandheld);
                     await db.SaveChangesAsync();
                 }
+                if (newStore.tblProjectNetworkSwtich != null)
+                {
+                    var aProjectNetworkSwtichID = db.Database.SqlQuery<int>("select top 1  aProjectNetworkSwtichID  from tblProjectNetworkSwtich with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectNetworkSwtich.nProjectID = aProjectID;
+                    newStore.tblProjectNetworkSwtich.nMyActiveStatus = 1;
+                    newStore.tblProjectNetworkSwtich.aProjectNetworkSwtichID = aProjectNetworkSwtichID;
+                    if (aProjectNetworkSwtichID > 0)
+                        db.Entry(newStore.tblProjectNetworkSwtich).State = EntityState.Modified;
+                    else
+                        db.tblProjectNetworkSwtiches.Add(newStore.tblProjectNetworkSwtich);
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectImageOrMemory != null)
+                {
+                    var aProjectImageOrMemoryID = db.Database.SqlQuery<int>("select top 1  aProjectImageOrMemoryID  from tblProjectImageOrMemory with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectImageOrMemory.nProjectID = aProjectID;
+                    newStore.tblProjectImageOrMemory.nMyActiveStatus = 1;
+                    newStore.tblProjectImageOrMemory.aProjectImageOrMemoryID = aProjectImageOrMemoryID;
+                    if (aProjectImageOrMemoryID > 0)
+                        db.Entry(newStore.tblProjectImageOrMemory).State = EntityState.Modified;
+                    else
+                        db.tblProjectImageOrMemories.Add(newStore.tblProjectImageOrMemory);
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectOrderAccuracy != null)
+                {
+                    var aProjectOrderAccuracyID = db.Database.SqlQuery<int>("select top 1  aProjectOrderAccuracyID  from tblProjectOrderAccuracy with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectOrderAccuracy.nProjectID = aProjectID;
+                    newStore.tblProjectOrderAccuracy.nMyActiveStatus = 1;
+                    newStore.tblProjectOrderAccuracy.aProjectOrderAccuracyID = aProjectOrderAccuracyID;
+                    if (aProjectOrderAccuracyID > 0)
+                        db.Entry(newStore.tblProjectOrderAccuracy).State = EntityState.Modified;
+                    else
+                        db.tblProjectOrderAccuracies.Add(newStore.tblProjectOrderAccuracy);
+                    await db.SaveChangesAsync();
+                }
+                if (newStore.tblProjectOrderStatusBoard != null)
+                {
+                    var aProjectOrderStatusBoardID = db.Database.SqlQuery<int>("select top 1  aProjectOrderStatusBoardID  from tblProjectOrderStatusBoard with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectOrderStatusBoard.nProjectID = aProjectID;
+                    newStore.tblProjectOrderStatusBoard.nMyActiveStatus = 1;
+                    newStore.tblProjectOrderStatusBoard.aProjectOrderStatusBoardID = aProjectOrderStatusBoardID;
+                    if (aProjectOrderStatusBoardID > 0)
+                        db.Entry(newStore.tblProjectOrderStatusBoard).State = EntityState.Modified;
+                    else
+                        db.tblProjectOrderStatusBoards.Add(newStore.tblProjectOrderStatusBoard);
+                    await db.SaveChangesAsync();
+                }
                 if (newStore.tblProjectInstallation != null)
                 {
                     var aProjectInstallationID = db.Database.SqlQuery<int>("select top 1  aProjectInstallationID  from tblProjectInstallation with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();

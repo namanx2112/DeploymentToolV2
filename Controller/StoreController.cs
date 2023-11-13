@@ -686,6 +686,12 @@ namespace DeploymentTool.Controller
                 int iInstalnposition = -1;
                 bool bRadio = false;
                 int iRadioposition = -1;
+                bool bNSwitch = false;
+                int iNSwitchposition = -1;
+                bool bOAccuracy = false;
+                int iOAccuracyposition = -1;
+                bool bOStatusBoard = false;
+                int iOStatusBoardposition = -1;
                 foreach (var techparts in item)
                 {
                     if (techparts.tTable == "tblProjectPOS")
@@ -853,6 +859,81 @@ namespace DeploymentTool.Controller
                             i++;
                         }
                         lstItems[iInstalnposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+
+                    }
+                    else if (techparts.tTable == "tblProjectNetworkSwtich")
+                    {
+                        if (!bNSwitch)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "Network Swtich",
+                                lItems = new List<AuditFields>()
+                            });
+                            bNSwitch = true;
+                            iNSwitchposition = i;
+                            i++;
+                        }
+                        lstItems[iNSwitchposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+
+                    }
+                    else if (techparts.tTable == "tblProjectOrderAccuracy")
+                    {
+                        if (!bOAccuracy)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "Order Accuracy",
+                                lItems = new List<AuditFields>()
+                            });
+                            bOAccuracy = true;
+                            iOAccuracyposition = i;
+                            i++;
+                        }
+                        lstItems[iOAccuracyposition].lItems.Add(new AuditFields()
+                        {
+                            dDate = techparts.dDate,
+                            tChangeNote = techparts.tChangeNote,
+                            tFieldName = techparts.tFieldName,
+                            tNewValue = techparts.tNewValue,
+                            tPreviousValue = techparts.tPreviousValue,
+                            nUserId = techparts.nUserId
+                        });
+
+                    }
+                    else if (techparts.tTable == "tblProjectOrderStatusBoard")
+                    {
+                        if (!bOStatusBoard)
+                        {
+                            lstItems.Add(new AuditModel()
+                            {
+                                // nTotalCount = 10,
+                                tComponentName = "Order Status Board",
+                                lItems = new List<AuditFields>()
+                            });
+                            bOStatusBoard = true;
+                            iOStatusBoardposition = i;
+                            i++;
+                        }
+                        lstItems[iOStatusBoardposition].lItems.Add(new AuditFields()
                         {
                             dDate = techparts.dDate,
                             tChangeNote = techparts.tChangeNote,

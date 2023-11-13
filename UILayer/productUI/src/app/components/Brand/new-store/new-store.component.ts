@@ -94,7 +94,37 @@ export class NewStoreComponent {
       this.allTabs.push(this.service.GetStoreAudioTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
-    if (this._NeedTechComponent == "all" || this._NeedTechComponent == "menu") {
+    if (tBrand.nBrandType == Brands.Buffalo) {
+      if (this._NeedTechComponent == "all" || this._NeedTechComponent == "serverhandheld") {
+        this.allTabs.push(this.service.GetStoreServerHandheldTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+    }
+
+    if (tBrand.nBrandType == Brands.Dunkin) {
+      if (this._NeedTechComponent == "all" || this._NeedTechComponent == "orderaccuracy") {
+        this.allTabs.push(this.service.GetStoreOrderAccuracyTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+    }
+
+    if (tBrand.nBrandType == Brands.Dunkin) {
+      if (this._NeedTechComponent == "all" || this._NeedTechComponent == "orderstatusboard") {
+        this.allTabs.push(this.service.GetStoreOrderStatusBoardTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+    }
+
+    if (tBrand.nBrandType == Brands.Arby) {
+      if (this._NeedTechComponent == "all" || this._NeedTechComponent == "hprollout") {
+        this.allTabs.push(this.service.GetStoreNetworkSwitchTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+        this.allTabs.push(this.service.GetStoreImageMemoryTab(TabInstanceType.Single));
+        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
+      }
+    }
+
+    if (this._NeedTechComponent == "all" || this._NeedTechComponent == "exteriormenu") {
       this.allTabs.push(this.service.GetStoreExteriorMenusTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
@@ -104,7 +134,7 @@ export class NewStoreComponent {
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
 
-    if (this._NeedTechComponent == "all" || this._NeedTechComponent == "menu") {
+    if (this._NeedTechComponent == "all" || this._NeedTechComponent == "interiormenu") {
       this.allTabs.push(this.service.GetStoreInteriorMenusTab(TabInstanceType.Single));
       this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
     }
@@ -114,11 +144,11 @@ export class NewStoreComponent {
         this.allTabs.push(this.service.GetStoreServerHandheldTab(TabInstanceType.Single));
         this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
       }
-      else if(tBrand.nBrandType == Brands.Arby) {
+      else if (tBrand.nBrandType == Brands.Arby) {
         this.allTabs.push(this.service.GetStoreRadioTab(TabInstanceType.Single));
         this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
       }
-      else{
+      else if (tBrand.nBrandType == Brands.Sonic) {
         this.allTabs.push(this.service.GetStoreSonicRadioTab(TabInstanceType.Single));
         this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
       }
@@ -344,6 +374,58 @@ export class NewStoreComponent {
         }
         else {
           this.techCompService.CreateServerHandheld(fieldValues).subscribe((x: any) => {
+            callBack(x, true);
+          });
+        }
+        break;
+      case TabType.StoreNetworkSwitch:
+        let aProjectNetworkSwtichID = (this.tValues[tab.tab_name]["aProjectNetworkSwtichID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectNetworkSwtichID"]) : 0;
+        if (aProjectNetworkSwtichID > 0) {
+          this.techCompService.UpdateNetworkSwitch(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues, false);
+          });
+        }
+        else {
+          this.techCompService.CreateNetworkSwitch(fieldValues).subscribe((x: any) => {
+            callBack(x, true);
+          });
+        }
+        break;
+      case TabType.StoreImageMemory:
+        let aProjectImageOrMemoryID = (this.tValues[tab.tab_name]["aProjectImageOrMemoryID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectImageOrMemoryID"]) : 0;
+        if (aProjectImageOrMemoryID > 0) {
+          this.techCompService.UpdateImageMemory(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues, false);
+          });
+        }
+        else {
+          this.techCompService.CreateImageMemory(fieldValues).subscribe((x: any) => {
+            callBack(x, true);
+          });
+        }
+        break;
+      case TabType.StoreOrderAccuracy:
+        let aProjectOrderAccuracyID = (this.tValues[tab.tab_name]["aProjectOrderAccuracyID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectOrderAccuracyID"]) : 0;
+        if (aProjectOrderAccuracyID > 0) {
+          this.techCompService.UpdateOrderAccuracy(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues, false);
+          });
+        }
+        else {
+          this.techCompService.CreateOrderAccuracy(fieldValues).subscribe((x: any) => {
+            callBack(x, true);
+          });
+        }
+        break;
+      case TabType.StoreOrderStatusBoard:
+        let aProjectOrderStatusBoardID = (this.tValues[tab.tab_name]["aProjectOrderStatusBoardID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectOrderStatusBoardID"]) : 0;
+        if (aProjectOrderStatusBoardID > 0) {
+          this.techCompService.UpdateOrderStatusBoard(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues, false);
+          });
+        }
+        else {
+          this.techCompService.CreateOrderStatusBoard(fieldValues).subscribe((x: any) => {
             callBack(x, true);
           });
         }

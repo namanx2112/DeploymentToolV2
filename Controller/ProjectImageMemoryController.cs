@@ -66,23 +66,23 @@ namespace DeploymentTool.Controller
         public async Task<IHttpActionResult> Update(tblProjectImageOrMemory tblProjectImageOrMemory)
         {
 
-            ////tblProjectImageOrMemory.ProjectActiveStatus = 1;//SantoshPP\
-            //Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ServerHandheld, tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory);
+            //tblProjectImageOrMemory.ProjectActiveStatus = 1;//SantoshPP\
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory);
 
-            //var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            //Nullable<int> lUserId = securityContext.nUserID;
-            //int nBrandID = 6;
-            //int nCreateOrUpdate = 2;
-            //////----Vendor Audit field-----------
-            //// if (tblProjectImageOrMemory.nVendor != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nVendor", tblProjectImageOrMemory.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
-            ////----nStatus Audit field-----------
-            //if (tblProjectImageOrMemory.nStatus != null)
-            //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nStatus", tblProjectImageOrMemory.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
-            //////----nNumberOfTabletsPerStore Audit field-----------
-            ////if (tblProjectImageOrMemory.nNumberOfTabletsPerStore != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nNumberOfTabletsPerStore", tblProjectImageOrMemory.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
-            ////----DeliveryDate Audit field-----------
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 2;
+            ////----Vendor Audit field-----------
+            // if (tblProjectImageOrMemory.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nVendor", tblProjectImageOrMemory.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectImageOrMemory.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nStatus", tblProjectImageOrMemory.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nNumberOfTabletsPerStore Audit field-----------
+            //if (tblProjectImageOrMemory.nNumberOfTabletsPerStore != null)
+            //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nNumberOfTabletsPerStore", tblProjectImageOrMemory.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
             //if (tblProjectImageOrMemory.dDeliveryDate != null)
             //{
             //    DateTime dt = DateTime.Parse(tblProjectImageOrMemory.dDeliveryDate.ToString());
@@ -93,28 +93,28 @@ namespace DeploymentTool.Controller
             //    DateTime dt = DateTime.Parse(tblProjectImageOrMemory.dShipDate.ToString());
             //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 4, "tblProjectImageOrMemory", "dShipDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
             //}
-            //////----Cost Audit field-----------
-            ////if (tblProjectImageOrMemory.cCost != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "cCost", tblProjectImageOrMemory.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----Cost Audit field-----------
+            //if (tblProjectImageOrMemory.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "cCost", tblProjectImageOrMemory.cCost.ToString(), "", lUserId, nCreateOrUpdate);
 
 
-            //db.Entry(tblProjectImageOrMemory).State = EntityState.Modified;
+            db.Entry(tblProjectImageOrMemory).State = EntityState.Modified;
 
-            //try
-            //{
-            //    await db.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!tblProjectAudioExists(tblProjectImageOrMemory.aServerHandheldId))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!tblProjectAudioExists(tblProjectImageOrMemory.aProjectImageOrMemoryID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -124,27 +124,27 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Create(tblProjectImageOrMemory tblProjectImageOrMemory)
         {
-            //var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectImageOrMemory set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectImageOrMemory.nStoreId));
-            ////tblProjectImageOrMemory.ProjectActiveStatus = 1; SantoshPP
-            //tblProjectImageOrMemory.aServerHandheldId = 0;
-            //Misc.Utilities.SetActiveProjectId(Misc.ProjectType.ServerHandheld, tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory);
-            //db.tblProjectImageOrMemories.Add(tblProjectImageOrMemory);
-            //await db.SaveChangesAsync();
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectImageOrMemory set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectImageOrMemory.nStoreId));
+            //tblProjectImageOrMemory.ProjectActiveStatus = 1; SantoshPP
+            tblProjectImageOrMemory.aProjectImageOrMemoryID = 0;
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory);
+            db.tblProjectImageOrMemories.Add(tblProjectImageOrMemory);
+            await db.SaveChangesAsync();
 
-            //var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
-            //Nullable<int> lUserId = securityContext.nUserID;
-            //int nBrandID = 6;
-            //int nCreateOrUpdate = 1;
-            //////----Vendor Audit field-----------
-            ////if (tblProjectImageOrMemory.nVendor != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nVendor", tblProjectImageOrMemory.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
-            ////----nStatus Audit field-----------
-            //if (tblProjectImageOrMemory.nStatus != null)
-            //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nStatus", tblProjectImageOrMemory.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
-            //////----nNumberOfTabletsPerStore Audit field-----------
-            ////if (tblProjectImageOrMemory.nNumberOfTabletsPerStore != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nNumberOfTabletsPerStore", tblProjectImageOrMemory.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
-            ////----DeliveryDate Audit field-----------
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            Nullable<int> lUserId = securityContext.nUserID;
+            int nBrandID = 6;
+            int nCreateOrUpdate = 1;
+            ////----Vendor Audit field-----------
+            //if (tblProjectImageOrMemory.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nVendor", tblProjectImageOrMemory.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //----nStatus Audit field-----------
+            if (tblProjectImageOrMemory.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nStatus", tblProjectImageOrMemory.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----nNumberOfTabletsPerStore Audit field-----------
+            //if (tblProjectImageOrMemory.nNumberOfTabletsPerStore != null)
+            //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "nNumberOfTabletsPerStore", tblProjectImageOrMemory.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
+            //----DeliveryDate Audit field-----------
             //if (tblProjectImageOrMemory.dDeliveryDate != null)
             //{
             //    DateTime dt = DateTime.Parse(tblProjectImageOrMemory.dDeliveryDate.ToString());
@@ -155,9 +155,9 @@ namespace DeploymentTool.Controller
             //    DateTime dt = DateTime.Parse(tblProjectImageOrMemory.dShipDate.ToString());
             //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 4, "tblProjectImageOrMemory", "dShipDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
             //}
-            //////----Cost Audit field-----------
-            ////if (tblProjectImageOrMemory.cCost != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "cCost", tblProjectImageOrMemory.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+            ////----Cost Audit field-----------
+            //if (tblProjectImageOrMemory.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectImageOrMemory.nStoreId, tblProjectImageOrMemory.nProjectID, 1, "tblProjectImageOrMemory", "cCost", tblProjectImageOrMemory.cCost.ToString(), "", lUserId, nCreateOrUpdate);
 
 
             return Json(tblProjectImageOrMemory);

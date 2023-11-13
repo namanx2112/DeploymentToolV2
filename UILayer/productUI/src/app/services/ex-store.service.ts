@@ -3612,7 +3612,7 @@ export class ExStoreService {
     return {
       tab_name: "Network Switch",
       tab_header: "Network Switch",
-      tTableName: "tblProjectNetworkSwitch",
+      tTableName: "tblProjectNetworkSwtich",
       tab_type: TabType.StoreNetworkSwitch,
       tab_unique_name: "",
       instanceType: instType,
@@ -3632,7 +3632,7 @@ export class ExStoreService {
       }],
       fields: [{
         field_name: "NetworkSwitchId",
-        fieldUniqeName: "aNetworkSwitchId",
+        fieldUniqeName: "aProjectNetworkSwtichID",
         defaultVal: "0",
         readOnly: false,
         invalid: false,
@@ -3690,7 +3690,7 @@ export class ExStoreService {
         hidden: false
       }, {
         field_name: "Shipment to Vendor",
-        fieldUniqeName: "nShipmenttoVendor",
+        fieldUniqeName: "nShipmentToVendor",
         defaultVal: "",
         readOnly: false,
         invalid: false,
@@ -3725,13 +3725,13 @@ export class ExStoreService {
         mandatory: false,
         hidden: false
       }, {
-        field_name: "Old Serial Number ",
+        field_name: "Old Serial Number",
         fieldUniqeName: "tOldSerialNumber",
         defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.text,
-        field_placeholder: "Enter Old Serial Number ",
+        field_placeholder: "Enter Old Serial Number",
         validator: [],
         mandatory: false,
         hidden: false
@@ -3745,7 +3745,7 @@ export class ExStoreService {
     return {
       tab_name: "Image Memory",
       tab_header: "Image Memory",
-      tTableName: "tblProjectImageMemory",
+      tTableName: "tblProjectImageOrMemory",
       tab_type: TabType.StoreImageMemory,
       tab_unique_name: "",
       instanceType: instType,
@@ -3765,7 +3765,7 @@ export class ExStoreService {
       }],
       fields: [{
         field_name: "Image Memory Id",
-        fieldUniqeName: "aImageMemoryId",
+        fieldUniqeName: "aProjectImageOrMemoryID",
         defaultVal: "0",
         readOnly: false,
         invalid: false,

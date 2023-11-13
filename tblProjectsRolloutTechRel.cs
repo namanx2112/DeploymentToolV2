@@ -12,7 +12,7 @@ namespace DeploymentTool
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectsRolloutTechRel
+    public partial class tblProjectsRolloutTechRel: Misc.IModelParent
     {
         public int aProjectsRolloutTechRelID { get; set; }
         public Nullable<int> nProjectsRolloutID { get; set; }
