@@ -187,6 +187,15 @@ export class CommonService {
       case ProjectTypes.ServerHandheldInstallation:
         pString = "Server Handheld Installation";
         break;
+      case ProjectTypes.OrderAccuracyInstallation:
+        pString = "Order Accuracy Installation";
+        break;
+      case ProjectTypes.OrderStatusBoardInstallation:
+        pString = "Order StatusBoard Installation";
+        break;
+      case ProjectTypes.ArbysHPRolloutInstallation:
+        pString = "HP Rollout Installation";
+        break;
     }
     return pString;
   }
