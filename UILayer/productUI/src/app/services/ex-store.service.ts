@@ -4048,8 +4048,8 @@ export class ExStoreService {
   }
   GetStoreOrderStatusBoardTab(instType: TabInstanceType): HomeTab {
     return {
-      tab_name: "Order StatusBoard",
-      tab_header: "Order StatusBoard",
+      tab_name: "Order Status Board",
+      tab_header: "Order Status Board",
       tTableName: "tblProjectOrderStatusBoard",
       tab_type: TabType.StoreOrderStatusBoard,
       tab_unique_name: "",

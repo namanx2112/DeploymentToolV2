@@ -46,6 +46,10 @@ export class AuditViewComponent {
     this.techComps["Radio"] = this.exStore.GetStoreRadioTab(TabInstanceType.Single);
     this.techComps["Sonic Radio"] = this.exStore.GetStoreSonicRadioTab(TabInstanceType.Single);
     this.techComps["Installation"] = this.exStore.GetStoreInsallationTab(TabInstanceType.Single);
+    this.techComps["Order Status Board"] = this.exStore.GetStoreOrderStatusBoardTab(TabInstanceType.Single);
+    this.techComps["Order Accuracy"] = this.exStore.GetStoreOrderAccuracyTab(TabInstanceType.Single);
+    this.techComps["Image Memory"] = this.exStore.GetStoreImageMemoryTab(TabInstanceType.Single);
+    this.techComps["Network Switch"] = this.exStore.GetStoreNetworkSwitchTab(TabInstanceType.Single);
     this.allUsers = this.commonService.GetDropdownOptions(0, "User");
   }
 
