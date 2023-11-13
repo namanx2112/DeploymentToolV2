@@ -418,14 +418,3 @@ export interface AuditFields{
     tChangeNote: string,
     dDate: Date
 }
-
-export interface RolloutProjects{
-    aRolloutProjectId: number,
-    tProjectName: string,
-    nBrandId: number,
-    nTechComponent: number,
-    nEquipmentVendor: number,
-    nInstallationVendor: number,
-    dStartDate: Date,
-    dEndDate: Date
-}

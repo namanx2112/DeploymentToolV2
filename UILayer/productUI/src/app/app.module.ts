@@ -90,6 +90,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { SavedReportsComponent } from './components/Brand/saved-reports/saved-reports.component';
 import { AuditViewComponent } from './components/Brand/audit-view/audit-view.component';
 import { RolloutProjectsHomeComponent } from './components/Brand/rollout-projects-home/rollout-projects-home.component';
+import { ProjectRolloutEditorComponent } from './components/Brand/project-rollout-editor/project-rollout-editor.component';
+import { ProjectRolloutImportComponent } from './components/Brand/project-rollout-import/project-rollout-import.component';
 
 @NgModule({
     declarations: [
@@ -155,6 +157,8 @@ import { RolloutProjectsHomeComponent } from './components/Brand/rollout-project
         SavedReportsComponent,
         AuditViewComponent,
         RolloutProjectsHomeComponent,
+        ProjectRolloutEditorComponent,
+        ProjectRolloutImportComponent,
     ],
     providers: [
         {

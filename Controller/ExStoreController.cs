@@ -310,16 +310,16 @@ namespace DeploymentTool.Controller
                         db.tblProjectServerHandhelds.Add(newStore.tblProjectServerHandheld);
                     await db.SaveChangesAsync();
                 }
-                if (newStore.tblProjectNetworkSwtich != null)
+                if (newStore.tblProjectNetworkSwitch != null)
                 {
-                    var aProjectNetworkSwtichID = db.Database.SqlQuery<int>("select top 1  aProjectNetworkSwtichID  from tblProjectNetworkSwtich with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
-                    newStore.tblProjectNetworkSwtich.nProjectID = aProjectID;
-                    newStore.tblProjectNetworkSwtich.nMyActiveStatus = 1;
-                    newStore.tblProjectNetworkSwtich.aProjectNetworkSwtichID = aProjectNetworkSwtichID;
+                    var aProjectNetworkSwtichID = db.Database.SqlQuery<int>("select top 1  aProjectNetworkSwtichID  from tblProjectNetworkSwitch with(nolock) where nStoreID = @nStoreId and nProjectID=@nProjectID  ", new SqlParameter("@nStoreId", newStore.nStoreId), new SqlParameter("@nProjectID", aProjectID)).FirstOrDefault();
+                    newStore.tblProjectNetworkSwitch.nProjectID = aProjectID;
+                    newStore.tblProjectNetworkSwitch.nMyActiveStatus = 1;
+                    newStore.tblProjectNetworkSwitch.aProjectNetworkSwtichID = aProjectNetworkSwtichID;
                     if (aProjectNetworkSwtichID > 0)
-                        db.Entry(newStore.tblProjectNetworkSwtich).State = EntityState.Modified;
+                        db.Entry(newStore.tblProjectNetworkSwitch).State = EntityState.Modified;
                     else
-                        db.tblProjectNetworkSwtiches.Add(newStore.tblProjectNetworkSwtich);
+                        db.tblProjectNetworkSwitches.Add(newStore.tblProjectNetworkSwitch);
                     await db.SaveChangesAsync();
                 }
                 if (newStore.tblProjectImageOrMemory != null)

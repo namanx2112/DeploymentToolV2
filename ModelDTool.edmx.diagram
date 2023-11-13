@@ -65,7 +65,7 @@
         <EntityTypeShape EntityType="dtDBModel.tblProjectNote1" Width="1.5" PointX="9.75" PointY="23.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectServerHandheld" Width="1.5" PointX="23.375" PointY="10.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectImageOrMemory" Width="1.5" PointX="23.375" PointY="15.75" />
-        <EntityTypeShape EntityType="dtDBModel.tblProjectNetworkSwtich" Width="1.5" PointX="23.375" PointY="19.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblProjectNetworkSwitch" Width="1.5" PointX="23.375" PointY="19.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectOrderAccuracy" Width="1.5" PointX="23.375" PointY="23.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectOrderStatusBoard" Width="1.5" PointX="24.375" PointY="3.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectsRollout" Width="1.5" PointX="5.375" PointY="24.75" />

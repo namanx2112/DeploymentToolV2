@@ -380,7 +380,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="dDateFor_nBackupStatus" Type="date" />
           <Property Name="dDateFor_nTempStatus" Type="date" />
         </EntityType>
-        <EntityType Name="tblProjectNetworkSwtich">
+        <EntityType Name="tblProjectNetworkSwitch">
           <Key>
             <PropertyRef Name="aProjectNetworkSwtichID" />
           </Key>
@@ -562,7 +562,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           <Property Name="nStatus" Type="int" />
           <Property Name="dtStartDate" Type="datetime" />
           <Property Name="dtEndDate" Type="datetime" />
-          <Property Name="tEstimateIstallTImePerStore" Type="nvarchar" MaxLength="255" />
+          <Property Name="tEstimateInstallTImePerStore" Type="nvarchar" MaxLength="255" />
           <Property Name="nCreatedBy" Type="int" />
           <Property Name="nUpdateBy" Type="int" />
           <Property Name="dtCreatedOn" Type="datetime" />
@@ -1051,7 +1051,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblProjectInstallation" EntityType="Self.tblProjectInstallation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectInteriorMenus" EntityType="Self.tblProjectInteriorMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectNetworking" EntityType="Self.tblProjectNetworking" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblProjectNetworkSwtich" EntityType="Self.tblProjectNetworkSwtich" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectNetworkSwitch" EntityType="Self.tblProjectNetworkSwitch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectNote" EntityType="Self.tblProjectNote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectNotes" EntityType="Self.tblProjectNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectOrderAccuracy" EntityType="Self.tblProjectOrderAccuracy" Schema="dbo" store:Type="Tables" />
@@ -1287,7 +1287,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblProjectNote1" EntityType="dtDBModel.tblProjectNote1" />
           <EntitySet Name="tblProjectServerHandhelds" EntityType="dtDBModel.tblProjectServerHandheld" />
           <EntitySet Name="tblProjectImageOrMemories" EntityType="dtDBModel.tblProjectImageOrMemory" />
-          <EntitySet Name="tblProjectNetworkSwtiches" EntityType="dtDBModel.tblProjectNetworkSwtich" />
+          <EntitySet Name="tblProjectNetworkSwitches" EntityType="dtDBModel.tblProjectNetworkSwitch" />
           <EntitySet Name="tblProjectOrderAccuracies" EntityType="dtDBModel.tblProjectOrderAccuracy" />
           <EntitySet Name="tblProjectOrderStatusBoards" EntityType="dtDBModel.tblProjectOrderStatusBoard" />
           <EntitySet Name="tblProjectsRollouts" EntityType="dtDBModel.tblProjectsRollout" />
@@ -2181,7 +2181,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="nMyActiveStatus" Type="Int32" />
           <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="tblProjectNetworkSwtich">
+        <EntityType Name="tblProjectNetworkSwitch">
           <Key>
             <PropertyRef Name="aProjectNetworkSwtichID" />
           </Key>
@@ -2247,7 +2247,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="nStatus" Type="Int32" />
           <Property Name="dtStartDate" Type="DateTime" Precision="3" />
           <Property Name="dtEndDate" Type="DateTime" Precision="3" />
-          <Property Name="tEstimateIstallTImePerStore" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tEstimateInstallTImePerStore" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="nCreatedBy" Type="Int32" />
           <Property Name="nUpdateBy" Type="Int32" />
           <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
@@ -3230,9 +3230,9 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblProjectNetworkSwtiches">
-            <EntityTypeMapping TypeName="dtDBModel.tblProjectNetworkSwtich">
-              <MappingFragment StoreEntitySet="tblProjectNetworkSwtich">
+          <EntitySetMapping Name="tblProjectNetworkSwitches">
+            <EntityTypeMapping TypeName="dtDBModel.tblProjectNetworkSwitch">
+              <MappingFragment StoreEntitySet="tblProjectNetworkSwitch">
                 <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
                 <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
                 <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
@@ -3295,7 +3295,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
                 <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
                 <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
                 <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-                <ScalarProperty Name="tEstimateIstallTImePerStore" ColumnName="tEstimateIstallTImePerStore" />
+                <ScalarProperty Name="tEstimateInstallTImePerStore" ColumnName="tEstimateInstallTImePerStore" />
                 <ScalarProperty Name="dtEndDate" ColumnName="dtEndDate" />
                 <ScalarProperty Name="dtStartDate" ColumnName="dtStartDate" />
                 <ScalarProperty Name="nStatus" ColumnName="nStatus" />

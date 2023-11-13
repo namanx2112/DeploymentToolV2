@@ -16,6 +16,7 @@ import { StoreService } from 'src/app/services/store.service';
 import { TechComponenttService } from 'src/app/services/tech-component.service';
 import { UserService } from 'src/app/services/user.service';
 import { VendorService } from 'src/app/services/vendor.service';
+import { RolloutProjectsService } from 'src/app/services/rollout-projects.service';
 
 
 export interface TableColumnDef {
@@ -52,7 +53,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
   responseData: any;
   constructor(private _liveAnnouncer: LiveAnnouncer, private brandService: BrandServiceService, private techCompService: TechComponenttService, private verndorService: VendorService,
     private franchiseSerice: FranchiseService, private userSerice: UserService, private exService: ExStoreService, private partsService: PartsService,
-    private storeService: StoreService, public access: AccessService, private noteService: NotesService, private commonService: CommonService) {
+    private rolloutService: RolloutProjectsService, private storeService: StoreService, public access: AccessService, private noteService: NotesService, private commonService: CommonService) {
     this.initVal = new Date();
   }
 
@@ -71,7 +72,7 @@ export class TableComponent implements OnChanges, AfterViewInit {
       let tField = this.curTab.fields.find(x => x.fieldUniqeName == colName)
       if (tField && tField.field_type == FieldType.dropdown && tField.options) {
         let opArr: OptionType[] = this.commonService.GetDropdownOptions(this.nBrandId, tField.options);
-        let dVal =  opArr.find(x => x.aDropdownId == colVal)?.tDropdownText;
+        let dVal = opArr.find(x => x.aDropdownId == colVal)?.tDropdownText;
         if (dVal)
           rVal = dVal;
       }
@@ -148,6 +149,9 @@ export class TableComponent implements OnChanges, AfterViewInit {
       }
       else if (this.curTab.tab_type == TabType.VendorParts) {
         this.cService = this.partsService;
+      }
+      else if (this.curTab.tab_type == TabType.RolloutProjects) {
+        this.cService = this.rolloutService;
       }
     }
     this.getTable();

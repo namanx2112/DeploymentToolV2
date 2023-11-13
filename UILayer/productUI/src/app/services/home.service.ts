@@ -246,7 +246,7 @@ this.GetPartsTab(TabInstanceType.Table)
     return {
       tab_name: "Rollout Projects",
       tab_header: "Rollout Projects",
-      tTableName: "tblProjectRollouts",
+      tTableName: "tblProjectsRollout",
       tab_type: TabType.RolloutProjects,
       tab_unique_name: "",
       instanceType: instType,

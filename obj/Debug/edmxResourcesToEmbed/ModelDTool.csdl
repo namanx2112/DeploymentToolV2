@@ -90,7 +90,7 @@
     <EntitySet Name="tblProjectNote1" EntityType="dtDBModel.tblProjectNote1" />
     <EntitySet Name="tblProjectServerHandhelds" EntityType="dtDBModel.tblProjectServerHandheld" />
     <EntitySet Name="tblProjectImageOrMemories" EntityType="dtDBModel.tblProjectImageOrMemory" />
-    <EntitySet Name="tblProjectNetworkSwtiches" EntityType="dtDBModel.tblProjectNetworkSwtich" />
+    <EntitySet Name="tblProjectNetworkSwitches" EntityType="dtDBModel.tblProjectNetworkSwitch" />
     <EntitySet Name="tblProjectOrderAccuracies" EntityType="dtDBModel.tblProjectOrderAccuracy" />
     <EntitySet Name="tblProjectOrderStatusBoards" EntityType="dtDBModel.tblProjectOrderStatusBoard" />
     <EntitySet Name="tblProjectsRollouts" EntityType="dtDBModel.tblProjectsRollout" />
@@ -984,7 +984,7 @@
     <Property Name="nMyActiveStatus" Type="Int32" />
     <Property Name="dDateFor_nStatus" Type="DateTime" Precision="0" />
   </EntityType>
-  <EntityType Name="tblProjectNetworkSwtich">
+  <EntityType Name="tblProjectNetworkSwitch">
     <Key>
       <PropertyRef Name="aProjectNetworkSwtichID" />
     </Key>
@@ -1050,7 +1050,7 @@
     <Property Name="nStatus" Type="Int32" />
     <Property Name="dtStartDate" Type="DateTime" Precision="3" />
     <Property Name="dtEndDate" Type="DateTime" Precision="3" />
-    <Property Name="tEstimateIstallTImePerStore" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tEstimateInstallTImePerStore" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="nCreatedBy" Type="Int32" />
     <Property Name="nUpdateBy" Type="Int32" />
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />

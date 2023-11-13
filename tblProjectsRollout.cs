@@ -23,7 +23,7 @@ namespace DeploymentTool
         public Nullable<int> nStatus { get; set; }
         public Nullable<System.DateTime> dtStartDate { get; set; }
         public Nullable<System.DateTime> dtEndDate { get; set; }
-        public string tEstimateIstallTImePerStore { get; set; }
+        public string tEstimateInstallTImePerStore  { get; set; }
         public Nullable<int> nCreatedBy { get; set; }
         public Nullable<int> nUpdateBy { get; set; }
         public Nullable<System.DateTime> dtCreatedOn { get; set; }

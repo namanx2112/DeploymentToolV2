@@ -23,7 +23,7 @@ namespace DeploymentTool.Model
         public tblProjectExteriorMenu tblProjectExteriorMenus { get; set; }
         public tblProjectPaymentSystem tblProjectPaymentSystem { get; set; }
         public tblProjectInteriorMenu tblProjectInteriorMenus { get; set; }
-        public tblProjectNetworkSwtich tblProjectNetworkSwtich { get; set; }
+        public tblProjectNetworkSwitch tblProjectNetworkSwitch { get; set; }
         public tblProjectImageOrMemory tblProjectImageOrMemory { get; set; }
         public tblProjectOrderAccuracy tblProjectOrderAccuracy { get; set; }
         public tblProjectOrderStatusBoard tblProjectOrderStatusBoard { get; set; }

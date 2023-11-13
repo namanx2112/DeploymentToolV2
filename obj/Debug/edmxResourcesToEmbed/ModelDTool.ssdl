@@ -375,7 +375,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dDateFor_nBackupStatus" Type="date" />
     <Property Name="dDateFor_nTempStatus" Type="date" />
   </EntityType>
-  <EntityType Name="tblProjectNetworkSwtich">
+  <EntityType Name="tblProjectNetworkSwitch">
     <Key>
       <PropertyRef Name="aProjectNetworkSwtichID" />
     </Key>
@@ -557,7 +557,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nStatus" Type="int" />
     <Property Name="dtStartDate" Type="datetime" />
     <Property Name="dtEndDate" Type="datetime" />
-    <Property Name="tEstimateIstallTImePerStore" Type="nvarchar" MaxLength="255" />
+    <Property Name="tEstimateInstallTImePerStore" Type="nvarchar" MaxLength="255" />
     <Property Name="nCreatedBy" Type="int" />
     <Property Name="nUpdateBy" Type="int" />
     <Property Name="dtCreatedOn" Type="datetime" />
@@ -1046,7 +1046,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblProjectInstallation" EntityType="Self.tblProjectInstallation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectInteriorMenus" EntityType="Self.tblProjectInteriorMenus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectNetworking" EntityType="Self.tblProjectNetworking" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tblProjectNetworkSwtich" EntityType="Self.tblProjectNetworkSwtich" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectNetworkSwitch" EntityType="Self.tblProjectNetworkSwitch" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectNote" EntityType="Self.tblProjectNote" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectNotes" EntityType="Self.tblProjectNotes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectOrderAccuracy" EntityType="Self.tblProjectOrderAccuracy" Schema="dbo" store:Type="Tables" />

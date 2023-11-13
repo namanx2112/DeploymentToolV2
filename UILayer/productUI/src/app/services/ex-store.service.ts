@@ -26,9 +26,9 @@ export class ExStoreService {
   }
 
 
-  UploadStore(fileToUpload: File, nBrandId: number) {
+  UploadStore(fileToUpload: File, nBrandId: number, exType: any) {
     const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name + String.fromCharCode(1000) + nBrandId);
+    formData.append('fileKey', fileToUpload, fileToUpload.name + String.fromCharCode(1000) + nBrandId+ String.fromCharCode(1000) + exType);
     let httpHeader = new HttpHeaders({
       "Authorization": "Bearer " + this.cacheService.getToken()
     });
@@ -3612,7 +3612,7 @@ export class ExStoreService {
     return {
       tab_name: "Network Switch",
       tab_header: "Network Switch",
-      tTableName: "tblProjectNetworkSwtich",
+      tTableName: "tblProjectNetworkSwitch",
       tab_type: TabType.StoreNetworkSwitch,
       tab_unique_name: "",
       instanceType: instType,

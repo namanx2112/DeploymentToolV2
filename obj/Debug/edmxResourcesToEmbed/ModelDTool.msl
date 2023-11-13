@@ -948,9 +948,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblProjectNetworkSwtiches">
-      <EntityTypeMapping TypeName="dtDBModel.tblProjectNetworkSwtich">
-        <MappingFragment StoreEntitySet="tblProjectNetworkSwtich">
+    <EntitySetMapping Name="tblProjectNetworkSwitches">
+      <EntityTypeMapping TypeName="dtDBModel.tblProjectNetworkSwitch">
+        <MappingFragment StoreEntitySet="tblProjectNetworkSwitch">
           <ScalarProperty Name="dDateFor_nStatus" ColumnName="dDateFor_nStatus" />
           <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
           <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
@@ -1013,7 +1013,7 @@
           <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
           <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
           <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
-          <ScalarProperty Name="tEstimateIstallTImePerStore" ColumnName="tEstimateIstallTImePerStore" />
+          <ScalarProperty Name="tEstimateInstallTImePerStore" ColumnName="tEstimateInstallTImePerStore" />
           <ScalarProperty Name="dtEndDate" ColumnName="dtEndDate" />
           <ScalarProperty Name="dtStartDate" ColumnName="dtStartDate" />
           <ScalarProperty Name="nStatus" ColumnName="nStatus" />

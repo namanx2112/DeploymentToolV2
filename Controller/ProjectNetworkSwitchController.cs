@@ -19,9 +19,9 @@ namespace DeploymentTool.Controller
         [Authorize]
         [HttpPost]
         // GET: api/ProjectAudios
-        public IQueryable<tblProjectNetworkSwtich> Get(Dictionary<string, string> searchFields)
+        public IQueryable<tblProjectNetworkSwitch> Get(Dictionary<string, string> searchFields)
         {
-            IQueryable<tblProjectNetworkSwtich> items = null;
+            IQueryable<tblProjectNetworkSwitch> items = null;
             try
             {
 
@@ -31,13 +31,13 @@ namespace DeploymentTool.Controller
 
                 if (nProjectID != 0)
                 {
-                    return db.tblProjectNetworkSwtiches.Where(p => p.nProjectID == nProjectID).AsQueryable();
+                    return db.tblProjectNetworkSwitches.Where(p => p.nProjectID == nProjectID).AsQueryable();
                 }
                 else
                 {
                     SqlParameter tModuleNameParam = new SqlParameter("@nStoreId", nStoreId);
-                    SqlParameter tModuleTech = new SqlParameter("@tTechnologyTableName", "tblProjectNetworkSwtich");
-                    items = db.Database.SqlQuery<tblProjectNetworkSwtich>("exec sproc_getTechnologyData @nStoreId,@tTechnologyTableName", tModuleNameParam, tModuleTech).AsQueryable();
+                    SqlParameter tModuleTech = new SqlParameter("@tTechnologyTableName", "tblProjectNetworkSwitch");
+                    items = db.Database.SqlQuery<tblProjectNetworkSwitch>("exec sproc_getTechnologyData @nStoreId,@tTechnologyTableName", tModuleNameParam, tModuleTech).AsQueryable();
                     //return items;
                 }
             }
@@ -51,54 +51,54 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> GettblProjectAudio(int id)
         {
-            tblProjectNetworkSwtich tblProjectNetworkSwtich = await db.tblProjectNetworkSwtiches.FindAsync(id);
-            if (tblProjectNetworkSwtich == null)
+            tblProjectNetworkSwitch tblProjectNetworkSwitch = await db.tblProjectNetworkSwitches.FindAsync(id);
+            if (tblProjectNetworkSwitch == null)
             {
                 return NotFound();
             }
 
-            return Ok(tblProjectNetworkSwtich);
+            return Ok(tblProjectNetworkSwitch);
         }
 
         // PUT: api/ProjectAudios/5
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Update(tblProjectNetworkSwtich tblProjectNetworkSwtich)
+        public async Task<IHttpActionResult> Update(tblProjectNetworkSwitch tblProjectNetworkSwitch)
         {
 
-            //tblProjectNetworkSwtich.ProjectActiveStatus = 1;//SantoshPP\
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich);
+            //tblProjectNetworkSwitch.ProjectActiveStatus = 1;//SantoshPP\
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch);
 
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             Nullable<int> lUserId = securityContext.nUserID;
             int nBrandID = 6;
             int nCreateOrUpdate = 2;
             ////----Vendor Audit field-----------
-            // if (tblProjectNetworkSwtich.nVendor != null)
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nVendor", tblProjectNetworkSwtich.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            // if (tblProjectNetworkSwitch.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 1, "tblProjectNetworkSwitch", "nVendor", tblProjectNetworkSwitch.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
             //----nStatus Audit field-----------
-            if (tblProjectNetworkSwtich.nStatus != null)
-                Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nStatus", tblProjectNetworkSwtich.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            if (tblProjectNetworkSwitch.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 1, "tblProjectNetworkSwitch", "nStatus", tblProjectNetworkSwitch.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
             ////----nNumberOfTabletsPerStore Audit field-----------
-            //if (tblProjectNetworkSwtich.nNumberOfTabletsPerStore != null)
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nNumberOfTabletsPerStore", tblProjectNetworkSwtich.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
+            //if (tblProjectNetworkSwitch.nNumberOfTabletsPerStore != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 1, "tblProjectNetworkSwitch", "nNumberOfTabletsPerStore", tblProjectNetworkSwitch.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
             //----DeliveryDate Audit field-----------
-            //if (tblProjectNetworkSwtich.dDeliveryDate != null)
+            //if (tblProjectNetworkSwitch.dDeliveryDate != null)
             //{
-            //    DateTime dt = DateTime.Parse(tblProjectNetworkSwtich.dDeliveryDate.ToString());
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 4, "tblProjectNetworkSwtich", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            //    DateTime dt = DateTime.Parse(tblProjectNetworkSwitch.dDeliveryDate.ToString());
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 4, "tblProjectNetworkSwitch", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
             //} //----dShipDate Audit field-----------
-            //if (tblProjectNetworkSwtich.dShipDate != null)
+            //if (tblProjectNetworkSwitch.dShipDate != null)
             //{
-            //    DateTime dt = DateTime.Parse(tblProjectNetworkSwtich.dShipDate.ToString());
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 4, "tblProjectNetworkSwtich", "dShipDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            //    DateTime dt = DateTime.Parse(tblProjectNetworkSwitch.dShipDate.ToString());
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 4, "tblProjectNetworkSwitch", "dShipDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
             //}
             //////----Cost Audit field-----------
-            ////if (tblProjectNetworkSwtich.cCost != null)
-            ////    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "cCost", tblProjectNetworkSwtich.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+            ////if (tblProjectNetworkSwitch.cCost != null)
+            ////    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 1, "tblProjectNetworkSwitch", "cCost", tblProjectNetworkSwitch.cCost.ToString(), "", lUserId, nCreateOrUpdate);
 
 
-            db.Entry(tblProjectNetworkSwtich).State = EntityState.Modified;
+            db.Entry(tblProjectNetworkSwitch).State = EntityState.Modified;
 
             try
             {
@@ -106,7 +106,7 @@ namespace DeploymentTool.Controller
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tblProjectAudioExists(tblProjectNetworkSwtich.aProjectNetworkSwtichID))
+                if (!tblProjectAudioExists(tblProjectNetworkSwitch.aProjectNetworkSwtichID))
                 {
                     return NotFound();
                 }
@@ -122,46 +122,46 @@ namespace DeploymentTool.Controller
         // POST: api/ProjectAudios
         [Authorize]
         [HttpPost]
-        public async Task<IHttpActionResult> Create(tblProjectNetworkSwtich tblProjectNetworkSwtich)
+        public async Task<IHttpActionResult> Create(tblProjectNetworkSwitch tblProjectNetworkSwitch)
         {
-            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectNetworkSwtich set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectNetworkSwtich.nStoreId));
-            //tblProjectNetworkSwtich.ProjectActiveStatus = 1; SantoshPP
-            tblProjectNetworkSwtich.aProjectNetworkSwtichID = 0;
-            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich);
-            db.tblProjectNetworkSwtiches.Add(tblProjectNetworkSwtich);
+            var noOfRowUpdated = db.Database.ExecuteSqlCommand("update tblProjectNetworkSwitch set nMyActiveStatus=0 where nStoreId =@nStoreId", new SqlParameter("@nStoreId", tblProjectNetworkSwitch.nStoreId));
+            //tblProjectNetworkSwitch.ProjectActiveStatus = 1; SantoshPP
+            tblProjectNetworkSwitch.aProjectNetworkSwtichID = 0;
+            Misc.Utilities.SetActiveProjectId(Misc.ProjectType.New, tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch);
+            db.tblProjectNetworkSwitches.Add(tblProjectNetworkSwitch);
             await db.SaveChangesAsync();
 
-            //tblProjectNetworkSwtiches. = tblProjectNetworkSwtich.aProjectNetworkSwtichID;
+            //tblProjectNetworkSwitches. = tblProjectNetworkSwitch.aProjectNetworkSwtichID;
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             Nullable<int> lUserId = securityContext.nUserID;
             int nBrandID = 6;
             int nCreateOrUpdate = 1;
             ////----Vendor Audit field-----------
-            //if (tblProjectNetworkSwtich.nVendor != null)
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nVendor", tblProjectNetworkSwtich.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
+            //if (tblProjectNetworkSwitch.nVendor != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 1, "tblProjectNetworkSwitch", "nVendor", tblProjectNetworkSwitch.nVendor.ToString(), "", lUserId, nCreateOrUpdate);
             //----nStatus Audit field-----------
-            if (tblProjectNetworkSwtich.nStatus != null)
-                Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nStatus", tblProjectNetworkSwtich.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
+            if (tblProjectNetworkSwitch.nStatus != null)
+                Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 1, "tblProjectNetworkSwitch", "nStatus", tblProjectNetworkSwitch.nStatus.ToString(), "", lUserId, nCreateOrUpdate);
             ////----nNumberOfTabletsPerStore Audit field-----------
-            //if (tblProjectNetworkSwtich.nNumberOfTabletsPerStore != null)
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "nNumberOfTabletsPerStore", tblProjectNetworkSwtich.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
+            //if (tblProjectNetworkSwitch.nNumberOfTabletsPerStore != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 1, "tblProjectNetworkSwitch", "nNumberOfTabletsPerStore", tblProjectNetworkSwitch.nNumberOfTabletsPerStore.ToString(), "", lUserId, nCreateOrUpdate);
             //----DeliveryDate Audit field-----------
-            //if (tblProjectNetworkSwtich.dDeliveryDate != null)
+            //if (tblProjectNetworkSwitch.dDeliveryDate != null)
             //{
-            //    DateTime dt = DateTime.Parse(tblProjectNetworkSwtich.dDeliveryDate.ToString());
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 4, "tblProjectNetworkSwtich", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            //    DateTime dt = DateTime.Parse(tblProjectNetworkSwitch.dDeliveryDate.ToString());
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 4, "tblProjectNetworkSwitch", "dDeliveryDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
             //} //----dShipDate Audit field-----------
-            //if (tblProjectNetworkSwtich.dShipDate != null)
+            //if (tblProjectNetworkSwitch.dShipDate != null)
             //{
-            //    DateTime dt = DateTime.Parse(tblProjectNetworkSwtich.dShipDate.ToString());
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 4, "tblProjectNetworkSwtich", "dShipDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
+            //    DateTime dt = DateTime.Parse(tblProjectNetworkSwitch.dShipDate.ToString());
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 4, "tblProjectNetworkSwitch", "dShipDate", dt.ToString("yyyy-MM-dd"), "", lUserId, nCreateOrUpdate);
             //}
             ////----Cost Audit field-----------
-            //if (tblProjectNetworkSwtich.cCost != null)
-            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwtich.nStoreId, tblProjectNetworkSwtich.nProjectID, 1, "tblProjectNetworkSwtich", "cCost", tblProjectNetworkSwtich.cCost.ToString(), "", lUserId, nCreateOrUpdate);
+            //if (tblProjectNetworkSwitch.cCost != null)
+            //    Misc.Utilities.AddToAudit(tblProjectNetworkSwitch.nStoreId, tblProjectNetworkSwitch.nProjectID, 1, "tblProjectNetworkSwitch", "cCost", tblProjectNetworkSwitch.cCost.ToString(), "", lUserId, nCreateOrUpdate);
 
 
-            return Json(tblProjectNetworkSwtich);
+            return Json(tblProjectNetworkSwitch);
         }
 
         // DELETE: api/ProjectAudios/5
@@ -169,16 +169,16 @@ namespace DeploymentTool.Controller
         [HttpPost]
         public async Task<IHttpActionResult> Delete(int id)
         {
-            tblProjectNetworkSwtich tblProjectNetworkSwtich = await db.tblProjectNetworkSwtiches.FindAsync(id);
-            if (tblProjectNetworkSwtich == null)
+            tblProjectNetworkSwitch tblProjectNetworkSwitch = await db.tblProjectNetworkSwitches.FindAsync(id);
+            if (tblProjectNetworkSwitch == null)
             {
                 return NotFound();
             }
 
-            db.tblProjectNetworkSwtiches.Remove(tblProjectNetworkSwtich);
+            db.tblProjectNetworkSwitches.Remove(tblProjectNetworkSwitch);
             await db.SaveChangesAsync();
 
-            return Ok(tblProjectNetworkSwtich);
+            return Ok(tblProjectNetworkSwitch);
         }
 
         protected override void Dispose(bool disposing)
@@ -192,7 +192,7 @@ namespace DeploymentTool.Controller
 
         private bool tblProjectAudioExists(int id)
         {
-            return db.tblProjectNetworkSwtiches.Count(e => e.aProjectNetworkSwtichID == id) > 0;
+            return db.tblProjectNetworkSwitches.Count(e => e.aProjectNetworkSwtichID == id) > 0;
         }
     }
 }

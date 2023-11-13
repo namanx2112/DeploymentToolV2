@@ -4,7 +4,7 @@ import { Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CacheService } from './cache.service';
 import { CommonService } from './common.service';
-import { RolloutProjects } from '../interfaces/store';
+import { RolloutProjects } from '../interfaces/projects';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class RolloutProjectsService {
   }
 
   Delete(request: RolloutProjects) {
-    return this.http.get<RolloutProjects>(CommonService.ConfigUrl + "ProjectRollout/Delete?id=" + request.aRolloutProjectId, { headers: this.cacheService.getHttpHeaders() });
+    return this.http.get<RolloutProjects>(CommonService.ConfigUrl + "ProjectRollout/Delete?id=" + request.aProjectsRolloutID, { headers: this.cacheService.getHttpHeaders() });
   }
 
 
@@ -58,7 +58,7 @@ export class RolloutProjectsService {
   GetFields(): Fields[] {
     let fields = [{
       field_name: "Rollout Project Id",
-      fieldUniqeName: "aRolloutProjectId",
+      fieldUniqeName: "aProjectsRolloutID",
       defaultVal: "0",
       readOnly: false,
       invalid: false,
@@ -69,7 +69,7 @@ export class RolloutProjectsService {
       hidden: true
     }, {
       field_name: "Project Name",
-      fieldUniqeName: "tProjectName",
+      fieldUniqeName: "tProjectsRolloutName",
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -78,10 +78,21 @@ export class RolloutProjectsService {
       validator: [Validators.required],
       mandatory: false,
       hidden: false
+    }, {
+      field_name: "Project Description",
+      fieldUniqeName: "tProjectsRolloutDescription",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.text,
+      field_placeholder: "Enter Project Description",
+      validator: [],
+      mandatory: false,
+      hidden: false
     },
     {
       field_name: "Brnad Id",
-      fieldUniqeName: "nBrandId",
+      fieldUniqeName: "nBrandID",
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -92,46 +103,32 @@ export class RolloutProjectsService {
       hidden: true
     },
     {
-      field_name: "Technology Component",
-      fieldUniqeName: "nTechComponent",
+      field_name: "Status",
+      fieldUniqeName: "nStatus",
       defaultVal: "",
       readOnly: false,
       invalid: false,
       field_type: FieldType.dropdown,
-      options: this.commonService.GetDropdown("TechComponent"),
-      field_placeholder: "Enter Technology Component",
+      options: this.commonService.GetDropdown("ProjectRolloutStatus"),
+      field_placeholder: "Enter Rollout Status",
       validator: [],
       mandatory: false,
       hidden: false
     },
     {
-      field_name: "Equipment Vendor",
-      fieldUniqeName: "nEquipmentVendor",
+      field_name: "Estimate Install Time/Store",
+      fieldUniqeName: "tEstimateInstallTImePerStore",
       defaultVal: "",
       readOnly: false,
       invalid: false,
-      field_type: FieldType.dropdown,
-      field_placeholder: "Enter Equipment Vendor",
-      options: this.commonService.GetDropdown("Vendor"),
-      validator: [],
-      mandatory: false,
-      hidden: false
-    },
-    {
-      field_name: "Installation Vendor",
-      fieldUniqeName: "nInstallationVendor",
-      defaultVal: "",
-      readOnly: false,
-      invalid: false,
-      field_type: FieldType.dropdown,
-      field_placeholder: "Enter Installation Vendor",
-      options: this.commonService.GetDropdown("Vendor"),
+      field_type: FieldType.text,
+      field_placeholder: "Enter Estimate Install Time/Store",
       validator: [],
       mandatory: false,
       hidden: false
     },{
       field_name: "Start Date",
-      fieldUniqeName: "dStartDate",
+      fieldUniqeName: "dtStartDate",
       defaultVal: "",
       readOnly: false,
       invalid: false,
@@ -142,7 +139,7 @@ export class RolloutProjectsService {
       hidden: false
     },{
       field_name: "End Date",
-      fieldUniqeName: "dEndDate",
+      fieldUniqeName: "dtEndDate",
       defaultVal: "",
       readOnly: false,
       invalid: false,

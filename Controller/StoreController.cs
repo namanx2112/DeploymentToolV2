@@ -869,7 +869,7 @@ namespace DeploymentTool.Controller
                         });
 
                     }
-                    else if (techparts.tTable == "tblProjectNetworkSwtich")
+                    else if (techparts.tTable == "tblProjectNetworkSwitch")
                     {
                         if (!bNSwitch)
                         {

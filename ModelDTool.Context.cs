@@ -85,7 +85,7 @@ namespace DeploymentTool
         public virtual DbSet<tblProjectNote1> tblProjectNote1 { get; set; }
         public virtual DbSet<tblProjectServerHandheld> tblProjectServerHandhelds { get; set; }
         public virtual DbSet<tblProjectImageOrMemory> tblProjectImageOrMemories { get; set; }
-        public virtual DbSet<tblProjectNetworkSwtich> tblProjectNetworkSwtiches { get; set; }
+        public virtual DbSet<tblProjectNetworkSwitch> tblProjectNetworkSwitches { get; set; }
         public virtual DbSet<tblProjectOrderAccuracy> tblProjectOrderAccuracies { get; set; }
         public virtual DbSet<tblProjectOrderStatusBoard> tblProjectOrderStatusBoards { get; set; }
         public virtual DbSet<tblProjectsRollout> tblProjectsRollouts { get; set; }

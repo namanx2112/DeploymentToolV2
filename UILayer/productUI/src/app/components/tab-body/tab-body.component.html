@@ -13,8 +13,10 @@
     <app-table *ngIf="secondPart == 'table'" [curTab]="curTab" [searchFields]="searchFields"
       (rowClicked)="rowClicked($event)" [nBrandId]="0" [refreshMe]="refreshMe"></app-table>
   </div>
-  <div class="newEditPart" *ngIf="secondPart == 'newEdit'">
-    <app-new-edit-object [controlValues]="curControlVals" [curTab]="curTab"
+  <div class="newEditPart">
+    <app-new-edit-object *ngIf="showNewEdit()" [controlValues]="curControlVals" [curTab]="curTab"
       (returnBack)="returnBack($event)"></app-new-edit-object>
+    <app-project-rollout-editor *ngIf="showRolloutNewEdit()"
+      [request]="{curBrand:curBrand}"></app-project-rollout-editor>
   </div>
 </div>

@@ -39,7 +39,8 @@
                     (click)="menuClick('newproject', 'orderaccuracy', 'OrderAccuracyInstallation');">Order Accuracy
                     Installation</button>
                 <button mat-menu-item *ngIf="_curBrand.nBrandType == 4"
-                    (click)="menuClick('newproject', 'orderstatusboard', 'OrderStatusBoardInstallation');">Order Status Board 
+                    (click)="menuClick('newproject', 'orderstatusboard', 'OrderStatusBoardInstallation');">Order Status
+                    Board
                     Installation</button>
             </mat-menu>
             <button mat-button *ngIf="access.hasAccess('home.sonic.searchproject', 1) || showSearchForcefully"
@@ -70,7 +71,8 @@
         <span [ngClass]="drawer.opened ? 'toggleIcon opened' : 'toggleIcon'" (click)="drawer.toggle()">
             <mat-icon>play_arrow</mat-icon>
         </span>
-        <app-tab-body *ngIf="showMode == 'projectrollout'" [curTab]="rolloutTab" [NeedNew]="false"></app-tab-body>
+        <app-tab-body *ngIf="showMode == 'projectrollout'"
+            [request]="{curTab:rolloutTab, NeedNew: false, curBrand: _curBrand}"></app-tab-body>
         <app-brand-dashboard *ngIf="showMode == 'dashboard'"
             [request]="{curBrand: _curBrand, defaultConditionForSearch: defaultConditionForSearch, showTile: (defaultConditionForSearch != '')}"
             (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>

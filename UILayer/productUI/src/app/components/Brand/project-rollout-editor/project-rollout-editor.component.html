@@ -1,0 +1,78 @@
+<div *ngIf="showPage == 1">
+    <form [formGroup]="formGroup" class="form">
+        <div class="curField">
+            <mat-label class="fleidLabel">{{myFields['tProjectsRolloutName'].field_name}}</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="Placeholder"
+                    formControlName="{{myFields['tProjectsRolloutName'].fieldUniqeName}}"
+                    [ngModel]="controlValues[myFields['tProjectsRolloutName'].fieldUniqeName]">
+            </mat-form-field>
+        </div>
+        <div class="curSingleField">
+            <mat-label class="fleidLabel">{{myFields['tProjectsRolloutDescription'].field_name}}</mat-label>
+            <mat-form-field appearance="outline">
+                <textarea matInput placeholder="Placeholder"
+                    formControlName="{{myFields['tProjectsRolloutDescription'].fieldUniqeName}}"
+                    [ngModel]="controlValues[myFields['tProjectsRolloutDescription'].fieldUniqeName]"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="curField">
+            <mat-label class="fleidLabel">{{myFields['dtStartDate'].field_name}}</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput [matDatepicker]="pickerStart" placeholder="Choose a date" #pickerInput
+                    [formControl]="formControls[myFields['dtStartDate'].fieldUniqeName]" />
+                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStart></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="curField">
+            <mat-label class="fleidLabel">{{myFields['dtEndDate'].field_name}}</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput [matDatepicker]="pickerEnd" placeholder="Choose a date" #pickerInput
+                    [formControl]="formControls[myFields['dtEndDate'].fieldUniqeName]" />
+                <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEnd></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="curField">
+            <mat-label class="fleidLabel">{{myFields['tEstimateInstallTImePerStore'].field_name}}</mat-label>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Placeholder"
+                    formControlName="{{myFields['tEstimateInstallTImePerStore'].fieldUniqeName}}"
+                    [ngModel]="controlValues[myFields['tEstimateInstallTImePerStore'].fieldUniqeName]">
+            </mat-form-field>
+        </div>
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>{{myFields['tProjectName'].field_name}}</mat-label>
+            <mat-select [compareWith]="compareDropDown" formControlName="{{myFields['tProjectName'].fieldUniqeName}}"
+                [(value)]="controlValues[myFields['tProjectName'].fieldUniqeName]">
+                <mat-option *ngFor="let opt of curControl.dropDownOptions"
+                    [value]="opt.aDropdownId">{{opt.tDropdownText}}</mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
+        </mat-form-field> -->
+    </form>
+    <div class="actionButton">
+        <button (click)="movePage(1)" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Next
+        </button>
+    </div>
+</div>
+<div *ngIf="showPage == 2">
+    <div *ngFor="let key of uploadingRows; let index = index" class="uploadList">
+        <span>{{key.name}}</span>
+        <button mat-raised-button (click)="uploadItem(key.type, index)">Upload</button>
+    </div>
+    <div class="actionButton">
+        <button [disabled]="!canSubmit()" (click)="submitMe()" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Submit
+        </button>
+        <button (click)="movePage(-1)" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Back
+        </button>
+    </div>
+</div>

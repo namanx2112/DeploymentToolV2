@@ -160,14 +160,15 @@ namespace DeploymentTool.Controller
 
                     int nBrandIdTemp = 0;
                     var filesReadToProvider = await request.Content.ReadAsMultipartAsync();
-
+                    int nProjectType = 0;
                     foreach (var stream in filesReadToProvider.Contents)
                     {
                         string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
-                        if (fRequest.Length == 2)
+                        if (fRequest.Length > 2)
                         {
                             string FileName = fRequest[0];
                             nBrandIdTemp = Convert.ToInt32(fRequest[1]);
+                            nProjectType = Convert.ToInt32(fRequest[2]);
                             break;
                         }
                     }
@@ -181,10 +182,10 @@ namespace DeploymentTool.Controller
                         foreach (var stream in filesReadToProvider.Contents)
                         {
                             string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
-                            if (fRequest.Length == 2)
+                            if (fRequest.Length > 2)
                             {
                                 string FileName = fRequest[0];
-                                int nBrandId = Convert.ToInt32(fRequest[1]);
+                                int nBrandId = Convert.ToInt32(fRequest[1]);                                
                                 var fileBytes = await stream.ReadAsByteArrayAsync();
                                 string URL = HttpRuntime.AppDomainAppPath;
 
@@ -232,7 +233,7 @@ namespace DeploymentTool.Controller
                         foreach (var stream in filesReadToProvider.Contents)
                         {
                             string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
-                            if (fRequest.Length == 2)
+                            if (fRequest.Length > 2)
                             {
                                 string FileName = fRequest[0];
                                 int nBrandId = Convert.ToInt32(fRequest[1]);

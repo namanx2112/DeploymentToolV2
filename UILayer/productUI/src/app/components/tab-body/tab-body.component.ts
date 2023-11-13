@@ -4,6 +4,7 @@ import { MatRow } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { HomeTab, TabType } from 'src/app/interfaces/home-tab';
+import { BrandModel } from 'src/app/interfaces/models';
 import { AccessService } from 'src/app/services/access.service';
 
 @Component({
@@ -12,23 +13,25 @@ import { AccessService } from 'src/app/services/access.service';
   styleUrls: ['./tab-body.component.css']
 })
 export class TabBodyComponent {
+  @Input()
+  set request(val: any) {
+    this._curTab = val.curTab;
+    this._needNew = val.needNew;
+
+    this.NewInstanceName = "New " + TabType[this._curTab.tab_type];
+    if (this._needNew == true)
+      this.secondPart = "newEdit";
+    this.curBrand = val.curBrand;
+  }
   _curTab: HomeTab;
   get curTab(): HomeTab {
     return this._curTab;
-  }
-  @Input() set curTab(val: HomeTab) {
-    this._curTab = val;
-    this.NewInstanceName = "New " + TabType[val.tab_type];
   }
   _needNew: boolean;
   get NeedNew(): boolean {
     return this._needNew;
   }
-  @Input() set NeedNew(val: boolean) {
-    this._needNew = val;
-    if (this._needNew == true)
-      this.secondPart = "newEdit";
-  }
+  curBrand: BrandModel;
   secondPart: string;
   curControlVals: Dictionary<string>;
   searchControlVals: Dictionary<string>;
@@ -49,6 +52,14 @@ export class TabBodyComponent {
     this.curControlVals = {};
     this.secondPart = "newEdit";
     this.isNew = true;
+  }
+
+  showNewEdit() {
+    return (this.curTab.tab_type != TabType.RolloutProjects && this.secondPart == 'newEdit');
+  }
+
+  showRolloutNewEdit() {
+    return (this.curTab.tab_type == TabType.RolloutProjects && this.secondPart == 'newEdit');
   }
 
   onSubmit(controlVals: FormGroup) {
