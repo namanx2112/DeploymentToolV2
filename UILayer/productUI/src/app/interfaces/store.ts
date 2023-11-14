@@ -231,6 +231,7 @@ export interface StoreInstallation {
     dInstallDate: Date,
     dInstallTime: Date,
     dInstallEnd: Date,
+    nInstallType: number,
     nStatus: number,
     nSignoffs: number,
     nTestTransactions: number,

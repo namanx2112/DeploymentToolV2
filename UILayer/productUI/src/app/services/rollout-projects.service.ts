@@ -89,6 +89,28 @@ export class RolloutProjectsService {
       validator: [],
       mandatory: false,
       hidden: false
+    }, {
+      field_name: "Deployment Cost",
+      fieldUniqeName: "cDeploymentCost",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.currency,
+      field_placeholder: "Enter Deployment Cost",
+      validator: [],
+      mandatory: false,
+      hidden: false
+    }, {
+      field_name: "Hardware Cost",
+      fieldUniqeName: "cHardwareCost",
+      defaultVal: "",
+      readOnly: false,
+      invalid: false,
+      field_type: FieldType.currency,
+      field_placeholder: "Enter Hardware Cost",
+      validator: [],
+      mandatory: false,
+      hidden: false
     },
     {
       field_name: "Brnad Id",
@@ -103,7 +125,7 @@ export class RolloutProjectsService {
       hidden: true
     },
     {
-      field_name: "Status",
+      field_name: "Rollout Project Status",
       fieldUniqeName: "nStatus",
       defaultVal: "",
       readOnly: false,

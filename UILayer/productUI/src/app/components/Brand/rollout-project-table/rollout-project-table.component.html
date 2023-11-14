@@ -1,0 +1,15 @@
+<mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" matSort #TbSortWithObject="matSort"
+    (matSortChange)="announceSortChange($event)">
+
+    <!-- table dynamic columns -->
+    <ng-container *ngFor="let column of columns;let index = index;"
+        [matColumnDef]="column.columnDef">
+        <mat-header-cell *matHeaderCellDef class="headerClass" mat-sort-header matTooltip="{{ column.header }}">{{
+            column.header }}</mat-header-cell>
+        <mat-cell *matCellDef="let row" matTooltip="{{ getCellVal(column.columnDef, row[column.columnDef])}}">
+            {{ getCellVal(column.columnDef, row[column.columnDef])}}
+        </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="rowClick(row)"></mat-row>
+</mat-table>

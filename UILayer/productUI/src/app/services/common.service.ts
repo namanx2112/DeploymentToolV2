@@ -262,6 +262,34 @@ export class CommonService {
     }];
   }
 
+  static getRolloutProjectStatus() {
+    return [{
+      tDropdownText: "New",
+      aDropdownId: "0",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "In Progress",
+      aDropdownId: "1",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Completed",
+      aDropdownId: "2",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }, {
+      tDropdownText: "Cancelled",
+      aDropdownId: "3",
+      optionOrder: 1,
+      bDeleted: false,
+      nFunction: 0
+    }];
+  }
+
   static getProjectTypeOptions() {
     return [{
       tDropdownText: "New",
@@ -386,6 +414,9 @@ export class CommonService {
       }
       else if (columnName == "UserAccessTypes") {
         ddItems = CommonService.getUserAccessTypes();
+      }
+      else if(columnName == "ProjectRolloutStatus"){
+        ddItems = CommonService.getRolloutProjectStatus();
       }
       else {
         if (columnName == "Franchise" || columnName == "Vendor" || columnName == "User")// Since Franchise and Vendor is shared

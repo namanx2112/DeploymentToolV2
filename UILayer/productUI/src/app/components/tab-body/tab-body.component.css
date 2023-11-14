@@ -37,7 +37,9 @@
     float: left;
     margin: 0px 15px;
     height: 45px;
-
+}
+.btnDown{
+    margin-top: 22px;
 }
 .searchControls{
     float: left;

@@ -54,12 +54,16 @@ export class TabBodyComponent {
     this.isNew = true;
   }
 
+  isRollout(){
+    return this.curTab.tab_type == TabType.RolloutProjects;
+  }
+
   showNewEdit() {
-    return (this.curTab.tab_type != TabType.RolloutProjects && this.secondPart == 'newEdit');
+    return (!this.isRollout() && this.secondPart == 'newEdit');
   }
 
   showRolloutNewEdit() {
-    return (this.curTab.tab_type == TabType.RolloutProjects && this.secondPart == 'newEdit');
+    return (this.isRollout() && this.secondPart == 'newEdit');
   }
 
   onSubmit(controlVals: FormGroup) {

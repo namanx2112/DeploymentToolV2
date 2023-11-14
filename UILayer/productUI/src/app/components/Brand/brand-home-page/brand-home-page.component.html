@@ -50,6 +50,10 @@
                 (click)="menuClick('importproject')"
                 [className]="configMenu=='importproject'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>attach_file</mat-icon>Import
                 Project</button>
+            <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)"
+                (click)="menuClick('projectrollout')"
+                [className]="configMenu=='projectrollout'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>insert_drive_file</mat-icon>Rollout
+                Projects</button>
         </div>
         <div class="ConfigList tabSelectionOption">
             <span (click)="clickOption('dashboard')"
@@ -63,8 +67,6 @@
                 [className]="configMenu=='savedreports'?'selected':''">Saved Reports</span>
             <span (click)="clickOption('dashboardpane')" *ngIf="access.hasAccess('home.sonic.report', 0)"
                 [className]="configMenu=='dashboardpane'?'selected':''">Dashboard</span>
-            <span (click)="clickOption('projectrollout')" *ngIf="access.hasAccess('home.sonic.report', 0)"
-                [className]="configMenu=='projectrollout'?'selected':''">Rollout Projects</span>
         </div>
     </mat-drawer>
     <div class="sideNavContent">

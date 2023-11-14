@@ -3,24 +3,38 @@
         <div class="curField">
             <mat-label class="fleidLabel">{{myFields['tProjectsRolloutName'].field_name}}</mat-label>
             <mat-form-field appearance="outline">
-                <input matInput placeholder="Placeholder"
-                    formControlName="{{myFields['tProjectsRolloutName'].fieldUniqeName}}"
-                    [ngModel]="controlValues[myFields['tProjectsRolloutName'].fieldUniqeName]">
+                <input matInput placeholder="Placeholder" [formControl]="formControls['tProjectsRolloutName']"
+                    [(ngModel)]="controlValues.tProjectsRolloutName">
             </mat-form-field>
         </div>
         <div class="curSingleField">
             <mat-label class="fleidLabel">{{myFields['tProjectsRolloutDescription'].field_name}}</mat-label>
             <mat-form-field appearance="outline">
-                <textarea matInput placeholder="Placeholder"
-                    formControlName="{{myFields['tProjectsRolloutDescription'].fieldUniqeName}}"
-                    [ngModel]="controlValues[myFields['tProjectsRolloutDescription'].fieldUniqeName]"></textarea>
+                <textarea matInput placeholder="Placeholder" [formControl]="formControls['tProjectsRolloutDescription']"
+                    [(ngModel)]="controlValues.tProjectsRolloutDescription"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="curField">
+            <mat-label class="fleidLabel">{{myFields['cDeploymentCost'].field_name}}</mat-label>
+            <mat-form-field appearance="outline">
+                <input type="number" matInput placeholder="Placeholder" [formControl]="formControls['cDeploymentCost']"
+                    [(ngModel)]="controlValues.cDeploymentCost">
+                <span matPrefix class="dollarSymbol">$&nbsp;</span>
+            </mat-form-field>
+        </div>
+        <div class="curField">
+            <mat-label class="fleidLabel">{{myFields['cHardwareCost'].field_name}}</mat-label>
+            <mat-form-field appearance="outline">
+                <input type="number" matInput placeholder="Placeholder" [formControl]="formControls['cHardwareCost']"
+                    [(ngModel)]="controlValues.cHardwareCost">
+                <span matPrefix class="dollarSymbol">$&nbsp;</span>
             </mat-form-field>
         </div>
         <div class="curField">
             <mat-label class="fleidLabel">{{myFields['dtStartDate'].field_name}}</mat-label>
             <mat-form-field appearance="outline">
-                <input matInput [matDatepicker]="pickerStart" placeholder="Choose a date" #pickerInput
-                    [formControl]="formControls[myFields['dtStartDate'].fieldUniqeName]" />
+                <input matInput [matDatepicker]="pickerStart" placeholder="Choose a start date" #pickerInput
+                    [formControl]="formControls['dtStartDate']" />
                 <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
                 <mat-datepicker #pickerStart></mat-datepicker>
             </mat-form-field>
@@ -28,8 +42,8 @@
         <div class="curField">
             <mat-label class="fleidLabel">{{myFields['dtEndDate'].field_name}}</mat-label>
             <mat-form-field appearance="outline">
-                <input matInput [matDatepicker]="pickerEnd" placeholder="Choose a date" #pickerInput
-                    [formControl]="formControls[myFields['dtEndDate'].fieldUniqeName]" />
+                <input matInput [matDatepicker]="pickerEnd" placeholder="Choose a end date" #pickerInput
+                    [formControl]="formControls['dtEndDate']" />
                 <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
                 <mat-datepicker #pickerEnd></mat-datepicker>
             </mat-form-field>
@@ -38,20 +52,20 @@
             <mat-label class="fleidLabel">{{myFields['tEstimateInstallTImePerStore'].field_name}}</mat-label>
             <mat-form-field appearance="outline">
                 <input type="text" matInput placeholder="Placeholder"
-                    formControlName="{{myFields['tEstimateInstallTImePerStore'].fieldUniqeName}}"
-                    [ngModel]="controlValues[myFields['tEstimateInstallTImePerStore'].fieldUniqeName]">
+                    [formControl]="formControls['tEstimateInstallTImePerStore']"
+                    [(ngModel)]="controlValues.tEstimateInstallTImePerStore">
             </mat-form-field>
         </div>
-        <!-- <mat-form-field appearance="outline">
-            <mat-label>{{myFields['tProjectName'].field_name}}</mat-label>
-            <mat-select [compareWith]="compareDropDown" formControlName="{{myFields['tProjectName'].fieldUniqeName}}"
-                [(value)]="controlValues[myFields['tProjectName'].fieldUniqeName]">
-                <mat-option *ngFor="let opt of curControl.dropDownOptions"
-                    [value]="opt.aDropdownId">{{opt.tDropdownText}}</mat-option>
-            </mat-select>
-            <mat-error
-                *ngIf="curControl.hidden == false && hasEror(curControl)">{{getErrorMessage(curControl)}}</mat-error>
-        </mat-form-field> -->
+        <div class="curField">
+            <mat-label class="fleidLabel">{{myFields['nStatus'].field_name}}</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-select [compareWith]="compareDropDown" [formControl]="formControls['nStatus']"
+                    [(value)]="controlValues.nStatus">
+                    <mat-option *ngFor="let opt of myFields['nStatus'].dropDownOptions"
+                        [value]="opt.aDropdownId">{{opt.tDropdownText}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </form>
     <div class="actionButton">
         <button (click)="movePage(1)" mat-raised-button
@@ -65,6 +79,28 @@
         <span>{{key.name}}</span>
         <button mat-raised-button (click)="uploadItem(key.type, index)">Upload</button>
     </div>
+    <div class="actionButton">
+        <button [disabled]="!canSubmit()" (click)="submitMe()" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Submit
+        </button>
+        <button (click)="movePage(1)" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Next
+        </button>
+        <button (click)="movePage(-1)" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Back
+        </button>
+    </div>
+</div>
+<div *ngIf="showPage == 3">
+    <mat-tab-group>
+        <mat-tab *ngFor="let key of uploadingRows; let index = index" label="{{key.name}}">
+            <app-rollout-project-table
+                [request]="{items: uploadingRows[index].items, projectType: uploadingRows[index].type, nBrandId: curBrand.aBrandId}"></app-rollout-project-table>
+        </mat-tab>
+    </mat-tab-group>
     <div class="actionButton">
         <button [disabled]="!canSubmit()" (click)="submitMe()" mat-raised-button
             class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">

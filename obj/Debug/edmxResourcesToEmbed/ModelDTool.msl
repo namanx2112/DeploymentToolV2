@@ -184,6 +184,7 @@
           <ScalarProperty Name="tManagerName" ColumnName="tManagerName" />
           <ScalarProperty Name="tInstallTechNumber" ColumnName="tInstallTechNumber" />
           <ScalarProperty Name="dInstallTime" ColumnName="dInstallTime" />
+          <ScalarProperty Name="nInstallType" ColumnName="nInstallType" />
           <ScalarProperty Name="nRevisitDateChanged" ColumnName="nRevisitDateChanged" />
           <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
           <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />

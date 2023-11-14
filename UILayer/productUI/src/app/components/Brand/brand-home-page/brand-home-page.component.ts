@@ -80,7 +80,7 @@ export class BrandHomePageComponent {
       this.techCompType = techComp;
       this.projectType = this.ProjectTypes.filter(x => x.tDropdownText.toLocaleLowerCase() == newOption.toLocaleLowerCase())[0];
     }
-    if (tMode == "search" || tMode == "importproject")
+    if (tMode == "search" || tMode == "importproject"  || tMode == "projectrollout")
       this.configMenu = tMode;
     else
       this.configMenu = "dashboard";

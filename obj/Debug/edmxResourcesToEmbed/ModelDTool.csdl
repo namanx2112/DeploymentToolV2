@@ -284,6 +284,7 @@
     <Property Name="dRevisitDate" Type="DateTime" Precision="0" />
     <Property Name="nRevisitDateChanged" Type="Int32" />
     <Property Name="dInstallTime" Type="DateTime" Precision="3" />
+    <Property Name="nInstallType" Type="Int32" />
     <Property Name="tInstallTechNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tManagerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tManagerNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />

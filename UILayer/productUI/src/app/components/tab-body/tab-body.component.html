@@ -6,7 +6,7 @@
     <app-controls [request]="{fields: curTab.search_fields, needButton: false, themeClass: 'whiteGray', numberOfControlsInARow: 1, 
         controlValues: searchControlVals, SubmitLabel: SubmitLabel,
             readOnlyForm: false, nBrandId: 0}" (onSubmit)="onSubmit($event)" class="searchControls"></app-controls>
-    <button mat-raised-button class="searchButton" (click)="OpenNew()"
+    <button mat-raised-button [ngClass]="isRollout() ? 'searchButton btnDown' : 'searchButton'" (click)="OpenNew()"
       *ngIf="access.hasAccess('home.configuration.' + curTab.tab_name, 1)">{{NewInstanceName}}</button>
   </div>
   <div class="tablePart" *ngIf="secondPart != 'newEdit'">

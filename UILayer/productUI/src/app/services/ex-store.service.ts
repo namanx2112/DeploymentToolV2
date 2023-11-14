@@ -28,7 +28,7 @@ export class ExStoreService {
 
   UploadStore(fileToUpload: File, nBrandId: number, exType: any) {
     const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name + String.fromCharCode(1000) + nBrandId+ String.fromCharCode(1000) + exType);
+    formData.append('fileKey', fileToUpload, fileToUpload.name + String.fromCharCode(1000) + nBrandId + String.fromCharCode(1000) + exType);
     let httpHeader = new HttpHeaders({
       "Authorization": "Bearer " + this.cacheService.getToken()
     });
@@ -2969,6 +2969,19 @@ export class ExStoreService {
         field_placeholder: "Enter Status",
         validator: [],
         options: this.commonService.GetDropdown("InstallationStatus"),
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Install Type",
+        fieldUniqeName: "nInstallType",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Status",
+        validator: [],
+        options: this.commonService.GetDropdown("InstallationInstallType"),
         mandatory: false,
         hidden: false
       }, {

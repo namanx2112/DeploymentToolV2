@@ -47,7 +47,7 @@ export class ProjectRolloutEditorComponent {
   @Input()
   set request(val: any) {
     this.curBrand = val.curBrand;
-    this.controlValues = (typeof val.rowValue == 'undefined') ? {} : val.rowValue;
+    this.controlValues = (typeof val.rowValue == 'undefined') ? this.getNewRollout() : val.rowValue;
     this.initMe();
   }
   curBrand: BrandModel;
@@ -63,6 +63,22 @@ export class ProjectRolloutEditorComponent {
     , private dateAdapter: DateAdapter<Date>, public commonService: CommonService,
     private rolloutService: RolloutProjectsService) {
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
+  }
+
+  getNewRollout() {
+    return {
+      aProjectsRolloutID: 0,
+      tProjectsRolloutName: "",
+      tProjectsRolloutDescription: "",
+      cHardwareCost: 0,
+      cDeploymentCost: 0,
+      nNumberOfStore: 0,
+      nBrandID: this.curBrand.aBrandId,
+      nStatus: 0,
+      tEstimateInstallTImePerStore: 0,
+      dtStartDate: null,
+      dtEndDate: null
+    };
   }
 
   initMe() {
@@ -104,6 +120,7 @@ export class ProjectRolloutEditorComponent {
         }
       }
     }
+    this.myFields['nStatus'].dropDownOptions = CommonService.getRolloutProjectStatus();
     this.valueChanged();
   }
 

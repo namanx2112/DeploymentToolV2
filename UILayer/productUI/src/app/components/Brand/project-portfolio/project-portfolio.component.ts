@@ -121,6 +121,61 @@ export class ProjectPortfolioComponent {
           columnDef: "sonicradio",
           header: "Radio"
         }, {
+          columnDef: "networkswitch",
+          header: "Network Switch"
+        }, {
+          columnDef: "imagememory",
+          header: "Image Memory"
+        }, {
+          columnDef: "installation",
+          header: "Installation"
+        }, {
+          columnDef: "notes",
+          header: "Notes"
+        }
+      ];
+    }
+    else if (tBrand.nBrandType == Brands.Dunkin) {
+      this.columnsToDisplay = [
+        {
+          columnDef: "store",
+          header: ""
+        },
+        {
+          columnDef: "networking",
+          header: "Networking"
+        }
+        , {
+          columnDef: "pos",
+          header: "POS"
+        }, {
+          columnDef: "audio",
+          header: "Audio"
+        }, {
+          columnDef: "exteriormenu",
+          header: "Exterior Menu"
+        }, {
+          columnDef: "paymentsystem",
+          header: "Payment System"
+        }, {
+          columnDef: "interiormenu",
+          header: "Interior Menu"
+        }, {
+          columnDef: "orderaccuracy",
+          header: "Order Accuracy"
+        }, {
+          columnDef: "orderstatusboard",
+          header: "Order Status Board"
+        }, {
+          columnDef: "sonicradio",
+          header: "Radio"
+        }, {
+          columnDef: "networkswitch",
+          header: "Network Switch"
+        }, {
+          columnDef: "imagememory",
+          header: "Image Memory"
+        }, {
           columnDef: "installation",
           header: "Installation"
         }, {
