@@ -12,12 +12,13 @@ table {
 
 th,
 td {
-    overflow: hidden;
     width: 200px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
+.tTable{
+    display: table;
+}
 
 .table-container {
     height: 100%;

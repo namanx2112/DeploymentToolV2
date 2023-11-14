@@ -78,7 +78,7 @@ export class RolloutProjectTableComponent {
     }
     return rVal;
   }
-  
+
   fetchHeaderName(fieldName: string) {
     let newName = fieldName.substring(1, fieldName.length);
     newName = newName.replace(/([A-Z])/g, ' $&');
@@ -87,6 +87,8 @@ export class RolloutProjectTableComponent {
 
   getFieldHeaders() {
     for (var cName in this.items[0]) {
+      if (cName.toLowerCase() == "nbrandid")
+        continue;
       let dName = this.fetchHeaderName(cName);
       this.columns.push({
         columnDef: cName,

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { DatePipe } from '@angular/common';
@@ -50,6 +50,7 @@ export class ProjectRolloutEditorComponent {
     this.controlValues = (typeof val.rowValue == 'undefined') ? this.getNewRollout() : val.rowValue;
     this.initMe();
   }
+  @Output() returnBack = new EventEmitter<string>();
   curBrand: BrandModel;
   tTab: HomeTab;
   formGroup = new FormGroup({});
@@ -102,6 +103,21 @@ export class ProjectRolloutEditorComponent {
     }
   }
 
+  cantMoveNext(page: number) {
+    let can = false;
+    if (page == 1) {
+      if (this.controlValues.tProjectsRolloutName != "")
+        can = true;
+    }
+    else if (page == 2) {
+      for (var indx in this.uploadingRows) {
+        if (this.uploadingRows[indx].items.length > 0)
+          can = true;
+      }
+    }
+    return can;
+  }
+
   compareDropDown(o1: any, o2: any) {
     if (o1 == o2)
       return true;
@@ -152,8 +168,10 @@ export class ProjectRolloutEditorComponent {
     const dialogConfig = new MatDialogConfig();
     let dialogRef: any;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '90%';
+    dialogConfig.width = '80%';
+    dialogConfig.height = '90%';
     dialogConfig.data = {
+      title: "Import " + CommonService.getProjectName(projType) + " Projects",
       projectType: projType,
       curBrand: this.curBrand,
       onSubmit: function (pType: any, data: any) {
@@ -168,10 +186,10 @@ export class ProjectRolloutEditorComponent {
   }
 
   canSubmit() {
-    let can = true;
+    let can = false;
     for (var indx in this.uploadingRows) {
-      if (this.uploadingRows[indx].items.length == 0)
-        can = false;
+      if (this.uploadingRows[indx].items.length > 0)
+        can = true;
     }
     return can;
   }
@@ -187,6 +205,7 @@ export class ProjectRolloutEditorComponent {
     this.controlValues["nBrandID"] = this.curBrand.aBrandId;
     this.rolloutService.Create(this.controlValues).subscribe(x => {
       alert("Saved");
+      this.returnBack.emit("done");
     });
   }
 }

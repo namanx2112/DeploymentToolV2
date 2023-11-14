@@ -17,11 +17,13 @@ export class ProjectRolloutImportComponent {
   dragAreaClass: string;
   projectType: string;
   onSubmit: any;
+  title: string;
   constructor(private service: ExStoreService, @Inject(MAT_DIALOG_DATA) public data: any) {
     if (typeof data != 'undefined') {
       this.projectType = data.projectType;
       this._curBrand = data.curBrand;
       this.onSubmit = data.onSubmit;
+      this.title = data.title;
     }
     this.dragAreaClass = "uploadDiv blackBorder lightGray";
     this.excelData = [];

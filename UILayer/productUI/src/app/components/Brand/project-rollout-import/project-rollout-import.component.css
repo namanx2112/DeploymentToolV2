@@ -3,11 +3,12 @@
     width: 95%;
     z-index: 4;
     background-color: #fff;
+    margin: auto;
 }
 
 .projectBody{
     width: 100%;
-    min-height: 400px;
+    height: calc(100% - 120px);
     overflow: auto;
 }
 
@@ -37,8 +38,6 @@ a{
 .uploadDiv{
     width: 90%;
     margin: 10% auto;
-    padding-top: 100px;
-    height: 200px;
     border-radius: 10px;
     border-style: solid;
     border-width: 1px;

@@ -1,5 +1,5 @@
 <div class="projectHeader">
-    <h4 class="projHeader">Import Project</h4>
+    <h4 class="projHeader">{{title}}</h4>
 </div>
 <div class="projectBody">
     <div *ngIf="excelData.length == 0" ngClass="{{dragAreaClass}}" DropZone (onFileDropped)="handleFileInput($event)">
@@ -9,7 +9,9 @@
         <span *ngIf="fileToUpload != null" class="fileName">{{fileToUpload.name}}</span>
         <span class="fileType">Excel format only</span>
     </div>
-    <app-file-store-selection *ngIf="excelData.length > 0"  (SelectionChange)="SelectionChange($event)" [excelData]="excelData"></app-file-store-selection>
+    <app-file-store-selection *ngIf="excelData.length > 0" (SelectionChange)="SelectionChange($event)"
+        [excelData]="excelData"></app-file-store-selection>
 </div>
 
-<button type="submit" class="submitButton" mat-raised-button [disabled]="selectedItems.length == 0" (click)="CreateNewStores()">Submit</button>
+<button type="submit" class="submitButton" mat-raised-button [disabled]="selectedItems.length == 0"
+    (click)="CreateNewStores()">Submit</button>
