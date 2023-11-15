@@ -15,11 +15,12 @@ export class RolloutProjectsService {
 
   GetTableVisibleColumns() {
     return [
-      "nTechComponent",
-      "nEquipmentVendor",
-      "nInstallationVendor",
-      "dStartDate",
-      "dEndDate"
+      "tProjectsRolloutName",
+      "tProjectsRolloutDescription",
+      "nNumberOfStore",
+      "tEstimateInstallTImePerStore",
+      "dtStartDate",
+      "dtEndDate"
     ];
   }
 
