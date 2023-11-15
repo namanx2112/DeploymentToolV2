@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
-import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, ProjectExcel, StoreSearchModel } from '../interfaces/store';
+import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, ProjectExcel, StoreSearchModel, ProjectGlimpse } from '../interfaces/store';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CacheService } from './cache.service';
@@ -37,6 +37,10 @@ export class ExStoreService {
 
   CreateNewStores(request: ProjectExcel[]) {
     return this.http.post<string>(CommonService.ConfigUrl + "ExStore/CreateNewStores", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  GetProjectGlimpse(nProjectId: number) {
+    return this.http.get<ProjectGlimpse>(CommonService.ConfigUrl + "ExStore/GetProjectGlimpse?nProjectId=" + nProjectId, { headers: this.cacheService.getHttpHeaders() });
   }
 
   SearchStore(request: string, nBrandId: number) {

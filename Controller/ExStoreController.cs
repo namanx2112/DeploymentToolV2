@@ -102,6 +102,27 @@ namespace DeploymentTool.Controller
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetProjectGlimpse(int nProjectId)
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            try
+            {
+                SqlParameter pProjectId = new SqlParameter("@nProjectId", nProjectId);
+                ProjectGlimpse items = db.Database.SqlQuery<ProjectGlimpse>("exec sproc_getProjectGlimpse @nProjectId", pProjectId).FirstOrDefault();
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<ProjectGlimpse>(items, new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("Sonic.GetProjectGlimpse", HttpContext.Current, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
         [Authorize]
         [HttpGet]
         public HttpResponseMessage getStoreDetails(int nStoreId)

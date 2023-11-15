@@ -319,6 +319,12 @@ export interface StoreSearchModel {
     lstProjectsInfo: ProjectInfo[]
 }
 
+export interface ProjectGlimpse{
+    aProjectsRolloutID: number,
+    tProjectsRolloutName: string,
+    nProjectStatus: number
+}
+
 export interface ProjectInfo {
     nProjectId: number,
     nProjectType: number,

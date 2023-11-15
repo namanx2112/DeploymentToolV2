@@ -37,16 +37,27 @@
 controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
     readOnlyForm: true, nBrandId: curBrandId}" (onSubmit)="onSubmit($event, allTabs[0])"></app-controls>
         </div>
-        <div class="fullTile tileSelected">
-            <h4>
-                <div class="tileHeaderLeft">{{allTabs[1].tab_header}} <span class="projTypeOnTabHeader">{{ "(" +
-                        projectTypeString(selectedProject.nProjectType) + ")"}}</span></div>
-                <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[1].tab_name, 1)"><a
-                        (click)="editTab(allTabs[1])">Edit</a></div>
-            </h4>
-            <app-controls *ngIf="tValues[allTabs[1].tab_name] != undefined" class="tabForm" [request]="{fields: allTabs[1].fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
+        <div class="tileGroup">
+            <div class="halfTile tileSelected">
+                <h4>
+                    <div class="tileHeaderLeft">Project Details
+                        <span class="projTypeOnTabHeader">{{ "(" +
+                            projectTypeString(selectedProject.nProjectType) + ")"}}</span>
+                    </div>
+                </h4>
+                <app-project-glimpse class="tabForm" [request]="{curProject: selectedProject, curBrandId: curBrandId}"></app-project-glimpse>
+            </div>
+            <div class="halfTile tileSelected">
+                <h4>
+                    <div class="tileHeaderLeft">{{allTabs[1].tab_header}} <span class="projTypeOnTabHeader">{{ "(" +
+                            projectTypeString(selectedProject.nProjectType) + ")"}}</span></div>
+                    <div class="right" *ngIf="access.hasAccess('home.sonic.project.' + allTabs[1].tab_name, 1)"><a
+                            (click)="editTab(allTabs[1])">Edit</a></div>
+                </h4>
+                <app-controls *ngIf="tValues[allTabs[1].tab_name] != undefined" class="tabForm" [request]="{fields: allTabs[1].fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
             controlValues: tValues[allTabs[1].tab_name], SubmitLabel: 'None',
                 readOnlyForm: true, nBrandId: curBrandId}" (onSubmit)="onSubmit($event, allTabs[1])"></app-controls>
+            </div>
         </div>
         <div class="tileGroup">
             <div class="halfTile tileSelected">
@@ -91,7 +102,8 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
     </div>
     <div class="TechAreaTabBar" *ngIf="tabForUI.length > 0 && viewName == 'tabview'">
         <div class="tabHeader">
-            <div *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)" [ngClass]="(selectedTab == -10) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-10);">
+            <div *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)"
+                [ngClass]="(selectedTab == -10) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-10);">
                 Delivery Status</div>
             <div *ngFor="let tTab of tabForUI;let index = index"
                 [ngClass]="(selectedTab == index) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(index);">
@@ -104,7 +116,8 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
                 <span *ngIf="tTab.tab_name == 'Installation'" class="projTypeOnTabHeader">{{ "(" +
                     projectTypeString(selectedProject.nProjectType) + ")"}} </span>
             </div>
-            <div *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)" [ngClass]="(selectedTab == -11) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-11);">
+            <div *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)"
+                [ngClass]="(selectedTab == -11) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-11);">
                 Documents</div>
             <div [ngClass]="(selectedTab == -12) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(-12);"
                 *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)">
@@ -148,7 +161,8 @@ controlValues: tValues[tabForUI[selectedTab].tab_name], SubmitLabel: 'None',
             <div class="tBody">
                 <app-controls *ngIf="canShowTab(tTab)" class="tabForm" [request]="{fields: tTab.fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
 controlValues: tValues[tTab.tab_name], SubmitLabel: 'None',
-    readOnlyForm: true, nBrandId: curBrandId, fieldRestrictions: fieldRestrictions[tTab.tab_name]}" (onSubmit)="onSubmit($event, tTab)"></app-controls>
+    readOnlyForm: true, nBrandId: curBrandId, fieldRestrictions: fieldRestrictions[tTab.tab_name]}"
+                    (onSubmit)="onSubmit($event, tTab)"></app-controls>
             </div>
         </div>
     </div>

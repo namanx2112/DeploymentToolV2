@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
@@ -126,21 +127,21 @@ namespace DeploymentTool.Model
                 // Misc.Utilities.SetActiveProjectId(Misc.ProjectType.AudioInstallation, tblProjectsRollout.nStoreId, tblProjectsRollout);
                 db.tblProjectsRollouts.Add(tblRollout);
                 await db.SaveChangesAsync();
-
+                int aProjectsRolloutID = tblRollout.aProjectsRolloutID;
                 var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
                 Nullable<int> lUserId = securityContext.nUserID;
-                int nBrandID = 6;
+                int? nBrandID = request.nBrandID;
                 int nCreateOrUpdate = 1;
                 foreach (RolloutItem item in request.uploadingRows)
                 {
 
                     if (item.type == ProjectType.OrderAccuracyInstallation)
                     {
-                        await CreateNewStoresForOrderAccurcy(item.items);
+                        await CreateNewStoresForOrderAccurcy(item.items, nBrandID,  aProjectsRolloutID);
                     }
                     else if (item.type == ProjectType.OrderStatusBoardInstallation)
                     {
-                        await CreateStoreFromExcelForOrderStatusBoard(item.items);
+                        await CreateStoreFromExcelForOrderStatusBoard(item.items, nBrandID,  aProjectsRolloutID);
                     }
                 }
                 ////----Vendor Audit field-----------
@@ -158,19 +159,19 @@ namespace DeploymentTool.Model
             return Json(tblRollout);
         }
 
-        public async Task<HttpResponseMessage> CreateNewStoresForOrderAccurcy(List<dynamic> requestArr)
+        public async Task<HttpResponseMessage> CreateNewStoresForOrderAccurcy(List<dynamic> requestArr, int? nBrandId, int aProjectsRolloutID)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
                 foreach (var tItem in requestArr)
                 {
-                    int nBrandId = 6;
+                    //int nBrandId = 6;
                     ProjectType pType;
                     ProjectExcelFieldsOrderAccurcy request = JsonConvert.DeserializeObject<ProjectExcelFieldsOrderAccurcy>(JsonConvert.SerializeObject(tItem));
                     List<SqlParameter> tPramList = new List<SqlParameter>();
                     tPramList.Add(new SqlParameter("@tStoreName", "Dont Know"));
-                    tPramList.Add(new SqlParameter("@tProjectType", request.tProjectType));
+                    tPramList.Add(new SqlParameter("@tProjectType", 12));
                     tPramList.Add(new SqlParameter("@tStoreNumber", request.tStoreNumber));
                     tPramList.Add(new SqlParameter("@tAddress", request.tAddress));
                     tPramList.Add(new SqlParameter("@tCity", request.tCity));
@@ -182,8 +183,11 @@ namespace DeploymentTool.Model
                     tPramList.Add(new SqlParameter("@tANE", request.tANE));
                     tPramList.Add(new SqlParameter("@tRVP", request.tRVP));
                     tPramList.Add(new SqlParameter("@tPrincipalPartner", request.tPrincipalPartner));
-                    tPramList.Add(new SqlParameter("@dStatus", request.tState));
-                    tPramList.Add(new SqlParameter("@dOpenStore", request.dOpenStore));
+                    tPramList.Add(new SqlParameter("@dStatus", request.dStatus));
+
+                   // if(request.dOpenStore.HasValue)
+                    tPramList.Add(new SqlParameter("@dOpenStore", request.dOpenStore));//typeof(System.DateTime)
+
                     tPramList.Add(new SqlParameter("@tProjectStatus", request.tProjectStatus));
                     tPramList.Add(new SqlParameter("@nCreatedBy", securityContext.nUserID));
                     tPramList.Add(new SqlParameter("@nBrandId", nBrandId));
@@ -217,19 +221,23 @@ namespace DeploymentTool.Model
                     tPramList.Add(new SqlParameter("@tCost", request.tCost));
                     tPramList.Add(new SqlParameter("@tInstallNotes", request.tInstallNotes));
                     tPramList.Add(new SqlParameter("@tInstallType", request.tInstallType));
-                    string output = db.Database.SqlQuery<Dropdown>("exec sproc_CreateStoreFromExcelForOrderAccuracy @tStoreName,@tProjectType," +
+                    tPramList.Add(new SqlParameter("@nProjectsRolloutID", aProjectsRolloutID));
+                    
+                    db.Database.ExecuteSqlCommand("exec sproc_CreateStoreFromExcelForOrderAccuracy @tStoreName,@tProjectType," +
                         "@tStoreNumber,@tAddress,@tCity,@tState,@nDMAID,@tDMA,@tRED,@tCM," +
                         "@tANE,@tRVP,@tPrincipalPartner,@dStatus,@dOpenStore,@tProjectStatus,@nCreatedBy,@nBrandId," +
                         "@tOrderAccuracyVendor,@tOrderAccuracyStatus,@nBakeryPrinter,@nDualCupLabel,@nDTExpo,@nFCExpo,@dShipDate,@tShippingCarrier,@tTrackingNumber,@dDeliveryDate," +
                         "@tInstallationVendor,@tInstallStatus,@dInstallDate,@tInstallTime,@tInstallTechNumber,@tManagerName,@tManagerNumber," +
                         "@tManagerCheckout,@tPhotoDeliverables,@tLeadTech,@dInstallEnd,@tSignoffs,@tTestTransactions,@tInstallProjectStatus," +
-                        "@dRevisitDate,@tCost,@tInstallNotes,@tInstallType "
+                        "@dRevisitDate,@tCost,@tInstallNotes,@tInstallType,@nProjectsRolloutID  "
                         , tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
                         tPramList[6], tPramList[7], tPramList[8], tPramList[9], tPramList[10], tPramList[11], tPramList[12], tPramList[13],
                         tPramList[14], tPramList[15], tPramList[16], tPramList[17], tPramList[18], tPramList[19], tPramList[20], tPramList[21],
                         tPramList[22], tPramList[23], tPramList[24], tPramList[25], tPramList[26], tPramList[27], tPramList[28], tPramList[29],
                         tPramList[30], tPramList[31], tPramList[32], tPramList[33], tPramList[34], tPramList[35], tPramList[36], tPramList[37],
-                        tPramList[38], tPramList[39], tPramList[40], tPramList[41], tPramList[42], tPramList[43], tPramList[44], tPramList[45]).ToString();
+                        tPramList[38], tPramList[39], tPramList[40], tPramList[41], tPramList[42], tPramList[43], tPramList[44], tPramList[45], tPramList[46]).ToString();
+
+                    ///await db.SaveChangesAsync();
                 }
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
@@ -238,26 +246,26 @@ namespace DeploymentTool.Model
             }
             catch (Exception ex)
             {
-                TraceUtility.ForceWriteException("Sonic.CreateNewStores", HttpContext.Current, ex);
+                TraceUtility.ForceWriteException("OrderAccuracy.CreateNewStores", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
 
         }
         [Authorize]
         [HttpPost]
-        public async Task<HttpResponseMessage> CreateStoreFromExcelForOrderStatusBoard(List<dynamic> requestArr)
+        public async Task<HttpResponseMessage> CreateStoreFromExcelForOrderStatusBoard(List<dynamic> requestArr, int? nBrandId, int aProjectsRolloutID)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
                 foreach (var tItem in requestArr)
                 {
-                    int nBrandId = 6;
+                    //int nBrandId = 6;
                     ProjectType pType;
                     ProjectExcelFieldsOrderStatusBoard request = JsonConvert.DeserializeObject<ProjectExcelFieldsOrderStatusBoard>(JsonConvert.SerializeObject(tItem));
                     List<SqlParameter> tPramList = new List<SqlParameter>();
                     tPramList.Add(new SqlParameter("@tStoreName", "Dont Know"));
-                    tPramList.Add(new SqlParameter("@tProjectType", request.tProjectType));
+                    tPramList.Add(new SqlParameter("@tProjectType", 13));
                     tPramList.Add(new SqlParameter("@tStoreNumber", request.tStoreNumber));
                     tPramList.Add(new SqlParameter("@tAddress", request.tAddress));
                     tPramList.Add(new SqlParameter("@tCity", request.tCity));
@@ -269,8 +277,11 @@ namespace DeploymentTool.Model
                     tPramList.Add(new SqlParameter("@tANE", request.tANE));
                     tPramList.Add(new SqlParameter("@tRVP", request.tRVP));
                     tPramList.Add(new SqlParameter("@tPrincipalPartner", request.tPrincipalPartner));
-                    tPramList.Add(new SqlParameter("@dStatus", request.tState));
-                    tPramList.Add(new SqlParameter("@dOpenStore", request.dOpenStore));
+                    tPramList.Add(new SqlParameter("@dStatus", request.dStatus));
+
+                    // if(request.dOpenStore.HasValue)
+                    tPramList.Add(new SqlParameter("@dOpenStore", request.dOpenStore));//typeof(System.DateTime)
+
                     tPramList.Add(new SqlParameter("@tProjectStatus", request.tProjectStatus));
                     tPramList.Add(new SqlParameter("@nCreatedBy", securityContext.nUserID));
                     tPramList.Add(new SqlParameter("@nBrandId", nBrandId));
@@ -301,19 +312,20 @@ namespace DeploymentTool.Model
                     tPramList.Add(new SqlParameter("@tCost", request.tCost));
                     tPramList.Add(new SqlParameter("@tInstallNotes", request.tInstallNotes));
                     tPramList.Add(new SqlParameter("@tInstallType", request.tInstallType));
-                    string output = db.Database.SqlQuery<Dropdown>("exec sproc_CreateStoreFromExcelForOrderStatusBoard @tStoreName,@tProjectType," +
+                    tPramList.Add(new SqlParameter("@nProjectsRolloutID", aProjectsRolloutID));
+                    db.Database.ExecuteSqlCommand("exec sproc_CreateStoreFromExcelForOrderStatusBoard @tStoreName,@tProjectType," +
                         "@tStoreNumber,@tAddress,@tCity,@tState,@nDMAID,@tDMA,@tRED,@tCM," +
                         "@tANE,@tRVP,@tPrincipalPartner,@dStatus,@dOpenStore,@tProjectStatus,@nCreatedBy,@nBrandId," +
                         "@tOrderStatusBoardVendor,@tOrderStatusBoardStatus,@nOSB,@dShipDate,@tShippingCarrier,@tTrackingNumber,@dDeliveryDate," +
                         "@tInstallationVendor,@tInstallStatus,@dInstallDate,@tInstallTime,@tInstallTechNumber,@tManagerName,@tManagerNumber," +
                         "@tManagerCheckout,@tPhotoDeliverables,@tLeadTech,@dInstallEnd,@tSignoffs,@tTestTransactions,@tInstallProjectStatus," +
-                        "@dRevisitDate,@tCost,@tInstallNotes,@tInstallType "
+                        "@dRevisitDate,@tCost,@tInstallNotes,@tInstallType,@nProjectsRolloutID  "
                         , tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
                         tPramList[6], tPramList[7], tPramList[8], tPramList[9], tPramList[10], tPramList[11], tPramList[12], tPramList[13],
                         tPramList[14], tPramList[15], tPramList[16], tPramList[17], tPramList[18], tPramList[19], tPramList[20], tPramList[21],
                         tPramList[22], tPramList[23], tPramList[24], tPramList[25], tPramList[26], tPramList[27], tPramList[28], tPramList[29],
                         tPramList[30], tPramList[31], tPramList[32], tPramList[33], tPramList[34], tPramList[35], tPramList[36], tPramList[37],
-                        tPramList[38], tPramList[39], tPramList[40], tPramList[41], tPramList[42]).ToString();
+                        tPramList[38], tPramList[39], tPramList[40], tPramList[41], tPramList[42], tPramList[43]).ToString();
                 }
 
                 return new HttpResponseMessage(HttpStatusCode.OK)
@@ -323,7 +335,7 @@ namespace DeploymentTool.Model
             }
             catch (Exception ex)
             {
-                TraceUtility.ForceWriteException("Sonic.CreateNewStores", HttpContext.Current, ex);
+                TraceUtility.ForceWriteException("OrderStatusBoard.CreateNewStores", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
 

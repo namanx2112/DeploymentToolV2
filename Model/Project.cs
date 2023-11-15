@@ -77,4 +77,12 @@ namespace DeploymentTool.Model
         public ProjectType type { get; set; }
     }
 
+    public class ProjectGlimpse
+    {
+        public int aProjectsRolloutID { get; set; }
+        public string tProjectsRolloutName { get; set; }
+
+        public Nullable<int> nProjectStatus { get; set; }
+    }
+
 }
