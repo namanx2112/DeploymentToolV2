@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
@@ -340,6 +341,35 @@ namespace DeploymentTool.Model
             }
 
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/Store/GetMyProjects")]
+        public HttpResponseMessage GetMyProjects(int nProjectsRolloutID)
+        {
+            var reportTable = new DataTable();
+            DbConnection connection = db.Database.Connection;
+            DbProviderFactory dbFactory = DbProviderFactories.GetFactory(connection);
+            using (var cmd = dbFactory.CreateCommand())
+            {
+                string strName = string.Empty;
+                cmd.Connection = connection;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "sproc_GetMyProjectsForRollout";
+                var reportIdParam = new SqlParameter("@nProjectsRolloutID", nProjectsRolloutID);
+                cmd.Parameters.Add(reportIdParam);
+                using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
+                {
+                    adapter.SelectCommand = cmd;
+                    adapter.Fill(reportTable);
+                }
+            }
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<DataTable>(reportTable, new JsonMediaTypeFormatter())
+            };
+        }
+
         // DELETE: api/ProjectAudios/5
         [Authorize]
         [HttpPost]

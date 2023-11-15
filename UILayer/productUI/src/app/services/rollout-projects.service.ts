@@ -40,6 +40,9 @@ export class RolloutProjectsService {
     return this.http.get<RolloutProjects>(CommonService.ConfigUrl + "ProjectRollout/Delete?id=" + request.aProjectsRolloutID, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  GetMyProjects(nProjectsRolloutID: number) {
+    return this.http.get<any>(CommonService.ConfigUrl + "ProjectRollout/GetMyProjects?nProjectsRolloutID=" + nProjectsRolloutID, { headers: this.cacheService.getHttpHeaders() });
+  }
 
   GetSearchFields(): Fields[] {
     let fields = [{

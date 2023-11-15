@@ -94,6 +94,7 @@ import { ProjectRolloutEditorComponent } from './components/Brand/project-rollou
 import { ProjectRolloutImportComponent } from './components/Brand/project-rollout-import/project-rollout-import.component';
 import { RolloutProjectTableComponent } from './components/Brand/rollout-project-table/rollout-project-table.component';
 import { ProjectGlimpseComponent } from './components/Brand/project-glimpse/project-glimpse.component';
+import { RolloutOwnProjectsComponent } from './components/Brand/rollout-own-projects/rollout-own-projects.component';
 
 @NgModule({
     declarations: [
@@ -163,6 +164,7 @@ import { ProjectGlimpseComponent } from './components/Brand/project-glimpse/proj
         ProjectRolloutImportComponent,
         RolloutProjectTableComponent,
         ProjectGlimpseComponent,
+        RolloutOwnProjectsComponent,
     ],
     providers: [
         {

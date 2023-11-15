@@ -69,6 +69,11 @@
                 </mat-form-field>
             </div>
         </form>
+        <div class="myProjects" *ngIf="controlValues != undefined && controlValues['aProjectsRolloutID'] !=undefined
+        && controlValues['aProjectsRolloutID'] != '0'">
+            <h4>Linked Projects and Stores</h4>
+            <app-rollout-own-projects [request]="{nBrandId: curBrand.aBrandId, nProjectsRolloutID: controlValues['aProjectsRolloutID']}"></app-rollout-own-projects>
+        </div>
     </div>
     <div class="actionButton">
         <button [disabled]="!cantMoveNext(1)" (click)="movePage(1)" mat-raised-button
