@@ -110,9 +110,13 @@ export class ProjectRolloutEditorComponent {
         can = true;
     }
     else if (page == 2) {
-      for (var indx in this.uploadingRows) {
-        if (this.uploadingRows[indx].items.length > 0)
-          can = true;
+      if (this.controlValues["aProjectsRolloutID"] > 0)
+        can = true;
+      else {
+        for (var indx in this.uploadingRows) {
+          if (this.uploadingRows[indx].items.length > 0)
+            can = true;
+        }
       }
     }
     return can;
