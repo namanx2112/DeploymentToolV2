@@ -20,7 +20,7 @@ export class ProjectGlimpseComponent {
   curBrandId: number;
   curGlimpse: ProjectGlimpse;
   isRollout: boolean = false;
-
+  loaded: boolean = false;
   constructor(private exStoreService: ExStoreService, private commonService: CommonService) {
 
   }
@@ -42,8 +42,11 @@ export class ProjectGlimpseComponent {
 
   getProjectGlimpse() {
     this.exStoreService.GetProjectGlimpse(this.curProject.nProjectId).subscribe(x => {
-      this.curGlimpse = x;
-      this.isRollout = (x.aProjectsRolloutID > 0);
+      if (x != null) {
+        this.curGlimpse = x;
+        this.isRollout = (x.aProjectsRolloutID > 0);
+        this.loaded = true;
+      }
     })
   }
 }

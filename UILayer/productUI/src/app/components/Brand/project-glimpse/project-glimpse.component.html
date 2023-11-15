@@ -3,14 +3,14 @@
     <span class="readOnlyControl">{{isRollout}}</span>
 </div>
 <div class="gRow">
-    <label class="fleidLabel" *ngIf="curGlimpse != undefined">Rollout Project Name</label>
-    <span class="readOnlyControl">{{curGlimpse.tProjectsRolloutName}}</span>
+    <label class="fleidLabel">Rollout Project Name</label>
+    <span class="readOnlyControl" *ngIf="loaded">{{curGlimpse.tProjectsRolloutName}}</span>
 </div>
 <div class="gRow">
     <label class="fleidLabel">Go-live Date</label>
     <span class="readOnlyControl">{{getFormatedDate(curProject.dGoLiveDate)}}</span>
 </div>
 <div class="gRow">
-    <label class="fleidLabel" *ngIf="curGlimpse != undefined">Project Status</label>
-    <span class="readOnlyControl">{{getProjectStatusString(curGlimpse.nProjectStatus)}}</span>
+    <label class="fleidLabel">Project Status</label>
+    <span class="readOnlyControl" *ngIf="loaded">{{getProjectStatusString(curGlimpse.nProjectStatus)}}</span>
 </div>
