@@ -183,7 +183,7 @@
           <ScalarProperty Name="tManagerNumber" ColumnName="tManagerNumber" />
           <ScalarProperty Name="tManagerName" ColumnName="tManagerName" />
           <ScalarProperty Name="tInstallTechNumber" ColumnName="tInstallTechNumber" />
-          <ScalarProperty Name="dInstallTime" ColumnName="dInstallTime" />
+          <ScalarProperty Name="tInstallTime" ColumnName="tInstallTime" />
           <ScalarProperty Name="nInstallType" ColumnName="nInstallType" />
           <ScalarProperty Name="nRevisitDateChanged" ColumnName="nRevisitDateChanged" />
           <ScalarProperty Name="nMyActiveStatus" ColumnName="nMyActiveStatus" />
@@ -941,7 +941,7 @@
           <ScalarProperty Name="nStoreId" ColumnName="nStoreId" />
           <ScalarProperty Name="tReturnShipmentTracking" ColumnName="tReturnShipmentTracking" />
           <ScalarProperty Name="nReturnShipment" ColumnName="nReturnShipment" />
-          <ScalarProperty Name="tHPShipmentTracking" ColumnName="tHPShipmentTracking" />
+          <ScalarProperty Name="tShipmentTracking" ColumnName="tShipmentTracking" />
           <ScalarProperty Name="nStatus" ColumnName="nStatus" />
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />
@@ -959,6 +959,8 @@
           <ScalarProperty Name="tNewSerialNumber" ColumnName="tNewSerialNumber" />
           <ScalarProperty Name="nSetupStatus" ColumnName="nSetupStatus" />
           <ScalarProperty Name="nShipmentToVendor" ColumnName="nShipmentToVendor" />
+          <ScalarProperty Name="tOldSwitchTracking" ColumnName="tOldSwitchTracking" />
+          <ScalarProperty Name="nOldSwitchReturnStatus" ColumnName="nOldSwitchReturnStatus" />
           <ScalarProperty Name="nStatus" ColumnName="nStatus" />
           <ScalarProperty Name="nVendor" ColumnName="nVendor" />
           <ScalarProperty Name="nProjectID" ColumnName="nProjectID" />

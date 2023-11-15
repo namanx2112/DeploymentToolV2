@@ -5,7 +5,12 @@ using System.Web;
 
 namespace DeploymentTool.Model
 {
-    public class ProjectExcelFields
+
+    public interface IProjectExcelFields
+    {
+
+    }
+    public class ProjectExcelFields: IProjectExcelFields
     {
         public int nBrandId { get; set; }
         public string tProjectType { get; set; }
@@ -40,7 +45,7 @@ namespace DeploymentTool.Model
 
     }
 
-    public class ProjectExcelFieldsOrderAccurcy
+    public class ProjectExcelFieldsOrderAccurcy: IProjectExcelFields
     {
         public int nBrandId { get; set; }
         public string tProjectType { get; set; }
@@ -101,7 +106,7 @@ namespace DeploymentTool.Model
 
     }
 
-    public class ProjectExcelFieldsOrderStatusBoard
+    public class ProjectExcelFieldsOrderStatusBoard: IProjectExcelFields
     {
         public int nBrandId { get; set; }
         public string tProjectType { get; set; }

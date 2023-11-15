@@ -110,15 +110,16 @@ export interface StoreServerHandheld {
     dDateFor_nStatus: Date
 }
 export interface StoreNetworkSwitch {
-    aNetworkSwitchID: number,
+    aProjectNetworkSwtichID: number,
     nStoreId: number,
     nProjectID: number,
     nVendor: number,
     nStatus: number,
-    nShipmenttoVendor: number,
+    nShipmentToVendor: number,
     nSetupStatus: number,
     tNewSerialNumber: string,
-    tOldSerialNumber: string
+    tOldSerialNumber: string,
+    nOldSwitchReturnStatus: number,
 }
 export interface StoreImageMemory {
     aImageMemoryId: number,
@@ -126,7 +127,7 @@ export interface StoreImageMemory {
     nProjectID: number,
     nVendor: number,
     nStatus: number,
-    tHPShipmentTracking: string,
+    tShipmentTracking: string,
     nReturnShipment: number,
     tReturnShipmentTracking: string
 }
@@ -229,7 +230,7 @@ export interface StoreInstallation {
     nVendor: number,
     tLeadTech: string,
     dInstallDate: Date,
-    dInstallTime: Date,
+    tInstallTime: Date,
     dInstallEnd: Date,
     nInstallType: number,
     nStatus: number,

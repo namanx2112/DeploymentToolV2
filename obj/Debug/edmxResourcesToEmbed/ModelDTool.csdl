@@ -283,7 +283,7 @@
     <Property Name="dDateFor_nProjectStatus" Type="DateTime" Precision="0" />
     <Property Name="dRevisitDate" Type="DateTime" Precision="0" />
     <Property Name="nRevisitDateChanged" Type="Int32" />
-    <Property Name="dInstallTime" Type="DateTime" Precision="3" />
+    <Property Name="tInstallTime" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="nInstallType" Type="Int32" />
     <Property Name="tInstallTechNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tManagerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -978,7 +978,7 @@
     <Property Name="nProjectID" Type="Int32" />
     <Property Name="nVendor" Type="Int32" />
     <Property Name="nStatus" Type="Int32" />
-    <Property Name="tHPShipmentTracking" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tShipmentTracking" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="nReturnShipment" Type="Int32" />
     <Property Name="tReturnShipmentTracking" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="nStoreId" Type="Int32" />
@@ -994,8 +994,10 @@
     <Property Name="nVendor" Type="Int32" />
     <Property Name="nStatus" Type="Int32" />
     <Property Name="nShipmentToVendor" Type="Int32" />
+    <Property Name="nOldSwitchReturnStatus" Type="Int32" />
     <Property Name="nSetupStatus" Type="Int32" />
     <Property Name="tNewSerialNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tOldSwitchTracking" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tOldSerialNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="nStoreId" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />

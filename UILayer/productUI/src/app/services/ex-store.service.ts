@@ -2997,11 +2997,11 @@ export class ExStoreService {
         hidden: false
       }, {
         field_name: "Install Time",
-        fieldUniqeName: "dInstallTime",
+        fieldUniqeName: "tInstallTime",
         defaultVal: "",
         readOnly: false,
         invalid: false,
-        field_type: FieldType.time,
+        field_type: FieldType.text,
         field_placeholder: "Enter Install Time",
         validator: [],
         mandatory: false,
@@ -3688,6 +3688,18 @@ export class ExStoreService {
         options: this.commonService.GetDropdown("Vendor"),
         mandatory: false,
         hidden: false
+      }, {
+        field_name: "OldSwitchReturnStatus",
+        fieldUniqeName: "nOldSwitchReturnStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        options: this.commonService.GetDropdown("Vendor"),
+        mandatory: false,
+        hidden: false
       },
       {
         field_name: "Status",
@@ -3745,6 +3757,17 @@ export class ExStoreService {
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter Old Serial Number",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }, {
+        field_name: "Old Switch Tracking",
+        fieldUniqeName: "tOldSwitchTracking",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Old Switch Tracking",
         validator: [],
         mandatory: false,
         hidden: false
@@ -3836,13 +3859,13 @@ export class ExStoreService {
         hidden: false
       },
       {
-        field_name: "HP Shipment Tracking",
-        fieldUniqeName: "tHPShipmentTracking",
+        field_name: "Shipment Tracking",
+        fieldUniqeName: "tShipmentTracking",
         defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.text,
-        field_placeholder: "Enter HP Shipment Tracking",
+        field_placeholder: "Enter Shipment Tracking",
         validator: [],
         mandatory: false,
         hidden: false

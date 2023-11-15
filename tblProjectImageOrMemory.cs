@@ -18,7 +18,7 @@ namespace DeploymentTool
         public Nullable<int> nProjectID { get; set; }
         public Nullable<int> nVendor { get; set; }
         public Nullable<int> nStatus { get; set; }
-        public string tHPShipmentTracking { get; set; }
+        public string tShipmentTracking { get; set; }
         public Nullable<int> nReturnShipment { get; set; }
         public string tReturnShipmentTracking { get; set; }
         public Nullable<int> nStoreId { get; set; }

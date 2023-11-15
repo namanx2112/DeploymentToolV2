@@ -302,7 +302,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nProjectID" Type="int" />
     <Property Name="nVendor" Type="int" />
     <Property Name="nStatus" Type="int" />
-    <Property Name="tHPShipmentTracking" Type="nvarchar" MaxLength="255" />
+    <Property Name="tShipmentTracking" Type="nvarchar" MaxLength="255" />
     <Property Name="nReturnShipment" Type="int" />
     <Property Name="tReturnShipmentTracking" Type="nvarchar" MaxLength="255" />
     <Property Name="nStoreId" Type="int" />
@@ -336,7 +336,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nManagerCheckout" Type="int" />
     <Property Name="nPhotoDeliverables" Type="int" />
     <Property Name="tInstallNotes" Type="nvarchar(max)" />
-    <Property Name="dInstallTime" Type="datetime" />
+    <Property Name="tInstallTime" Type="nvarchar" MaxLength="255" />
     <Property Name="nInstallType" Type="int" />
   </EntityType>
   <EntityType Name="tblProjectInteriorMenus">
@@ -385,8 +385,10 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nVendor" Type="int" />
     <Property Name="nStatus" Type="int" />
     <Property Name="nShipmentToVendor" Type="int" />
+    <Property Name="nOldSwitchReturnStatus" Type="int" />
     <Property Name="nSetupStatus" Type="int" />
     <Property Name="tNewSerialNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="tOldSwitchTracking" Type="nvarchar" MaxLength="255" />
     <Property Name="tOldSerialNumber" Type="nvarchar" MaxLength="255" />
     <Property Name="nStoreId" Type="int" />
     <Property Name="nMyActiveStatus" Type="int" />
