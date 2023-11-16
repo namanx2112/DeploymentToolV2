@@ -428,7 +428,7 @@ namespace DeploymentTool.Misc
                         //
                         //
                         tPramList.Add(new SqlParameter("@tServerHandheldVendor", request.tServerHandheldVendor));
-                        tPramList.Add(new SqlParameter("@tServerHandheldStatus", request.tServerHandheldStatus));
+                        tPramList.Add(new SqlParameter("@tServerHandheldStatus", request.tServerHandheldStatus ?? (object)DBNull.Value));
                         tPramList.Add(new SqlParameter("@dShipDate", request.dShipDate ?? (object)DBNull.Value));
                         tPramList.Add(new SqlParameter("@tShippingCarrier", request.tShippingCarrier));
                         tPramList.Add(new SqlParameter("@tTrackingNumber", request.tTrackingNumber));
@@ -438,7 +438,7 @@ namespace DeploymentTool.Misc
                         tPramList.Add(new SqlParameter("@nShoulderStrap", request.nShoulderStrap));
                         tPramList.Add(new SqlParameter("@nProtectiveCase", request.nProtectiveCase));
                         tPramList.Add(new SqlParameter("@dDeliveryDate", request.dDeliveryDate ?? (object)DBNull.Value));
-                        tPramList.Add(new SqlParameter("@tServerHandheldCost", request.tServerHandheldCost));
+                        tPramList.Add(new SqlParameter("@tServerHandheldCost", request.tServerHandheldCost ?? (object)DBNull.Value));
                         //
                         tPramList.Add(new SqlParameter("@tInstallationVendor", request.tInstallationVendor));
                         tPramList.Add(new SqlParameter("@tInstallStatus", request.tInstallStatus));
@@ -455,7 +455,7 @@ namespace DeploymentTool.Misc
                         tPramList.Add(new SqlParameter("@tTestTransactions", request.tTestTransactions));
                         tPramList.Add(new SqlParameter("@tInstallProjectStatus", request.tInstallProjectStatus));
                         tPramList.Add(new SqlParameter("@dRevisitDate", request.dRevisitDate ?? (object)DBNull.Value));
-                        tPramList.Add(new SqlParameter("@tCost", request.tCost));
+                        tPramList.Add(new SqlParameter("@tCost", request.tCost ?? (object)DBNull.Value));
                         tPramList.Add(new SqlParameter("@tInstallNotes", request.tInstallNotes));
                         tPramList.Add(new SqlParameter("@tInstallType", request.tInstallType));
                         tPramList.Add(new SqlParameter("@nProjectsRolloutID", aProjectsRolloutID));
