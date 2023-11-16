@@ -571,6 +571,8 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
 					<Property Name="dtCreatedOn" Type="datetime" />
 					<Property Name="dtUpdatedOn" Type="datetime" />
 					<Property Name="bDeleted" Type="bit" />
+					<Property Name="cHardwareCost" Type="decimal" Precision="18" Scale="2" />
+					<Property Name="cDeploymentCost" Type="decimal" Precision="18" Scale="2" />
 					<Property Name="dDateFor_nStatus" Type="date" />
 				</EntityType>
 				<EntityType Name="tblProjectsRolloutStoreRel">
@@ -2266,6 +2268,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 					<Property Name="aProjectsRolloutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
 					<Property Name="tProjectsRolloutName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
 					<Property Name="tProjectsRolloutDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+					<Property Name="cHardwareCost" Type="Decimal" Precision="18" Scale="0" />
+					<Property Name="cDeploymentCost" Type="Decimal" Precision="18" Scale="0" />
 					<Property Name="nBrandID" Type="Int32" />
 					<Property Name="nNumberOfStore" Type="Int32" />
 					<Property Name="nMyActiveStatus" Type="Int32" />
@@ -3331,6 +3335,8 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
 								<ScalarProperty Name="nNumberOfStore" ColumnName="nNumberOfStore" />
 								<ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
 								<ScalarProperty Name="tProjectsRolloutDescription" ColumnName="tProjectsRolloutDescription" />
+								<ScalarProperty Name="cHardwareCost" ColumnName="cHardwareCost" />
+								<ScalarProperty Name="cDeploymentCost" ColumnName="cDeploymentCost" />
 								<ScalarProperty Name="tProjectsRolloutName" ColumnName="tProjectsRolloutName" />
 								<ScalarProperty Name="aProjectsRolloutID" ColumnName="aProjectsRolloutID" />
 							</MappingFragment>

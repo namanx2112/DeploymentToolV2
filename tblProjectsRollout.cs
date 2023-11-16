@@ -30,5 +30,7 @@ namespace DeploymentTool
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
         public Nullable<System.DateTime> dDateFor_nStatus { get; set; }
+        public Nullable<decimal> cHardwareCost { get; set; }
+        public Nullable<decimal> cDeploymentCost { get; set; }
     }
 }

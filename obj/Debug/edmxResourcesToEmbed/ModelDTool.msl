@@ -1024,6 +1024,8 @@
           <ScalarProperty Name="nNumberOfStore" ColumnName="nNumberOfStore" />
           <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
           <ScalarProperty Name="tProjectsRolloutDescription" ColumnName="tProjectsRolloutDescription" />
+          <ScalarProperty Name="cHardwareCost" ColumnName="cHardwareCost" />
+          <ScalarProperty Name="cDeploymentCost" ColumnName="cDeploymentCost" />
           <ScalarProperty Name="tProjectsRolloutName" ColumnName="tProjectsRolloutName" />
           <ScalarProperty Name="aProjectsRolloutID" ColumnName="aProjectsRolloutID" />
         </MappingFragment>

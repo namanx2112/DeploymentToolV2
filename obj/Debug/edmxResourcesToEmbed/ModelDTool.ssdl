@@ -566,6 +566,8 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+    <Property Name="cHardwareCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="cDeploymentCost" Type="decimal" Precision="18" Scale="2" />
     <Property Name="dDateFor_nStatus" Type="date" />
   </EntityType>
   <EntityType Name="tblProjectsRolloutStoreRel">

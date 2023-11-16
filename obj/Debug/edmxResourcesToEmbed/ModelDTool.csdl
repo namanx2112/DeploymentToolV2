@@ -1047,6 +1047,8 @@
     <Property Name="aProjectsRolloutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tProjectsRolloutName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="tProjectsRolloutDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="cHardwareCost" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="cDeploymentCost" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="nBrandID" Type="Int32" />
     <Property Name="nNumberOfStore" Type="Int32" />
     <Property Name="nMyActiveStatus" Type="Int32" />

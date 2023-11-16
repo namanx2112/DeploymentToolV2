@@ -42,6 +42,8 @@ namespace DeploymentTool.Model
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
         public Nullable<System.DateTime> dDateFor_nStatus { get; set; }
+        public Nullable<decimal> cHardwareCost { get; set; }
+        public Nullable<decimal> cDeploymentCost { get; set; }
 
         public List<RolloutItem> uploadingRows { get; set; }
 
@@ -52,6 +54,8 @@ namespace DeploymentTool.Model
                 aProjectsRolloutID = this.aProjectsRolloutID,
                 tProjectsRolloutName = this.tProjectsRolloutName,
                 tProjectsRolloutDescription = this.tProjectsRolloutDescription,
+                cHardwareCost = this.cHardwareCost,
+                cDeploymentCost = this.cDeploymentCost,
                 nBrandID = this.nBrandID,
                 nNumberOfStore = this.nNumberOfStore,
                 nMyActiveStatus = this.nMyActiveStatus,
