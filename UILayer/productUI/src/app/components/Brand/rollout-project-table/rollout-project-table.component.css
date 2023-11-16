@@ -2,22 +2,12 @@ th,
 td {
     border-bottom: 1px solid #ddd;
     white-space: nowrap;
-    padding: 5px 0px;
+    padding: 5px 2px;
 }
 
-table {
-    width: 100%;
-    table-layout: fixed;
-}
-
-th,
-td {
-    width: 200px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.tTable{
+.tTable {
     display: table;
+    width: auto;
 }
 
 .table-container {
@@ -25,11 +15,10 @@ td {
     overflow: auto;
 }
 
-table {
-    width: auto;
+.checkCell{
+    width: 50px;
 }
 
-.headerClass {
-    width: auto;
-    width: 100px;
+.allCell{
+    width: 150px;
 }

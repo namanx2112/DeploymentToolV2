@@ -16,7 +16,7 @@
   <div class="newEditPart">
     <app-new-edit-object *ngIf="showNewEdit()" [controlValues]="curControlVals" [curTab]="curTab"
       (returnBack)="returnBack($event)"></app-new-edit-object>
-    <app-project-rollout-editor *ngIf="showRolloutNewEdit()"
+    <app-project-rollout-editor *ngIf="showRolloutNewEdit()" (openStore)="openEvent($event)"
       [request]="{curBrand:curBrand, rowValue: curControlVals}" (returnBack)="returnBack($event)"></app-project-rollout-editor>
   </div>
 </div>

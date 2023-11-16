@@ -50,7 +50,8 @@ export class ProjectRolloutEditorComponent {
     this.controlValues = (typeof val.rowValue == 'undefined') ? this.getNewRollout() : val.rowValue;
     this.initMe();
   }
-  @Output() returnBack = new EventEmitter<string>();
+  @Output() returnBack = new EventEmitter<any>();
+  @Output() openStore = new EventEmitter<any>();
   curBrand: BrandModel;
   tTab: HomeTab;
   formGroup = new FormGroup({});
@@ -92,21 +93,25 @@ export class ProjectRolloutEditorComponent {
 
   initSupportedProject() {
     if (this.curBrand.nBrandType == Brands.Buffalo) {
-      this.uploadingRows.push({ name: "Serve Handheld", type: ProjectTypes.ServerHandheldInstallation, items: [] });
+      this.uploadingRows.push({ name: "Server Handheld", type: ProjectTypes.ServerHandheldInstallation, items: [], fileName: "" });
     }
     else if (this.curBrand.nBrandType == Brands.Dunkin) {
-      this.uploadingRows.push({ name: "Order Accuracy", type: ProjectTypes.OrderAccuracyInstallation, items: [] });
-      this.uploadingRows.push({ name: "Order Status Board", type: ProjectTypes.OrderStatusBoardInstallation, items: [] });
+      this.uploadingRows.push({ name: "Order Accuracy", type: ProjectTypes.OrderAccuracyInstallation, items: [], fileName: "" });
+      this.uploadingRows.push({ name: "Order Status Board", type: ProjectTypes.OrderStatusBoardInstallation, items: [], fileName: "" });
     }
     else if (this.curBrand.nBrandType == Brands.Arby) {
-      this.uploadingRows.push({ name: "Arby's HP Rollout", type: ProjectTypes.ArbysHPRolloutInstallation, items: [] });
+      this.uploadingRows.push({ name: "Arby's HP Rollout", type: ProjectTypes.ArbysHPRolloutInstallation, items: [], fileName: "" });
     }
+  }
+
+  showStore(ev: any){
+    this.openStore.emit(ev);
   }
 
   cantMoveNext(page: number) {
     let can = false;
     if (page == 1) {
-      if (this.controlValues.tProjectsRolloutName != "")
+      if (typeof this.controlValues.tProjectsRolloutName != 'undefined' && this.controlValues.tProjectsRolloutName != null && this.controlValues.tProjectsRolloutName != "")
         can = true;
     }
     else if (page == 2) {
@@ -167,6 +172,11 @@ export class ProjectRolloutEditorComponent {
     this.showPage += tIndex;
   }
 
+  deleteUploadItem(projType: ProjectTypes, index: number) {
+    this.uploadingRows[index].items = [];
+    this.uploadingRows[index].fileName = "";
+  }
+
   uploadItem(projType: ProjectTypes, index: number) {
     let cThis = this;
     const dialogConfig = new MatDialogConfig();
@@ -178,8 +188,9 @@ export class ProjectRolloutEditorComponent {
       title: "Import " + CommonService.getProjectName(projType) + " Projects",
       projectType: projType,
       curBrand: this.curBrand,
-      onSubmit: function (pType: any, data: any) {
+      onSubmit: function (pType: any, data: any, fileName: string) {
         cThis.uploadingRows[index].items = data;
+        cThis.uploadingRows[index].fileName = fileName;
         dialogRef.close();
       },
       onClose: function (ev: any) {
@@ -191,9 +202,13 @@ export class ProjectRolloutEditorComponent {
 
   canSubmit() {
     let can = false;
-    for (var indx in this.uploadingRows) {
-      if (this.uploadingRows[indx].items.length > 0)
-        can = true;
+    if (this.controlValues["aProjectsRolloutID"] > 0)
+      can = true;
+    else {
+      for (var indx in this.uploadingRows) {
+        if (this.uploadingRows[indx].items.length > 0)
+          can = true;
+      }
     }
     return can;
   }
@@ -208,8 +223,8 @@ export class ProjectRolloutEditorComponent {
     this.controlValues["uploadingRows"] = this.uploadingRows;
     this.controlValues["nBrandID"] = this.curBrand.aBrandId;
     this.rolloutService.Create(this.controlValues).subscribe(x => {
-      alert("Saved");
-      this.returnBack.emit("done");
+      alert(x);
+      this.returnBack.emit({ closed: true });
     });
   }
 }

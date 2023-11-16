@@ -107,13 +107,10 @@ controlValues: tValues[allTabs[0].tab_name], SubmitLabel: 'None',
                 Delivery Status</div>
             <div *ngFor="let tTab of tabForUI;let index = index"
                 [ngClass]="(selectedTab == index) ? 'selectedTab lightGray' : 'lightGray'" (click)="tabClick(index);">
-                <span *ngIf="index != 7">
+                <span>
                     {{tTab.tab_header}}
                 </span>
-                <span class="headerLeft" *ngIf="index == 7">
-                    {{tTab.tab_header}}
-                </span>
-                <span *ngIf="tTab.tab_name == 'Installation'" class="projTypeOnTabHeader">{{ "(" +
+                <span *ngIf="tTab.tab_name == 'Installation'" class="projTypeOnTabHeader leftProjTypeOnHeader">{{ "(" +
                     projectTypeString(selectedProject.nProjectType) + ")"}} </span>
             </div>
             <div *ngIf="access.hasAccess('home.sonic.project.documentstab', 1)"

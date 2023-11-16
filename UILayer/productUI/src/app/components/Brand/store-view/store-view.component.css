@@ -114,6 +114,9 @@
     line-height: 30px;
 }
 
+.leftProjTypeOnHeader{
+    margin-top: -12px;
+}
 .projTypeOnTabHeader{
     font-size: 10px;
     display: block;

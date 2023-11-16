@@ -89,7 +89,6 @@ import { AdvancedSearchResultComponent } from './components/Brand/advanced-searc
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SavedReportsComponent } from './components/Brand/saved-reports/saved-reports.component';
 import { AuditViewComponent } from './components/Brand/audit-view/audit-view.component';
-import { RolloutProjectsHomeComponent } from './components/Brand/rollout-projects-home/rollout-projects-home.component';
 import { ProjectRolloutEditorComponent } from './components/Brand/project-rollout-editor/project-rollout-editor.component';
 import { ProjectRolloutImportComponent } from './components/Brand/project-rollout-import/project-rollout-import.component';
 import { RolloutProjectTableComponent } from './components/Brand/rollout-project-table/rollout-project-table.component';
@@ -159,7 +158,6 @@ import { RolloutOwnProjectsComponent } from './components/Brand/rollout-own-proj
         AdvancedSearchResultComponent,
         SavedReportsComponent,
         AuditViewComponent,
-        RolloutProjectsHomeComponent,
         ProjectRolloutEditorComponent,
         ProjectRolloutImportComponent,
         RolloutProjectTableComponent,

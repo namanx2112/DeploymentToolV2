@@ -18,6 +18,8 @@ export class ProjectRolloutImportComponent {
   projectType: string;
   onSubmit: any;
   title: string;
+  fileName: string;
+  errorUpload: string = "";
   constructor(private service: ExStoreService, @Inject(MAT_DIALOG_DATA) public data: any) {
     if (typeof data != 'undefined') {
       this.projectType = data.projectType;
@@ -40,11 +42,16 @@ export class ProjectRolloutImportComponent {
   uploadFileToActivity() {
     if (this.fileToUpload != null) {
       if (this.fileToUpload.name.toLowerCase().endsWith("xlsx")) {
+        this.fileName = this.fileToUpload.name;
+        this.errorUpload = "";
         this.service.UploadStore(this.fileToUpload, this._curBrand.aBrandId, this.projectType).subscribe((data: ProjectExcel[]) => {
-          this.addRecords(data);
+          if (data.length == 0)
+            this.errorUpload = "Cannot process this file, please check the file format";
+          else
+            this.addRecords(data);
           // do something, if upload success
         }, error => {
-          console.log(error);
+          this.errorUpload = "Some error occured while uploading";
         });
       }
       else
@@ -66,7 +73,7 @@ export class ProjectRolloutImportComponent {
 
   CreateNewStores() {
     if (this.selectedItems.length > 0) {
-      this.onSubmit(this.projectType, this.selectedItems);
+      this.onSubmit(this.projectType, this.selectedItems, this.fileName);
     }
   }
 }

@@ -502,7 +502,7 @@ export class CommonService {
   }
 
   static GetDropDownValueFromControl(curControl: Fields, optVal: string, _controlValues: any, nBrandId: number) {
-    let outputVal = optVal;
+    let outputVal = "";
     if (curControl.options) {
       if (curControl.options == "ProjectType") {
         outputVal = this.getProjectTypeOptions().filter(x => x.aDropdownId == optVal)[0].tDropdownText;

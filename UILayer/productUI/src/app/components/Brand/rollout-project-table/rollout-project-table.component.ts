@@ -1,5 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, Input, ViewChild } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatRow, MatTableDataSource } from '@angular/material/table';
 import { Dictionary } from 'src/app/interfaces/commons';
@@ -26,16 +27,18 @@ export class RolloutProjectTableComponent {
     this.items = val.items;
     this.dataSource = new MatTableDataSource(this.items);
     this.dataSource.sort = this.sort;
-    this.projectType = val.projectType;
-    this.nBrandId = val.nBrandId;
+    if (typeof val.needCheckBox != 'undefined')
+      this.needCheckBox = val.needCheckBox;
     this.getFieldHeaders();
   }
+  @Output()
+  SelectionChange = new EventEmitter<any[]>();
+  selection = new SelectionModel<any>(true, []);
   dataSource: MatTableDataSource<any>;
-  nBrandId: number;
-  projectType: ProjectTypes;
   items: any;
   columns: TableColumnDef[] = [];
   displayedColumns: string[] = [];
+  needCheckBox: boolean = false;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private _liveAnnouncer: LiveAnnouncer, private storeService: ExStoreService, private commonService: CommonService) {
 
@@ -68,6 +71,36 @@ export class RolloutProjectTableComponent {
     this.dataSource.sort = this.sort;
   }
 
+  checkboxChange(event: any, row: any) {
+    if (event)
+      this.selection.toggle(row);
+    this.SelectionChange.emit(this.selection.selected);
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      this.SelectionChange.emit(this.selection.selected);
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+    this.SelectionChange.emit(this.selection.selected);
+  }
+
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
+  }
+
   getCellVal(tField: string, colVal: string) {
     let rVal = colVal;
     if (tField.indexOf("c") == 0) {
@@ -86,6 +119,8 @@ export class RolloutProjectTableComponent {
   }
 
   getFieldHeaders() {
+    if (this.needCheckBox)
+      this.displayedColumns.push("select");
     for (var cName in this.items[0]) {
       if (cName.toLowerCase() == "nbrandid")
         continue;

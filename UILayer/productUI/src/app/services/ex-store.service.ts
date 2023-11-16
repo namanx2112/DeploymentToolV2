@@ -2989,13 +2989,13 @@ export class ExStoreService {
         mandatory: false,
         hidden: false
       }, {
-        field_name: "Install Date",
+        field_name: "Schedule Install Date",
         fieldUniqeName: "dInstallDate",
         defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.date,
-        field_placeholder: "Enter Install Date",
+        field_placeholder: "Enter Schedule Install Date",
         validator: [],
         mandatory: false,
         hidden: false
@@ -3007,6 +3007,29 @@ export class ExStoreService {
         invalid: false,
         field_type: FieldType.text,
         field_placeholder: "Enter Install Time",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      }, {
+        field_name: "Install End",
+        fieldUniqeName: "dInstallEnd",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.date,
+        field_placeholder: "Enter Install End",
+        validator: [],
+        mandatory: false,
+        hidden: false
+      },
+      {
+        field_name: "Lead Tech",
+        fieldUniqeName: "tLeadTech",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.text,
+        field_placeholder: "Enter Lead Tech",
         validator: [],
         mandatory: false,
         hidden: false
@@ -3066,29 +3089,6 @@ export class ExStoreService {
         field_type: FieldType.dropdown,
         field_placeholder: "Enter Photo Deliverables",
         options: this.commonService.GetDropdown("InstallationPhotoDeliverables"),
-        validator: [],
-        mandatory: false,
-        hidden: false
-      },
-      {
-        field_name: "Lead Tech",
-        fieldUniqeName: "tLeadTech",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.text,
-        field_placeholder: "Enter Lead Tech",
-        validator: [],
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "Install End",
-        fieldUniqeName: "dInstallEnd",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.date,
-        field_placeholder: "Enter Install End",
         validator: [],
         mandatory: false,
         hidden: false
@@ -3549,7 +3549,7 @@ export class ExStoreService {
       },
       {
         field_name: "5 Bay Charger",
-        fieldUniqeName: "n5BayCharger",
+        fieldUniqeName: "nFiveBayCharger",
         defaultVal: "",
         readOnly: false,
         invalid: false,
@@ -3584,13 +3584,13 @@ export class ExStoreService {
         hidden: false
       },
       {
-        field_name: "Delivery Date",
+        field_name: "Need by Date",
         fieldUniqeName: "dDeliveryDate",
         defaultVal: "",
         readOnly: false,
         invalid: false,
         field_type: FieldType.date,
-        field_placeholder: "Enter Delivery Date",
+        field_placeholder: "Enter Need by Date",
         validator: [],
         mandatory: false,
         hidden: false

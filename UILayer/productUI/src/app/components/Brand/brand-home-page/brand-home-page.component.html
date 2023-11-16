@@ -49,7 +49,7 @@
             <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)"
                 (click)="menuClick('importproject')"
                 [className]="configMenu=='importproject'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>attach_file</mat-icon>Import
-                Project</button>
+                Construction Project</button>
             <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)"
                 (click)="menuClick('projectrollout')"
                 [className]="configMenu=='projectrollout'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>insert_drive_file</mat-icon>Rollout
@@ -73,8 +73,8 @@
         <span [ngClass]="drawer.opened ? 'toggleIcon opened' : 'toggleIcon'" (click)="drawer.toggle()">
             <mat-icon>play_arrow</mat-icon>
         </span>
-        <app-tab-body *ngIf="showMode == 'projectrollout'"
-            [request]="{curTab:rolloutTab, NeedNew: false, curBrand: _curBrand}"></app-tab-body>
+        <app-tab-body *ngIf="showMode == 'projectrollout'" [request]="{curTab:rolloutTab, NeedNew: false, curBrand: _curBrand, 
+            searchFields: '{nBrandID:' + _curBrand.aBrandId + '}'}" (openStore)="showStore($event)"></app-tab-body>
         <app-brand-dashboard *ngIf="showMode == 'dashboard'"
             [request]="{curBrand: _curBrand, defaultConditionForSearch: defaultConditionForSearch, showTile: (defaultConditionForSearch != '')}"
             (ChangeView)="ChangeViewBrand($event)" (SearchedResult)="SearchedResult($event)"></app-brand-dashboard>

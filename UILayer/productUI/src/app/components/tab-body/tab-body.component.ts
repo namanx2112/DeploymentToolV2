@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatRow } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,7 +22,10 @@ export class TabBodyComponent {
     if (this._needNew == true)
       this.secondPart = "newEdit";
     this.curBrand = val.curBrand;
+    if (typeof val.searchFields != 'undefined')
+      this.searchFields = val.searchFields;
   }
+  @Output() openStore = new EventEmitter<any>();
   _curTab: HomeTab;
   get curTab(): HomeTab {
     return this._curTab;
@@ -54,8 +57,12 @@ export class TabBodyComponent {
     this.isNew = true;
   }
 
-  isRollout(){
+  isRollout() {
     return this.curTab.tab_type == TabType.RolloutProjects;
+  }
+
+  openEvent(ev: any){
+    this.openStore.emit(ev);
   }
 
   showNewEdit() {
