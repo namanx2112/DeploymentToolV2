@@ -170,12 +170,6 @@ export class ProjectPortfolioComponent {
           columnDef: "sonicradio",
           header: "Radio"
         }, {
-          columnDef: "networkswitch",
-          header: "Network Switch"
-        }, {
-          columnDef: "imagememory",
-          header: "Image Memory"
-        }, {
           columnDef: "installation",
           header: "Installation"
         }, {
