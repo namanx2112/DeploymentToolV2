@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { Fields, HomeTab, TabType } from 'src/app/interfaces/home-tab';
-import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreInstallation, StoreInteriorMenus, StoreNetworkings, StorePOS, StorePaymentSystem, StoreSearchModel, StoreServerHandheld, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
+import { StoreAudio, StoreConfiguration, StoreContact, StoreExteriorMenus, StoreImageMemory, StoreInstallation, StoreInteriorMenus, StoreNetworkSwitch, StoreNetworkings, StoreOrderAccuracy, StoreOrderStatusBoard, StorePOS, StorePaymentSystem, StoreSearchModel, StoreServerHandheld, StoreSonicRadio, StoreStackholders } from 'src/app/interfaces/store';
 import { AllTechnologyComponentsService } from 'src/app/services/all-technology-components.service';
 import { ExStoreService } from 'src/app/services/ex-store.service';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
@@ -102,6 +102,26 @@ export class StoreTechComponentsComponent {
         break;
       case TabType.StoreProjectServerHandheld:
         this.techCompService.GetServerHandheld(searchField).subscribe((x: StoreServerHandheld[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreImageMemory:
+        this.techCompService.GetImageMemory(searchField).subscribe((x: StoreImageMemory[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreNetworkSwitch:
+        this.techCompService.GetNetworkSwitch(searchField).subscribe((x: StoreNetworkSwitch[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreOrderAccuracy:
+        this.techCompService.GetOrderAccuracy(searchField).subscribe((x: StoreOrderAccuracy[]) => {
+          this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
+        });
+        break;
+      case TabType.StoreOrderStatusBoard:
+        this.techCompService.GetOrderStatusBoard(searchField).subscribe((x: StoreOrderStatusBoard[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
         break;

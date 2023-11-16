@@ -248,6 +248,19 @@ export class ExStoreService {
         tabs.push(this.GetStoreServerHandheldTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
         break;
+      case 12://Order Accuracy
+        tabs.push(this.GetStoreOrderAccuracyTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
+        break;
+      case 13://Order status board
+        tabs.push(this.GetStoreOrderStatusBoardTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
+        break;
+      case 14://Arbys HP Rollout
+        tabs.push(this.GetStoreImageMemoryTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreNetworkSwitchTab(TabInstanceType.Single));
+        tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
+        break;
       default:
         tabs.push(this.GetStoreAudioTab(TabInstanceType.Single));
         tabs.push(this.GetStoreNetworingTab(TabInstanceType.Single));
@@ -257,8 +270,15 @@ export class ExStoreService {
         tabs.push(this.GetStoreInteriorMenusTab(TabInstanceType.Single));
         if (tBrand.nBrandType == Brands.Buffalo)
           tabs.push(this.GetStoreServerHandheldTab(TabInstanceType.Single));
-        else if (tBrand.nBrandType == Brands.Arby)
+        else if (tBrand.nBrandType == Brands.Arby) {
+          tabs.push(this.GetStoreImageMemoryTab(TabInstanceType.Single));
+          tabs.push(this.GetStoreNetworkSwitchTab(TabInstanceType.Single));
           tabs.push(this.GetStoreRadioTab(TabInstanceType.Single));
+        }
+        else if (tBrand.nBrandType == Brands.Dunkin) {
+          tabs.push(this.GetStoreOrderAccuracyTab(TabInstanceType.Single));
+          tabs.push(this.GetStoreOrderStatusBoardTab(TabInstanceType.Single));
+        }
         else
           tabs.push(this.GetStoreSonicRadioTab(TabInstanceType.Single));
         tabs.push(this.GetStoreInsallationTab(TabInstanceType.Single));
