@@ -151,7 +151,7 @@ namespace DeploymentTool.Controller
                         }
                         else if (techparts.tComponent == "Order Accuracy")
                         {
-                            obj.serverhandheld = new ProjectPortfolioItems()
+                            obj.orderaccuracy = new ProjectPortfolioItems()
                             {
                                 dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
                                 tStatus = techparts.tStatus,
@@ -160,7 +160,7 @@ namespace DeploymentTool.Controller
                         }
                         else if (techparts.tComponent == "Order Status Board")
                         {
-                            obj.serverhandheld = new ProjectPortfolioItems()
+                            obj.orderstatusoard = new ProjectPortfolioItems()
                             {
                                 dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
                                 tStatus = techparts.tStatus,
@@ -169,7 +169,16 @@ namespace DeploymentTool.Controller
                         }
                         else if (techparts.tComponent == "Network Switch")
                         {
-                            obj.serverhandheld = new ProjectPortfolioItems()
+                            obj.networkswitch = new ProjectPortfolioItems()
+                            {
+                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
+                                tStatus = techparts.tStatus,
+                                tVendor = techparts.tVendor
+                            };
+                        }
+                        else if (techparts.tComponent == "Image Memory")
+                        {
+                            obj.imagememory = new ProjectPortfolioItems()
                             {
                                 dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
                                 tStatus = techparts.tStatus,

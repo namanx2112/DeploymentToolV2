@@ -20,6 +20,12 @@ namespace DeploymentTool.Model
         public ProjectPortfolioItems interiormenu { get; set; }
         public ProjectPortfolioItems sonicradio { get; set; }
         public ProjectPortfolioItems serverhandheld { get; set; }
+
+        public ProjectPortfolioItems orderaccuracy { get; set; }
+        public ProjectPortfolioItems orderstatusoard { get; set; }
+        public ProjectPortfolioItems networkswitch { get; set; }
+
+        public ProjectPortfolioItems imagememory { get; set; }
         public ProjectPortfolioItems installation { get; set; }
         public List<ProjectPorfolioNotes> notes { get; set; }
     }
