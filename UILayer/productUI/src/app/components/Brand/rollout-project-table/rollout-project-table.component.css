@@ -22,3 +22,7 @@ td {
 .allCell{
     width: 150px;
 }
+
+.tSpinner{
+    position: absolute;z-index: 222;margin-top: 15%;margin-left: 45%;
+}

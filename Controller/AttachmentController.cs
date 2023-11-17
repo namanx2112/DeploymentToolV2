@@ -824,8 +824,7 @@ namespace DeploymentTool.Controller
                                             objProjectExcel.tInstallationVendor = reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor"))) : "";
                                             objProjectExcel.tInstallStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
 
-                                            if (reader.GetValue(dtNew.Columns.IndexOf("Install Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Date")).ToString() != "")
-                                                objProjectExcel.dInstallDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Install Date")));
+                                            objProjectExcel.dInstallDate = reader.ConvertMeToDateTime(dtNew, "Install Date");
 
                                             objProjectExcel.tInstallTime = reader.GetValue(dtNew.Columns.IndexOf("Install Time")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Time")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Time"))) : "";
                                             objProjectExcel.tInstallTechNumber = reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number"))) : "";

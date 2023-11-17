@@ -122,7 +122,7 @@ namespace DeploymentTool.Misc
             }
         }
 
-        public static void AddToAudit( int? nStoreId, int? nProjectID,int nDataType,string tTable,string tField,string tChangeValue,string tChangeNote, int? lUserId,int nCreateOrUpdate)
+        public static void AddToAudit(int? nStoreId, int? nProjectID, int nDataType, string tTable, string tField, string tChangeValue, string tChangeNote, int? lUserId, int nCreateOrUpdate)
         {
             try
             {
@@ -482,7 +482,7 @@ namespace DeploymentTool.Misc
                     }
 
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -598,7 +598,7 @@ namespace DeploymentTool.Misc
             }
             return strReturn;
         }
-            public static void SendMail(EMailRequest request)
+        public static void SendMail(EMailRequest request)
         {
 
             System.Net.Mail.MailMessage mailMessage = new System.Net.Mail.MailMessage();
@@ -676,6 +676,7 @@ namespace DeploymentTool.Misc
             MailObj.tContent = tContent;
             DeploymentTool.Misc.Utilities.SendMail(MailObj);
         }
+        
         public static string EncodeString(string str)
         {
             string sResp = string.Empty;
@@ -810,6 +811,21 @@ namespace DeploymentTool.Misc
                 _finalHash = string.Empty;
             }
             return _finalHash;
+        }
+    }
+
+    public static class ExtensionMethod
+    {
+        public static DateTime? ConvertMeToDateTime(this IExcelDataReader reader, DataTable dtable, string columnName)
+        {
+            DateTime? dt = null;
+            if (reader != null && dtable.Columns.IndexOf(columnName) > -1 && reader.GetValue(dtable.Columns.IndexOf(columnName)) != null && reader.GetValue(dtable.Columns.IndexOf(columnName)).ToString() != "")
+            {
+                DateTime newDT;
+                if (DateTime.TryParse(reader.GetValue(dtable.Columns.IndexOf(columnName)).ToString(), out newDT))
+                    dt = newDT;
+            }
+            return dt;
         }
     }
 

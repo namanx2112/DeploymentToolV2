@@ -9,6 +9,7 @@ import { ProjectTypes } from 'src/app/interfaces/store';
 import { CommonService } from 'src/app/services/common.service';
 import { ExStoreService } from 'src/app/services/ex-store.service';
 import { HomeService } from 'src/app/services/home.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { StoreService } from 'src/app/services/store.service';
 
 export interface TableColumnDef {
@@ -40,7 +41,8 @@ export class RolloutProjectTableComponent {
   displayedColumns: string[] = [];
   needCheckBox: boolean = false;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private _liveAnnouncer: LiveAnnouncer, private storeService: ExStoreService, private commonService: CommonService) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private storeService: ExStoreService, 
+    private commonService: CommonService, private loadingService: LoadingService) {
 
   }
 
@@ -84,13 +86,15 @@ export class RolloutProjectTableComponent {
   }
 
   toggleAllRows() {
+    this.loadingService.startLoading();
     if (this.isAllSelected()) {
       this.selection.clear();
+      this.loadingService.stopLoading();
       this.SelectionChange.emit(this.selection.selected);
       return;
     }
-
     this.selection.select(...this.dataSource.data);
+    this.loadingService.stopLoading();
     this.SelectionChange.emit(this.selection.selected);
   }
 
