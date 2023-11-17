@@ -119,10 +119,14 @@ export class RolloutProjectTableComponent {
   }
 
   getFieldHeaders() {
-    if (this.needCheckBox)
+    if (this.needCheckBox) {
       this.displayedColumns.push("select");
+      this.displayedColumns.push("nStoreExistStatus");
+    }
     for (var cName in this.items[0]) {
       if (cName.toLowerCase() == "nbrandid")
+        continue;
+      if (this.needCheckBox && cName == "nStoreExistStatus")
         continue;
       let dName = this.fetchHeaderName(cName);
       this.columns.push({

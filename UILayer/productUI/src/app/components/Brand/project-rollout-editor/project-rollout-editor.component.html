@@ -71,7 +71,7 @@
         </form>
         <div class="myProjects" *ngIf="controlValues != undefined && controlValues['aProjectsRolloutID'] !=undefined
         && controlValues['aProjectsRolloutID'] != '0'">
-            <h4>Linked Projects and Stores</h4>
+            <h4>Store List</h4>
             <app-rollout-own-projects (openStore)="showStore($event)"
                 [request]="{nBrandId: curBrand.aBrandId, nProjectsRolloutID: controlValues['aProjectsRolloutID']}"></app-rollout-own-projects>
         </div>

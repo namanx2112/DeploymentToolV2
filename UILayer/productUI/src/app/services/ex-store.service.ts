@@ -3653,7 +3653,7 @@ export class ExStoreService {
       tab_type: TabType.StoreNetworkSwitch,
       tab_unique_name: "",
       instanceType: instType,
-      isTechComponent: false,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -3703,18 +3703,6 @@ export class ExStoreService {
       }, {
         field_name: "Vendor",
         fieldUniqeName: "nVendor",
-        defaultVal: "",
-        readOnly: false,
-        invalid: false,
-        field_type: FieldType.dropdown,
-        field_placeholder: "Enter Vendor",
-        validator: [],
-        options: this.commonService.GetDropdown("Vendor"),
-        mandatory: false,
-        hidden: false
-      }, {
-        field_name: "OldSwitchReturnStatus",
-        fieldUniqeName: "nOldSwitchReturnStatus",
         defaultVal: "",
         readOnly: false,
         invalid: false,
@@ -3785,6 +3773,18 @@ export class ExStoreService {
         mandatory: false,
         hidden: false
       }, {
+        field_name: "Old Switch Return Status",
+        fieldUniqeName: "nOldSwitchReturnStatus",
+        defaultVal: "",
+        readOnly: false,
+        invalid: false,
+        field_type: FieldType.dropdown,
+        field_placeholder: "Enter Vendor",
+        validator: [],
+        options: this.commonService.GetDropdown("Vendor"),
+        mandatory: false,
+        hidden: false
+      }, {
         field_name: "Old Switch Tracking",
         fieldUniqeName: "tOldSwitchTracking",
         defaultVal: "",
@@ -3809,7 +3809,7 @@ export class ExStoreService {
       tab_type: TabType.StoreImageMemory,
       tab_unique_name: "",
       instanceType: instType,
-      isTechComponent: false,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -3933,7 +3933,7 @@ export class ExStoreService {
       tab_type: TabType.StoreOrderAccuracy,
       tab_unique_name: "",
       instanceType: instType,
-      isTechComponent: false,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",
@@ -4114,7 +4114,7 @@ export class ExStoreService {
       tab_type: TabType.StoreOrderStatusBoard,
       tab_unique_name: "",
       instanceType: instType,
-      isTechComponent: false,
+      isTechComponent: true,
       childTabs: [],
       search_fields: [{
         field_name: "Vendor",

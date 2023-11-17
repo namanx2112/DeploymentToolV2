@@ -7,7 +7,7 @@
         </div>
         <div class="menuPart">
             <button mat-button [matMenuTriggerFor]="menu"
-                *ngIf="access.hasAccess('home.sonic.newproject', 1)"><mat-icon>add</mat-icon>New Project</button>
+                *ngIf="access.hasAccess('home.sonic.newproject', 1)"><mat-icon>add</mat-icon>New Projects</button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="menuClick('newstore', 'all', 'New');">New Store</button>
                 <button mat-menu-item (click)="menuClick('newproject', 'all','Remodel');">Remodel Store</button>
@@ -49,7 +49,7 @@
             <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)"
                 (click)="menuClick('importproject')"
                 [className]="configMenu=='importproject'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>attach_file</mat-icon>Import
-                Construction Project</button>
+                Construction Projects</button>
             <button mat-button *ngIf="access.hasAccess('home.sonic.importproject', 1)"
                 (click)="menuClick('projectrollout')"
                 [className]="configMenu=='projectrollout'?'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted selected':'mat-mdc-menu-trigger mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted'"><mat-icon>insert_drive_file</mat-icon>Rollout
