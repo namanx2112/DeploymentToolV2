@@ -21,8 +21,8 @@
 }
 
 .menuPart button{
-    width: 238px;
-    margin: 0px 10%;
+    width: 250px;
+    margin: 0px 8%;
     display: block;
     text-align: left;
     padding: 0px;
@@ -51,7 +51,7 @@
 
 .ConfigList > span {
     display: block;
-    margin: 10px 10%;
+    margin: 10px 8%;
     background-color: #fff;
     padding: 8px;
     height: 20px;

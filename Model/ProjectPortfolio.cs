@@ -22,7 +22,7 @@ namespace DeploymentTool.Model
         public ProjectPortfolioItems serverhandheld { get; set; }
 
         public ProjectPortfolioItems orderaccuracy { get; set; }
-        public ProjectPortfolioItems orderstatusoard { get; set; }
+        public ProjectPortfolioItems orderstatusboard { get; set; }
         public ProjectPortfolioItems networkswitch { get; set; }
 
         public ProjectPortfolioItems imagememory { get; set; }

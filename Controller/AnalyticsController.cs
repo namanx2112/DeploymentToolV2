@@ -160,7 +160,7 @@ namespace DeploymentTool.Controller
                         }
                         else if (techparts.tComponent == "Order Status Board")
                         {
-                            obj.orderstatusoard = new ProjectPortfolioItems()
+                            obj.orderstatusboard = new ProjectPortfolioItems()
                             {
                                 dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
                                 tStatus = techparts.tStatus,
