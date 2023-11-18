@@ -248,9 +248,14 @@ namespace DeploymentTool.Controller
                     reportModel.tReportName = reportNameParam.Value.ToString();
                 }
             }
+            TableResponse resp = new TableResponse()
+            {
+                response = reportModel,
+                nTotalRows = 11
+            };
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<ReportModel>(reportModel, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<TableResponse>(resp, new JsonMediaTypeFormatter())
             };
         }
 
@@ -341,9 +346,14 @@ namespace DeploymentTool.Controller
                     reportModel.tReportName = "Advance Search Result";
                 }
             }
+            TableResponse resp = new TableResponse()
+            {
+                response = reportModel,
+                nTotalRows = 111
+            };
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<ReportModel>(reportModel, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<TableResponse>(resp, new JsonMediaTypeFormatter())
             };
         }
 

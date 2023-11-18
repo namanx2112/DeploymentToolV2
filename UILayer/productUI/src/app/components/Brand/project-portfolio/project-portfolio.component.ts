@@ -42,7 +42,6 @@ export class ProjectPortfolioComponent {
   dataSource: MatTableDataSource<any>;;
   expandedElement: any;
   columnsToDisplayWithExpand: any;
-  isLoading = false;
   totalRows = 0;
   pageSize = 5;
   currentPage = 0;
@@ -237,7 +236,8 @@ export class ProjectPortfolioComponent {
   }
 
   getRecord() {
-    this.analyticsService.Get({ nBrandId: this._curBrand.aBrandId.toString(), pageSize: this.pageSize.toString(), currentPage: this.currentPage.toString() }).subscribe(x => {
+    this.analyticsService.Get({ nBrandId: this._curBrand.aBrandId.toString(), 
+      pageSize: this.pageSize.toString(), currentPage: this.currentPage.toString() }).subscribe(x => {
       this.totalRows = x.nTotalRows;
       this.dataSource = new MatTableDataSource(x.response);
       this.dataSource.filterPredicate = (data: any, filter: string) => {

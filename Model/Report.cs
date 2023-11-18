@@ -20,6 +20,8 @@ namespace DeploymentTool.Model
         public string tParam3 { get; set; }
         public string tParam4 { get; set; }
         public string tParam5 { get; set; }
+        public int nCurrentPage { get; set; }
+        public int nPageSize { get; set; }
     }
     public class ReportModel
     {

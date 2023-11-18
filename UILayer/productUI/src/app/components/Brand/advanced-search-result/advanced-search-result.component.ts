@@ -1,5 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ReportModel } from 'src/app/interfaces/analytics';
@@ -19,7 +20,8 @@ import * as XLSX from 'xlsx';
 export class AdvancedSearchResultComponent {
   @Input()
   set reportParam(val: any) {
-    this.getReport(val);
+    this.tParams = val;
+    this.getReport();
     this._nBrandId = val.nBrandId;
     this._fromView = val.fromView;
   }
@@ -31,6 +33,11 @@ export class AdvancedSearchResultComponent {
   tReport: ReportModel;
   dataSource: MatTableDataSource<any>;// = new MatTableDataSource(ELEMENT_DATA);
   _nBrandId: number;
+  totalRows = 0;
+  pageSize = 5;
+  currentPage = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  tParams: any;
   constructor(private _liveAnnouncer: LiveAnnouncer, private analyticsService: AnalyticsService, private service: ExStoreService) {
 
   }
@@ -40,6 +47,13 @@ export class AdvancedSearchResultComponent {
   ngOnInit() {
     // get data from API 
 
+  }
+
+  pageChanged(event: PageEvent) {
+    console.log({ event });
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.getReport();
   }
 
   goBackClicked() {
@@ -52,9 +66,13 @@ export class AdvancedSearchResultComponent {
     });
   }
 
-  getReport(params: any) {
-    this.analyticsService.GetStoreTable(params).subscribe(x => {
-      this.tReport = x;
+  getReport() {
+    let newParam = this.tParams;
+    newParam.pageSize = this.pageSize.toString();
+    newParam.currentPage = this.currentPage.toString();
+    this.analyticsService.GetStoreTable(newParam).subscribe(x => {
+      this.totalRows = x.nTotalRows;
+      this.tReport = x.response;
       this.loadTable();
     });
   }

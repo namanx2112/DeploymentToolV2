@@ -43,3 +43,8 @@ th.mat-sort-header-sorted {
   cursor: pointer;
   text-decoration: underline;
 }
+.mat-paginator-sticky {
+    bottom: 0px;
+    position: sticky;
+    z-index: 10;
+}

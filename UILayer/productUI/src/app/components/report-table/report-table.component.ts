@@ -1,5 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ReportModel } from 'src/app/interfaces/analytics';
@@ -19,21 +20,30 @@ import * as XLSX from 'xlsx';
 export class ReportTableComponent implements OnInit {
   @Input()
   set reportParam(val: any) {
-    if (typeof val.request.tProjectIDs != 'undefined')
-      this.getReport(val.request.reportId, val.request.tProjectIDs, val.tParam);
-    else
-      this.getReport(val.request.reportId, val.request.tParam1, val.tParam);
     this._nBrandId = val.nBrandId;
     this._fromView = val.fromView;
+    this.reportId = val.request.reportId;
+    this.tParam1 = val.request.tParam1;
+    this.tParam = val.tParam;
+    this.tProjectIDs = val.request.tProjectIDs;
+    this.getReport();
   }
   @Output() openStore = new EventEmitter<StoreSearchModel>();
   @Output() goBack = new EventEmitter<string>();
   @ViewChild('TABLE', { read: ElementRef }) table: ElementRef;
+  reportId: number;
+  tProjectIDs: string;
+  tParam1: string;
+  tParam: string;
   columns: string[];
   _fromView: string;
   tReport: ReportModel;
   dataSource: MatTableDataSource<any>;// = new MatTableDataSource(ELEMENT_DATA);
   _nBrandId: number;
+  totalRows = 0;
+  pageSize = 5;
+  currentPage = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
   constructor(private _liveAnnouncer: LiveAnnouncer, private analyticsService: AnalyticsService, private service: ExStoreService) {
 
   }
@@ -43,6 +53,13 @@ export class ReportTableComponent implements OnInit {
   ngOnInit() {
     // get data from API 
 
+  }
+
+  pageChanged(event: PageEvent) {
+    console.log({ event });
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.getReport();
   }
 
   goBackClicked() {
@@ -55,11 +72,22 @@ export class ReportTableComponent implements OnInit {
     });
   }
 
-  getReport(reportId: number, tParam1: string, tParam2: string) {
-    this.analyticsService.GetReport(reportId, tParam1, tParam2, "", "", "").subscribe(x => {
-      this.tReport = x;
-      this.loadTable();
-    });
+  getReport() {
+    if (typeof this.tProjectIDs != 'undefined') {
+      this.analyticsService.GetReport(this.reportId, this.tProjectIDs, this.tParam, "", "", "",
+        this.pageSize, this.currentPage).subscribe(x => {
+          this.totalRows = x.nTotalRows;
+          this.tReport = x.response;
+          this.loadTable();
+        });
+    }
+    else
+      this.analyticsService.GetReport(this.reportId, this.tParam1, this.tParam, "", "", "",
+        this.pageSize, this.currentPage).subscribe(x => {
+          this.totalRows = x.nTotalRows;
+          this.tReport = x.response;
+          this.loadTable();
+        });
   }
 
   getCellVal(colName: string, colVal: string) {

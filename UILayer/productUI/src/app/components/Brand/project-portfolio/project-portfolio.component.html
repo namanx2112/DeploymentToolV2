@@ -57,6 +57,6 @@
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
     <mat-paginator #paginator [length]="totalRows" [showFirstLastButtons]="true" [pageIndex]="currentPage"
-        [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
-    </mat-paginator>
+        [pageSize]="pageSize" class="mat-paginator-sticky" [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+    </mat-paginator> 
 </div>

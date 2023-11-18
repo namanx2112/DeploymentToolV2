@@ -1,13 +1,13 @@
-tr.example-detail-row{
+tr.example-detail-row {
     height: 0px;
 }
 
-.SearchPart{
+.SearchPart {
     width: 60%;
     margin: auto;
 }
 
-.SearchPart input{        
+.SearchPart input {
     width: 100%;
     height: 40px;
     border: 0px;
@@ -17,56 +17,57 @@ tr.example-detail-row{
     border-radius: 10px;
 }
 
-table{
+table {
     min-width: 100%;
-    white-space: normal!important;
+    white-space: normal !important;
     box-shadow: none;
 }
 
-td{
+td {
     border: 0px none;
     padding: 0px;
 }
 
-td:not(:last-child){
+td:not(:last-child) {
     border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-td:first-child{
+td:first-child {
     border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-tr:nth-child(4n+1):not(.mat-mdc-header-row){    
-    background-color: rgba(0,40,80,0.02);
+tr:nth-child(4n+1):not(.mat-mdc-header-row) {
+    background-color: rgba(0, 40, 80, 0.02);
 }
 
-.insideHeader{
+.insideHeader {
     width: 100%;
     float: left;
     height: 50px;
 }
 
-.insideBody{
+.insideBody {
     width: 100%;
     float: left;
 }
 
-.insideElement > h4 > span{
+.insideElement>h4>span {
     display: inline-block;
     margin: 10px 0px 0px 10px;
     font-weight: 100;
 }
-.insideElement > h4 > span > span{
+
+.insideElement>h4>span>span {
     font-weight: bold;
 }
 
-.insideElement > h4{
+.insideElement>h4 {
     padding: 0px;
     margin: 0px;
     height: 50px;
 }
 
-.notesButon{
+.notesButon {
     float: right;
     margin: 10px 10px 0px 0px;
     width: 150px;
@@ -75,9 +76,16 @@ tr:nth-child(4n+1):not(.mat-mdc-header-row){
 .mat-mdc-form-field {
     font-size: 14px;
     width: 100%;
-  }
-  .tdCell > *{
+}
+
+.tdCell>* {
     display: block;
     width: 100%;
     min-height: 110px;
-  }
+}
+
+.mat-paginator-sticky {
+    bottom: 0px;
+    position: sticky;
+    z-index: 10;
+}
