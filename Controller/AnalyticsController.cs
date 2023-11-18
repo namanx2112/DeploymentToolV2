@@ -27,15 +27,20 @@ namespace DeploymentTool.Controller
         {
             int nStoreId = 0;// (searchFields == null || searchFields["nStoreId"] == null) ? 0 : Convert.ToInt32(searchFields["nStoreId"]);
             int nBrandId = (searchFields == null || searchFields["nBrandId"] == null) ? 0 : Convert.ToInt32(searchFields["nBrandId"]);
-
+            int ncurrentPage = (searchFields == null || searchFields["currentPage"] == null) ? 0 : Convert.ToInt32(searchFields["currentPage"]);
+            int npageSize = (searchFields == null || searchFields["pageSize"] == null) ? 0 : Convert.ToInt32(searchFields["pageSize"]);
+            TableResponse tableResponse = new TableResponse();
             List<ProjectPortfolio> items = new List<ProjectPortfolio>();
             try
             {
-                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId", new SqlParameter("@nBrandId", nBrandId)).ToList();
+                ncurrentPage++;
+                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@PageSize,@CurrentPage"
+                    , new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@CurrentPage", ncurrentPage), new SqlParameter("@PageSize", npageSize)).ToList();
 
                 foreach (var parts in activeProj)
                 {
                     int nProjectId = parts.nProjectId;
+                    tableResponse.nTotalRows = parts.nTotalRows;
                     nProjectId = 0;//ignore project and get store notes
                     List<ProjectPorfolioNotes> portnotes = db.Database.SqlQuery<ProjectPorfolioNotes>("exec sproc_getProjectPortfolioNotes @nStoreId,@nProjectId", new SqlParameter("@nStoreId", parts.nStoreId), new SqlParameter("@nProjectId", nProjectId)).ToList();
 
@@ -194,9 +199,10 @@ namespace DeploymentTool.Controller
             {
 
             }
+            tableResponse.response = items;
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<List<ProjectPortfolio>>(items, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<TableResponse>(tableResponse, new JsonMediaTypeFormatter())
             };
 
         }

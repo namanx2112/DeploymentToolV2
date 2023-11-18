@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormGroup } from '@angular/forms';
 import { FieldType, Fields } from 'src/app/interfaces/home-tab';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { CommonService } from 'src/app/services/common.service';
 import { AnalyticsService } from 'src/app/services/analytics.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -42,6 +42,11 @@ export class ProjectPortfolioComponent {
   dataSource: MatTableDataSource<any>;;
   expandedElement: any;
   columnsToDisplayWithExpand: any;
+  isLoading = false;
+  totalRows = 0;
+  pageSize = 5;
+  currentPage = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
   constructor(private dialog: MatDialog, private analyticsService: AnalyticsService, public access: AccessService) {
   }
 
@@ -51,6 +56,13 @@ export class ProjectPortfolioComponent {
 
   openStoreClicked(item: any) {
     this.openStore.emit(item);
+  }
+
+  pageChanged(event: PageEvent) {
+    console.log({ event });
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.getRecord();
   }
 
   loadColumns() {
@@ -225,8 +237,9 @@ export class ProjectPortfolioComponent {
   }
 
   getRecord() {
-    this.analyticsService.Get({ nBrandId: this._curBrand.aBrandId.toString() }).subscribe(x => {
-      this.dataSource = new MatTableDataSource(x);
+    this.analyticsService.Get({ nBrandId: this._curBrand.aBrandId.toString(), pageSize: this.pageSize.toString(), currentPage: this.currentPage.toString() }).subscribe(x => {
+      this.totalRows = x.nTotalRows;
+      this.dataSource = new MatTableDataSource(x.response);
       this.dataSource.filterPredicate = (data: any, filter: string) => {
         filter = filter.toLocaleLowerCase();
         return ((data["store"].tStoreNumber != null && data["store"].tStoreNumber.toLowerCase().indexOf(filter) > -1) ||

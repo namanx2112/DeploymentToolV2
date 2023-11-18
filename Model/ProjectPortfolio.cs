@@ -5,7 +5,7 @@ using System.Web;
 
 namespace DeploymentTool.Model
 {
-    public class ProjectPortfolio
+    public class ProjectPortfolio: ITableActualResponse
     {        
         public int nStoreId {  get; set; }
         public int nProjectType { get; set; }
@@ -95,6 +95,8 @@ namespace DeploymentTool.Model
         public Nullable<decimal> cCost { get; set; }
         //public decimal cCost { get; set; }
         public Nullable<DateTime> dInstallDate { get; set; }
+
+        public int nTotalRows { get; set; }
 
     }
 }

@@ -1,5 +1,10 @@
 import { HomeTab } from "./home-tab"
 
+export interface TableResponse{
+    nTotalRows: number,
+    response: any
+}
+
 export interface BrandModel {
     aBrandId: number,
     tBrandIdentifier: string,

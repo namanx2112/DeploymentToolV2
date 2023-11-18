@@ -802,6 +802,7 @@
     <Compile Include="Model\StoreSearchModel.cs" />
     <Compile Include="Model\SupportContent.cs" />
     <Compile Include="Model\TableFields.cs" />
+    <Compile Include="Model\TableResponse.cs" />
     <Compile Include="Model\TechComponent.cs" />
     <Compile Include="Model\Templates\ProjectTemplates.cs" />
     <Compile Include="Model\User.cs" />

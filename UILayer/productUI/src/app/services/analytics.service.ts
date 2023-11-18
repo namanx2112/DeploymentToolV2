@@ -4,6 +4,7 @@ import { CacheService } from './cache.service';
 import { ProjectPortfolio, ReportModel } from '../interfaces/analytics';
 import { CommonService } from './common.service';
 import { DahboardTile, Dictionary, MyReportModel } from '../interfaces/commons';
+import { TableResponse } from '../interfaces/models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AnalyticsService {
   constructor(private http: HttpClient, private cacheService: CacheService) { }
 
   Get(searchFields: Dictionary<string> | null) {
-    return this.http.post<ProjectPortfolio[]>(CommonService.ConfigUrl + "Analytics/GetProjectPortfolio", searchFields, { headers: this.cacheService.getHttpHeaders() });
+    return this.http.post<TableResponse>(CommonService.ConfigUrl + "Analytics/GetProjectPortfolio", searchFields, { headers: this.cacheService.getHttpHeaders() });
   }
 
   GetReport(reportId: number, tParam1: string, tParam2: string, tParam3: string, tParam4: string, tParam5: string) {
