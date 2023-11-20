@@ -121,6 +121,33 @@ export class AdvancedSearchResultComponent {
     this.dataSource.sort = this.sort;
   }
 
+  serverDownload(){
+    let newParam = this.tParams;
+    newParam.pageSize = this.pageSize.toString();
+    newParam.currentPage = this.currentPage.toString();
+    this.analyticsService.DownloadStoreTable(newParam).subscribe(tdata => {
+      var newBlob = new Blob([tdata], { type: "application/vnd.ms-excel" });
+
+      // For other browsers: 
+      // Create a link pointing to the ObjectURL containing the blob.
+      const data = window.URL.createObjectURL(newBlob);
+
+      var link = document.createElement('a');
+      link.href = data;
+      link.download = "report.xlsx";
+      // this is necessary as link.click() does not work on the latest firefox
+      link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+
+      setTimeout(function () {
+        // For Firefox it is necessary to delay revoking the ObjectURL
+        window.URL.revokeObjectURL(data);
+        link.remove();
+      }, 100);
+    }, async (error) => {
+      console.log("Error occured:" + error);
+    });
+  }
+
   exportAsExcel() {
     // const workSheet = XLSX.utils.json_to_sheet(this.dataSource.data, { header: this.tReport.headers });
     // const workBook: XLSX.WorkBook = XLSX.utils.book_new();

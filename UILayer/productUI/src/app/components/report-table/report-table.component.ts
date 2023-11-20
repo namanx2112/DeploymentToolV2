@@ -90,6 +90,35 @@ export class ReportTableComponent implements OnInit {
         });
   }
 
+  serverDownload() {
+    let downloadCalback = function (tdata: any) {
+      var newBlob = new Blob([tdata], { type: "application/vnd.ms-excel" });
+
+      // For other browsers: 
+      // Create a link pointing to the ObjectURL containing the blob.
+      const data = window.URL.createObjectURL(newBlob);
+
+      var link = document.createElement('a');
+      link.href = data;
+      link.download = "report.xlsx";
+      // this is necessary as link.click() does not work on the latest firefox
+      link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+
+      setTimeout(function () {
+        // For Firefox it is necessary to delay revoking the ObjectURL
+        window.URL.revokeObjectURL(data);
+        link.remove();
+      }, 100);
+    }
+    if (typeof this.tProjectIDs != 'undefined') {
+      this.analyticsService.DownloadReport(this.reportId, this.tProjectIDs, this.tParam, "", "", "",
+        this.pageSize, this.currentPage).subscribe(x => downloadCalback);
+    }
+    else
+      this.analyticsService.DownloadReport(this.reportId, this.tParam1, this.tParam, "", "", "",
+        this.pageSize, this.currentPage).subscribe(x => downloadCalback);
+  }
+
   getCellVal(colName: string, colVal: string) {
     let rVal = colVal;
     if (colName.toLocaleLowerCase().indexOf("cost") > -1) {

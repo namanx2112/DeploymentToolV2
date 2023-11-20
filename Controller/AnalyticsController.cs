@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -209,6 +210,22 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpPost]
+        [Route("api/Store/DownloadReport")]
+        public HttpResponseMessage DownloadReport(ReportRequest request)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            Stream stream = new MemoryStream(null);
+            var fileContent = new StreamContent(stream);
+            response.Content = fileContent;
+            response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+            response.Content.Headers.ContentDisposition.FileName = "changeMe.xlsx";
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.ms-excel");
+
+            return response;
+        }
+
+        [Authorize]
+        [HttpPost]
         [Route("api/Store/GetReport")]
         public HttpResponseMessage GetReport(ReportRequest request)
         {
@@ -260,6 +277,22 @@ namespace DeploymentTool.Controller
         }
 
         [Authorize]
+        [HttpPost]
+        [Route("api/Store/DownloadStoreTable")]
+        public HttpResponseMessage DownloadStoreTable(Dictionary<string, string> searchFields)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            Stream stream = new MemoryStream(null);
+            var fileContent = new StreamContent(stream);
+            response.Content = fileContent;
+            response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+            response.Content.Headers.ContentDisposition.FileName = "changeMe.xlsx";
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.ms-excel");
+
+            return response;
+        }
+
+            [Authorize]
         [HttpPost]
         [Route("api/Store/GetStoreTable")]
         public HttpResponseMessage GetStoreTable(Dictionary<string, string> searchFields)
