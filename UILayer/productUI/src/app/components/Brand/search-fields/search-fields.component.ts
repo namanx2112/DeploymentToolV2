@@ -11,18 +11,21 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class SearchFieldsComponent {
   @Input()
-  set curBrand(val: BrandModel) {
-    this._curBrand = val;
+  set request(val: any) {
+    this._curBrand = val.curBrand;
+    this.columns = val.columns;
     this.loadProjectTYpes();
   }
   @Output()
   searchClicked = new EventEmitter<any>();
+  columns: string[] = [];
   _curBrand: BrandModel;
   defaultCondition: string = '';
   selectedProjects: any[] = [];
   selectedVendors: any[] = [];
   selectedFranchise: any[] = [];
   selectedCity: string = "";
+  selectedStoreNumber: string = "";
   allProjectTypes: OptionType[] = [];
   allVendors: OptionType[] = [];
   allFranchise: OptionType[] = [];
@@ -32,7 +35,7 @@ export class SearchFieldsComponent {
     this.campaignOne = new FormGroup({
       start: new FormControl(null),
       end: new FormControl(null),
-    });    
+    });
   }
 
   loadProjectTYpes() {
@@ -57,9 +60,11 @@ export class SearchFieldsComponent {
     let tVendor = this.selectedVendors.join(",");
     let tFranchise = this.selectedFranchise.join(",");
     let tCity = this.selectedCity;
+    let tStoreNumber = this.selectedStoreNumber;
     this.callSearch({
       nBrandId: this._curBrand.aBrandId, tProjTypes: tProjTypes, dtStart: dtStart, dtEnd: dtEnd,
-      tVendor: tVendor, tFranchise: tFranchise, tCity: tCity, defaultCondition: this.defaultCondition
+      tVendor: tVendor, tFranchise: tFranchise, tCity: tCity, defaultCondition: this.defaultCondition,
+      tStoreNumber: tStoreNumber
     });
   }
 
@@ -70,6 +75,7 @@ export class SearchFieldsComponent {
     this.campaignOne.controls['start'].setValue(null);
     this.campaignOne.controls['end'].setValue(null);
     this.selectedCity = "";
+    this.selectedStoreNumber = "";
     this.searchClicked.emit();
   }
 }

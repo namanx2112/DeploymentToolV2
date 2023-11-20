@@ -1,5 +1,6 @@
 <div [ngClass]="showAdvancedSearch ? 'AdvancedSearchPart' :'SearchPart'">
-    <app-search-fields *ngIf="showAdvancedSearch && loaded" [curBrand]="_curBrand" (searchClicked)="searchClicked($event)"></app-search-fields>
+    <app-search-fields *ngIf="showAdvancedSearch && loaded" [request]="{curBrand: _curBrand, columns: 'tStoreNumber'}"
+        (searchClicked)="searchClicked($event)"></app-search-fields>
     <input *ngIf="!showAdvancedSearch" matInput (keyup)="applyFilter($event)"
         placeholder="Search by Store number or Franchise or Project Manager or Project type" #input>
 </div>

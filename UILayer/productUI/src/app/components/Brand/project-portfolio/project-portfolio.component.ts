@@ -48,7 +48,7 @@ export class ProjectPortfolioComponent {
   currentPage = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   loaded: boolean = false;
-  showAdvancedSearch: boolean = false;// SantoshppPortfolioAdvancedSearch
+  showAdvancedSearch: boolean = true;// SantoshppPortfolioAdvancedSearch
   constructor(private dialog: MatDialog, private analyticsService: AnalyticsService, public access: AccessService) {
   }
 

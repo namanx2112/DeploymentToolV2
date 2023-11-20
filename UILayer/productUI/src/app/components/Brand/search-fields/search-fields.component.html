@@ -1,5 +1,5 @@
 <div class="searchFields">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" *ngIf="columns.indexOf('tProjTypes') > -1">
         <mat-label>Project Type</mat-label>
         <mat-select multiple [(ngModel)]="selectedProjects">
             <!-- <mat-option value="-1">Select All</mat-option> -->
@@ -7,7 +7,7 @@
                 [value]="proj.aDropdownId">{{proj.tDropdownText}}</mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field class="marginLeft" appearance="outline">
+    <mat-form-field class="marginLeft" appearance="outline" *ngIf="columns.indexOf('tVendor') > -1">
         <mat-label>Vendor</mat-label>
         <mat-select multiple [(ngModel)]="selectedVendors">
             <!-- <mat-option value="-1">Select All</mat-option> -->
@@ -15,7 +15,7 @@
                 [value]="vendor.aDropdownId">{{vendor.tDropdownText}}</mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field class="marginLeft" appearance="outline">
+    <mat-form-field class="marginLeft" appearance="outline" *ngIf="columns.indexOf('tFranchise') > -1">
         <mat-label>Franchise</mat-label>
         <mat-select multiple [(ngModel)]="selectedFranchise">
             <!-- <mat-option value="-1">Select All</mat-option> -->
@@ -23,11 +23,15 @@
                 [value]="franchise.aDropdownId">{{franchise.tDropdownText}}</mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field class="marginLeft" appearance="outline">
+    <mat-form-field class="marginLeft" appearance="outline" *ngIf="columns.indexOf('tCity') > -1">
         <mat-label>City</mat-label>
         <input matInput [(ngModel)]="selectedCity">
     </mat-form-field>
-    <mat-form-field class="marginLeft" appearance="outline">
+    <mat-form-field class="marginLeft" appearance="outline" *ngIf="columns.indexOf('tStoreNumber') > -1">
+        <mat-label>StoreNumber</mat-label>
+        <input matInput [(ngModel)]="selectedStoreNumber">
+    </mat-form-field>
+    <mat-form-field class="marginLeft" appearance="outline" *ngIf="columns.indexOf('dGolive') > -1">
         <mat-label>GoLive Date Between</mat-label>
         <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="rangePicker">
             <input matStartDate placeholder="Start date" formControlName="start">
