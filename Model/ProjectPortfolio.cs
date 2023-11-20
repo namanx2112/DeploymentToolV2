@@ -99,4 +99,32 @@ namespace DeploymentTool.Model
         public int nTotalRows { get; set; }
 
     }
+    public class ActiveProjectsTypeGoliveDate
+    {
+
+
+        public int nProjectId { get; set; }
+
+        public int nStoreId { get; set; }
+        public int nProjectType { get; set; }
+
+        public string tProjectType { get; set; }
+
+        public string tStoreNumber { get; set; }
+        public string tStoreDetails { get; set; }
+        public Nullable<DateTime> dProjectGoliveDate { get; set; }
+        public Nullable<DateTime> dProjEndDate { get; set; }
+        public string tProjManager { get; set; }
+        public string tStatus { get; set; }
+        public string tNewVendor { get; set; }
+
+
+        public string tFranchise { get; set; }
+        public Nullable<decimal> cCost { get; set; }
+        //public decimal cCost { get; set; }
+        public Nullable<DateTime> dInstallDate { get; set; }
+
+        public int nTotalRows { get; set; }
+
+    }
 }

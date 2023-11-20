@@ -261,7 +261,7 @@ namespace DeploymentTool.Controller
             tContent += "</tbody>";
             tContent += "</table></div></br>";
             int nBrandId = 0;
-            List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@nStoreID", new SqlParameter("@nBrandId", nBrandId),  new SqlParameter("@nStoreID", request.nStoreId)).ToList();
+            List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActiveProjectsTypeGoliveDate @nBrandId,@nStoreID", new SqlParameter("@nBrandId", nBrandId),  new SqlParameter("@nStoreID", request.nStoreId)).ToList();
             tContent += "<div><table><thead><tr><b><th>Project type</th><th>Go-live Date</th></b></tr></thead>";
             tContent += "<tbody>";
             foreach (var part in activeProj)

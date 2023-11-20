@@ -35,7 +35,7 @@ namespace DeploymentTool.Controller
             try
             {
                 ncurrentPage++;
-                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@PageSize,@CurrentPage"
+                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@CurrentPage,@PageSize"
                     , new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@CurrentPage", ncurrentPage), new SqlParameter("@PageSize", npageSize)).ToList();
 
                 foreach (var parts in activeProj)
@@ -234,41 +234,66 @@ namespace DeploymentTool.Controller
                 reportTable = new DataTable(),
                 tReportName = string.Empty
             };
-            DbConnection connection = db.Database.Connection;
-            DbProviderFactory dbFactory = DbProviderFactories.GetFactory(connection);
-            using (var cmd = dbFactory.CreateCommand())
+            var nTotalRows = 0;
+            try
             {
-                string strName = string.Empty;
-                cmd.Connection = connection;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "sproc_getReportData";
-                var reportIdParam = new SqlParameter("@nReportId", request.reportId);                
-                var reportNameParam = new SqlParameter("@tReportName", strName);
-                var reportParameters1 = new SqlParameter("@pm1", request.tParam1.Trim(','));
-                var reportParameters2= new SqlParameter("@pm2", request.tParam2);
-                var reportParameters3 = new SqlParameter("@pm3", request.tParam3);
-                var reportParameters4 = new SqlParameter("@pm4", request.tParam4);
-                var reportParameters5 = new SqlParameter("@pm5", request.tParam5);
-                reportNameParam.Direction = ParameterDirection.Output;
-                reportNameParam.Size = 500;
-                cmd.Parameters.Add(reportIdParam);                
-                cmd.Parameters.Add(reportNameParam);
-                cmd.Parameters.Add(reportParameters1);
-                cmd.Parameters.Add(reportParameters2);
-                cmd.Parameters.Add(reportParameters3);
-                cmd.Parameters.Add(reportParameters4);
-                cmd.Parameters.Add(reportParameters5);
-                using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
+                DbConnection connection = db.Database.Connection;
+                DbProviderFactory dbFactory = DbProviderFactories.GetFactory(connection);
+                using (var cmd = dbFactory.CreateCommand())
                 {
-                    adapter.SelectCommand = cmd;
-                    adapter.Fill(reportModel.reportTable);
-                    reportModel.tReportName = reportNameParam.Value.ToString();
+                    int ncurrentPage = request.nCurrentPage != null ? Convert.ToInt32(request.nCurrentPage) : 0;
+                    int npageSize = request.nPageSize != null ? Convert.ToInt32(request.nPageSize) : 0;
+                    ncurrentPage++;
+                    //npageSize = 11000;
+                    string strName = string.Empty;
+                    cmd.Connection = connection;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "sproc_getReportData";
+                    var reportIdParam = new SqlParameter("@nReportId", request.reportId);
+                    var reportNameParam = new SqlParameter("@tReportName", strName);
+                    var reportParameters1 = new SqlParameter("@pm1", request.tParam1.Trim(','));
+                    var reportParameters2 = new SqlParameter("@pm2", request.tParam2);
+                    var reportParameters3 = new SqlParameter("@pm3", ncurrentPage);
+                    var reportParameters4 = new SqlParameter("@pm4", npageSize);
+                    var reportParameters5 = new SqlParameter("@pm5", request.tParam5);
+                    // var reportParameters6 = new SqlParameter("@CurrentPage", ncurrentPage);
+                    // var reportParameters7 = new SqlParameter("@PageSize", npageSize);
+                    cmd.CommandTimeout = 100000;
+                    reportNameParam.Direction = ParameterDirection.Output;
+                    reportNameParam.Size = 500;
+                    cmd.Parameters.Add(reportIdParam);
+                    cmd.Parameters.Add(reportNameParam);
+                    cmd.Parameters.Add(reportParameters1);
+                    cmd.Parameters.Add(reportParameters2);
+                    cmd.Parameters.Add(reportParameters3);
+                    cmd.Parameters.Add(reportParameters4);
+                    cmd.Parameters.Add(reportParameters5);
+                    //cmd.Parameters.Add(reportParameters6);
+                    //cmd.Parameters.Add(reportParameters7);
+                    using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
+                    {
+                        adapter.SelectCommand = cmd;
+                        adapter.Fill(reportModel.reportTable);
+                        reportModel.tReportName = reportNameParam.Value.ToString();
+                    }
                 }
+
+                if (reportModel.reportTable.Columns["nTotalRows"] != null)
+                {
+                    nTotalRows = reportModel.reportTable.Rows[0].Field<int>("nTotalRows");
+
+                    reportModel.reportTable.Columns.Remove("nTotalRows");
+                }
+                // reportModel.reportTable.Columns.RemoveAt(columnIndex);
+            }
+            catch (Exception ex)
+            {
+
             }
             TableResponse resp = new TableResponse()
             {
                 response = reportModel,
-                nTotalRows = 11
+                nTotalRows = nTotalRows
             };
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -346,10 +371,15 @@ namespace DeploymentTool.Controller
                     //    tInstaller = defaultCondition.Replace("nInstallVendor=", "");
                     defaultCondition = defaultCondition.Replace("nVendor=", "");
                 }
+                int ncurrentPage = searchFields.ContainsKey("currentPage") && (searchFields["currentPage"] != null) ? Convert.ToInt32(searchFields["currentPage"]) : 0;
+                int npageSize = searchFields.ContainsKey("pageSize") && (searchFields["pageSize"] != null) ? Convert.ToInt32(searchFields["pageSize"]) : 0;
+                ncurrentPage++;
+               // npageSize = 5;
                 string strName = string.Empty;
                 cmd.Connection = connection;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "sproc_getAdvanceSearchData";
+                cmd.CommandTimeout = 100000;
                 var reportIdParam = new SqlParameter("@nBrandId", nBrandId);
                 var reportParameters1 = new SqlParameter("@tProjectTypes", tProjTypes);
                 var reportParameters2 = new SqlParameter("@dtStart", dtStart);
@@ -361,6 +391,8 @@ namespace DeploymentTool.Controller
                 var reportParameters8 = new SqlParameter("@tInstaller", tInstaller);
                 var reportParameters9 = new SqlParameter("@tState", tState);
                 var reportParameters10 = new SqlParameter("@defaultCondition", defaultCondition);
+                var reportParameters11 = new SqlParameter("@CurrentPage", ncurrentPage);
+                var reportParameters12 = new SqlParameter("@PageSize", npageSize);
                 cmd.Parameters.Add(reportIdParam);
                 cmd.Parameters.Add(reportParameters1);
                 cmd.Parameters.Add(reportParameters2);
@@ -372,6 +404,8 @@ namespace DeploymentTool.Controller
                 cmd.Parameters.Add(reportParameters8);
                 cmd.Parameters.Add(reportParameters9);
                 cmd.Parameters.Add(reportParameters10);
+                cmd.Parameters.Add(reportParameters11);
+                cmd.Parameters.Add(reportParameters12);
                 using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
                 {
                     adapter.SelectCommand = cmd;
@@ -379,10 +413,18 @@ namespace DeploymentTool.Controller
                     reportModel.tReportName = "Advance Search Result";
                 }
             }
+            var nTotalRows = 0;
+            if (reportModel.reportTable.Columns["nTotalRows"] != null)
+            {
+                nTotalRows = reportModel.reportTable.Rows[0].Field<int>("nTotalRows");
+
+                reportModel.reportTable.Columns.Remove("nTotalRows");
+            }
+           // reportModel.reportTable.Columns.RemoveAt(columnIndex);
             TableResponse resp = new TableResponse()
             {
                 response = reportModel,
-                nTotalRows = 111
+                nTotalRows = nTotalRows
             };
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
