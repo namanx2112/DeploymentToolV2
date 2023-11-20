@@ -38,6 +38,7 @@ export class ProjectPortfolioComponent {
   set curBrand(val: BrandModel) {
     this._curBrand = val;
     this.loadColumns();
+    this.loaded = true;
   }
   dataSource: MatTableDataSource<any>;;
   expandedElement: any;
@@ -46,12 +47,20 @@ export class ProjectPortfolioComponent {
   pageSize = 25;
   currentPage = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+  loaded: boolean = false;
+  showAdvancedSearch: boolean = false;// SantoshppPortfolioAdvancedSearch
   constructor(private dialog: MatDialog, private analyticsService: AnalyticsService, public access: AccessService) {
   }
 
   ngOnChanges() {
 
   }
+
+
+  searchClicked(fields: any) {
+    this.getRecord(fields);
+  }
+
 
   openStoreClicked(item: any) {
     this.openStore.emit(item);
@@ -61,7 +70,7 @@ export class ProjectPortfolioComponent {
     console.log({ event });
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
-    this.getRecord();
+    this.getRecord(null);
   }
 
   loadColumns() {
@@ -235,9 +244,13 @@ export class ProjectPortfolioComponent {
     this.getRecord();
   }
 
-  getRecord() {
-    this.analyticsService.Get({ nBrandId: this._curBrand.aBrandId.toString(), 
-      pageSize: this.pageSize.toString(), currentPage: this.currentPage.toString() }).subscribe(x => {
+  getRecord(searchField: any = null) {
+    if (searchField == null)
+      searchField = {};
+    searchField.nBrandId = this._curBrand.aBrandId.toString();
+    searchField.pageSize = this.pageSize.toString();
+    searchField.currentPage = this.currentPage.toString();
+    this.analyticsService.Get(searchField).subscribe(x => {
       this.totalRows = x.nTotalRows;
       this.dataSource = new MatTableDataSource(x.response);
       this.dataSource.filterPredicate = (data: any, filter: string) => {

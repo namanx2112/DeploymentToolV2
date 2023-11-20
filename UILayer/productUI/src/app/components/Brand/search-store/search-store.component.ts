@@ -29,12 +29,13 @@ export class SearchStoreComponent {
   constructor(private service: ExStoreService) {
   }
 
+  compareStore(s1: string, s2: string) {
+    return (s2 == "") ? true : s1.startsWith(s2);
+  }
+
   private _filter(value: string): StoreSearchModel[] {
     if (typeof value == 'string') {
-      const filterValue = value.toLowerCase();
-
-      return this.ddOptions.filter(option => option.tStoreNumber?.toString().toLowerCase().includes(filterValue) ||
-        option.tAddress.toString().toLowerCase().includes(filterValue));
+      return this.ddOptions.filter(option => this.compareStore(option.tStoreNumber, value));
     }
     else
       return [];

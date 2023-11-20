@@ -94,6 +94,7 @@ import { ProjectRolloutImportComponent } from './components/Brand/project-rollou
 import { RolloutProjectTableComponent } from './components/Brand/rollout-project-table/rollout-project-table.component';
 import { ProjectGlimpseComponent } from './components/Brand/project-glimpse/project-glimpse.component';
 import { RolloutOwnProjectsComponent } from './components/Brand/rollout-own-projects/rollout-own-projects.component';
+import { SearchFieldsComponent } from './components/Brand/search-fields/search-fields.component';
 
 @NgModule({
     declarations: [
@@ -163,6 +164,7 @@ import { RolloutOwnProjectsComponent } from './components/Brand/rollout-own-proj
         RolloutProjectTableComponent,
         ProjectGlimpseComponent,
         RolloutOwnProjectsComponent,
+        SearchFieldsComponent,
     ],
     providers: [
         {

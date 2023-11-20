@@ -41,14 +41,14 @@ export class ReportTableComponent implements OnInit {
   dataSource: MatTableDataSource<any>;// = new MatTableDataSource(ELEMENT_DATA);
   _nBrandId: number;
   totalRows = 0;
-  pageSize = 25;
+  pageSize = 25;//SantoshPPPageSize
   currentPage = 0;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions: number[] = [5, 10, 25, 100];//SantoshPPPageSizeOptions
   constructor(private _liveAnnouncer: LiveAnnouncer, private analyticsService: AnalyticsService, private service: ExStoreService) {
 
   }
 
-  // @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   ngOnInit() {
     // get data from API 
@@ -136,32 +136,32 @@ export class ReportTableComponent implements OnInit {
       this.columns.push(indx);
     }
     this.dataSource = new MatTableDataSource(this.tReport.reportTable);
-    //this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.sort;
   }
 
-  // announceSortChange(sortState: Sort) {
-  //   // This example uses English messages. If your application supports
-  //   // multiple language, you would internationalize these strings.
-  //   // Furthermore, you can customize the message to add additional
-  //   // details about the values being sorted.
-  //   if (sortState.direction) {
-  //     this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-  //   } else {
-  //     this._liveAnnouncer.announce('Sorting cleared');
-  //   }
+  announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
 
-  //   var compare = function (a: any, b: any) {
-  //     if (a[sortState.active].toLowerCase() < b[sortState.active].toLowerCase()) {
-  //       return -1;
-  //     }
-  //     if (a[sortState.active].toLowerCase() > b[sortState.active].toLowerCase()) {
-  //       return 1;
-  //     }
-  //     return 0;
-  //   }
-  //   this.dataSource = new MatTableDataSource(this.tReport.reportTable.sort(compare));
-  //   this.dataSource.sort = this.sort;
-  // }
+    var compare = function (a: any, b: any) {
+      if (a[sortState.active].toLowerCase() < b[sortState.active].toLowerCase()) {
+        return -1;
+      }
+      if (a[sortState.active].toLowerCase() > b[sortState.active].toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    }
+    this.dataSource = new MatTableDataSource(this.tReport.reportTable.sort(compare));
+    this.dataSource.sort = this.sort;
+  }
 
   exportAsExcel() {
     // const workSheet = XLSX.utils.json_to_sheet(this.dataSource.data, { header: this.tReport.headers });

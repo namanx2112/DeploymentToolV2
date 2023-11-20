@@ -1,5 +1,6 @@
-<div class="SearchPart">
-    <input matInput (keyup)="applyFilter($event)"
+<div [ngClass]="showAdvancedSearch ? 'AdvancedSearchPart' :'SearchPart'">
+    <app-search-fields *ngIf="showAdvancedSearch && loaded" [curBrand]="_curBrand" (searchClicked)="searchClicked($event)"></app-search-fields>
+    <input *ngIf="!showAdvancedSearch" matInput (keyup)="applyFilter($event)"
         placeholder="Search by Store number or Franchise or Project Manager or Project type" #input>
 </div>
 <div class="tablePart">
@@ -57,6 +58,7 @@
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
     <mat-paginator #paginator [length]="totalRows" [showFirstLastButtons]="true" [pageIndex]="currentPage"
-        [pageSize]="pageSize" class="mat-paginator-sticky" [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
-    </mat-paginator> 
+        [pageSize]="pageSize" class="mat-paginator-sticky" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageChanged($event)" aria-label="Select page">
+    </mat-paginator>
 </div>

@@ -13,7 +13,7 @@ export class AnalyticsService {
 
   constructor(private http: HttpClient, private cacheService: CacheService) { }
 
-  Get(searchFields: Dictionary<string> | null) {
+  Get(searchFields: any) {
     return this.http.post<TableResponse>(CommonService.ConfigUrl + "Analytics/GetProjectPortfolio", searchFields, { headers: this.cacheService.getHttpHeaders() });
   }
 
