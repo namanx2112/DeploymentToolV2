@@ -34,7 +34,7 @@ export class AdvancedSearchResultComponent {
   dataSource: MatTableDataSource<any>;// = new MatTableDataSource(ELEMENT_DATA);
   _nBrandId: number;
   totalRows = 0;
-  pageSize = 5;
+  pageSize = 25;
   currentPage = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   tParams: any;

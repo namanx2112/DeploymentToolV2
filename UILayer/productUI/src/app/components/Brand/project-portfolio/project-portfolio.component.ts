@@ -43,7 +43,7 @@ export class ProjectPortfolioComponent {
   expandedElement: any;
   columnsToDisplayWithExpand: any;
   totalRows = 0;
-  pageSize = 5;
+  pageSize = 25;
   currentPage = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   constructor(private dialog: MatDialog, private analyticsService: AnalyticsService, public access: AccessService) {
