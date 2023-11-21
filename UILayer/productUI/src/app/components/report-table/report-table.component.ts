@@ -41,9 +41,9 @@ export class ReportTableComponent implements OnInit {
   dataSource: MatTableDataSource<any>;// = new MatTableDataSource(ELEMENT_DATA);
   _nBrandId: number;
   totalRows = 0;
-  pageSize = 25;//SantoshPPPageSize
+  pageSize = CommonService.defaultPagesize;
   currentPage = 0;
-  pageSizeOptions: number[] = [5, 10, 25, 100];//SantoshPPPageSizeOptions
+  pageSizeOptions: number[] = CommonService.pageSizeOptions;
   constructor(private _liveAnnouncer: LiveAnnouncer, private analyticsService: AnalyticsService, private service: ExStoreService) {
 
   }

@@ -3,10 +3,8 @@
   </div>
 </div>
 <div class="reportBody">
-  <button mat-raised-button class="exportButton" matTooltip="Click to download" (click)="serverDownload()">Export as
+  <button mat-raised-button class="exportButton" matTooltip="Click to download" (click)="exportAsExcel()">Export as
     Excel<mat-icon>save_alt</mat-icon></button>
-  <!-- <button mat-raised-button class="exportButton" matTooltip="Click to download" (click)="exportAsExcel()">Export as
-    Excel<mat-icon>save_alt</mat-icon></button> -->
   <table *ngIf="tReport != undefined" mat-table [dataSource]="dataSource" matSort
     (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" #TABLE>
 

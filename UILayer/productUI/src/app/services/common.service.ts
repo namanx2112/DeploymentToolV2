@@ -24,6 +24,9 @@ export class CommonService {
 
   }
 
+  static pageSizeOptions: number[] = [5, 10, 25, 100, 200];
+  static defaultPagesize: number = 100;
+
   static ConfigUrl: string = "./api/";
 
   static isValidEmail(email: string) {
