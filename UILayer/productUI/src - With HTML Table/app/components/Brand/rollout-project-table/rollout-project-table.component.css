@@ -1,0 +1,28 @@
+th,
+td {
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+    padding: 5px 2px;
+}
+
+.tTable {
+    display: table;
+    width: auto;
+}
+
+.table-container {
+    height: 100%;
+    overflow: auto;
+}
+
+.checkCell{
+    width: 50px;
+}
+
+.allCell{
+    width: 150px;
+}
+
+.tSpinner{
+    position: absolute;z-index: 222;margin-top: 15%;margin-left: 45%;
+}

@@ -6,7 +6,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
                 {{columns[index]}}
             </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" matTooltip="{{getCellVal(column, element[column])}}">
                 <span *ngIf="column != 'Store Number'"> {{getCellVal(column, element[column])}} </span>
                 <span *ngIf="column == 'Store Number'" (click)="openItem(element[column])"
                     matTooltip="Click to Open Store" class="openItem">{{getCellVal(column, element[column])}}</span>

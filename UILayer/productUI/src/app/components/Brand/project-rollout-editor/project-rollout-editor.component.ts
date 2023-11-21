@@ -104,7 +104,7 @@ export class ProjectRolloutEditorComponent {
     }
   }
 
-  showStore(ev: any){
+  showStore(ev: any) {
     this.openStore.emit(ev);
   }
 
@@ -200,14 +200,30 @@ export class ProjectRolloutEditorComponent {
     dialogRef = this.dialog.open(ProjectRolloutImportComponent, dialogConfig);
   }
 
+  canSubmitFirstPage() {
+    let can = false;
+    if (this.formControls["tProjectsRolloutName"].value != null && this.formControls["tProjectsRolloutName"].value != "") {
+      if (this.controlValues["aProjectsRolloutID"] > 0)
+        can = true;
+      else {
+        for (var indx in this.uploadingRows) {
+          if (this.uploadingRows[indx].items.length > 0)
+            can = true;
+        }
+      }
+    }
+    return can;
+  }
   canSubmit() {
     let can = false;
-    if (this.controlValues["aProjectsRolloutID"] > 0)
-      can = true;
-    else {
-      for (var indx in this.uploadingRows) {
-        if (this.uploadingRows[indx].items.length > 0)
-          can = true;
+    if (this.formControls["tProjectsRolloutName"].value != null && this.formControls["tProjectsRolloutName"].value != "") {
+      if (this.controlValues["aProjectsRolloutID"] > 0)
+        can = true;
+      else {
+        for (var indx in this.uploadingRows) {
+          if (this.uploadingRows[indx].items.length > 0)
+            can = true;
+        }
       }
     }
     return can;

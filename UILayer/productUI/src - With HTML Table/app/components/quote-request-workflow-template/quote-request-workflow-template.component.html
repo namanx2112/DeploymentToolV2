@@ -1,0 +1,47 @@
+<div class="tabsBody">
+    <div class="header"><mat-icon class="tIcon" (click)="goBack()">arrow_back_ios</mat-icon>Create New Quote Request Workflow</div>
+    <div class="controlPart grayWhiteTheme grayWhite" *ngIf="curTemplate != undefined">
+        <mat-label class="fleidLabel" [attr.for]="">Name of the Workflow</mat-label>
+        <mat-form-field class="curField" appearance="outline">
+            <input matInput [type]="'text'" [(ngModel)]="curTemplate.tTemplateName" (keydown)="onKeydown($event)">
+            <!-- <mat-icon *ngIf="curControl.icon != ''" matSuffix>{{curControl.icon}}</mat-icon> -->
+            <!-- <mat-error>{{getErrorMessage(curControl)}}</mat-error> -->
+        </mat-form-field>
+
+        <mat-label class="fleidLabel" [attr.for]="">Select Sections</mat-label>
+        <mat-form-field class="curField" appearance="outline">
+            <mat-select [formControl]="techCompControl" multiple [ngModel]="selectedTabs"
+                (valueChange)="onTechCompChange($event)">
+                <mat-select-trigger>
+                    {{(selectedTabs.length > 0) ? selectedTabs[0].tab_name : ''}}
+                    <span *ngIf="(techCompControl.value?.length || 0) > 1" class="example-additional-selection">
+                        (+{{(techCompControl.value?.length || 0) - 1}} {{techCompControl.value?.length === 2 ? 'other' :
+                        'others'}})
+                    </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let opt of techCompTabs" [value]="opt">{{opt.tab_name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-label class="fleidLabel" [attr.for]="">Select Fields</mat-label>
+        <div class="compFields">
+            <span class="headerLabel">Fields</span>
+            <div class="checkBoxFields">
+                <div *ngFor="let item of selectedTabs">
+                    <h5 class="checkboxTab">{{item.tab_name}}</h5>
+                    <mat-checkbox *ngFor="let fieldItem of getAllowedFields(item.fields)" color="primary"
+                        [checked]="isChecked(fieldItem.fieldUniqeName, item)"
+                        (change)="checkboxFieldChange($event, item, fieldItem)" class="fieldCheckbox">
+                        {{fieldItem.field_name}}
+                    </mat-checkbox>
+                </div>
+
+                <!-- <div class="addButton lightGray"><span>+</span>Add New Item</div> -->
+            </div>
+        </div>
+        <button mat-raised-button
+            class="buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base"
+            [disabled]="canSave()" (click)="submit()">Save</button>
+    </div>
+</div>

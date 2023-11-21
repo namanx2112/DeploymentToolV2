@@ -21,11 +21,9 @@ export class AdvancedSearchResultComponent {
   @Input()
   set reportParam(val: any) {
     this.tParams = val;
+    this.getReport();
     this._nBrandId = val.nBrandId;
     this._fromView = val.fromView;
-    setTimeout(() => {
-      this.getReport();
-    }, 10);
   }
   @Output() openStore = new EventEmitter<StoreSearchModel>();
   @Output() goBack = new EventEmitter<string>();
@@ -41,10 +39,6 @@ export class AdvancedSearchResultComponent {
   pageSizeOptions: number[] = CommonService.pageSizeOptions;
   tParams: any;
   constructor(private _liveAnnouncer: LiveAnnouncer, private analyticsService: AnalyticsService, private service: ExStoreService) {
-
-  }
-
-  ngafterviewinit() {
 
   }
 
@@ -96,15 +90,11 @@ export class AdvancedSearchResultComponent {
 
   loadTable() {
     this.columns = [];
-    console.log("Start LoadTable:" + new Date().toTimeString());
     for (var indx in this.tReport.reportTable[0]) {
       this.columns.push(indx);
     }
-    console.log("Start datasource:" + new Date().toTimeString());
-    this.dataSource = new MatTableDataSource(this.tReport.reportTable);    
-    console.log("Start Sort:" + new Date().toTimeString());
+    this.dataSource = new MatTableDataSource(this.tReport.reportTable);
     this.dataSource.sort = this.sort;
-    console.log("End LoadTable:" + new Date().toTimeString());
   }
 
   announceSortChange(sortState: Sort) {
@@ -131,7 +121,7 @@ export class AdvancedSearchResultComponent {
     this.dataSource.sort = this.sort;
   }
 
-  serverDownload() {
+  serverDownload(){
     let newParam = this.tParams;
     newParam.pageSize = this.pageSize.toString();
     newParam.currentPage = this.currentPage.toString();

@@ -1,0 +1,36 @@
+<div class="mat-elevation-z8  table-container">
+    <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 tTable" matSort #TbSortWithObject="matSort"
+        (matSortChange)="announceSortChange($event)">
+        <ng-container matColumnDef="select" *ngIf="needCheckBox">
+            <mat-header-cell *matHeaderCellDef class="checkCell">
+                <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="checkboxChange($event, row)"
+                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="nStoreExistStatus" *ngIf="needCheckBox">
+            <mat-header-cell *matHeaderCellDef class="checkCell">
+                Store exists
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                {{row["nStoreExistStatus"] == "1" ? 'Update': 'Add' }}
+            </mat-cell>
+        </ng-container>
+        <!-- table dynamic columns -->
+        <ng-container *ngFor="let column of columns;let index = index;" [matColumnDef]="column.columnDef">
+            <mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="{{ column.header }}" class="allCell">{{
+                column.header }}</mat-header-cell>
+            <mat-cell *matCellDef="let row" matTooltip="{{ getCellVal(column.columnDef, row[column.columnDef])}}">
+                {{ getCellVal(column.columnDef, row[column.columnDef])}}
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true;"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></mat-row>
+    </mat-table>
+</div>

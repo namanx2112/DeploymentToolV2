@@ -4,7 +4,8 @@
             <div class="curField">
                 <mat-label class="fleidLabel">{{myFields['tProjectsRolloutName'].field_name}}</mat-label>
                 <mat-form-field appearance="outline">
-                    <input matInput placeholder="Enter {{myFields['tProjectsRolloutName'].field_name}}" [formControl]="formControls['tProjectsRolloutName']"
+                    <input matInput placeholder="Enter {{myFields['tProjectsRolloutName'].field_name}}"
+                        [formControl]="formControls['tProjectsRolloutName']"
                         [(ngModel)]="controlValues.tProjectsRolloutName">
                 </mat-form-field>
             </div>
@@ -53,7 +54,8 @@
             <div class="curField">
                 <mat-label class="fleidLabel">{{myFields['tEstimateInstallTImePerStore'].field_name}}</mat-label>
                 <mat-form-field appearance="outline">
-                    <input type="text" matInput placeholder="Enter {{myFields['tEstimateInstallTImePerStore'].field_name}}"
+                    <input type="text" matInput
+                        placeholder="Enter {{myFields['tEstimateInstallTImePerStore'].field_name}}"
                         [formControl]="formControls['tEstimateInstallTImePerStore']"
                         [(ngModel)]="controlValues.tEstimateInstallTImePerStore">
                 </mat-form-field>
@@ -77,6 +79,10 @@
         </div>
     </div>
     <div class="actionButton">
+        <button [disabled]="!canSubmitFirstPage()" (click)="submitMe()" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Submit
+        </button>
         <button [disabled]="!cantMoveNext(1)" (click)="movePage(1)" mat-raised-button
             class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
             Next
@@ -88,15 +94,16 @@
         <div *ngFor="let key of uploadingRows; let index = index" class="uploadList">
             <span class="uName">{{key.name}}</span>
             <span *ngIf="this.uploadingRows[index].items.length > 0">
-                <button matTooltip="Click to remove uploaded file" (click)="deleteUploadItem(key.type, index)" class="btnFile">
+                <button matTooltip="Click to remove uploaded file" (click)="deleteUploadItem(key.type, index)"
+                    class="btnFile">
                     <mat-icon id="rmIcon">remove_circle</mat-icon>
                     <mat-icon id="fileIcon">insert_drive_file</mat-icon>
                 </button>
                 <span class="fileName">{{this.uploadingRows[index].fileName}}</span>
                 <span class="rowCount">{{this.uploadingRows[index].items.length}} Projects Selected</span>
             </span>
-            <button mat-raised-button (click)="uploadItem(key.type, index)" 
-            [className]="(this.uploadingRows[index].items.length > 0) ? 'mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base reUpload': 'mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base'">
+            <button mat-raised-button (click)="uploadItem(key.type, index)"
+                [className]="(this.uploadingRows[index].items.length > 0) ? 'mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base reUpload': 'mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base'">
                 {{(this.uploadingRows[index].items.length > 0) ? "ReUpload": "Upload"}}</button>
         </div>
     </div>

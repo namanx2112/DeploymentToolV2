@@ -1,0 +1,168 @@
+.curField,
+.curSingleField {
+    display: flex;
+    flex-direction: column;
+}
+
+.readOnlyField {
+    flex-direction: row !important;
+    height: 35px;
+}
+
+.curField {
+    width: 45%;
+}
+
+.curThreeField {
+    width: 30%;
+}
+
+.curSingleField {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.fieldGroup {
+    font-size: 18px;
+    margin: 10px 0px;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0px 1px;
+}
+
+.controlButton {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+}
+
+.closeButtonClass {
+    float: left;
+    min-width: 150px;
+}
+
+.dollarSymbol {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.dollarSymbolReadOnly {
+    font-size: 14px;
+    float: left;
+    margin-top: 0px;
+    margin-left: 0px;
+    font-weight: bold;
+}
+
+.buttonClass {
+    float: right;
+    width: 150px;
+}
+
+.exButton {
+    margin-left: 10px;
+}
+
+.readOnlyControl {
+    font-size: 14px;
+    float: right;
+    width: 50%;
+    overflow: hidden;
+}
+
+.readOnlyField .fleidLabel {
+    float: left;
+    width: 40%;
+    overflow: hidden;
+}
+
+.textAreaField {
+    height: 140px;
+}
+
+.uploadList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btnFile {
+    background-color: transparent;
+    border: 0px none;
+    width: 25px;
+    padding: 0px;
+    margin: 0px !important;
+    height: 30px;
+    cursor: pointer;
+}
+
+.btnFile:hover #fileIcon,
+.btnFile #rmIcon {
+    display: none;
+}
+
+.btnFile #fileIcon,
+.btnFile:hover #rmIcon {
+    display: block;
+}
+
+.uploadList>span,
+.uploadList button {
+    float: left;
+    margin: 25px 10px 10px 0px;
+}
+
+.uName {
+    font-weight: 600;
+}
+
+.reUpload {
+    background-color: gray;
+    color: #fff;
+}
+
+.fileName {
+    float: right;
+    font-weight: 500;
+    margin-left: 5px;
+    font-size: 12px;
+    width: calc(100% - 30px);
+}
+
+.rowCount {
+    float: right;
+    margin-left: 5px;
+    font-size: 12px;
+    width: calc(100% - 30px);
+    color: gray;
+}
+
+.actionButton {
+    margin-top: 30px;
+    padding: 0px 1px;
+}
+
+.rContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.rBody {
+    height: calc(100% - 80px);
+    overflow: auto;
+}
+
+.myProjects {
+    margin-top: 5px;
+    padding: 0px 5px 5px 0px;
+}

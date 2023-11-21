@@ -1,0 +1,18 @@
+<div class="projectHeader">
+    <h4 class="projHeader">{{title}}</h4>
+</div>
+<div class="projectBody">
+    <div *ngIf="excelData.length == 0" ngClass="{{dragAreaClass}}" DropZone (onFileDropped)="handleFileInput($event)">
+        <span><mat-icon class="uploadIcon">cloud_upload</mat-icon></span>
+        <input #file type="file" id="file" (change)="handleOneFile($event)">
+        <span class="msg">Drag and drop or <a (click)="file.click()">Choose file</a> to upload</span>
+        <span *ngIf="errorUpload != '' && fileToUpload != null" class="fileName">{{fileToUpload.name}}</span>
+        <span *ngIf="errorUpload != ''" class="errorUpload">{{errorUpload}}</span>
+        <span class="fileType">Excel format only</span>
+    </div>
+    <app-rollout-project-table *ngIf="excelData.length > 0" (SelectionChange)="SelectionChange($event)"
+        [request]="{items:excelData, needCheckBox: true }"></app-rollout-project-table>
+</div>
+
+<button type="submit" class="submitButton" mat-raised-button [disabled]="selectedItems.length == 0"
+    (click)="CreateNewStores()">Submit</button>

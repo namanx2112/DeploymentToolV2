@@ -1,0 +1,67 @@
+table {
+    width: 100%;
+    box-shadow: none;
+    white-space: nowrap;
+    border: 1px solid lightgray;
+}
+
+.header {
+    height: 40px;
+    width: 100%;
+    line-height: 35px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+tbody tr {
+    cursor: pointer;
+}
+
+.stickyHeader {
+    position: sticky !important;
+}
+
+th {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+td{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+th,
+td {
+    height: 52px;
+    text-align: left;
+    padding: 0px 16px;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.header .mat-icon {
+    height: auto;
+    line-height: 16px;
+    cursor: pointer;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.openItem {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.mat-paginator-sticky {
+    bottom: 0px;
+    position: sticky;
+    z-index: 10;
+}
