@@ -148,7 +148,7 @@ namespace DeploymentTool.Model
                     {
                         strReturn += Misc.Utilities.CreateStoreFromExcelForOrderStatusBoard(item.items, nBrandID, aProjectsRolloutID);
                     }
-                    else if (item.type == ProjectType.ArbysHPRolloutInstallation)
+                    else if (item.type == ProjectType.ArbysHPRollout)
                     {
                         strReturn += Misc.Utilities.CreateStoreFromExcelForHPRollout(item.items, nBrandID, aProjectsRolloutID);
                     }
