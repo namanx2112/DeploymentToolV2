@@ -1,5 +1,8 @@
-﻿using System;
+﻿using DeploymentTool.Misc;
+using ExcelDataReader;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -8,11 +11,39 @@ namespace DeploymentTool.Model
 
     public interface IProjectExcelFields
     {
+        IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew);
 
+        string getStoreNumber();
+
+        void setValues(int nExist, int? nProjectId, int? nStoreId);
     }
-    public class ProjectExcelFields: IProjectExcelFields
+    public class ProjectExcelFields : IProjectExcelFields
     {
         public int nBrandId { get; set; }
+        private Nullable<int> _nProjectId;
+        private Nullable<int> _nStoreId;
+        public Nullable<int> nProjectId
+        {
+            get
+            {
+                return _nProjectId == null ? 0 : _nProjectId;
+            }
+            set
+            {
+                _nProjectId = value;
+            }
+        }
+        public Nullable<int> nStoreId
+        {
+            get
+            {
+                return _nStoreId == null ? 0 : _nStoreId;
+            }
+            set
+            {
+                _nStoreId = value;
+            }
+        }
         public string tProjectType { get; set; }
         public string tStoreNumber { get; set; }
         public string tAddress { get; set; }
@@ -43,11 +74,111 @@ namespace DeploymentTool.Model
 
         public string tInstallStatus { get; set; }
 
+        public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
+        {
+            try
+            {
+                TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
+                DataTable dt = new DataTable();
+                try
+                {
+                    ProjectType nProjectType;
+                    string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
+                    string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
+                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
+                    {
+                        tProjectType = projectType;
+                        tStoreNumber = storeNumber;
+                        tProjectType = projectType;
+                        tStoreNumber = storeNumber;
+                        tAddress = reader.GetValue(dtNew.Columns.IndexOf("Address")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Address")).ToString() : "";
+                        tCity = reader.GetValue(dtNew.Columns.IndexOf("City")) != null ? reader.GetValue(dtNew.Columns.IndexOf("City")).ToString() : "";
+                        tState = reader.GetValue(dtNew.Columns.IndexOf("State")) != null ? reader.GetValue(dtNew.Columns.IndexOf("State")).ToString() : "";
+                        nDMAID = reader.GetValue(dtNew.Columns.IndexOf("DMA ID")) != null && reader.GetValue(dtNew.Columns.IndexOf("DMA ID")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("DMA ID"))) : 0;
+                        tDMA = reader.GetValue(dtNew.Columns.IndexOf("DMA")) != null ? reader.GetValue(dtNew.Columns.IndexOf("DMA")).ToString() : "";
+                        tRED = reader.GetValue(dtNew.Columns.IndexOf("RED")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RED")).ToString() : "";
+                        tCM = reader.GetValue(dtNew.Columns.IndexOf("CM")) != null ? reader.GetValue(dtNew.Columns.IndexOf("CM")).ToString() : "";
+                        tANE = reader.GetValue(dtNew.Columns.IndexOf("A&E")) != null ? reader.GetValue(dtNew.Columns.IndexOf("A&E")).ToString() : "";
+                        tRVP = reader.GetValue(dtNew.Columns.IndexOf("RVP")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RVP")).ToString() : "";
+                        tPrincipalPartner = reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")).ToString() : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Status")).ToString() != "")
+                            dStatus = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Status")));
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Open Store")) != null && reader.GetValue(dtNew.Columns.IndexOf("Open Store")).ToString() != "")
+                            dOpenStore = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store")));//default value
+
+                        tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
+
+                        nNumberOfTabletsPerStore = reader.GetValue(dtNew.Columns.IndexOf("# of tablets per store")) != null && reader.GetValue(dtNew.Columns.IndexOf("# of tablets per store")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("# of tablets per store"))) : 0;
+                        tEquipmentVendor = reader.GetValue(dtNew.Columns.IndexOf("Equipment Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Equipment Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Equipment Vendor"))) : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Ship Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Ship Date")).ToString() != "")
+                            dShipDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Ship Date")));
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")).ToString() != "")
+                            dRevisitDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")));
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Scheduled Install Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Scheduled Install Date")).ToString() != "")
+                            dInstallDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Scheduled Install Date")));
+                        tInstallationVendor = reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor"))) : "";
+                        tInstallStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    TraceUtility.ForceWriteException("ImportExceltoDatabase", HttpContext.Current, ex);
+                    //result = false;
+                }
+                finally
+                {
+                    //oledbConn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
+            }
+            return this;
+        }
+
+        public string getStoreNumber()
+        {
+            return this.tStoreNumber;
+        }
+
+        public void setValues(int nExist, int? nProjectId, int? nStoreId)
+        {
+            this.nStoreId = nStoreId;
+            this.nStoreExistStatus = nExist;
+            this.nProjectId = nProjectId;
+        }
     }
 
-    public class ProjectExcelFieldsOrderAccurcy: IProjectExcelFields
+    public class ProjectExcelFieldsOrderAccurcy : IProjectExcelFields
     {
         public int nBrandId { get; set; }
+        private Nullable<int> _nProjectId;
+        private Nullable<int> _nStoreId;
+        public Nullable<int> nProjectId
+        {
+            get
+            {
+                return _nProjectId == null ? 0 : _nProjectId;
+            }
+            set
+            {
+                _nProjectId = value;
+            }
+        }
+        public Nullable<int> nStoreId
+        {
+            get
+            {
+                return _nStoreId == null ? 0 : _nStoreId;
+            }
+            set
+            {
+                _nStoreId = value;
+            }
+        }
         public string tProjectType { get; set; }
         public string tStoreNumber { get; set; }
         public string tAddress { get; set; }
@@ -104,11 +235,145 @@ namespace DeploymentTool.Model
         public string tInstallNotes { get; set; }
         public string tInstallType { get; set; }
 
+        public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
+        {
+            try
+            {
+                TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
+                DataTable dt = new DataTable();
+                try
+                {
+                    ProjectType nProjectType;
+                    string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
+                    string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
+                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
+                    {
+                        tProjectType = projectType;
+                        tStoreNumber = storeNumber;
+                        tAddress = reader.GetValue(dtNew.Columns.IndexOf("Address")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Address")).ToString() : "";
+                        tCity = reader.GetValue(dtNew.Columns.IndexOf("City")) != null ? reader.GetValue(dtNew.Columns.IndexOf("City")).ToString() : "";
+                        tState = reader.GetValue(dtNew.Columns.IndexOf("State")) != null ? reader.GetValue(dtNew.Columns.IndexOf("State")).ToString() : "";
+                        nDMAID = reader.GetValue(dtNew.Columns.IndexOf("DMA ID")) != null && reader.GetValue(dtNew.Columns.IndexOf("DMA ID")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("DMA ID"))) : 0;
+                        tDMA = reader.GetValue(dtNew.Columns.IndexOf("DMA")) != null ? reader.GetValue(dtNew.Columns.IndexOf("DMA")).ToString() : "";
+                        tRED = reader.GetValue(dtNew.Columns.IndexOf("RED")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RED")).ToString() : "";
+                        tCM = reader.GetValue(dtNew.Columns.IndexOf("CM")) != null ? reader.GetValue(dtNew.Columns.IndexOf("CM")).ToString() : "";
+                        tANE = reader.GetValue(dtNew.Columns.IndexOf("A&E")) != null ? reader.GetValue(dtNew.Columns.IndexOf("A&E")).ToString() : "";
+                        tRVP = reader.GetValue(dtNew.Columns.IndexOf("RVP")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RVP")).ToString() : "";
+                        tPrincipalPartner = reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")).ToString() : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Status")).ToString() != "")
+                            dStatus = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Status")));
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Open Store")) != null && reader.GetValue(dtNew.Columns.IndexOf("Open Store")).ToString() != "")
+                            dOpenStore = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store")));//default value
+
+                        tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
+
+                        tOrderAccuracyVendor = reader.GetValue(dtNew.Columns.IndexOf("Order Accuracy Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Order Accuracy Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Order Accuracy Vendor"))) : "";
+                        tOrderAccuracyStatus = reader.GetValue(dtNew.Columns.IndexOf("Order Accuracy Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Order Accuracy Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Order Accuracy Status"))) : "";
+                        nBakeryPrinter = reader.GetValue(dtNew.Columns.IndexOf("Bakery Printer")) != null && reader.GetValue(dtNew.Columns.IndexOf("Bakery Printer")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("Bakery Printer"))) : 0;
+                        nDualCupLabel = reader.GetValue(dtNew.Columns.IndexOf("Dual Cup Label")) != null && reader.GetValue(dtNew.Columns.IndexOf("Dual Cup Label")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("Dual Cup Label"))) : 0;
+                        nDTExpo = reader.GetValue(dtNew.Columns.IndexOf("DT Expo")) != null && reader.GetValue(dtNew.Columns.IndexOf("DT Expo")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("DT Expo"))) : 0;
+                        nFCExpo = reader.GetValue(dtNew.Columns.IndexOf("FC Expo")) != null && reader.GetValue(dtNew.Columns.IndexOf("FC Expo")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("FC Expo"))) : 0;
+
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Ship Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Ship Date")).ToString() != "")
+                            dShipDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Ship Date")));
+
+                        tShippingCarrier = reader.GetValue(dtNew.Columns.IndexOf("Shipping Carrier")) != null && reader.GetValue(dtNew.Columns.IndexOf("Shipping Carrier")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Shipping Carrier"))) : "";
+                        tTrackingNumber = reader.GetValue(dtNew.Columns.IndexOf("Tracking Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Tracking Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Tracking Number"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Delivery Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Delivery Date")).ToString() != "")
+                            dDeliveryDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Delivery Date")));
+
+
+
+
+                        tInstallationVendor = reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor"))) : "";
+                        tInstallStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Install Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Date")).ToString() != "")
+                            dInstallDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Install Date")));
+
+                        tInstallTime = reader.GetValue(dtNew.Columns.IndexOf("Install Time")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Time")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Time"))) : "";
+                        tInstallTechNumber = reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number"))) : "";
+
+                        tManagerName = reader.GetValue(dtNew.Columns.IndexOf("Manager Name")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Name")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Name"))) : "";
+                        tManagerNumber = reader.GetValue(dtNew.Columns.IndexOf("Manager Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Number"))) : "";
+
+                        tManagerCheckout = reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout"))) : "";
+                        tPhotoDeliverables = reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")) != null && reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables"))) : "";
+
+                        tLeadTech = reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")) != null && reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Lead Tech"))) : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Install End")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install End")).ToString() != "")
+                            dInstallEnd = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Install End")));
+                        tSignoffs = reader.GetValue(dtNew.Columns.IndexOf("Signoffs")) != null && reader.GetValue(dtNew.Columns.IndexOf("Signoffs")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Signoffs"))) : "";
+                        tTestTransactions = reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")) != null && reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+                        tInstallProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")).ToString() != "")
+                            dRevisitDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")));
+
+                        tCost = reader.GetValue(dtNew.Columns.IndexOf("Cost")) != null && reader.GetValue(dtNew.Columns.IndexOf("Cost")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Cost"))) : "";
+                        tInstallNotes = reader.GetValue(dtNew.Columns.IndexOf("Install Notes")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Notes")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Notes"))) : "";
+                        tInstallType = reader.GetValue(dtNew.Columns.IndexOf("Install Type")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Type")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Type"))) : "";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    TraceUtility.ForceWriteException("ImportExceltoDatabase", HttpContext.Current, ex);
+                    //result = false;
+                }
+                finally
+                {
+                    //oledbConn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
+            }
+            return this;
+        }
+
+        public string getStoreNumber()
+        {
+            return this.tStoreNumber;
+        }
+        public void setValues(int nExist, int? nProjectId, int? nStoreId)
+        {
+            this.nStoreId = nStoreId;
+            this.nStoreExistStatus = nExist;
+            this.nProjectId = nProjectId;
+        }
     }
 
-    public class ProjectExcelFieldsOrderStatusBoard: IProjectExcelFields
+    public class ProjectExcelFieldsOrderStatusBoard : IProjectExcelFields
     {
         public int nBrandId { get; set; }
+        private Nullable<int> _nProjectId;
+        private Nullable<int> _nStoreId;
+        public Nullable<int> nProjectId
+        {
+            get
+            {
+                return _nProjectId == null ? 0 : _nProjectId;
+            }
+            set
+            {
+                _nProjectId = value;
+            }
+        }
+        public Nullable<int> nStoreId
+        {
+            get
+            {
+                return _nStoreId == null ? 0 : _nStoreId;
+            }
+            set
+            {
+                _nStoreId = value;
+            }
+        }
         public string tProjectType { get; set; }
         public string tStoreNumber { get; set; }
         public string tAddress { get; set; }
@@ -160,12 +425,141 @@ namespace DeploymentTool.Model
         public string tInstallNotes { get; set; }
         public string tInstallType { get; set; }
 
+        public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
+        {
+            try
+            {
+                TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
+                DataTable dt = new DataTable();
+                try
+                {
+                    ProjectType nProjectType;
+                    string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
+                    string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
+                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
+                    {
+                        tProjectType = projectType;
+                        tStoreNumber = storeNumber;
+                        tAddress = reader.GetValue(dtNew.Columns.IndexOf("Address")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Address")).ToString() : "";
+                        tCity = reader.GetValue(dtNew.Columns.IndexOf("City")) != null ? reader.GetValue(dtNew.Columns.IndexOf("City")).ToString() : "";
+                        tState = reader.GetValue(dtNew.Columns.IndexOf("State")) != null ? reader.GetValue(dtNew.Columns.IndexOf("State")).ToString() : "";
+                        nDMAID = reader.GetValue(dtNew.Columns.IndexOf("DMA ID")) != null && reader.GetValue(dtNew.Columns.IndexOf("DMA ID")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("DMA ID"))) : 0;
+                        tDMA = reader.GetValue(dtNew.Columns.IndexOf("DMA")) != null ? reader.GetValue(dtNew.Columns.IndexOf("DMA")).ToString() : "";
+                        tRED = reader.GetValue(dtNew.Columns.IndexOf("RED")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RED")).ToString() : "";
+                        tCM = reader.GetValue(dtNew.Columns.IndexOf("CM")) != null ? reader.GetValue(dtNew.Columns.IndexOf("CM")).ToString() : "";
+                        tANE = reader.GetValue(dtNew.Columns.IndexOf("A&E")) != null ? reader.GetValue(dtNew.Columns.IndexOf("A&E")).ToString() : "";
+                        tRVP = reader.GetValue(dtNew.Columns.IndexOf("RVP")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RVP")).ToString() : "";
+                        tPrincipalPartner = reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")).ToString() : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Status")).ToString() != "")
+                            dStatus = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Status")));
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Open Store")) != null && reader.GetValue(dtNew.Columns.IndexOf("Open Store")).ToString() != "")
+                            dOpenStore = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store")));//default value
+
+                        tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
+
+
+                        tOrderStatusBoardVendor = reader.GetValue(dtNew.Columns.IndexOf("Order Status Board Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Order Status Board Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Order Status Board Vendor"))) : "";
+                        tOrderStatusBoardStatus = reader.GetValue(dtNew.Columns.IndexOf("Order Status Board Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Order Status Board Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Order Status Board Status"))) : "";
+                        nOSB = reader.GetValue(dtNew.Columns.IndexOf("OSB")) != null && reader.GetValue(dtNew.Columns.IndexOf("OSB")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("OSB"))) : 0;
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Ship Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Ship Date")).ToString() != "")
+                            dShipDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Ship Date")));
+
+                        tShippingCarrier = reader.GetValue(dtNew.Columns.IndexOf("Shipping Carrier")) != null && reader.GetValue(dtNew.Columns.IndexOf("Shipping Carrier")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Shipping Carrier"))) : "";
+                        tTrackingNumber = reader.GetValue(dtNew.Columns.IndexOf("Tracking Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Tracking Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Tracking Number"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Delivery Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Delivery Date")).ToString() != "")
+                            dDeliveryDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Delivery Date")));
+
+
+
+
+                        tInstallationVendor = reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor"))) : "";
+                        tInstallStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Install Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Date")).ToString() != "")
+                            dInstallDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Install Date")));
+
+                        tInstallTime = reader.GetValue(dtNew.Columns.IndexOf("Install Time")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Time")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Time"))) : "";
+                        tInstallTechNumber = reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number"))) : "";
+
+                        tManagerName = reader.GetValue(dtNew.Columns.IndexOf("Manager Name")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Name")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Name"))) : "";
+                        tManagerNumber = reader.GetValue(dtNew.Columns.IndexOf("Manager Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Number"))) : "";
+
+                        tManagerCheckout = reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout"))) : "";
+                        tPhotoDeliverables = reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")) != null && reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables"))) : "";
+
+                        tLeadTech = reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")) != null && reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Lead Tech"))) : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Install End")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install End")).ToString() != "")
+                            dInstallEnd = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Install End")));
+                        tSignoffs = reader.GetValue(dtNew.Columns.IndexOf("Signoffs")) != null && reader.GetValue(dtNew.Columns.IndexOf("Signoffs")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Signoffs"))) : "";
+                        tTestTransactions = reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")) != null && reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+                        tInstallProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")).ToString() != "")
+                            dRevisitDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")));
+
+                        tCost = reader.GetValue(dtNew.Columns.IndexOf("Cost")) != null && reader.GetValue(dtNew.Columns.IndexOf("Cost")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Cost"))) : "";
+                        tInstallNotes = reader.GetValue(dtNew.Columns.IndexOf("Install Notes")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Notes")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Notes"))) : "";
+                        tInstallType = reader.GetValue(dtNew.Columns.IndexOf("Install Type")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Type")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Type"))) : "";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    TraceUtility.ForceWriteException("ImportExceltoDatabase", HttpContext.Current, ex);
+                    //result = false;
+                }
+                finally
+                {
+                    //oledbConn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
+            }
+            return this;
+        }
+
+        public string getStoreNumber()
+        {
+            return this.tStoreNumber;
+        }
+        public void setValues(int nExist, int? nProjectId, int? nStoreId)
+        {
+            this.nStoreId = nStoreId;
+            this.nStoreExistStatus = nExist;
+            this.nProjectId = nProjectId;
+        }
     }
     public class ProjectExcelFieldsHPRollout : IProjectExcelFields
     {
-        public Nullable<int> nProjectId { get; set; }
-        public Nullable<int> nStoreId { get; set; }
         public int nBrandId { get; set; }
+        private Nullable<int> _nProjectId;
+        private Nullable<int> _nStoreId;
+        public Nullable<int> nProjectId
+        {
+            get
+            {
+                return _nProjectId == null ? 0 : _nProjectId;
+            }
+            set
+            {
+                _nProjectId = value;
+            }
+        }
+        public Nullable<int> nStoreId
+        {
+            get
+            {
+                return _nStoreId == null ? 0 : _nStoreId;
+            }
+            set
+            {
+                _nStoreId = value;
+            }
+        }
         public string tProjectType { get; set; }
         public string tStoreNumber { get; set; }
         public string tAddress { get; set; }
@@ -226,11 +620,147 @@ namespace DeploymentTool.Model
         public string tInstallNotes { get; set; }
         public string tInstallType { get; set; }
 
+        public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
+        {
+            try
+            {
+                TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
+                DataTable dt = new DataTable();
+                try
+                {
+                    ProjectType nProjectType;
+                    string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
+                    string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
+                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
+                    {
+                        tProjectType = projectType;
+                        tStoreNumber = storeNumber;
+                        tAddress = reader.GetValue(dtNew.Columns.IndexOf("Address")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Address")).ToString() : "";
+                        tCity = reader.GetValue(dtNew.Columns.IndexOf("City")) != null ? reader.GetValue(dtNew.Columns.IndexOf("City")).ToString() : "";
+                        tState = reader.GetValue(dtNew.Columns.IndexOf("State")) != null ? reader.GetValue(dtNew.Columns.IndexOf("State")).ToString() : "";
+                        nDMAID = reader.GetValue(dtNew.Columns.IndexOf("DMA ID")) != null && reader.GetValue(dtNew.Columns.IndexOf("DMA ID")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("DMA ID"))) : 0;
+                        tDMA = reader.GetValue(dtNew.Columns.IndexOf("DMA")) != null ? reader.GetValue(dtNew.Columns.IndexOf("DMA")).ToString() : "";
+                        tRED = reader.GetValue(dtNew.Columns.IndexOf("RED")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RED")).ToString() : "";
+                        tCM = reader.GetValue(dtNew.Columns.IndexOf("CM")) != null ? reader.GetValue(dtNew.Columns.IndexOf("CM")).ToString() : "";
+                        tANE = reader.GetValue(dtNew.Columns.IndexOf("A&E")) != null ? reader.GetValue(dtNew.Columns.IndexOf("A&E")).ToString() : "";
+                        tRVP = reader.GetValue(dtNew.Columns.IndexOf("RVP")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RVP")).ToString() : "";
+                        tPrincipalPartner = reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")).ToString() : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Status")).ToString() != "")
+                            dStatus = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Status")));
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Open Store")) != null && reader.GetValue(dtNew.Columns.IndexOf("Open Store")).ToString() != "")
+                            dOpenStore = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store")));//default value
+
+                        tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
+
+
+                        tNetworkSwitchVendor = reader.GetValue(dtNew.Columns.IndexOf("Network Switch Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Network Switch Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Network Switch Vendor"))) : "";
+                        tNetworkSwitchStatus = reader.GetValue(dtNew.Columns.IndexOf("Network Switch Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Network Switch Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Network Switch Status"))) : "";
+                        tShipmenttoVendor = reader.GetValue(dtNew.Columns.IndexOf("Shipment to Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Shipment to Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Shipment to Vendor"))) : "";
+                        tSetupStatus = reader.GetValue(dtNew.Columns.IndexOf("Setup Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Setup Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Setup Status"))) : "";
+                        tNewSerialNumber = reader.GetValue(dtNew.Columns.IndexOf("New Serial Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("New Serial Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("New Serial Number"))) : "";
+                        tOldSerialNumber = reader.GetValue(dtNew.Columns.IndexOf("Old Serial Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Old Serial Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Old Serial Number"))) : "";
+                        tOldSwitchReturnStatus = reader.GetValue(dtNew.Columns.IndexOf("Old Switch Return Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Old Switch Return Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Old Switch Return Status"))) : "";
+                        tOldSwitchTracking = reader.GetValue(dtNew.Columns.IndexOf("Old Switch Tracking")) != null && reader.GetValue(dtNew.Columns.IndexOf("Old Switch Tracking")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Old Switch Tracking"))) : "";
+
+                        /////////////
+                        tImageMemoryVendor = reader.GetValue(dtNew.Columns.IndexOf("Image Memory Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Image Memory Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Image Memory Vendor"))) : "";
+                        tImageMemoryStatus = reader.GetValue(dtNew.Columns.IndexOf("Image Memory Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Image Memory Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Image Memory Status"))) : "";
+                        tShipmentTracking = reader.GetValue(dtNew.Columns.IndexOf("Shipment Tracking")) != null && reader.GetValue(dtNew.Columns.IndexOf("Shipment Tracking")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Shipment Tracking"))) : "";
+                        tReturnShipment = reader.GetValue(dtNew.Columns.IndexOf("Return Shipment")) != null && reader.GetValue(dtNew.Columns.IndexOf("Return Shipment")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Return Shipment"))) : "";
+                        tReturnShipmentTracking = reader.GetValue(dtNew.Columns.IndexOf("Return Shipment Tracking")) != null && reader.GetValue(dtNew.Columns.IndexOf("Return Shipment Tracking")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Return Shipment Tracking"))) : "";
+
+
+
+                        tInstallationVendor = reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor"))) : "";
+                        tInstallStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+
+                        dInstallDate = reader.ConvertMeToDateTime(dtNew, "Install Date");
+
+                        tInstallTime = reader.GetValue(dtNew.Columns.IndexOf("Install Time")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Time")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Time"))) : "";
+                        tInstallTechNumber = reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number"))) : "";
+
+                        tManagerName = reader.GetValue(dtNew.Columns.IndexOf("Manager Name")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Name")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Name"))) : "";
+                        tManagerNumber = reader.GetValue(dtNew.Columns.IndexOf("Manager Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Number"))) : "";
+
+                        tManagerCheckout = reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout"))) : "";
+                        tPhotoDeliverables = reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")) != null && reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables"))) : "";
+
+                        tLeadTech = reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")) != null && reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Lead Tech"))) : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Install End")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install End")).ToString() != "")
+                            dInstallEnd = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Install End")));
+                        tSignoffs = reader.GetValue(dtNew.Columns.IndexOf("Signoffs")) != null && reader.GetValue(dtNew.Columns.IndexOf("Signoffs")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Signoffs"))) : "";
+                        tTestTransactions = reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")) != null && reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+                        tInstallProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")).ToString() != "")
+                            dRevisitDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")));
+
+                        tCost = reader.GetValue(dtNew.Columns.IndexOf("Cost")) != null && reader.GetValue(dtNew.Columns.IndexOf("Cost")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Cost"))) : "";
+                        tInstallNotes = reader.GetValue(dtNew.Columns.IndexOf("Install Notes")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Notes")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Notes"))) : "";
+                        tInstallType = reader.GetValue(dtNew.Columns.IndexOf("Install Type")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Type")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Type"))) : "";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    TraceUtility.ForceWriteException("ImportExceltoDatabase", HttpContext.Current, ex);
+                    //result = false;
+                }
+                finally
+                {
+                    //oledbConn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
+            }
+            // return ip;
+            // return result;
+            return this;
+        }
+
+        public string getStoreNumber()
+        {
+            return this.tStoreNumber;
+        }
+
+        public void setValues(int nExist, int? nProjectId, int? nStoreId)
+        {
+            this.nStoreId = nStoreId;
+            this.nStoreExistStatus = nExist;
+            this.nProjectId = nProjectId;
+        }
     }
 
     public class ProjectExcelFieldsServerHandheld : IProjectExcelFields
     {
         public int nBrandId { get; set; }
+
+        private Nullable<int> _nProjectId;
+        private Nullable<int> _nStoreId;
+        public Nullable<int> nProjectId
+        {
+            get
+            {
+                return _nProjectId == null ? 0 : _nProjectId;
+            }
+            set
+            {
+                _nProjectId = value;
+            }
+        }
+        public Nullable<int> nStoreId
+        {
+            get
+            {
+                return _nStoreId == null ? 0 : _nStoreId;
+            }
+            set
+            {
+                _nStoreId = value;
+            }
+        }
         public string tProjectType { get; set; }
         public string tStoreNumber { get; set; }
         public string tAddress { get; set; }
@@ -287,7 +817,120 @@ namespace DeploymentTool.Model
         public string tInstallNotes { get; set; }
         public string tInstallType { get; set; }
 
+        public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
+        {
+            try
+            {
+                TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
+                DataTable dt = new DataTable();
+                try
+                {
+                    ProjectType nProjectType;
+                    string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
+                    string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
+                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
+                    {
+                        tProjectType = projectType;
+                        tStoreNumber = storeNumber;
+                        tAddress = reader.GetValue(dtNew.Columns.IndexOf("Address")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Address")).ToString() : "";
+                        tCity = reader.GetValue(dtNew.Columns.IndexOf("City")) != null ? reader.GetValue(dtNew.Columns.IndexOf("City")).ToString() : "";
+                        tState = reader.GetValue(dtNew.Columns.IndexOf("State")) != null ? reader.GetValue(dtNew.Columns.IndexOf("State")).ToString() : "";
+                        nDMAID = reader.GetValue(dtNew.Columns.IndexOf("DMA ID")) != null && reader.GetValue(dtNew.Columns.IndexOf("DMA ID")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("DMA ID"))) : 0;
+                        tDMA = reader.GetValue(dtNew.Columns.IndexOf("DMA")) != null ? reader.GetValue(dtNew.Columns.IndexOf("DMA")).ToString() : "";
+                        tRED = reader.GetValue(dtNew.Columns.IndexOf("RED")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RED")).ToString() : "";
+                        tCM = reader.GetValue(dtNew.Columns.IndexOf("CM")) != null ? reader.GetValue(dtNew.Columns.IndexOf("CM")).ToString() : "";
+                        tANE = reader.GetValue(dtNew.Columns.IndexOf("A&E")) != null ? reader.GetValue(dtNew.Columns.IndexOf("A&E")).ToString() : "";
+                        tRVP = reader.GetValue(dtNew.Columns.IndexOf("RVP")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RVP")).ToString() : "";
+                        tPrincipalPartner = reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")).ToString() : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Status")).ToString() != "")
+                            dStatus = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Status")));
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Open Store")) != null && reader.GetValue(dtNew.Columns.IndexOf("Open Store")).ToString() != "")
+                            dOpenStore = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store")));//default value
+
+                        tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
+
+
+                        tServerHandheldVendor = reader.GetValue(dtNew.Columns.IndexOf("Server Handheld Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Server Handheld Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Server Handheld Vendor"))) : "";
+                        tServerHandheldStatus = reader.GetValue(dtNew.Columns.IndexOf("Server Handheld Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Server Handheld Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Server Handheld Status"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Ship Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Ship Date")).ToString() != "")
+                            dShipDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Ship Date")));
+
+                        tShippingCarrier = reader.GetValue(dtNew.Columns.IndexOf("Shipping Carrier")) != null && reader.GetValue(dtNew.Columns.IndexOf("Shipping Carrier")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Shipping Carrier"))) : "";
+                        tTrackingNumber = reader.GetValue(dtNew.Columns.IndexOf("Tracking Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Tracking Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Tracking Number"))) : "";
+
+                        nTablets = reader.GetValue(dtNew.Columns.IndexOf("Tablets")) != null && reader.GetValue(dtNew.Columns.IndexOf("Tablets")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("Tablets"))) : 0;
+                        nFiveBayharger = reader.GetValue(dtNew.Columns.IndexOf("5 Bay Charger")) != null && reader.GetValue(dtNew.Columns.IndexOf("5 Bay Charger")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("5 Bay Charger"))) : 0;
+                        nShoulderStrap = reader.GetValue(dtNew.Columns.IndexOf("Shoulder Strap")) != null && reader.GetValue(dtNew.Columns.IndexOf("Shoulder Strap")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("Shoulder Strap"))) : 0;
+                        nProtectiveCase = reader.GetValue(dtNew.Columns.IndexOf("Protective Case")) != null && reader.GetValue(dtNew.Columns.IndexOf("Protective Case")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("Protective Case"))) : 0;
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Delivery Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Delivery Date")).ToString() != "")
+                            dDeliveryDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Delivery Date")));
+
+                        tServerHandheldCost = reader.GetValue(dtNew.Columns.IndexOf("Server Handheld Cost")) != null && reader.GetValue(dtNew.Columns.IndexOf("Server Handheld Cost")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Server Handheld Cost"))) : "";
+
+
+
+                        tInstallationVendor = reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor"))) : "";
+                        tInstallStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Install Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Date")).ToString() != "")
+                            dInstallDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Install Date")));
+
+                        tInstallTime = reader.GetValue(dtNew.Columns.IndexOf("Install Time")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Time")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Time"))) : "";
+                        tInstallTechNumber = reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number"))) : "";
+
+                        tManagerName = reader.GetValue(dtNew.Columns.IndexOf("Manager Name")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Name")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Name"))) : "";
+                        tManagerNumber = reader.GetValue(dtNew.Columns.IndexOf("Manager Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Number"))) : "";
+
+                        tManagerCheckout = reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout"))) : "";
+                        tPhotoDeliverables = reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")) != null && reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables"))) : "";
+
+                        tLeadTech = reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")) != null && reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Lead Tech"))) : "";
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Install End")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install End")).ToString() != "")
+                            dInstallEnd = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Install End")));
+                        tSignoffs = reader.GetValue(dtNew.Columns.IndexOf("Signoffs")) != null && reader.GetValue(dtNew.Columns.IndexOf("Signoffs")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Signoffs"))) : "";
+                        tTestTransactions = reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")) != null && reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+                        tInstallProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
+
+                        if (reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")).ToString() != "")
+                            dRevisitDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")));
+
+                        tCost = reader.GetValue(dtNew.Columns.IndexOf("Cost")) != null && reader.GetValue(dtNew.Columns.IndexOf("Cost")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Cost"))) : "";
+                        tInstallNotes = reader.GetValue(dtNew.Columns.IndexOf("Install Notes")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Notes")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Notes"))) : "";
+                        tInstallType = reader.GetValue(dtNew.Columns.IndexOf("Install Type")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Type")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Type"))) : "";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    TraceUtility.ForceWriteException("ImportExceltoDatabase", HttpContext.Current, ex);
+                    //result = false;
+                }
+                finally
+                {
+                    //oledbConn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
+            }
+            return this;
+        }
+
+        public string getStoreNumber()
+        {
+            return this.tStoreNumber;
+        }
+        public void setValues(int nExist, int? nProjectId, int? nStoreId)
+        {
+            this.nStoreId = nStoreId;
+            this.nStoreExistStatus = nExist;
+            this.nProjectId = nProjectId;
+        }
     }
+
     public class ProjectExcelFieldsSonic
     {
         public int nBrandId { get; set; }

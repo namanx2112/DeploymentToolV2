@@ -140,11 +140,11 @@ namespace DeploymentTool.Model
                 foreach (RolloutItem item in request.uploadingRows)
                 {
 
-                    if (item.type == ProjectType.OrderAccuracyInstallation)
+                    if (item.type == ProjectType.OrderAccuracy)
                     {
                         strReturn += Misc.Utilities.CreateNewStoresForOrderAccurcy(item.items, nBrandID, aProjectsRolloutID);
                     }
-                    else if (item.type == ProjectType.OrderStatusBoardInstallation)
+                    else if (item.type == ProjectType.OrderStatusBoard)
                     {
                         strReturn += Misc.Utilities.CreateStoreFromExcelForOrderStatusBoard(item.items, nBrandID, aProjectsRolloutID);
                     }

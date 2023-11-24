@@ -257,15 +257,17 @@ namespace DeploymentTool.Misc
                         tPramList.Add(new SqlParameter("@tInstallNotes", request.tInstallNotes));
                         tPramList.Add(new SqlParameter("@tInstallType", request.tInstallType));
                         tPramList.Add(new SqlParameter("@nProjectsRolloutID", aProjectsRolloutID));
-
-                        db.Database.ExecuteSqlCommand("exec sproc_CreateStoreFromExcelForOrderAccuracy @tStoreName,@tProjectType," +
+                        tPramList.Add(new SqlParameter("@nProjectId", request.nProjectId));
+                        tPramList.Add(new SqlParameter("@nStoreId", request.nStoreId));
+                        tPramList.Add(new SqlParameter("@nExistFlag", request.nStoreExistStatus));
+                        db.Database.ExecuteSqlCommand("exec sproc_CreateStoreFromExcelForOrderAccuracy @nProjectId,@nStoreId,@nExistFlag, @tStoreName,@tProjectType," +
                             "@tStoreNumber,@tAddress,@tCity,@tState,@nDMAID,@tDMA,@tRED,@tCM," +
                             "@tANE,@tRVP,@tPrincipalPartner,@dStatus,@dOpenStore,@tProjectStatus,@nCreatedBy,@nBrandId," +
                             "@tOrderAccuracyVendor,@tOrderAccuracyStatus,@nBakeryPrinter,@nDualCupLabel,@nDTExpo,@nFCExpo,@dShipDate,@tShippingCarrier,@tTrackingNumber,@dDeliveryDate," +
                             "@tInstallationVendor,@tInstallStatus,@dInstallDate,@tInstallTime,@tInstallTechNumber,@tManagerName,@tManagerNumber," +
                             "@tManagerCheckout,@tPhotoDeliverables,@tLeadTech,@dInstallEnd,@tSignoffs,@tTestTransactions,@tInstallProjectStatus," +
                             "@dRevisitDate,@tCost,@tInstallNotes,@tInstallType,@nProjectsRolloutID  "
-                            , tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
+                            , tPramList[47], tPramList[48], tPramList[49], tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
                             tPramList[6], tPramList[7], tPramList[8], tPramList[9], tPramList[10], tPramList[11], tPramList[12], tPramList[13],
                             tPramList[14], tPramList[15], tPramList[16], tPramList[17], tPramList[18], tPramList[19], tPramList[20], tPramList[21],
                             tPramList[22], tPramList[23], tPramList[24], tPramList[25], tPramList[26], tPramList[27], tPramList[28], tPramList[29],
@@ -358,14 +360,17 @@ namespace DeploymentTool.Misc
                         tPramList.Add(new SqlParameter("@tInstallNotes", request.tInstallNotes));
                         tPramList.Add(new SqlParameter("@tInstallType", request.tInstallType));
                         tPramList.Add(new SqlParameter("@nProjectsRolloutID", aProjectsRolloutID));
-                        db.Database.ExecuteSqlCommand("exec sproc_CreateStoreFromExcelForOrderStatusBoard @tStoreName,@tProjectType," +
+                        tPramList.Add(new SqlParameter("@nProjectId", request.nProjectId));
+                        tPramList.Add(new SqlParameter("@nStoreId", request.nStoreId));
+                        tPramList.Add(new SqlParameter("@nExistFlag", request.nStoreExistStatus));
+                        db.Database.ExecuteSqlCommand("exec sproc_CreateStoreFromExcelForOrderStatusBoard @nProjectId,@nStoreId,@nExistFlag, @tStoreName,@tProjectType," +
                             "@tStoreNumber,@tAddress,@tCity,@tState,@nDMAID,@tDMA,@tRED,@tCM," +
                             "@tANE,@tRVP,@tPrincipalPartner,@dStatus,@dOpenStore,@tProjectStatus,@nCreatedBy,@nBrandId," +
                             "@tOrderStatusBoardVendor,@tOrderStatusBoardStatus,@nOSB,@dShipDate,@tShippingCarrier,@tTrackingNumber,@dDeliveryDate," +
                             "@tInstallationVendor,@tInstallStatus,@dInstallDate,@tInstallTime,@tInstallTechNumber,@tManagerName,@tManagerNumber," +
                             "@tManagerCheckout,@tPhotoDeliverables,@tLeadTech,@dInstallEnd,@tSignoffs,@tTestTransactions,@tInstallProjectStatus," +
                             "@dRevisitDate,@tCost,@tInstallNotes,@tInstallType,@nProjectsRolloutID  "
-                            , tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
+                            , tPramList[44], tPramList[45], tPramList[46],tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
                             tPramList[6], tPramList[7], tPramList[8], tPramList[9], tPramList[10], tPramList[11], tPramList[12], tPramList[13],
                             tPramList[14], tPramList[15], tPramList[16], tPramList[17], tPramList[18], tPramList[19], tPramList[20], tPramList[21],
                             tPramList[22], tPramList[23], tPramList[24], tPramList[25], tPramList[26], tPramList[27], tPramList[28], tPramList[29],
@@ -459,7 +464,10 @@ namespace DeploymentTool.Misc
                         tPramList.Add(new SqlParameter("@tInstallNotes", request.tInstallNotes));
                         tPramList.Add(new SqlParameter("@tInstallType", request.tInstallType));
                         tPramList.Add(new SqlParameter("@nProjectsRolloutID", aProjectsRolloutID));
-                        db.Database.ExecuteSqlCommand(" exec sproc_CreateStoreFromExcelForServerHandheld @tStoreName,@tProjectType," +
+                        tPramList.Add(new SqlParameter("@nProjectId", request.nProjectId));
+                        tPramList.Add(new SqlParameter("@nStoreId", request.nStoreId));
+                        tPramList.Add(new SqlParameter("@nExistFlag", request.nStoreExistStatus));
+                        db.Database.ExecuteSqlCommand(" exec sproc_CreateStoreFromExcelForServerHandheld @nProjectId,@nStoreId,@nExistFlag, @tStoreName,@tProjectType," +
                             "@tStoreNumber,@tAddress,@tCity,@tState,@nDMAID,@tDMA,@tRED,@tCM," +
                             "@tANE,@tRVP,@tPrincipalPartner,@dStatus,@dOpenStore,@tProjectStatus,@nCreatedBy,@nBrandId," +
                             "@tServerHandheldVendor,@tServerHandheldStatus,@dShipDate,@tShippingCarrier,@tTrackingNumber,@nTablets,@nFiveBayharger," +
@@ -467,7 +475,7 @@ namespace DeploymentTool.Misc
                             "@tInstallationVendor,@tInstallStatus,@dInstallDate,@tInstallTime,@tInstallTechNumber,@tManagerName,@tManagerNumber," +
                             "@tManagerCheckout,@tPhotoDeliverables,@tLeadTech,@dInstallEnd,@tSignoffs,@tTestTransactions,@tInstallProjectStatus," +
                             "@dRevisitDate,@tCost,@tInstallNotes,@tInstallType,@nProjectsRolloutID "
-                            , tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
+                            , tPramList[48], tPramList[49], tPramList[50], tPramList[0], tPramList[1], tPramList[2], tPramList[3], tPramList[4], tPramList[5],
                             tPramList[6], tPramList[7], tPramList[8], tPramList[9], tPramList[10], tPramList[11], tPramList[12], tPramList[13],
                             tPramList[14], tPramList[15], tPramList[16], tPramList[17], tPramList[18], tPramList[19], tPramList[20], tPramList[21],
                             tPramList[22], tPramList[23], tPramList[24], tPramList[25], tPramList[26], tPramList[27], tPramList[28], tPramList[29],
