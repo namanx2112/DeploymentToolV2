@@ -60,6 +60,7 @@ export class ProjectRolloutEditorComponent {
   myFields: Dictionary<Fields>;
   showPage: number = 0;
   uploadingRows: any[] = [];
+  submitted: boolean = false;
   constructor(private dialog: MatDialog,
     private homeService: HomeService, private datePipe: DatePipe
     , private dateAdapter: DateAdapter<Date>, public commonService: CommonService,
@@ -188,6 +189,7 @@ export class ProjectRolloutEditorComponent {
       title: "Import " + CommonService.getProjectName(projType) + " Projects",
       projectType: projType,
       curBrand: this.curBrand,
+      nRolloutId: (this.controlValues["aProjectsRolloutID"] != null) ? this.controlValues["aProjectsRolloutID"] : 0,
       onSubmit: function (pType: any, data: any, fileName: string) {
         cThis.uploadingRows[index].items = data;
         cThis.uploadingRows[index].fileName = fileName;
@@ -240,6 +242,7 @@ export class ProjectRolloutEditorComponent {
     this.controlValues["nBrandID"] = this.curBrand.aBrandId;
     this.rolloutService.Create(this.controlValues).subscribe(x => {
       alert(x);
+      this.submitted = false;
       this.returnBack.emit({ closed: true });
     });
   }

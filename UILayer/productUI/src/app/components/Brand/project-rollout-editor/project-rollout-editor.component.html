@@ -128,10 +128,8 @@
         </mat-tab-group>
     </div>
     <div class="actionButton">
-        <button [disabled]="!canSubmit()" (click)="submitMe()" mat-raised-button
-            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
-            Submit
-        </button>
+        <app-ex-button [disabled]="!canSubmit()" (Clicked)="submitMe()" [label]="'Submit'" class="exButton buttonClass"
+            [submitted]="submitted"></app-ex-button>
         <button (click)="movePage(-1)" mat-raised-button
             class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
             Back

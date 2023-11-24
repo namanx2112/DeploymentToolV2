@@ -41,7 +41,7 @@ export class RolloutProjectTableComponent {
   displayedColumns: string[] = [];
   needCheckBox: boolean = false;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private _liveAnnouncer: LiveAnnouncer, private storeService: ExStoreService, 
+  constructor(private _liveAnnouncer: LiveAnnouncer, private storeService: ExStoreService,
     private commonService: CommonService, private loadingService: LoadingService) {
 
   }
@@ -54,6 +54,7 @@ export class RolloutProjectTableComponent {
     // multiple language, you would internationalize these strings.
     // Furthermore, you can customize the message to add additional
     // details about the values being sorted.
+    this.loading(true);
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
@@ -61,16 +62,17 @@ export class RolloutProjectTableComponent {
     }
 
     var compare = function (a: any, b: any) {
-      if (a[sortState.active].toLowerCase() < b[sortState.active].toLowerCase()) {
+      if (a[sortState.active] < b[sortState.active]) {
         return -1;
       }
-      if (a[sortState.active].toLowerCase() > b[sortState.active].toLowerCase()) {
+      if (a[sortState.active] > b[sortState.active]) {
         return 1;
       }
       return 0;
     }
     this.dataSource = new MatTableDataSource(this.items.sort(compare));
     this.dataSource.sort = this.sort;
+    this.loading(false);
   }
 
   checkboxChange(event: any, row: any) {
@@ -85,16 +87,27 @@ export class RolloutProjectTableComponent {
     return numSelected === numRows;
   }
 
+  loading(load: boolean) {
+    if (load)
+      setTimeout(() => {
+        this.loadingService.startLoading();
+      }, 1);
+    else
+      setTimeout(() => {
+        this.loadingService.stopLoading();
+      }, 1);
+  }
+
   toggleAllRows() {
-    this.loadingService.startLoading();
+    this.loading(true);
     if (this.isAllSelected()) {
       this.selection.clear();
-      this.loadingService.stopLoading();
+      this.loading(false);
       this.SelectionChange.emit(this.selection.selected);
       return;
     }
     this.selection.select(...this.dataSource.data);
-    this.loadingService.stopLoading();
+    this.loading(false);
     this.SelectionChange.emit(this.selection.selected);
   }
 
@@ -128,7 +141,7 @@ export class RolloutProjectTableComponent {
       this.displayedColumns.push("nStoreExistStatus");
     }
     for (var cName in this.items[0]) {
-      if (cName.toLowerCase() == "nbrandid")
+      if (cName == "nBrandId" || cName == "nProjectId" || cName == "nStoreId")
         continue;
       if (this.needCheckBox && cName == "nStoreExistStatus")
         continue;

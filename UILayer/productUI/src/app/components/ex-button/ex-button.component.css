@@ -1,0 +1,43 @@
+.mover {
+    width: 30px;
+    height: 30px;
+    background: #c8252c;
+    border-radius: 50%;
+    animation: move 5s infinite ease-in-out;
+    display: none;
+}
+
+.sLabel {
+    position: absolute;
+    margin-top: -25px;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.submitted .mover {
+    display: block !important;
+}
+
+@keyframes move {
+
+    20%,
+    100% {
+        opacity: 0;
+        transform: translate(90px, 0);
+    }
+
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+}
+
+.area {
+    width: 100px;
+    height: 30px;
+    margin: 0 auto;
+}

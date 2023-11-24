@@ -15,19 +15,19 @@
             </mat-cell>
         </ng-container>
         <ng-container matColumnDef="nStoreExistStatus" *ngIf="needCheckBox">
-            <mat-header-cell *matHeaderCellDef class="checkCell">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="checkCell">
                 Store exists
             </mat-header-cell>
             <mat-cell *matCellDef="let row">
-                {{row["nStoreExistStatus"] == "1" ? 'Update': 'Add' }}
+                {{row["nStoreExistStatus"] == "1" ? 'Update' : (row["nStoreExistStatus"] == "2") ? 'Re-link' : 'Add' }}
             </mat-cell>
         </ng-container>
         <!-- table dynamic columns -->
         <ng-container *ngFor="let column of columns;let index = index;" [matColumnDef]="column.columnDef">
             <mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="{{ column.header }}" class="allCell">{{
                 column.header }}</mat-header-cell>
-            <mat-cell *matCellDef="let row" matTooltip="{{ getCellVal(column.columnDef, row[column.columnDef])}}">
-                {{ getCellVal(column.columnDef, row[column.columnDef])}}
+            <mat-cell *matCellDef="let row">
+                {{ row[column.columnDef]}}
             </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true;"></mat-header-row>

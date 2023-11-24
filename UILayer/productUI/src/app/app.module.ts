@@ -96,6 +96,7 @@ import { ProjectGlimpseComponent } from './components/Brand/project-glimpse/proj
 import { RolloutOwnProjectsComponent } from './components/Brand/rollout-own-projects/rollout-own-projects.component';
 import { SearchFieldsComponent } from './components/Brand/search-fields/search-fields.component';
 import { AdvancedSearchResultTryComponent } from './components/Brand/advanced-search-result-try/advanced-search-result-try.component';
+import { ExButtonComponent } from './components/ex-button/ex-button.component';
 
 @NgModule({
     declarations: [
@@ -167,6 +168,7 @@ import { AdvancedSearchResultTryComponent } from './components/Brand/advanced-se
         RolloutOwnProjectsComponent,
         SearchFieldsComponent,
         AdvancedSearchResultTryComponent,
+        ExButtonComponent,
     ],
     providers: [
         {

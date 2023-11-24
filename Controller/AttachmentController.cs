@@ -160,7 +160,7 @@ namespace DeploymentTool.Controller
 
                     int nBrandIdTemp = 0;
                     var filesReadToProvider = await request.Content.ReadAsMultipartAsync();
-                    int nProjectType = 0;
+                    ProjectType nProjectType = 0;
                     foreach (var stream in filesReadToProvider.Contents)
                     {
                         string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
@@ -168,11 +168,11 @@ namespace DeploymentTool.Controller
                         {
                             string FileName = fRequest[0];
                             nBrandIdTemp = Convert.ToInt32(fRequest[1]);
-                            nProjectType = Convert.ToInt32(fRequest[2]);
+                            Enum.TryParse(fRequest[2], true, out nProjectType);
                             break;
                         }
                     }
-                    var output = db.Database.SqlQuery<string>("select top 1 tBrandName from tblBrand with (nolock) where aBrandId=@aBrandId ", new SqlParameter("@aBrandId", nBrandIdTemp)).FirstOrDefault();
+                    //var output = db.Database.SqlQuery<string>("select top 1 tBrandName from tblBrand with (nolock) where aBrandId=@aBrandId ", new SqlParameter("@aBrandId", nBrandIdTemp)).FirstOrDefault();
 
                     //if (output.Contains("Buffalo Wild Wings"))
                     //{
@@ -229,7 +229,7 @@ namespace DeploymentTool.Controller
                     //else
                     {
 
-                        if (nProjectType == 12)//12,'Order Accuracy Installation'
+                        if (nProjectType == ProjectType.OrderAccuracyInstallation)//12,'Order Accuracy Installation'
                         {
                             List<ProjectExcelFieldsOrderAccurcy> fields = new List<ProjectExcelFieldsOrderAccurcy>();
 
@@ -254,7 +254,7 @@ namespace DeploymentTool.Controller
                                     }
 
                                     TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
-                                    ImportExceltoDatabaseOrderAccuracy(fields, strFilePath, nBrandId);                                    
+                                    ImportExceltoDatabaseOrderAccuracy(fields, strFilePath, nBrandId);
 
                                 }
                             }
@@ -264,7 +264,7 @@ namespace DeploymentTool.Controller
                                 Content = new ObjectContent<List<ProjectExcelFieldsOrderAccurcy>>(fields, new JsonMediaTypeFormatter())
                             };
                         }
-                        else if (nProjectType == 13)//(13,'Order Status Board Installation'
+                        else if (nProjectType == ProjectType.OrderStatusBoardInstallation)//(13,'Order Status Board Installation'
                         {
                             List<ProjectExcelFieldsOrderStatusBoard> fields = new List<ProjectExcelFieldsOrderStatusBoard>();
                             foreach (var stream in filesReadToProvider.Contents)
@@ -287,7 +287,7 @@ namespace DeploymentTool.Controller
                                     }
 
                                     TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
-                                    ImportExceltoDatabaseOrderStatusBoard(fields, strFilePath, nBrandId);                                   
+                                    ImportExceltoDatabaseOrderStatusBoard(fields, strFilePath, nBrandId);
 
                                 }
                             }
@@ -297,7 +297,7 @@ namespace DeploymentTool.Controller
                                 Content = new ObjectContent<List<ProjectExcelFieldsOrderStatusBoard>>(fields, new JsonMediaTypeFormatter())
                             };
                         }
-                        else if (nProjectType == 14)//14,'Arbys HP Rollout Installation'
+                        else if (nProjectType == ProjectType.ArbysHPRollout)//14,'Arbys HP Rollout Installation'
                         {
                             List<ProjectExcelFieldsHPRollout> fields = new List<ProjectExcelFieldsHPRollout>();
 
@@ -309,6 +309,7 @@ namespace DeploymentTool.Controller
                                 {
                                     string FileName = fRequest[0];
                                     int nBrandId = Convert.ToInt32(fRequest[1]);
+                                    int nRolloutId = Convert.ToInt32(fRequest[3]);
                                     var fileBytes = await stream.ReadAsByteArrayAsync();
                                     string URL = HttpRuntime.AppDomainAppPath;
 
@@ -322,7 +323,7 @@ namespace DeploymentTool.Controller
                                     }
 
                                     TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
-                                    ImportExceltoDatabaseHPRollout(fields, strFilePath, nBrandId);
+                                    fields = ImportExceltoDatabaseHPRollout(strFilePath, nBrandId, nRolloutId);
 
                                 }
                             }
@@ -332,7 +333,7 @@ namespace DeploymentTool.Controller
                                 Content = new ObjectContent<List<ProjectExcelFieldsHPRollout>>(fields, new JsonMediaTypeFormatter())
                             };
                         }
-                        else if (nProjectType == 10)//10,'Server Handheld'
+                        else if (nProjectType == ProjectType.ServerHandheld)//10,'Server Handheld'
                         {
                             List<ProjectExcelFieldsServerHandheld> fields = new List<ProjectExcelFieldsServerHandheld>();
 
@@ -367,7 +368,7 @@ namespace DeploymentTool.Controller
                                 Content = new ObjectContent<List<ProjectExcelFieldsServerHandheld>>(fields, new JsonMediaTypeFormatter())
                             };
                         }
-                        else 
+                        else
                         {
                             List<ProjectExcelFieldsSonic> fields = new List<ProjectExcelFieldsSonic>();
 
@@ -392,7 +393,7 @@ namespace DeploymentTool.Controller
 
                                     TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
                                     ImportExceltoDatabaseSonic(fields, strFilePath, nBrandId);
-                                    
+
 
                                 }
                             }
@@ -459,7 +460,7 @@ namespace DeploymentTool.Controller
                                     if (projectType != "" && storeNumber != "")
                                     {
                                         SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", storeNumber);
-                                         objProjectExcel = new ProjectExcelFieldsOrderAccurcy();
+                                        objProjectExcel = new ProjectExcelFieldsOrderAccurcy();
 
                                         var output = db.Database.SqlQuery<int>("(select count(*) from tblProject with (nolock) where nstoreid in(Select aStoreID from tblstore with (nolock) where tstoreNumber= @tStoreNumber  and nBrandID=@nBrandId))  ", new SqlParameter("@tStoreNumber", storeNumber), new SqlParameter("@nBrandId", nBrandId)).FirstOrDefault();
 
@@ -727,142 +728,19 @@ namespace DeploymentTool.Controller
             // return result;
         }
 
-        void ImportExceltoDatabaseHPRollout(List<ProjectExcelFieldsHPRollout> fields, string strFilePath, int nBrandId)
+        List<ProjectExcelFieldsHPRollout> ImportExceltoDatabaseHPRollout(string strFilePath, int nBrandId, int nRolloutId)
         {
             //  
-
+            List<ProjectExcelFieldsHPRollout> fields = new List<ProjectExcelFieldsHPRollout>();
             try
             {
                 TraceUtility.WriteTrace("AttachmentController", "Starting ImportExceltoDatabase");
-                ProjectExcelFieldsHPRollout objProjectExcel = new ProjectExcelFieldsHPRollout();
-                DataTable dt = new DataTable();
                 try
                 {
-                    DataTable dtNew = new DataTable();
-                    // oledbConn.Open();
-                    using (var stream = File.Open(strFilePath, FileMode.Open, FileAccess.Read))
-                    {
-                        // Auto-detect format, supports:
-                        //  - Binary Excel files (2.0-2003 format; *.xls)
-                        //  - OpenXml Excel files (2007 format; *.xlsx, *.xlsb)
-                        using (var reader = ExcelReaderFactory.CreateReader(stream))
-                        {
-                            // Choose one of either 1 or 2:
-
-                            // 1. Use the reader methods
-                            do
-                            {
-                                reader.Read();
-                                int ColumnCount = reader.FieldCount;
-                                for (int i = 0; i < ColumnCount; i++)
-                                {
-                                    string ColumnName = reader.GetValue(i).ToString();
-                                    if (!dtNew.Columns.Contains(ColumnName))
-                                    { dtNew.Columns.Add(ColumnName); }
-                                }
-                                while (reader.Read())
-                                {
-
-                                    // reader.GetDouble(0);
-                                    string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
-                                    string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
-
-                                    if (projectType != "" && storeNumber != "")
-                                    {
-                                        SqlParameter tModuleNameParam = new SqlParameter("@tStoreNumber", storeNumber);
-                                        objProjectExcel = new ProjectExcelFieldsHPRollout();
-                                        var output = db.Database.SqlQuery<int>("(select count(*) from tblProject with (nolock) where nstoreid in(Select aStoreID from tblstore with (nolock) where tstoreNumber= @tStoreNumber  and nBrandID=@nBrandId))  ", new SqlParameter("@tStoreNumber", storeNumber), new SqlParameter("@nBrandId", nBrandId)).FirstOrDefault();
-                                      
-                                        if (output == 0)
-                                            objProjectExcel.nStoreExistStatus = 0;
-                                        else if (output == 1)
-                                            objProjectExcel.nStoreExistStatus = 1;
-                                        else
-                                            objProjectExcel.nStoreExistStatus = 2;
-
-                                        if (objProjectExcel.nStoreExistStatus != 2)
-                                        {
-
-                                            objProjectExcel.tProjectType = projectType;
-                                            objProjectExcel.tStoreNumber = storeNumber;
-                                            objProjectExcel.tAddress = reader.GetValue(dtNew.Columns.IndexOf("Address")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Address")).ToString() : "";
-                                            objProjectExcel.tCity = reader.GetValue(dtNew.Columns.IndexOf("City")) != null ? reader.GetValue(dtNew.Columns.IndexOf("City")).ToString() : "";
-                                            objProjectExcel.tState = reader.GetValue(dtNew.Columns.IndexOf("State")) != null ? reader.GetValue(dtNew.Columns.IndexOf("State")).ToString() : "";
-                                            objProjectExcel.nDMAID = reader.GetValue(dtNew.Columns.IndexOf("DMA ID")) != null && reader.GetValue(dtNew.Columns.IndexOf("DMA ID")).ToString() != "" ? Convert.ToInt32(reader.GetValue(dtNew.Columns.IndexOf("DMA ID"))) : 0;
-                                            objProjectExcel.tDMA = reader.GetValue(dtNew.Columns.IndexOf("DMA")) != null ? reader.GetValue(dtNew.Columns.IndexOf("DMA")).ToString() : "";
-                                            objProjectExcel.tRED = reader.GetValue(dtNew.Columns.IndexOf("RED")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RED")).ToString() : "";
-                                            objProjectExcel.tCM = reader.GetValue(dtNew.Columns.IndexOf("CM")) != null ? reader.GetValue(dtNew.Columns.IndexOf("CM")).ToString() : "";
-                                            objProjectExcel.tANE = reader.GetValue(dtNew.Columns.IndexOf("A&E")) != null ? reader.GetValue(dtNew.Columns.IndexOf("A&E")).ToString() : "";
-                                            objProjectExcel.tRVP = reader.GetValue(dtNew.Columns.IndexOf("RVP")) != null ? reader.GetValue(dtNew.Columns.IndexOf("RVP")).ToString() : "";
-                                            objProjectExcel.tPrincipalPartner = reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Principal Partner")).ToString() : "";
-                                            if (reader.GetValue(dtNew.Columns.IndexOf("Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Status")).ToString() != "")
-                                                objProjectExcel.dStatus = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Status")));
-                                            if (reader.GetValue(dtNew.Columns.IndexOf("Open Store")) != null && reader.GetValue(dtNew.Columns.IndexOf("Open Store")).ToString() != "")
-                                                objProjectExcel.dOpenStore = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Open Store")));//default value
-
-                                            objProjectExcel.tProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Project Status")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Status")).ToString() : "";
-
-
-                                            objProjectExcel.tNetworkSwitchVendor = reader.GetValue(dtNew.Columns.IndexOf("Network Switch Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Network Switch Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Network Switch Vendor"))) : "";
-                                            objProjectExcel.tNetworkSwitchStatus = reader.GetValue(dtNew.Columns.IndexOf("Network Switch Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Network Switch Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Network Switch Status"))) : "";
-                                            objProjectExcel.tShipmenttoVendor = reader.GetValue(dtNew.Columns.IndexOf("Shipment to Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Shipment to Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Shipment to Vendor"))) : "";
-                                            objProjectExcel.tSetupStatus = reader.GetValue(dtNew.Columns.IndexOf("Setup Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Setup Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Setup Status"))) : "";
-                                            objProjectExcel.tNewSerialNumber = reader.GetValue(dtNew.Columns.IndexOf("New Serial Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("New Serial Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("New Serial Number"))) : "";
-                                            objProjectExcel.tOldSerialNumber = reader.GetValue(dtNew.Columns.IndexOf("Old Serial Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Old Serial Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Old Serial Number"))) : "";
-                                            objProjectExcel.tOldSwitchReturnStatus = reader.GetValue(dtNew.Columns.IndexOf("Old Switch Return Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Old Switch Return Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Old Switch Return Status"))) : "";
-                                            objProjectExcel.tOldSwitchTracking = reader.GetValue(dtNew.Columns.IndexOf("Old Switch Tracking")) != null && reader.GetValue(dtNew.Columns.IndexOf("Old Switch Tracking")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Old Switch Tracking"))) : "";
-
-                                            /////////////
-                                            objProjectExcel.tImageMemoryVendor = reader.GetValue(dtNew.Columns.IndexOf("Image Memory Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Image Memory Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Image Memory Vendor"))) : "";
-                                            objProjectExcel.tImageMemoryStatus = reader.GetValue(dtNew.Columns.IndexOf("Image Memory Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Image Memory Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Image Memory Status"))) : "";
-                                            objProjectExcel.tShipmentTracking = reader.GetValue(dtNew.Columns.IndexOf("Shipment Tracking")) != null && reader.GetValue(dtNew.Columns.IndexOf("Shipment Tracking")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Shipment Tracking"))) : "";
-                                            objProjectExcel.tReturnShipment = reader.GetValue(dtNew.Columns.IndexOf("Return Shipment")) != null && reader.GetValue(dtNew.Columns.IndexOf("Return Shipment")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Return Shipment"))) : "";
-                                            objProjectExcel.tReturnShipmentTracking = reader.GetValue(dtNew.Columns.IndexOf("Return Shipment Tracking")) != null && reader.GetValue(dtNew.Columns.IndexOf("Return Shipment Tracking")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Return Shipment Tracking"))) : "";
-
-
-
-                                            objProjectExcel.tInstallationVendor = reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")) != null && reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Installation Vendor"))) : "";
-                                            objProjectExcel.tInstallStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
-
-                                            objProjectExcel.dInstallDate = reader.ConvertMeToDateTime(dtNew, "Install Date");
-
-                                            objProjectExcel.tInstallTime = reader.GetValue(dtNew.Columns.IndexOf("Install Time")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Time")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Time"))) : "";
-                                            objProjectExcel.tInstallTechNumber = reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Tech Number"))) : "";
-
-                                            objProjectExcel.tManagerName = reader.GetValue(dtNew.Columns.IndexOf("Manager Name")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Name")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Name"))) : "";
-                                            objProjectExcel.tManagerNumber = reader.GetValue(dtNew.Columns.IndexOf("Manager Number")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Number")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Number"))) : "";
-
-                                            objProjectExcel.tManagerCheckout = reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")) != null && reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Manager Checkout"))) : "";
-                                            objProjectExcel.tPhotoDeliverables = reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")) != null && reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Photo Deliverables"))) : "";
-
-                                            objProjectExcel.tLeadTech = reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")) != null && reader.GetValue(dtNew.Columns.IndexOf("Lead Tech")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Lead Tech"))) : "";
-                                            if (reader.GetValue(dtNew.Columns.IndexOf("Install End")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install End")).ToString() != "")
-                                                objProjectExcel.dInstallEnd = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Install End")));
-                                            objProjectExcel.tSignoffs = reader.GetValue(dtNew.Columns.IndexOf("Signoffs")) != null && reader.GetValue(dtNew.Columns.IndexOf("Signoffs")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Signoffs"))) : "";
-                                            objProjectExcel.tTestTransactions = reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")) != null && reader.GetValue(dtNew.Columns.IndexOf("Test Transactions")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
-                                            objProjectExcel.tInstallProjectStatus = reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Project Status")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Status"))) : "";
-
-                                            if (reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")) != null && reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")).ToString() != "")
-                                                objProjectExcel.dRevisitDate = Convert.ToDateTime(reader.GetValue(dtNew.Columns.IndexOf("Revisit Date")));
-
-                                            objProjectExcel.tCost = reader.GetValue(dtNew.Columns.IndexOf("Cost")) != null && reader.GetValue(dtNew.Columns.IndexOf("Cost")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Cost"))) : "";
-                                            objProjectExcel.tInstallNotes = reader.GetValue(dtNew.Columns.IndexOf("Install Notes")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Notes")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Notes"))) : "";
-                                            objProjectExcel.tInstallType = reader.GetValue(dtNew.Columns.IndexOf("Install Type")) != null && reader.GetValue(dtNew.Columns.IndexOf("Install Type")).ToString() != "" ? Convert.ToString(reader.GetValue(dtNew.Columns.IndexOf("Install Type"))) : "";
-
-
-                                            fields.Add(objProjectExcel);
-                                        }
-                                    }
-                                }
-                            } while (reader.NextResult());
-
-                            // 2. Use the AsDataSet extension method
-                            //  var result = reader.AsDataSet();
-
-                            // The result of each spreadsheet is in result.Tables
-                        }
-                    }
-
+                    ProjectFieldProcessor fieldProcessor = new ProjectFieldProcessor();
+                    string strStoreNumbers;
+                    Dictionary<string, ProjectExcelFieldsHPRollout> foundFields = fieldProcessor.ImportExceltoDatabaseHPRollout(strFilePath, out strStoreNumbers);
+                    fields = fieldProcessor.UpdateStoreExistFields(foundFields, (int)ProjectType.ArbysHPRollout, strStoreNumbers, nBrandId, nRolloutId);
                 }
                 catch (Exception ex)
                 {
@@ -878,8 +756,7 @@ namespace DeploymentTool.Controller
             {
                 TraceUtility.ForceWriteException("ImportExceltoDatabase2", HttpContext.Current, ex);
             }
-            // return ip;
-            // return result;
+            return fields;
         }
 
         void ImportExceltoDatabaseServerHandheld(List<ProjectExcelFieldsServerHandheld> fields, string strFilePath, int nBrandId)
@@ -928,7 +805,7 @@ namespace DeploymentTool.Controller
                                         var output = db.Database.SqlQuery<int>("(select count(*) from tblProject with (nolock) where nstoreid in(Select aStoreID from tblstore with (nolock) where tstoreNumber= @tStoreNumber  and nBrandID=@nBrandId))  ", new SqlParameter("@tStoreNumber", storeNumber), new SqlParameter("@nBrandId", nBrandId)).FirstOrDefault();
                                         objProjectExcel = new ProjectExcelFieldsServerHandheld();
 
-                                        if (output==0)
+                                        if (output == 0)
                                             objProjectExcel.nStoreExistStatus = 0;
                                         else if (output == 1)
                                             objProjectExcel.nStoreExistStatus = 1;

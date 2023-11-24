@@ -20,12 +20,15 @@ export class ProjectRolloutImportComponent {
   title: string;
   fileName: string;
   errorUpload: string = "";
+  allItems: number = 0;
+  nRolloutId: number;
   constructor(private service: ExStoreService, @Inject(MAT_DIALOG_DATA) public data: any) {
     if (typeof data != 'undefined') {
       this.projectType = data.projectType;
       this._curBrand = data.curBrand;
       this.onSubmit = data.onSubmit;
       this.title = data.title;
+      this.nRolloutId = data.nRolloutId;
     }
     this.dragAreaClass = "uploadDiv blackBorder lightGray";
     this.excelData = [];
@@ -44,7 +47,8 @@ export class ProjectRolloutImportComponent {
       if (this.fileToUpload.name.toLowerCase().endsWith("xlsx")) {
         this.fileName = this.fileToUpload.name;
         this.errorUpload = "";
-        this.service.UploadStore(this.fileToUpload, this._curBrand.aBrandId, this.projectType).subscribe((data: ProjectExcel[]) => {
+        let eParam = this.projectType + String.fromCharCode(1000) + this.nRolloutId;
+        this.service.UploadStore(this.fileToUpload, this._curBrand.aBrandId, eParam).subscribe((data: ProjectExcel[]) => {
           if (data.length == 0)
             this.errorUpload = "Cannot process this file, please check the file format";
           else
@@ -65,6 +69,7 @@ export class ProjectRolloutImportComponent {
       data[indx].nBrandId = this._curBrand.aBrandId;
       this.excelData.push(data[indx]);
     }
+    this.allItems = data.length;
   }
 
   SelectionChange(items: ProjectExcel[]) {

@@ -15,6 +15,24 @@
 .submitButton {
     float: right;
     margin: 20px;
+    position: relative;
+}
+
+.submitButton span{
+    position: absolute;
+    margin-top: -18px;
+    width: 100%;
+    text-align: center;
+    color: gray;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.tLabel{
+    float: left;
+    color: gray;
+    font-size: 12px;
+    margin-left: 20px;
 }
 
 a {

@@ -163,6 +163,8 @@ namespace DeploymentTool.Model
     }
     public class ProjectExcelFieldsHPRollout : IProjectExcelFields
     {
+        public Nullable<int> nProjectId { get; set; }
+        public Nullable<int> nStoreId { get; set; }
         public int nBrandId { get; set; }
         public string tProjectType { get; set; }
         public string tStoreNumber { get; set; }

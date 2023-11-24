@@ -788,6 +788,7 @@
     <Compile Include="Model\ProjectComponent.cs" />
     <Compile Include="Model\ProjectComponentUpload.cs" />
     <Compile Include="Model\ProjectExcelFields.cs" />
+    <Compile Include="Model\ProjectFieldProcessor.cs" />
     <Compile Include="Model\ProjectPortfolio.cs" />
     <Compile Include="Model\ProjectRolloutModel.cs" />
     <Compile Include="Model\PurchaseOrderPreviewTemplate.cs" />
