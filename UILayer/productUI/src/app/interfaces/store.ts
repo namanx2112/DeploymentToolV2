@@ -122,7 +122,7 @@ export interface StoreNetworkSwitch {
     nOldSwitchReturnStatus: number,
 }
 export interface StoreImageMemory {
-    aImageMemoryId: number,
+    aProjectImageOrMemoryID: number,
     nStoreId: number,
     nProjectID: number,
     nVendor: number,

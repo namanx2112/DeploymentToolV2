@@ -340,6 +340,58 @@ export class StoreTechComponentsComponent {
           });
         }
         break;
+      case TabType.StoreImageMemory:
+        let aProjectImageOrMemoryID = (this.tValues[tab.tab_name]["aProjectImageOrMemoryID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectImageOrMemoryID"]) : 0;
+        if (aProjectImageOrMemoryID > 0) {
+          this.techCompService.UpdateImageMemory(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateImageMemory(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
+      case TabType.StoreNetworkSwitch:
+        let aProjectNetworkSwtichID = (this.tValues[tab.tab_name]["aProjectNetworkSwtichID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectNetworkSwtichID"]) : 0;
+        if (aProjectNetworkSwtichID > 0) {
+          this.techCompService.UpdateNetworkSwitch(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateNetworkSwitch(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
+      case TabType.StoreOrderAccuracy:
+        let aProjectOrderAccuracyID = (this.tValues[tab.tab_name]["aProjectOrderAccuracyID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectOrderAccuracyID"]) : 0;
+        if (aProjectOrderAccuracyID > 0) {
+          this.techCompService.UpdateOrderAccuracy(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateOrderAccuracy(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
+      case TabType.StoreOrderStatusBoard:
+        let aProjectOrderStatusBoardID = (this.tValues[tab.tab_name]["aProjectOrderStatusBoardID"]) ? parseInt(this.tValues[tab.tab_name]["aProjectOrderStatusBoardID"]) : 0;
+        if (aProjectOrderStatusBoardID > 0) {
+          this.techCompService.UpdateOrderStatusBoard(fieldValues).subscribe((x: any) => {
+            callBack(fieldValues);
+          });
+        }
+        else {
+          this.techCompService.CreateOrderStatusBoard(fieldValues).subscribe((x: any) => {
+            callBack(x);
+          });
+        }
+        break;
     }
   }
 }
