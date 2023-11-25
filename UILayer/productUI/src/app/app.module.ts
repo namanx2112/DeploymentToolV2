@@ -97,6 +97,9 @@ import { RolloutOwnProjectsComponent } from './components/Brand/rollout-own-proj
 import { SearchFieldsComponent } from './components/Brand/search-fields/search-fields.component';
 import { AdvancedSearchResultTryComponent } from './components/Brand/advanced-search-result-try/advanced-search-result-try.component';
 import { ExButtonComponent } from './components/ex-button/ex-button.component';
+import {TableVirtualScrollModule} from 'ng-table-virtual-scroll';
+import {CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [
@@ -207,7 +210,10 @@ import { ExButtonComponent } from './components/ex-button/ex-button.component';
         MatTooltipModule,
         MatButtonToggleModule,
         MatNativeDateModule,
-        MatExpansionModule
+        MatExpansionModule,
+        ScrollingModule,
+        TableVirtualScrollModule,
+        CdkVirtualScrollViewport
     ]
 })
 export class AppModule { }

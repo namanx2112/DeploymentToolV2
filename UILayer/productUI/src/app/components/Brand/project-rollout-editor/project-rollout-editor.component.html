@@ -74,7 +74,7 @@
         <div class="myProjects" *ngIf="controlValues != undefined && controlValues['aProjectsRolloutID'] !=undefined
         && controlValues['aProjectsRolloutID'] != '0'">
             <h4>Store List</h4>
-            <app-rollout-own-projects (openStore)="showStore($event)"
+            <app-rollout-own-projects (openStore)="showStore($event)" style="height: 300px;display: block;"
                 [request]="{nBrandId: curBrand.aBrandId, nProjectsRolloutID: controlValues['aProjectsRolloutID']}"></app-rollout-own-projects>
         </div>
     </div>
@@ -120,7 +120,7 @@
 </div>
 <div *ngIf="showPage == 3" class="rContainer">
     <div class="rBody">
-        <mat-tab-group dynamicHeight>
+        <mat-tab-group id="tabgroup">
             <mat-tab *ngFor="let key of uploadingRows; let index = index" label="{{key.name}}">
                 <app-rollout-project-table
                     [request]="{items: uploadingRows[index].items, projectType: uploadingRows[index].type, nBrandId: curBrand.aBrandId}"></app-rollout-project-table>

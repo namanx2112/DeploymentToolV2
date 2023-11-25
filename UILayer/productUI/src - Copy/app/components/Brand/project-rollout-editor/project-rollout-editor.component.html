@@ -1,0 +1,138 @@
+<div *ngIf="showPage == 1" class="rContainer">
+    <div class="rBody">
+        <form [formGroup]="formGroup" class="form">
+            <div class="curField">
+                <mat-label class="fleidLabel">{{myFields['tProjectsRolloutName'].field_name}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="Enter {{myFields['tProjectsRolloutName'].field_name}}"
+                        [formControl]="formControls['tProjectsRolloutName']"
+                        [(ngModel)]="controlValues.tProjectsRolloutName">
+                </mat-form-field>
+            </div>
+            <div class="curSingleField textAreaField">
+                <mat-label class="fleidLabel">{{myFields['tProjectsRolloutDescription'].field_name}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <textarea matInput placeholder="Enter {{myFields['tProjectsRolloutDescription'].field_name}}"
+                        [formControl]="formControls['tProjectsRolloutDescription']"
+                        [(ngModel)]="controlValues.tProjectsRolloutDescription"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="curField">
+                <mat-label class="fleidLabel">{{myFields['cDeploymentCost'].field_name}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <input type="number" matInput placeholder="Enter {{myFields['cDeploymentCost'].field_name}}"
+                        [formControl]="formControls['cDeploymentCost']" [(ngModel)]="controlValues.cDeploymentCost">
+                    <span matPrefix class="dollarSymbol">$&nbsp;</span>
+                </mat-form-field>
+            </div>
+            <div class="curField">
+                <mat-label class="fleidLabel">{{myFields['cHardwareCost'].field_name}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <input type="number" matInput placeholder="Enter {{myFields['cHardwareCost'].field_name}}"
+                        [formControl]="formControls['cHardwareCost']" [(ngModel)]="controlValues.cHardwareCost">
+                    <span matPrefix class="dollarSymbol">$&nbsp;</span>
+                </mat-form-field>
+            </div>
+            <div class="curField">
+                <mat-label class="fleidLabel">{{myFields['dtStartDate'].field_name}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="pickerStart" placeholder="Choose a start date" #pickerInput
+                        [formControl]="formControls['dtStartDate']" />
+                    <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStart></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="curField">
+                <mat-label class="fleidLabel">{{myFields['dtEndDate'].field_name}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="pickerEnd" placeholder="Choose an end date" #pickerInput
+                        [formControl]="formControls['dtEndDate']" />
+                    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEnd></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="curField">
+                <mat-label class="fleidLabel">{{myFields['tEstimateInstallTImePerStore'].field_name}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <input type="text" matInput
+                        placeholder="Enter {{myFields['tEstimateInstallTImePerStore'].field_name}}"
+                        [formControl]="formControls['tEstimateInstallTImePerStore']"
+                        [(ngModel)]="controlValues.tEstimateInstallTImePerStore">
+                </mat-form-field>
+            </div>
+            <div class="curField">
+                <mat-label class="fleidLabel">{{myFields['nStatus'].field_name}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <mat-select [compareWith]="compareDropDown" [formControl]="formControls['nStatus']"
+                        [(value)]="controlValues.nStatus">
+                        <mat-option *ngFor="let opt of myFields['nStatus'].dropDownOptions"
+                            [value]="opt.aDropdownId">{{opt.tDropdownText}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+        <div class="myProjects" *ngIf="controlValues != undefined && controlValues['aProjectsRolloutID'] !=undefined
+        && controlValues['aProjectsRolloutID'] != '0'">
+            <h4>Store List</h4>
+            <app-rollout-own-projects (openStore)="showStore($event)"
+                [request]="{nBrandId: curBrand.aBrandId, nProjectsRolloutID: controlValues['aProjectsRolloutID']}"></app-rollout-own-projects>
+        </div>
+    </div>
+    <div class="actionButton">
+        <button [disabled]="!canSubmitFirstPage()" (click)="submitMe()" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Submit
+        </button>
+        <button [disabled]="!cantMoveNext(1)" (click)="movePage(1)" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Next
+        </button>
+    </div>
+</div>
+<div *ngIf="showPage == 2" class="rContainer">
+    <div class="rBody">
+        <div *ngFor="let key of uploadingRows; let index = index" class="uploadList">
+            <span class="uName">{{key.name}}</span>
+            <span *ngIf="this.uploadingRows[index].items.length > 0">
+                <button matTooltip="Click to remove uploaded file" (click)="deleteUploadItem(key.type, index)"
+                    class="btnFile">
+                    <mat-icon id="rmIcon">remove_circle</mat-icon>
+                    <mat-icon id="fileIcon">insert_drive_file</mat-icon>
+                </button>
+                <span class="fileName">{{this.uploadingRows[index].fileName}}</span>
+                <span class="rowCount">{{this.uploadingRows[index].items.length}} Projects Selected</span>
+            </span>
+            <button mat-raised-button (click)="uploadItem(key.type, index)"
+                [className]="(this.uploadingRows[index].items.length > 0) ? 'mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base reUpload': 'mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base'">
+                {{(this.uploadingRows[index].items.length > 0) ? "ReUpload": "Upload"}}</button>
+        </div>
+    </div>
+    <div class="actionButton">
+        <button [disabled]="!cantMoveNext(2)" (click)="movePage(1)" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Next
+        </button>
+        <button (click)="movePage(-1)" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Back
+        </button>
+    </div>
+</div>
+<div *ngIf="showPage == 3" class="rContainer">
+    <div class="rBody">
+        <mat-tab-group dynamicHeight>
+            <mat-tab *ngFor="let key of uploadingRows; let index = index" label="{{key.name}}">
+                <app-rollout-project-table
+                    [request]="{items: uploadingRows[index].items, projectType: uploadingRows[index].type, nBrandId: curBrand.aBrandId}"></app-rollout-project-table>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div class="actionButton">
+        <app-ex-button [disabled]="!canSubmit()" (Clicked)="submitMe()" [label]="'Submit'" class="exButton buttonClass"
+            [submitted]="submitted"></app-ex-button>
+        <button (click)="movePage(-1)" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Back
+        </button>
+    </div>
+</div>

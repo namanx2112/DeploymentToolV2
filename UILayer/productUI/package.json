@@ -32,6 +32,7 @@
     "inputmask": "5.0.5",
     "js-sha256": "^0.10.1",
     "moment": "^2.29.4",
+    "ng-table-virtual-scroll": "^1.6.0",
     "node-sass": "^9.0.0",
     "primeng": "^16.0.2",
     "quill-delta-to-html": "^0.12.1",

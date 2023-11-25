@@ -34,7 +34,7 @@ namespace DeploymentTool.Model
     {
         public string tStoreNumber { get; set; }
         public string tStoreDetails { get; set; }
-        public DateTime dtGoliveDate { get; set; }
+        public Nullable<DateTime> dtGoliveDate { get; set; }
         public string tProjectManager { get; set; }
         public string tProjectType { get; set; }
         public string tFranchise { get; set; }

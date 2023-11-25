@@ -1,0 +1,8 @@
+<button [disabled]="disabled" (click)="buttonClicked($event)" mat-raised-button
+    [ngClass]="submitted ? 'buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base submitted': 
+'buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base'">
+    <div class="area">
+        <div class="mover"></div>
+    </div>
+    <span class="sLabel">{{submitted? 'Wait' :'Submit'}}</span>
+</button>

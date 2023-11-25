@@ -1,20 +1,39 @@
 <div class="reportBody">
-    <table *ngIf="reportTable != undefined" mat-table [dataSource]="dataSource" matSort
-        (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" #TABLE>
+    <cdk-virtual-scroll-viewport *ngIf="reportTable != undefined" itemSize="48" style="height: 100%;">
+        <table>
+            <thead class="stickyHeader">
+                <tr>
+                    <th *ngFor="let col of columns" matTooltip="{{ col }}">{{col}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *cdkVirtualFor="let row of reportTable" (click)="openItem(row['Store #'])">
+                    <td *ngFor="let col of columns">
+                        {{row[col]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-        <ng-container *ngFor="let column of columns;let index = index;" matColumnDef="{{column}}">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
-                {{columns[index]}}
-            </th>
-            <td mat-cell *matCellDef="let element" matTooltip="{{getCellVal(column, element[column])}}">
-                <span *ngIf="(column != 'Store Number' && column != 'StoreNo' && column != 'Store #')"> {{getCellVal(column, element[column])}}
-                </span>
-                <span *ngIf="(column == 'Store Number' || column == 'StoreNo' || column == 'Store #')" (click)="openItem(element[column])"
-                    matTooltip="Click to Open Store" class="openItem">{{getCellVal(column, element[column])}}</span>
-            </td>
-        </ng-container>
+        <!-- <table *ngIf="reportTable != undefined" mat-table [dataSource]="dataSource" matSort
+            (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" #TABLE>
 
-        <tr mat-header-row *matHeaderRowDef="columns;sticky: true;"></tr>
-        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-    </table>
+            <ng-container *ngFor="let column of columns;let index = index;" matColumnDef="{{column}}">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+                    {{columns[index]}}
+                </th>
+                <td mat-cell *matCellDef="let element" matTooltip="{{getCellVal(column, element[column])}}">
+                    <span *ngIf="(column != 'Store Number' && column != 'StoreNo' && column != 'Store #')">
+                        {{getCellVal(column, element[column])}}
+                    </span>
+                    <span *ngIf="(column == 'Store Number' || column == 'StoreNo' || column == 'Store #')"
+                        (click)="openItem(element[column])" matTooltip="Click to Open Store"
+                        class="openItem">{{getCellVal(column, element[column])}}</span>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columns;sticky: true;"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+        </table> -->
+    </cdk-virtual-scroll-viewport>
 </div>

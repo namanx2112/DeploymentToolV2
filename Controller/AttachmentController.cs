@@ -172,61 +172,60 @@ namespace DeploymentTool.Controller
                             break;
                         }
                     }
-                    //var output = db.Database.SqlQuery<string>("select top 1 tBrandName from tblBrand with (nolock) where aBrandId=@aBrandId ", new SqlParameter("@aBrandId", nBrandIdTemp)).FirstOrDefault();
+                    if (nProjectType <= 0)
+                    {
 
-                    //if (output.Contains("Buffalo Wild Wings"))
-                    //{
-                    //    List<ProjectExcelFields> fields = new List<ProjectExcelFields>();
+                        List<ProjectExcelFields> fields = new List<ProjectExcelFields>();
 
 
-                    //    foreach (var stream in filesReadToProvider.Contents)
-                    //    {
-                    //        string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
-                    //        if (fRequest.Length > 2)
-                    //        {
-                    //            string FileName = fRequest[0];
-                    //            int nBrandId = Convert.ToInt32(fRequest[1]);                                
-                    //            var fileBytes = await stream.ReadAsByteArrayAsync();
-                    //            string URL = HttpRuntime.AppDomainAppPath;
+                        foreach (var stream in filesReadToProvider.Contents)
+                        {
+                            string[] fRequest = stream.Headers.ContentDisposition.FileName.Replace("\"", "").Split((char)1000);
+                            if (fRequest.Length > 2)
+                            {
+                                string FileName = fRequest[0];
+                                int nBrandId = Convert.ToInt32(fRequest[1]);
+                                var fileBytes = await stream.ReadAsByteArrayAsync();
+                                string URL = HttpRuntime.AppDomainAppPath;
 
-                    //            string strFilePath = URL + @"Attachments\" + FileName;
+                                string strFilePath = URL + @"Attachments\" + FileName;
 
-                    //            TraceUtility.WriteTrace("AttachmentController", "UploadStore:strFilePath:" + strFilePath);
-                    //            using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
-                    //            {
-                    //                bw.Write(fileBytes);
-                    //                bw.Close();
-                    //            }
+                                TraceUtility.WriteTrace("AttachmentController", "UploadStore:strFilePath:" + strFilePath);
+                                using (System.IO.BinaryWriter bw = new BinaryWriter(File.Open(strFilePath, FileMode.Create)))
+                                {
+                                    bw.Write(fileBytes);
+                                    bw.Close();
+                                }
 
-                    //            TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
-                    //            ImportExceltoDatabase(fields, strFilePath, nBrandId);
-                    //            /* fields.Add(new ProjectExcelFields() {
-                    //                 tProjectType = "RELOCATION",
-                    //                 tStoreNumber = "6937",
-                    //                 tAddress = "461 Columbia Ave",
-                    //                 tCity = "Lexington",
-                    //                 tState = "SC",
-                    //                 nDMAID = 546,
-                    //                 tDMA = "COLUMBIA SC",
-                    //                 tRED = "Michael Landru",
-                    //                 tCM = "Kevin Dalpiaz",
-                    //                 tANE = "",
-                    //                 tRVP = "Linda Wiseley",
-                    //                 tPrincipalPartner = "MICHAEL IRONS",
-                    //                 dStatus = DateTime.Now,
-                    //                 dOpenStore = DateTime.Now,
-                    //                 tProjectStatus = "Under Construction"
-                    //             });*/
+                                TraceUtility.WriteTrace("AttachmentController", "UploadStore:Written:" + strFilePath);
+                                ImportExceltoDatabase(fields, strFilePath, nBrandId);
+                                /* fields.Add(new ProjectExcelFields() {
+                                     tProjectType = "RELOCATION",
+                                     tStoreNumber = "6937",
+                                     tAddress = "461 Columbia Ave",
+                                     tCity = "Lexington",
+                                     tState = "SC",
+                                     nDMAID = 546,
+                                     tDMA = "COLUMBIA SC",
+                                     tRED = "Michael Landru",
+                                     tCM = "Kevin Dalpiaz",
+                                     tANE = "",
+                                     tRVP = "Linda Wiseley",
+                                     tPrincipalPartner = "MICHAEL IRONS",
+                                     dStatus = DateTime.Now,
+                                     dOpenStore = DateTime.Now,
+                                     tProjectStatus = "Under Construction"
+                                 });*/
 
-                    //        }
-                    //    }
-                    //    TraceUtility.WriteTrace("AttachmentController", "UploadStore:Returing");
-                    //    return new HttpResponseMessage(HttpStatusCode.OK)
-                    //    {
-                    //        Content = new ObjectContent<List<ProjectExcelFields>>(fields, new JsonMediaTypeFormatter())
-                    //    };
-                    //}
-                    //else
+                            }
+                        }
+                        TraceUtility.WriteTrace("AttachmentController", "UploadStore:Returing");
+                        return new HttpResponseMessage(HttpStatusCode.OK)
+                        {
+                            Content = new ObjectContent<List<ProjectExcelFields>>(fields, new JsonMediaTypeFormatter())
+                        };
+                    }
+                    else
                     {
 
                         List<IProjectExcelFields> fields = new List<IProjectExcelFields>();
@@ -239,7 +238,7 @@ namespace DeploymentTool.Controller
                             {
                                 string FileName = fRequest[0];
                                 int nBrandId = Convert.ToInt32(fRequest[1]);
-                                int nRolloutId = Convert.ToInt32(fRequest[3]);
+                                int nRolloutId = fRequest.Length > 3 ? Convert.ToInt32(fRequest[3]) : 0;
                                 var fileBytes = await stream.ReadAsByteArrayAsync();
                                 string URL = HttpRuntime.AppDomainAppPath;
 

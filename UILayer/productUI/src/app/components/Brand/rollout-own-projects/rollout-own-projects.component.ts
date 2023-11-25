@@ -10,6 +10,7 @@ import { AnalyticsService } from 'src/app/services/analytics.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ExStoreService } from 'src/app/services/ex-store.service';
 import { RolloutProjectsService } from 'src/app/services/rollout-projects.service';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-rollout-own-projects',

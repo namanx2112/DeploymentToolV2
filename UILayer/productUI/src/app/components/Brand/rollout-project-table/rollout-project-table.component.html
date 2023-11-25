@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8  table-container">
-    <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 tTable" matSort #TbSortWithObject="matSort"
+    <!-- <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 tTable" matSort #TbSortWithObject="matSort"
         (matSortChange)="announceSortChange($event)">
         <ng-container matColumnDef="select" *ngIf="needCheckBox">
             <mat-header-cell *matHeaderCellDef class="checkCell">
@@ -22,7 +22,6 @@
                 {{row["nStoreExistStatus"] == "1" ? 'Update' : (row["nStoreExistStatus"] == "2") ? 'Re-link' : 'Add' }}
             </mat-cell>
         </ng-container>
-        <!-- table dynamic columns -->
         <ng-container *ngFor="let column of columns;let index = index;" [matColumnDef]="column.columnDef">
             <mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="{{ column.header }}" class="allCell">{{
                 column.header }}</mat-header-cell>
@@ -32,5 +31,37 @@
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true;"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></mat-row>
-    </mat-table>
+    </mat-table> -->
+    <cdk-virtual-scroll-viewport *ngIf="items != undefined" itemSize="48" style="height: 100%;">
+        <table>
+            <thead class="stickyHeader">
+                <tr>
+                    <th *ngIf="needCheckBox">
+                        <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <th *ngIf="needCheckBox">Store exists</th>
+                    <th *ngFor="let col of columns" matTooltip="{{ col.header }}">{{col.header}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *cdkVirtualFor="let row of items">
+                    <td *ngIf="needCheckBox">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="checkboxChange($event, row)"
+                            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </td>
+                    <td *ngIf="needCheckBox">
+                        {{row["nStoreExistStatus"] == "1" ? 'Update' : (row["nStoreExistStatus"] == "2") ? 'Re-link' :
+                        'Add'}}
+                    </td>
+                    <td *ngFor="let col of columns">
+                        {{row[col.columnDef]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </cdk-virtual-scroll-viewport>
 </div>

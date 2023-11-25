@@ -1,0 +1,21 @@
+<div class="reportBody">
+    <table #tableReference *ngIf="tReport != undefined">
+        <thead class="stickyHeader">
+            <tr>
+                <th *ngFor="let col of columns">{{col}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of tReport.reportTable;let index=index" (click)="openItem(row)">
+                <td *ngFor="let col of columns;let cIndex = index">
+                    {{tReport.reportTable[index][col]}}
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <mat-paginator #paginator [length]="totalRows" [showFirstLastButtons]="true" [pageIndex]="currentPage"
+        [pageSize]="pageSize" class="mat-paginator-sticky" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageChanged($event)" aria-label="Select page">
+    </mat-paginator>
+</div>

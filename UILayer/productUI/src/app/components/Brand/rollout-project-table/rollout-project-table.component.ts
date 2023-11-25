@@ -11,6 +11,7 @@ import { ExStoreService } from 'src/app/services/ex-store.service';
 import { HomeService } from 'src/app/services/home.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { StoreService } from 'src/app/services/store.service';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 export interface TableColumnDef {
   columnDef: string,
@@ -26,8 +27,6 @@ export class RolloutProjectTableComponent {
   @Input()
   set request(val: any) {
     this.items = val.items;
-    this.dataSource = new MatTableDataSource(this.items);
-    this.dataSource.sort = this.sort;
     if (typeof val.needCheckBox != 'undefined')
       this.needCheckBox = val.needCheckBox;
     this.getFieldHeaders();
@@ -35,10 +34,8 @@ export class RolloutProjectTableComponent {
   @Output()
   SelectionChange = new EventEmitter<any[]>();
   selection = new SelectionModel<any>(true, []);
-  dataSource: MatTableDataSource<any>;
   items: any;
   columns: TableColumnDef[] = [];
-  displayedColumns: string[] = [];
   needCheckBox: boolean = false;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private _liveAnnouncer: LiveAnnouncer, private storeService: ExStoreService,
@@ -70,8 +67,6 @@ export class RolloutProjectTableComponent {
       }
       return 0;
     }
-    this.dataSource = new MatTableDataSource(this.items.sort(compare));
-    this.dataSource.sort = this.sort;
     this.loading(false);
   }
 
@@ -83,7 +78,7 @@ export class RolloutProjectTableComponent {
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.items.length;
     return numSelected === numRows;
   }
 
@@ -106,7 +101,7 @@ export class RolloutProjectTableComponent {
       this.SelectionChange.emit(this.selection.selected);
       return;
     }
-    this.selection.select(...this.dataSource.data);
+    this.selection.select(...this.items);
     this.loading(false);
     this.SelectionChange.emit(this.selection.selected);
   }
@@ -136,10 +131,6 @@ export class RolloutProjectTableComponent {
   }
 
   getFieldHeaders() {
-    if (this.needCheckBox) {
-      this.displayedColumns.push("select");
-      this.displayedColumns.push("nStoreExistStatus");
-    }
     for (var cName in this.items[0]) {
       if (cName == "nBrandId" || cName == "nProjectId" || cName == "nStoreId")
         continue;
@@ -150,42 +141,6 @@ export class RolloutProjectTableComponent {
         columnDef: cName,
         header: dName
       });
-      this.displayedColumns.push(cName);
     }
-    // if (this.projectType == ProjectTypes.OrderAccuracyInstallation) {
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("Project Type");
-    //   this.allFiels.push("tStoreNumber"); this.displayedColumns.push("Store Number");
-    //   this.allFiels.push("tAddress"); this.displayedColumns.push("Address");
-    //   this.allFiels.push("tCity"); this.displayedColumns.push("City");
-    //   this.allFiels.push("tState"); this.displayedColumns.push("State");
-    //   this.allFiels.push("DMAID"); this.displayedColumns.push("DMAID");
-    //   this.allFiels.push("tDMA"); this.displayedColumns.push("DMA");
-    //   this.allFiels.push("tRED"); this.displayedColumns.push("RED");
-    //   this.allFiels.push("tCM"); this.displayedColumns.push("CM");
-    //   this.allFiels.push("tANE"); this.displayedColumns.push("ANE");
-    //   this.allFiels.push("tRVP"); this.displayedColumns.push("RVP");
-    //   this.allFiels.push("tPrincipalPartner"); this.displayedColumns.push("Principal Partner");
-    //   this.allFiels.push("dStatus"); this.displayedColumns.push("Status");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    //   this.allFiels.push("tProjectType"); this.displayedColumns.push("PType");
-    // }
-    // else if (this.projectType == ProjectTypes.OrderStatusBoardInstallation) {
-    //   this.allFiels = this.storeService.GetStoreOrderStatusBoardTab(TabInstanceType.Single).fields;
-    //   this.allFiels.push(...this.storeService.GetStoreInsallationTab(TabInstanceType.Single).fields);
-    // }
-    // else if (this.projectType == ProjectTypes.ArbysHPRolloutInstallation) {
-    //   this.allFiels = this.storeService.GetStoreNetworkSwitchTab(TabInstanceType.Single).fields;
-    //   this.allFiels.push(...this.storeService.GetStoreImageMemoryTab(TabInstanceType.Single).fields);
-    //   this.allFiels.push(...this.storeService.GetStoreInsallationTab(TabInstanceType.Single).fields);
-    // }
   }
 }

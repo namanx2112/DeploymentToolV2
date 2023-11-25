@@ -1,0 +1,24 @@
+
+.searchFields{
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.exButton{
+    float: left;
+    margin: 5px 2px 5px 2px;
+    width: 170px;
+    cursor: pointer;
+  }
+  
+  
+  .searchButton{
+    float: left;
+    color: #fff;
+    margin: 5px 20px 5px 2px;
+    width: 170px;
+    cursor: pointer;
+    background-color: #c8252c;
+  }

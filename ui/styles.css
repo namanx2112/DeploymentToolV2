@@ -21,6 +21,10 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif !important;
 }
 
+.mat-mdc-tab-body-wrapper {
+    height: calc(100vh - 228px);
+}
+
 .mdc-data-table__cell {
     position: relative;
 }
@@ -153,8 +157,8 @@ button {
     padding: 12px 0px !important;
 }
 
-.textAreaField textarea{
-    height: 155px!important;
+.textAreaField textarea {
+    height: 155px !important;
     resize: none;
 }
 
@@ -179,7 +183,7 @@ button {
 .deployit .tabSelectionOption>span.selected,
 .menuPart .selected {
     background-color: #c8252c !important;
-    color: #fff;
+    color: #fff !important;
 }
 
 .deployit .header,

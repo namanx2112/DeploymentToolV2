@@ -170,3 +170,7 @@
 body {
     padding: 20px;
 }
+
+#tabgroup {
+    height: 100%;
+}

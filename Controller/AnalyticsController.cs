@@ -35,6 +35,7 @@ namespace DeploymentTool.Controller
             try
             {
                 ncurrentPage++;
+                db.Database.CommandTimeout= 1000;
                 List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@CurrentPage,@PageSize"
                     , new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@CurrentPage", ncurrentPage), new SqlParameter("@PageSize", npageSize)).ToList();
 
@@ -57,7 +58,9 @@ namespace DeploymentTool.Controller
                     {
                         tStoreNumber = parts.tStoreNumber,
                         tStoreDetails = parts.tStoreDetails,
-                        dtGoliveDate = (DateTime)parts.dProjectGoliveDate,
+                       // dtGoliveDate = (DateTime)parts.dProjectGoliveDate,
+                       
+                        dtGoliveDate = parts.dProjectGoliveDate?.Date,
                         tProjectManager = parts.tProjManager,
                         tProjectType = parts.tProjectType,
                         tFranchise = parts.tFranchise,
@@ -239,6 +242,10 @@ namespace DeploymentTool.Controller
             {
                 DbConnection connection = db.Database.Connection;
                 DbProviderFactory dbFactory = DbProviderFactories.GetFactory(connection);
+
+                var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+                Nullable<int> lUserId = securityContext.nUserID;
+
                 using (var cmd = dbFactory.CreateCommand())
                 {
                     int ncurrentPage = request.nCurrentPage != null ? Convert.ToInt32(request.nCurrentPage) : 0;
@@ -255,7 +262,7 @@ namespace DeploymentTool.Controller
                     var reportParameters2 = new SqlParameter("@pm2", request.tParam2);
                     var reportParameters3 = new SqlParameter("@pm3", ncurrentPage);
                     var reportParameters4 = new SqlParameter("@pm4", npageSize);
-                    var reportParameters5 = new SqlParameter("@pm5", request.tParam5);
+                    var reportParameters5 = new SqlParameter("@pm5", lUserId);
                     // var reportParameters6 = new SqlParameter("@CurrentPage", ncurrentPage);
                     // var reportParameters7 = new SqlParameter("@PageSize", npageSize);
                     cmd.CommandTimeout = 100000;
@@ -278,7 +285,8 @@ namespace DeploymentTool.Controller
                     }
                 }
 
-                if (reportModel.reportTable.Columns["nTotalRows"] != null)
+                //  if (reportModel.reportTable.Columns["nTotalRows"] != null)
+                if (reportModel.reportTable.Columns["nTotalRows"] != null && reportModel.reportTable.Rows.Count > 0)
                 {
                     nTotalRows = reportModel.reportTable.Rows[0].Field<int>("nTotalRows");
 
@@ -414,7 +422,7 @@ namespace DeploymentTool.Controller
                 }
             }
             var nTotalRows = 0;
-            if (reportModel.reportTable.Columns["nTotalRows"] != null)
+            if (reportModel.reportTable.Columns["nTotalRows"] != null && reportModel.reportTable.Rows.Count>0)
             {
                 nTotalRows = reportModel.reportTable.Rows[0].Field<int>("nTotalRows");
 
