@@ -210,7 +210,7 @@ namespace DeploymentTool.Model
 
         // DELETE: api/ProjectAudios/5
         [Authorize]
-        [HttpPost]
+        [HttpGet]
         public async Task<IHttpActionResult> Delete(int id)
         {
             tblProjectsRollout tblProjectsRollout = await db.tblProjectsRollouts.FindAsync(id);

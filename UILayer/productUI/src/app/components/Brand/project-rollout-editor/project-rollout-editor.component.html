@@ -7,6 +7,7 @@
                     <input matInput placeholder="Enter {{myFields['tProjectsRolloutName'].field_name}}"
                         [formControl]="formControls['tProjectsRolloutName']"
                         [(ngModel)]="controlValues.tProjectsRolloutName">
+                        <mat-icon matSuffix></mat-icon>
                 </mat-form-field>
             </div>
             <div class="curSingleField textAreaField">
@@ -60,6 +61,7 @@
                         placeholder="Enter {{myFields['tEstimateInstallTImePerStore'].field_name}}"
                         [formControl]="formControls['tEstimateInstallTImePerStore']"
                         [(ngModel)]="controlValues.tEstimateInstallTImePerStore">
+                        <mat-icon matSuffix></mat-icon>
                 </mat-form-field>
             </div>
             <div class="curField">
@@ -70,6 +72,7 @@
                         <mat-option *ngFor="let opt of myFields['nStatus'].dropDownOptions"
                             [value]="opt.aDropdownId">{{opt.tDropdownText}}</mat-option>
                     </mat-select>
+                    <mat-icon matSuffix></mat-icon>
                 </mat-form-field>
             </div>
         </form>
