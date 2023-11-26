@@ -45,7 +45,7 @@ namespace DeploymentTool.Model
         public string tRVP { get; set; }
         public string tPrincipalPartner { get; set; }
         public DateTime dStatus { get; set; }
-        public DateTime dOpenStore { get; set; }
+        public DateTime? dOpenStore { get; set; }
         public int nProjectStatus { get; set; }
         [JsonPropertyName("aStoreId")]
         public int aStoreId { get; set; }
@@ -80,7 +80,7 @@ namespace DeploymentTool.Model
             this.nProjectID = tProj.aProjectID;
             this.tStoreName = tProj.tProjectName;
             this.aStoreId = (int)tStore.aStoreID;
-            this.dOpenStore = (DateTime)tProj.dGoLiveDate;
+            this.dOpenStore = tProj.dGoLiveDate;
             this.nProjectType = (int)tProj.nProjectType;
             if (tProj.nProjectStatus != null)
                 this.nProjectStatus = (int)tProj.nProjectStatus;
