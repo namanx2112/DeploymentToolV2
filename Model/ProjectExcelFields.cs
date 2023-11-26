@@ -15,6 +15,8 @@ namespace DeploymentTool.Model
 
         string getStoreNumber();
 
+        ProjectType getProjectType();
+
         void setValues(int nExist, int? nProjectId, int? nStoreId);
     }
     public class ProjectExcelFields : IProjectExcelFields
@@ -74,6 +76,12 @@ namespace DeploymentTool.Model
 
         public string tInstallStatus { get; set; }
 
+        ProjectType projType = ProjectType.New;
+        public ProjectType getProjectType()
+        {
+            return projType;
+        }
+
         public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
         {
             try
@@ -87,6 +95,7 @@ namespace DeploymentTool.Model
                     string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
                     if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
                     {
+                        projType = nProjectType;
                         tProjectType = projectType;
                         tStoreNumber = storeNumber;
                         tProjectType = projectType;
@@ -234,7 +243,11 @@ namespace DeploymentTool.Model
         public string tCost { get; set; }
         public string tInstallNotes { get; set; }
         public string tInstallType { get; set; }
-
+        ProjectType projType = ProjectType.OrderAccuracy;
+        public ProjectType getProjectType()
+        {
+            return projType;
+        }
         public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
         {
             try
@@ -246,7 +259,7 @@ namespace DeploymentTool.Model
                     ProjectType nProjectType;
                     string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
                     string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
-                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
+                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType) && nProjectType == projType)
                     {
                         tProjectType = projectType;
                         tStoreNumber = storeNumber;
@@ -424,7 +437,11 @@ namespace DeploymentTool.Model
         public string tCost { get; set; }
         public string tInstallNotes { get; set; }
         public string tInstallType { get; set; }
-
+        ProjectType projType = ProjectType.OrderStatusBoard;
+        public ProjectType getProjectType()
+        {
+            return projType;
+        }
         public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
         {
             try
@@ -436,7 +453,7 @@ namespace DeploymentTool.Model
                     ProjectType nProjectType;
                     string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
                     string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
-                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
+                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType) && nProjectType == projType)
                     {
                         tProjectType = projectType;
                         tStoreNumber = storeNumber;
@@ -620,6 +637,11 @@ namespace DeploymentTool.Model
         public string tInstallNotes { get; set; }
         public string tInstallType { get; set; }
 
+        ProjectType projType = ProjectType.ArbysHPRollout;
+        public ProjectType getProjectType()
+        {
+            return projType;
+        }
         public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
         {
             try
@@ -631,7 +653,7 @@ namespace DeploymentTool.Model
                     ProjectType nProjectType;
                     string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
                     string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
-                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
+                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType) && nProjectType == projType)
                     {
                         tProjectType = projectType;
                         tStoreNumber = storeNumber;
@@ -817,6 +839,11 @@ namespace DeploymentTool.Model
         public string tInstallNotes { get; set; }
         public string tInstallType { get; set; }
 
+        ProjectType projType = ProjectType.ServerHandheld;
+        public ProjectType getProjectType()
+        {
+            return projType;
+        }
         public IProjectExcelFields getModelFromColumns(IExcelDataReader reader, DataTable dtNew)
         {
             try
@@ -828,7 +855,7 @@ namespace DeploymentTool.Model
                     ProjectType nProjectType;
                     string storeNumber = reader.GetValue(dtNew.Columns.IndexOf("Store Number")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Store Number")).ToString() : "";
                     string projectType = reader.GetValue(dtNew.Columns.IndexOf("Project Type")) != null ? reader.GetValue(dtNew.Columns.IndexOf("Project Type")).ToString() : "";
-                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType))
+                    if (projectType != "" && storeNumber != "" && Enum.TryParse(projectType.Replace(" ", ""), true, out nProjectType) && nProjectType == projType)
                     {
                         tProjectType = projectType;
                         tStoreNumber = storeNumber;
