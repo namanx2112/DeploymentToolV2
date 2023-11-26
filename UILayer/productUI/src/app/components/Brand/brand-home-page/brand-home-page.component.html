@@ -59,7 +59,7 @@
             <span (click)="clickOption('dashboard')"
                 [className]="configMenu=='dashboard'?'selected':''">{{_curBrand.tBrandName}}
                 Homepage</span>
-            <span (click)="clickOption('Project Portfolio')"
+            <span (click)="clickOption('Project Portfolio')" *ngIf="access.hasAccess('home.sonic.projectportfolio', 0)"
                 [className]="configMenu=='Project Portfolio'?'selected':''">Project Portfolio</span>
             <span (click)="clickOption('Report Generator')" *ngIf="access.hasAccess('home.sonic.reportgenerator', 1)"
                 [className]="configMenu=='Report Generator'?'selected':''">Report Generator</span>
