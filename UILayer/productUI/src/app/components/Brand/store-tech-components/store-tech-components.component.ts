@@ -7,6 +7,7 @@ import { AllTechnologyComponentsService } from 'src/app/services/all-technology-
 import { ExStoreService } from 'src/app/services/ex-store.service';
 import { DialogControlsComponent } from '../../dialog-controls/dialog-controls.component';
 import { AccessService } from 'src/app/services/access.service';
+import { UserAccessMeta, UserType } from 'src/app/interfaces/models';
 
 @Component({
   selector: 'app-store-tech-components',
@@ -21,11 +22,14 @@ export class StoreTechComponentsComponent {
     this._curStore = value.element;
     this.needEdit = value.needEdit;
     this.curBrandId = value.curBrandId;
+    this.getUserMeta();
     this.initTab();
   }
   needEdit: boolean;
   allTabs: HomeTab[];
   tValues: Dictionary<Dictionary<string>>;
+  userMeta: UserAccessMeta;
+  fieldRestrictions: any;
   constructor(private dialog: MatDialog, private service: ExStoreService, private techCompService: AllTechnologyComponentsService, public access: AccessService) {
 
   }
@@ -39,6 +43,13 @@ export class StoreTechComponentsComponent {
       let tTab = this.allTabs[tIndx];
       this.getValues(tTab);
     }
+  }
+
+  getUserMeta() {
+    this.userMeta = this.access.getMyUserMeta();
+    this.fieldRestrictions = this.access.getCompFieldAccess();
+    if (this.fieldRestrictions == null)
+      this.fieldRestrictions = {};
   }
 
   getValues(tabType: HomeTab) {
@@ -180,6 +191,56 @@ export class StoreTechComponentsComponent {
     //   //console.log(`Dialog result: ${result}`);
     //   let t = result;
     // });
+  }
+
+  canEditTab(tab: HomeTab) {
+    let can = true;
+    can = this.access.hasAccess('home.sonic.project.POS', 1);
+    if (!can) {
+      if (tab.isTechComponent) {
+        if (this.userMeta.userType == UserType.EquipmentVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
+          let vendorId = this.tValues[tab.tab_name]["nVendor"];
+          if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
+            can = true;
+          }
+        }
+      }
+      else if (tab.tab_name == "Installation") {
+        if (this.userMeta.userType == UserType.InstallationVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
+          let vendorId = this.tValues[tab.tab_name]["nVendor"];
+          if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
+            can = true;
+          }
+        }
+      }
+    }
+    return can;
+  }
+
+  canShowTabForUser(tab: HomeTab) {
+    let can = true;
+    if (tab.isTechComponent) {
+      if (this.userMeta.userType == UserType.EquipmentVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
+        let vendorId = this.tValues[tab.tab_name]["nVendor"];
+        if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
+          can = true;
+        }
+        else
+          can = false;
+      }
+      else if (this.userMeta.userType == UserType.InstallationVendor)
+        can = false;
+    }
+    else if (tab.tab_name == "Installation") {
+      if (this.userMeta.userType == UserType.InstallationVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
+        let vendorId = this.tValues[tab.tab_name]["nVendor"];
+        if (vendorId != null && vendorId != "" && parseInt(vendorId) == this.userMeta.nOriginatorId) {
+          can = true;
+        } else
+          can = false;
+      }
+    }
+    return can;
   }
 
   SaveTechComp(tab: HomeTab, data: any, callBack: any) {
