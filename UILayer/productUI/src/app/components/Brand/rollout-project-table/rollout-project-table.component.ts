@@ -132,9 +132,7 @@ export class RolloutProjectTableComponent {
 
   getFieldHeaders() {
     for (var cName in this.items[0]) {
-      if (cName == "nBrandId" || cName == "nProjectId" || cName == "nStoreId")
-        continue;
-      if (this.needCheckBox && cName == "nStoreExistStatus")
+      if (cName == "nBrandId" || cName == "nProjectId" || cName == "nStoreId" || cName == "nStoreExistStatus")
         continue;
       let dName = this.fetchHeaderName(cName);
       this.columns.push({

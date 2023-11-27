@@ -426,6 +426,10 @@ button {
     color: #fff !important;
 }
 
+.dunkin_theme a.active {
+    border-bottom: 5px solid #ff6e0c;
+}
+
 .dunkin_theme .selectedTab {
     background-color: #653602;
     color: #fff;

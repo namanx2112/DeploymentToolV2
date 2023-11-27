@@ -48,6 +48,7 @@ export class ProjectRolloutEditorComponent {
   set request(val: any) {
     this.curBrand = val.curBrand;
     this.controlValues = (typeof val.rowValue == 'undefined') ? this.getNewRollout() : val.rowValue;
+    this.brandThemeClss = "rContainer " + this.curBrand.tMyClass;
     this.initMe();
   }
   @Output() returnBack = new EventEmitter<any>();
@@ -61,6 +62,8 @@ export class ProjectRolloutEditorComponent {
   showPage: number = 0;
   uploadingRows: any[] = [];
   submitted: boolean = false;
+  activeTab: string;
+  brandThemeClss: string;
   constructor(private dialog: MatDialog,
     private homeService: HomeService, private datePipe: DatePipe
     , private dateAdapter: DateAdapter<Date>, public commonService: CommonService,
@@ -103,6 +106,7 @@ export class ProjectRolloutEditorComponent {
     else if (this.curBrand.nBrandType == Brands.Arby) {
       this.uploadingRows.push({ name: "Arby's HP Rollout", type: ProjectTypes.ArbysHPRolloutInstallation, items: [], fileName: "" });
     }
+    this.activeTab = this.uploadingRows[0].name;
   }
 
   showStore(ev: any) {
@@ -200,6 +204,10 @@ export class ProjectRolloutEditorComponent {
       }
     };
     dialogRef = this.dialog.open(ProjectRolloutImportComponent, dialogConfig);
+  }
+
+  tabClick(tabName: string) {
+    this.activeTab = tabName;
   }
 
   canSubmitFirstPage() {

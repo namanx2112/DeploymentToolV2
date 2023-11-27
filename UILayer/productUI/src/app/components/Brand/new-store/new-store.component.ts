@@ -140,11 +140,7 @@ export class NewStoreComponent {
     }
 
     if (this._NeedTechComponent == "all") {
-      if (tBrand.nBrandType == Brands.Buffalo) {
-        this.allTabs.push(this.service.GetStoreServerHandheldTab(TabInstanceType.Single));
-        this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
-      }
-      else if (tBrand.nBrandType == Brands.Arby) {
+      if (tBrand.nBrandType == Brands.Arby) {
         this.allTabs.push(this.service.GetStoreRadioTab(TabInstanceType.Single));
         this.tValues[this.allTabs[this.allTabs.length - 1].tab_name] = {};
       }

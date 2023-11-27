@@ -1,4 +1,4 @@
-<div *ngIf="showPage == 1" class="rContainer">
+<div *ngIf="showPage == 1" [ngClass]="brandThemeClss">
     <div class="rBody">
         <form [formGroup]="formGroup" class="form">
             <div class="curField">
@@ -7,7 +7,7 @@
                     <input matInput placeholder="Enter {{myFields['tProjectsRolloutName'].field_name}}"
                         [formControl]="formControls['tProjectsRolloutName']"
                         [(ngModel)]="controlValues.tProjectsRolloutName">
-                        <mat-icon matSuffix></mat-icon>
+                    <mat-icon matSuffix></mat-icon>
                 </mat-form-field>
             </div>
             <div class="curSingleField textAreaField">
@@ -61,7 +61,7 @@
                         placeholder="Enter {{myFields['tEstimateInstallTImePerStore'].field_name}}"
                         [formControl]="formControls['tEstimateInstallTImePerStore']"
                         [(ngModel)]="controlValues.tEstimateInstallTImePerStore">
-                        <mat-icon matSuffix></mat-icon>
+                    <mat-icon matSuffix></mat-icon>
                 </mat-form-field>
             </div>
             <div class="curField">
@@ -94,7 +94,7 @@
         </button>
     </div>
 </div>
-<div *ngIf="showPage == 2" class="rContainer">
+<div *ngIf="showPage == 2" [ngClass]="brandThemeClss">
     <div class="rBody">
         <div *ngFor="let key of uploadingRows; let index = index" class="uploadList">
             <span class="uName">{{key.name}}</span>
@@ -123,14 +123,18 @@
         </button>
     </div>
 </div>
-<div *ngIf="showPage == 3" class="rContainer">
+<div *ngIf="showPage == 3" [ngClass]="brandThemeClss">
     <div class="rBody">
-        <mat-tab-group id="tabgroup">
-            <mat-tab *ngFor="let key of uploadingRows; let index = index" label="{{key.name}}">
-                <app-rollout-project-table
-                    [request]="{items: uploadingRows[index].items, projectType: uploadingRows[index].type, nBrandId: curBrand.aBrandId}"></app-rollout-project-table>
-            </mat-tab>
-        </mat-tab-group>
+        <div class="prodTab">
+            <div class="prodTabHeader" *ngFor="let key of uploadingRows; let index = index"
+                (click)="tabClick(key.name)"><a [className]="activeTab==key.name ? 'active' : ''">{{key.name}}</a>
+            </div>
+            <ng-container *ngFor="let key of uploadingRows; let index = index">
+                <div class="prodTabBody" *ngIf="activeTab==key.name"><app-rollout-project-table class="tableBody"
+                        [request]="{items: uploadingRows[index].items, projectType: uploadingRows[index].type, nBrandId: curBrand.aBrandId}"></app-rollout-project-table>
+                </div>
+            </ng-container>
+        </div>
     </div>
     <div class="actionButton">
         <app-ex-button [disabled]="!canSubmit()" (Clicked)="submitMe()" [label]="'Submit'" class="exButton buttonClass"

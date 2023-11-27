@@ -30,7 +30,7 @@ export class SearchStoreComponent {
   }
 
   compareStore(s1: string, s2: string) {
-    return (s2 == "") ? true : s1.startsWith(s2);
+    return (s1 == null || s2 == null) ? true : (s2 == "") ? true : s1.startsWith(s2);
   }
 
   private _filter(value: string): StoreSearchModel[] {

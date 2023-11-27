@@ -9,6 +9,33 @@
     height: 35px;
 }
 
+.prodTab {
+    height: 100%;
+    width: 100%;
+}
+.prodTabHeader {
+    height: 29px;
+    float: left;
+}
+
+.prodTabHeader a{
+    font-size: 18px;
+    padding: 0px 50px;
+    cursor: pointer;
+    border-bottom-width: 5px;
+}
+
+.prodTabBody {
+    height: calc(100% - 30px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    float: left;
+}
+
+.tableBody {
+    height: 100%;
+}
+
 .curField {
     width: 45%;
 }

@@ -32,7 +32,7 @@
         <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true;"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></mat-row>
     </mat-table> -->
-    <cdk-virtual-scroll-viewport *ngIf="items != undefined" itemSize="48" style="height: 100%;">
+    <cdk-virtual-scroll-viewport *ngIf="items != undefined" itemSize="60" style="height: 100%;">
         <table>
             <thead class="stickyHeader">
                 <tr>
@@ -42,7 +42,7 @@
                             [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
                         </mat-checkbox>
                     </th>
-                    <th *ngIf="needCheckBox">Store exists</th>
+                    <th *ngIf="needCheckBox">Operation Type</th>
                     <th *ngFor="let col of columns" matTooltip="{{ col.header }}">{{col.header}}</th>
                 </tr>
             </thead>
