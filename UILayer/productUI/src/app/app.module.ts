@@ -100,6 +100,7 @@ import { ExButtonComponent } from './components/ex-button/ex-button.component';
 import {TableVirtualScrollModule} from 'ng-table-virtual-scroll';
 import {CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { TableViewComponent } from './components/frameworks/table-view/table-view.component';
 
 @NgModule({
     declarations: [
@@ -172,6 +173,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         SearchFieldsComponent,
         AdvancedSearchResultTryComponent,
         ExButtonComponent,
+        TableViewComponent,
     ],
     providers: [
         {

@@ -53,8 +53,8 @@ export class StoreTechComponentsComponent {
   }
 
   getValues(tabType: HomeTab) {
-    let searchField: Dictionary<string> = { "nProjectID": this._curStore.nProjectId.toString() };
-    // (!this.needEdit) ? { "nStoreId": this._curStore.nStoreId.toString() } : { "nProjectID": this._curStore.nProjectId.toString() };
+    //let searchField: Dictionary<string> = { "nProjectID": this._curStore.nProjectId.toString() };
+    let searchField: Dictionary<string> = (this.needEdit) ? { "nStoreId": this._curStore.nStoreId.toString() } : { "nProjectID": this._curStore.nProjectId.toString() };
     switch (tabType.tab_type) {
       case TabType.StoreContact:
         this.techCompService.GetStoreContact(searchField).subscribe((x: StoreContact[]) => {

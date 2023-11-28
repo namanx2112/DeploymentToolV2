@@ -36,8 +36,10 @@ namespace DeploymentTool.Controller
             {
                 ncurrentPage++;
                 db.Database.CommandTimeout= 1000;
-                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@CurrentPage,@PageSize"
-                    , new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@CurrentPage", ncurrentPage), new SqlParameter("@PageSize", npageSize)).ToList();
+                var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+                Nullable<int> lUserId = securityContext.nUserID;
+                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@CurrentPage,@PageSize,@nUserID "
+                    , new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@CurrentPage", ncurrentPage), new SqlParameter("@PageSize", npageSize), new SqlParameter("@nUserID", lUserId)).ToList();
 
                 foreach (var parts in activeProj)
                 {

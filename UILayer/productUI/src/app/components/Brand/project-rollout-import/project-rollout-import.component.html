@@ -12,10 +12,14 @@
     </div>
     <app-rollout-project-table *ngIf="excelData.length > 0" (SelectionChange)="SelectionChange($event)"
         [request]="{items:excelData, needCheckBox: true }"></app-rollout-project-table>
+    <!-- <app-table-view class="tableBody" (SelectionChange)="SelectionChange($event)" [request]="{items: excelData, needCheckBox: true, hasHeaderName: false, hideColumns: ['nBrandId', 'nProjectId', 'nStoreId', 'nStoreExistStatus'],
+    exColumns: exColumns}">
+    </app-table-view> -->
 </div>
 <span class="tLabel">1. Operation Type = 'Add': Store/Project does not exists and will be added when checked.<br />
     2. Operation Type = 'Update': Store/Project already exists and values will be updated in when checked.<br />
-    3. Operation Type = 'Re-link': Store/Project already exists and linked with another Rollout project, and will be unlinked
+    3. Operation Type = 'Re-link': Store/Project already exists and linked with another Rollout project, and will be
+    unlinked
     with linked Rollout project and linked with this rollout project and values will be updated when checked.</span>
 <div class="submitButton">
     <span>{{this.selectedItems.length + '/' + allItems}}</span>

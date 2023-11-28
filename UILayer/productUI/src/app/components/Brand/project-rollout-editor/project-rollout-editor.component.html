@@ -130,8 +130,12 @@
                 (click)="tabClick(key.name)"><a [className]="activeTab==key.name ? 'active' : ''">{{key.name}}</a>
             </div>
             <ng-container *ngFor="let key of uploadingRows; let index = index">
-                <div class="prodTabBody" *ngIf="activeTab==key.name"><app-rollout-project-table class="tableBody"
+                <div class="prodTabBody" *ngIf="activeTab==key.name">
+                    <app-rollout-project-table class="tableBody"
                         [request]="{items: uploadingRows[index].items, projectType: uploadingRows[index].type, nBrandId: curBrand.aBrandId}"></app-rollout-project-table>
+                    <!-- <app-table-view class="tableBody"
+                        [request]="{items: uploadingRows[index].items, hasHeaderName: false, hideColumns: ['nBrandId', 'nProjectId', 'nStoreId', 'nStoreExistStatus']}">
+                    </app-table-view> -->
                 </div>
             </ng-container>
         </div>

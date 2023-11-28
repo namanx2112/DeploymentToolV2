@@ -22,8 +22,10 @@ export class ProjectRolloutImportComponent {
   errorUpload: string = "";
   allItems: number = 0;
   nRolloutId: number;
+  exColumns: any;
   constructor(private service: ExStoreService, @Inject(MAT_DIALOG_DATA) public data: any) {
     if (typeof data != 'undefined') {
+      this.initExColumns();
       this.projectType = data.projectType;
       this._curBrand = data.curBrand;
       this.onSubmit = data.onSubmit;
@@ -33,6 +35,18 @@ export class ProjectRolloutImportComponent {
     this.dragAreaClass = "uploadDiv blackBorder lightGray";
     this.excelData = [];
     this.selectedItems = [];
+  }
+  initExColumns() {
+    this.exColumns = {
+      "Operation Type": {
+        fromColumn: "nStoreExistStatus",
+        values: {
+          "0": "Add",
+          "1": "Update",
+          "2": "Re-link"
+        }
+      }
+    };
   }
   handleFileInput(files: any) {
     this.fileToUpload = files[0];

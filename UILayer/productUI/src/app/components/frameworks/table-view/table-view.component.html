@@ -1,0 +1,35 @@
+<div *ngIf="loaded" class="outerTable" @fade>
+    <cdk-virtual-scroll-viewport itemSize="60" style="height: 100%;">
+        <table matSort matSortActive="{{sortColumn}}" [matSortDirection]="sortDirection"
+            (matSortChange)="sortData($event)">
+            <thead class="stickyHeader">
+                <tr>
+                    <th *ngIf="needCheckBox">
+                        <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <th *ngFor="let col of exColumns">{{col}}</th>
+                    <th *ngFor="let col of columns" matTooltip="{{ col.header }}" mat-sort-header="{{col.columnDef}}">
+                        {{col.header}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *cdkVirtualFor="let row of items">
+                    <td *ngIf="needCheckBox">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="checkboxChange($event, row)"
+                            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </td>
+                    <td *ngFor="let col of exColumns">
+                        {{getExColVal(col, row)}}
+                    </td>
+                    <td *ngFor="let col of columns">
+                        {{row[col.columnDef]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </cdk-virtual-scroll-viewport>
+</div>
