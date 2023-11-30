@@ -9,7 +9,7 @@
         <div class="tBody">
             <app-controls *ngIf="canShowTabForUser(tTab)" class="tabForm" [request]="{fields: tTab.fields, needButton: false, themeClass: 'grayWhite', numberOfControlsInARow: 1, 
 controlValues: tValues[tTab.tab_name], SubmitLabel: 'None',
-    readOnlyForm: true, nBrandId: curBrandId}"></app-controls>
+    readOnlyForm: true, nBrandId: curBrandId, fieldRestrictions: fieldRestrictions[tTab.tab_name]}"></app-controls>
         </div>
     </div>
-</div> 
+</div>

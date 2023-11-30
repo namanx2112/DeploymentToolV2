@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FieldType, Fields, HomeTab, TabInstanceType, TabType } from '../interfaces/home-tab';
 import { Validators } from '@angular/forms';
 import { CommonService } from './common.service';
-import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, ProjectExcel, StoreSearchModel, ProjectGlimpse } from '../interfaces/store';
+import { ActiveProject, HistoricalProjects, ProjectTypes, ProjectNotes, ProjectExcel, StoreSearchModel, ProjectGlimpse, StoreAndId } from '../interfaces/store';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CacheService } from './cache.service';
@@ -43,8 +43,12 @@ export class ExStoreService {
     return this.http.get<ProjectGlimpse>(CommonService.ConfigUrl + "ExStore/GetProjectGlimpse?nProjectId=" + nProjectId, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  GetStoreList(request: string, nBrandId: number) {
+    return this.http.get<StoreAndId[]>(CommonService.ConfigUrl + "ExStore/GetStoreList?searchText=" + request + "&nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
+  }
+
   SearchStore(request: string, nBrandId: number) {
-    return this.http.get<StoreSearchModel[]>(CommonService.ConfigUrl + "ExStore/SearchStore?searchText=" + request + "&nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
+    return this.http.get<StoreSearchModel[]>(CommonService.ConfigUrl + "ExStore/GetStoreInfo?searchText=" + request + "&nBrandId=" + nBrandId, { headers: this.cacheService.getHttpHeaders() });
   }
 
 

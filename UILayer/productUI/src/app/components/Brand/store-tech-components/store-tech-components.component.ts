@@ -107,6 +107,7 @@ export class StoreTechComponentsComponent {
         });
         break;
       case TabType.StoreInstallation:
+        searchField = { "nProjectID": this._curStore.nProjectId.toString() };
         this.techCompService.GetInstallation(searchField).subscribe((x: StoreInstallation[]) => {
           this.tValues[tabType.tab_name] = this.translateValuesToFields(tabType.fields, x[0]);
         });
@@ -173,7 +174,8 @@ export class StoreTechComponentsComponent {
       needButton: true,
       controlValues: this.tValues[cTab.tab_name],
       SubmitLabel: "Save",
-      curBrandId: this._curStore.nBrandId,
+      curBrandId: this.curBrandId,
+      fieldRestrictions: this.fieldRestrictions[cTab.tab_name],
       onSubmit: function (data: any) {
         cthis.SaveTechComp(cTab, data, function (val: any) {
           cthis.tValues[cTab.tab_name] = data.value;
@@ -195,6 +197,8 @@ export class StoreTechComponentsComponent {
 
   canEditTab(tab: HomeTab) {
     let can = true;
+    if (typeof this.tValues[tab.tab_name] == 'undefined')
+      return false;
     can = this.access.hasAccess('home.sonic.project.POS', 1);
     if (!can) {
       if (tab.isTechComponent) {
@@ -219,6 +223,8 @@ export class StoreTechComponentsComponent {
 
   canShowTabForUser(tab: HomeTab) {
     let can = true;
+    if (typeof this.tValues[tab.tab_name] == 'undefined')
+      return false;
     if (tab.isTechComponent) {
       if (this.userMeta.userType == UserType.EquipmentVendor || this.userMeta.userType == UserType.EqupmentAndInstallationVendor) {
         let vendorId = this.tValues[tab.tab_name]["nVendor"];

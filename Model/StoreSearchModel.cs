@@ -5,6 +5,13 @@ using System.Web;
 
 namespace DeploymentTool.Model
 {
+
+    public class StoreAndId
+    {
+        public int nStoreId { get; set; }
+        public string tStoreNumber { get; set; }
+    }
+
     public class StoreSearchModel
     {
         public int nStoreId { get; set; }

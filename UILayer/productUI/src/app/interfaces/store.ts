@@ -95,7 +95,7 @@ export interface StoreAudio {
     dLoopDeliveryDate: Date,
     cCost: number,
     dDateFor_nStatus: Date,
-    dDateFor_nLoopStatus:Date
+    dDateFor_nLoopStatus: Date
 }
 export interface StoreServerHandheld {
     aServerHandheldId: number,
@@ -319,7 +319,12 @@ export interface StoreSearchModel {
     lstProjectsInfo: ProjectInfo[]
 }
 
-export interface ProjectGlimpse{
+export interface StoreAndId {
+    nStoreId: number,
+    tStoreNumber: string
+}
+
+export interface ProjectGlimpse {
     aProjectsRolloutID: number,
     tProjectsRolloutName: string,
     nProjectStatus: number
@@ -367,7 +372,7 @@ export interface NewProjectStore {
     tGCEMail: string
 }
 
-export interface DeliveryStatus{
+export interface DeliveryStatus {
     tComponent: string,
     dDeliveryDate: Date,
     dInstallDate: Date,
@@ -376,18 +381,18 @@ export interface DeliveryStatus{
     tStatus: string
 }
 
-export interface DateChangeNotitication{
+export interface DateChangeNotitication {
     tComponent: string,
     tVendor: string,
     isSelected: boolean
 }
 
-export interface DateChangeBody{
+export interface DateChangeBody {
     nStoreId: number,
     lstItems: DateChangeNotitication[]
 }
 
-export interface DateChangeNotificationBody{
+export interface DateChangeNotificationBody {
     tTo: string,
     tCC: string,
     tSubject: string,
@@ -395,14 +400,14 @@ export interface DateChangeNotificationBody{
     nStoreId: number
 }
 
-export interface DateChangePOOption{
+export interface DateChangePOOption {
     nStoreId: number,
     nPOId: number,
     tPONumber: number,
     isSelected: boolean
 }
 
-export interface DocumentsTabTable{
+export interface DocumentsTabTable {
     nStoreId: number,
     nProjectId: number,
     nPOId: number,
@@ -412,13 +417,13 @@ export interface DocumentsTabTable{
     dtCreatedOn: Date
 }
 
-export interface AuditModel{
+export interface AuditModel {
     tComponentName: string,
     nTotalCount: number,
     lItems: AuditFields[]
 }
 
-export interface AuditFields{
+export interface AuditFields {
     nUserId: number,
     tFieldName: string,
     tPreviousValue: string,

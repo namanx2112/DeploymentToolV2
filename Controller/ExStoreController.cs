@@ -81,7 +81,7 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public HttpResponseMessage SearchStore(string searchText, int nBrandId)
+        public HttpResponseMessage GetStoreList(string searchText, int nBrandId)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
@@ -90,7 +90,31 @@ namespace DeploymentTool.Controller
                     searchText = string.Empty;
                 SqlParameter tModuleNameParam = new SqlParameter("@tText", searchText);
                 SqlParameter nBrand = new SqlParameter("@nBrandID", nBrandId);
-                List<StoreSearchModel> items = db.Database.SqlQuery<StoreSearchModel>("exec sproc_SearchStore @tText,@nBrandID", tModuleNameParam, nBrand).ToList();
+                List<StoreAndId> items = db.Database.SqlQuery<StoreAndId>("exec sproc_SearchStore @tText,@nBrandID", tModuleNameParam, nBrand).ToList();
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<List<StoreAndId>>(items, new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("Sonic.SearchStore", HttpContext.Current, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetStoreInfo(string searchText, int nBrandId)
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            try
+            {
+                if (searchText == null)
+                    searchText = string.Empty;
+                SqlParameter tModuleNameParam = new SqlParameter("@tText", searchText);
+                SqlParameter nBrand = new SqlParameter("@nBrandID", nBrandId);
+                List<StoreSearchModel> items = db.Database.SqlQuery<StoreSearchModel>("exec sproc_GetStoreInfo @tText,@nBrandID", tModuleNameParam, nBrand).ToList();
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<List<StoreSearchModel>>(items, new JsonMediaTypeFormatter())
