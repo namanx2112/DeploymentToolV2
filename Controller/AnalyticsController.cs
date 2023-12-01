@@ -30,31 +30,78 @@ namespace DeploymentTool.Controller
             int nBrandId = (searchFields == null || searchFields["nBrandId"] == null) ? 0 : Convert.ToInt32(searchFields["nBrandId"]);
             int ncurrentPage = (searchFields == null || searchFields["currentPage"] == null) ? 0 : Convert.ToInt32(searchFields["currentPage"]);
             int npageSize = (searchFields == null || searchFields["pageSize"] == null) ? 0 : Convert.ToInt32(searchFields["pageSize"]);
+
+            var tStoreNumber =  searchFields.ContainsKey("tStoreNumber") && (searchFields["tStoreNumber"] != null) ? Convert.ToString(searchFields["tStoreNumber"]) : "";
+            //var tStoreNumber = "55003";//
+            // var tFranchise = (searchFields["tFranchise"] == null) ? "" : Convert.ToString(searchFields["tFranchise"]);
+            var tFranchise = searchFields.ContainsKey("tFranchise") && (searchFields["tFranchise"] != null) ? Convert.ToString(searchFields["tFranchise"]) : "";
+
+            //var tCity = (searchFields["tCity"] == null) ? null : Convert.ToString(searchFields["tCity"]);
+            var tProjTypes = searchFields.ContainsKey("tProjTypes") && (searchFields["tProjTypes"] != null) ? Convert.ToString(searchFields["tProjTypes"]) : "";
+            var tITPM = searchFields.ContainsKey("tITPM") && (searchFields["tITPM"] != null) ? Convert.ToString(searchFields["tITPM"]) : "";
+
             TableResponse tableResponse = new TableResponse();
             List<ProjectPortfolio> items = new List<ProjectPortfolio>();
             try
             {
+                Dictionary<int?, string> objVendor =Misc.Utilities.GetVendorList();
+                Dictionary<int?, string> objDrop = Misc.Utilities.GetDropDownList();
+                Dictionary<int?, string> objProj = Misc.Utilities.GetProjectType();
+
                 ncurrentPage++;
+              //  npageSize = 10000;
                 db.Database.CommandTimeout= 1000;
                 var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
                 Nullable<int> lUserId = securityContext.nUserID;
-                List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@CurrentPage,@PageSize,@nUserID "
-                    , new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@CurrentPage", ncurrentPage), new SqlParameter("@PageSize", npageSize), new SqlParameter("@nUserID", lUserId)).ToList();
+                //var nTechComp = db.Database.ExecuteSqlCommand("select top 1 nVendorID from tblUserVendorRel where nuserid=@nUserID ",new SqlParameter("@nUserID", lUserId));
+                var nTempVendor = db.Database.SqlQuery<int>("select top 1 nVendorID from tblUserVendorRel where nuserid=@nUserID  ", new SqlParameter("@nUserID", lUserId)).ToList();
+
+
+                List<ActivePortFolioProjectsAllModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsAllModel>(" exec sproc_getActivePortFolioProjects_new @nBrandId,@CurrentPage,@PageSize,@nUserID, @tStoreNumber, @tFranchise,@tITPM,@tProjectTypes "
+                    , new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@CurrentPage", ncurrentPage), 
+                    new SqlParameter("@PageSize", npageSize), new SqlParameter("@nUserID", lUserId),
+                    new SqlParameter("@tStoreNumber", tStoreNumber), new SqlParameter("@tFranchise", tFranchise), 
+                    new SqlParameter("@tITPM", tITPM), new SqlParameter("@tProjectTypes", tProjTypes)
+                    
+                    ).ToList();
+
+                //List<ActivePortFolioProjectsModel> activeProj = db.Database.SqlQuery<ActivePortFolioProjectsModel>("exec sproc_getActivePortFolioProjects @nBrandId,@CurrentPage,@PageSize,@nUserID "
+                //   , new SqlParameter("@nBrandId", nBrandId), new SqlParameter("@CurrentPage", ncurrentPage), new SqlParameter("@PageSize", npageSize), new SqlParameter("@nUserID", lUserId)).ToList();
 
                 foreach (var parts in activeProj)
                 {
-                    int nProjectId = parts.nProjectId;
-                    tableResponse.nTotalRows = parts.nTotalRows;
+                    int nProjectId = parts.aProjectID;
+                    if (nTempVendor.Count > 0 && Misc.Utilities.isProjectTypeWithSameVendor(nTempVendor[0],parts))
+                        continue;
+                        tableResponse.nTotalRows = parts.nTotalRows;
                     nProjectId = 0;//ignore project and get store notes
-                    List<ProjectPorfolioNotes> portnotes = db.Database.SqlQuery<ProjectPorfolioNotes>("exec sproc_getProjectPortfolioNotes @nStoreId,@nProjectId", new SqlParameter("@nStoreId", parts.nStoreId), new SqlParameter("@nProjectId", nProjectId)).ToList();
+                                   //List<ProjectPorfolioNotes> portnotes = new List<ProjectPorfolioNotes>() ;// db.Database.SqlQuery<ProjectPorfolioNotes>("exec sproc_getProjectPortfolioNotes @nStoreId,@nProjectId", new SqlParameter("@nStoreId", parts.nStoreId), new SqlParameter("@nProjectId", nProjectId)).ToList();
+                                   //ProjectPorfolioNotes objNot = new ProjectPorfolioNotes();
+                                   //objNot.aNoteID = parts.aNoteID;
+                                   //objNot.tNotesDesc = parts.tNoteDesc;
+                                   //objNot.tNotesOwner = parts.tNotesOwner;
 
+                    //portnotes.Add(objNot);
+                    List<ProjectPorfolioNotes> portnotes = new List<ProjectPorfolioNotes>();
+                    if (parts.aNoteID > 0)
+                    {
+                        portnotes.Add(new ProjectPorfolioNotes()
+                        {
+
+                            tNotesDesc = parts.tNoteDesc,
+                            nProjectId = parts.aProjectID,
+                            tNotesOwner = parts.tNotesOwner,
+                            aNoteID = parts.aNoteID
+
+                        });
+                    }
                     ProjectPortfolio obj = new ProjectPortfolio();
                     obj.nProjectType = parts.nProjectType;
-                    obj.tProjectType = parts.tProjectType;
-                    obj.nProjectId = parts.nProjectId;
+                    obj.tProjectType = objProj[parts.nProjectType]; // FIX1 ((ProjectType)parts.nProjectType).ToString(); // FIX1
+                    obj.nProjectId = parts.aProjectID;
                     obj.notes = portnotes;
-                    obj.nStoreId = parts.nStoreId;
-                    List<TechData> techData = db.Database.SqlQuery<TechData>("exec sproc_GetPortfolioData @nProjectId, @nStoreId", new SqlParameter("@nProjectId", parts.nProjectId), new SqlParameter("@nStoreId", parts.nStoreId)).ToList();
+                    obj.nStoreId = parts.nStoreID;
+                   // List<TechData> techData = db.Database.SqlQuery<TechData>("exec sproc_GetPortfolioData @nProjectId, @nStoreId", new SqlParameter("@nProjectId", parts.nProjectId), new SqlParameter("@nStoreId", parts.nStoreId)).ToList();
 
                     obj.store = new ProjectPortfolioStore()
                     {
@@ -62,138 +109,160 @@ namespace DeploymentTool.Controller
                         tStoreDetails = parts.tStoreDetails,
                        // dtGoliveDate = (DateTime)parts.dProjectGoliveDate,
                        
-                        dtGoliveDate = parts.dProjectGoliveDate?.Date,
-                        tProjectManager = parts.tProjManager,
-                        tProjectType = parts.tProjectType,
+                        dtGoliveDate = parts.dGoliveDate?.Date,
+                        tProjectManager = parts.tProjectManager,
+                        tProjectType = objProj[parts.nProjectType], //FIX2
                         tFranchise = parts.tFranchise,
                         cCost = parts.cCost != null ? (decimal)parts.cCost : 0,
-                        dInstallDate = parts.dInstallDate?.Date,
+                        dInstallDate = parts.dInstallationDate?.Date,
                     };
-                    foreach (var techparts in techData)
+                   // foreach (var techparts in techData)
                     {
-                        if (techparts.tComponent == "Networking")
+                       // if (nTempVendor.Count > 0 && nTempVendor[0] != parts.nNetworkingVendorID)  
+                                                                                                   //    continue;
+                                                                                                   //string tTempStatus = null;
+                                                                                                   //if (parts.nPrimaryStatus != null && Misc.Utilities.dropDownList.ContainsKey(parts.nPrimaryStatus) && parts.dDateFor_nPrimaryStatus != null)
+                                                                                                   //    tTempStatus = Misc.Utilities.dropDownList.ContainsKey(parts.nPrimaryStatus) + Misc.Utilities.dropDownList[parts.nPrimaryStatus].ToString().Replace("[Day/", "[" + Convert.ToDateTime(parts.dDateFor_nPrimaryStatus).ToString("dd") + "//").Replace("/Month]", "" + Convert.ToDateTime(parts.dDateFor_nPrimaryStatus).ToString("MMM") + "]");
+                                                                                                   //else if (parts.nPrimaryStatus != null && Misc.Utilities.dropDownList.ContainsKey(parts.nPrimaryStatus))
+                                                                                                   //    tTempStatus = Misc.Utilities.dropDownList[parts.nPrimaryStatus].ToString();
+                        if ((nTempVendor.Count < 1 && Misc.Utilities.GetProjectTypeWithTech(parts) )|| (nTempVendor.Count > 0 && nTempVendor[0] == parts.nNetworkingVendorID) )
                         {
                             obj.networking = new ProjectPortfolioItems()
                             {
-                                dtDate = techparts.dDeliveryDate?.Date,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                dtDate = parts.dNetworkDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nPrimaryStatus, parts.dDateFor_nPrimaryStatus),
+                                tVendor = parts.nNetworkingVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nNetworkingVendorID) ? Misc.Utilities.vendorListData[parts.nNetworkingVendorID].ToString() : null
                             };
                         }
-                        else if (techparts.tComponent == "POS")
+
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.POSInstallation) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nPOSVendorID))
                         {
                             obj.pos = new ProjectPortfolioItems()
-                            {
-                                dtDate = techparts.dDeliveryDate?.Date,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor,
-                                dSupportDate = techparts.dSupportDate?.Date
+                            {                                
+                                dtDate = parts.dPOSDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nPOSnStatusID, parts.dPOSDateFor_nStatus),
+                                tVendor = parts.nPOSVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nPOSVendorID) ? Misc.Utilities.vendorListData[parts.nPOSVendorID].ToString() : null,
+                                dSupportDate = parts.dPOSSupportDate?.Date
+
                             };
                         }
-                        else if (techparts.tComponent == "Audio")
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.AudioInstallation) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nAudioVendorID))
                         {
                             obj.audio = new ProjectPortfolioItems()
                             {
-                                dtDate = techparts.dDeliveryDate?.Date,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor,
-                                tLoopType = techparts.tLoopType,
-                                tLoopStatus = techparts.tLoopStatus
+                                
+
+                                dtDate = parts.dAudioDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nAudionStatusID, parts.dAudioDateFor_nStatus),
+                                tVendor = parts.nAudioVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nAudioVendorID) ? Misc.Utilities.vendorListData[parts.nAudioVendorID].ToString() : null,
+                                tLoopType = Misc.Utilities.geDropDownStatusTextByID(parts.nLoopType, null),
+                                tLoopStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nLoopStatus, parts.dDateFor_nLoopStatus)
+                              
                             };
                         }
-                        else if (techparts.tComponent == "Sonic Radio")
+                        if ((nTempVendor.Count < 1 && Misc.Utilities.GetProjectTypeWithTech(parts))|| (nTempVendor.Count > 0 && nTempVendor[0] == parts.nSonicRadioVendorID))
                         {
                             obj.sonicradio = new ProjectPortfolioItems()
                             {
-                                dtDate = techparts.dDeliveryDate?.Date,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                dtDate = parts.dSonicRadioDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nSonicRadioStatusID, parts.dSonicRadioDateFor_nStatus),
+                                tVendor = parts.nSonicRadioVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nSonicRadioVendorID) ? Misc.Utilities.vendorListData[parts.nSonicRadioVendorID].ToString() : null
+
                             };
                         }
-                        else if (techparts.tComponent == "Payment Systems")
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.PaymentTerminalInstallation) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nPaymentSystemVendorID))
                         {
                             obj.paymentsystem = new ProjectPortfolioItems()
-                            {
-                                dtDate = techparts.dDeliveryDate?.Date,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor,
-                                tBuyPassID = techparts.tBuyPassID,
-                                tServerEPS = techparts.tServerEPS
+                            {                                
+                                dtDate = parts.dPaymentSystemDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nPaymentSystemStatusID, parts.dPaymentSystemDateFor_nStatus),
+                                tVendor = parts.nPaymentSystemVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nPaymentSystemVendorID) ? Misc.Utilities.vendorListData[parts.nPaymentSystemVendorID].ToString() : null,
+                                tBuyPassID = Misc.Utilities.geDropDownStatusTextByID(parts.nBuyPassID, null),
+                                tServerEPS = Misc.Utilities.geDropDownStatusTextByID(parts.nServerEPS, null)
                             };
                         }
-                        else if (techparts.tComponent == "Interior Menus")
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.InteriorMenuInstallation) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nInteriorMenusVendorID))
                         {
                             obj.interiormenu = new ProjectPortfolioItems()
                             {
-                                dtDate = techparts.dDeliveryDate?.Date,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                dtDate = parts.dInteriorMenusDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nInteriorMenusStatusID, parts.dInteriorMenusDateFor_nStatus),
+                                tVendor = parts.nInteriorMenusVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nInteriorMenusVendorID) ? Misc.Utilities.vendorListData[parts.nInteriorMenusVendorID].ToString() : null
+
                             };
                         }
-                        else if (techparts.tComponent == "Exterior Menus")
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.ExteriorMenuInstallation) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nExteriorMenusVendorID))
                         {
                             obj.exteriormenu = new ProjectPortfolioItems()
                             {
-                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                dtDate = parts.dExteriorMenusDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nExteriorMenusStatusID, parts.dExteriorMenusDateFor_nStatus),
+                                tVendor = parts.nExteriorMenusVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nExteriorMenusVendorID) ? Misc.Utilities.vendorListData[parts.nExteriorMenusVendorID].ToString() : null
+
                             };
                         }
-                        else if (techparts.tComponent == "Installation")
+                        if (nTempVendor.Count < 1 || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nInstallationVendorID))
                         {
                             obj.installation = new ProjectPortfolioItems()
                             {
-                                dtDate = techparts.dDeliveryDate?.Date,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor,
-                                dInstallEndDate = techparts.dInstallEndDate?.Date,
-                                tSignoffs = techparts.tSignoffs,
-                                tTestTransactions = techparts.tTestTransactions
+                               
+
+                                dtDate = parts.dInstallationDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nInstallationStatusID, parts.dInstallationDateFor_nStatus),
+                                tVendor = parts.nInstallationVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nInstallationVendorID) ? Misc.Utilities.vendorListData[parts.nInstallationVendorID].ToString() : null,
+                                dInstallEndDate= parts.dInstallationEndDate?.Date,
+                                tSignoffs = Misc.Utilities.geDropDownStatusTextByID(parts.nSignoffs, null),
+                                tTestTransactions = Misc.Utilities.geDropDownStatusTextByID(parts.nTestTransactions, null) 
+
                             };
                         }
-                        else if (techparts.tComponent == "Server Handheld")
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.ServerHandheld) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nServerHandheldVendorID))
                         {
                             obj.serverhandheld = new ProjectPortfolioItems()
-                            {
-                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                            {                                
+                                dtDate = parts.dServerHandheldDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nServerHandheldStatusID, parts.dServerHandheldDateFor_nStatus), 
+                                tVendor = parts.nServerHandheldVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nServerHandheldVendorID) ? Misc.Utilities.vendorListData[parts.nServerHandheldVendorID].ToString() : null
+
                             };
                         }
-                        else if (techparts.tComponent == "Order Accuracy")
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.OrderAccuracy) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nOrderAccuracyVendorID))
                         {
                             obj.orderaccuracy = new ProjectPortfolioItems()
                             {
-                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                dtDate = parts.dOrderAccuracyDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nOrderAccuracyStatusID, parts.dOrderAccuracyDateFor_nStatus),
+                                tVendor = parts.nOrderAccuracyVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nOrderAccuracyVendorID) ? Misc.Utilities.vendorListData[parts.nOrderAccuracyVendorID].ToString() : null
+
                             };
                         }
-                        else if (techparts.tComponent == "Order Status Board")
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.OrderStatusBoard) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nOrderStatusBoardVendorID))
                         {
                             obj.orderstatusboard = new ProjectPortfolioItems()
                             {
-                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                dtDate = parts.dOrderStatusBoardDeliveryDate?.Date,
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nOrderStatusBoardStatusID, parts.dOrderStatusBoardDateFor_nStatus),
+                                tVendor = parts.nOrderStatusBoardVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nOrderStatusBoardVendorID) ? Misc.Utilities.vendorListData[parts.nOrderStatusBoardVendorID].ToString() : null
+
                             };
                         }
-                        else if (techparts.tComponent == "Network Switch")
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.ArbysHPRollout) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nNetworkSwitchVendorID))
                         {
                             obj.networkswitch = new ProjectPortfolioItems()
-                            {
-                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                            {                                
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nNetworkSwitchStatusID, parts.dNetworkSwitchDateFor_nStatusID),
+                                tVendor = parts.nNetworkSwitchVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nNetworkSwitchVendorID) ? Misc.Utilities.vendorListData[parts.nNetworkSwitchVendorID].ToString() : null
+
                             };
                         }
-                        else if (techparts.tComponent == "Image Memory")
+                        if (nTempVendor.Count < 1 && (Misc.Utilities.GetProjectTypeWithTech(parts) || (ProjectType)parts.nProjectType == ProjectType.ArbysHPRollout) || (nTempVendor.Count > 0 && nTempVendor[0] == parts.nImageOrMemoryVendorID))
                         {
                             obj.imagememory = new ProjectPortfolioItems()
                             {
-                                dtDate = techparts.dDeliveryDate?.Date,// == null ? DateTime.Now : (DateTime)techparts.dDeliveryDate,
-                                tStatus = techparts.tStatus,
-                                tVendor = techparts.tVendor
+                                
+                                tStatus = Misc.Utilities.geDropDownStatusTextByID(parts.nImageOrMemoryStatusID, parts.dImageOrMemoryDateFor_nStatus),
+                                tVendor = parts.nImageOrMemoryVendorID != null && Misc.Utilities.vendorListData.ContainsKey(parts.nImageOrMemoryVendorID) ? Misc.Utilities.vendorListData[parts.nImageOrMemoryVendorID].ToString() : null
+
                             };
                         }
                     }

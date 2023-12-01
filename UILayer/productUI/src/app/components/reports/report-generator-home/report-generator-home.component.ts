@@ -15,7 +15,7 @@ export class ReportGeneratorHomeComponent {
   }
   selectedTab: string;
   curBrand: BrandModel;
-  curFolder: ReportFolder;
+  curModel: any;
   showView: string = "home";
   titles: string[] = ["Home"];
   constructor() {
@@ -28,22 +28,51 @@ export class ReportGeneratorHomeComponent {
   menuClick(item: string) {
     switch (item) {
       case "newfolder":
-        this.editReport({
-          aFolderId: 0,
-          tFolderName: "",
-          tFolderDescription: ""
-        });
+        this.editItem(
+          {
+            report: false,
+            item: {
+              aFolderId: 0,
+              tFolderName: "",
+              tFolderDescription: ""
+            }
+          });
+        break;
+      case "newfolder":
+        this.editItem(
+          {
+            report: true,
+            item: {
+              aReportId: 0,
+              tReportName: "",
+              tReportDescription: ""
+            }
+          });
         break;
     }
   }
 
-  editReport(req: any) {
-    this.curFolder = req;
-    this.showView = "editfolder";
-    if (req.aFolderId > 0)
-      this.titles.push("Edit Report");
-    else
-      this.titles.push("New Report");
+  editItem(req: any) {
+    if (req.report == false) {
+      this.curModel = req.item;
+      if (this.showView != "editfolder") {
+        this.showView = "editfolder";
+        if (req.aFolderId > 0)
+          this.titles.push("Edit Folder");
+        else
+          this.titles.push("New Folder");
+      }
+    }
+    else {
+      this.curModel = req.item;
+      if (this.showView != "editreport") {
+        this.showView = "editreport";
+        if (req.aFolderId > 0)
+          this.titles.push("Edit Report");
+        else
+          this.titles.push("New Report");
+      }
+    }
   }
 
   actionPerformedFolder(ev: any) {

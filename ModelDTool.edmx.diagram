@@ -71,6 +71,7 @@
         <EntityTypeShape EntityType="dtDBModel.tblProjectsRollout" Width="1.5" PointX="5.375" PointY="24.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectsRolloutStoreRel" Width="1.5" PointX="25.375" PointY="8.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectsRolloutTechRel" Width="1.5" PointX="7.375" PointY="18.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblReportFolder" Width="1.5" PointX="25.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

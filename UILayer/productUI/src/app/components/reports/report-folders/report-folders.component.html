@@ -6,28 +6,46 @@
                 <mat-icon matListItemIcon class="folderIcon">folder</mat-icon>{{folder.tFolderName}}
             </mat-panel-title>
             <mat-panel-description>
-                Created on: {{getFormatedDate(folder.dCreatedOn)}}
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButton" (click)="$event.stopPropagation();">
+                {{ folder.tCreatedBy }} Created {{getFormatedDate(folder.dCreatedOn)}}
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButton"
+                    (click)="$event.stopPropagation();">
                     <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="editMe(folder)">
+                    <button mat-menu-item (click)="editMe(folder, false)">
                         <mat-icon>edit</mat-icon>
                         <span>Edit Folder</span>
                     </button>
-                    <button mat-menu-item (click)="deleteMe(folder)">
+                    <button mat-menu-item (click)="deleteMe(folder, true)">
                         <mat-icon>delete</mat-icon>
                         <span>Delete Folder</span>
                     </button>
                 </mat-menu>
             </mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-list>
-            <mat-list-item *ngFor="let item of curReports" class="reportItem">
-                <mat-icon matListItemIcon>list_alt</mat-icon>
-                <div matListItemTitle>{{item.tReportName}}</div>
-                <div matListItemLine>{{getFormatedDate(item.dCreatedOn)}}</div>
-            </mat-list-item>
-        </mat-list>
+        <div class="reportList">
+            <div *ngFor="let item of curReports" class="reportItem">
+                <div class="reportName">
+                    <mat-icon>list_alt</mat-icon>
+                    <div class="rTitle">{{item.tReportName}}</div>
+                </div>
+                <div class="reportAbout">{{item.tCreatedBy}} Created {{getFormatedDate(item.dCreatedOn)}}
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButtonReport"
+                        (click)="$event.stopPropagation();">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="editMe(item, true)">
+                            <mat-icon>edit</mat-icon>
+                            <span>Edit Report</span>
+                        </button>
+                        <button mat-menu-item (click)="deleteMe(item, true)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete Report</span>
+                        </button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
     </mat-expansion-panel>
 </mat-accordion>

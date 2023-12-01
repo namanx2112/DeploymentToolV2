@@ -17,20 +17,20 @@ namespace DeploymentTool
         public int aProjectsRolloutID { get; set; }
         public string tProjectsRolloutName { get; set; }
         public string tProjectsRolloutDescription { get; set; }
+        public Nullable<decimal> cHardwareCost { get; set; }
+        public Nullable<decimal> cDeploymentCost { get; set; }
         public Nullable<int> nBrandID { get; set; }
         public Nullable<int> nNumberOfStore { get; set; }
         public Nullable<int> nMyActiveStatus { get; set; }
         public Nullable<int> nStatus { get; set; }
         public Nullable<System.DateTime> dtStartDate { get; set; }
         public Nullable<System.DateTime> dtEndDate { get; set; }
-        public string tEstimateInstallTImePerStore  { get; set; }
+        public string tEstimateInstallTImePerStore { get; set; }
         public Nullable<int> nCreatedBy { get; set; }
         public Nullable<int> nUpdateBy { get; set; }
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
         public Nullable<System.DateTime> dtUpdatedOn { get; set; }
         public Nullable<bool> bDeleted { get; set; }
         public Nullable<System.DateTime> dDateFor_nStatus { get; set; }
-        public Nullable<decimal> cHardwareCost { get; set; }
-        public Nullable<decimal> cDeploymentCost { get; set; }
     }
 }

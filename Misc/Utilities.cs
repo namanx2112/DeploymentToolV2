@@ -121,7 +121,249 @@ namespace DeploymentTool.Misc
 
             }
         }
+        public static Dictionary<int?, string> GetVendorList()
+        {
+            try
+            {
+                dtDBEntities db = new dtDBEntities();
+               // List<VendorList> itemParts = db.Database.SqlQuery<VendorList>(" select aVendorId, tVendorName from tblVendor with (nolock) ").ToList();
+               if(vendorListData==null)
+                SetvendorListData(db.Database.SqlQuery<VendorList>(" select aVendorId, tVendorName from tblVendor with (nolock) ").ToList());
 
+                return vendorListData;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+        public static void SetvendorListData(List<VendorList> vendorList)
+        {
+            Dictionary<int?, string> _vendorListData = new Dictionary<int?, string>();
+            foreach (VendorList _vendorList in vendorList)
+            {
+                if (_vendorListData.ContainsKey(_vendorList.aVendorId))
+                {
+
+                    _vendorListData[_vendorList.aVendorId] = _vendorList.tVendorName;
+
+                }
+                else
+                {
+                    _vendorListData.Add(_vendorList.aVendorId, _vendorList.tVendorName);
+                }
+            }
+            vendorListData = _vendorListData;
+        }
+
+        public static Dictionary<int?, string> vendorListData { get; set; }
+
+        public static Dictionary<int?, string> projectType { get; set; }
+
+        public static Dictionary<int?, string> GetDropDownList()
+        {
+            try
+            {
+                dtDBEntities db = new dtDBEntities();
+                // List<VendorList> itemParts = db.Database.SqlQuery<VendorList>(" select aVendorId, tVendorName from tblVendor with (nolock) ").ToList();
+                if (dropDownList == null)
+                    SetDropDownListData(db.Database.SqlQuery<iDropDownList>("  select aDropdownId,tDropdownText,nBrandId from tbldropdowns with (nolock) ").ToList());
+
+                return dropDownList;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+
+        public static bool isProjectTypeWithSameVendor(int nVendor,ActivePortFolioProjectsAllModel parts)
+        {
+            try
+            {
+
+                switch ((ProjectType)parts.nProjectType)
+                {
+                    case ProjectType.AudioInstallation:
+                        if (nVendor == parts.nAudioVendorID || nVendor == parts.nInstallationVendorID)
+                            return false;
+                        break;
+                    case ProjectType.POSInstallation:
+                        if (nVendor == parts.nPOSVendorID || nVendor == parts.nInstallationVendorID)
+                            return false;
+                        break;
+                    case ProjectType.InteriorMenuInstallation:
+                        if (nVendor == parts.nInteriorMenusVendorID || nVendor == parts.nInstallationVendorID)
+                            return false;
+                        break;
+                    case ProjectType.ExteriorMenuInstallation:
+                        if (nVendor == parts.nExteriorMenusVendorID || nVendor == parts.nInstallationVendorID)
+                            return false;
+                        break;
+                    case ProjectType.PaymentTerminalInstallation:
+                        if (nVendor == parts.nPaymentSystemVendorID || nVendor == parts.nInstallationVendorID)
+                            return false;
+                        break;
+                    case ProjectType.ServerHandheld:
+                        if (nVendor == parts.nServerHandheldVendorID || nVendor == parts.nInstallationVendorID)
+                            return false;
+                        break;
+                    case ProjectType.OrderAccuracy:
+                        if (nVendor == parts.nOrderAccuracyVendorID || nVendor == parts.nInstallationVendorID)
+                            return false;
+                        break;
+                    case ProjectType.OrderStatusBoard:
+                        if (nVendor == parts.nOrderStatusBoardVendorID || nVendor == parts.nInstallationVendorID)
+                            return false;
+                        break;
+                    case ProjectType.ArbysHPRollout:
+                        if (nVendor == parts.nNetworkSwitchVendorID|| nVendor == parts.nImageOrMemoryVendorID || nVendor == parts.nInstallationVendorID)
+                            return false;
+                        break;
+                    default:
+                        return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool GetProjectTypeWithTech(ActivePortFolioProjectsAllModel parts)
+        {
+            try
+            {
+
+                switch ((ProjectType)parts.nProjectType)
+                {
+                    case ProjectType.AudioInstallation:                       
+                            return false;
+                        break;
+                    case ProjectType.POSInstallation:                        
+                            return false;
+                        break;
+                    case ProjectType.InteriorMenuInstallation:
+                            return false;
+                        break;
+                    case ProjectType.ExteriorMenuInstallation:
+                            return false;
+                        break;
+                    case ProjectType.PaymentTerminalInstallation:
+                            return false;
+                        break;
+                    case ProjectType.ServerHandheld:
+                            return false;
+                        break;
+                    case ProjectType.OrderAccuracy:
+                            return false;
+                        break;
+                    case ProjectType.OrderStatusBoard:
+                            return false;
+                        break;
+                    case ProjectType.ArbysHPRollout:
+                            return false;
+                        break;
+                    default:
+                        return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return true;
+            }
+            return true;
+        }
+        public static Dictionary<int?, string> GetProjectType()
+        {
+            try
+            {
+
+                if (projectType == null)
+                {
+                    projectType = new Dictionary<int?, string>();
+                    projectType.Add(0, "New");
+                    projectType.Add(1, "Rebuild");
+                    projectType.Add(2, "Remodel");
+                    projectType.Add(3, "Relocation");
+                    projectType.Add(4, "Acquisition");
+                    projectType.Add(5, "POS Installation");
+                    projectType.Add(6, "Audio Installation");
+                    projectType.Add(7, "Interior Menu Installation");
+                    projectType.Add(8, "Payment Terminal Installation");
+                    projectType.Add(9, "Parts Replacement");
+                    projectType.Add(10, "Server Handheld");
+                    projectType.Add(11, "Exterior Menu Installation");
+                    projectType.Add(12, "Order Accuracy Installation");
+                    projectType.Add(13, "Order Status Board Installation");
+                    projectType.Add(14, "Arbys HP Rollout Installation");
+                }
+                return projectType;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
+        public static void SetDropDownListData(List<iDropDownList> dropDownLists)
+        {
+            Dictionary<int?, string> _idropDownList = new Dictionary<int?, string>();
+            foreach (iDropDownList _dropList in dropDownLists)
+            {
+                if (_idropDownList.ContainsKey(_dropList.aDropdownId))
+                {
+
+                    _idropDownList[_dropList.aDropdownId] = _dropList.tDropdownText;
+
+                }
+                else
+                {
+                    _idropDownList.Add(_dropList.aDropdownId, _dropList.tDropdownText);
+                }
+            }
+            dropDownList = _idropDownList;
+        }
+        public static string geDropDownStatusTextByID(int? statusId, DateTime? dDateFor_nStatus)
+        {
+            try
+            {
+                string tTempStatus = null;
+                if (statusId != null && dropDownList.ContainsKey(statusId) && dDateFor_nStatus != null)
+                    tTempStatus =  dropDownList[statusId].ToString().Replace("[Day/", "[" + Convert.ToDateTime(dDateFor_nStatus).ToString("dd") + "//").Replace("/Month]", "" + Convert.ToDateTime(dDateFor_nStatus).ToString("MMM") + "]");
+                else if (statusId != null && dropDownList.ContainsKey(statusId))
+                    tTempStatus = dropDownList[statusId].ToString();
+
+                return tTempStatus;
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        
+        }
+
+        public static Dictionary<int?, string> dropDownList { get; set; }
+        //public static List<iDropDownList> GetDropDownList()
+        //{
+        //    try
+        //    {
+        //        dtDBEntities db = new dtDBEntities();
+        //        List<iDropDownList> itemParts = db.Database.SqlQuery<iDropDownList>(" select aDropdownId,tDropdownText,nBrandId from tbldropdowns with (nolock) ").ToList();
+
+        //        return itemParts;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    return null;
+        //}
         public static void AddToAudit(int? nStoreId, int? nProjectID, int nDataType, string tTable, string tField, string tChangeValue, string tChangeNote, int? lUserId, int nCreateOrUpdate)
         {
             try

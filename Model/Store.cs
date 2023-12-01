@@ -73,7 +73,7 @@ namespace DeploymentTool.Model
         public Nullable<DateTime> dInstallEndDate { get; set; }
         public string tSignoffs { get; set; }
         public string tTestTransactions { get; set; }
-
+        public Nullable<int> nVendor { get; set; }
 
     }
     public class DateChangeBody

@@ -105,6 +105,7 @@ import { ReportGeneratorHomeComponent } from './components/reports/report-genera
 import { ReportFoldersComponent } from './components/reports/report-folders/report-folders.component';
 import {MatListModule} from '@angular/material/list';
 import { FolderEditorComponent } from './components/reports/folder-editor/folder-editor.component';
+import { ReportEditorComponent } from './components/reports/report-editor/report-editor.component';
 
 @NgModule({
     declarations: [
@@ -181,6 +182,7 @@ import { FolderEditorComponent } from './components/reports/folder-editor/folder
         ReportGeneratorHomeComponent,
         ReportFoldersComponent,
         FolderEditorComponent,
+        ReportEditorComponent,
     ],
     providers: [
         {

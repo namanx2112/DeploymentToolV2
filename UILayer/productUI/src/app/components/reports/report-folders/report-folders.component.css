@@ -7,24 +7,46 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
     margin-left: 20px;
+    display: flex;
+    align-items: center;
+    height: 50px;
 }
 
-.expHeader{
+.expHeader {
     background-color: #f0f0f0;
 }
 
-.reportItem mat-icon{
-    margin: 16px 10px!important;
+.reportItem mat-icon {
+    margin: 10px !important;
+    float: left;
 }
 
 .reportItem:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.exButton {
-    position: absolute;
-    right: 10px;
-    width: 25px;
-    height: 30px;
+.reportName {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.rTitle {
+    padding: 12px 0px;
+}
+
+.reportAbout {
+    display: flex;
+    flex-grow: 1.5;
+    padding: 12px;
+    align-items: center;
+}
+
+.exButtonReport {
     padding: 0px;
+}
+
+.exButton {
+    padding: 0px;
+    margin: 0px;
 }

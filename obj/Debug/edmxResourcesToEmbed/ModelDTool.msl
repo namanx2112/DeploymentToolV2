@@ -1055,5 +1055,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblReportFolders">
+      <EntityTypeMapping TypeName="dtDBModel.tblReportFolder">
+        <MappingFragment StoreEntitySet="tblReportFolder">
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="tFolderDescription" ColumnName="tFolderDescription" />
+          <ScalarProperty Name="tFolderName" ColumnName="tFolderName" />
+          <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
+          <ScalarProperty Name="aReportFolderID" ColumnName="aReportFolderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

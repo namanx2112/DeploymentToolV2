@@ -17,7 +17,7 @@ export class ReportFoldersComponent {
     }
 
     @Output()
-    editReport = new EventEmitter<ReportFolder>();
+    editItem = new EventEmitter<any>();
 
     curBrand: BrandModel;
 
@@ -43,15 +43,23 @@ export class ReportFoldersComponent {
         });
     }
 
-    editMe(item: ReportFolder) {
-        this.editReport.emit(item);
+    editMe(item: any, report: boolean) {
+        this.editItem.emit({ item: item, report: report });
     }
 
-    deleteMe(item: ReportFolder) {
-        this.rgService.DeleteFolder(item).subscribe(x => {
-            if (x.aFolderId > 0)
-                this.getMyFolders();
-        });
+    deleteMe(item: any, report: boolean) {
+        if (!report) {
+            this.rgService.DeleteFolder(item).subscribe(x => {
+                if (x.aFolderId > 0)
+                    this.getMyFolders();
+            });
+        }
+        else {
+            // this.rgService.DeleteFolder(item).subscribe(x => {
+            //     if (x.aFolderId > 0)
+            //         this.getMyFolders();
+            // });
+        }
     }
 
     Closed() { }

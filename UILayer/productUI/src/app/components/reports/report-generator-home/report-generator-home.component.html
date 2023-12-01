@@ -12,7 +12,9 @@
 </div>
 <div class="rgBody">
     <app-report-folders *ngIf="showView == 'home'" [request]="{curBrand: curBrand}"
-        (editReport)="editReport($event)"></app-report-folders>
-    <app-folder-editor *ngIf="showView == 'editfolder'" [request]="{curBrand: curBrand, curFolder: curFolder}"
+        (editItem)="editItem($event)"></app-report-folders>
+    <app-folder-editor *ngIf="showView == 'editfolder'" [request]="{curBrand: curBrand, curFolder: curModel}"
         (actionPerformed)="actionPerformedFolder($event)"></app-folder-editor>
+    <app-report-editor *ngIf="showView == 'editreport'" [request]="{curBrand: curBrand, curFolder: curModel}"
+        (actionPerformed)="actionPerformedFolder($event)"></app-report-editor>
 </div>

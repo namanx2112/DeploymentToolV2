@@ -1,0 +1,28 @@
+<div class="feContainer">
+    <div class="feBody">
+        <div class="curField">
+            <mat-label class="fleidLabel">Report Name</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="Enter Report Name" [(ngModel)]="curFolder.tReportName">
+                <mat-icon matSuffix></mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="curField">
+            <mat-label class="fleidLabel">Report Description</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="Enter Report Description" [(ngModel)]="curFolder.tReportDescription">
+                <mat-icon matSuffix></mat-icon>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="actionButton">
+        <button [disabled]="!cantSubmit()" (click)="submitMe()" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
+            Submit
+        </button>
+        <button (click)="cancel()" mat-raised-button
+            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base" style="margin-left: 20px;">
+            Cancel
+        </button>
+    </div>
+</div>
