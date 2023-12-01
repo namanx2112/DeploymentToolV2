@@ -101,6 +101,10 @@ import {TableVirtualScrollModule} from 'ng-table-virtual-scroll';
 import {CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { TableViewComponent } from './components/frameworks/table-view/table-view.component';
+import { ReportGeneratorHomeComponent } from './components/reports/report-generator-home/report-generator-home.component';
+import { ReportFoldersComponent } from './components/reports/report-folders/report-folders.component';
+import {MatListModule} from '@angular/material/list';
+import { FolderEditorComponent } from './components/reports/folder-editor/folder-editor.component';
 
 @NgModule({
     declarations: [
@@ -174,6 +178,9 @@ import { TableViewComponent } from './components/frameworks/table-view/table-vie
         AdvancedSearchResultTryComponent,
         ExButtonComponent,
         TableViewComponent,
+        ReportGeneratorHomeComponent,
+        ReportFoldersComponent,
+        FolderEditorComponent,
     ],
     providers: [
         {
@@ -215,7 +222,8 @@ import { TableViewComponent } from './components/frameworks/table-view/table-vie
         MatExpansionModule,
         ScrollingModule,
         TableVirtualScrollModule,
-        CdkVirtualScrollViewport
+        CdkVirtualScrollViewport,
+        MatListModule
     ]
 })
 export class AppModule { }

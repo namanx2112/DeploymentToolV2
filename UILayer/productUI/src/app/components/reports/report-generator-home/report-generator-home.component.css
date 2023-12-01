@@ -1,0 +1,51 @@
+.header {
+    width: 100%;
+    height: 30px;
+    margin: 20px auto;
+    float: left;
+}
+
+.header h3{
+    float: left;
+}
+
+.tabHeader {
+    width: 100%;
+    height: 22px;
+    float: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tabSeparator {
+    width: 2px;
+    height: 20px;
+    float: left;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.titleSeparator {
+    padding: 0px 10px;
+    height: 20px;
+    float: left;
+    font-size: 14px;
+}
+
+.tabHeader a {
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0px 20px;
+    border-bottom-width: 2px;
+    float: left;
+}
+
+.tabHeader a .mat-icon {
+    float: left;
+    margin: -2px 5px 0px 0px;
+    color: lightslategray;
+}
+
+.rgBody {
+    width: 99%;
+    height: calc(100% - 81px);
+    float: left;
+}

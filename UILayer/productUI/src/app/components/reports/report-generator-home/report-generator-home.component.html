@@ -1,0 +1,18 @@
+<div class="header">
+    <h3 *ngFor="let item of titles;let index = index">
+        <span class="titleSeparator" *ngIf="index > 0">></span> {{item}}
+    </h3>
+</div>
+<div class="tabHeader">
+    <a [ngClass]="selectedTab == 'home' ? 'active' : ''" (click)="tabClick('home')">Home</a>
+    <div class="tabSeparator"></div>
+    <a (click)="menuClick('newfolder')"><mat-icon>create_new_folder</mat-icon>New Folder</a>
+    <a (click)="menuClick('newreport')"><mat-icon>
+            table_chart</mat-icon>New Report</a>
+</div>
+<div class="rgBody">
+    <app-report-folders *ngIf="showView == 'home'" [request]="{curBrand: curBrand}"
+        (editReport)="editReport($event)"></app-report-folders>
+    <app-folder-editor *ngIf="showView == 'editfolder'" [request]="{curBrand: curBrand, curFolder: curFolder}"
+        (actionPerformed)="actionPerformedFolder($event)"></app-folder-editor>
+</div>

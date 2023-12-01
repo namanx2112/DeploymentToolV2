@@ -1,0 +1,30 @@
+.folderIcon {
+    color: darkgray;
+    margin-right: 5px;
+}
+
+.reportItem {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.expHeader{
+    background-color: #f0f0f0;
+}
+
+.reportItem mat-icon{
+    margin: 16px 10px!important;
+}
+
+.reportItem:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.exButton {
+    position: absolute;
+    right: 10px;
+    width: 25px;
+    height: 30px;
+    padding: 0px;
+}

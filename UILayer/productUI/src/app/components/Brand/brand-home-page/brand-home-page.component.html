@@ -61,8 +61,8 @@
                 Homepage</span>
             <span (click)="clickOption('Project Portfolio')" *ngIf="access.hasAccess('home.sonic.projectportfolio', 0)"
                 [className]="configMenu=='Project Portfolio'?'selected':''">Project Portfolio</span>
-            <span (click)="clickOption('Report Generator')" *ngIf="access.hasAccess('home.sonic.reportgenerator', 1)"
-                [className]="configMenu=='Report Generator'?'selected':''">Report Generator</span>
+            <span (click)="clickOption('reportgenerator')" *ngIf="access.hasAccess('home.sonic.reportgenerator', 1)"
+                [className]="configMenu=='reportgenerator'?'selected':''">Report Generator</span>
             <span (click)="clickOption('savedreports')" *ngIf="access.hasAccess('home.sonic.report', 0)"
                 [className]="configMenu=='savedreports'?'selected':''">Saved Reports</span>
             <span (click)="clickOption('dashboardpane')" *ngIf="access.hasAccess('home.sonic.report', 0)"
@@ -108,11 +108,13 @@
             [curStore]="curStore"></app-project-template-list>
         <app-project-portfolio *ngIf="showMode == 'Project Portfolio'" [curBrand]="_curBrand"
             (BackToStoreView)="BackToStoreView($event)" (openStore)="showStore($event)"></app-project-portfolio>
+        <app-report-generator-home *ngIf="showMode == 'reportgenerator'" [request]="{curBrand:_curBrand}"
+            (BackToStoreView)="BackToStoreView($event)" (openStore)="showStore($event)"></app-report-generator-home>
         <app-advanced-search *ngIf="showMode == 'search'" (ChangeView)="ChangeView($event)"
             (openStore)="showStore($event)"
             [request]="{curBrand: _curBrand, defaultCondition: defaultConditionForSearch}"></app-advanced-search>
         <app-not-implemented
-            *ngIf="showMode != 'Project Portfolio' && showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'InteriorMenuInstallation' && showMode != 'ExteriorMenuInstallation' && 
+            *ngIf="showMode != 'Project Portfolio' && showMode != 'reportgenerator' && showMode != 'projecttemplatelist' && showMode != 'newproject' && showMode != 'InteriorMenuInstallation' && showMode != 'ExteriorMenuInstallation' && 
         showMode != 'audioinstallation' && showMode != 'paymentterminalinstllation' && showMode != 'posinstallation' && showMode != 'importproject' && 
         showMode != 'newstore' && showMode != 'projectrollout' && showMode != 'savedreports' && showMode != 'search' && showMode != 'dashboard' && showMode != 'dashboardpane' && showMode != 'viewreport' && showMode != 'storeview' && showMode != 'projecthistoricalview' && showMode != 'projectactiveview'"></app-not-implemented>
     </div>

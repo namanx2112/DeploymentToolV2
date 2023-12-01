@@ -723,6 +723,7 @@
     <Compile Include="Controller\ProjectServerHandheldController.cs" />
     <Compile Include="Controller\ProjectSonicRadiosController.cs" />
     <Compile Include="Controller\ProjectStakeHoldersController.cs" />
+    <Compile Include="Controller\ReportGeneratorController.cs" />
     <Compile Include="Controller\RoleController.cs" />
     <Compile Include="Controller\StoreContactsController.cs" />
     <Compile Include="Controller\PurchaseOrderController.cs" />
@@ -794,6 +795,7 @@
     <Compile Include="Model\PurchaseOrderPreviewTemplate.cs" />
     <Compile Include="Model\QuoteRequestTemplate.cs" />
     <Compile Include="Model\Report.cs" />
+    <Compile Include="Model\ReportGenerator.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\SearchField.cs" />
     <Compile Include="Model\SecurityContext.cs" />

@@ -1,0 +1,30 @@
+.feContainer{
+    height: 100%;
+    margin: 0px auto;
+}
+.header{
+    height: 40px;
+    width: 100%;
+    line-height: 35px;
+    float: left;
+    font-size: 15px;    
+    font-weight: bold;
+}
+.mat-icon{
+    height: auto;
+    line-height: 16px;
+    cursor: pointer;
+}
+
+.curField,
+.curSingleField {
+    display: flex;
+    flex-direction: column;
+}
+.curField {
+    width: 45%;
+}
+.rBody {
+    height: calc(100% - 80px);
+    overflow: auto;
+}
