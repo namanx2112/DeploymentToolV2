@@ -21,10 +21,18 @@
     display: flex;
     flex-direction: column;
 }
-.curField {
+.curField, .exField  mat-form-field{
     width: 45%;
 }
 .rBody {
     height: calc(100% - 80px);
     overflow: auto;
+}
+
+.labelWithRadio{
+    display: flex;
+    height: 22px;
+    width: 45%;
+    align-items: center;
+    justify-content: space-between;
 }

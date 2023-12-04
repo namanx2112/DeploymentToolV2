@@ -11,7 +11,7 @@ import { ReportGeneratorService } from 'src/app/services/report-generator.servic
 export class ReportEditorComponent {
   @Input()
   set request(val: any) {
-    this.curFolder = val.curFolder;
+    this.curModel = val.curModel;
     this.curBrand = val.curBrand;
     this.initUI();
   }
@@ -20,7 +20,7 @@ export class ReportEditorComponent {
   actionPerformed = new EventEmitter<any>();
 
   curBrand: BrandModel;
-  curFolder: ReportEditorModel;
+  curModel: ReportEditorModel;
   constructor(private rgService: ReportGeneratorService) {
 
   }
@@ -33,7 +33,7 @@ export class ReportEditorComponent {
   }
 
   submitMe() {
-    // this.rgService.EditFolder(this.curFolder).subscribe(x => {
+    // this.rgService.EditFolder(this.curModel).subscribe(x => {
     //   this.actionPerformed.emit(x);
     // });
   }
@@ -44,7 +44,7 @@ export class ReportEditorComponent {
 
   cantSubmit() {
     let can = false;
-    if (this.curFolder.tReportName != "")
+    if (this.curModel.tReportName != "")
       can = true;
     return true;
   }

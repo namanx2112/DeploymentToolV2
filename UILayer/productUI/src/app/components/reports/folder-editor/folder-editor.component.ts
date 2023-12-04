@@ -12,7 +12,7 @@ export class FolderEditorComponent {
 
   @Input()
   set request(val: any) {
-    this.curFolder = val.curFolder;
+    this.curModel = val.curModel;
     this.curBrand = val.curBrand;
     this.initUI();
   }
@@ -21,7 +21,7 @@ export class FolderEditorComponent {
   actionPerformed = new EventEmitter<any>();
 
   curBrand: BrandModel;
-  curFolder: ReportFolder;
+  curModel: ReportFolder;
   constructor(private rgService: ReportGeneratorService) {
 
   }
@@ -33,8 +33,15 @@ export class FolderEditorComponent {
 
   }
 
+  setType(e: any) {
+    if (e.checked)
+      this.curModel.nFolderType = 1;
+    else
+      this.curModel.nFolderType = 0;
+  }
+
   submitMe() {
-    this.rgService.EditFolder(this.curFolder).subscribe(x => {
+    this.rgService.EditFolder(this.curModel).subscribe(x => {
       this.actionPerformed.emit(x);
     });
   }
@@ -45,7 +52,7 @@ export class FolderEditorComponent {
 
   cantSubmit() {
     let can = false;
-    if (this.curFolder.tFolderName != "")
+    if (this.curModel.tFolderName != "")
       can = true;
     return true;
   }

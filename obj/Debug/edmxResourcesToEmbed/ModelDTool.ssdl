@@ -717,6 +717,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     </Key>
     <Property Name="aReportFolderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nBrandId" Type="int" />
+    <Property Name="nFolderType" Type="int" />
     <Property Name="tFolderName" Type="nvarchar" MaxLength="1000" />
     <Property Name="tFolderDescription" Type="nvarchar(max)" />
     <Property Name="nCreatedBy" Type="int" />

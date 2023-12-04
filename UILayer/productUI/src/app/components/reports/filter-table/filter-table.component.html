@@ -1,0 +1,59 @@
+<table>
+    <thead>
+        <tr>
+            <th style="width: 50px;">
+            </th>
+            <th style="width: 40px;" *ngIf="group">
+            </th>
+            <th>
+                AddOr
+            </th>
+            <th>
+                Field
+            </th>
+            <th>
+                Operator
+            </th>
+            <th>
+                Value
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of rows">
+            <td>
+                <span class="rowAction"><mat-icon>add</mat-icon></span>
+                <span class="rowAction"><mat-icon>clear</mat-icon></span>
+            </td>
+            <td *ngIf="group">
+                <mat-checkbox class="example-margin"></mat-checkbox>
+            </td>
+            <td>
+                <mat-select [(value)]="row.andOr">
+                    <mat-option value="0">And</mat-option>
+                    <mat-option value="1">Or</mat-option>
+                </mat-select>
+            </td>
+            <td>
+                <mat-select [(value)]="row.field">
+                    <mat-option>-- None --</mat-option>
+                    <mat-optgroup *ngFor="let field of fields" [label]="field.tGroupName">
+                        <mat-option [value]="field.nFieldId">{{field.tFieldName}}</mat-option>
+                    </mat-optgroup>
+                </mat-select>
+            </td>
+            <td>
+                <mat-select [(value)]="row.nOperator">
+                    <mat-option>></mat-option>
+                    <mat-option><</mat-option>
+                </mat-select>
+            </td>
+            <td>
+                <mat-select [(value)]="row.nValue">
+                    <mat-option>1</mat-option>
+                    <mat-option>2</mat-option>
+                </mat-select>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1092,6 +1092,7 @@
     </Key>
     <Property Name="aReportFolderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nBrandId" Type="Int32" />
+    <Property Name="nFolderType" Type="Int32" />
     <Property Name="tFolderName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="tFolderDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nCreatedBy" Type="Int32" />

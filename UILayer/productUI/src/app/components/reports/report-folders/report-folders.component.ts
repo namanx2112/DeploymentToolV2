@@ -37,10 +37,38 @@ export class ReportFoldersComponent {
         });
     }
 
+    filterVisible(item: any) {
+        return item.visible != 0;
+    }
+
     getMyReports(folder: ReportFolder) {
         this.rgService.GetReportsForFolder(folder.aFolderId).subscribe(x => {
             this.curReports = x;
         });
+    }
+
+    applyFilter(event: Event) {
+        let filterValue: any;
+        filterValue = (event.target as HTMLInputElement).value;
+        if (this.allFolders) {
+            filterValue = filterValue.toLowerCase();
+            for (let indx in this.allFolders) {
+                let tItem = this.allFolders[indx];
+                if (tItem.tFolderName.trim().toLowerCase().indexOf(filterValue) > -1)
+                    tItem.visible = 1;
+                else
+                    tItem.visible = 0;
+            }
+            // if (this.curReports.length > 0) {
+            //     for (let indx in this.curReports) {
+            //         let tItem = this.curReports[indx];
+            //         if (tItem.tReportName.trim().toLowerCase().indexOf(filterValue) > -1)
+            //             tItem.visible = 1;
+            //         else
+            //             tItem.visible = 0;
+            //     }
+            // }
+        }
     }
 
     editMe(item: any, report: boolean) {

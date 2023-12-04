@@ -32,17 +32,19 @@ export class ReportGeneratorHomeComponent {
           {
             report: false,
             item: {
+              nBrandId: this.curBrand.aBrandId,
               aFolderId: 0,
               tFolderName: "",
               tFolderDescription: ""
             }
           });
         break;
-      case "newfolder":
+      case "newreport":
         this.editItem(
           {
             report: true,
             item: {
+              nBrandId: this.curBrand.aBrandId,
               aReportId: 0,
               tReportName: "",
               tReportDescription: ""
@@ -67,7 +69,7 @@ export class ReportGeneratorHomeComponent {
       this.curModel = req.item;
       if (this.showView != "editreport") {
         this.showView = "editreport";
-        if (req.aFolderId > 0)
+        if (req.aReportId > 0)
           this.titles.push("Edit Report");
         else
           this.titles.push("New Report");

@@ -1067,6 +1067,7 @@
           <ScalarProperty Name="tFolderName" ColumnName="tFolderName" />
           <ScalarProperty Name="nBrandId" ColumnName="nBrandId" />
           <ScalarProperty Name="aReportFolderID" ColumnName="aReportFolderID" />
+          <ScalarProperty Name="nFolderType" ColumnName="nFolderType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

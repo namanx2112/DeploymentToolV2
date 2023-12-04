@@ -1,6 +1,9 @@
+<div>
+    <input class="searchFolder" (keyup)="applyFilter($event)" placeholder="Enter folder name to filter" />
+</div>
 <mat-accordion class="example-headers-align">
-    <mat-expansion-panel hideToggle *ngFor="let folder of allFolders" (opened)="getMyReports(folder)"
-        (closed)="Closed()">
+    <mat-expansion-panel *ngFor="let folder of allFolders| forFilter:filterVisible" (opened)="getMyReports(folder)"
+        (closed)="Closed()" [expanded]="folder.visible == 1">
         <mat-expansion-panel-header class="expHeader">
             <mat-panel-title>
                 <mat-icon matListItemIcon class="folderIcon">folder</mat-icon>{{folder.tFolderName}}
@@ -24,7 +27,7 @@
             </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="reportList">
-            <div *ngFor="let item of curReports" class="reportItem">
+            <div *ngFor="let item of curReports| forFilter:filterVisible" class="reportItem">
                 <div class="reportName">
                     <mat-icon>list_alt</mat-icon>
                     <div class="rTitle">{{item.tReportName}}</div>

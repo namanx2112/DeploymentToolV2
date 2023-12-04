@@ -106,6 +106,8 @@ import { ReportFoldersComponent } from './components/reports/report-folders/repo
 import {MatListModule} from '@angular/material/list';
 import { FolderEditorComponent } from './components/reports/folder-editor/folder-editor.component';
 import { ReportEditorComponent } from './components/reports/report-editor/report-editor.component';
+import { FilterTableComponent } from './components/reports/filter-table/filter-table.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
     declarations: [
@@ -183,6 +185,7 @@ import { ReportEditorComponent } from './components/reports/report-editor/report
         ReportFoldersComponent,
         FolderEditorComponent,
         ReportEditorComponent,
+        FilterTableComponent,
     ],
     providers: [
         {
@@ -225,7 +228,8 @@ import { ReportEditorComponent } from './components/reports/report-editor/report
         ScrollingModule,
         TableVirtualScrollModule,
         CdkVirtualScrollViewport,
-        MatListModule
+        MatListModule,
+        MatSlideToggleModule
     ]
 })
 export class AppModule { }
