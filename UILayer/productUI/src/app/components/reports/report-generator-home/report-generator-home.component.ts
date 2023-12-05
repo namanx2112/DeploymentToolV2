@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BrandModel } from 'src/app/interfaces/models';
 import { ReportFolder } from 'src/app/interfaces/report-generator';
+import { ReportGeneratorService } from 'src/app/services/report-generator.service';
 
 @Component({
   selector: 'app-report-generator-home',
@@ -18,7 +19,7 @@ export class ReportGeneratorHomeComponent {
   curModel: any;
   showView: string = "home";
   titles: any[] = [{ view: "home", title: "Home" }];
-  constructor() {
+  constructor(private rgService: ReportGeneratorService) {
     this.selectedTab = "home";
   }
   tabClick(item: string) {
@@ -78,12 +79,23 @@ export class ReportGeneratorHomeComponent {
     else {
       this.curModel = req.item;
       if (this.showView != "editreport") {
-        this.goToHome();
-        this.showView = "editreport";
-        if (req.aReportId > 0)
-          this.titles.push({ view: "editreport", title: "Edit Report" });
-        else
-          this.titles.push({ view: "editreport", title: "New Report" });
+        var lauchReportView = function (cThis: any) {
+          cThis.goToHome();
+          cThis.showView = "editreport";
+          if (req.aReportId > 0)
+            cThis.titles.push({ view: "editreport", title: "Edit Report" });
+          else
+            cThis.titles.push({ view: "editreport", title: "New Report" });
+        }
+        if (this.curModel.aReportId > 0) {
+          this.rgService.GetReportDetails(this.curModel.aReportId).subscribe(x => {
+            this.curModel = x;
+            lauchReportView(this);
+          });
+        }
+        else {
+          lauchReportView(this);
+        }
       }
     }
   }

@@ -164,6 +164,88 @@ namespace DeploymentTool.Controller
             };
         }
 
+
+        [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetReportDetails(int nReportId)
+        {
+
+            //List<ReportInfo> items = new List<ReportInfo>()
+            //{
+            //    new ReportInfo()
+            //    {
+            //       aReportId = 1,
+            //       nFolderId = 1,
+            //       tReportName = "ABCD Report",
+            //       dCreatedOn = DateTime.Now.AddDays(-111),
+            //       tCreatedBy = "ASDASd"
+            //    },
+            //    new ReportInfo()
+            //    {
+            //       aReportId = 1,
+            //       nFolderId = 1,
+            //       tReportName = "XYZ Report",
+            //       dCreatedOn = DateTime.Now.AddDays(-20),
+            //       tCreatedBy = "ASDASd"
+            //    },
+            //    new ReportInfo()
+            //    {
+            //       aReportId = 1,
+            //       nFolderId = 1,
+            //       tReportName = "DASCD Report",
+            //       dCreatedOn = DateTime.Now.AddDays(-1211),
+            //       tCreatedBy = "ASDASd"
+            //    },
+            //    new ReportInfo()
+            //    {
+            //       aReportId = 1,
+            //       nFolderId = 1,
+            //       tReportName = "afwetv Report",
+            //       dCreatedOn = DateTime.Now.AddDays(-1111),
+            //       tCreatedBy = "ASDASd"
+            //    },
+            //    new ReportInfo()
+            //    {
+            //       aReportId = 1,
+            //       nFolderId = 1,
+            //       tReportName = "ggsdfv  sd Report",
+            //       dCreatedOn = DateTime.Now.AddDays(-11),
+            //       tCreatedBy = "ASDASd"
+            //    },
+            //    new ReportInfo()
+            //    {
+            //       aReportId = 1,
+            //       nFolderId = 1,
+            //       tReportName = "dsfv  sdfsdf Report",
+            //       dCreatedOn = DateTime.Now.AddDays(-1),
+            //       tCreatedBy = "ASDASd"
+            //    },
+            //    new ReportInfo()
+            //    {
+            //       aReportId = 1,
+            //       nFolderId = 1,
+            //       tReportName = "dfsdfsd Report",
+            //       dCreatedOn = DateTime.Now.AddDays(-10),
+            //       tCreatedBy = "ASDASd"
+            //    },
+
+            //};
+
+            var items = new ReportInfo()
+            {
+                aReportId = 1,
+                nFolderId = 1,
+                tReportName = "ABCD Report",
+                dCreatedOn = DateTime.Now.AddDays(-111),
+                tCreatedBy = "ASDASd"
+            };
+
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<ReportInfo>(items, new JsonMediaTypeFormatter())
+            };
+        }
+
         [Authorize]
         [HttpGet]
         public HttpResponseMessage GetFieldOperatorType(int nBrandID)

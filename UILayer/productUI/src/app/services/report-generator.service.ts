@@ -40,6 +40,10 @@ export class ReportGeneratorService {
     return this.http.get<ReportInfo[]>(CommonService.ConfigUrl + "ReportGenerator/GetReportsForFolder?nFolderId=" + nFolderId, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  GetReportDetails(nReportId: number) {
+    return this.http.get<ReportInfo>(CommonService.ConfigUrl + "ReportGenerator/GetReportDetails?nReportId=" + nReportId, { headers: this.cacheService.getHttpHeaders() });
+  }
+
   GetReportFields(nBrandID: number) {
     return this.http.get<ReportField[]>(CommonService.ConfigUrl + "ReportGenerator/GetReportFields?nBrandID=" + nBrandID, { headers: this.cacheService.getHttpHeaders() });
   }
