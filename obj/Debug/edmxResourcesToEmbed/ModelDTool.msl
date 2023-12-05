@@ -1071,5 +1071,116 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblDisplayColumns">
+      <EntityTypeMapping TypeName="dtDBModel.tblDisplayColumn">
+        <MappingFragment StoreEntitySet="tblDisplayColumns">
+          <ScalarProperty Name="nOrder" ColumnName="nOrder" />
+          <ScalarProperty Name="nFieldID" ColumnName="nFieldID" />
+          <ScalarProperty Name="nRelatedType" ColumnName="nRelatedType" />
+          <ScalarProperty Name="nRelatedID" ColumnName="nRelatedID" />
+          <ScalarProperty Name="aDisplayColumnsID" ColumnName="aDisplayColumnsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFields">
+      <EntityTypeMapping TypeName="dtDBModel.tblField">
+        <MappingFragment StoreEntitySet="tblField">
+          <ScalarProperty Name="tConstraint" ColumnName="tConstraint" />
+          <ScalarProperty Name="nBrandID" ColumnName="nBrandID" />
+          <ScalarProperty Name="tRelColumn" ColumnName="tRelColumn" />
+          <ScalarProperty Name="tPrimaryColumn" ColumnName="tPrimaryColumn" />
+          <ScalarProperty Name="tColumnName" ColumnName="tColumnName" />
+          <ScalarProperty Name="tTableName" ColumnName="tTableName" />
+          <ScalarProperty Name="nAvailableFlag" ColumnName="nAvailableFlag" />
+          <ScalarProperty Name="tFieldName" ColumnName="tFieldName" />
+          <ScalarProperty Name="nFieldTypeID" ColumnName="nFieldTypeID" />
+          <ScalarProperty Name="nFieldGroupID" ColumnName="nFieldGroupID" />
+          <ScalarProperty Name="aFieldID" ColumnName="aFieldID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFieldGroups">
+      <EntityTypeMapping TypeName="dtDBModel.tblFieldGroup">
+        <MappingFragment StoreEntitySet="tblFieldGroup">
+          <ScalarProperty Name="tName" ColumnName="tName" />
+          <ScalarProperty Name="aFieldGroupID" ColumnName="aFieldGroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFieldTypeOperatorRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblFieldTypeOperatorRel">
+        <MappingFragment StoreEntitySet="tblFieldTypeOperatorRel">
+          <ScalarProperty Name="nOperatorID" ColumnName="nOperatorID" />
+          <ScalarProperty Name="nFieldTypeID" ColumnName="nFieldTypeID" />
+          <ScalarProperty Name="aFieldTypeOperatorRelID" ColumnName="aFieldTypeOperatorRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFieldTypeOperatorValueRels">
+      <EntityTypeMapping TypeName="dtDBModel.tblFieldTypeOperatorValueRel">
+        <MappingFragment StoreEntitySet="tblFieldTypeOperatorValueRel">
+          <ScalarProperty Name="tValueType" ColumnName="tValueType" />
+          <ScalarProperty Name="nFieldTypeOperatorRelID" ColumnName="nFieldTypeOperatorRelID" />
+          <ScalarProperty Name="aFieldTypeOperatorValueRelID" ColumnName="aFieldTypeOperatorValueRelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFieldTypes">
+      <EntityTypeMapping TypeName="dtDBModel.tblFieldType">
+        <MappingFragment StoreEntitySet="tblFieldTypes">
+          <ScalarProperty Name="tName" ColumnName="tName" />
+          <ScalarProperty Name="aFieldTypeID" ColumnName="aFieldTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOperators">
+      <EntityTypeMapping TypeName="dtDBModel.tblOperator">
+        <MappingFragment StoreEntitySet="tblOperator">
+          <ScalarProperty Name="tOperator" ColumnName="tOperator" />
+          <ScalarProperty Name="aOperatorID" ColumnName="aOperatorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReports">
+      <EntityTypeMapping TypeName="dtDBModel.tblReport">
+        <MappingFragment StoreEntitySet="tblReport">
+          <ScalarProperty Name="nReportFolderID" ColumnName="nReportFolderID" />
+          <ScalarProperty Name="bDeleted" ColumnName="bDeleted" />
+          <ScalarProperty Name="dtUpdatedOn" ColumnName="dtUpdatedOn" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="nUpdateBy" ColumnName="nUpdateBy" />
+          <ScalarProperty Name="nCreatedBy" ColumnName="nCreatedBy" />
+          <ScalarProperty Name="nChartType" ColumnName="nChartType" />
+          <ScalarProperty Name="bSproc" ColumnName="bSproc" />
+          <ScalarProperty Name="tQuery" ColumnName="tQuery" />
+          <ScalarProperty Name="tBrandID" ColumnName="tBrandID" />
+          <ScalarProperty Name="nReportType" ColumnName="nReportType" />
+          <ScalarProperty Name="tName" ColumnName="tName" />
+          <ScalarProperty Name="aReportID" ColumnName="aReportID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblReportColumns">
+      <EntityTypeMapping TypeName="dtDBModel.tblReportColumn">
+        <MappingFragment StoreEntitySet="tblReportColumns">
+          <ScalarProperty Name="tSelectColumns" ColumnName="tSelectColumns" />
+          <ScalarProperty Name="tHeaders" ColumnName="tHeaders" />
+          <ScalarProperty Name="tTitles" ColumnName="tTitles" />
+          <ScalarProperty Name="nReportID" ColumnName="nReportID" />
+          <ScalarProperty Name="aReportColumns" ColumnName="aReportColumns" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSortColumns">
+      <EntityTypeMapping TypeName="dtDBModel.tblSortColumn">
+        <MappingFragment StoreEntitySet="tblSortColumns">
+          <ScalarProperty Name="nOrder" ColumnName="nOrder" />
+          <ScalarProperty Name="nFieldID" ColumnName="nFieldID" />
+          <ScalarProperty Name="nRelatedType" ColumnName="nRelatedType" />
+          <ScalarProperty Name="nRelatedID" ColumnName="nRelatedID" />
+          <ScalarProperty Name="aSortColumnsID" ColumnName="aSortColumnsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

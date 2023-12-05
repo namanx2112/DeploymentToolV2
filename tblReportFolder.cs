@@ -16,7 +16,7 @@ namespace DeploymentTool
     {
         public int aReportFolderID { get; set; }
         public Nullable<int> nBrandId { get; set; }
-        public Nullable<int> nFolderType { get; set; }        
+        public Nullable<int> nFolderType { get; set; }
         public string tFolderName { get; set; }
         public string tFolderDescription { get; set; }
         public Nullable<int> nCreatedBy { get; set; }

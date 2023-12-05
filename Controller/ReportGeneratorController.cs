@@ -188,7 +188,7 @@ namespace DeploymentTool.Controller
             Nullable<int> lUserId = securityContext.nUserID;
             SqlParameter tparam1 = new SqlParameter("@nBrandID", nBrandID);
             SqlParameter tparam2 = new SqlParameter("@nUserID", lUserId);
-            List<ReportFields> items = db.Database.SqlQuery<ReportFields>("exec sproc_getReportFields @nBrandID,@nUserID ", tparam1, tparam2).ToList();
+            List<ReportFields> items = db.Database.SqlQuery<ReportFields>("exec sproc_getFields @nBrandID,@nUserID ", tparam1, tparam2).ToList();
 
 
             return new HttpResponseMessage(HttpStatusCode.OK)

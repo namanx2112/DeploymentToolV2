@@ -23,23 +23,21 @@ export interface ReportInfo {
 }
 
 export interface ReportField {
-    aReportFieldID: number,
-    nReportFieldGroupID: number,
+    aFieldID: number,
     tGroupName: string,
     nFieldTypeID: number,
-    tReportFieldName: string,
-    bAvailableForFilter: boolean,
-    bAvailableForColumn: boolean,
-    bAvailableForSort: boolean,
+    tFieldName: string,
+    nAvailableFlag: number,
     tTableName: string,
     tColumnName: string,
     tPrimaryColumn: string,
     tRelColumn: string,
-    nBrandID: number
+    nBrandID: number,
+    tConstraint: string
 }
 
 export interface ReportFieldAndOperatorType {
-    aFieldTypeOperatorRelID: number,
+    aOperatorID: number,
     nFieldTypeID: number,
     tName: string,
     tOperator: string
@@ -49,5 +47,21 @@ export interface ReportFieldAndOperatorType {
 export interface ReportEditorModel {
     aReportId: number,
     tReportName: string,
-    tReportDescription: string
+    tReportDescription: string,
+    conditions: ReportCondtion[],
+    isValid: boolean
+}
+
+export interface ReportCondtion {
+    nConditionID:number,
+    nRelatedID: number,
+    
+    nAndOr: number,
+    nFieldID: number,
+    nOperatorID: number,
+    nValue: number,
+    nArrValues: any[]
+    tValue: string,
+    dValue?: Date,
+    cValue: number
 }

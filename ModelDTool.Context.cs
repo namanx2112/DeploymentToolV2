@@ -92,6 +92,16 @@ namespace DeploymentTool
         public virtual DbSet<tblProjectsRolloutStoreRel> tblProjectsRolloutStoreRels { get; set; }
         public virtual DbSet<tblProjectsRolloutTechRel> tblProjectsRolloutTechRels { get; set; }
         public virtual DbSet<tblReportFolder> tblReportFolders { get; set; }
+        public virtual DbSet<tblDisplayColumn> tblDisplayColumns { get; set; }
+        public virtual DbSet<tblField> tblFields { get; set; }
+        public virtual DbSet<tblFieldGroup> tblFieldGroups { get; set; }
+        public virtual DbSet<tblFieldTypeOperatorRel> tblFieldTypeOperatorRels { get; set; }
+        public virtual DbSet<tblFieldTypeOperatorValueRel> tblFieldTypeOperatorValueRels { get; set; }
+        public virtual DbSet<tblFieldType> tblFieldTypes { get; set; }
+        public virtual DbSet<tblOperator> tblOperators { get; set; }
+        public virtual DbSet<tblReport> tblReports { get; set; }
+        public virtual DbSet<tblReportColumn> tblReportColumns { get; set; }
+        public virtual DbSet<tblSortColumn> tblSortColumns { get; set; }
     
         public virtual int sproc_CreateStoreFromExcel(string tStoreName, Nullable<int> nProjectType, string tStoreNumber, string tAddress, string tCity, string tState, Nullable<int> nDMAID, string tDMA, string tRED, string tCM, string tANE, string tRVP, string tPrincipalPartner, Nullable<System.DateTime> dStatus, Nullable<System.DateTime> dOpenStore, string tProjectStatus, Nullable<int> nCreatedBy, Nullable<int> nBrandId, Nullable<int> nNumberOfTabletsPerStore, string tEquipmentVendor, Nullable<System.DateTime> dShipDate, Nullable<System.DateTime> dRevisitDate, Nullable<System.DateTime> dInstallDate, string tInstallationVendor, string tInstallStatus)
         {

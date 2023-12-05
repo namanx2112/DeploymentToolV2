@@ -5,7 +5,7 @@
     float: left;
 }
 
-.header h3{
+.header h3 {
     float: left;
 }
 
@@ -36,12 +36,18 @@
     padding: 0px 20px;
     border-bottom-width: 2px;
     float: left;
+    display: block;
+    color: lightslategray;
+}
+
+.tabHeader a:hover {
+    background-color: lightslategray;
+    color: #fff;
 }
 
 .tabHeader a .mat-icon {
     float: left;
     margin: -2px 5px 0px 0px;
-    color: lightslategray;
 }
 
 .rgBody {

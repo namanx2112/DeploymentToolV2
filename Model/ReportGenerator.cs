@@ -42,22 +42,19 @@ namespace DeploymentTool.Model
     }
     public class ReportFieldAndOperatorType
     {
-        public int aFieldTypeOperatorRelID { get; set; }
+        public int aOperatorID { get; set; }
         public int nFieldTypeID { get; set; }
         public string tName { get; set; }
         public string tOperator { get; set; }
     }
     public class ReportFields
     {
-        public int aReportFieldID { get; set; }
-        public int nReportFieldGroupID { get; set; }
+        public int aFieldID { get; set; }
         public string tGroupName { get; set; }
         public int nFieldTypeID { get; set; }
-        public string tReportFieldName { get; set; }
+        public string tFieldName { get; set; }
 
-        public Nullable<bool> bAvailableForFilter { get; set; }
-        public Nullable<bool> bAvailableForColumn { get; set; }
-        public Nullable<bool> bAvailableForSort { get; set; }
+        public int nAvailableFlag { get; set; }
         public string tConstraint { get; set; }
 
         public string tTableName { get; set; }

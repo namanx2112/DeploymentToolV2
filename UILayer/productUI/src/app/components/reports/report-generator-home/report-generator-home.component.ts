@@ -47,7 +47,8 @@ export class ReportGeneratorHomeComponent {
               nBrandId: this.curBrand.aBrandId,
               aReportId: 0,
               tReportName: "",
-              tReportDescription: ""
+              tReportDescription: "",
+              isValid: false
             }
           });
         break;

@@ -82,6 +82,16 @@ warning 6002: The table/view 'dtDB.dbo.tblCountry' does not have a primary key d
     <Property Name="aCountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tCountryName" Type="nvarchar" MaxLength="255" Nullable="false" />
   </EntityType>
+  <EntityType Name="tblDisplayColumns">
+    <Key>
+      <PropertyRef Name="aDisplayColumnsID" />
+    </Key>
+    <Property Name="aDisplayColumnsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nRelatedID" Type="int" />
+    <Property Name="nRelatedType" Type="int" />
+    <Property Name="nFieldID" Type="int" />
+    <Property Name="nOrder" Type="int" />
+  </EntityType>
   <EntityType Name="tblDocuments">
     <Key>
       <PropertyRef Name="aDocumentID" />
@@ -141,6 +151,52 @@ warning 6002: The table/view 'dtDB.dbo.tblEnumTableField' does not have a primar
     <Property Name="tTableName" Type="nvarchar" MaxLength="255" />
     <Property Name="tColumnName" Type="nvarchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="tblField">
+    <Key>
+      <PropertyRef Name="aFieldID" />
+    </Key>
+    <Property Name="aFieldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nFieldGroupID" Type="int" />
+    <Property Name="nFieldTypeID" Type="int" />
+    <Property Name="tFieldName" Type="nvarchar(max)" />
+    <Property Name="nAvailableFlag" Type="int" />
+    <Property Name="tTableName" Type="nvarchar(max)" />
+    <Property Name="tColumnName" Type="nvarchar(max)" />
+    <Property Name="tPrimaryColumn" Type="nvarchar(max)" />
+    <Property Name="tRelColumn" Type="nvarchar(max)" />
+    <Property Name="nBrandID" Type="int" />
+    <Property Name="tConstraint" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblFieldGroup">
+    <Key>
+      <PropertyRef Name="aFieldGroupID" />
+    </Key>
+    <Property Name="aFieldGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblFieldTypeOperatorRel">
+    <Key>
+      <PropertyRef Name="aFieldTypeOperatorRelID" />
+    </Key>
+    <Property Name="aFieldTypeOperatorRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nFieldTypeID" Type="int" />
+    <Property Name="nOperatorID" Type="int" />
+  </EntityType>
+  <EntityType Name="tblFieldTypeOperatorValueRel">
+    <Key>
+      <PropertyRef Name="aFieldTypeOperatorValueRelID" />
+    </Key>
+    <Property Name="aFieldTypeOperatorValueRelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nFieldTypeOperatorRelID" Type="int" />
+    <Property Name="tValueType" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblFieldTypes">
+    <Key>
+      <PropertyRef Name="aFieldTypeID" />
+    </Key>
+    <Property Name="aFieldTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tName" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="tblFranchise">
     <Key>
       <PropertyRef Name="aFranchiseId" />
@@ -181,6 +237,13 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblOperator">
+    <Key>
+      <PropertyRef Name="aOperatorID" />
+    </Key>
+    <Property Name="aOperatorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tOperator" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="tblOutgoingEmail">
     <Key>
@@ -711,13 +774,40 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="tTechCompFieldName" Type="varchar" MaxLength="500" />
     <Property Name="nQuoteRequestTechCompId" Type="int" />
   </EntityType>
+  <EntityType Name="tblReport">
+    <Key>
+      <PropertyRef Name="aReportID" />
+    </Key>
+    <Property Name="aReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tName" Type="varchar" MaxLength="1000" />
+    <Property Name="nReportType" Type="int" />
+    <Property Name="tBrandID" Type="varchar" MaxLength="1000" />
+    <Property Name="tQuery" Type="varchar(max)" />
+    <Property Name="bSproc" Type="bit" />
+    <Property Name="nChartType" Type="int" />
+    <Property Name="nCreatedBy" Type="int" />
+    <Property Name="nUpdateBy" Type="int" />
+    <Property Name="dtCreatedOn" Type="datetime" />
+    <Property Name="dtUpdatedOn" Type="datetime" />
+    <Property Name="bDeleted" Type="bit" />
+    <Property Name="nReportFolderID" Type="int" />
+  </EntityType>
+  <EntityType Name="tblReportColumns">
+    <Key>
+      <PropertyRef Name="aReportColumns" />
+    </Key>
+    <Property Name="aReportColumns" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nReportID" Type="int" />
+    <Property Name="tTitles" Type="varchar" MaxLength="1000" />
+    <Property Name="tHeaders" Type="varchar" MaxLength="1000" />
+    <Property Name="tSelectColumns" Type="varchar" MaxLength="1000" />
+  </EntityType>
   <EntityType Name="tblReportFolder">
     <Key>
       <PropertyRef Name="aReportFolderID" />
     </Key>
     <Property Name="aReportFolderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nBrandId" Type="int" />
-    <Property Name="nFolderType" Type="int" />
     <Property Name="tFolderName" Type="nvarchar" MaxLength="1000" />
     <Property Name="tFolderDescription" Type="nvarchar(max)" />
     <Property Name="nCreatedBy" Type="int" />
@@ -725,6 +815,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="dtCreatedOn" Type="datetime" />
     <Property Name="dtUpdatedOn" Type="datetime" />
     <Property Name="bDeleted" Type="bit" />
+    <Property Name="nFolderType" Type="int" />
   </EntityType>
   <EntityType Name="tblRole">
     <Key>
@@ -746,6 +837,16 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     <Property Name="nRoleID" Type="int" />
     <Property Name="nPermissionID" Type="int" />
     <Property Name="nPermVal" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSortColumns">
+    <Key>
+      <PropertyRef Name="aSortColumnsID" />
+    </Key>
+    <Property Name="aSortColumnsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nRelatedID" Type="int" />
+    <Property Name="nRelatedType" Type="int" />
+    <Property Name="nFieldID" Type="int" />
+    <Property Name="nOrder" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'dtDB.dbo.tblState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1050,11 +1151,18 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblApplicationTrace" EntityType="Self.tblApplicationTrace" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblAttachment" EntityType="Self.tblAttachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDisplayColumns" EntityType="Self.tblDisplayColumns" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDocuments" EntityType="Self.tblDocuments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDropdownModule" EntityType="Self.tblDropdownModule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDropdowns" EntityType="Self.tblDropdowns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblField" EntityType="Self.tblField" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFieldGroup" EntityType="Self.tblFieldGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFieldTypeOperatorRel" EntityType="Self.tblFieldTypeOperatorRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFieldTypeOperatorValueRel" EntityType="Self.tblFieldTypeOperatorValueRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFieldTypes" EntityType="Self.tblFieldTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblNoteType" EntityType="Self.tblNoteType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOperator" EntityType="Self.tblOperator" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOutgoingEmail" EntityType="Self.tblOutgoingEmail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOutgoingEmailAttachment" EntityType="Self.tblOutgoingEmailAttachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblParts" EntityType="Self.tblParts" Schema="dbo" store:Type="Tables" />
@@ -1086,9 +1194,12 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblQuoteRequestMain" EntityType="Self.tblQuoteRequestMain" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestTechComp" EntityType="Self.tblQuoteRequestTechComp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblQuoteRequestTechCompFields" EntityType="Self.tblQuoteRequestTechCompFields" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReport" EntityType="Self.tblReport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReportColumns" EntityType="Self.tblReportColumns" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblReportFolder" EntityType="Self.tblReportFolder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblRole" EntityType="Self.tblRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblRolePermissionRel" EntityType="Self.tblRolePermissionRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSortColumns" EntityType="Self.tblSortColumns" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStore" EntityType="Self.tblStore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblSupportTicket" EntityType="Self.tblSupportTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />

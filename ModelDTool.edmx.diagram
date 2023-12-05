@@ -72,6 +72,16 @@
         <EntityTypeShape EntityType="dtDBModel.tblProjectsRolloutStoreRel" Width="1.5" PointX="25.375" PointY="8.75" />
         <EntityTypeShape EntityType="dtDBModel.tblProjectsRolloutTechRel" Width="1.5" PointX="7.375" PointY="18.75" />
         <EntityTypeShape EntityType="dtDBModel.tblReportFolder" Width="1.5" PointX="25.375" PointY="12.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblDisplayColumn" Width="1.5" PointX="12.375" PointY="25.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblField" Width="1.5" PointX="14.375" PointY="25.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblFieldGroup" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblFieldTypeOperatorRel" Width="1.5" PointX="25.375" PointY="16.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblFieldTypeOperatorValueRel" Width="1.5" PointX="16.375" PointY="25.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblFieldType" Width="1.5" PointX="18.375" PointY="25.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblOperator" Width="1.5" PointX="25.375" PointY="19.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblReport" Width="1.5" PointX="25.375" PointY="22.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblReportColumn" Width="1.5" PointX="26.375" PointY="0.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblSortColumn" Width="1.5" PointX="26.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

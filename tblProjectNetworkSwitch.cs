@@ -9,11 +9,10 @@
 
 namespace DeploymentTool
 {
-    using DeploymentTool.Misc;
     using System;
     using System.Collections.Generic;
     
-    public partial class tblProjectNetworkSwitch: IModelParent
+    public partial class tblProjectNetworkSwitch: Misc.IModelParent
     {
         public int aProjectNetworkSwtichID { get; set; }
         public Nullable<int> nProjectID { get; set; }

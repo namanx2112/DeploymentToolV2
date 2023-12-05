@@ -410,7 +410,7 @@ export class CommonService {
     }];
   }
 
-  public GetDropdownOptions(nBrandId: number, columnName?: string): OptionType[] {
+  public GetDropdownOptions(nBrandId: number, columnName?: string, avoidBlank: boolean = true): OptionType[] {
     let ddItems: OptionType[] = [];
     if (columnName) {
       if (columnName == "ProjectType") {
@@ -440,7 +440,7 @@ export class CommonService {
             ddItems.sort(this.compareByText);
           else
             ddItems.sort(this.compare);
-          if (this.noNeedBlankDropDown.indexOf(columnName) == -1)
+          if (this.noNeedBlankDropDown.indexOf(columnName) == -1 && avoidBlank == false)
             ddItems.unshift({
               tDropdownText: "",
               aDropdownId: "0",

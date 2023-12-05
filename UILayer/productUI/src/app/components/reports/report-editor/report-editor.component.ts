@@ -38,14 +38,21 @@ export class ReportEditorComponent {
     // });
   }
 
+  selectedFilter(req: any) {
+    this.curModel.isValid = req.isValid;
+    this.curModel.conditions = req.rows;
+  }
+
   cancel() {
     this.actionPerformed.emit();
   }
 
   cantSubmit() {
     let can = false;
-    if (this.curModel.tReportName != "")
+    if (this.curModel.tReportName == "")
       can = true;
-    return true;
+    if (!this.curModel.isValid)
+      can = true;
+    return can;
   }
 }

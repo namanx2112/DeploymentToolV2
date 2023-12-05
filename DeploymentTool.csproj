@@ -830,6 +830,9 @@
     <Compile Include="tblCountry.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblDisplayColumn.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblDocument.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
@@ -845,6 +848,21 @@
     <Compile Include="tblEnumTableField.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblField.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblFieldGroup.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblFieldType.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblFieldTypeOperatorRel.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblFieldTypeOperatorValueRel.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblFranchise.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
@@ -852,6 +870,9 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblNoteType.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOperator.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblOutgoingEmail.cs">
@@ -947,6 +968,12 @@
     <Compile Include="tblQuoteRequestTechCompField.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblReport.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblReportColumn.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblReportFolder.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
@@ -954,6 +981,9 @@
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblRolePermissionRel.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSortColumn.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
     <Compile Include="tblState.cs">

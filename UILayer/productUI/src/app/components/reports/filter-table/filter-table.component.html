@@ -31,30 +31,30 @@
                 <mat-checkbox class="example-margin"></mat-checkbox>
             </td>
             <td>
-                <mat-select [(value)]="row.andOr">
+                <mat-select [(value)]="row.nAndOr" (ngModelChange)="anyModelChange($event)">
                     <mat-option *ngFor="let op of andOrOperators" [value]="op.opId">{{op.text}}</mat-option>
                 </mat-select>
             </td>
             <td>
-                <mat-select [(value)]="row.field" (selectionChange)="fieldChanged(row)">
+                <mat-select [(value)]="row.field" (selectionChange)="fieldChanged(row)" (ngModelChange)="anyModelChange($event)">
                     <mat-option>-- None --</mat-option>
                     <mat-optgroup *ngFor="let field of fields" [label]="field.tGroupName">
-                        <mat-option [value]="field">{{field.tReportFieldName}}</mat-option>
+                        <mat-option [value]="field">{{field.tFieldName}}</mat-option>
                     </mat-optgroup>
                 </mat-select>
             </td>
             <td>
-                <mat-select [compareWith]="compareOperatorDropDown" [(value)]="row.nOperator">
+                <mat-select [compareWith]="compareOperatorDropDown" [(value)]="row.nOperatorID" (ngModelChange)="anyModelChange($event)">
                     <mat-option *ngFor="let op of row.operators"
-                        [value]="op.aFieldTypeOperatorRelID">{{op.tOperator}}</mat-option>
+                        [value]="op.aOperatorID">{{op.tOperator}}</mat-option>
                 </mat-select>
             </td>
-            <td>
+            <td class="noPadding">
                 <span class="inputPrefix" *ngIf="row.field.nFieldTypeID == 9">$</span>
                 <input [(value)]="row.tValue"
                     *ngIf="row.field.nFieldTypeID == 1 || row.field.nFieldTypeID == 2 || row.field.nFieldTypeID == 3 || row.field.nFieldTypeID == 6  || row.field.nFieldTypeID == 7 || row.field.nFieldTypeID == 9"
-                    [type]="row.field.nFieldTypeID == 6 ? 'number': 'text'" />
-                <mat-select *ngIf="row.field.nFieldTypeID == 5" [(value)]="row.nValues" multiple class="ddOption">
+                    [type]="row.field.nFieldTypeID == 6 ? 'number': 'text'" (ngModelChange)="anyModelChange($event)" />
+                <mat-select *ngIf="row.field.nFieldTypeID == 5" [(value)]="row.nArrValues" multiple class="ddOption" (ngModelChange)="anyModelChange($event)">
                     <mat-option *ngFor="let op of row.ddOptions"
                         [value]="op.aDropdownId">{{op.tDropdownText}}</mat-option>
                 </mat-select>

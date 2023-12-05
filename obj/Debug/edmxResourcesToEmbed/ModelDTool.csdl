@@ -97,6 +97,16 @@
     <EntitySet Name="tblProjectsRolloutStoreRels" EntityType="dtDBModel.tblProjectsRolloutStoreRel" />
     <EntitySet Name="tblProjectsRolloutTechRels" EntityType="dtDBModel.tblProjectsRolloutTechRel" />
     <EntitySet Name="tblReportFolders" EntityType="dtDBModel.tblReportFolder" />
+    <EntitySet Name="tblDisplayColumns" EntityType="dtDBModel.tblDisplayColumn" />
+    <EntitySet Name="tblFields" EntityType="dtDBModel.tblField" />
+    <EntitySet Name="tblFieldGroups" EntityType="dtDBModel.tblFieldGroup" />
+    <EntitySet Name="tblFieldTypeOperatorRels" EntityType="dtDBModel.tblFieldTypeOperatorRel" />
+    <EntitySet Name="tblFieldTypeOperatorValueRels" EntityType="dtDBModel.tblFieldTypeOperatorValueRel" />
+    <EntitySet Name="tblFieldTypes" EntityType="dtDBModel.tblFieldType" />
+    <EntitySet Name="tblOperators" EntityType="dtDBModel.tblOperator" />
+    <EntitySet Name="tblReports" EntityType="dtDBModel.tblReport" />
+    <EntitySet Name="tblReportColumns" EntityType="dtDBModel.tblReportColumn" />
+    <EntitySet Name="tblSortColumns" EntityType="dtDBModel.tblSortColumn" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -1100,5 +1110,106 @@
     <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
     <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="bDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblDisplayColumn">
+    <Key>
+      <PropertyRef Name="aDisplayColumnsID" />
+    </Key>
+    <Property Name="aDisplayColumnsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nRelatedID" Type="Int32" />
+    <Property Name="nRelatedType" Type="Int32" />
+    <Property Name="nFieldID" Type="Int32" />
+    <Property Name="nOrder" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblField">
+    <Key>
+      <PropertyRef Name="aFieldID" />
+    </Key>
+    <Property Name="aFieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nFieldGroupID" Type="Int32" />
+    <Property Name="nFieldTypeID" Type="Int32" />
+    <Property Name="tFieldName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="nAvailableFlag" Type="Int32" />
+    <Property Name="tTableName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tColumnName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tPrimaryColumn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tRelColumn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="nBrandID" Type="Int32" />
+    <Property Name="tConstraint" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblFieldGroup">
+    <Key>
+      <PropertyRef Name="aFieldGroupID" />
+    </Key>
+    <Property Name="aFieldGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblFieldTypeOperatorRel">
+    <Key>
+      <PropertyRef Name="aFieldTypeOperatorRelID" />
+    </Key>
+    <Property Name="aFieldTypeOperatorRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nFieldTypeID" Type="Int32" />
+    <Property Name="nOperatorID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblFieldTypeOperatorValueRel">
+    <Key>
+      <PropertyRef Name="aFieldTypeOperatorValueRelID" />
+    </Key>
+    <Property Name="aFieldTypeOperatorValueRelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nFieldTypeOperatorRelID" Type="Int32" />
+    <Property Name="tValueType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblFieldType">
+    <Key>
+      <PropertyRef Name="aFieldTypeID" />
+    </Key>
+    <Property Name="aFieldTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblOperator">
+    <Key>
+      <PropertyRef Name="aOperatorID" />
+    </Key>
+    <Property Name="aOperatorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tOperator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblReport">
+    <Key>
+      <PropertyRef Name="aReportID" />
+    </Key>
+    <Property Name="aReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="nReportType" Type="Int32" />
+    <Property Name="tBrandID" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tQuery" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="bSproc" Type="Boolean" />
+    <Property Name="nChartType" Type="Int32" />
+    <Property Name="nCreatedBy" Type="Int32" />
+    <Property Name="nUpdateBy" Type="Int32" />
+    <Property Name="dtCreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="dtUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="bDeleted" Type="Boolean" />
+    <Property Name="nReportFolderID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblReportColumn">
+    <Key>
+      <PropertyRef Name="aReportColumns" />
+    </Key>
+    <Property Name="aReportColumns" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nReportID" Type="Int32" />
+    <Property Name="tTitles" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tHeaders" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tSelectColumns" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblSortColumn">
+    <Key>
+      <PropertyRef Name="aSortColumnsID" />
+    </Key>
+    <Property Name="aSortColumnsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nRelatedID" Type="Int32" />
+    <Property Name="nRelatedType" Type="Int32" />
+    <Property Name="nFieldID" Type="Int32" />
+    <Property Name="nOrder" Type="Int32" />
   </EntityType>
 </Schema>

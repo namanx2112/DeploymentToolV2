@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType } from 'src/app/interfaces/home-tab';
 import { BrandModel } from 'src/app/interfaces/models';
@@ -19,6 +19,10 @@ export class FilterTableComponent {
     this.initRows();
   }
 
+  @Output()
+  filterChanged = new EventEmitter<any>();
+
+  filterTable: any;
   curBrand: BrandModel;
   rows: any[] = [];
   group: boolean = false;
@@ -36,14 +40,16 @@ export class FilterTableComponent {
 
   getNewRow() {
     return {
-      andOr: 0,
-      fieldId: this.fields[0].aReportFieldID,
+      nAndOr: 0,
+      nFieldID: this.fields[0].aFieldID,
       field: this.fields[0],
-      nOperator: 1,
+      nOperatorID: 1,
       ddOptions: [],
       operators: [],
-      nValues: [],
-      tValue: ""
+      nArrValues: [],
+      nValue: -1,
+      tValue: "",
+      cValue: -1
     };
   }
 
@@ -56,6 +62,35 @@ export class FilterTableComponent {
       opId: 1,
       text: "Or"
     }];
+  }
+
+  anyModelChange(ev: any) {
+    this.filterChanged.emit({
+      isValid: this.isFilterValid(),
+      rows: this.rows
+    });
+  }
+
+  isFilterValid() {
+    let valid = true;
+    for (var item in this.rows) {
+      if (!this.isRowValid(item)) {
+        valid = false;
+        break;
+      }
+    }
+    return valid;
+  }
+
+  isRowValid(row: any) {
+    let valid = true;
+    if (row.tValue.length == 0 && row.tValue == "")
+      valid = false;
+    else {
+      if (row.nArrValues.length > 0)
+        row.tValue = row.nArrValues.join(",")
+    }
+    return valid;
   }
 
   initOperators() {
@@ -80,11 +115,11 @@ export class FilterTableComponent {
   }
 
   fieldChanged(row: any) {
-    row.fieldId = row.field.aReportFieldID;
+    row.nFieldID = row.field.aFieldID;
     row.operators = this.getMyOperator(row.field.nFieldTypeID);
-    row.nOperator = row.operators[0].aFieldTypeOperatorRelID;
+    row.nOperatorID = row.operators[0].aOperatorID;
     if (typeof row.field != 'undefined' && (row.field.nFieldTypeID - 1) == FieldType.dropdown)
-      row.ddOptions = this.commonService.GetDropdownOptions(this.curBrand.aBrandId, row.field.tConstraint);
+      row.ddOptions = this.commonService.GetDropdownOptions(this.curBrand.aBrandId, row.field.tConstraint, true);
   }
 
   getMyOperator(myTypeId: number) {
