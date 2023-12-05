@@ -50,10 +50,10 @@
             </td>
             <td class="noPadding">
                 <span class="inputPrefix" *ngIf="row.field.nFieldTypeID == 9">$</span>
-                <input matInput [(ngModel)]="row.tValue"
+                <input matInput [(ngModel)]="row.tValue" [ngClass]="row.field.nFieldTypeID == 9 ? 'currancyInput' : ''"
                     *ngIf="row.field.nFieldTypeID == 1 || row.field.nFieldTypeID == 2 || row.field.nFieldTypeID == 3 || row.field.nFieldTypeID == 6  || row.field.nFieldTypeID == 7 || row.field.nFieldTypeID == 9"
                     [type]="row.field.nFieldTypeID == 6 ? 'number': 'text'" />
-                <mat-select *ngIf="row.field.nFieldTypeID == 5" [(value)]="row.nArrValues" multiple class="ddOption">
+                <mat-select *ngIf="row.field.nFieldTypeID == 5" [(value)]="row.nArrValues" multiple class="ddOption" style="margin-left: 4px;">
                     <mat-option *ngFor="let op of row.ddOptions"
                         [value]="op.aDropdownId">{{op.tDropdownText}}</mat-option>
                 </mat-select>

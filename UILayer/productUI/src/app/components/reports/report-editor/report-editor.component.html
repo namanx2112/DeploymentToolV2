@@ -8,6 +8,15 @@
             </mat-form-field>
         </div>
         <div class="curField">
+            <mat-label class="fleidLabel">Folder</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-select [compareWith]="compareDropDown" [(value)]="curModel.nFolderId">
+                    <mat-option *ngFor="let opt of allFolders"
+                        [value]="opt.aFolderId">{{opt.tFolderName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="curField">
             <mat-label class="fleidLabel">Report Description</mat-label>
             <mat-form-field appearance="outline">
                 <input matInput placeholder="Enter Report Description" [(ngModel)]="curModel.tReportDescription">

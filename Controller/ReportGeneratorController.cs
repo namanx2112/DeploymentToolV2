@@ -265,8 +265,74 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
+                Nullable<int> lUserId = securityContext.nUserID;
+                tblReport tblreport = request.GetTblReport();
+                //request.tBrandID != null && request.tBrandID != "" &&
+                //        tblreport.tBrandID = "," + request.tBrandID + ",";
+                if (request.aReportId > 0)
+                {
+                    var nFilterCndn = db.Database.ExecuteSqlCommand("delete from tblFilterCondition where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
+                    var nDsplClmn = db.Database.ExecuteSqlCommand("delete from tblDisplayColumns where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
+                    var nSrtClmn = db.Database.ExecuteSqlCommand("delete from tblSortColumns where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
 
 
+                    tblreport.nUpdateBy = lUserId;
+                    tblreport.dtUpdatedOn = DateTime.Now;
+                    //db.Entry(tblreport).State = EntityState.Modified;
+                    db.Entry(tblreport).Property(x => x.nUpdateBy).IsModified = true;
+                    db.Entry(tblreport).Property(x => x.dtUpdatedOn).IsModified = true;
+                    db.Entry(tblreport).Property(x => x.tName).IsModified = true;
+                    //db.Entry(tblreport).Property(x => x.tDesc).IsModified = true;
+                    db.Entry(tblreport).Property(x => x.nReportFolderID).IsModified = true;
+                    db.Entry(tblreport).Property(x => x.tBrandID).IsModified = true;
+                }
+                else
+                {
+                  
+                    tblreport.nCreatedBy = lUserId;
+                    tblreport.dtCreatedOn = DateTime.Now;
+                    tblreport.aReportID = 0;
+                    db.tblReports.Add(tblreport);
+                }
+
+                await db.SaveChangesAsync();
+                int aReportID = tblreport.aReportID;
+                request.aReportId = tblreport.aReportID;
+
+                foreach (var itrt in request.conditions)
+                {
+                    tblFilterCondition tblFiltercndn = new tblFilterCondition();
+                    tblFiltercndn.nRelatedID = aReportID;
+                    tblFiltercndn.nRelatedType = 1;
+                    tblFiltercndn.nFieldID = itrt.aFieldID;
+                    tblFiltercndn.nFieldTypeID = itrt.nFieldTypeID;
+                    tblFiltercndn.nAndOr = itrt.nAndOr;
+                    tblFiltercndn.nOperatorID = itrt.nOperatorID;
+                    tblFiltercndn.nValue = itrt.nValue;
+                    tblFiltercndn.tValue = itrt.tValue;
+                    tblFiltercndn.dValue = itrt.dValue;
+                    tblFiltercndn.cValue = itrt.cValue;
+                    db.tblFilterConditions.Add(tblFiltercndn);
+                }
+              
+                foreach (var itrt in request.spClmn)
+                {
+                    tblDisplayColumn tblDspClmn = new tblDisplayColumn();
+                    tblDspClmn.nRelatedID = aReportID;
+                    tblDspClmn.nRelatedType = 1;
+                    tblDspClmn.nFieldID = itrt.nFieldID;
+                    tblDspClmn.nOrder = itrt.nOrder;
+                    db.tblDisplayColumns.Add(tblDspClmn);
+                }
+                foreach (var itrt in request.srtClmn)
+                {
+                    tblSortColumn tblsrtClmn = new tblSortColumn();
+                    tblsrtClmn.nRelatedID = aReportID;
+                    tblsrtClmn.nRelatedType = 1;
+                    tblsrtClmn.nFieldID = itrt.nFieldID;
+                    tblsrtClmn.nOrder = itrt.nOrder;
+                    db.tblSortColumns.Add(tblsrtClmn);
+                }
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())

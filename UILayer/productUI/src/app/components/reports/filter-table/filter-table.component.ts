@@ -41,6 +41,7 @@ export class FilterTableComponent {
     return {
       nAndOr: 0,
       nFieldID: this.fields[0].aFieldID,
+      nFieldTypeID: 0,
       field: this.fields[0],
       nOperatorID: 1,
       ddOptions: [],
@@ -130,6 +131,7 @@ export class FilterTableComponent {
 
   fieldChanged(row: any) {
     row.nFieldID = row.field.aFieldID;
+    row.nFieldTypeID = row.field.aFieldID;
     row.operators = this.getMyOperator(row.field.nFieldTypeID);
     row.nOperatorID = row.operators[0].aOperatorID;
     if (typeof row.field != 'undefined' && (row.field.nFieldTypeID - 1) == FieldType.dropdown)
@@ -142,6 +144,7 @@ export class FilterTableComponent {
 
   addRow(index: number) {
     this.rows.splice(index + 1, 0, this.getNewRow());
+    this.fieldChanged(this.rows[index + 1]);
   }
 
   delRow(index: number) {

@@ -46,6 +46,8 @@ export interface ReportFieldAndOperatorType {
 
 export interface ReportEditorModel {
     aReportId: number,
+    nFolderId: number,
+    tBrandID: number,
     tReportName: string,
     tReportDescription: string,
     conditions: ReportCondtion[]
@@ -56,6 +58,7 @@ export interface ReportCondtion {
     nRelatedID: number,    
     nAndOr: number,
     nFieldID: number,
+    nFieldTypeID: number,
     nOperatorID: number,
     nValue: number,
     nArrValues: any[]

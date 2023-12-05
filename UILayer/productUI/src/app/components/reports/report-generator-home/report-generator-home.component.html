@@ -1,6 +1,6 @@
 <div class="header">
     <h3 *ngFor="let item of titles;let index = index">
-        <span class="titleSeparator" *ngIf="index > 0">></span> {{item}}
+        <span class="titleSeparator" *ngIf="index > 0">></span> {{titles[index].title}}
     </h3>
 </div>
 <div class="tabHeader">
@@ -14,7 +14,7 @@
     <app-report-folders *ngIf="showView == 'home'" [request]="{curBrand: curBrand}"
         (editItem)="editItem($event)"></app-report-folders>
     <app-folder-editor *ngIf="showView == 'editfolder'" [request]="{curBrand: curBrand, curModel: curModel}"
-        (actionPerformed)="actionPerformedFolder($event)"></app-folder-editor>
+        (actionPerformed)="actionPerformed($event)"></app-folder-editor>
     <app-report-editor *ngIf="showView == 'editreport'" [request]="{curBrand: curBrand, curModel: curModel}"
-        (actionPerformed)="actionPerformedFolder($event)"></app-report-editor>
+        (actionPerformed)="actionPerformed($event)"></app-report-editor>
 </div>

@@ -17,7 +17,7 @@ export class ReportGeneratorHomeComponent {
   curBrand: BrandModel;
   curModel: any;
   showView: string = "home";
-  titles: string[] = ["Home"];
+  titles: any[] = [{ view: "home", title: "Home" }];
   constructor() {
     this.selectedTab = "home";
   }
@@ -45,6 +45,7 @@ export class ReportGeneratorHomeComponent {
             report: true,
             item: {
               nBrandId: this.curBrand.aBrandId,
+              nFolderId: -1,
               aReportId: 0,
               tReportName: "",
               tReportDescription: "",
@@ -55,32 +56,41 @@ export class ReportGeneratorHomeComponent {
     }
   }
 
+  goToHome() {
+    while (this.showView != "home") {
+      this.titles.pop();
+      this.showView = this.titles[this.titles.length - 1].view;
+    }
+  }
+
   editItem(req: any) {
     if (req.report == false) {
       this.curModel = req.item;
       if (this.showView != "editfolder") {
+        this.goToHome();
         this.showView = "editfolder";
         if (req.aFolderId > 0)
-          this.titles.push("Edit Folder");
+          this.titles.push({ view: "editfolder", title: "Edit Folder" });
         else
-          this.titles.push("New Folder");
+          this.titles.push({ view: "editfolder", title: "New Folder" });
       }
     }
     else {
       this.curModel = req.item;
       if (this.showView != "editreport") {
+        this.goToHome();
         this.showView = "editreport";
         if (req.aReportId > 0)
-          this.titles.push("Edit Report");
+          this.titles.push({ view: "editreport", title: "Edit Report" });
         else
-          this.titles.push("New Report");
+          this.titles.push({ view: "editreport", title: "New Report" });
       }
     }
   }
 
-  actionPerformedFolder(ev: any) {
-    this.showView = "home";
+  actionPerformed(ev: any) {
     this.titles.pop();
+    this.showView = this.titles[this.titles.length - 1].view;
   }
 
   moveView(view: string) { }

@@ -37,10 +37,29 @@ namespace DeploymentTool.Model
         public int aReportId { get; set; }
         public int nFolderId { get; set; }
         public string tReportName { get; set; }
-
+        public string tReportDesc { get; set; }
+        public string tBrandID { get; set; }
         public List<ReportFields> conditions { get; set; }
+        public List<tblDisplayColumn> spClmn { get; set; }
+        public List<tblSortColumn> srtClmn { get; set; }
+       
         public DateTime dCreatedOn { get; set; }
         public string tCreatedBy { get; set; }
+
+        public tblReport GetTblReport()
+        {
+            return new tblReport()
+            {
+                aReportID = this.aReportId,
+                // tBrandID =","+ this.nBrandId.t+",",
+                tName = this.tReportName,
+                //tDesc = this.tReportDesc,
+                nReportFolderID = this.nFolderId
+            };
+        }
+
+
+
     }
     public class ReportFieldAndOperatorType
     {
@@ -54,6 +73,14 @@ namespace DeploymentTool.Model
         public int aFieldID { get; set; }
         public string tGroupName { get; set; }
         public int nFieldTypeID { get; set; }
+        public int nAndOr { get; set; }
+        public int nOperatorID { get; set; }
+        public int nValue { get; set; }
+
+        public string tValue { get; set; }
+        public DateTime dValue { get; set; }
+
+        public decimal cValue { get; set; }
         public string tFieldName { get; set; }
 
         public int nAvailableFlag { get; set; }

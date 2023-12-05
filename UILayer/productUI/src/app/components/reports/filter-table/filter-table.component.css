@@ -26,11 +26,18 @@ td:not(.noPadding) {
     color: green;
 }
 
+.currancyInput {
+    text-indent: 15px;
+}
+
+input:not(.currancyInput) {
+    text-indent: 2px;
+}
+
 input {
     width: calc(100% - 5px);
     height: 36px;
     border: 0px none;
-    text-indent: 15px;
 }
 
 .inputPrefix {
@@ -45,7 +52,7 @@ input {
     width: 300px;
 }
 
-.actionButton{
+.actionButton {
     float: right;
     margin-top: 15px;
 }
