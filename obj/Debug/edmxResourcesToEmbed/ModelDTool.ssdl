@@ -197,6 +197,22 @@ warning 6002: The table/view 'dtDB.dbo.tblEnumTableField' does not have a primar
     <Property Name="aFieldTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tName" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="tblFilterCondition">
+    <Key>
+      <PropertyRef Name="nConditionID" />
+    </Key>
+    <Property Name="nConditionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nRelatedID" Type="int" />
+    <Property Name="nRelatedType" Type="int" />
+    <Property Name="nFieldID" Type="int" />
+    <Property Name="nFieldTypeID" Type="int" />
+    <Property Name="nAndOr" Type="int" />
+    <Property Name="nOperatorID" Type="int" />
+    <Property Name="nValue" Type="int" />
+    <Property Name="tValue" Type="nvarchar(max)" />
+    <Property Name="dValue" Type="date" />
+    <Property Name="cValue" Type="decimal" Precision="12" Scale="2" />
+  </EntityType>
   <EntityType Name="tblFranchise">
     <Key>
       <PropertyRef Name="aFranchiseId" />
@@ -1160,6 +1176,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
     <EntitySet Name="tblFieldTypeOperatorRel" EntityType="Self.tblFieldTypeOperatorRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblFieldTypeOperatorValueRel" EntityType="Self.tblFieldTypeOperatorValueRel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblFieldTypes" EntityType="Self.tblFieldTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFilterCondition" EntityType="Self.tblFilterCondition" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblNoteType" EntityType="Self.tblNoteType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOperator" EntityType="Self.tblOperator" Schema="dbo" store:Type="Tables" />

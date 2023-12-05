@@ -48,6 +48,10 @@ export class ReportGeneratorService {
     return this.http.get<ReportFieldAndOperatorType[]>(CommonService.ConfigUrl + "ReportGenerator/GetFieldOperatorType?nBrandID=" + nBrandID, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  EditReport(request: any) {
+    return this.http.post<ReportFolder>(CommonService.ConfigUrl + "ReportGenerator/EditReport", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
   // Delete(request: FranchiseModel) {
   //   return this.http.get<FranchiseModel>(CommonService.ConfigUrl + "Franchise/Delete?id=" + request.aFranchiseId, { headers: this.cacheService.getHttpHeaders() });
   // }

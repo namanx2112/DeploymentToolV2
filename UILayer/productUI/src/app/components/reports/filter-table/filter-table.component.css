@@ -44,3 +44,8 @@ input {
 .ddOption {
     width: 300px;
 }
+
+.actionButton{
+    float: right;
+    margin-top: 15px;
+}

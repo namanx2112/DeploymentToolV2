@@ -37,6 +37,8 @@ namespace DeploymentTool.Model
         public int aReportId { get; set; }
         public int nFolderId { get; set; }
         public string tReportName { get; set; }
+
+        public List<ReportFields> conditions { get; set; }
         public DateTime dCreatedOn { get; set; }
         public string tCreatedBy { get; set; }
     }

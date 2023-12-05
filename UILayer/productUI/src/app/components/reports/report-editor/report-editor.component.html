@@ -16,16 +16,6 @@
         </div>
     </div>
     <mat-label class="fleidLabel">Conditions:</mat-label>
-    <app-filter-table [request]="{curBrand: curBrand, curModel: curModel}" (selectedFilter)="selectedFilter($event)"></app-filter-table>
-    <div class="actionButton">
-        <button [disabled]="cantSubmit()" (click)="submitMe()" mat-raised-button
-            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base">
-            Submit
-        </button>
-        <button (click)="cancel()" mat-raised-button
-            class="exButton buttonClass btn-primary mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base"
-            style="margin-left: 20px;">
-            Cancel
-        </button>
-    </div>
+    <app-filter-table [request]="{curBrand: curBrand, curModel: curModel}"
+        (buttonClick)="buttonClicked($event)"></app-filter-table>
 </div>

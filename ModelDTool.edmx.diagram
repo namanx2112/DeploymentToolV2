@@ -82,6 +82,7 @@
         <EntityTypeShape EntityType="dtDBModel.tblReport" Width="1.5" PointX="25.375" PointY="22.75" />
         <EntityTypeShape EntityType="dtDBModel.tblReportColumn" Width="1.5" PointX="26.375" PointY="0.75" />
         <EntityTypeShape EntityType="dtDBModel.tblSortColumn" Width="1.5" PointX="26.375" PointY="3.75" />
+        <EntityTypeShape EntityType="dtDBModel.tblFilterCondition" Width="1.5" PointX="20.375" PointY="26.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

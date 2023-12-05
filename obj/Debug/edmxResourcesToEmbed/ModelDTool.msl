@@ -1182,5 +1182,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblFilterConditions">
+      <EntityTypeMapping TypeName="dtDBModel.tblFilterCondition">
+        <MappingFragment StoreEntitySet="tblFilterCondition">
+          <ScalarProperty Name="cValue" ColumnName="cValue" />
+          <ScalarProperty Name="dValue" ColumnName="dValue" />
+          <ScalarProperty Name="tValue" ColumnName="tValue" />
+          <ScalarProperty Name="nValue" ColumnName="nValue" />
+          <ScalarProperty Name="nOperatorID" ColumnName="nOperatorID" />
+          <ScalarProperty Name="nAndOr" ColumnName="nAndOr" />
+          <ScalarProperty Name="nFieldTypeID" ColumnName="nFieldTypeID" />
+          <ScalarProperty Name="nFieldID" ColumnName="nFieldID" />
+          <ScalarProperty Name="nRelatedType" ColumnName="nRelatedType" />
+          <ScalarProperty Name="nRelatedID" ColumnName="nRelatedID" />
+          <ScalarProperty Name="nConditionID" ColumnName="nConditionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

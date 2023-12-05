@@ -20,9 +20,8 @@ export class FilterTableComponent {
   }
 
   @Output()
-  filterChanged = new EventEmitter<any>();
+  buttonClick = new EventEmitter<any>();
 
-  filterTable: any;
   curBrand: BrandModel;
   rows: any[] = [];
   group: boolean = false;
@@ -64,31 +63,46 @@ export class FilterTableComponent {
     }];
   }
 
-  anyModelChange(ev: any) {
-    this.filterChanged.emit({
-      isValid: this.isFilterValid(),
-      rows: this.rows
-    });
-  }
-
-  isFilterValid() {
-    let valid = true;
-    for (var item in this.rows) {
-      if (!this.isRowValid(item)) {
-        valid = false;
+  cantSubmit() {
+    let valid = false;
+    for (var indx in this.rows) {
+      if (!this.isRowValid(this.rows[indx])) {
+        valid = true;
         break;
       }
     }
     return valid;
   }
 
+  submitMe() {
+    this.buttonClick.emit({ action: "submit", rows: this.rows });
+  }
+
+  cancel() {
+    this.buttonClick.emit({ action: "cancel", rows: this.rows });
+  }
+
   isRowValid(row: any) {
     let valid = true;
-    if (row.tValue.length == 0 && row.tValue == "")
-      valid = false;
-    else {
-      if (row.nArrValues.length > 0)
-        row.tValue = row.nArrValues.join(",")
+    switch (row.field.nFieldTypeID) {
+      case (FieldType.currency + 1):
+        if (row.tValue == "")
+          valid = false;
+        else
+          row.cValue = row.tValue;
+        break;
+      case (FieldType.number + 1):
+        if (row.tValue == "")
+          valid = false;
+        else
+          row.nValue = row.tValue;
+        break;
+      case (FieldType.dropdown + 1):
+        if (row.nArrValues.length == 0)
+          valid = false;
+        else
+          row.tValue = row.nArrValues.join(",");
+        break;
     }
     return valid;
   }
@@ -127,7 +141,7 @@ export class FilterTableComponent {
   }
 
   addRow(index: number) {
-    this.rows.splice(index, 0, this.getNewRow());
+    this.rows.splice(index + 1, 0, this.getNewRow());
   }
 
   delRow(index: number) {

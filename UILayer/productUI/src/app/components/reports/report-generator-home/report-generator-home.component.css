@@ -41,8 +41,7 @@
 }
 
 .tabHeader a:hover {
-    background-color: lightslategray;
-    color: #fff;
+    color: darkgray;
 }
 
 .tabHeader a .mat-icon {

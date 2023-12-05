@@ -48,14 +48,12 @@ export interface ReportEditorModel {
     aReportId: number,
     tReportName: string,
     tReportDescription: string,
-    conditions: ReportCondtion[],
-    isValid: boolean
+    conditions: ReportCondtion[]
 }
 
 export interface ReportCondtion {
     nConditionID:number,
-    nRelatedID: number,
-    
+    nRelatedID: number,    
     nAndOr: number,
     nFieldID: number,
     nOperatorID: number,

@@ -32,15 +32,19 @@ export class ReportEditorComponent {
 
   }
 
-  submitMe() {
-    // this.rgService.EditFolder(this.curModel).subscribe(x => {
-    //   this.actionPerformed.emit(x);
-    // });
-  }
-
-  selectedFilter(req: any) {
-    this.curModel.isValid = req.isValid;
-    this.curModel.conditions = req.rows;
+  buttonClicked(ev: any) {
+    if (ev.action == "submit") {
+      this.curModel.conditions = ev.rows;
+      if (!this.cantSubmit()) {
+        this.rgService.EditReport(this.curModel).subscribe(x => {
+          this.actionPerformed.emit(x);
+        });
+      }
+      else
+        alert("Please enter a name for report");
+    }
+    else
+      this.actionPerformed.emit();
   }
 
   cancel() {
@@ -50,8 +54,6 @@ export class ReportEditorComponent {
   cantSubmit() {
     let can = false;
     if (this.curModel.tReportName == "")
-      can = true;
-    if (!this.curModel.isValid)
       can = true;
     return can;
   }

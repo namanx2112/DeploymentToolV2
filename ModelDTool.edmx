@@ -202,6 +202,22 @@ warning 6002: The table/view 'dtDB.dbo.tblEnumTableField' does not have a primar
           <Property Name="aFieldTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tName" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="tblFilterCondition">
+          <Key>
+            <PropertyRef Name="nConditionID" />
+          </Key>
+          <Property Name="nConditionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nRelatedID" Type="int" />
+          <Property Name="nRelatedType" Type="int" />
+          <Property Name="nFieldID" Type="int" />
+          <Property Name="nFieldTypeID" Type="int" />
+          <Property Name="nAndOr" Type="int" />
+          <Property Name="nOperatorID" Type="int" />
+          <Property Name="nValue" Type="int" />
+          <Property Name="tValue" Type="nvarchar(max)" />
+          <Property Name="dValue" Type="date" />
+          <Property Name="cValue" Type="decimal" Precision="12" Scale="2" />
+        </EntityType>
         <EntityType Name="tblFranchise">
           <Key>
             <PropertyRef Name="aFranchiseId" />
@@ -1165,6 +1181,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblFieldTypeOperatorRel" EntityType="Self.tblFieldTypeOperatorRel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblFieldTypeOperatorValueRel" EntityType="Self.tblFieldTypeOperatorValueRel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblFieldTypes" EntityType="Self.tblFieldTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFilterCondition" EntityType="Self.tblFilterCondition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblFranchise" EntityType="Self.tblFranchise" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblNoteType" EntityType="Self.tblNoteType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOperator" EntityType="Self.tblOperator" Schema="dbo" store:Type="Tables" />
@@ -1436,6 +1453,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <EntitySet Name="tblReports" EntityType="dtDBModel.tblReport" />
           <EntitySet Name="tblReportColumns" EntityType="dtDBModel.tblReportColumn" />
           <EntitySet Name="tblSortColumns" EntityType="dtDBModel.tblSortColumn" />
+          <EntitySet Name="tblFilterConditions" EntityType="dtDBModel.tblFilterCondition" />
 				</EntityContainer>
 				<EntityType Name="tblBrand">
 					<Key>
@@ -2540,6 +2558,22 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           <Property Name="nRelatedType" Type="Int32" />
           <Property Name="nFieldID" Type="Int32" />
           <Property Name="nOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblFilterCondition">
+          <Key>
+            <PropertyRef Name="nConditionID" />
+          </Key>
+          <Property Name="nConditionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nRelatedID" Type="Int32" />
+          <Property Name="nRelatedType" Type="Int32" />
+          <Property Name="nFieldID" Type="Int32" />
+          <Property Name="nFieldTypeID" Type="Int32" />
+          <Property Name="nAndOr" Type="Int32" />
+          <Property Name="nOperatorID" Type="Int32" />
+          <Property Name="nValue" Type="Int32" />
+          <Property Name="tValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dValue" Type="DateTime" Precision="0" />
+          <Property Name="cValue" Type="Decimal" Precision="12" Scale="2" />
         </EntityType>
 			</Schema>
 		</edmx:ConceptualModels>
@@ -3725,6 +3759,23 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
                 <ScalarProperty Name="nRelatedType" ColumnName="nRelatedType" />
                 <ScalarProperty Name="nRelatedID" ColumnName="nRelatedID" />
                 <ScalarProperty Name="aSortColumnsID" ColumnName="aSortColumnsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFilterConditions">
+            <EntityTypeMapping TypeName="dtDBModel.tblFilterCondition">
+              <MappingFragment StoreEntitySet="tblFilterCondition">
+                <ScalarProperty Name="cValue" ColumnName="cValue" />
+                <ScalarProperty Name="dValue" ColumnName="dValue" />
+                <ScalarProperty Name="tValue" ColumnName="tValue" />
+                <ScalarProperty Name="nValue" ColumnName="nValue" />
+                <ScalarProperty Name="nOperatorID" ColumnName="nOperatorID" />
+                <ScalarProperty Name="nAndOr" ColumnName="nAndOr" />
+                <ScalarProperty Name="nFieldTypeID" ColumnName="nFieldTypeID" />
+                <ScalarProperty Name="nFieldID" ColumnName="nFieldID" />
+                <ScalarProperty Name="nRelatedType" ColumnName="nRelatedType" />
+                <ScalarProperty Name="nRelatedID" ColumnName="nRelatedID" />
+                <ScalarProperty Name="nConditionID" ColumnName="nConditionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

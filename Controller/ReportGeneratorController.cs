@@ -257,5 +257,26 @@ namespace DeploymentTool.Controller
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<HttpResponseMessage> EditReport(ReportInfo request)
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            try
+            {
+
+
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ReportGenerator.CreateFolder", HttpContext.Current, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
     }
 }

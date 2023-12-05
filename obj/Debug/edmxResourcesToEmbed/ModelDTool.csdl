@@ -107,6 +107,7 @@
     <EntitySet Name="tblReports" EntityType="dtDBModel.tblReport" />
     <EntitySet Name="tblReportColumns" EntityType="dtDBModel.tblReportColumn" />
     <EntitySet Name="tblSortColumns" EntityType="dtDBModel.tblSortColumn" />
+    <EntitySet Name="tblFilterConditions" EntityType="dtDBModel.tblFilterCondition" />
   </EntityContainer>
   <EntityType Name="tblBrand">
     <Key>
@@ -1211,5 +1212,21 @@
     <Property Name="nRelatedType" Type="Int32" />
     <Property Name="nFieldID" Type="Int32" />
     <Property Name="nOrder" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblFilterCondition">
+    <Key>
+      <PropertyRef Name="nConditionID" />
+    </Key>
+    <Property Name="nConditionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nRelatedID" Type="Int32" />
+    <Property Name="nRelatedType" Type="Int32" />
+    <Property Name="nFieldID" Type="Int32" />
+    <Property Name="nFieldTypeID" Type="Int32" />
+    <Property Name="nAndOr" Type="Int32" />
+    <Property Name="nOperatorID" Type="Int32" />
+    <Property Name="nValue" Type="Int32" />
+    <Property Name="tValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dValue" Type="DateTime" Precision="0" />
+    <Property Name="cValue" Type="Decimal" Precision="12" Scale="2" />
   </EntityType>
 </Schema>

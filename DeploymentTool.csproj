@@ -863,6 +863,9 @@
     <Compile Include="tblFieldTypeOperatorValueRel.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblFilterCondition.cs">
+      <DependentUpon>ModelDTool.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblFranchise.cs">
       <DependentUpon>ModelDTool.tt</DependentUpon>
     </Compile>
