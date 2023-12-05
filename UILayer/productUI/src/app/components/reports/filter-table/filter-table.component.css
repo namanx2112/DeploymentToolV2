@@ -1,5 +1,40 @@
-table{
-    border: 1px solid lightgray;
+table {
     width: 100%;
     text-align: left;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 5px;
+    border: 1px solid lightgray;
+}
+
+.rowAction {
+    cursor: pointer;
+}
+
+.rowAction.del {
+    color: red;
+}
+
+.rowAction.add {
+    color: green;
+}
+
+input {
+    width: calc(100% - 5px);
+    height: 22px;
+    border: 1px solid lightgray;
+}
+
+.inputPrefix {
+    position: absolute;
+    margin-left: 4px;
+    margin-top: 2px;
+    color: gray;
+}
+
+.ddOption{
+    width: 300px;
 }

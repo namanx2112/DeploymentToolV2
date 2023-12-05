@@ -22,6 +22,29 @@ export interface ReportInfo {
     visible: number | 1
 }
 
+export interface ReportField {
+    aReportFieldID: number,
+    nReportFieldGroupID: number,
+    tGroupName: string,
+    nFieldTypeID: number,
+    tReportFieldName: string,
+    bAvailableForFilter: boolean,
+    bAvailableForColumn: boolean,
+    bAvailableForSort: boolean,
+    tTableName: string,
+    tColumnName: string,
+    tPrimaryColumn: string,
+    tRelColumn: string,
+    nBrandID: number
+}
+
+export interface ReportFieldAndOperatorType {
+    aFieldTypeOperatorRelID: number,
+    nFieldTypeID: number,
+    tName: string,
+    tOperator: string
+}
+
 
 export interface ReportEditorModel {
     aReportId: number,

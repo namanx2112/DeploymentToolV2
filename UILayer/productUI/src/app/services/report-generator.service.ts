@@ -5,7 +5,7 @@ import { PartsModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
 import { CacheService } from './cache.service';
-import { ReportFolder, ReportInfo } from '../interfaces/report-generator';
+import { ReportField, ReportFieldAndOperatorType, ReportFolder, ReportInfo } from '../interfaces/report-generator';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,14 @@ export class ReportGeneratorService {
 
   GetReportsForFolder(nFolderId: number) {
     return this.http.get<ReportInfo[]>(CommonService.ConfigUrl + "ReportGenerator/GetReportsForFolder?nFolderId=" + nFolderId, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  GetReportFields(nBrandID: number) {
+    return this.http.get<ReportField[]>(CommonService.ConfigUrl + "ReportGenerator/GetReportFields?nBrandID=" + nBrandID, { headers: this.cacheService.getHttpHeaders() });
+  }
+
+  GetFieldOperatorType(nBrandID: number) {
+    return this.http.get<ReportFieldAndOperatorType[]>(CommonService.ConfigUrl + "ReportGenerator/GetFieldOperatorType?nBrandID=" + nBrandID, { headers: this.cacheService.getHttpHeaders() });
   }
 
   // Delete(request: FranchiseModel) {

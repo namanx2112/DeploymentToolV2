@@ -1,4 +1,5 @@
-<div>
+<div class="searchDiv">
+    <span class="inputPrefix"><mat-icon>search</mat-icon></span>
     <input class="searchFolder" (keyup)="applyFilter($event)" placeholder="Enter folder name to filter" />
 </div>
 <mat-accordion class="example-headers-align">
@@ -6,7 +7,9 @@
         (closed)="Closed()" [expanded]="folder.visible == 1">
         <mat-expansion-panel-header class="expHeader">
             <mat-panel-title>
-                <mat-icon matListItemIcon class="folderIcon">folder</mat-icon>{{folder.tFolderName}}
+                <mat-icon matListItemIcon class="folderIcon" *ngIf="folder.nFolderType != 1">folder</mat-icon>
+                <mat-icon matListItemIcon class="folderIcon" *ngIf="folder.nFolderType == 1">folder_shared</mat-icon>                
+                {{folder.tFolderName}}
             </mat-panel-title>
             <mat-panel-description>
                 {{ folder.tCreatedBy }} Created {{getFormatedDate(folder.dCreatedOn)}}

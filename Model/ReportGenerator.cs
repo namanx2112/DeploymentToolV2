@@ -13,7 +13,7 @@ namespace DeploymentTool.Model
     {
         public int aFolderId { get; set; }
         public int nBrandId { get; set; }
-        public string tFolderName { get; set; } 
+        public string tFolderName { get; set; }
         public string tFolderDescription { get; set; }
         public Nullable<int> nFolderType { get; set; }
         public DateTime dCreatedOn { get; set; }
@@ -58,13 +58,14 @@ namespace DeploymentTool.Model
         public Nullable<bool> bAvailableForFilter { get; set; }
         public Nullable<bool> bAvailableForColumn { get; set; }
         public Nullable<bool> bAvailableForSort { get; set; }
+        public string tConstraint { get; set; }
 
         public string tTableName { get; set; }
 
         public string tColumnName { get; set; }
 
         public string tPrimaryColumn { get; set; }
-        public string tRelColumn { get; set; }        
+        public string tRelColumn { get; set; }
         public Nullable<int> nBrandID { get; set; }
     }
 }

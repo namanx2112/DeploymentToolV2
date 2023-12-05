@@ -166,7 +166,7 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
-        public HttpResponseMessage GetFieldOperatorType(int nFolderId)
+        public HttpResponseMessage GetFieldOperatorType(int nBrandID)
         {
             //var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             //Nullable<int> lUserId = securityContext.nUserID;

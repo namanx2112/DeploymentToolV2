@@ -5,53 +5,58 @@
             </th>
             <th style="width: 40px;" *ngIf="group">
             </th>
-            <th>
+            <th style="width: 100px;">
                 AddOr
             </th>
             <th>
                 Field
             </th>
-            <th>
+            <th style="width: 200px;">
                 Operator
             </th>
-            <th>
+            <th class="ddOption">
                 Value
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of rows">
+        <tr *ngFor="let row of rows;let index = index">
             <td>
-                <span class="rowAction"><mat-icon>add</mat-icon></span>
-                <span class="rowAction"><mat-icon>clear</mat-icon></span>
+                <span class="rowAction add" (click)="addRow(index)"
+                    matTooltip="Add a row"><mat-icon>add</mat-icon></span>
+                <span class="rowAction del" *ngIf="index > 0" (click)="delRow(index)"
+                    matTooltip="Delete this row"><mat-icon>clear</mat-icon></span>
             </td>
             <td *ngIf="group">
                 <mat-checkbox class="example-margin"></mat-checkbox>
             </td>
             <td>
                 <mat-select [(value)]="row.andOr">
-                    <mat-option value="0">And</mat-option>
-                    <mat-option value="1">Or</mat-option>
+                    <mat-option *ngFor="let op of andOrOperators" [value]="op.opId">{{op.text}}</mat-option>
                 </mat-select>
             </td>
             <td>
-                <mat-select [(value)]="row.field">
+                <mat-select [(value)]="row.field" (selectionChange)="fieldChanged(row)">
                     <mat-option>-- None --</mat-option>
                     <mat-optgroup *ngFor="let field of fields" [label]="field.tGroupName">
-                        <mat-option [value]="field.nFieldId">{{field.tFieldName}}</mat-option>
+                        <mat-option [value]="field">{{field.tReportFieldName}}</mat-option>
                     </mat-optgroup>
                 </mat-select>
             </td>
             <td>
-                <mat-select [(value)]="row.nOperator">
-                    <mat-option>></mat-option>
-                    <mat-option><</mat-option>
+                <mat-select [compareWith]="compareOperatorDropDown" [(value)]="row.nOperator">
+                    <mat-option *ngFor="let op of row.operators"
+                        [value]="op.aFieldTypeOperatorRelID">{{op.tOperator}}</mat-option>
                 </mat-select>
             </td>
             <td>
-                <mat-select [(value)]="row.nValue">
-                    <mat-option>1</mat-option>
-                    <mat-option>2</mat-option>
+                <span class="inputPrefix" *ngIf="row.field.nFieldTypeID == 9">$</span>
+                <input [(value)]="row.tValue"
+                    *ngIf="row.field.nFieldTypeID == 1 || row.field.nFieldTypeID == 2 || row.field.nFieldTypeID == 3 || row.field.nFieldTypeID == 6  || row.field.nFieldTypeID == 7 || row.field.nFieldTypeID == 9"
+                    [type]="row.field.nFieldTypeID == 6 ? 'number': 'text'" />
+                <mat-select *ngIf="row.field.nFieldTypeID == 5" [(value)]="row.nValues" multiple class="ddOption">
+                    <mat-option *ngFor="let op of row.ddOptions"
+                        [value]="op.aDropdownId">{{op.tDropdownText}}</mat-option>
                 </mat-select>
             </td>
         </tr>
