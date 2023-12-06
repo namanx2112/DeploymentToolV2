@@ -30,6 +30,7 @@ export class FilterTableComponent {
   fields: ReportField[] = [];
   operators: ReportFieldAndOperatorType[] = [];
   andOrOperators: any[] = [];
+  fieldsByGroup: any = {};
   constructor(private rgService: ReportGeneratorService, private commonService: CommonService) {
 
   }
@@ -143,6 +144,7 @@ export class FilterTableComponent {
   initFields() {
     this.rgService.GetReportFields(this.curBrand.aBrandId).subscribe(x => {
       this.fields = x;
+      this.fieldsByGroup = this.rgService.getFieldByGroup(x);
       this.initOperators();
     });
   }

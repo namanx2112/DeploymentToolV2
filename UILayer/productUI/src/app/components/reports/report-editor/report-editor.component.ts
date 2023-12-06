@@ -25,6 +25,7 @@ export class ReportEditorComponent {
   curModel: ReportEditorModel;
   allFolders: ReportFolder[] = [];
   allFields: ReportField[] = [];
+  fieldsByGroup: any;
   constructor(private rgService: ReportGeneratorService, private dialog: MatDialog) {
 
   }
@@ -55,6 +56,7 @@ export class ReportEditorComponent {
     let openDialog = function () {
       dialogConfig.data = {
         allFields: cthis.allFields,
+        fieldsByGroup: cthis.fieldsByGroup,
         srtClmn: cthis.curModel.srtClmn,
         spClmn: cthis.curModel.spClmn,
         aferSave: function (data: any) {
@@ -73,6 +75,7 @@ export class ReportEditorComponent {
     if (this.allFields.length == 0) {
       this.rgService.GetReportFields(this.curBrand.aBrandId).subscribe(x => {
         this.allFields = x;
+        this.fieldsByGroup = this.rgService.getFieldByGroup(x);
         openDialog();
       });
     }

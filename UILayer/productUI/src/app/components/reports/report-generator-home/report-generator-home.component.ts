@@ -46,6 +46,7 @@ export class ReportGeneratorHomeComponent {
             report: true,
             item: {
               nBrandId: this.curBrand.aBrandId,
+              conditions: [],
               nFolderId: -1,
               aReportId: 0,
               tReportName: "",

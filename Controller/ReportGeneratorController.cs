@@ -139,7 +139,13 @@ namespace DeploymentTool.Controller
                 {
                     tblReportFldr.nUpdateBy = lUserId;
                     tblReportFldr.dtUpdatedOn = DateTime.Now;
-                    db.Entry(tblReportFldr).State = EntityState.Modified;
+                    db.Entry(tblReportFldr).State = EntityState.Unchanged;
+                    db.Entry(tblReportFldr).Property(x => x.nUpdateBy).IsModified = true;
+                    db.Entry(tblReportFldr).Property(x => x.dtUpdatedOn).IsModified = true;
+                    db.Entry(tblReportFldr).Property(x => x.nFolderType).IsModified = true;
+                    db.Entry(tblReportFldr).Property(x => x.tFolderName).IsModified = true;
+                    db.Entry(tblReportFldr).Property(x => x.tFolderDescription).IsModified = true;
+
                 }
                 else
                 {
@@ -171,7 +177,11 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
-                request.aFolderId = 99;
+                if (request.aFolderId > 0)
+                {
+                    var nFilterCndn = db.Database.ExecuteSqlCommand("delete from tblReportFolder where aFolderId =@aFolderId  ", new SqlParameter("@aFolderId", request.aFolderId));
+                   
+                }
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())
@@ -191,7 +201,14 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
-                request.aReportId = 99;
+                if (request.aReportId > 0)
+                {
+                    var nFilterCndn = db.Database.ExecuteSqlCommand("delete from tblFilterCondition where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
+                    var nDsplClmn = db.Database.ExecuteSqlCommand("delete from tblDisplayColumns where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
+                    var nSrtClmn = db.Database.ExecuteSqlCommand("delete from tblSortColumns where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
+                    var nreport = db.Database.ExecuteSqlCommand("delete from tblreport where aReportID=3 =@nReportID  ", new SqlParameter("@nReportID", request.aReportId));
+
+                }
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())
@@ -224,7 +241,7 @@ namespace DeploymentTool.Controller
 
                     tblreport.nUpdateBy = lUserId;
                     tblreport.dtUpdatedOn = DateTime.Now;
-                    //db.Entry(tblreport).State = EntityState.Modified;
+                    db.Entry(tblreport).State = EntityState.Unchanged;
                     db.Entry(tblreport).Property(x => x.nUpdateBy).IsModified = true;
                     db.Entry(tblreport).Property(x => x.dtUpdatedOn).IsModified = true;
                     db.Entry(tblreport).Property(x => x.tName).IsModified = true;

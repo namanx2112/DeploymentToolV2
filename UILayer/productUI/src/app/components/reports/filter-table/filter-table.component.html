@@ -38,8 +38,8 @@
             <td>
                 <mat-select [(value)]="row.field" (selectionChange)="fieldChanged(row)">
                     <mat-option>-- None --</mat-option>
-                    <mat-optgroup *ngFor="let field of fields" [label]="field.tGroupName">
-                        <mat-option [value]="field">{{field.tFieldName}}</mat-option>
+                    <mat-optgroup *ngFor="let group of fieldsByGroup" [label]="group.tGroupName">
+                        <mat-option *ngFor="let field of group.items" [value]="field">{{field.tFieldName}}</mat-option>
                     </mat-optgroup>
                 </mat-select>
             </td>

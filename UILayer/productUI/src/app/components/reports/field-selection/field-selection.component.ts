@@ -25,6 +25,7 @@ export class FieldSelectionComponent {
   filteredOptionsColumn: ReportField[] = [];
   aferSave: any;
   showAddFor: string;
+  fieldsByGroup: any = {};
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     if (typeof data != 'undefined') {
       this.allFields = data.allFields;
@@ -32,6 +33,7 @@ export class FieldSelectionComponent {
       this.selectedColumns = (typeof data.spClmn != 'undefined') ? data.spClmn : [];
       this.filteredOptionsSort = data.allFields;
       this.filteredOptionsColumn = data.allFields;
+      this.fieldsByGroup = data.fieldsByGroup;
       this.aferSave = data.aferSave;
       this.initItems();
     }

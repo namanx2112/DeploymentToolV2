@@ -52,6 +52,23 @@ export class ReportGeneratorService {
     return this.http.get<ReportField[]>(CommonService.ConfigUrl + "ReportGenerator/GetReportFields?nBrandID=" + nBrandID, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  getFieldByGroup(fields: ReportField[]) {
+    let item: any[] = [];
+    for (var indx in fields) {
+      let field = fields[indx];
+      let gIndx = item.findIndex(x => x.tGroupName == field.tGroupName);
+      if (gIndx == -1) {
+        item.push({
+          tGroupName: field.tGroupName,
+          items: [field]
+        });
+      }
+      else
+        item[gIndx].items.push(field);
+    }
+    return item;
+  }
+
   GetFieldOperatorType(nBrandID: number) {
     return this.http.get<ReportFieldAndOperatorType[]>(CommonService.ConfigUrl + "ReportGenerator/GetFieldOperatorType?nBrandID=" + nBrandID, { headers: this.cacheService.getHttpHeaders() });
   }
