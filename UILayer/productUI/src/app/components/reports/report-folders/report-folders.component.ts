@@ -77,16 +77,20 @@ export class ReportFoldersComponent {
 
     deleteMe(item: any, report: boolean) {
         if (!report) {
-            this.rgService.DeleteFolder(item).subscribe(x => {
-                if (x.aFolderId > 0)
-                    this.getMyFolders();
-            });
+            if (confirm("Are you sure you want to delete this folder?")) {
+                this.rgService.DeleteFolder(item).subscribe(x => {
+                    if (x.aFolderId > 0)
+                        this.getMyFolders();
+                });
+            }
         }
         else {
-            // this.rgService.DeleteFolder(item).subscribe(x => {
-            //     if (x.aFolderId > 0)
-            //         this.getMyFolders();
-            // });
+            if (confirm("Are you sure you want to delete this report?")) {
+                this.rgService.DeleteReport(item).subscribe(x => {
+                    if (x.aReportId > 0)
+                        this.getMyFolders();
+                });
+            }
         }
     }
 

@@ -35,6 +35,10 @@ export class ReportGeneratorService {
     return this.http.post<ReportFolder>(CommonService.ConfigUrl + "ReportGenerator/DeleteFolder", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  DeleteReport(request: any) {
+    return this.http.post<ReportInfo>(CommonService.ConfigUrl + "ReportGenerator/DeleteReport", request, { headers: this.cacheService.getHttpHeaders() });
+  }
+
 
   GetReportsForFolder(nFolderId: number) {
     return this.http.get<ReportInfo[]>(CommonService.ConfigUrl + "ReportGenerator/GetReportsForFolder?nFolderId=" + nFolderId, { headers: this.cacheService.getHttpHeaders() });
