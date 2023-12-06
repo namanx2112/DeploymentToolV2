@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { BrandModel } from 'src/app/interfaces/models';
-import { ReportEditorModel, ReportFolder } from 'src/app/interfaces/report-generator';
+import { ReportEditorModel, ReportField, ReportFolder } from 'src/app/interfaces/report-generator';
 import { ReportGeneratorService } from 'src/app/services/report-generator.service';
+import { FieldSelectionComponent } from '../field-selection/field-selection.component';
 
 @Component({
   selector: 'app-report-editor',
@@ -22,7 +24,8 @@ export class ReportEditorComponent {
   curBrand: BrandModel;
   curModel: ReportEditorModel;
   allFolders: ReportFolder[] = [];
-  constructor(private rgService: ReportGeneratorService) {
+  allFields: ReportField[] = [];
+  constructor(private rgService: ReportGeneratorService, private dialog: MatDialog) {
 
   }
 
@@ -42,12 +45,39 @@ export class ReportEditorComponent {
     });
   }
 
-  fieldSelection(){
-
-  }
-
-  sortSelection(){
-    
+  fieldSelection() {
+    let cthis = this;
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '60%';
+    dialogConfig.height = '70%';
+    let openDialog = function () {
+      dialogConfig.data = {
+        allFields: cthis.allFields,
+        srtClmn: cthis.curModel.srtClmn,
+        spClmn: cthis.curModel.spClmn,
+        aferSave: function (data: any) {
+          cthis.curModel.srtClmn = data.srtClmn;
+          cthis.curModel.spClmn = data.spClmn;
+          dialogRef.close();
+        },
+        onClose: function (ev: any) {
+          dialogRef.close();
+        },
+        themeClass: "grayWhite",
+        dialogTheme: "lightGrayWhiteTheme"
+      };
+      dialogRef = cthis.dialog.open(FieldSelectionComponent, dialogConfig);
+    }
+    if (this.allFields.length == 0) {
+      this.rgService.GetReportFields(this.curBrand.aBrandId).subscribe(x => {
+        this.allFields = x;
+        openDialog();
+      });
+    }
+    else
+      openDialog();
   }
 
   compareDropDown(o1: any, o2: any) {

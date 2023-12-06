@@ -1,21 +1,62 @@
-<div class="example-container">
-    <h2>To do</h2>
+<div class="tContainer">
+    <div class="example-container">
+        <h2>Columns</h2>
+        <button *ngIf="showAddFor != 'column'" (click)="showAddFor='column'"
+            class="btnAddField ng-star-inserted mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"><mat-icon>add</mat-icon>Add
+            a column</button>
+        <div *ngIf="showAddFor == 'column'" class="colList">
+            <mat-form-field class="example-full-width">
+                <mat-label>Number</mat-label>
+                <input #input type="text" placeholder="Pick one" matInput [matAutocomplete]="autoColumn"
+                    (input)="filter(false)" (focus)="filter(false)">
+                <mat-autocomplete (optionSelected)="fieldChanged($event, false)" #autoColumn="matAutocomplete">
+                    <mat-optgroup *ngFor="let field of filteredOptionsColumn" [label]="field.tGroupName">
+                        <mat-option [value]="field">{{field.tFieldName}}</mat-option>
+                    </mat-optgroup>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="listContainer">
+            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="selectedColumns" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" cdkDrag *ngFor="let item of selectedColumns;let index=index;">
+                    {{item.tFieldName}}
+                    <span class="rowAction del" *ngIf="(selectedColumns.length > 1)" (click)="delColumn(index, false);"
+                        matTooltip="Delete column"><mat-icon>clear</mat-icon></span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        @for (item of todo; track item) {
-        <div class="example-box" cdkDrag>{{item}}</div>
-        }
+    <div class="example-container">
+        <h2>Sorting</h2>
+        <button *ngIf="showAddFor != 'sort'" (click)="showAddFor='sort'"
+            class="btnAddField ng-star-inserted mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"><mat-icon>add</mat-icon>Add
+            a column</button>
+        <div *ngIf="showAddFor == 'sort'" class="colList">
+            <mat-form-field class="example-full-width">
+                <mat-label>Number</mat-label>
+                <input #input type="text" placeholder="Pick one" matInput [matAutocomplete]="autoSorting"
+                    (input)="filter(true)" (focus)="filter(true)">
+                <mat-autocomplete (optionSelected)="fieldChanged($event, true)" #autoSorting="matAutocomplete">
+                    <mat-optgroup *ngFor="let field of filteredOptionsSort" [label]="field.tGroupName">
+                        <mat-option [value]="field">{{field.tFieldName}}</mat-option>
+                    </mat-optgroup>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+        <div class="listContainer">
+            <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="sortColumns" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" cdkDrag *ngFor="let item of sortColumns;let index=index;">{{item.tFieldName}}
+                    <span class="rowAction del" (click)="delColumn(index, true);"
+                        matTooltip="Delete column"><mat-icon>clear</mat-icon></span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="example-container">
-    <h2>Done</h2>
-
-    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
-        class="example-list" (cdkDropListDropped)="drop($event)">
-        @for (item of done; track item) {
-        <div class="example-box" cdkDrag>{{item}}</div>
-        }
-    </div>
+<div mat-dialog-actions style="float: right;">
+    <button mat-dialog-close cdkFocusInitial (click)="saveClicked()" mat-raised-button>OK</button>
+    <button mat-dialog-close mat-raised-button>Cancel</button>
 </div>

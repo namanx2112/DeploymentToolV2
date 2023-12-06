@@ -36,6 +36,24 @@ export interface ReportField {
     tConstraint: string
 }
 
+export interface DisplayColumn{
+    aDisplayColumnsID: number,
+    nRelatedID: number,
+    nRelatedType: number,
+    nFieldID: number,
+    tFieldName: string,
+    nOrder: number
+}
+
+export interface SortColumns{
+    aSortColumnsID: number,
+    nRelatedID: number,
+    nRelatedType: number,
+    nFieldID: number,
+    tFieldName: string,
+    nOrder: number
+}
+
 export interface ReportFieldAndOperatorType {
     aOperatorID: number,
     nFieldTypeID: number,
@@ -50,7 +68,9 @@ export interface ReportEditorModel {
     tBrandID: number,
     tReportName: string,
     tReportDescription: string,
-    conditions: ReportCondtion[]
+    conditions: ReportCondtion[],
+    spClmn: DisplayColumn[],
+    srtClmn: SortColumns[]
 }
 
 export interface ReportCondtion {
