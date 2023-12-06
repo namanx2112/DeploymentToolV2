@@ -8,7 +8,7 @@ import {
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DisplayColumn, ReportField, SortColumns } from 'src/app/interfaces/report-generator';
+import { DisplayColumn, GroupByFields, ReportField, SortColumns } from 'src/app/interfaces/report-generator';
 
 @Component({
   selector: 'app-field-selection',
@@ -21,18 +21,18 @@ export class FieldSelectionComponent {
   sortColumns: SortColumns[] = [];
   selectedColumns: DisplayColumn[] = [];
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
-  filteredOptionsSort: ReportField[] = [];
-  filteredOptionsColumn: ReportField[] = [];
+  filteredOptionsSort: GroupByFields[] = [];
+  filteredOptionsColumn: GroupByFields[] = [];
   aferSave: any;
   showAddFor: string;
-  fieldsByGroup: any = {};
+  fieldsByGroup: GroupByFields[] = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     if (typeof data != 'undefined') {
       this.allFields = data.allFields;
       this.sortColumns = (typeof data.srtClmn != 'undefined') ? data.srtClmn : [];
       this.selectedColumns = (typeof data.spClmn != 'undefined') ? data.spClmn : [];
-      this.filteredOptionsSort = data.allFields;
-      this.filteredOptionsColumn = data.allFields;
+      this.filteredOptionsSort = data.fieldsByGroup;
+      this.filteredOptionsColumn = data.fieldsByGroup;
       this.fieldsByGroup = data.fieldsByGroup;
       this.aferSave = data.aferSave;
       this.initItems();
@@ -117,10 +117,20 @@ export class FieldSelectionComponent {
 
   filter(sort: boolean): void {
     const filterValue = this.input.nativeElement.value.toLowerCase();
-    if (sort)
-      this.filteredOptionsSort = this.allFields.filter(o => o.tFieldName.toLowerCase().includes(filterValue));
-    else
-      this.filteredOptionsColumn = this.allFields.filter(o => o.tFieldName.toLowerCase().includes(filterValue));
+    if (sort) {
+      this.filteredOptionsSort = [];
+      for (let item of this.fieldsByGroup) {
+        this.filteredOptionsSort.push({ tGroupName: item.tGroupName, items: item.items.filter(o => o.tFieldName.toLowerCase().includes(filterValue)) });
+      }
+      //this.filteredOptionsSort = this.allFields.filter(o => o.tFieldName.toLowerCase().includes(filterValue));
+    }
+    else {
+      this.filteredOptionsColumn = [];
+      for (let item of this.fieldsByGroup) {
+        this.filteredOptionsColumn.push({ tGroupName: item.tGroupName, items: item.items.filter(o => o.tFieldName.toLowerCase().includes(filterValue)) });
+      }
+    }
+    //this.filteredOptionsColumn = this.allFields.filter(o => o.tFieldName.toLowerCase().includes(filterValue));
   }
 
   saveClicked() {

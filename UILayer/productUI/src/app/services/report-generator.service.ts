@@ -5,7 +5,7 @@ import { PartsModel } from '../interfaces/models';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
 import { CacheService } from './cache.service';
-import { ReportField, ReportFieldAndOperatorType, ReportFolder, ReportInfo } from '../interfaces/report-generator';
+import { GroupByFields, ReportField, ReportFieldAndOperatorType, ReportFolder, ReportInfo } from '../interfaces/report-generator';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +52,7 @@ export class ReportGeneratorService {
     return this.http.get<ReportField[]>(CommonService.ConfigUrl + "ReportGenerator/GetReportFields?nBrandID=" + nBrandID, { headers: this.cacheService.getHttpHeaders() });
   }
 
-  getFieldByGroup(fields: ReportField[]) {
+  getFieldByGroup(fields: ReportField[]): GroupByFields[] {
     let item: any[] = [];
     for (var indx in fields) {
       let field = fields[indx];

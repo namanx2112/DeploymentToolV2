@@ -159,7 +159,8 @@ export class FilterTableComponent {
     row.nFieldID = row.field.aFieldID;
     row.nFieldTypeID = row.field.nFieldTypeID;
     row.operators = this.getMyOperator(row.field.nFieldTypeID);
-    row.nOperatorID = row.operators[0].aOperatorID;
+    if (typeof row.nOperatorID == 'undefined')
+      row.nOperatorID = row.operators[0].aOperatorID;
     if (typeof row.field != 'undefined' && (row.field.nFieldTypeID - 1) == FieldType.dropdown)
       row.ddOptions = this.commonService.GetDropdownOptions(this.curBrand.aBrandId, row.field.tConstraint, true);
   }

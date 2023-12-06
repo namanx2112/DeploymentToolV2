@@ -36,6 +36,11 @@ export interface ReportField {
     tConstraint: string
 }
 
+export interface GroupByFields{
+    tGroupName: string,
+    items: ReportField[]
+}
+
 export interface DisplayColumn{
     aDisplayColumnsID: number,
     nRelatedID: number,

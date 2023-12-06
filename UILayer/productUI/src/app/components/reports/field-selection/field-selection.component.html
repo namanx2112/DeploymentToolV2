@@ -10,8 +10,8 @@
                 <input #input type="text" placeholder="Pick one" matInput [matAutocomplete]="autoColumn"
                     (input)="filter(false)" (focus)="filter(false)">
                 <mat-autocomplete (optionSelected)="fieldChanged($event, false)" #autoColumn="matAutocomplete">
-                    <mat-optgroup *ngFor="let field of filteredOptionsColumn" [label]="field.tGroupName">
-                        <mat-option [value]="field">{{field.tFieldName}}</mat-option>
+                    <mat-optgroup *ngFor="let group of filteredOptionsColumn" [label]="group.tGroupName">
+                        <mat-option *ngFor="let field of group.items" [value]="field">{{field.tFieldName}}</mat-option>
                     </mat-optgroup>
                 </mat-autocomplete>
             </mat-form-field>
@@ -39,8 +39,8 @@
                 <input #input type="text" placeholder="Pick one" matInput [matAutocomplete]="autoSorting"
                     (input)="filter(true)" (focus)="filter(true)">
                 <mat-autocomplete (optionSelected)="fieldChanged($event, true)" #autoSorting="matAutocomplete">
-                    <mat-optgroup *ngFor="let field of filteredOptionsSort" [label]="field.tGroupName">
-                        <mat-option [value]="field">{{field.tFieldName}}</mat-option>
+                    <mat-optgroup *ngFor="let group of filteredOptionsSort" [label]="group.tGroupName">
+                        <mat-option *ngFor="let field of group.items" [value]="field">{{field.tFieldName}}</mat-option>
                     </mat-optgroup>
                 </mat-autocomplete>
             </mat-form-field>
@@ -57,7 +57,7 @@
     </div>
 </div>
 <div class="notes">You can add columns by selecting a column in Add a column option.<br/>Drag and drop columns to change the order. </div>
-<div mat-dialog-actions style="float: right;">
+<div mat-dialog-actions style="float: right;margin-right: 25px;padding-right: 0px;">
     <button mat-dialog-close cdkFocusInitial (click)="saveClicked()" mat-raised-button>OK</button>
     <button mat-dialog-close mat-raised-button>Cancel</button>
 </div>

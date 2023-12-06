@@ -97,8 +97,6 @@ export class ReportEditorComponent {
           this.actionPerformed.emit(x);
         });
       }
-      else
-        alert("Please enter a name for report");
     }
     else
       this.actionPerformed.emit();
@@ -109,9 +107,15 @@ export class ReportEditorComponent {
   }
 
   cantSubmit() {
-    let can = false;
-    if (this.curModel.tReportName == "")
-      can = true;
-    return can;
+    let cant = false;
+    if (this.curModel.tReportName == ""){
+      cant = true;
+      alert("Please enter a name for report");
+    }
+    else if(this.curModel.spClmn.length == 0){
+      cant = true;
+      alert("Please select at least one column for this report");
+    }
+    return cant;
   }
 }
