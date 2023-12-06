@@ -42,6 +42,14 @@ export class ReportEditorComponent {
     });
   }
 
+  fieldSelection(){
+
+  }
+
+  sortSelection(){
+    
+  }
+
   compareDropDown(o1: any, o2: any) {
     if (o1 == o2)
       return true;

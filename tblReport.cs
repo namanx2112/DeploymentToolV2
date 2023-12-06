@@ -16,6 +16,8 @@ namespace DeploymentTool
     {
         public int aReportID { get; set; }
         public string tName { get; set; }
+
+        public string tReportDescription { get; set; }
         public Nullable<int> nReportType { get; set; }
         public string tBrandID { get; set; }
         public string tQuery { get; set; }

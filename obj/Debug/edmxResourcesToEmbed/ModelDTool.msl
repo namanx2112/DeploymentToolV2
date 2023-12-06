@@ -1157,6 +1157,7 @@
           <ScalarProperty Name="nReportType" ColumnName="nReportType" />
           <ScalarProperty Name="tName" ColumnName="tName" />
           <ScalarProperty Name="aReportID" ColumnName="aReportID" />
+          <ScalarProperty Name="tReportDescription" ColumnName="tReportDescription" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

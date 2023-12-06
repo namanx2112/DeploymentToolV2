@@ -1181,6 +1181,7 @@
     </Key>
     <Property Name="aReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tReportDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <Property Name="nReportType" Type="Int32" />
     <Property Name="tBrandID" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <Property Name="tQuery" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />

@@ -29,57 +29,6 @@ namespace DeploymentTool.Controller
             SqlParameter tparam2 = new SqlParameter("@nUserID", lUserId);
             List<ReportFolder> items = db.Database.SqlQuery<ReportFolder>("exec sproc_getMyfolderForReport @nBrandId,@nUserID ", tparam1, tparam2).ToList();
 
-            //List<ReportFolder> items = new List<ReportFolder>()
-            //{
-            //    new ReportFolder()
-            //    {
-            //        aFolderId = 1,
-            //        dCreatedOn = DateTime.Now,
-            //        tCreatedBy = "Admin",
-            //        tFolderName = "Home",
-            //        tFolderDescription = "Folder for Home Page"
-            //    },
-            //    new ReportFolder()
-            //    {
-            //        aFolderId = 2,
-            //        dCreatedOn = DateTime.Now.AddDays(-112),
-            //        tCreatedBy = "Admin",
-            //        tFolderName = "Vendor",
-            //        tFolderDescription = "Folder for Vendors"
-            //    },
-            //    new ReportFolder()
-            //    {
-            //        aFolderId = 3,
-            //        dCreatedOn = DateTime.Now.AddDays(-111),
-            //        tCreatedBy = "Admin",
-            //        tFolderName = "Franchise",
-            //        tFolderDescription = "Folder for Franchise"
-            //    },
-            //    new ReportFolder()
-            //    {
-            //        aFolderId = 4,
-            //        dCreatedOn = DateTime.Now.AddDays(-12),
-            //        tCreatedBy = "Admin",
-            //        tFolderName = "Admin",
-            //        tFolderDescription = "Folder for Admins"
-            //    },
-            //    new ReportFolder()
-            //    {
-            //        aFolderId = 5,
-            //        dCreatedOn = DateTime.Now.AddDays(-102),
-            //        tCreatedBy = "Admin",
-            //        tFolderName = "Project Managers",
-            //        tFolderDescription = "Folder for Project Managers"
-            //    },
-            //    new ReportFolder()
-            //    {
-            //        aFolderId = 6,
-            //        dCreatedOn = DateTime.Now.AddDays(-212),
-            //        tCreatedBy = "Admin",
-            //        tFolderName = "Sonic",
-            //        tFolderDescription = "Folder for Sonic"
-            //    }
-            //};
 
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -97,66 +46,7 @@ namespace DeploymentTool.Controller
             SqlParameter tparam2 = new SqlParameter("@nUserID", lUserId);
             List<ReportInfo> items = db.Database.SqlQuery<ReportInfo>("exec sproc_getReportsForFolder @nFolderId,@nUserID ", tparam1, tparam2).ToList();
 
-            //List<ReportInfo> items = new List<ReportInfo>()
-            //{
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "ABCD Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-111),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "XYZ Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-20),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "DASCD Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-1211),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "afwetv Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-1111),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "ggsdfv  sd Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-11),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "dsfv  sdfsdf Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-1),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "dfsdfsd Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-10),
-            //       tCreatedBy = "ASDASd"
-            //    },
-
-            //};
+          
 
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -169,80 +59,34 @@ namespace DeploymentTool.Controller
         [HttpGet]
         public HttpResponseMessage GetReportDetails(int nReportId)
         {
+           // IQueryable<tblFilterCondition> itm = null;
+            ReportDetails request =new ReportDetails();
+            List<tblReport> tblreport= db.tblReports.Where(p => p.aReportID == nReportId).ToList();
+            request.aReportId=nReportId;
+            request.nFolderId = (int)tblreport[0].nReportFolderID;
+            request.tReportName = tblreport[0].tName;
+            request.tReportDescription = tblreport[0].tReportDescription;
+            // itm = db.tblFilterConditions.Where(p => p.nRelatedID == nReportId && p.nRelatedType ==1 ).ToList();
+            request.conditions = db.tblFilterConditions.Where(p => p.nRelatedID == nReportId && p.nRelatedType == 1).ToList(); 
+            request.spClmn = db.tblDisplayColumns.Where(p => p.nRelatedID == nReportId && p.nRelatedType == 1).ToList();
+            request.srtClmn = db.tblSortColumns.Where(p => p.nRelatedID == nReportId && p.nRelatedType == 1).ToList();
+            //SqlParameter tparam1 = new SqlParameter("@nReportId", nReportId);
+            //List<ReportConditions> items = db.Database.SqlQuery<ReportConditions>("exec sproc_getReportDetails  @nReportId", tparam1).ToList();
 
-            //List<ReportInfo> items = new List<ReportInfo>()
+
+
+            //var items = new ReportInfo()
             //{
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "ABCD Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-111),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "XYZ Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-20),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "DASCD Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-1211),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "afwetv Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-1111),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "ggsdfv  sd Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-11),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "dsfv  sdfsdf Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-1),
-            //       tCreatedBy = "ASDASd"
-            //    },
-            //    new ReportInfo()
-            //    {
-            //       aReportId = 1,
-            //       nFolderId = 1,
-            //       tReportName = "dfsdfsd Report",
-            //       dCreatedOn = DateTime.Now.AddDays(-10),
-            //       tCreatedBy = "ASDASd"
-            //    },
-
+            //    aReportId = 1,
+            //    nFolderId = 1,
+            //    tReportName = "ABCD Report",
+            //    dCreatedOn = DateTime.Now.AddDays(-111),
+            //    tCreatedBy = "ASDASd"
             //};
-
-            var items = new ReportInfo()
-            {
-                aReportId = 1,
-                nFolderId = 1,
-                tReportName = "ABCD Report",
-                dCreatedOn = DateTime.Now.AddDays(-111),
-                tCreatedBy = "ASDASd"
-            };
 
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<ReportInfo>(items, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<ReportDetails>(request, new JsonMediaTypeFormatter())
             };
         }
 
@@ -342,15 +186,15 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpPost]
-        public async Task<HttpResponseMessage> EditReport(ReportInfo request)
+        public async Task<HttpResponseMessage> EditReport(ReportDetails request)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
                 Nullable<int> lUserId = securityContext.nUserID;
                 tblReport tblreport = request.GetTblReport();
-                //request.tBrandID != null && request.tBrandID != "" &&
-                //        tblreport.tBrandID = "," + request.tBrandID + ",";
+                if (request.nBrandId != null && request.nBrandId != 0)
+                    tblreport.tBrandID = "," + request.nBrandId.ToString() + ",";
                 if (request.aReportId > 0)
                 {
                     var nFilterCndn = db.Database.ExecuteSqlCommand("delete from tblFilterCondition where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
@@ -364,7 +208,7 @@ namespace DeploymentTool.Controller
                     db.Entry(tblreport).Property(x => x.nUpdateBy).IsModified = true;
                     db.Entry(tblreport).Property(x => x.dtUpdatedOn).IsModified = true;
                     db.Entry(tblreport).Property(x => x.tName).IsModified = true;
-                    //db.Entry(tblreport).Property(x => x.tDesc).IsModified = true;
+                    db.Entry(tblreport).Property(x => x.tReportDescription).IsModified = true;
                     db.Entry(tblreport).Property(x => x.nReportFolderID).IsModified = true;
                     db.Entry(tblreport).Property(x => x.tBrandID).IsModified = true;
                 }
@@ -380,41 +224,43 @@ namespace DeploymentTool.Controller
                 await db.SaveChangesAsync();
                 int aReportID = tblreport.aReportID;
                 request.aReportId = tblreport.aReportID;
-
-                foreach (var itrt in request.conditions)
-                {
-                    tblFilterCondition tblFiltercndn = new tblFilterCondition();
-                    tblFiltercndn.nRelatedID = aReportID;
-                    tblFiltercndn.nRelatedType = 1;
-                    tblFiltercndn.nFieldID = itrt.aFieldID;
-                    tblFiltercndn.nFieldTypeID = itrt.nFieldTypeID;
-                    tblFiltercndn.nAndOr = itrt.nAndOr;
-                    tblFiltercndn.nOperatorID = itrt.nOperatorID;
-                    tblFiltercndn.nValue = itrt.nValue;
-                    tblFiltercndn.tValue = itrt.tValue;
-                    tblFiltercndn.dValue = itrt.dValue;
-                    tblFiltercndn.cValue = itrt.cValue;
-                    db.tblFilterConditions.Add(tblFiltercndn);
-                }
-              
-                foreach (var itrt in request.spClmn)
-                {
-                    tblDisplayColumn tblDspClmn = new tblDisplayColumn();
-                    tblDspClmn.nRelatedID = aReportID;
-                    tblDspClmn.nRelatedType = 1;
-                    tblDspClmn.nFieldID = itrt.nFieldID;
-                    tblDspClmn.nOrder = itrt.nOrder;
-                    db.tblDisplayColumns.Add(tblDspClmn);
-                }
-                foreach (var itrt in request.srtClmn)
-                {
-                    tblSortColumn tblsrtClmn = new tblSortColumn();
-                    tblsrtClmn.nRelatedID = aReportID;
-                    tblsrtClmn.nRelatedType = 1;
-                    tblsrtClmn.nFieldID = itrt.nFieldID;
-                    tblsrtClmn.nOrder = itrt.nOrder;
-                    db.tblSortColumns.Add(tblsrtClmn);
-                }
+                if (request.conditions != null)
+                    foreach (var itrt in request.conditions)
+                    {
+                        tblFilterCondition tblFiltercndn = new tblFilterCondition();
+                        tblFiltercndn.nRelatedID = aReportID;
+                        tblFiltercndn.nRelatedType = 1;
+                        tblFiltercndn.nFieldID = itrt.nFieldID;
+                        tblFiltercndn.nFieldTypeID = itrt.nFieldTypeID;
+                        tblFiltercndn.nAndOr = itrt.nAndOr;
+                        tblFiltercndn.nOperatorID = itrt.nOperatorID;
+                        tblFiltercndn.nValue = itrt.nValue;
+                        tblFiltercndn.tValue = itrt.tValue;
+                        tblFiltercndn.dValue = itrt.dValue;
+                        tblFiltercndn.cValue = itrt.cValue;
+                        db.tblFilterConditions.Add(tblFiltercndn);
+                    }
+                if (request.spClmn != null)
+                    foreach (var itrt in request.spClmn)
+                    {
+                        tblDisplayColumn tblDspClmn = new tblDisplayColumn();
+                        tblDspClmn.nRelatedID = aReportID;
+                        tblDspClmn.nRelatedType = 1;
+                        tblDspClmn.nFieldID = itrt.nFieldID;
+                        tblDspClmn.nOrder = itrt.nOrder;
+                        db.tblDisplayColumns.Add(tblDspClmn);
+                    }
+                if (request.srtClmn != null)
+                    foreach (var itrt in request.srtClmn)
+                    {
+                        tblSortColumn tblsrtClmn = new tblSortColumn();
+                        tblsrtClmn.nRelatedID = aReportID;
+                        tblsrtClmn.nRelatedType = 1;
+                        tblsrtClmn.nFieldID = itrt.nFieldID;
+                        tblsrtClmn.nOrder = itrt.nOrder;
+                        db.tblSortColumns.Add(tblsrtClmn);
+                    }
+                await db.SaveChangesAsync();
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())

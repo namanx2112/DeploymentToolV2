@@ -796,6 +796,7 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
     </Key>
     <Property Name="aReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tName" Type="varchar" MaxLength="1000" />
+    <Property Name="tReportDescription" Type="varchar" MaxLength="1000" />
     <Property Name="nReportType" Type="int" />
     <Property Name="tBrandID" Type="varchar" MaxLength="1000" />
     <Property Name="tQuery" Type="varchar(max)" />

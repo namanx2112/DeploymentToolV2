@@ -108,6 +108,7 @@ import { FolderEditorComponent } from './components/reports/folder-editor/folder
 import { ReportEditorComponent } from './components/reports/report-editor/report-editor.component';
 import { FilterTableComponent } from './components/reports/filter-table/filter-table.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FieldSelectionComponent } from './components/reports/field-selection/field-selection.component';
 
 @NgModule({
     declarations: [
@@ -186,6 +187,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
         FolderEditorComponent,
         ReportEditorComponent,
         FilterTableComponent,
+        FieldSelectionComponent,
     ],
     providers: [
         {

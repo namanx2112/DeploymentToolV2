@@ -801,7 +801,8 @@ warning 6002: The table/view 'dtDB.dbo.tblFunctions' does not have a primary key
           </Key>
           <Property Name="aReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tName" Type="varchar" MaxLength="1000" />
-          <Property Name="nReportType" Type="int" />
+		  <Property Name="tReportDescription" Type="varchar" MaxLength="1000" />			
+		  <Property Name="nReportType" Type="int" />
           <Property Name="tBrandID" Type="varchar" MaxLength="1000" />
           <Property Name="tQuery" Type="varchar(max)" />
           <Property Name="bSproc" Type="bit" />
@@ -2527,6 +2528,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
           </Key>
           <Property Name="aReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+		  <Property Name="tReportDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="nReportType" Type="Int32" />
           <Property Name="tBrandID" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="tQuery" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -3737,6 +3739,7 @@ warning 6002: The table/view 'dtDB.dbo.tblUserFunctionRel' does not have a prima
                 <ScalarProperty Name="nReportType" ColumnName="nReportType" />
                 <ScalarProperty Name="tName" ColumnName="tName" />
                 <ScalarProperty Name="aReportID" ColumnName="aReportID" />
+				  <ScalarProperty Name="tReportDescription" ColumnName="tReportDescription" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
