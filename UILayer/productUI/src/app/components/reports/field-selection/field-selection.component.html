@@ -48,15 +48,25 @@
         <div class="listContainer">
             <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="sortColumns" class="example-list"
                 (cdkDropListDropped)="drop($event)">
-                <div class="example-box" cdkDrag *ngFor="let item of sortColumns;let index=index;">{{item.tFieldName}}
-                    <span class="rowAction del" (click)="delColumn(index, true);"
-                        matTooltip="Delete column"><mat-icon>clear</mat-icon></span>
+                <div class="example-box" cdkDrag *ngFor="let item of sortColumns;let index=index;">
+                    <div>
+                        {{item.tFieldName}}
+                    </div>
+                    <div>
+                        <span class="rowAction del" (click)="delColumn(index, true);"
+                            matTooltip="Delete column"><mat-icon>clear</mat-icon></span>
+                        <span class="rowAction order" (click)="sortColumn(item);"
+                            [matTooltip]="(item.nOrder == 0) ? 'Sort ascending': 'Sort descending'"><mat-icon
+                                *ngIf="item.nOrder == 0">arrow_downward</mat-icon><mat-icon
+                                *ngIf="item.nOrder == 1">arrow_upward</mat-icon></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="notes">You can add columns by selecting a column in Add a column option.<br/>Drag and drop columns to change the order. </div>
+<div class="notes">You can add columns by selecting a column in Add a column option.<br />Drag and drop columns to
+    change the order. </div>
 <div mat-dialog-actions style="float: right;margin-right: 25px;padding-right: 0px;">
     <button mat-dialog-close cdkFocusInitial (click)="saveClicked()" mat-raised-button>OK</button>
     <button mat-dialog-close mat-raised-button>Cancel</button>

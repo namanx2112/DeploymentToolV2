@@ -102,6 +102,13 @@ export class FieldSelectionComponent {
     }
   }
 
+  sortColumn(item: SortColumns) {
+    if (item.nOrder == 1)
+      item.nOrder = 0;
+    else
+      item.nOrder = 1;
+  }
+
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

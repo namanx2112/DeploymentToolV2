@@ -8,14 +8,14 @@
     flex-direction: column;
 }
 
-.notes{
+.notes {
     float: left;
     font-size: 12px;
     color: lightgray;
     margin-left: 25px;
 }
 
-.example-full-width{
+.example-full-width {
     width: 100%;
 }
 
@@ -36,6 +36,10 @@
 
 .rowAction.del {
     color: red;
+    cursor: pointer;
+}
+
+.rowAction.order {
     cursor: pointer;
 }
 
@@ -61,7 +65,7 @@
 .example-list {
     border-style: solid none solid none;
     border-width: 1px 0px 1px 0px;
-    border-radius: 0px!important;
+    border-radius: 0px !important;
     font-weight: 500;
     border-color: #ccc;
     min-height: 40px;
