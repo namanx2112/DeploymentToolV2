@@ -78,6 +78,7 @@ export interface ReportCondtion {
     nRelatedID: number,    
     nAndOr: number,
     nFieldID: number,
+    field: any,
     nFieldTypeID: number,
     nOperatorID: number,
     nValue: number,
