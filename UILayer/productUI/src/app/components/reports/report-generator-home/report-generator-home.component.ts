@@ -19,6 +19,7 @@ export class ReportGeneratorHomeComponent {
   curModel: any;
   showView: string = "home";
   titles: any[] = [{ view: "home", title: "Home" }];
+  reportRequest: any;
   constructor(private rgService: ReportGeneratorService) {
     this.selectedTab = "home";
   }
@@ -63,6 +64,27 @@ export class ReportGeneratorHomeComponent {
       this.titles.pop();
       this.showView = this.titles[this.titles.length - 1].view;
     }
+  }
+
+  folderListAction(req: any) {
+    if (req.action == "editreport") {
+      this.editItem(req.item);
+    }
+    else if (req.action == "openreport") {
+      this.reportRequest = {
+        nBrandId: this.curBrand.aBrandId,
+        fromView: "report",
+        request: {
+          reportId: req.item.aReportId
+        }
+      }
+      this.titles.push({ view: "showreport", title: req.item.tReportName });
+      this.showView = "showreport";
+    }
+  }
+
+  showStore(eve: any) {
+
   }
 
   editItem(req: any) {

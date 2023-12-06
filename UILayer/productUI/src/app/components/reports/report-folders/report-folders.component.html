@@ -31,7 +31,7 @@
         </mat-expansion-panel-header>
         <div class="reportList">
             <div *ngFor="let item of curReports| forFilter:filterVisible" class="reportItem">
-                <div class="reportName">
+                <div class="reportName" (click)="openReport(item)">
                     <mat-icon>list_alt</mat-icon>
                     <div class="rTitle">{{item.tReportName}}</div>
                 </div>

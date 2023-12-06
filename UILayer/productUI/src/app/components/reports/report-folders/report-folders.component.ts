@@ -17,7 +17,7 @@ export class ReportFoldersComponent {
     }
 
     @Output()
-    editItem = new EventEmitter<any>();
+    folderListAction = new EventEmitter<any>();
 
     curBrand: BrandModel;
 
@@ -72,7 +72,11 @@ export class ReportFoldersComponent {
     }
 
     editMe(item: any, report: boolean) {
-        this.editItem.emit({ item: item, report: report });
+        this.folderListAction.emit({ action: "editreport", item: { item: item, report: report } });
+    }
+
+    openReport(item: ReportInfo) {
+        this.folderListAction.emit({ action: "openreport", item: item });
     }
 
     deleteMe(item: any, report: boolean) {
