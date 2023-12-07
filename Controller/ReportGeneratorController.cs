@@ -177,23 +177,50 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
+                string strReturn = "";
                 if (request.aFolderId > 0)
                 {
-                    var nFilterCndn = db.Database.ExecuteSqlCommand("delete from tblReportFolder where aFolderId =@aFolderId  ", new SqlParameter("@aFolderId", request.aFolderId));
-                   
+                    var nTempVendor = db.Database.SqlQuery<int>("select count(*) from tblReport with (nolock) where nReportFolderID=@nReportFolderID  ", new SqlParameter("@nReportFolderID", request.aFolderId)).ToList();
+                    if (nTempVendor.Count > 0)
+                        strReturn = "Can not delete this folder, it contains one or more reports. Please delete or move the reports and then delete this folder.";
+                    else
+                    {
+                        var nFilterCndn = db.Database.ExecuteSqlCommand("delete from tblReportFolder where aReportFolderID =@aFolderId  ", new SqlParameter("@aFolderId", request.aFolderId));
+                    }
                 }
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())
+                    Content = new ObjectContent<string>(strReturn, new JsonMediaTypeFormatter())
                 };
             }
             catch (Exception ex)
             {
-                TraceUtility.ForceWriteException("ReportGenerator.CreateFolder", HttpContext.Current, ex);
+                TraceUtility.ForceWriteException("ReportGenerator.DeleteFolder", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+        [Authorize]
+        [HttpPost]
+        public HttpResponseMessage MoveReport(int aReportID, int aFolderId)
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            try
+            {
 
+                var nTempVendor = db.Database.SqlQuery<int>("update tblreport set nReportFolderID=@nReportFolderID  where aReportID=@aReportID ", new SqlParameter("@nReportFolderID", aFolderId), new SqlParameter("@aReportID", aReportID)).ToList();
+
+
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<string>("SUCCESS", new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ReportGenerator.MoveReport", HttpContext.Current, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
         [Authorize]
         [HttpPost]
         public HttpResponseMessage DeleteReport(ReportInfo request)
@@ -206,7 +233,7 @@ namespace DeploymentTool.Controller
                     var nFilterCndn = db.Database.ExecuteSqlCommand("delete from tblFilterCondition where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
                     var nDsplClmn = db.Database.ExecuteSqlCommand("delete from tblDisplayColumns where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
                     var nSrtClmn = db.Database.ExecuteSqlCommand("delete from tblSortColumns where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
-                    var nreport = db.Database.ExecuteSqlCommand("delete from tblreport where aReportID=3 =@nReportID  ", new SqlParameter("@nReportID", request.aReportId));
+                    var nreport = db.Database.ExecuteSqlCommand("delete from tblreport where aReportID=@nReportID  ", new SqlParameter("@nReportID", request.aReportId));
 
                 }
                 return new HttpResponseMessage(HttpStatusCode.OK)
@@ -298,6 +325,9 @@ namespace DeploymentTool.Controller
                         db.tblSortColumns.Add(tblsrtClmn);
                     }
                 await db.SaveChangesAsync();
+
+                var nupdateReport = db.Database.ExecuteSqlCommand("exec sproc_generateSqlQuery @nRelatedID =@nReportID, @nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
+
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())
