@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType } from 'src/app/interfaces/home-tab';
 import { BrandModel } from 'src/app/interfaces/models';
-import { ReportCondtion, ReportEditorModel, ReportField, ReportFieldAndOperatorType } from 'src/app/interfaces/report-generator';
+import { ConditionOperatorIds, ReportCondtion, ReportEditorModel, ReportField, ReportFieldAndOperatorType } from 'src/app/interfaces/report-generator';
 import { CommonService } from 'src/app/services/common.service';
 import { ReportGeneratorService } from 'src/app/services/report-generator.service';
 
@@ -25,7 +25,7 @@ export class FilterTableComponent {
 
   curModel: ReportEditorModel;
   curBrand: BrandModel;
-  rows: any[] = [];
+  rows: ReportCondtion[] = [];
   group: boolean = false;
   fields: ReportField[] = [];
   operators: ReportFieldAndOperatorType[] = [];
@@ -90,25 +90,36 @@ export class FilterTableComponent {
 
   isRowValid(row: any) {
     let valid = true;
-    switch (row.field.nFieldTypeID) {
-      case (FieldType.currency + 1):
-        if (row.tValue == "")
-          valid = false;
-        else
-          row.cValue = row.tValue;
-        break;
-      case (FieldType.number + 1):
-        if (row.tValue == "")
-          valid = false;
-        else
-          row.nValue = row.tValue;
-        break;
-      case (FieldType.dropdown + 1):
-        if (row.nArrValues.length == 0)
-          valid = false;
-        else
-          row.tValue = row.nArrValues.join(",");
-        break;
+    if (typeof row.field.nFieldTypeID == 'undefined')
+      valid = false;
+    else {
+      if (!(row.nOperatorID == ConditionOperatorIds.IsEmpty || row.nOperatorID == ConditionOperatorIds.IsNotEmpty)) {
+        switch (row.field.nFieldTypeID) {
+          case (FieldType.currency + 1):
+            if (row.tValue == "")
+              valid = false;
+            else
+              row.cValue = row.tValue;
+            break;
+          case (FieldType.number + 1):
+            if (row.tValue == "")
+              valid = false;
+            else
+              row.nValue = row.tValue;
+            break;
+          case (FieldType.dropdown + 1):
+            if (row.nArrValues.length == 0)
+              valid = false;
+            else
+              row.tValue = row.nArrValues.join(",");
+            break;
+          case (FieldType.date + 1):
+          case (FieldType.text + 1):
+            if (row.tValue == "")
+              valid = false;
+            break;
+        }
+      }
     }
     return valid;
   }
@@ -155,11 +166,11 @@ export class FilterTableComponent {
     else return false
   }
 
-  fieldChanged(row: any) {
+  fieldChanged(row: ReportCondtion) {
     row.nFieldID = row.field.aFieldID;
     row.nFieldTypeID = row.field.nFieldTypeID;
     row.operators = this.getMyOperator(row.field.nFieldTypeID);
-    if (typeof row.nOperatorID == 'undefined')
+    if (typeof row.nOperatorID == 'undefined' || row.operators.findIndex(x => x.aOperatorID == row.nOperatorID) == -1)
       row.nOperatorID = row.operators[0].aOperatorID;
     if (typeof row.field != 'undefined' && (row.field.nFieldTypeID - 1) == FieldType.dropdown)
       row.ddOptions = this.commonService.GetDropdownOptions(this.curBrand.aBrandId, row.field.tConstraint, true);

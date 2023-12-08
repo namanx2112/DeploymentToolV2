@@ -1,6 +1,11 @@
 export interface ReportGenerator {
 }
 
+export enum ConditionOperatorIds {
+    Equals = 1, NotEquals = 2, Greater = 3, Less = 4, GreaterEquals = 5, LessEquals = 6, In = 7, NotIn = 8, Contains = 9, NotContains = 10,
+    StartsWith = 11, EndsWith = 12, IsEmpty = 13, IsNotEmpty = 14
+}
+
 export interface ReportFolder {
     aFolderId: number,
     nBrandId: number,
@@ -36,12 +41,12 @@ export interface ReportField {
     tConstraint: string
 }
 
-export interface GroupByFields{
+export interface GroupByFields {
     tGroupName: string,
     items: ReportField[]
 }
 
-export interface DisplayColumn{
+export interface DisplayColumn {
     aDisplayColumnsID: number,
     nRelatedID: number,
     nRelatedType: number,
@@ -50,7 +55,7 @@ export interface DisplayColumn{
     nOrder: number
 }
 
-export interface SortColumns{
+export interface SortColumns {
     aSortColumnsID: number,
     nRelatedID: number,
     nRelatedType: number,
@@ -79,15 +84,17 @@ export interface ReportEditorModel {
 }
 
 export interface ReportCondtion {
-    nConditionID:number,
-    nRelatedID: number,    
+    nConditionID: number,
+    nRelatedID: number,
     nAndOr: number,
     nFieldID: number,
     field: any,
     nFieldTypeID: number,
     nOperatorID: number,
     nValue: number,
-    nArrValues: any[]
+    nArrValues: any[],
+    operators: any[],
+    ddOptions: any[],
     tValue: string,
     dValue?: Date,
     cValue: number

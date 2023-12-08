@@ -26,16 +26,31 @@ export class ReportEditorComponent {
   allFolders: ReportFolder[] = [];
   allFields: ReportField[] = [];
   fieldsByGroup: any;
+  columnsConfigured: string[] = [];
   constructor(private rgService: ReportGeneratorService, private dialog: MatDialog) {
 
   }
 
   initUI() {
     this.getMyFolders();
+    this.rgService.GetReportFields(this.curBrand.aBrandId).subscribe(x => {
+      this.allFields = x;
+      this.fieldsByGroup = this.rgService.getFieldByGroup(x);
+      this.updateConfiguredReport();
+    });
   }
 
   goBack() {
 
+  }
+
+  updateConfiguredReport() {
+    this.columnsConfigured = [];
+    for (var indx in this.curModel.spClmn) {
+      let tField = this.allFields.find(x => x.aFieldID == this.curModel.spClmn[indx].nFieldID);
+      if (tField)
+        this.columnsConfigured.push(tField.tFieldName);
+    }
   }
 
   getMyFolders() {
@@ -62,6 +77,7 @@ export class ReportEditorComponent {
         aferSave: function (data: any) {
           cthis.curModel.srtClmn = data.srtClmn;
           cthis.curModel.spClmn = data.spClmn;
+          cthis.updateConfiguredReport();
           dialogRef.close();
         },
         onClose: function (ev: any) {
@@ -72,15 +88,7 @@ export class ReportEditorComponent {
       };
       dialogRef = cthis.dialog.open(FieldSelectionComponent, dialogConfig);
     }
-    if (this.allFields.length == 0) {
-      this.rgService.GetReportFields(this.curBrand.aBrandId).subscribe(x => {
-        this.allFields = x;
-        this.fieldsByGroup = this.rgService.getFieldByGroup(x);
-        openDialog();
-      });
-    }
-    else
-      openDialog();
+    openDialog();
   }
 
   compareDropDown(o1: any, o2: any) {
@@ -108,11 +116,11 @@ export class ReportEditorComponent {
 
   cantSubmit() {
     let cant = false;
-    if (this.curModel.tReportName == ""){
+    if (this.curModel.tReportName == "") {
       cant = true;
       alert("Please enter a name for report");
     }
-    else if(this.curModel.spClmn.length == 0){
+    else if (this.curModel.spClmn.length == 0) {
       cant = true;
       alert("Please select at least one column for this report");
     }

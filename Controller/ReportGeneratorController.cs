@@ -238,7 +238,7 @@ namespace DeploymentTool.Controller
                 }
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())
+                    Content = new ObjectContent<string>("", new JsonMediaTypeFormatter())
                 };
             }
             catch (Exception ex)

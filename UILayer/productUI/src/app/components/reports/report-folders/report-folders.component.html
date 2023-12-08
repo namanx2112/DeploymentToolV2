@@ -13,7 +13,7 @@
             </mat-panel-title>
             <mat-panel-description>
                 {{ folder.tCreatedBy }} Created {{getFormatedDate(folder.dCreatedOn)}}
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButton"
+                <button [matMenuTriggerFor]="menu" aria-label="Options" matTooltip="Click to show menu" class="exButton"
                     (click)="$event.stopPropagation();">
                     <mat-icon>more_vert</mat-icon>
                 </button>
@@ -37,7 +37,7 @@
                     <div class="rTitle">{{item.tReportName}}</div>
                 </div>
                 <div class="reportAbout">{{item.tCreatedBy}} Created {{getFormatedDate(item.dCreatedOn)}}
-                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Options" class="exButtonReport"
+                    <button [matMenuTriggerFor]="menu" aria-label="Options" matTooltip="Click to show menu" class="exButtonReport"
                         (click)="$event.stopPropagation();">
                         <mat-icon>more_vert</mat-icon>
                     </button>

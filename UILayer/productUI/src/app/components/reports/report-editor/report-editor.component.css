@@ -28,10 +28,39 @@
     padding: 0px 1px;
 }
 
+.tblColumn{
+    border-collapse: collapse;
+}
+.tblColumn th{
+    border: 1px solid #ccc;
+    font-size: 10px;
+}
+
+.exAction{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    height: 25px;
+    margin-bottom: 24px;
+}
+
 .curField,
 .curSingleField {
     display: flex;
     flex-direction: column;
+}
+.curSingleField{
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.colButton{    
+    width: 150px;
+    height: 24px;
+    background: none;
+    box-shadow: none;
+    text-align: left;
+    padding: 0px;
+    margin: 0px;
+    color: darkgray;
 }
 .curField {
     width: 45%;

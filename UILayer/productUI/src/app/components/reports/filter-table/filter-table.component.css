@@ -22,6 +22,12 @@ td:not(.noPadding) {
     color: red;
 }
 
+.noValue{
+    width: 100%;
+    height: 36px;
+    background-color: lightgray;
+}
+
 .rowAction.add {
     color: green;
 }

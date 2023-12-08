@@ -46,12 +46,24 @@
     padding: 0px;
 }
 
+.exButton, .exButtonReport{
+    border: 0px none;
+    width: 40px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.exButtonReport:hover,
+.exButton:hover {
+    background-color: transparent;
+}
+
 .exButton {
     padding: 0px;
     margin: 0px;
 }
 
-.searchDiv{
+.searchDiv {
     position: relative;
 }
 
@@ -69,4 +81,3 @@
     margin-top: 22px;
     color: gray;
 }
-
