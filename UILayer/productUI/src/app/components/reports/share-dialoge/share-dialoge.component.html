@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Share Report(s)</h1>
+<div mat-dialog-content class="shareBody">
+    <div class="sharePart">
+        <h4>Brand</h4>
+        <div class="items">
+            <mat-selection-list [(ngModel)]="selectedBrand">
+                <mat-list-option *ngFor="let item of brands" [value]="item" class="listItem">{{item.tBrandName}}</mat-list-option>
+            </mat-selection-list>
+        </div>
+    </div>
+    <div class="sharePart">
+        <h4>Roles</h4>
+        <div class="items">
+            <mat-selection-list [(ngModel)]="selectedRole">
+                <mat-list-option *ngFor="let item of roles" [value]="item" class="listItem">{{item.tDropdownText}}</mat-list-option>
+            </mat-selection-list>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions style="float: right;margin-right: 27px;">
+    <button mat-raised-button cdkFocusInitial (click)="onShare()" [disabled]="selectedBrand.length < 1">Ok</button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+</div>

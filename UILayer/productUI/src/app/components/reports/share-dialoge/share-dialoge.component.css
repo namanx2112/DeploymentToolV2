@@ -1,0 +1,29 @@
+.shareBody{
+    display: flex;
+    height: calc(100% - 112px);
+    padding: 20px 24px 0px 24px!important;
+}
+
+.sharePart{
+    flex-grow: 1;
+    height: calc(100% - 22px);    
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.sharePart h4{
+    margin: 0px;
+}
+
+.listItem{
+    padding-left: 0px!important;
+}
+
+.items{    
+    height: calc(100% - 35px);
+    float: left;
+    width: 100%;
+    display: block;
+    border: 1px solid #fff;
+}

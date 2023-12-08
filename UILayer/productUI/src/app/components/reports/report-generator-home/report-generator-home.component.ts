@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { BrandModel } from 'src/app/interfaces/models';
 import { ReportFolder } from 'src/app/interfaces/report-generator';
 import { ReportGeneratorService } from 'src/app/services/report-generator.service';
+import { ShareDialogeComponent } from '../share-dialoge/share-dialoge.component';
 
 @Component({
   selector: 'app-report-generator-home',
@@ -20,7 +22,8 @@ export class ReportGeneratorHomeComponent {
   showView: string = "home";
   titles: any[] = [{ view: "home", title: "Home" }];
   reportRequest: any;
-  constructor(private rgService: ReportGeneratorService) {
+  selectedReports: number[] = [];
+  constructor(private rgService: ReportGeneratorService, private dialog: MatDialog) {
     this.selectedTab = "home";
   }
   tabClick(item: string) {
@@ -64,6 +67,7 @@ export class ReportGeneratorHomeComponent {
       this.titles.pop();
       this.showView = this.titles[this.titles.length - 1].view;
     }
+    this.selectedReports = [];
   }
 
   folderListAction(req: any) {
@@ -81,10 +85,34 @@ export class ReportGeneratorHomeComponent {
       this.titles.push({ view: "showreport", title: req.item.tReportName });
       this.showView = "showreport";
     }
+    else if (req.action == "reportselect") {
+      this.selectedReports = req.selectedReports;
+    }
+  }
+
+  openShare() {
+    let cthis = this;
+    const dialogConfig = new MatDialogConfig();
+    let dialogRef: any;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '50%';
+    dialogConfig.height = '60%';
+    dialogConfig.data = {
+      selectedBrand: [this.curBrand],
+      reportIds: this.selectedReports,
+      afterClose: function (data: any) {
+        dialogRef.close();
+      },
+      onClose: function (ev: any) {
+        dialogRef.close();
+      },
+      themeClass: "grayWhite",
+      dialogTheme: "lightGrayWhiteTheme"
+    };
+    dialogRef = cthis.dialog.open(ShareDialogeComponent, dialogConfig);
   }
 
   showStore(eve: any) {
-
   }
 
   editItem(req: any) {
@@ -105,8 +133,10 @@ export class ReportGeneratorHomeComponent {
         var lauchReportView = function (cThis: any) {
           cThis.goToHome();
           cThis.showView = "editreport";
-          if (req.aReportId > 0)
+          if (cThis.curModel.aReportId > 0){
+            cThis.selectedReports = [cThis.curModel.aReportId];
             cThis.titles.push({ view: "editreport", title: "Edit Report" });
+          }
           else
             cThis.titles.push({ view: "editreport", title: "New Report" });
         }
@@ -126,6 +156,7 @@ export class ReportGeneratorHomeComponent {
   actionPerformed(ev: any) {
     this.titles.pop();
     this.showView = this.titles[this.titles.length - 1].view;
+    this.selectedReports = [];
   }
 
   moveView(view: string) { }

@@ -9,6 +9,7 @@
     <a (click)="menuClick('newfolder')"><mat-icon>create_new_folder</mat-icon>New Folder</a>
     <a (click)="menuClick('newreport')"><mat-icon>
             table_chart</mat-icon>New Report</a>
+    <button (click)="openShare()" class="shareButton" [disabled]="selectedReports.length == 0"><mat-icon style="margin-right: 4px;">share</mat-icon>Share Report</button>
 </div>
 <div class="rgBody">
     <app-report-folders *ngIf="showView == 'home'" [request]="{curBrand: curBrand}"

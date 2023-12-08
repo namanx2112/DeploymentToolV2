@@ -23,6 +23,7 @@ export class ReportFoldersComponent {
 
     allFolders: ReportFolder[] = [];
     curReports: ReportInfo[] = [];
+    selectedReports: number[] = [];
     constructor(private rgService: ReportGeneratorService) {
 
     }
@@ -69,6 +70,20 @@ export class ReportFoldersComponent {
             //     }
             // }
         }
+    }
+
+    changeReportSelection(ev: any, item: ReportInfo) {
+        let checked = ev.checked;
+        let indx = this.selectedReports.findIndex(x => x == item.aReportId);
+        if (checked) {
+            if (indx == -1)
+                this.selectedReports.push(item.aReportId);
+        }
+        else {
+            this.selectedReports.splice(indx, 1)
+        }
+        this.folderListAction.emit({ action: "reportselect", selectedReports: this.selectedReports });
+        ev.stopPropagation();
     }
 
     editMe(item: any, report: boolean) {

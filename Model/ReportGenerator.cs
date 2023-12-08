@@ -81,6 +81,13 @@ namespace DeploymentTool.Model
     //    public Decimal cValue { get; set; }
 
     //}
+    
+    public class ReportShareModel
+    {
+        public List<int> reportIds { get; set; }
+        public List<int> brands { get; set; }
+        public List<int> roles { get; set; }
+    }
 
 public class ReportInfo
     {

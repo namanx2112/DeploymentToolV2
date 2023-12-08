@@ -163,6 +163,8 @@ export class FilterTableComponent {
       row.nOperatorID = row.operators[0].aOperatorID;
     if (typeof row.field != 'undefined' && (row.field.nFieldTypeID - 1) == FieldType.dropdown)
       row.ddOptions = this.commonService.GetDropdownOptions(this.curBrand.aBrandId, row.field.tConstraint, true);
+    if (typeof row.field != 'undefined' && (row.field.nFieldTypeID - 1) == FieldType.date)
+      row.ddOptions = this.commonService.GetSearchOptionsForDate();
   }
 
   getMyOperator(myTypeId: number) {

@@ -410,6 +410,54 @@ export class CommonService {
     }];
   }
 
+  public GetSearchOptionsForDate() {
+    let ddItems: OptionType[] = [
+      {
+        tDropdownText: "@StartOfDay",
+        aDropdownId: "0",
+        optionOrder: 0,
+        bDeleted: false,
+        nFunction: 0
+      },
+      {
+        tDropdownText: "@StartOfDay('-7d')",
+        aDropdownId: "0",
+        optionOrder: 0,
+        bDeleted: false,
+        nFunction: 0
+      },
+      {
+        tDropdownText: "@StartOfDay('-30d')",
+        aDropdownId: "0",
+        optionOrder: 0,
+        bDeleted: false,
+        nFunction: 0
+      },
+      {
+        tDropdownText: "@StartOfWeek",
+        aDropdownId: "0",
+        optionOrder: 0,
+        bDeleted: false,
+        nFunction: 0
+      },
+      {
+        tDropdownText: "@StartOfMonth",
+        aDropdownId: "0",
+        optionOrder: 0,
+        bDeleted: false,
+        nFunction: 0
+      },
+      {
+        tDropdownText: "@StartOfYear",
+        aDropdownId: "0",
+        optionOrder: 0,
+        bDeleted: false,
+        nFunction: 0
+      }
+    ];
+    return ddItems;
+  }
+
   public GetDropdownOptions(nBrandId: number, columnName?: string, avoidBlank: boolean = true): OptionType[] {
     let ddItems: OptionType[] = [];
     if (columnName) {
@@ -419,7 +467,7 @@ export class CommonService {
       else if (columnName == "UserAccessTypes") {
         ddItems = CommonService.getUserAccessTypes();
       }
-      else if(columnName == "ProjectRolloutStatus"){
+      else if (columnName == "ProjectRolloutStatus") {
         ddItems = CommonService.getRolloutProjectStatus();
       }
       else {

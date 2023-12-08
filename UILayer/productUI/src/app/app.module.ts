@@ -109,6 +109,7 @@ import { ReportEditorComponent } from './components/reports/report-editor/report
 import { FilterTableComponent } from './components/reports/filter-table/filter-table.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FieldSelectionComponent } from './components/reports/field-selection/field-selection.component';
+import { ShareDialogeComponent } from './components/reports/share-dialoge/share-dialoge.component';
 
 @NgModule({
     declarations: [
@@ -188,6 +189,7 @@ import { FieldSelectionComponent } from './components/reports/field-selection/fi
         ReportEditorComponent,
         FilterTableComponent,
         FieldSelectionComponent,
+        ShareDialogeComponent,
     ],
     providers: [
         {

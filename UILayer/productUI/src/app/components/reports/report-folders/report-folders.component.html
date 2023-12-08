@@ -8,7 +8,7 @@
         <mat-expansion-panel-header class="expHeader">
             <mat-panel-title>
                 <mat-icon matListItemIcon class="folderIcon" *ngIf="folder.nFolderType != 1">folder</mat-icon>
-                <mat-icon matListItemIcon class="folderIcon" *ngIf="folder.nFolderType == 1">folder_shared</mat-icon>                
+                <mat-icon matListItemIcon class="folderIcon" *ngIf="folder.nFolderType == 1">folder_shared</mat-icon>
                 {{folder.tFolderName}}
             </mat-panel-title>
             <mat-panel-description>
@@ -31,6 +31,7 @@
         </mat-expansion-panel-header>
         <div class="reportList">
             <div *ngFor="let item of curReports| forFilter:filterVisible" class="reportItem">
+                <mat-checkbox (change)="changeReportSelection($event, item);" />
                 <div class="reportName" (click)="openReport(item)">
                     <mat-icon>list_alt</mat-icon>
                     <div class="rTitle">{{item.tReportName}}</div>

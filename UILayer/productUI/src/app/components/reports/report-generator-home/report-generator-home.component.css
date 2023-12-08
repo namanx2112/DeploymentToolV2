@@ -30,6 +30,29 @@
     font-size: 14px;
 }
 
+.shareButton {
+    background: no-repeat;
+    height: 24px;
+    width: 160px;
+    margin-top: -2px;
+    box-shadow: none;
+    color: lightslategray;
+    float: left;
+    border: 0px none;
+    display: flex;
+    align-items: center;
+    outline: none;
+}
+
+.shareButton:hover:not(:disabled) {
+    color: darkgray;
+    cursor: pointer;
+}
+
+.shareButton:disabled{
+    color: lightgray;
+}
+
 .tabHeader a {
     font-size: 14px;
     cursor: pointer;
