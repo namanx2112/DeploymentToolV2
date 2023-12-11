@@ -13,20 +13,14 @@
             </mat-panel-title>
             <mat-panel-description>
                 {{ folder.tCreatedBy }} Created {{getFormatedDate(folder.dCreatedOn)}}
-                <button [matMenuTriggerFor]="menu" aria-label="Options" matTooltip="Click to show menu" class="exButton"
-                    (click)="$event.stopPropagation();">
-                    <mat-icon>more_vert</mat-icon>
+                <button *ngIf="folder.canEdit" matTooltip="Click to edit" class="exButton"
+                    (click)="editMe(folder, false);$event.stopPropagation();">
+                    <mat-icon>edit</mat-icon>
                 </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="editMe(folder, false)">
-                        <mat-icon>edit</mat-icon>
-                        <span>Edit Folder</span>
-                    </button>
-                    <button mat-menu-item (click)="deleteMe(folder, false)">
-                        <mat-icon>delete</mat-icon>
-                        <span>Delete Folder</span>
-                    </button>
-                </mat-menu>
+                <button *ngIf="folder.canEdit" matTooltip="Click to delete this folder" class="exButton delButton"
+                    (click)="deleteMe(folder, false);$event.stopPropagation();">
+                    <mat-icon>delete</mat-icon>
+                </button>
             </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="reportList">
@@ -37,20 +31,14 @@
                     <div class="rTitle">{{item.tReportName}}</div>
                 </div>
                 <div class="reportAbout">{{item.tCreatedBy}} Created {{getFormatedDate(item.dCreatedOn)}}
-                    <button [matMenuTriggerFor]="menu" aria-label="Options" matTooltip="Click to show menu" class="exButtonReport"
-                        (click)="$event.stopPropagation();">
-                        <mat-icon>more_vert</mat-icon>
+                    <button *ngIf="item.canEdit" matTooltip="Click to edit" class="exButton"
+                        (click)="editMe(item, true);$event.stopPropagation();">
+                        <mat-icon>edit</mat-icon>
                     </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="editMe(item, true)">
-                            <mat-icon>edit</mat-icon>
-                            <span>Edit Report</span>
-                        </button>
-                        <button mat-menu-item (click)="deleteMe(item, true)">
-                            <mat-icon>delete</mat-icon>
-                            <span>Delete Report</span>
-                        </button>
-                    </mat-menu>
+                    <button *ngIf="item.canEdit" matTooltip="Click to delete this report" class="exButton delButton"
+                        (click)="deleteMe(item, true);$event.stopPropagation();">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </div>
             </div>
         </div>

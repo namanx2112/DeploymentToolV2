@@ -14,7 +14,8 @@ export interface ReportFolder {
     nFolderType: number,
     dCreatedOn: Date,
     tCreatedBy: string,
-    visible: number | -1
+    visible: number | -1,
+    canEdit: boolean
 }
 
 export interface ReportInfo {
@@ -24,7 +25,8 @@ export interface ReportInfo {
     tReportName: string,
     dCreatedOn: Date,
     tCreatedBy: string,
-    visible: number | 1
+    visible: number | 1,
+    canEdit: boolean
 }
 
 export interface ReportField {
