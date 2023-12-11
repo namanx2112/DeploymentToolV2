@@ -37,12 +37,14 @@ export class ShareDialogeComponent {
   }
 
   getSharedDetails() {
-    this.rgService.GetShareDetails(this.reportIds[0]).subscribe(x => {
-      if (typeof x.brands != 'undefined' && x.brands.length > 0)
-        this.selectedBrand = x.brands;
-      if (typeof x.roles != 'undefined' && x.roles.length > 0)
-        this.selectedRole = x.roles;
-    });
+    if (this.reportIds.length == 1) {
+      this.rgService.GetShareDetails(this.reportIds[0]).subscribe(x => {
+        if (typeof x.brands != 'undefined' && x.brands.length > 0)
+          this.selectedBrand = x.brands;
+        if (typeof x.roles != 'undefined' && x.roles.length > 0)
+          this.selectedRole = x.roles;
+      });
+    }
   }
 
   onShare() {
