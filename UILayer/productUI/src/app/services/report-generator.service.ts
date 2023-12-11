@@ -39,6 +39,10 @@ export class ReportGeneratorService {
     return this.http.post<ReportInfo>(CommonService.ConfigUrl + "ReportGenerator/DeleteReport", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
+  GetShareDetails(nReportId: number){
+    return this.http.get<any>(CommonService.ConfigUrl + "ReportGenerator/GetShareDetails?nReportId=" + nReportId, { headers: this.cacheService.getHttpHeaders() });
+  }
+
   ShareReport(request: any) {
     return this.http.post<string>(CommonService.ConfigUrl + "ReportGenerator/ShareReport", request, { headers: this.cacheService.getHttpHeaders() });
   }

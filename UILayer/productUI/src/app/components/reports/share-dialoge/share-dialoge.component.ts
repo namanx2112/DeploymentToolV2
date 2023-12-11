@@ -16,27 +16,43 @@ export class ShareDialogeComponent {
   reportIds: number[] = [];
   brands: BrandModel[] = [];
   roles: OptionType[] = [];
-  selectedRole: OptionType[] = [];
-  selectedBrand: BrandModel[] = [];
+  selectedRole: number[] = [];
+  selectedBrand: number[] = [];
   afterClose: any;
   constructor(private commonService: CommonService, @Inject(MAT_DIALOG_DATA) public data: any, private rgService: ReportGeneratorService) {
     this.brands = CommonService.allBrands;
     this.roles = this.commonService.GetDropdownOptions(0, "UserRole", true);
     if (typeof data != 'undefined') {
-      this.selectedBrand = [data.curBrand];
+      this.selectedBrand = [data.curBrand.aBrandId];
       this.reportIds = data.reportIds;
       this.afterClose = data.afterClose;
     }
+    this.getSharedDetails();
+  }
+
+  compareDropDown(o1: any, o2: any) {
+    if (parseInt(o1) == parseInt(o2))
+      return true;
+    else return false
+  }
+
+  getSharedDetails() {
+    this.rgService.GetShareDetails(this.reportIds[0]).subscribe(x => {
+      if (typeof x.brands != 'undefined' && x.brands.length > 0)
+        this.selectedBrand = x.brands;
+      if (typeof x.roles != 'undefined' && x.roles.length > 0)
+        this.selectedRole = x.roles;
+    });
   }
 
   onShare() {
     let brands: number[] = [];
     let roles: number[] = [];
     for (var indx in this.selectedBrand)
-      brands.push(this.selectedBrand[indx].aBrandId);
+      brands.push(this.selectedBrand[indx]);
     for (var indx in this.selectedRole)
-      roles.push(parseInt(this.selectedRole[indx].aDropdownId));
-    this.rgService.ShareReport({reportIds: this.reportIds, brands: brands, roles: roles}).subscribe(x=>{
+      roles.push(this.selectedRole[indx]);
+    this.rgService.ShareReport({ reportIds: this.reportIds, brands: brands, roles: roles }).subscribe(x => {
       this.afterClose();
     });
   }

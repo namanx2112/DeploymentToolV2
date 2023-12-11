@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { BrandModel } from 'src/app/interfaces/models';
 import { ReportFolder } from 'src/app/interfaces/report-generator';
 import { ReportGeneratorService } from 'src/app/services/report-generator.service';
 import { ShareDialogeComponent } from '../share-dialoge/share-dialoge.component';
+import { ReportEditorComponent } from '../report-editor/report-editor.component';
 
 @Component({
   selector: 'app-report-generator-home',
@@ -23,6 +24,7 @@ export class ReportGeneratorHomeComponent {
   titles: any[] = [{ view: "home", title: "Home" }];
   reportRequest: any;
   selectedReports: number[] = [];
+  @ViewChild('reportEditor') reportEditor: ReportEditorComponent;
   constructor(private rgService: ReportGeneratorService, private dialog: MatDialog) {
     this.selectedTab = "home";
   }
@@ -100,7 +102,7 @@ export class ReportGeneratorHomeComponent {
     dialogConfig.width = '50%';
     dialogConfig.height = '60%';
     dialogConfig.data = {
-      selectedBrand: [this.curBrand],
+      curBrand: this.curBrand,
       reportIds: this.selectedReports,
       afterClose: function (data: any) {
         dialogRef.close();
@@ -115,6 +117,10 @@ export class ReportGeneratorHomeComponent {
   }
 
   showStore(eve: any) {
+  }
+
+  fieldSelection() {
+    this.reportEditor.FieldSelection();
   }
 
   editItem(req: any) {
@@ -135,7 +141,7 @@ export class ReportGeneratorHomeComponent {
         var lauchReportView = function (cThis: any) {
           cThis.goToHome();
           cThis.showView = "editreport";
-          if (cThis.curModel.aReportId > 0){
+          if (cThis.curModel.aReportId > 0) {
             cThis.selectedReports = [cThis.curModel.aReportId];
             cThis.titles.push({ view: "editreport", title: "Edit Report" });
           }

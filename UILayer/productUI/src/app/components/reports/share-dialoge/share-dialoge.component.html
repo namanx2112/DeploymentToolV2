@@ -3,16 +3,18 @@
     <div class="sharePart">
         <h4>Brand</h4>
         <div class="items">
-            <mat-selection-list [(ngModel)]="selectedBrand">
-                <mat-list-option *ngFor="let item of brands" [value]="item" class="listItem">{{item.tBrandName}}</mat-list-option>
+            <mat-selection-list [(ngModel)]="selectedBrand" [compareWith]="compareDropDown">
+                <mat-list-option *ngFor="let item of brands" [value]="item.aBrandId"
+                    class="listItem">{{item.tBrandName}}</mat-list-option>
             </mat-selection-list>
         </div>
     </div>
     <div class="sharePart">
         <h4>Roles</h4>
         <div class="items">
-            <mat-selection-list [(ngModel)]="selectedRole">
-                <mat-list-option *ngFor="let item of roles" [value]="item" class="listItem">{{item.tDropdownText}}</mat-list-option>
+            <mat-selection-list [(ngModel)]="selectedRole" [compareWith]="compareDropDown">
+                <mat-list-option *ngFor="let item of roles" [value]="item.aDropdownId"
+                    class="listItem">{{item.tDropdownText}}</mat-list-option>
             </mat-selection-list>
         </div>
     </div>

@@ -114,6 +114,16 @@ export class FilterTableComponent {
               row.tValue = row.nArrValues.join(",");
             break;
           case (FieldType.date + 1):
+            let regExWithNumber = /^@StartOfDay+(\('[-/+][0-9]+[a-z]+'\))/gim;
+            let regEx = /^@StartOfDay|StartOfWeek|StartOfMonth|StartOfYear/gim
+            if (row.tValue == "")
+              valid = false;
+            else if (!RegExp(regEx).test(row.tValue)) {
+              if (!RegExp(regExWithNumber).test(row.tValue)) {
+                valid = false;
+              }
+            }
+            break;
           case (FieldType.text + 1):
             if (row.tValue == "")
               valid = false;

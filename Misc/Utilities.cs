@@ -159,6 +159,27 @@ namespace DeploymentTool.Misc
 
         public static Dictionary<int?, string> vendorListData { get; set; }
 
+        public static string GetVendorNameByID(int vID)
+        {
+            try
+            {
+                if (vendorListData == null)
+                    GetVendorList();
+                string tVendorName = null;
+                if (vendorListData.ContainsKey(vID))
+                    tVendorName = vendorListData[vID].ToString();//
+
+
+                return tVendorName;
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+
+        }
         public static Dictionary<int?, string> projectType { get; set; }
 
         public static Dictionary<int?, string> GetDropDownList()
@@ -178,7 +199,550 @@ namespace DeploymentTool.Misc
             }
             return null;
         }
+        public static DataTable UpadateROPValue(DataTable dt)
+        {
+            //DataColumn Column1 = new DataColumn("Networking:Vendor", typeof(string));
+            //DataColumn Column2 = new DataColumn("Installation:Vendor", typeof(string));
+            //DataColumn Column3 = new DataColumn(" State", typeof(string));
+            //dt.Columns.Add(Column1);
+            //dt.Columns.Add(Column2);
+            //dt.Columns.Add(Column3);
+            foreach (DataRow dr in dt.Rows) // search whole table
+            {
+                if (dt.Columns.Contains("nNetworkingVendorID") && dr["nNetworkingVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nNetworkingVendorID"]);
+                    dr["Networking Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nPrimaryStatus") &&  dr["nPrimaryStatus"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nPrimaryStatus"]);
+                    if (dr["Networking Primary Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus =  Convert.ToDateTime(dr["Networking Primary Status"]);
+                        dr["Networking Primary Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Networking Primary Status"] = geDropDownStatusTextByID(vID, null).ToString();
 
+                }
+                if (dt.Columns.Contains("nPrimaryType") && dr["nPrimaryType"] != DBNull.Value)
+                {
+                    int dID = Convert.ToInt32(dr["nPrimaryType"]);
+                    dr["Networking Primary Type"] = ""; geDropDownStatusTextByID(dID, null); //need to work on this
+                }
+                if (dt.Columns.Contains("nBackupStatus") && dr["nBackupStatus"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nBackupStatus"]);
+                    if (dr["Networking Backup Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Networking Backup Status"]);
+                        dr["Networking Backup Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Networking Backup Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nBackupType") && dr["nBackupType"] != DBNull.Value)
+                {
+                    int dID = Convert.ToInt32(dr["nBackupType"]);
+                    dr["Networking Backup Type"] = ""; geDropDownStatusTextByID(dID, null); //need to work on this
+                }
+                if (dt.Columns.Contains("nTempStatus") && dr["nTempStatus"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nTempStatus"]);
+                    if (dr["Networking Temp Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Networking Temp Status"]);
+                        dr["Networking Temp Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Networking Temp Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nTempType") && dr["nTempType"] != DBNull.Value)
+                {
+                    int dID = Convert.ToInt32(dr["nTempType"]);
+                    dr["Networking Temp Type"] = ""; geDropDownStatusTextByID(dID, null); //need to work on this
+                }
+                if (dt.Columns.Contains("nPOSVendorID") && dr["nPOSVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nPOSVendorID"]);
+                    dr["POS Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nPOSnStatusID") && dr["nPOSnStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nPOSnStatusID"]);
+                    if (dr["POS Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["POS Status"]);
+                        dr["POS Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["POS Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nPOSnPaperworkID") && dr["nPOSnPaperworkID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nPOSnPaperworkID"]);
+                    if (dr["POS Paperwork Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["POS Paperwork Status"]);
+                        dr["POS Paperwork Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["POS Paperwork Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nAudioVendorID") && dr["nAudioVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nAudioVendorID"]);
+                    dr["Audio Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nConfiguration") && dr["nConfiguration"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nConfiguration"]);
+                    dr["Audio Configuration"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nAudionStatusID") && dr["nAudionStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nAudionStatusID"]);
+                    if (dr["Audio Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Audio Status"]);
+                        dr["Audio Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Audio Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nLoopStatus") && dr["nLoopStatus"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nLoopStatus"]);
+                    if (dr["Audio Loop Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Audio Loop Status"]);
+                        dr["Audio Loop Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Audio Loop Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nLoopType") && dr["nLoopType"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nLoopType"]);
+                    dr["Audio Loop Type"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nPaymentSystemVendorID") && dr["nPaymentSystemVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nPaymentSystemVendorID"]);
+                    dr["Payment System Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nPaymentSystemStatusID") && dr["nPaymentSystemStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nPaymentSystemStatusID"]);
+                    if (dr["Payment System Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Payment System Status"]);
+                        dr["Payment System Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Payment System Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nBuyPassID") && dr["nBuyPassID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nBuyPassID"]);
+                    if (dr["Payment BuyPass ID"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Payment BuyPass ID"]);
+                        dr["Payment BuyPass ID"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Payment BuyPass ID"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nServerEPS") && dr["nServerEPS"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nServerEPS"]);
+                    if (dr["Payment ServerEPS"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Payment ServerEPS"]);
+                        dr["Payment ServerEPS"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Payment ServerEPS"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nExteriorMenusVendorID") && dr["nExteriorMenusVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nExteriorMenusVendorID"]);
+                    dr["Exterior Menu Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nExteriorMenusStatusID") && dr["nExteriorMenusStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nExteriorMenusStatusID"]);
+                    if (dr["Exterior Menu Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Exterior Menu Status"]);
+                        dr["Exterior Menu Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Exterior Menu Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nInteriorMenusVendorID") && dr["nInteriorMenusVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nInteriorMenusVendorID"]);
+                    dr["Interior Menus Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nInteriorMenusStatusID") && dr["nInteriorMenusStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nInteriorMenusStatusID"]);
+                    if (dr["Interior Menus Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Interior Menus Status"]);
+                        dr["Interior Menus Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Interior Menus Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nInstallationVendorID") && dr["nInstallationVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nInstallationVendorID"]);
+                    dr["Installation Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nInstallationStatusID") && dr["nInstallationStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nInstallationStatusID"]);
+                    if (dr["Installation Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Installation Status"]);
+                        dr["Installation Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Installation Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nInstallationProjectStatusID") && dr["nInstallationProjectStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nInstallationProjectStatusID"]);
+                    if (dr["Installation Project Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Installation Project Status"]);
+                        dr["Installation Project Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Installation Project Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nInstallType") && dr["nInstallType"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nInstallType"]);
+                    dr["Installation Type"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nManagerCheckout") && dr["nManagerCheckout"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nManagerCheckout"]);
+                    dr["Installation Manager Checkout"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nPhotoDeliverables") && dr["nPhotoDeliverables"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nPhotoDeliverables"]);
+                    dr["Installation Photo Deliverables"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nSignoffs") && dr["nSignoffs"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nSignoffs"]);
+                    dr["Installation Signoffs"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nTestTransactions") && dr["nTestTransactions"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nTestTransactions"]);
+                    dr["Installation Test Transactions"] = GetVendorNameByID(vID);
+                }
+
+                if (dt.Columns.Contains("nSonicRadioVendorID") && dr["nSonicRadioVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nSonicRadioVendorID"]);
+                    dr["Sonic Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nColors") && dr["nColors"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nColors"]);
+                    dr["Sonic Colors"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nSonicRadioStatusID") && dr["nSonicRadioStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nSonicRadioStatusID"]);
+                    if (dr["Sonic Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Sonic Status"]);
+                        dr["Sonic Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Sonic Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nImageOrMemoryVendorID") && dr["nImageOrMemoryVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nImageOrMemoryVendorID"]);
+                    dr["Image Or Memory Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nImageOrMemoryStatusID") && dr["nImageOrMemoryStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nImageOrMemoryStatusID"]);
+                    if (dr["Image Or Memory Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Image Or Memory Status"]);
+                        dr["Image Or Memory Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Image Or Memory Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nReturnShipment") && dr["nReturnShipment"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nReturnShipment"]);
+                    dr["Image Or Memory Return Shipment"] = GetVendorNameByID(vID);
+                }
+
+
+                if (dt.Columns.Contains("nNetworkSwitchVendorID") && dr["nNetworkSwitchVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nNetworkSwitchVendorID"]);
+                    dr["Network Switch Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nShipmentToVendor") && dr["nShipmentToVendor"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nShipmentToVendor"]);
+                    dr["Network Switch Shipment To Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nSetupStatus") && dr["nSetupStatus"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nSetupStatus"]);
+                    dr["Network Switch Setup Status"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nOldSwitchReturnStatus") && dr["nOldSwitchReturnStatus"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nOldSwitchReturnStatus"]);
+                    dr["Network Switch Old Switch Retur nStatus"] = GetVendorNameByID(vID);
+                }
+
+                if (dt.Columns.Contains("nNetworkSwitchStatusID") && dr["nNetworkSwitchStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nNetworkSwitchStatusID"]);
+                    if (dr["Network Switch Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Network Switch Status"]);
+                        dr["Network Switch Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Network Switch Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nOrderAccuracyVendorID") && dr["nOrderAccuracyVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nOrderAccuracyVendorID"]);
+                    dr["Order Accuracy Vendor"] = GetVendorNameByID(vID);
+                }                
+                if (dt.Columns.Contains("nOrderAccuracyStatusID") && dr["nOrderAccuracyStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nOrderAccuracyStatusID"]);
+                    if (dr["Order Accuracy Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Order Accuracy Status"]);
+                        dr["Order Accuracy Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Order Accuracy Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nOrderStatusBoardVendorID") && dr["nOrderStatusBoardVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nOrderStatusBoardVendorID"]);
+                    dr["Order Status Board Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nOrderStatusBoardStatusID") && dr["nOrderStatusBoardStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nOrderStatusBoardStatusID"]);
+                    if (dr["Order Status Board Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Order Status Board Status"]);
+                        dr["Order Status Board Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Order Status Board Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nServerHandheldVendorID") && dr["nServerHandheldVendorID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nServerHandheldVendorID"]);
+                    dr["Server Handheld Vendor"] = GetVendorNameByID(vID);
+                }
+                if (dt.Columns.Contains("nServerHandheldStatusID") && dr["nServerHandheldStatusID"] != DBNull.Value)
+                {
+                    int vID = Convert.ToInt32(dr["nServerHandheldStatusID"]);
+                    if (dr["Server Handheld Status"] != DBNull.Value)
+                    {
+                        DateTime? dDateFor_nStatus = Convert.ToDateTime(dr["Server Handheld Status"]);
+                        dr["Server Handheld Status"] = geDropDownStatusTextByID(vID, dDateFor_nStatus).ToString();
+                    }
+                    else
+                        dr["Server Handheld Status"] = geDropDownStatusTextByID(vID, null).ToString();
+
+                }
+                if (dt.Columns.Contains("nProjectType") && dr["nProjectType"] != DBNull.Value)
+                {
+                    int pType = Convert.ToInt32(dr["nProjectType"]);
+                    dr["Project Type"] = GetProjectTypeByID(pType);
+                }
+                if (dt.Columns.Contains("nStoreState")  && dr["nStoreState"] != DBNull.Value)
+                {
+                    int dID = Convert.ToInt32(dr["nStoreState"]);
+                    dr["State"] = geDropDownStatusTextByID(dID, null);
+                }
+                if (dt.Columns.Contains("nBrandID") && dr["nBrandID"] != DBNull.Value)
+                {
+                    int dID = Convert.ToInt32(dr["nBrandID"]);
+                    dr["Brand"] = ""; geDropDownStatusTextByID(dID, null); //need to work on this
+                }
+                
+                //if (dt.Columns.Contains("nStoreState") && dr["nStoreState"] != DBNull.Value)
+                //{
+                //    int dID = Convert.ToInt32(dr["nStoreState"]);
+                //    dr["State"] = geDropDownStatusTextByID(dID, null);
+                //}
+            }
+            if (dt.Columns.Contains("nNetworkingVendorID"))
+                dt.Columns.Remove("nNetworkingVendorID");
+            if (dt.Columns.Contains("nPrimaryStatus"))
+                dt.Columns.Remove("nPrimaryStatus");
+            if (dt.Columns.Contains("nPrimaryType"))
+                dt.Columns.Remove("nPrimaryType");
+            if (dt.Columns.Contains("nBackupStatus"))
+                dt.Columns.Remove("nBackupStatus");
+            if (dt.Columns.Contains("nBackupStatus"))
+                dt.Columns.Remove("nBackupStatus");
+            if (dt.Columns.Contains("nTempStatus"))
+                dt.Columns.Remove("nTempStatus");
+            if (dt.Columns.Contains("nTempType"))
+                dt.Columns.Remove("nTempType");
+
+
+            if (dt.Columns.Contains("nPOSVendorID"))
+                dt.Columns.Remove("nPOSVendorID");
+            if (dt.Columns.Contains("nPOSnStatusID"))
+                dt.Columns.Remove("nPOSnStatusID");
+            if (dt.Columns.Contains("nPOSnPaperworkID"))
+                dt.Columns.Remove("nPOSnPaperworkID");
+
+            if (dt.Columns.Contains("nAudioVendorID"))
+                dt.Columns.Remove("nAudioVendorID");
+            if (dt.Columns.Contains("nConfiguration"))
+                dt.Columns.Remove("nConfiguration");
+            if (dt.Columns.Contains("nLoopStatus"))
+                dt.Columns.Remove("nLoopStatus");
+            if (dt.Columns.Contains("nAudionStatusID"))
+                dt.Columns.Remove("nAudionStatusID");
+            if (dt.Columns.Contains("nLoopType"))
+                dt.Columns.Remove("nLoopType");
+            
+            if (dt.Columns.Contains("nPaymentSystemVendorID"))
+                dt.Columns.Remove("nPaymentSystemVendorID");
+            if (dt.Columns.Contains("nPaymentSystemStatusID"))
+                dt.Columns.Remove("nPaymentSystemStatusID");
+            if (dt.Columns.Contains("nPaymentSystemStatusID"))
+                dt.Columns.Remove("nPaymentSystemStatusID");
+            if (dt.Columns.Contains("nBuyPassID"))
+                dt.Columns.Remove("nBuyPassID");
+            if (dt.Columns.Contains("nServerEPS"))
+                dt.Columns.Remove("nServerEPS");
+
+            if (dt.Columns.Contains("nExteriorMenusVendorID"))
+                dt.Columns.Remove("nExteriorMenusVendorID");
+            if (dt.Columns.Contains("nExteriorMenusStatusID"))
+                dt.Columns.Remove("nExteriorMenusStatusID");
+
+            if (dt.Columns.Contains("nInteriorMenusVendorID"))
+                dt.Columns.Remove("nInteriorMenusVendorID");
+            if (dt.Columns.Contains("nInteriorMenusStatusID"))
+                dt.Columns.Remove("nInteriorMenusStatusID");
+            if (dt.Columns.Contains("nInstallationVendorID"))
+                dt.Columns.Remove("nInstallationVendorID");
+            if (dt.Columns.Contains("nInstallationStatusID"))
+                dt.Columns.Remove("nInstallationStatusID");
+            if (dt.Columns.Contains("nInstallationProjectStatusID"))
+                dt.Columns.Remove("dInstallationDateFor_nProjectStatus");
+            if (dt.Columns.Contains("nInstallType"))
+                dt.Columns.Remove("nInstallType");
+            if (dt.Columns.Contains("nManagerCheckout"))
+                dt.Columns.Remove("nManagerCheckout");
+            if (dt.Columns.Contains("nPhotoDeliverables"))
+                dt.Columns.Remove("nPhotoDeliverables");
+            if (dt.Columns.Contains("nSignoffs"))
+                dt.Columns.Remove("nSignoffs");
+            if (dt.Columns.Contains("nTestTransactions"))
+                dt.Columns.Remove("nTestTransactions");
+
+
+
+            if (dt.Columns.Contains("nSonicRadioVendorID"))
+                dt.Columns.Remove("nSonicRadioVendorID");
+            if (dt.Columns.Contains("nSonicRadioStatusID"))
+                dt.Columns.Remove("nSonicRadioStatusID");
+            if (dt.Columns.Contains("nColors"))
+                dt.Columns.Remove("nColors");
+            
+
+            if (dt.Columns.Contains("nImageOrMemoryVendorID"))
+                dt.Columns.Remove("nImageOrMemoryVendorID");
+            if (dt.Columns.Contains("nImageOrMemoryStatusID"))
+                dt.Columns.Remove("nImageOrMemoryStatusID");
+            if (dt.Columns.Contains("nReturnShipment"))
+                dt.Columns.Remove("nReturnShipment");
+
+            if (dt.Columns.Contains("nNetworkSwitchVendorID"))
+                dt.Columns.Remove("nNetworkSwitchVendorID");
+            if (dt.Columns.Contains("nNetworkSwitchStatusID"))
+                dt.Columns.Remove("nNetworkSwitchStatusID");
+            if (dt.Columns.Contains("nShipmentToVendor"))
+                dt.Columns.Remove("nShipmentToVendor");
+            if (dt.Columns.Contains("nSetupStatus"))
+                dt.Columns.Remove("nSetupStatus");
+            if (dt.Columns.Contains("nOldSwitchReturnStatus"))
+                dt.Columns.Remove("nOldSwitchReturnStatus");
+
+
+            if (dt.Columns.Contains("nOrderAccuracyVendorID"))
+                dt.Columns.Remove("nOrderAccuracyVendorID");
+            if (dt.Columns.Contains("nOrderAccuracyStatusID"))
+                dt.Columns.Remove("nOrderAccuracyStatusID");
+         
+
+            if (dt.Columns.Contains("nOrderStatusBoardVendorID"))
+                dt.Columns.Remove("nOrderStatusBoardVendorID");
+            if (dt.Columns.Contains("nOrderStatusBoardStatusID"))
+                dt.Columns.Remove("nOrderStatusBoardStatusID");
+
+            if (dt.Columns.Contains("nServerHandheldVendorID"))
+                dt.Columns.Remove("nServerHandheldVendorID");
+            if (dt.Columns.Contains("nServerHandheldStatusID"))
+                dt.Columns.Remove("nServerHandheldStatusID");
+
+            if (dt.Columns.Contains("nProjectType"))
+                dt.Columns.Remove("nProjectType");
+            if (dt.Columns.Contains("nStoreState"))
+                dt.Columns.Remove("nStoreState");
+            if (dt.Columns.Contains("nFranchisee"))
+                dt.Columns.Remove("nFranchisee");
+            if (dt.Columns.Contains("nBrandID"))
+                dt.Columns.Remove("nBrandID");
+         
+
+            return dt;
+        }
         public static bool isProjectTypeWithSameVendor(int nVendor,ActivePortFolioProjectsAllModel parts)
         {
             try
@@ -309,6 +873,28 @@ namespace DeploymentTool.Misc
             }
             return null;
         }
+
+        public static string GetProjectTypeByID(int pType)
+        {
+            try
+            {
+                if (projectType == null)
+                    GetProjectType();
+                string tpType = null;
+                if ( projectType.ContainsKey(pType))
+                    tpType = projectType[pType].ToString();//
+                
+
+                return tpType;
+
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+
+        }
         public static void SetDropDownListData(List<iDropDownList> dropDownLists)
         {
             Dictionary<int?, string> _idropDownList = new Dictionary<int?, string>();
@@ -331,6 +917,8 @@ namespace DeploymentTool.Misc
         {
             try
             {
+                if (dropDownList == null)
+                    GetDropDownList();
                 string tTempStatus = null;
                 if (statusId != null && dropDownList.ContainsKey(statusId) && dDateFor_nStatus != null)
                     tTempStatus =  dropDownList[statusId].ToString().Replace("[Day/", "[" + Convert.ToDateTime(dDateFor_nStatus).ToString("dd") + "//").Replace("/Month]", "" + Convert.ToDateTime(dDateFor_nStatus).ToString("MMM") + "]");

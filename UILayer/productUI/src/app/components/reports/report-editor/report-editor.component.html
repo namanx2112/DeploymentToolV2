@@ -1,8 +1,4 @@
 <div class="feContainer">
-    <div class="exAction">
-        <button (click)="fieldSelection()" mat-raised-button class="colButton"><mat-icon>
-                list_alt</mat-icon>Column Options</button>
-    </div>
     <div class="reBody">
         <div class="curField">
             <mat-label class="fleidLabel">Report Name</mat-label>
@@ -21,6 +17,7 @@
         </div>
         <div class="curSingleField">
             <mat-label class="fleidLabel">Columns preview</mat-label>
+            <div class="noColumns" *ngIf="columnsConfigured.length == 0">Columns not selected</div>
             <table class="tblColumn">
                 <thead>
                     <tr>

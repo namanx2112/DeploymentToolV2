@@ -83,7 +83,7 @@ export class ReportFoldersComponent {
             this.selectedReports.splice(indx, 1)
         }
         this.folderListAction.emit({ action: "reportselect", selectedReports: this.selectedReports });
-        ev.stopPropagation();
+        //ev.stopPropagation();
     }
 
     editMe(item: any, report: boolean) {

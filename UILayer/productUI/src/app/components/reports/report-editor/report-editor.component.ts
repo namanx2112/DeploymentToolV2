@@ -61,7 +61,8 @@ export class ReportEditorComponent {
     });
   }
 
-  fieldSelection() {
+  // Called from report Generator
+  public FieldSelection() {
     let cthis = this;
     const dialogConfig = new MatDialogConfig();
     let dialogRef: any;

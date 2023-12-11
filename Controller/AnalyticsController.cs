@@ -329,8 +329,10 @@ namespace DeploymentTool.Controller
                     cmd.CommandText = "sproc_getReportData";
                     var reportIdParam = new SqlParameter("@nReportId", request.reportId);
                     var reportNameParam = new SqlParameter("@tReportName", strName);
-                    var reportParameters1 = new SqlParameter("@pm1", request.tParam1.Trim(','));
-                    var reportParameters2 = new SqlParameter("@pm2", request.tParam2);
+                    //var reportParameters1 = new SqlParameter("@pm1", request.tParam1.Trim(','));
+                     var reportParameters1 = new SqlParameter("@pm1", request.tParam1!=null?request.tParam1.Trim(','):null);
+               
+					var reportParameters2 = new SqlParameter("@pm2", request.tParam2);
                     var reportParameters3 = new SqlParameter("@pm3", ncurrentPage);
                     var reportParameters4 = new SqlParameter("@pm4", npageSize);
                     var reportParameters5 = new SqlParameter("@pm5", lUserId);
@@ -351,7 +353,11 @@ namespace DeploymentTool.Controller
                     using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
                     {
                         adapter.SelectCommand = cmd;
-                        adapter.Fill(reportModel.reportTable);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        Misc.Utilities.UpadateROPValue(dt);
+                       
+                        reportModel.reportTable = dt;
                         reportModel.tReportName = reportNameParam.Value.ToString();
                     }
                 }
@@ -360,8 +366,8 @@ namespace DeploymentTool.Controller
                 if (reportModel.reportTable.Columns["nTotalRows"] != null && reportModel.reportTable.Rows.Count > 0)
                 {
                     nTotalRows = reportModel.reportTable.Rows[0].Field<int>("nTotalRows");
-
-                    reportModel.reportTable.Columns.Remove("nTotalRows");
+                    if (reportModel.reportTable.Columns.Contains("nTotalRows"))
+                        reportModel.reportTable.Columns.Remove("nTotalRows");
                 }
                 // reportModel.reportTable.Columns.RemoveAt(columnIndex);
             }

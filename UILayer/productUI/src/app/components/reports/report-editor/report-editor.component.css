@@ -36,6 +36,14 @@
     font-size: 10px;
 }
 
+.noColumns{
+    color: lightgray;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 50px;
+    text-align: center;
+}
+
 .exAction{
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     height: 25px;

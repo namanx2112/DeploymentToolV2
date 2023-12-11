@@ -249,12 +249,59 @@ namespace DeploymentTool.Controller
         }
 
         [Authorize]
+        [HttpGet]
+        public HttpResponseMessage GetShareDetails(int nReportId)
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            try
+            {
+
+                ReportShareModel response = new ReportShareModel()
+                {
+                    reportIds = new List<int>() { nReportId },
+                    brands = new List<int>() { 1, 2 },
+                    roles = new List<int>() { 5, 4, 2 }
+                };
+                //await db.SaveChangesAsync();
+                //}
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ObjectContent<ReportShareModel>(response, new JsonMediaTypeFormatter())
+                };
+            }
+            catch (Exception ex)
+            {
+                TraceUtility.ForceWriteException("ReportGenerator.CreateFolder", HttpContext.Current, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [Authorize]
         [HttpPost]
         public HttpResponseMessage ShareReport(ReportShareModel request)
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
+
+                Nullable<int> lUserId = securityContext.nUserID;
+                string strBrnd = "";
+                foreach (var itrt in request.brands)
+                {
+                    if (itrt != 0)
+                        strBrnd = "," + itrt.ToString() + ",";
+                }
+                foreach (var itrt in request.reportIds)
+                {
+                    foreach (var itr in request.roles)
+                    {
+                        var nUpdateReport = db.Database.ExecuteSqlCommand("exec sproc_shareReportsByRole @nReportID,@nRoleID  ", new SqlParameter("@nReportID", itrt), new SqlParameter("@nRoleID", itr));
+                    }
+                    if(strBrnd!="")
+                     db.Database.ExecuteSqlCommand("update tblReport set tBrandID=@tBrandID where aReportID= @nReportID  ", new SqlParameter("@tBrandID", strBrnd), new SqlParameter("@nReportID", itrt));
+
+                }
+                //await db.SaveChangesAsync();
                 //}
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
