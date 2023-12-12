@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrandModel } from 'src/app/interfaces/models';
 import { ReportFolder } from 'src/app/interfaces/report-generator';
 import { ReportGeneratorService } from 'src/app/services/report-generator.service';
@@ -22,7 +23,7 @@ export class FolderEditorComponent {
 
   curBrand: BrandModel;
   curModel: ReportFolder;
-  constructor(private rgService: ReportGeneratorService) {
+  constructor(private rgService: ReportGeneratorService, private _snackBar: MatSnackBar) {
 
   }
 
@@ -33,6 +34,10 @@ export class FolderEditorComponent {
 
   }
 
+  showAlert(message: string) {
+    this._snackBar.open(message)._dismissAfter(4000);
+  }
+
   setType(e: any) {
     if (e.checked)
       this.curModel.nFolderType = 1;
@@ -40,10 +45,12 @@ export class FolderEditorComponent {
       this.curModel.nFolderType = 0;
   }
 
-  submitMe() {
-    this.rgService.EditFolder(this.curModel).subscribe(x => {
-      this.actionPerformed.emit(x);
-    });
+  public SaveFolder() {
+    if (!this.cantSubmit()) {
+      this.rgService.EditFolder(this.curModel).subscribe(x => {
+        this.actionPerformed.emit(x);
+      });
+    }
   }
 
   cancel() {
@@ -52,8 +59,10 @@ export class FolderEditorComponent {
 
   cantSubmit() {
     let can = false;
-    if (this.curModel.tFolderName != "")
+    if (this.curModel.tFolderName == ""){
+      this.showAlert("Please enter a name to this folder");
       can = true;
-    return true;
+    }
+    return can;
   }
 }

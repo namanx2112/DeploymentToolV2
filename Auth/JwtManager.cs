@@ -14,8 +14,10 @@ namespace DeploymentTool.Auth
     public class JwtManager
     {
         private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
+        private const int authExpire = 24;
+        private const int refreshExpire = 24;
 
-        public static AuthResponse GenerateToken(User objUser, int expireHours = 24)
+        public static AuthResponse GenerateToken(User objUser)
         {
             var symmetricKey = Convert.FromBase64String(Secret);
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -32,15 +34,30 @@ namespace DeploymentTool.Auth
 
         }),
 
-                Expires = now.AddHours(Convert.ToInt32(expireHours)),
+                Expires = now.AddHours(Convert.ToInt32(authExpire)),
 
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(symmetricKey),
                     SecurityAlgorithms.HmacSha256Signature)
             };
-            resp.Expires = tokenDescriptor.Expires;
-            var stoken = tokenHandler.CreateToken(tokenDescriptor);
-            resp.Token = tokenHandler.WriteToken(stoken);
+            var refreshTokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+            new Claim(ClaimTypes.Name, objUser.tName),
+            new Claim(ClaimTypes.Role, objUser.nRole.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, objUser.nUserID.ToString())
+
+        }),
+
+                Expires = now.AddHours(Convert.ToInt32(refreshExpire)),
+
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(symmetricKey),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+            resp.Token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+            resp.RefreshToken = tokenHandler.WriteToken(tokenHandler.CreateToken(refreshTokenDescriptor));
             resp.IsAuthSuccessful = true;
             return resp;
         }
@@ -99,7 +116,7 @@ namespace DeploymentTool.Auth
         public bool IsAuthSuccessful { get; set; }
         public string ErrorMessage { get; set; }
         public string Token { get; set; }
-        public DateTime? Expires { get; set; }
+        public string RefreshToken { get; set; }
     }
 
     public class UserAccessModel

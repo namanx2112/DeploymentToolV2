@@ -355,7 +355,7 @@ namespace DeploymentTool.Controller
                         adapter.SelectCommand = cmd;
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
-                        Misc.Utilities.UpadateROPValue(dt);
+                       // Misc.Utilities.UpadateROPValue(dt);
                        
                         reportModel.reportTable = dt;
                         reportModel.tReportName = reportNameParam.Value.ToString();

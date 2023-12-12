@@ -24,18 +24,20 @@ export class CacheService {
         });
     }
   }
-  
 
-  getHttpHeaders(): HttpHeaders {
-    let tHeader = new HttpHeaders().set('Content-Type', 'application/json').set("Authorization", "Bearer " + this.getToken());
+  getHttpHeaders(refreshToken: boolean = false): HttpHeaders {
+    let tHeader = new HttpHeaders().set('Content-Type', 'application/json').set("Authorization", "Bearer " + this.getToken(refreshToken));
     return tHeader;
-  }  
+  }
 
-  getToken() {
+  getToken(refreshToken: boolean = false) {
     let authResp = sessionStorage.getItem('aResp');
     let token = '';
     if (typeof authResp != 'undefined' && authResp != null && authResp != '') {
-      token = JSON.parse(authResp).auth.Token;
+      if (refreshToken)
+        token = JSON.parse(authResp).auth.RefreshToken;
+      else
+        token = JSON.parse(authResp).auth.Token;
     }
     return token;
   }

@@ -89,6 +89,12 @@ namespace DeploymentTool.Model
         public List<int> brands { get; set; }
         public List<int> roles { get; set; }
     }
+    public class ReportShareDetails
+    {
+        public int reportIds { get; set; }
+        public string tBrandID { get; set; }
+        public string tRoleId { get; set; }
+    }
 
 public class ReportInfo
     {

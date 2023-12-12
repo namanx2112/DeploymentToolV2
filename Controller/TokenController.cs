@@ -41,6 +41,16 @@ namespace DeploymentTool.Controller
 
         [Authorize]
         [HttpGet]
+        public HttpResponseMessage RefreshToken()
+        {
+            var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
+            User user = securityContext;
+            user.auth = JwtManager.GenerateToken(securityContext);
+            return Request.CreateResponse(HttpStatusCode.OK, user);
+        }
+
+        [Authorize]
+        [HttpGet]
         public HttpResponseMessage Logout()
         {
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];

@@ -82,7 +82,7 @@ export class ReportGeneratorService {
   }
 
   EditReport(request: any) {
-    return this.http.post<ReportFolder>(CommonService.ConfigUrl + "ReportGenerator/EditReport", request, { headers: this.cacheService.getHttpHeaders() });
+    return this.http.post<any>(CommonService.ConfigUrl + "ReportGenerator/EditReport", request, { headers: this.cacheService.getHttpHeaders() });
   }
 
   // Delete(request: FranchiseModel) {

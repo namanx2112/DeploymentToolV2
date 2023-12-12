@@ -15,6 +15,13 @@
                 </mat-select>
             </mat-form-field>
         </div>
+        <div class="curField">
+            <mat-label class="fleidLabel">Report Description</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="Enter Report Description" [(ngModel)]="curModel.tReportDescription">
+                <mat-icon matSuffix></mat-icon>
+            </mat-form-field>
+        </div>
         <div class="curSingleField">
             <mat-label class="fleidLabel">Columns preview</mat-label>
             <div class="noColumns" *ngIf="columnsConfigured.length == 0">Columns not selected</div>
@@ -26,15 +33,7 @@
                 </thead>
             </table>
         </div>
-        <div class="curField">
-            <mat-label class="fleidLabel">Report Description</mat-label>
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Enter Report Description" [(ngModel)]="curModel.tReportDescription">
-                <mat-icon matSuffix></mat-icon>
-            </mat-form-field>
-        </div>
     </div>
     <mat-label class="fleidLabel">Conditions:</mat-label>
-    <app-filter-table [request]="{curBrand: curBrand, curModel: curModel}"
-        (buttonClick)="buttonClicked($event)"></app-filter-table>
+    <app-filter-table #conditionTable [request]="{curBrand: curBrand, curModel: curModel}"></app-filter-table>
 </div>

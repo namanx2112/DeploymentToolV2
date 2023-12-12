@@ -82,7 +82,8 @@ export interface ReportEditorModel {
     tReportDescription: string,
     conditions: ReportCondtion[],
     spClmn: DisplayColumn[],
-    srtClmn: SortColumns[]
+    srtClmn: SortColumns[],
+    shareRequest?: any
 }
 
 export interface ReportCondtion {

@@ -23,6 +23,11 @@
     border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.clickableHeader{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .titleSeparator {
     padding: 0px 10px;
     height: 20px;

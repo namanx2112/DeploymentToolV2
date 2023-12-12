@@ -5,6 +5,7 @@ import { ReportFolder } from 'src/app/interfaces/report-generator';
 import { ReportGeneratorService } from 'src/app/services/report-generator.service';
 import { ShareDialogeComponent } from '../share-dialoge/share-dialoge.component';
 import { ReportEditorComponent } from '../report-editor/report-editor.component';
+import { FolderEditorComponent } from '../folder-editor/folder-editor.component';
 
 @Component({
   selector: 'app-report-generator-home',
@@ -25,6 +26,7 @@ export class ReportGeneratorHomeComponent {
   reportRequest: any;
   selectedReports: number[] = [];
   @ViewChild('reportEditor') reportEditor: ReportEditorComponent;
+  @ViewChild('folderEditor') folderEditor: FolderEditorComponent;
   constructor(private rgService: ReportGeneratorService, private dialog: MatDialog) {
     this.selectedTab = "home";
   }
@@ -104,6 +106,7 @@ export class ReportGeneratorHomeComponent {
     dialogConfig.data = {
       curBrand: this.curBrand,
       reportIds: this.selectedReports,
+      curModel: this.curModel,
       afterClose: function (data: any) {
         dialogRef.close();
       },
@@ -119,8 +122,20 @@ export class ReportGeneratorHomeComponent {
   showStore(eve: any) {
   }
 
+  moveToStep(item: any, index: number) {
+    if (index == 0)
+      this.goToHome();
+  }
+
   fieldSelection() {
     this.reportEditor.FieldSelection();
+  }
+
+  saveMenuClick() {
+    if (this.showView == "editreport")
+      this.reportEditor.ReportSaveCall();
+    else if (this.showView == "editfolder")
+      this.folderEditor.SaveFolder();
   }
 
   editItem(req: any) {

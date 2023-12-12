@@ -28,6 +28,19 @@ export class AuthService {
       });
   }
 
+  refreshAccess() {
+    let cThis = this;
+    this.http.get<any>(CommonService.ConfigUrl + "token/RefreshToken", { headers: this.cacheService.getHttpHeaders() })
+      .subscribe((res: any) => {
+        if (typeof res == 'string')
+          alert(res);
+        else {
+          sessionStorage.setItem('aResp', JSON.stringify(res));
+          this.getAccess();
+        }
+      });
+  }
+
   ChangePassword(request: any) {
     return this.http.post<any>(CommonService.ConfigUrl + "token/ChangePassword", request, { headers: this.cacheService.getHttpHeaders() });
   }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Dictionary } from 'src/app/interfaces/commons';
 import { FieldType } from 'src/app/interfaces/home-tab';
 import { BrandModel } from 'src/app/interfaces/models';
@@ -20,9 +21,6 @@ export class FilterTableComponent {
     this.initRows();
   }
 
-  @Output()
-  buttonClick = new EventEmitter<any>();
-
   curModel: ReportEditorModel;
   curBrand: BrandModel;
   rows: ReportCondtion[] = [];
@@ -31,7 +29,7 @@ export class FilterTableComponent {
   operators: ReportFieldAndOperatorType[] = [];
   andOrOperators: any[] = [];
   fieldsByGroup: any = {};
-  constructor(private rgService: ReportGeneratorService, private commonService: CommonService) {
+  constructor(private rgService: ReportGeneratorService, private commonService: CommonService, private _snackBar: MatSnackBar) {
 
   }
 
@@ -80,13 +78,17 @@ export class FilterTableComponent {
     return valid;
   }
 
-  submitMe() {
-    this.buttonClick.emit({ action: "submit", rows: this.rows });
+  public GetConditionRows() {
+    let conditionRows: any[] = [];
+    if (!this.cantSubmit())
+      conditionRows = this.rows;
+    return conditionRows;
   }
 
-  cancel() {
-    this.buttonClick.emit({ action: "cancel", rows: this.rows });
+  showAlert(message: string) {
+    this._snackBar.open(message)._dismissAfter(4000);;
   }
+
 
   isRowValid(row: any) {
     let valid = true;
@@ -96,37 +98,48 @@ export class FilterTableComponent {
       if (!(row.nOperatorID == ConditionOperatorIds.IsEmpty || row.nOperatorID == ConditionOperatorIds.IsNotEmpty)) {
         switch (row.field.nFieldTypeID) {
           case (FieldType.currency + 1):
-            if (row.tValue == "")
+            if (row.tValue == "") {
+              this.showAlert("Expected a value in " + row.field.tFieldName);
               valid = false;
+            }
             else
               row.cValue = row.tValue;
             break;
           case (FieldType.number + 1):
-            if (row.tValue == "")
+            if (row.tValue == "") {
               valid = false;
+              this.showAlert("Expected a value in " + row.field.tFieldName);
+            }
             else
               row.nValue = row.tValue;
             break;
           case (FieldType.dropdown + 1):
-            if (row.nArrValues.length == 0)
+            if (row.nArrValues.length == 0) {
               valid = false;
+              this.showAlert("At least one value in " + row.field.tFieldName + ' must be selected');
+            }
             else
               row.tValue = row.nArrValues.join(",");
             break;
           case (FieldType.date + 1):
             let regExWithNumber = /^@StartOfDay+(\('[-/+][0-9]+[a-z]+'\))/gim;
             let regEx = /^@StartOfDay|StartOfWeek|StartOfMonth|StartOfYear/gim
-            if (row.tValue == "")
+            if (row.tValue == "") {
+              this.showAlert("Expected a value in " + row.field.tFieldName);
               valid = false;
+            }
             else if (!RegExp(regEx).test(row.tValue)) {
               if (!RegExp(regExWithNumber).test(row.tValue)) {
+                this.showAlert("Value given in " + row.field.tFieldName + ' is not valid');
                 valid = false;
               }
             }
             break;
           case (FieldType.text + 1):
-            if (row.tValue == "")
+            if (row.tValue == "") {
+              this.showAlert("Expected a value in " + row.field.tFieldName);
               valid = false;
+            }
             break;
         }
       }
@@ -144,7 +157,7 @@ export class FilterTableComponent {
         break;
     }
     this.rows.push(tCond);
-    this.fieldChanged(this.rows[this.rows.length - 1]);
+    this.fieldChanged(this.rows[this.rows.length - 1], true);
   }
 
   initOperators() {
@@ -176,16 +189,22 @@ export class FilterTableComponent {
     else return false
   }
 
-  fieldChanged(row: ReportCondtion) {
+  fieldChanged(row: ReportCondtion, fromInit: boolean = false) {
     row.nFieldID = row.field.aFieldID;
     row.nFieldTypeID = row.field.nFieldTypeID;
     row.operators = this.getMyOperator(row.field.nFieldTypeID);
     if (typeof row.nOperatorID == 'undefined' || row.operators.findIndex(x => x.aOperatorID == row.nOperatorID) == -1)
       row.nOperatorID = row.operators[0].aOperatorID;
-    if (typeof row.field != 'undefined' && (row.field.nFieldTypeID - 1) == FieldType.dropdown)
+    if (typeof row.field != 'undefined' && (row.field.nFieldTypeID - 1) == FieldType.dropdown) {
       row.ddOptions = this.commonService.GetDropdownOptions(this.curBrand.aBrandId, row.field.tConstraint, true);
+    }
     if (typeof row.field != 'undefined' && (row.field.nFieldTypeID - 1) == FieldType.date)
       row.ddOptions = this.commonService.GetSearchOptionsForDate();
+    if (!fromInit) {
+      row.nArrValues = [];
+      row.tValue = "";
+      row.nValue = 0;
+    }
   }
 
   getMyOperator(myTypeId: number) {

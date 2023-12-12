@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { BrandModel } from 'src/app/interfaces/models';
 import { ReportEditorModel, ReportField, ReportFolder } from 'src/app/interfaces/report-generator';
 import { ReportGeneratorService } from 'src/app/services/report-generator.service';
 import { FieldSelectionComponent } from '../field-selection/field-selection.component';
+import { FilterTableComponent } from '../filter-table/filter-table.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-report-editor',
@@ -27,7 +29,8 @@ export class ReportEditorComponent {
   allFields: ReportField[] = [];
   fieldsByGroup: any;
   columnsConfigured: string[] = [];
-  constructor(private rgService: ReportGeneratorService, private dialog: MatDialog) {
+  @ViewChild('conditionTable') conditionTable: FilterTableComponent;
+  constructor(private rgService: ReportGeneratorService, private dialog: MatDialog, private _snackBar: MatSnackBar) {
 
   }
 
@@ -59,6 +62,10 @@ export class ReportEditorComponent {
       if (this.curModel.nFolderId == -1)
         this.curModel.nFolderId = this.allFolders[0].aFolderId;
     });
+  }
+
+  showAlert(message: string) {
+    this._snackBar.open(message)._dismissAfter(4000);
   }
 
   // Called from report Generator
@@ -98,17 +105,23 @@ export class ReportEditorComponent {
     else return false
   }
 
-  buttonClicked(ev: any) {
-    if (ev.action == "submit") {
-      this.curModel.conditions = ev.rows;
-      if (!this.cantSubmit()) {
+  public ReportSaveCall() {
+    if (!this.cantSubmit()) {
+      let rows = this.conditionTable.GetConditionRows();
+      if (rows.length > 0) {
+        this.curModel.conditions = rows;
         this.rgService.EditReport(this.curModel).subscribe(x => {
-          this.actionPerformed.emit(x);
+          if (this.curModel.aReportId == 0 && typeof this.curModel.shareRequest != 'undefined') {
+            this.curModel.shareRequest.reportIds = [x.aReportId]
+            this.rgService.ShareReport(this.curModel.shareRequest).subscribe(x => {
+              this.actionPerformed.emit(x);
+            })
+          }
+          else
+            this.actionPerformed.emit(x);
         });
       }
     }
-    else
-      this.actionPerformed.emit();
   }
 
   cancel() {
@@ -119,11 +132,11 @@ export class ReportEditorComponent {
     let cant = false;
     if (this.curModel.tReportName == "") {
       cant = true;
-      alert("Please enter a name for report");
+      this.showAlert("Please enter a name for report");
     }
     else if (this.curModel.spClmn.length == 0) {
       cant = true;
-      alert("Please select at least one column for this report");
+      this.showAlert("Please select at least one column for this report using 'Column options'");
     }
     return cant;
   }

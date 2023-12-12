@@ -110,6 +110,7 @@ import { FilterTableComponent } from './components/reports/filter-table/filter-t
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FieldSelectionComponent } from './components/reports/field-selection/field-selection.component';
 import { ShareDialogeComponent } from './components/reports/share-dialoge/share-dialoge.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -233,7 +234,8 @@ import { ShareDialogeComponent } from './components/reports/share-dialoge/share-
         TableVirtualScrollModule,
         CdkVirtualScrollViewport,
         MatListModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatSnackBarModule
     ]
 })
 export class AppModule { }

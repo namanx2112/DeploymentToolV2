@@ -19,6 +19,7 @@ export class ShareDialogeComponent {
   selectedRole: number[] = [];
   selectedBrand: number[] = [];
   afterClose: any;
+  curModel: any;
   constructor(private commonService: CommonService, @Inject(MAT_DIALOG_DATA) public data: any, private rgService: ReportGeneratorService) {
     this.brands = CommonService.allBrands;
     this.roles = this.commonService.GetDropdownOptions(0, "UserRole", true);
@@ -26,6 +27,7 @@ export class ShareDialogeComponent {
       this.selectedBrand = [data.curBrand.aBrandId];
       this.reportIds = data.reportIds;
       this.afterClose = data.afterClose;
+      this.curModel = data.curModel;
     }
     this.getSharedDetails();
   }
@@ -45,6 +47,10 @@ export class ShareDialogeComponent {
           this.selectedRole = x.roles;
       });
     }
+    else if (typeof this.curModel != 'undefined' && typeof this.curModel.shareRequest != 'undefined') {
+      this.selectedBrand = this.curModel.shareRequest.brands;
+      this.selectedRole = this.curModel.shareRequest.roles;
+    }
   }
 
   onShare() {
@@ -54,8 +60,13 @@ export class ShareDialogeComponent {
       brands.push(this.selectedBrand[indx]);
     for (var indx in this.selectedRole)
       roles.push(this.selectedRole[indx]);
-    this.rgService.ShareReport({ reportIds: this.reportIds, brands: brands, roles: roles }).subscribe(x => {
+    if (this.reportIds.length == 0) {
+      this.curModel.shareRequest = { brands: brands, roles: roles };
       this.afterClose();
-    });
+    }
+    else
+      this.rgService.ShareReport({ reportIds: this.reportIds, brands: brands, roles: roles }).subscribe(x => {
+        this.afterClose();
+      });
   }
 }

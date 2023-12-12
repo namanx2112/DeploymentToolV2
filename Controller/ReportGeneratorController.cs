@@ -181,7 +181,7 @@ namespace DeploymentTool.Controller
                 if (request.aFolderId > 0)
                 {
                     var nTempVendor = db.Database.SqlQuery<int>("select count(*) from tblReport with (nolock) where nReportFolderID=@nReportFolderID  ", new SqlParameter("@nReportFolderID", request.aFolderId)).ToList();
-                    if (nTempVendor.Count > 0)
+                    if (nTempVendor.Count > 0 && nTempVendor[0]!=0)
                         strReturn = "Can not delete this folder, it contains one or more reports. Please delete or move the reports and then delete this folder.";
                     else
                     {
@@ -255,12 +255,23 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
+                List<ReportShareDetails> items = db.Database.SqlQuery<ReportShareDetails>("exec sproc_getReportShareDetails @nReportId ", new SqlParameter("@nReportId", nReportId)).ToList();
+
+                List<int> tBrandID = null;// = new List<int>(Array.ConvertAll(sNumbers.Split(','), int.Parse));
+                char[] spearator = { ',' };
+                //List<int>() tBrandID =new List<int>();
+                List<int> roles = null;
+                if (items[0].tBrandID != null && items[0].tBrandID != "")
+                    tBrandID = new List<int>(Array.ConvertAll(items[0].tBrandID.Split(spearator, StringSplitOptions.RemoveEmptyEntries), int.Parse));
+                if (items[0].tRoleId != null && items[0].tRoleId != "")
+                    roles = new List<int>(Array.ConvertAll(items[0].tRoleId.Split(spearator, StringSplitOptions.RemoveEmptyEntries), int.Parse));
+
 
                 ReportShareModel response = new ReportShareModel()
                 {
                     reportIds = new List<int>() { nReportId },
-                    brands = new List<int>() { 1, 2 },
-                    roles = new List<int>() { 5, 4, 2 }
+                    brands = tBrandID,
+                    roles = roles
                 };
                 //await db.SaveChangesAsync();
                 //}
@@ -271,7 +282,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
-                TraceUtility.ForceWriteException("ReportGenerator.CreateFolder", HttpContext.Current, ex);
+                TraceUtility.ForceWriteException("ReportGenerator.GetShareDetails", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -310,7 +321,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
-                TraceUtility.ForceWriteException("ReportGenerator.CreateFolder", HttpContext.Current, ex);
+                TraceUtility.ForceWriteException("ReportGenerator.ShareReport", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -397,12 +408,12 @@ namespace DeploymentTool.Controller
 
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())
+                    Content = new ObjectContent<ReportDetails>(request, new JsonMediaTypeFormatter())
                 };
             }
             catch (Exception ex)
             {
-                TraceUtility.ForceWriteException("ReportGenerator.CreateFolder", HttpContext.Current, ex);
+                TraceUtility.ForceWriteException("ReportGenerator.EditReport", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
