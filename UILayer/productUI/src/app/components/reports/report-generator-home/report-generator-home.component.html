@@ -12,7 +12,7 @@
     <a *ngIf="!(showView == 'editreport' || showView == 'editfolder')" (click)="menuClick('newreport')"><mat-icon>
             table_chart</mat-icon>New Report</a>
     <button (click)="openShare()" class="shareButton"
-        *ngIf="selectedReports.length > 0 || (curModel != undefined && curModel.aReportId != undefined)"
+        *ngIf="selectedReports.length > 0 || (showView == 'editreport' && curModel != undefined && curModel.aReportId != undefined)"
         matTooltip="Share report"><mat-icon style="margin-right: 4px;">share</mat-icon>Share Report</button>
     <button (click)="fieldSelection()" class="shareButton"
         *ngIf="showView == 'editreport' && curModel != undefined && curModel.aReportId != undefined"
