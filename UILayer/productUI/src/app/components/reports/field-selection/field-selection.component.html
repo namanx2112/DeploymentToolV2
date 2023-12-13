@@ -1,21 +1,6 @@
 <div class="tContainer">
     <div class="example-container">
         <h2>Columns</h2>
-        <button *ngIf="showAddFor != 'column'" (click)="showAddFor='column'"
-            class="btnAddField ng-star-inserted mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"><mat-icon>add</mat-icon>Add
-            a column</button>
-        <div *ngIf="showAddFor == 'column'" class="colList">
-            <mat-form-field class="example-full-width">
-                <mat-label>Select a field to add</mat-label>
-                <input #input type="text" placeholder="Pick one" matInput [matAutocomplete]="autoColumn"
-                    (input)="filter(false)" (focus)="filter(false)">
-                <mat-autocomplete (optionSelected)="fieldChanged($event, false)" #autoColumn="matAutocomplete">
-                    <mat-optgroup *ngFor="let group of filteredOptionsColumn" [label]="group.tGroupName">
-                        <mat-option *ngFor="let field of group.items" [value]="field">{{field.tFieldName}}</mat-option>
-                    </mat-optgroup>
-                </mat-autocomplete>
-            </mat-form-field>
-        </div>
         <div class="listContainer">
             <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="selectedColumns" class="example-list"
                 (cdkDropListDropped)="drop($event)">
@@ -25,26 +10,27 @@
                         matTooltip="Delete column"><mat-icon>clear</mat-icon></span>
                 </div>
             </div>
+            <button *ngIf="showAddFor != 'column'" (click)="showAddFor='column'"
+                class="btnAddField ng-star-inserted mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"><mat-icon>add</mat-icon>Add
+                a column</button>
+            <div *ngIf="showAddFor == 'column'" class="colList">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Select a field to add</mat-label>
+                    <input #input type="text" placeholder="Pick one" matInput [matAutocomplete]="autoColumn"
+                        (input)="filter(false)" (focus)="filter(false)">
+                    <mat-autocomplete (optionSelected)="fieldChanged($event, false)" #autoColumn="matAutocomplete">
+                        <mat-optgroup *ngFor="let group of filteredOptionsColumn" [label]="group.tGroupName">
+                            <mat-option *ngFor="let field of group.items"
+                                [value]="field">{{field.tFieldName}}</mat-option>
+                        </mat-optgroup>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
         </div>
     </div>
 
     <div class="example-container">
         <h2>Sorting</h2>
-        <button *ngIf="showAddFor != 'sort'" (click)="showAddFor='sort'"
-            class="btnAddField ng-star-inserted mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"><mat-icon>add</mat-icon>Add
-            a column</button>
-        <div *ngIf="showAddFor == 'sort'" class="colList">
-            <mat-form-field class="example-full-width">
-                <mat-label>Select a field to add</mat-label>
-                <input #input type="text" placeholder="Pick one" matInput [matAutocomplete]="autoSorting"
-                    (input)="filter(true)" (focus)="filter(true)">
-                <mat-autocomplete (optionSelected)="fieldChanged($event, true)" #autoSorting="matAutocomplete">
-                    <mat-optgroup *ngFor="let group of filteredOptionsSort" [label]="group.tGroupName">
-                        <mat-option *ngFor="let field of group.items" [value]="field">{{field.tFieldName}}</mat-option>
-                    </mat-optgroup>
-                </mat-autocomplete>
-            </mat-form-field>
-        </div>
         <div class="listContainer">
             <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="sortColumns" class="example-list"
                 (cdkDropListDropped)="drop($event)">
@@ -61,6 +47,22 @@
                                 *ngIf="item.nOrder == 1">arrow_upward</mat-icon></span>
                     </div>
                 </div>
+            </div>
+            <button *ngIf="showAddFor != 'sort'" (click)="showAddFor='sort'"
+                class="btnAddField ng-star-inserted mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"><mat-icon>add</mat-icon>Add
+                a column</button>
+            <div *ngIf="showAddFor == 'sort'" class="colList">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Select a field to add</mat-label>
+                    <input #input type="text" placeholder="Pick one" matInput [matAutocomplete]="autoSorting"
+                        (input)="filter(true)" (focus)="filter(true)">
+                    <mat-autocomplete (optionSelected)="fieldChanged($event, true)" #autoSorting="matAutocomplete">
+                        <mat-optgroup *ngFor="let group of filteredOptionsSort" [label]="group.tGroupName">
+                            <mat-option *ngFor="let field of group.items"
+                                [value]="field">{{field.tFieldName}}</mat-option>
+                        </mat-optgroup>
+                    </mat-autocomplete>
+                </mat-form-field>
             </div>
         </div>
     </div>

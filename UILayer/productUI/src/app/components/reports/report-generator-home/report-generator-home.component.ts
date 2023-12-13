@@ -84,6 +84,7 @@ export class ReportGeneratorHomeComponent {
       this.reportRequest = {
         nBrandId: this.curBrand.aBrandId,
         fromView: "report",
+        canEdit: true,
         request: {
           reportId: req.item.aReportId
         }
@@ -131,9 +132,9 @@ export class ReportGeneratorHomeComponent {
     this.reportEditor.FieldSelection();
   }
 
-  saveMenuClick() {
+  saveMenuClick(preview: boolean = false) {
     if (this.showView == "editreport")
-      this.reportEditor.ReportSaveCall();
+      this.reportEditor.ReportSaveCall(preview);
     else if (this.showView == "editfolder")
       this.folderEditor.SaveFolder();
   }
@@ -176,10 +177,24 @@ export class ReportGeneratorHomeComponent {
     }
   }
 
+  moveFromReportTable(ev: any) {
+    if (typeof ev.action != 'undefined') {
+      if (ev.action == "edit")
+        this.editItem({ report: true, item: { aReportId: ev.reportId } });
+    }
+    else
+      this.goToHome();
+  }
+
   actionPerformed(ev: any) {
     this.titles.pop();
     this.showView = this.titles[this.titles.length - 1].view;
     this.selectedReports = [];
+    if (typeof ev.postCall != 'undefined') {
+      if (ev.postCall == "previewReport") {
+        this.folderListAction({ action: "openreport", item: { aReportId: ev.reportModel.aReportId, tReportName: ev.reportModel.tReportName } });
+      }
+    }
   }
 
   moveView(view: string) { }

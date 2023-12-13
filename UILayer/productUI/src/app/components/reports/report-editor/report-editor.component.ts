@@ -105,7 +105,7 @@ export class ReportEditorComponent {
     else return false
   }
 
-  public ReportSaveCall() {
+  public ReportSaveCall(preview: boolean) {
     if (!this.cantSubmit()) {
       let rows = this.conditionTable.GetConditionRows();
       if (rows.length > 0) {
@@ -113,19 +113,23 @@ export class ReportEditorComponent {
         this.rgService.EditReport(this.curModel).subscribe(x => {
           if (this.curModel.aReportId == 0 && typeof this.curModel.shareRequest != 'undefined') {
             this.curModel.shareRequest.reportIds = [x.aReportId]
-            this.rgService.ShareReport(this.curModel.shareRequest).subscribe(x => {
-              this.actionPerformed.emit(x);
+            this.rgService.ShareReport(this.curModel.shareRequest).subscribe(sResp => {
+              this.actionPerformed.emit(
+                {
+                  postCall: (preview) ? "previewReport" : "",
+                  reportModel: x
+                }
+              );
             })
           }
           else
-            this.actionPerformed.emit(x);
+            this.actionPerformed.emit({
+              postCall: (preview) ? "previewReport" : "",
+              reportModel: x
+            });
         });
       }
     }
-  }
-
-  cancel() {
-    this.actionPerformed.emit();
   }
 
   cantSubmit() {

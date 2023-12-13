@@ -44,20 +44,22 @@
 }
 
 .btnAddField {
-    width: 150px;
-    height: 77px;
+    width: 100%;
+    height: 40px;
     line-height: 0px;
+    border-radius: 0px;
     text-align: left;
     padding: 0px;
     margin: 0px;
     justify-content: flex-start;
+    background-color: #E8E8E8;
 }
 
 .listContainer {
     border-style: none solid solid solid;
     border-width: 0px 1px 1px 1px;
     border-color: #ccc;
-    height: calc(100% - 60px);
+    height: calc(100% - 2px);
     width: 100%;
     overflow: auto;
 }

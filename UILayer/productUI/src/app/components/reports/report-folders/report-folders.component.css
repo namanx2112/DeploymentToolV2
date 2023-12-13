@@ -3,16 +3,19 @@
     margin-right: 5px;
 }
 
+.reportItem:hover {
+    background-color: transparent !important;
+}
+
 .reportItem {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    cursor: pointer;
     margin-left: 20px;
     display: flex;
     align-items: center;
     height: 40px;
 }
 
-.folderDescription{
+.folderDescription {
     flex-grow: 1.55;
     margin-top: -4px;
 }
@@ -30,26 +33,34 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.delButton mat-icon{
+.delButton mat-icon {
     color: red;
 }
 
-.reportName mat-icon{
+.reportName mat-icon {
     float: left;
     font-size: 20px;
     margin-top: 12px;
 }
-.folderName{
+
+.folderName {
     line-height: 25px;
 }
-.reportName, .folderName {
+
+.reportName,
+.folderName {
     display: flex;
     flex-grow: 1;
     flex-basis: 0;
 }
 
+.rTitle:hover {
+    text-decoration: underline;
+}
+
 .rTitle {
     padding: 12px 0px;
+    cursor: pointer !important;
 }
 
 .reportAbout {
@@ -63,11 +74,12 @@
     padding: 0px;
 }
 
-.exButton:first-child{
-    margin-left: 10px!important;
+.exButton:first-child {
+    margin-left: 10px !important;
 }
 
-.exButton, .exButtonReport{
+.exButton,
+.exButtonReport {
     border: 0px none;
     width: 25px;
     background-color: transparent;

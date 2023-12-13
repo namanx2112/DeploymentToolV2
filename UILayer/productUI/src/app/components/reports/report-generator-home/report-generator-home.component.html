@@ -18,9 +18,15 @@
         *ngIf="showView == 'editreport' && curModel != undefined && curModel.aReportId != undefined"
         matTooltip="Column and sorting options">
         <mat-icon style="margin-right: 4px;">list_alt</mat-icon>Column Options</button>
-    <button (click)="saveMenuClick()" class="shareButton" *ngIf="showView == 'editreport' || showView == 'editfolder'"
-        matTooltip="Save">
+    <button class="shareButton" *ngIf="showView == 'editfolder'" (click)="saveMenuClick(false)" matTooltip="Save folder">
         <mat-icon style="margin-right: 4px;">save</mat-icon>Save</button>
+    <button class="shareButton" *ngIf="showView == 'editreport'" matTooltip="Save report" [matMenuTriggerFor]="saveMenu">
+        <mat-icon style="margin-right: 4px;">save</mat-icon>Save</button>
+    <mat-menu #saveMenu="matMenu">
+        <button mat-menu-item (click)="saveMenuClick(false)">Save</button>
+        <button mat-menu-item (click)="saveMenuClick(true)">Save and preview</button>
+    </mat-menu>
+
 </div>
 <div class="rgBody">
     <app-report-folders *ngIf="showView == 'home'" [request]="{curBrand: curBrand}"
@@ -32,5 +38,5 @@
         [request]="{curBrand: curBrand, curModel: curModel}"
         (actionPerformed)="actionPerformed($event)"></app-report-editor>
     <app-report-table *ngIf="showView == 'showreport'" [reportParam]="reportRequest" (openStore)="showStore($event)"
-        (goBack)="goToHome()"></app-report-table>
+        (goBack)="moveFromReportTable($event)"></app-report-table>
 </div>

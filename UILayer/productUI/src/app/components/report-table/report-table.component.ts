@@ -26,10 +26,11 @@ export class ReportTableComponent implements OnInit {
     this.tParam1 = val.request.tParam1;
     this.tParam = val.tParam;
     this.tProjectIDs = val.request.tProjectIDs;
+    this.canEdit = val.canEdit;
     this.getReport();
   }
   @Output() openStore = new EventEmitter<StoreSearchModel>();
-  @Output() goBack = new EventEmitter<string>();
+  @Output() goBack = new EventEmitter<any>();
   @ViewChild('TABLE', { read: ElementRef }) table: ElementRef;
   reportId: number;
   tProjectIDs: string;
@@ -44,6 +45,7 @@ export class ReportTableComponent implements OnInit {
   pageSize = CommonService.defaultPagesize;
   currentPage = 0;
   pageSizeOptions: number[] = CommonService.pageSizeOptions;
+  canEdit: boolean = false;
   constructor(private _liveAnnouncer: LiveAnnouncer, private analyticsService: AnalyticsService, private service: ExStoreService) {
 
   }
@@ -74,7 +76,7 @@ export class ReportTableComponent implements OnInit {
 
   getReport() {
     if (typeof this.tProjectIDs != 'undefined') {
-      this.analyticsService.GetReport(this.reportId, this.tProjectIDs, this.tParam, "", "", "",
+      this.analyticsService.GetReport(this.reportId, this._nBrandId, this.tProjectIDs, this.tParam, "", "", "",
         this.pageSize, this.currentPage).subscribe(x => {
           this.totalRows = x.nTotalRows;
           this.tReport = x.response;
@@ -82,12 +84,16 @@ export class ReportTableComponent implements OnInit {
         });
     }
     else
-      this.analyticsService.GetReport(this.reportId, this.tParam1, this.tParam, "", "", "",
+      this.analyticsService.GetReport(this.reportId, this._nBrandId, this.tParam1, this.tParam, "", "", "",
         this.pageSize, this.currentPage).subscribe(x => {
           this.totalRows = x.nTotalRows;
           this.tReport = x.response;
           this.loadTable();
         });
+  }
+
+  editReport() {
+    this.goBack.emit({ action: "edit", reportId: this.reportId });
   }
 
   serverDownload() {

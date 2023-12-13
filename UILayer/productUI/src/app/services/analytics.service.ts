@@ -17,11 +17,11 @@ export class AnalyticsService {
     return this.http.post<TableResponse>(CommonService.ConfigUrl + "Analytics/GetProjectPortfolio", searchFields, { headers: this.cacheService.getHttpHeaders() });
   }
 
-  GetReport(reportId: number, tParam1: string, tParam2: string, tParam3: string, tParam4: string, tParam5: string, pageSize: number,
+  GetReport(reportId: number,nBrandId: number, tParam1: string, tParam2: string, tParam3: string, tParam4: string, tParam5: string, pageSize: number,
     currentPage: number) {
     return this.http.post<TableResponse>(CommonService.ConfigUrl + "Analytics/GetReport", {
       reportId: reportId, tParam1: tParam1, tParam2: tParam2,
-      tParam3: tParam3, tParam4: tParam4, tParam5: tParam5, nCurrentPage: currentPage, nPageSize: pageSize
+      tParam3: tParam3, tParam4: tParam4, tParam5: tParam5, nCurrentPage: currentPage, nPageSize: pageSize, nBrandId: nBrandId
     }, { headers: this.cacheService.getHttpHeaders() });
   }
 

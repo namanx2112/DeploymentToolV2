@@ -29,7 +29,7 @@ export class ReportFoldersComponent {
     }
 
     getFormatedDate(date: any) {
-        return CommonService.getFormatedDateTimeString(date);
+        return CommonService.getFormatedDateString(date);
     }
 
     getMyFolders() {

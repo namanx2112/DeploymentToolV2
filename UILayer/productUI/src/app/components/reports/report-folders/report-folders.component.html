@@ -23,7 +23,7 @@
                 </button>
             </mat-panel-title>
             <mat-panel-description class="folderDescription">
-                {{ folder.tCreatedBy }} Created {{getFormatedDate(folder.dCreatedOn)}}
+                {{ folder.tCreatedBy }} {{folder.tCreatedUpdated}} {{getFormatedDate(folder.dCreatedOn)}}
             </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="reportList">
@@ -41,7 +41,8 @@
                     (click)="deleteMe(item, true);$event.stopPropagation();">
                     <mat-icon>delete</mat-icon>
                 </button>
-                <div class="reportAbout">{{item.tCreatedBy}} Created {{getFormatedDate(item.dCreatedOn)}}
+                <div class="reportAbout">{{item.tCreatedBy}} {{item.tCreatedModified}}
+                    {{getFormatedDate(item.dCreatedOn)}}
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@ namespace DeploymentTool.Model
     public class ReportRequest
     {
         public int reportId { get; set; }
+        public int nBrandId { get; set; }
         public string tParam1 { get; set; }
         public string tParam2 { get; set; }
         public string tParam3 { get; set; }

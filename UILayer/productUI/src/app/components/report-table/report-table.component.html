@@ -5,6 +5,7 @@
 <div class="reportBody">
   <button mat-raised-button class="exportButton" matTooltip="Click to download" (click)="exportAsExcel()">Export as
     Excel<mat-icon>save_alt</mat-icon></button>
+  <button mat-raised-button *ngIf="canEdit" class="exportButton" matTooltip="Click to download" (click)="editReport()">Edit<mat-icon>edit</mat-icon></button>
   <table *ngIf="tReport != undefined" mat-table [dataSource]="dataSource" matSort
     (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" #TABLE>
 
@@ -12,7 +13,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
         {{columns[index]}}
       </th>
-      <td mat-cell *matCellDef="let element" matTooltip="{{element[column]}}">        
+      <td mat-cell *matCellDef="let element" matTooltip="{{element[column]}}">
         <span *ngIf="(column != 'Store Number' && column != 'StoreNo')"> {{getCellVal(column, element[column])}} </span>
         <span *ngIf="(column == 'Store Number' || column == 'StoreNo')" (click)="openItem(element[column])"
           matTooltip="Click to Open Store" class="openItem">{{getCellVal(column, element[column])}}</span>

@@ -16,6 +16,7 @@ namespace DeploymentTool.Model
         public string tFolderName { get; set; }
         public string tFolderDescription { get; set; }
         public Nullable<int> nFolderType { get; set; }
+        public string tCreatedUpdated { get; set; }
         public DateTime dCreatedOn { get; set; }
         public string tCreatedBy { get; set; }
         public bool canEdit { get; set; }
@@ -102,7 +103,7 @@ public class ReportInfo
         public int nFolderId { get; set; }
         public string tReportName { get; set; }
         public string tReportDescription { get; set; }
-        
+        public string tCreatedUpdated { get; set; }
         public List<ReportFields> conditions { get; set; }
         public DateTime dCreatedOn { get; set; }
         public string tCreatedBy { get; set; }

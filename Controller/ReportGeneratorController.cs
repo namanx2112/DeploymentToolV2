@@ -234,7 +234,6 @@ namespace DeploymentTool.Controller
                     var nDsplClmn = db.Database.ExecuteSqlCommand("delete from tblDisplayColumns where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
                     var nSrtClmn = db.Database.ExecuteSqlCommand("delete from tblSortColumns where nRelatedID =@nReportID and nRelatedType=1 ", new SqlParameter("@nReportID", request.aReportId));
                     var nreport = db.Database.ExecuteSqlCommand("delete from tblreport where aReportID=@nReportID  ", new SqlParameter("@nReportID", request.aReportId));
-
                 }
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
