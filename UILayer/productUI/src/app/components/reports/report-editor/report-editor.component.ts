@@ -111,22 +111,31 @@ export class ReportEditorComponent {
       if (rows.length > 0) {
         this.curModel.conditions = rows;
         this.rgService.EditReport(this.curModel).subscribe(x => {
-          if (this.curModel.aReportId == 0 && typeof this.curModel.shareRequest != 'undefined') {
-            this.curModel.shareRequest.reportIds = [x.aReportId]
-            this.rgService.ShareReport(this.curModel.shareRequest).subscribe(sResp => {
-              this.actionPerformed.emit(
-                {
-                  postCall: (preview) ? "previewReport" : "",
-                  reportModel: x
-                }
-              );
-            })
+          if (typeof x == 'object') {
+            if (this.curModel.aReportId == 0)
+              alert("Report " + x.tReportName + " created successfully.");
+            else
+              alert("Report " + x.tReportName + " updated successfully.");
+            if (this.curModel.aReportId == 0 && typeof this.curModel.shareRequest != 'undefined') {
+
+              this.curModel.shareRequest.reportIds = [x.aReportId]
+              this.rgService.ShareReport(this.curModel.shareRequest).subscribe(sResp => {
+                this.actionPerformed.emit(
+                  {
+                    postCall: (preview) ? "previewReport" : "",
+                    reportModel: x
+                  }
+                );
+              })
+            }
+            else
+              this.actionPerformed.emit({
+                postCall: (preview) ? "previewReport" : "",
+                reportModel: x
+              });
           }
-          else
-            this.actionPerformed.emit({
-              postCall: (preview) ? "previewReport" : "",
-              reportModel: x
-            });
+          else if (typeof x == 'string')
+            alert(x);
         });
       }
     }

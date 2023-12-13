@@ -48,7 +48,15 @@ export class FolderEditorComponent {
   public SaveFolder() {
     if (!this.cantSubmit()) {
       this.rgService.EditFolder(this.curModel).subscribe(x => {
-        this.actionPerformed.emit(x);
+        if (typeof x == 'object') {
+          if (this.curModel.aFolderId == 0)
+            alert("Folder " + x.tFolderName + " created successfully.");
+          else
+            alert("Folder " + x.tFolderName + " updated successfully.");
+          this.actionPerformed.emit(x);
+        }
+        else
+          alert(x);
       });
     }
   }
@@ -59,7 +67,7 @@ export class FolderEditorComponent {
 
   cantSubmit() {
     let can = false;
-    if (this.curModel.tFolderName == ""){
+    if (this.curModel.tFolderName == "") {
       this.showAlert("Please enter a name to this folder");
       can = true;
     }

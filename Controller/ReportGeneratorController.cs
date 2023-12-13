@@ -160,7 +160,7 @@ namespace DeploymentTool.Controller
                 request.aFolderId = tblReportFldr.aReportFolderID;
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new ObjectContent<string>("Success", new JsonMediaTypeFormatter())
+                    Content = new ObjectContent<ReportFolder>(request, new JsonMediaTypeFormatter())
                 };
             }
             catch (Exception ex)
