@@ -21,7 +21,7 @@
     <button class="shareButton" *ngIf="showView == 'editfolder'" (click)="saveMenuClick(false)" matTooltip="Save folder">
         <mat-icon style="margin-right: 4px;">save</mat-icon>Save</button>
     <button class="shareButton" *ngIf="showView == 'editreport'" matTooltip="Save report" [matMenuTriggerFor]="saveMenu">
-        <mat-icon style="margin-right: 4px;">save</mat-icon>Save</button>
+        <mat-icon style="margin-right: 4px;">save</mat-icon>Save<mat-icon style="margin-right: 4px;">keyboard_arrow_down</mat-icon></button>
     <mat-menu #saveMenu="matMenu">
         <button mat-menu-item (click)="saveMenuClick(false)">Save</button>
         <button mat-menu-item (click)="saveMenuClick(true)">Save and preview</button>

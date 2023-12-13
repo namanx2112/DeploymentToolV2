@@ -21,21 +21,44 @@ export class FieldSelectionComponent {
   sortColumns: SortColumns[] = [];
   selectedColumns: DisplayColumn[] = [];
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
+  allGroupFields: GroupByFields[] = [];
   filteredOptionsSort: GroupByFields[] = [];
   filteredOptionsColumn: GroupByFields[] = [];
   aferSave: any;
   showAddFor: string;
-  fieldsByGroup: GroupByFields[] = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     if (typeof data != 'undefined') {
       this.allFields = data.allFields;
       this.sortColumns = (typeof data.srtClmn != 'undefined') ? data.srtClmn : [];
       this.selectedColumns = (typeof data.spClmn != 'undefined') ? data.spClmn : [];
-      this.filteredOptionsSort = data.fieldsByGroup;
-      this.filteredOptionsColumn = data.fieldsByGroup;
-      this.fieldsByGroup = data.fieldsByGroup;
+      this.allGroupFields = data.fieldsByGroup;
       this.aferSave = data.aferSave;
+      this.updateColumns(false, "");
+      this.updateColumns(true, "");
       this.initItems();
+    }
+  }
+
+  updateColumns(forSort: boolean, cText: string) {
+    if (forSort) {
+      this.filteredOptionsSort = [];
+      for (var indx in this.allGroupFields) {
+        let tItem = this.allGroupFields[indx];
+        this.filteredOptionsSort.push({
+          tGroupName: tItem.tGroupName,
+          items: tItem.items.filter(x => this.sortColumns.findIndex(y => y.nFieldID == x.aFieldID)  ==-1 && x.tFieldName.toLocaleLowerCase().includes(cText))
+        })
+      }
+    }
+    else {
+      this.filteredOptionsColumn = [];
+      for (var indx in this.allGroupFields) {
+        let tItem = this.allGroupFields[indx];
+        this.filteredOptionsColumn.push({
+          tGroupName: tItem.tGroupName,
+          items: tItem.items.filter(x => this.selectedColumns.findIndex(y => y.nFieldID == x.aFieldID)  ==-1 && x.tFieldName.toLocaleLowerCase().includes(cText))
+        })
+      }
     }
   }
 
@@ -65,6 +88,7 @@ export class FieldSelectionComponent {
             nRelatedType: tItem.nFieldTypeID,
             nRelatedID: -1
           });
+        this.updateColumns(true, "");
       }
     }
     else {
@@ -82,6 +106,7 @@ export class FieldSelectionComponent {
             nRelatedType: tItem.nFieldTypeID,
             nRelatedID: -1
           });
+        this.updateColumns(false, "");
       }
     }
   }
@@ -124,20 +149,7 @@ export class FieldSelectionComponent {
 
   filter(sort: boolean): void {
     const filterValue = this.input.nativeElement.value.toLowerCase();
-    if (sort) {
-      this.filteredOptionsSort = [];
-      for (let item of this.fieldsByGroup) {
-        this.filteredOptionsSort.push({ tGroupName: item.tGroupName, items: item.items.filter(o => o.tFieldName.toLowerCase().includes(filterValue)) });
-      }
-      //this.filteredOptionsSort = this.allFields.filter(o => o.tFieldName.toLowerCase().includes(filterValue));
-    }
-    else {
-      this.filteredOptionsColumn = [];
-      for (let item of this.fieldsByGroup) {
-        this.filteredOptionsColumn.push({ tGroupName: item.tGroupName, items: item.items.filter(o => o.tFieldName.toLowerCase().includes(filterValue)) });
-      }
-    }
-    //this.filteredOptionsColumn = this.allFields.filter(o => o.tFieldName.toLowerCase().includes(filterValue));
+    this.updateColumns(sort, filterValue);
   }
 
   saveClicked() {
