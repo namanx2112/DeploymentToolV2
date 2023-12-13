@@ -61,7 +61,7 @@
                 Homepage</span>
             <span (click)="clickOption('Project Portfolio')" *ngIf="access.hasAccess('home.sonic.projectportfolio', 0)"
                 [className]="configMenu=='Project Portfolio'?'selected':''">Project Portfolio</span>
-            <span (click)="clickOption('reportgenerator')" *ngIf="access.hasAccess('home.sonic.reportgenerator', 1)"
+            <span (click)="clickOption('reportgenerator')" 
                 [className]="configMenu=='reportgenerator'?'selected':''">Report Generator</span>
             <span (click)="clickOption('savedreports')" *ngIf="access.hasAccess('home.sonic.report', 0)"
                 [className]="configMenu=='savedreports'?'selected':''">Saved Reports</span>

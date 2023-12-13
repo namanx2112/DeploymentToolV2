@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BrandModel } from 'src/app/interfaces/models';
 import { ReportFolder, ReportInfo } from 'src/app/interfaces/report-generator';
+import { AccessService } from 'src/app/services/access.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ReportGeneratorService } from 'src/app/services/report-generator.service';
 
@@ -24,7 +25,7 @@ export class ReportFoldersComponent {
     allFolders: ReportFolder[] = [];
     curReports: ReportInfo[] = [];
     selectedReports: number[] = [];
-    constructor(private rgService: ReportGeneratorService) {
+    constructor(private rgService: ReportGeneratorService, public access: AccessService) {
 
     }
 
@@ -34,6 +35,7 @@ export class ReportFoldersComponent {
 
     getMyFolders() {
         this.rgService.GetMyFolders(this.curBrand.aBrandId).subscribe(x => {
+            this.folderListAction.emit({ action: "folderFetched", noFolder: (x.length == 0) });
             this.allFolders = x;
         });
     }

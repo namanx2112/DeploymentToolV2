@@ -1,8 +1,11 @@
-<div class="searchDiv">
+<div class="searchDiv" *ngIf="allFolders.length > 0">
     <span class="inputPrefix"><mat-icon>search</mat-icon></span>
     <input class="searchFolder" (keyup)="applyFilter($event)" placeholder="Enter folder name to filter" />
 </div>
-<mat-accordion class="example-headers-align">
+<div *ngIf="allFolders.length == 0" class="noFolder">
+    There is no folder created/shared for you.
+</div>
+<mat-accordion class="example-headers-align" *ngIf="allFolders.length > 0">
     <mat-expansion-panel *ngFor="let folder of allFolders| forFilter:filterVisible" (opened)="getMyReports(folder)"
         (closed)="Closed()" [expanded]="folder.visible == 1">
         <mat-expansion-panel-header class="expHeader">
@@ -13,11 +16,11 @@
                         *ngIf="folder.nFolderType == 1">folder_shared</mat-icon>
                     {{folder.tFolderName}}
                 </div>
-                <button *ngIf="folder.canEdit" matTooltip="Click to edit" class="exButton"
+                <button *ngIf="access.hasAccess('home.sonic.reportgenerator', 1) && folder.canEdit" matTooltip="Click to edit" class="exButton"
                     (click)="editMe(folder, false);$event.stopPropagation();">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button *ngIf="folder.canEdit" matTooltip="Click to delete this folder" class="exButton delButton"
+                <button *ngIf="access.hasAccess('home.sonic.reportgenerator', 1) && folder.canEdit" matTooltip="Click to delete this folder" class="exButton delButton"
                     (click)="deleteMe(folder, false);$event.stopPropagation();">
                     <mat-icon>delete</mat-icon>
                 </button>
@@ -28,16 +31,16 @@
         </mat-expansion-panel-header>
         <div class="reportList">
             <div *ngFor="let item of curReports| forFilter:filterVisible" class="reportItem">
-                <mat-checkbox (change)="changeReportSelection($event, item);" />
+                <mat-checkbox *ngIf="access.hasAccess('home.sonic.reportgenerator', 1)" (change)="changeReportSelection($event, item);" />
                 <div class="reportName" (click)="openReport(item)">
                     <mat-icon>list_alt</mat-icon>
                     <div class="rTitle">{{item.tReportName}}</div>
                 </div>
-                <button *ngIf="item.canEdit" matTooltip="Click to edit" class="exButton"
+                <button *ngIf="access.hasAccess('home.sonic.reportgenerator', 1) && item.canEdit" matTooltip="Click to edit" class="exButton"
                     (click)="editMe(item, true);$event.stopPropagation();">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button *ngIf="item.canEdit" matTooltip="Click to delete this report" class="exButton delButton"
+                <button *ngIf="access.hasAccess('home.sonic.reportgenerator', 1) && item.canEdit" matTooltip="Click to delete this report" class="exButton delButton"
                     (click)="deleteMe(item, true);$event.stopPropagation();">
                     <mat-icon>delete</mat-icon>
                 </button>

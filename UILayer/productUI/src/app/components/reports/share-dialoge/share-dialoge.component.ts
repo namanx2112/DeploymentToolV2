@@ -22,7 +22,7 @@ export class ShareDialogeComponent {
   curModel: any;
   constructor(private commonService: CommonService, @Inject(MAT_DIALOG_DATA) public data: any, private rgService: ReportGeneratorService) {
     this.brands = CommonService.allBrands;
-    this.roles = this.commonService.GetDropdownOptions(0, "UserRole", true);
+    this.roles = this.commonService.GetDropdownOptions(0, "UserRole", true, true);
     if (typeof data != 'undefined') {
       this.selectedBrand = [data.curBrand.aBrandId];
       this.reportIds = data.reportIds;
@@ -41,9 +41,9 @@ export class ShareDialogeComponent {
   getSharedDetails() {
     if (this.reportIds.length == 1) {
       this.rgService.GetShareDetails(this.reportIds[0]).subscribe(x => {
-        if (typeof x.brands != 'undefined' && x.brands.length > 0)
+        if (typeof x.brands != 'undefined' && x.brands != null && x.brands.length > 0)
           this.selectedBrand = x.brands;
-        if (typeof x.roles != 'undefined' && x.roles.length > 0)
+        if (typeof x.roles != 'undefined' && x.roles != null && x.roles.length > 0)
           this.selectedRole = x.roles;
       });
     }

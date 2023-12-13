@@ -54,6 +54,14 @@
     flex-basis: 0;
 }
 
+.noFolder {
+    height: 100px;
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: center;
+}
+
 .rTitle:hover {
     text-decoration: underline;
 }

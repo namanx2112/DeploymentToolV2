@@ -6,6 +6,7 @@ import { ReportGeneratorService } from 'src/app/services/report-generator.servic
 import { ShareDialogeComponent } from '../share-dialoge/share-dialoge.component';
 import { ReportEditorComponent } from '../report-editor/report-editor.component';
 import { FolderEditorComponent } from '../folder-editor/folder-editor.component';
+import { AccessService } from 'src/app/services/access.service';
 
 @Component({
   selector: 'app-report-generator-home',
@@ -27,7 +28,8 @@ export class ReportGeneratorHomeComponent {
   selectedReports: number[] = [];
   @ViewChild('reportEditor') reportEditor: ReportEditorComponent;
   @ViewChild('folderEditor') folderEditor: FolderEditorComponent;
-  constructor(private rgService: ReportGeneratorService, private dialog: MatDialog) {
+  noFolder: boolean = true;
+  constructor(private rgService: ReportGeneratorService, private dialog: MatDialog, public access: AccessService) {
     this.selectedTab = "home";
   }
   tabClick(item: string) {
@@ -84,7 +86,7 @@ export class ReportGeneratorHomeComponent {
       this.reportRequest = {
         nBrandId: this.curBrand.aBrandId,
         fromView: "report",
-        canEdit: true,
+        canEdit: this.access.hasAccess('home.sonic.reportgenerator', 1),
         request: {
           reportId: req.item.aReportId
         }
@@ -95,6 +97,8 @@ export class ReportGeneratorHomeComponent {
     else if (req.action == "reportselect") {
       this.selectedReports = req.selectedReports;
     }
+    else if (req.action == "folderFetched")
+      this.noFolder = req.noFolder;
   }
 
   openShare() {

@@ -7,12 +7,12 @@
 <div class="tabHeader">
     <a [ngClass]="selectedTab == 'home' ? 'active' : ''" (click)="tabClick('home')">Home</a>
     <div class="tabSeparator"></div>
-    <a *ngIf="!(showView == 'editreport' || showView == 'editfolder')"
+    <a *ngIf="access.hasAccess('home.sonic.reportgenerator', 1) && !(showView == 'editreport' || showView == 'editfolder')"
         (click)="menuClick('newfolder')"><mat-icon>create_new_folder</mat-icon>New Folder</a>
-    <a *ngIf="!(showView == 'editreport' || showView == 'editfolder')" (click)="menuClick('newreport')"><mat-icon>
+    <a *ngIf="access.hasAccess('home.sonic.reportgenerator', 1) && noFolder == false && !(showView == 'editreport' || showView == 'editfolder')" (click)="menuClick('newreport')"><mat-icon>
             table_chart</mat-icon>New Report</a>
     <button (click)="openShare()" class="shareButton"
-        *ngIf="selectedReports.length > 0 || (showView == 'editreport' && curModel != undefined && curModel.aReportId != undefined)"
+        *ngIf="access.hasAccess('home.sonic.reportgenerator', 1) && selectedReports.length > 0 || (showView == 'editreport' && curModel != undefined && curModel.aReportId != undefined)"
         matTooltip="Share report"><mat-icon style="margin-right: 4px;">share</mat-icon>Share Report</button>
     <button (click)="fieldSelection()" class="shareButton"
         *ngIf="showView == 'editreport' && curModel != undefined && curModel.aReportId != undefined"

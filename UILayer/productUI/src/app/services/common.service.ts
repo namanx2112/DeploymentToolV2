@@ -458,7 +458,7 @@ export class CommonService {
     return ddItems;
   }
 
-  public GetDropdownOptions(nBrandId: number, columnName?: string, avoidBlank: boolean = true): OptionType[] {
+  public GetDropdownOptions(nBrandId: number, columnName?: string, avoidBlank: boolean = true, noFilter: boolean = false): OptionType[] {
     let ddItems: OptionType[] = [];
     if (columnName) {
       if (columnName == "ProjectType") {
@@ -497,8 +497,10 @@ export class CommonService {
               nFunction: 0
             });
           else {
-            if (columnName == "UserRole")
-              ddItems = ddItems.filter(x => x.tDropdownText.indexOf("Vendor") == -1 && x.tDropdownText.indexOf("Franchise") == -1)
+            if (columnName == "UserRole") {
+              if (!noFilter)
+                ddItems = ddItems.filter(x => x.tDropdownText.indexOf("Vendor") == -1 && x.tDropdownText.indexOf("Franchise") == -1)
+            }
           }
         }
       }
