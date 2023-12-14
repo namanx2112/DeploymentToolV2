@@ -336,7 +336,7 @@ namespace DeploymentTool.Controller
                     var reportParameters3 = new SqlParameter("@pm3", ncurrentPage);
                     var reportParameters4 = new SqlParameter("@pm4", npageSize);
                     var reportParameters5 = new SqlParameter("@pm5", lUserId);
-                    // var reportParameters6 = new SqlParameter("@CurrentPage", ncurrentPage);
+                    var reportParameters6 = new SqlParameter("@pm6", request.nBrandId);
                     // var reportParameters7 = new SqlParameter("@PageSize", npageSize);
                     cmd.CommandTimeout = 100000;
                     reportNameParam.Direction = ParameterDirection.Output;
@@ -348,14 +348,14 @@ namespace DeploymentTool.Controller
                     cmd.Parameters.Add(reportParameters3);
                     cmd.Parameters.Add(reportParameters4);
                     cmd.Parameters.Add(reportParameters5);
-                    //cmd.Parameters.Add(reportParameters6);
+                    cmd.Parameters.Add(reportParameters6);
                     //cmd.Parameters.Add(reportParameters7);
                     using (DbDataAdapter adapter = dbFactory.CreateDataAdapter())
                     {
                         adapter.SelectCommand = cmd;
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
-                       // Misc.Utilities.UpadateROPValue(dt);
+                        Misc.Utilities.UpadateROPValue(dt);
                        
                         reportModel.reportTable = dt;
                         reportModel.tReportName = reportNameParam.Value.ToString();

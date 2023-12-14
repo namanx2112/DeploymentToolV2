@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { BrandModel } from 'src/app/interfaces/models';
 import { ReportFolder } from 'src/app/interfaces/report-generator';
@@ -7,6 +7,7 @@ import { ShareDialogeComponent } from '../share-dialoge/share-dialoge.component'
 import { ReportEditorComponent } from '../report-editor/report-editor.component';
 import { FolderEditorComponent } from '../folder-editor/folder-editor.component';
 import { AccessService } from 'src/app/services/access.service';
+import { StoreSearchModel } from 'src/app/interfaces/store';
 
 @Component({
   selector: 'app-report-generator-home',
@@ -19,6 +20,7 @@ export class ReportGeneratorHomeComponent {
   set request(val: any) {
     this.curBrand = val.curBrand;
   }
+  @Output() openStore = new EventEmitter<StoreSearchModel>();
   selectedTab: string;
   curBrand: BrandModel;
   curModel: any;
@@ -125,6 +127,7 @@ export class ReportGeneratorHomeComponent {
   }
 
   showStore(eve: any) {
+    this.openStore.emit(eve);
   }
 
   moveToStep(item: any, index: number) {
