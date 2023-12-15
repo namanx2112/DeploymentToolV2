@@ -45,6 +45,7 @@ export class ReportFoldersComponent {
     }
 
     getMyReports(folder: ReportFolder) {
+        this.curReports = [];
         this.rgService.GetReportsForFolder(folder.aFolderId).subscribe(x => {
             this.curReports = x;
         });
