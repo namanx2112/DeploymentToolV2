@@ -3785,7 +3785,7 @@ export class ExStoreService {
         field_type: FieldType.dropdown,
         field_placeholder: "Enter Vendor",
         validator: [],
-        options: this.commonService.GetDropdown("Vendor"),
+        options: this.commonService.GetDropdown("NetworkSwitchOldSwitchReturnStatus"),
         mandatory: false,
         hidden: false
       }, {

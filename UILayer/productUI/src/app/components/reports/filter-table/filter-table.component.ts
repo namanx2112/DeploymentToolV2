@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Dictionary } from 'src/app/interfaces/commons';
-import { FieldType } from 'src/app/interfaces/home-tab';
+import { FieldType, OptionType } from 'src/app/interfaces/home-tab';
 import { BrandModel } from 'src/app/interfaces/models';
 import { ConditionOperatorIds, ReportCondtion, ReportEditorModel, ReportField, ReportFieldAndOperatorType } from 'src/app/interfaces/report-generator';
 import { CommonService } from 'src/app/services/common.service';
@@ -187,6 +187,10 @@ export class FilterTableComponent {
     if (parseInt(o1) == parseInt(o2))
       return true;
     else return false
+  }
+
+  filterOption(request: OptionType) {
+    return (typeof request.bDeleted == 'undefined' || request.bDeleted == null || request.bDeleted == false) ? true : false;
   }
 
   fieldChanged(row: ReportCondtion, fromInit: boolean = false) {
