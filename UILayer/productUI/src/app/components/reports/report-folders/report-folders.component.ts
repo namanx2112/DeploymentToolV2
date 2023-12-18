@@ -46,9 +46,15 @@ export class ReportFoldersComponent {
 
     getMyReports(folder: ReportFolder) {
         this.curReports = [];
+        this.clearReportSelection();
         this.rgService.GetReportsForFolder(folder.aFolderId).subscribe(x => {
             this.curReports = x;
         });
+    }
+
+    clearReportSelection(){
+        this.selectedReports = [];
+        this.folderListAction.emit({ action: "reportselect", selectedReports: this.selectedReports });
     }
 
     applyFilter(event: Event) {
@@ -120,6 +126,8 @@ export class ReportFoldersComponent {
         }
     }
 
-    Closed() { }
+    Closed() {
+        this.clearReportSelection();
+     }
 
 }
