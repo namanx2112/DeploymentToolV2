@@ -293,7 +293,7 @@ namespace DeploymentTool.Controller
             var securityContext = (User)HttpContext.Current.Items["SecurityContext"];
             try
             {
-
+                db.Database.BeginTransaction();
                 Nullable<int> lUserId = securityContext.nUserID;
                 string strBrnd = "";
                 foreach (var itrt in request.brands)
@@ -303,6 +303,7 @@ namespace DeploymentTool.Controller
                 }
                 foreach (var itrt in request.reportIds)
                 {
+                    db.Database.ExecuteSqlCommand("delete from tblReportRoleBasedAccessRel where  nReportID=@nReportID ", new SqlParameter("@nReportID", itrt));
                     foreach (var itr in request.roles)
                     {
                         var nUpdateReport = db.Database.ExecuteSqlCommand("exec sproc_shareReportsByRole @nReportID,@nRoleID  ", new SqlParameter("@nReportID", itrt), new SqlParameter("@nRoleID", itr));
@@ -311,6 +312,7 @@ namespace DeploymentTool.Controller
                      db.Database.ExecuteSqlCommand("update tblReport set tBrandID=@tBrandID where aReportID= @nReportID  ", new SqlParameter("@tBrandID", strBrnd), new SqlParameter("@nReportID", itrt));
 
                 }
+                db.Database.CurrentTransaction.Commit();
                 //await db.SaveChangesAsync();
                 //}
                 return new HttpResponseMessage(HttpStatusCode.OK)
@@ -320,6 +322,7 @@ namespace DeploymentTool.Controller
             }
             catch (Exception ex)
             {
+                db.Database.CurrentTransaction.Rollback();
                 TraceUtility.ForceWriteException("ReportGenerator.ShareReport", HttpContext.Current, ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
